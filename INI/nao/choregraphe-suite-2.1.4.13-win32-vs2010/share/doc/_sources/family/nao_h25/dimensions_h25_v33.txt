@@ -1,0 +1,16 @@
+
+.. _h25_dimensions_v33:
+
+H25 - Dimensions - V3.3
+=============================
+
+.. seealso::
+    :ref:`V5 <h25_dimensions>` | :ref:`V4 <h25_dimensions_v4>` | **V3.3** |  :ref:`V3.2 <h25_dimensions_v32>`
+
+    :ref:`nao-h25` | :ref:`robot_dimensions` 
+    
+--------------------
+
+.. include:: ../bulk/dimensions_h_v4_v33.rst
+
+

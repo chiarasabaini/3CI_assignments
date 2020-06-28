@@ -1,0 +1,272 @@
+.. include:: ../bulk/common.rst
+
+.. |green_chest| image:: /medias/nao/gs_green_led.png
+   :class: img-inline
+   :width: 50 px
+   :height: 48 px
+
+.. |red_chest| image:: /medias/nao/gs_red_led.png
+   :class: img-inline
+   :width: 50 px
+   :height: 50 px
+
+.. |yellow_chest| image:: /medias/nao/gs_yellow_led.png
+   :class: img-inline
+   :width: 50 px
+   :height: 46 px
+
+.. |white_chest| image:: /medias/nao/gs_white_led.png
+   :class: img-inline
+   :width: 50 px
+   :height: 49 px
+
+.. _notifications_nao:
+
+Event and state notifications
+=================================================
+
+You may receive notifications from |roboN| system or from an application.
+
+In that case, a small sound is played and the status LEDs remain still white but
+blink once in a while with a colour indicating the severity of the notification.
+
++---------------------+-----------------------+---------------------------------------------+
+| Status LEDs is ...                          | Description                                 |
++=====================+=======================+=============================================+
+| |white_chest|       | |green_chest|  Green  | |roboN| gives you some feed-back by an      |
+|                     |                       | **Info** notification about an ongoing      |
+|                     |                       | action.                                     |
+| Steady White light, |                       |                                             |
+|                     +-----------------------+---------------------------------------------+
+| cut by a brief      | |yellow_chest| Yellow | **Warning** notification occurs when an     |
+|                     |                       | issue requires your attention and/or        |
+|                     |                       | action.                                     |
+|                     |                       |                                             |
+|                     |                       | |roboN| is still usable but, it may         |
+|                     |                       | either run in a degraded mode in which      |
+|                     |                       | some features may be not available or it    |
+|                     |                       | may soon become unusable if you don't       |
+|                     |                       | solve the problem.                          |
+|                     +-----------------------+---------------------------------------------+
+| blinking in ...     | |red_chest| Red       | **Error** notification occurs when one or   |
+|                     |                       | all functionality(ies) of |roboN|           |
+|                     |                       | become unusable.                            |
+|                     |                       |                                             |
+|                     |                       | Try to solve the problem using the tips.    |
+|                     |                       | If the problem persists, contact the        |
+|                     |                       | customer support and provide them with the  |
+|                     |                       | error ID.                                   |
+|                     |                       | For further details, see:                   |
+|                     |                       | :ref:`contacting_support_nao`.              |
++---------------------+-----------------------+---------------------------------------------+
+
+
+Download a printable version:
+:download:`Status LEDs - Cheat sheet</medias/pdf/status_led_cheat_sheet21june2013.pdf>`.
+
+To ask |roboN| to read the notification, see: :ref:`nao_request`.
+
+List of notifications
+----------------------
+
+Boot process - notifications
+++++++++++++++++++++++++++++
+
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| #   | Message                                                    | Tips                                                   |    Type        |
++=====+============================================================+========================================================+================+
+| 10  | I canceled my system update. The system image was invalid. | The file containing the system image seems unusable,   | |red_chest|    |
+|     | I am still running version <*x.y.z*>.                      | try again to retrieve the relevant system file.        |                |
++-----+------------------------------------------------------------+                                                        +                |
+| 11  | I canceled my system update. The system image was invalid. |                                                        |                |
+|     | I am still running version <*x.y.z*>.                      |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+|     | I successfully updated my system.                          |                                                        |                |
+| 100 |                                                            |                                                        | |green_chest|  |
+|     | I am now running version <*x.y.z*>.                        |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 101 | I canceled my system update. The system                    | The system image is not compatible with the head.      | |red_chest|    |
+|     | image was not compatible with my upgrade program.          |                                                        |                |
+|     |                                                            | Check what system image version supports your robot    |                |
+|     |                                                            | version and retry with one of the supported system     |                |
+|     | I am still running version <*x.y.z*>.                      | image version.                                         |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 102 | I canceled my system update. The system                    | The system image is not compatible with the head       |                |
+|     | image was not compatible with my processor.                | hardware.                                              |                |
+|     | I am still running version <*x.y.z*>.                      |                                                        | |red_chest|    |
++-----+------------------------------------------------------------+                                                        +                |
+| 103 | I canceled my system update. The system                    | Check your head version and retry with a compatible    |                |
+|     | image was not compatible with my body.                     | system image.                                          |                |
+|     | I am still running version <*x.y.z*>.                      |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 104 | I canceled my system update.                               | The system image you try to update to is corrupted.    | |red_chest|    |
+|     | The system image was corrupted.                            | Try downloading it again then restart the update       |                |
+|     | I am still running version <*x.y.z*>.                      | process.                                               |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 105 | I canceled my system update.                               | The update program cannot recognize the hardware.      |                |
+|     | My current system seems corrupted.                         | Some changes done on the hardware damage it.           | |red_chest|    |
+|     | I am still running version <*x.y.z*>.                      | Contact the support.                                   |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 110 | I could not update my system.                              |                                                        | |red_chest|    |
++-----+                                                            |                                                        |                |
+| 111 |                                                            |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+|     | I successfully completed my factory reset.                 |                                                        |                |
+| 120 |                                                            |                                                        | |green_chest|  |
+|     | All my data and settings have been reset.                  |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 200 | I couldn't complete my factory reset.                      | Retry the update with factory reset enabled.           | |red_chest|    |
+|     |                                                            |                                                        |                |
++-----+ I may still have some data or settings from before.        + If the problem persists, contact the support.          +                |
+| 201 |                                                            |                                                        |                |
++-----+                                                            +                                                        +                |
+| 202 |                                                            |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 203 | I successfully completed my factory reset.                 |                                                        | |green_chest|  |
+|     | All my data and settings have been reset.                  |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 204 | I can't access some of my data.                            | The memory space dedicated to the user is not          |                |
+|     |                                                            | accessible due to some hardware failure.               | |yellow_chest| |
++-----+                                                            +                                                        +                |
+| 205 | My user partition seems corrupted.                         | Try to reboot the robot.                               |                |
+|     |                                                            |                                                        |                |
+|     |                                                            | If the problem persists, contact the support.          |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 214 | I can't access some of my data.                            | The memory space for internal usage is not accessible  |                |
+|     |                                                            | due to some hardware failure.                          | |yellow_chest| |
++-----+                                                            +                                                        +                |
+| 215 | My internal partition seems corrupted.                     | Try to reboot the robot.                               |                |
+|     |                                                            |                                                        |                |
+|     |                                                            | If the problem persists, contact the support.          |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 400 | I can't move. My current system is not compatible          | Body hardware incompatibilities.                       | |red_chest|    |
+|     | with my body.                                              |                                                        |                |
+|     |                                                            | Check the kind of robot you have, and retry with a     |                |
+|     |                                                            | compatible system image.                               |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 401 | I can't move. My current system is way too old             | Check the minimal version supporting the body hardware | |red_chest|    |
+|     | for my body.                                               | of the robot, and retry with a compatible system image.|                |
+|     |                                                            |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 402 | I can't move. My current system is way too recent          | Check the latest version supporting the body hardware  | |red_chest|    |
+|     | for my old body.                                           | of the robot, and retry with a compatible system image.|                |
+|     |                                                            |                                                        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 403 | I could not update all my firmwares.                       | Something went wrong updating the firmware.            | |red_chest|    |
+|     |                                                            |                                                        |                |
+|     |                                                            | Try to reboot to fix this.                             |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 404 | Body not found.                                            | The head does not find or recognize its body. The      | |red_chest|    |
+|     |                                                            | robot is unusable.                                     |                |
+|     |                                                            |                                                        |                |
+|     |                                                            | Try to reboot to fix this.                             |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+| 405 | I updated some of my firmware.                             | Some new firmware has been installed but will not be   |                |
+|     |                                                            | enabled until a reboot of the robot.                   | |yellow_chest| |
+|     | Please reboot me to                                        |                                                        |                |
+|     | finish the update.                                         | Turn off the robot using the standard procedure, then  |                |
+|     |                                                            | start it again.                                        |                |
+|     |                                                            |                                                        |                |
+|     |                                                            | If this warning occurs on every boot, it means:        |                |
+|     |                                                            |                                                        |                |
+|     |                                                            | * either some hardware is too old and cannot be        |                |
+|     |                                                            |   updated;                                             |                |
+|     |                                                            | * or some hardware is broken and cannot be updated.    |                |
+|     |                                                            |                                                        |                |
+|     |                                                            | In either case, you should contact the support.        |                |
++-----+------------------------------------------------------------+--------------------------------------------------------+----------------+
+
+.. _notif_warning_diagnosis_nao:
+
+Diagnosis - |roboN| - notifications
++++++++++++++++++++++++++++++++++++
+
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| #   | Message                                           | Tips                                             |    Type        |
++=====+===================================================+==================================================+================+
+| 500 | I can't connect to the cloud services.            |                                                  |                |
+|     | My head identifier is missing.                    |                                                  |  |red_chest|   |
+|     | Please contact support.                           |                                                  |                |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| 501 | I can't connect to cloud services,                | Make sure your is connected to internet then     |                |
+|     | My system date is wrong.                          | restart it to update the date                    | |yellow_chest| |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| 710 | I detected an error on <X> of my vital devices:   |                                                  |                |
+|     | <*list of devices*>.                              |                                                  | |red_chest|    |
+|     |                                                   |                                                  |                |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| 711 | I detected an error on <X> of my devices:         |                                                  |                |
+|     | <*list of devices*>.                              |                                                  | |yellow_chest| |
+|     |                                                   |                                                  |                |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| 712 | I detected a system error:                        |                                                  |                |
+|     | one of my software does not run properly.         |                                                  | |yellow_chest| |
+|     |                                                   |                                                  |                |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| 720 | Some of my motors are getting hot in my           | This warning will have an impact on your robot,  | |yellow_chest| |
+|     | <chainName wheel or sensor>.                      | see :ref:`reflexes-diagnosis`.                   |                |
+|     | I will need to rest soon.                         |                                                  |                |
+|     |                                                   | Contact the Aldebaran Robotics support.          |                |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+| 721 | A part of my body cannot move anymore.            | This error will have an impact on your robot,    | |red_chest|    |
+|     | Some of my motors are too hot in my <limbName>.   | see :ref:`reflexes-diagnosis`.                   |                |
+|     |                                                   |                                                  |                |
+|     | Please let me rest for a while.                   | Contact the Aldebaran Robotics support.          |                |
++-----+---------------------------------------------------+                                                  +----------------+
+| 722 | I can't move anymore.                             |                                                  | |red_chest|    |
+|     | Some of my motors are too hot in my <limbName>.   |                                                  |                |
+|     | Please let me rest for a while.                   |                                                  |                |
++-----+---------------------------------------------------+                                                  +----------------+
+| 730 | My head processor is too hot.                     |                                                  | |red_chest|    |
+|     |                                                   |                                                  |                |
+|     |                                                   |                                                  |                |
++-----+---------------------------------------------------+                                                  +----------------+
+| 731 | My head processor is too hot.                     |                                                  | |red_chest|    |
+|     | Please let me rest for a while.                   |                                                  |                |
+|     |                                                   |                                                  |                |
++-----+---------------------------------------------------+--------------------------------------------------+----------------+
+
+.. _battery_notif_nao:
+
+Battery - notifications
++++++++++++++++++++++++
+
++-----+-------------------------------------------------+--------------------------------------------------------------+----------------+
+| #   | Message                                         | Tips                                                         |    Type        |
++=====+=================================================+==============================================================+================+
+| 800 | I can't access my battery.                      |                                                              | |red_chest|    |
+|     |                                                 |                                                              |                |
++-----+-------------------------------------------------+--------------------------------------------------------------+----------------+
+| 801 | My battery will soon need charging.             | The battery level reached 30%. See:                          | |yellow_chest| |
+|     |                                                 | :ref:`charging-battery_nao`.                                 |                |
++-----+-------------------------------------------------+--------------------------------------------------------------+----------------+
+| 802 | My battery needs urgent charging.               | The battery level reached 15%. See:                          | |yellow_chest| |
+|     |                                                 | :ref:`charging-battery_nao`.                                 |                |
++-----+-------------------------------------------------+--------------------------------------------------------------+----------------+
+| 803 | My battery is totally empty. I'm shutting down. | The robot ran out of battery so it shut down.                | |red_chest|    |
+|     |                                                 | See: :ref:`charging-battery_nao`.                            |                |
++-----+-------------------------------------------------+--------------------------------------------------------------+----------------+
+| 804 | My battery is now fully charged.                |                                                              | |green_chest|  |
+|     |                                                 |                                                              |                |
++-----+-------------------------------------------------+--------------------------------------------------------------+----------------+
+
+.. _store_notif:
+
+|store| - notifications
++++++++++++++++++++++++
+
++-----+-------------------------------------------------+--------------------+-----------------+
+| #   | Message                                         | Tips               | Type            |
++=====+=================================================+====================+=================+
+| 830 | I have installed                                |                    | |green_chest|   |
+|     | <*Name of the applications*>.                   |                    |                 |
++-----+-------------------------------------------------+--------------------+-----------------+
+| 832 | I have updated                                  |                    | |green_chest|   |
+|     | <*Name of the applications*>.                   |                    |                 |
++-----+-------------------------------------------------+--------------------+-----------------+
+| 834 | I have removed the application                  |                    | |green_chest|   |
+|     | <*Name of the applications*>.                   |                    |                 |
++-----+-------------------------------------------------+--------------------+-----------------+
+| 840 | I have downloaded system version <*X.Y.Z*>.     |                    | |green_chest|   |
+|     | Reboot me to install it.                        |                    |                 |
++-----+-------------------------------------------------+--------------------+-----------------+

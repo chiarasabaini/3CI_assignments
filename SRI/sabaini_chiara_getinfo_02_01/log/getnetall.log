@@ -1,0 +1,141 @@
+Microsoft (R) Windows Script Host Version 5.812
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Start time: 17/05/2020 11:45:30
+
+Caption: [00000000] Microsoft Kernel Debug Network Adapter
+Description: Microsoft Kernel Debug Network Adapter
+DHCP: True
+IP Address: 
+MACAddress: 
+Service Name: kdnic
+Setting ID: {E3C1F5BB-8465-4263-8478-0C0D8E03A802}
+Index in Interface: 19
+
+Caption: [00000001] Qualcomm Atheros AR8171/8175 PCI-E Gigabit Ethernet Controller (NDIS 6.30)
+Description: Qualcomm Atheros AR8171/8175 PCI-E Gigabit Ethernet Controller (NDIS 6.30)
+DHCP: True
+IP Address: 
+MACAddress: E0:3F:49:2E:FF:F9
+Service Name: L1C
+Setting ID: {29D7B252-0272-42B6-A220-4A38695D48DA}
+Index in Interface: 4
+
+Caption: [00000002] Qualcomm Atheros AR9485WB-EG Wireless Network Adapter
+Description: Qualcomm Atheros AR9485WB-EG Wireless Network Adapter
+DHCP: True
+MACAddress: 6C:71:D9:A4:47:05
+Service Name: athr
+Setting ID: {D96FACA6-E8AA-47C0-ABBB-F783F64273B6}
+Index in Interface: 17
+
+Caption: [00000003] Microsoft Wi-Fi Direct Virtual Adapter
+Description: Microsoft Wi-Fi Direct Virtual Adapter
+DHCP: True
+IP Address: 
+MACAddress: 1E:71:D9:A4:47:05
+Service Name: vwifimp
+Setting ID: {7C81E240-C5F8-4EAD-B713-DC1B989F57C1}
+Index in Interface: 11
+
+Caption: [00000004] Bluetooth Device (Personal Area Network)
+Description: Bluetooth Device (Personal Area Network)
+DHCP: True
+IP Address: 
+MACAddress: 6C:71:D9:A4:47:04
+Service Name: BthPan
+Setting ID: {E07222A5-1232-47D5-930C-E88AA260349D}
+Index in Interface: 18
+
+Caption: [00000005] Microsoft Wi-Fi Direct Virtual Adapter
+Description: Microsoft Wi-Fi Direct Virtual Adapter
+DHCP: True
+IP Address: 
+MACAddress: 2E:71:D9:A4:47:05
+Service Name: vwifimp
+Setting ID: {918292E9-CD59-4154-A7DB-429AD3167D1C}
+Index in Interface: 12
+
+Caption: [00000006] WAN Miniport (SSTP)
+Description: WAN Miniport (SSTP)
+DHCP: False
+IP Address: 
+MACAddress: 
+Service Name: RasSstp
+Setting ID: {3A8E01B2-79CA-40B4-B25A-E05473F8F106}
+Index in Interface: 6
+
+Caption: [00000007] WAN Miniport (IKEv2)
+Description: WAN Miniport (IKEv2)
+DHCP: False
+IP Address: 
+MACAddress: 
+Service Name: RasAgileVpn
+Setting ID: {6F04C175-C700-4569-BA51-7AA2CDCC09E6}
+Index in Interface: 10
+
+Caption: [00000008] WAN Miniport (L2TP)
+Description: WAN Miniport (L2TP)
+DHCP: False
+IP Address: 
+MACAddress: 
+Service Name: Rasl2tp
+Setting ID: {040D102F-EF17-40E6-94FE-E12B68E69645}
+Index in Interface: 2
+
+Caption: [00000009] WAN Miniport (PPTP)
+Description: WAN Miniport (PPTP)
+DHCP: False
+IP Address: 
+MACAddress: 
+Service Name: PptpMiniport
+Setting ID: {C520821E-AB49-4CD9-BFE2-51B935A11486}
+Index in Interface: 16
+
+Caption: [00000010] WAN Miniport (PPPOE)
+Description: WAN Miniport (PPPOE)
+DHCP: False
+IP Address: 
+MACAddress: 
+Service Name: RasPppoe
+Setting ID: {BE9B7703-781F-4D52-BD3A-DBC528BBACF8}
+Index in Interface: 15
+
+Caption: [00000011] WAN Miniport (IP)
+Description: WAN Miniport (IP)
+DHCP: False
+IP Address: 
+MACAddress: 5C:93:20:52:41:53
+Service Name: NdisWan
+Setting ID: {4868E157-CC48-44A3-B183-E84AD80B2963}
+Index in Interface: 8
+
+Caption: [00000012] WAN Miniport (IPv6)
+Description: WAN Miniport (IPv6)
+DHCP: False
+IP Address: 
+MACAddress: 68:EB:20:52:41:53
+Service Name: NdisWan
+Setting ID: {6BBA3008-181E-4E73-9D96-AF6CCEDC546D}
+Index in Interface: 9
+
+Caption: [00000013] WAN Miniport (Network Monitor)
+Description: WAN Miniport (Network Monitor)
+DHCP: False
+IP Address: 
+MACAddress: 7C:DC:20:52:41:53
+Service Name: NdisWan
+Setting ID: {E736C575-AEED-4AE7-BD7A-7742ABDE36B6}
+Index in Interface: 20
+
+Caption: [00000014] VirtualBox Host-Only Ethernet Adapter
+Description: VirtualBox Host-Only Ethernet Adapter
+DHCP: False
+MACAddress: 0A:00:27:00:00:07
+Service Name: VBoxNetAdp
+Setting ID: {3EF710F1-9B5C-4DF0-91FA-144899E21889}
+Index in Interface: 7
+
+End time: 17/05/2020 11:45:30
+Execution time: 0.164062500000000s
+-------- 

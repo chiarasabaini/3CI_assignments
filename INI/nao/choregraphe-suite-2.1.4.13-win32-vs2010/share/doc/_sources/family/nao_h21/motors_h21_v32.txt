@@ -1,0 +1,28 @@
+.. _h21_motors_v32:
+
+H21 - Motors - V3.2
+=======================
+
+.. seealso::
+    :ref:`V4<h21_motors>` | :ref:`V3.3 <h21_motors_v33>` | **V3.2**
+
+    :ref:`nao-h21` | :ref:`robot_motors`
+
+--------------------
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_h21.png
+   :width: 334 px
+   :height: 437 px
+
+
+
+.. include:: ../bulk/motors_v32.rst
+
+.. include:: ../bulk/motors_v32_head.rst
+
+.. include:: ../bulk/motors_v32_arms.rst
+
+.. include:: ../bulk/motors_v32_legs.rst

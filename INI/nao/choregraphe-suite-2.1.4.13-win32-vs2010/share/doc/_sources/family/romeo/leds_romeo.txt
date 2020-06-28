@@ -1,0 +1,80 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo-led:
+
+|roboR| - LEDs
+===============
+
+.. seealso:: :ref:`romeo`
+
+--------------------
+
+.. image:: /medias/romeo/romeo_leds.png
+   :width: 263 px
+   :height: 272 px
+
+===== ================================= ==========  =============================
+Part  Name                               Qty         Description
+===== ================================= ==========  =============================
+**A** :ref:`romeo_head_tactile_LEDS`      12         16 step blue LEDs
+
+**B** :ref:`romeo_mouth_LEDS`             3          RGB FullColor
+===== ================================= ==========  =============================
+
+.. _romeo_head_tactile_LEDS:
+
+Head Tactile Sensor LEDs
+--------------------------
+
+.. image:: /medias/romeo/romeo_leds_tactile.png
+   :width: 390 px
+   :height: 250 px
+
+
+**Right**
+
+===========  ========================================  ==========  ==========  =============
+Short Name   Name                                       X(m)        Y(m)         Z(m)
+===========  ========================================  ==========  ==========  =============
+Brain0       Head/Led/Front/Right/1/Actuator/Value       *TBD*       *TBD*       *TBD*
+Brain1       Head/Led/Front/Right/0/Actuator/Value       *TBD*       *TBD*       *TBD*
+Brain2       Head/Led/Middle/Right/0/Actuator/Value      *TBD*       *TBD*       *TBD*
+Brain3       Head/Led/Rear/Right/0/Actuator/Value        *TBD*       *TBD*       *TBD*
+Brain4       Head/Led/Rear/Right/1/Actuator/Value        *TBD*       *TBD*       *TBD*
+Brain5       Head/Led/Rear/Right/2/Actuator/Value        *TBD*       *TBD*       *TBD*
+===========  ========================================  ==========  ==========  =============
+
+**Left**
+
+============  =======================================  ==========  ==========  =============
+Short Name    Name                                      X(m)        Y(m)         Z(m)
+============  =======================================  ==========  ==========  =============
+Brain6        Head/Led/Rear/Left/2/Actuator/Value        *TBD*       *TBD*       *TBD*
+Brain7        Head/Led/Rear/Left/1/Actuator/Value        *TBD*       *TBD*       *TBD*
+Brain8        Head/Led/Rear/Left/0/Actuator/Value        *TBD*       *TBD*       *TBD*
+Brain9        Head/Led/Middle/Left/0/Actuator/Value      *TBD*       *TBD*       *TBD*
+Brain10       Head/Led/Front/Left/0/Actuator/Value       *TBD*       *TBD*       *TBD*
+Brain11       Head/Led/Front/Left/1/Actuator/Value       *TBD*       *TBD*       *TBD*
+============  =======================================  ==========  ==========  =============
+
+
+.. _romeo_mouth_LEDS:
+
+Mouth LEDs
+-----------
+
+============  =======================================  ==========  ==========  =============
+Short Name    Name                                      X(m)        Y(m)         Z(m)
+============  =======================================  ==========  ==========  =============
+ *TBD*        FaceBoard/RedLed1/Actuator/Value          *TBD*       *TBD*       *TBD*
+ *TBD*        FaceBoard/GreenLed1/Actuator/Value        *TBD*       *TBD*       *TBD*
+ *TBD*        FaceBoard/BlueLed1/Actuator/Value         *TBD*       *TBD*       *TBD*
+
+ *TBD*        FaceBoard/RedLed2/Actuator/Value          *TBD*       *TBD*       *TBD*
+ *TBD*        FaceBoard/GreenLed2/Actuator/Value        *TBD*       *TBD*       *TBD*
+ *TBD*        FaceBoard/BlueLed2/Actuator/Value         *TBD*       *TBD*       *TBD*
+
+ *TBD*        FaceBoard/RedLed3/Actuator/Value          *TBD*       *TBD*       *TBD*
+ *TBD*        FaceBoard/GreenLed3/Actuator/Value        *TBD*       *TBD*       *TBD*
+ *TBD*        FaceBoard/BlueLed3/Actuator/Value         *TBD*       *TBD*       *TBD*
+============  =======================================  ==========  ==========  =============

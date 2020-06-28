@@ -1,0 +1,16 @@
+
+.. _t14_dimensions_v32:
+
+T14 - Dimensions - V3.2
+=============================
+
+.. seealso::
+    :ref:`V4 <t14_dimensions>` |  :ref:`V3.3 <t14_dimensions_v33>` | **V3.2** 
+
+    :ref:`nao-t2` | :ref:`robot_dimensions` 
+    
+--------------------
+
+.. include:: ../bulk/dimensions_t14_v32.rst
+
+

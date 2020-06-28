@@ -1,0 +1,291 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Experimental: qimessaging API &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="Python SDK" href="index.html" />
+    <link rel="next" title="Working with NAOqi" href="../../embedded/embedded_index.html" />
+    <link rel="prev" title="Python SDK tips and tricks" href="tips-and-tricks.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="tips-and-tricks.html" title="Python SDK tips and tricks">previous</a>
+     |
+    <a href="index.html" title="Python SDK" accesskey="U">up</a>
+   |
+    <a href="../../embedded/embedded_index.html" title="Working with NAOqi">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="dev-python-qimessaging">
+            
+  <div class="section" id="experimental-qimessaging-api">
+<span id="qimessaging-python"></span><h1>Experimental: qimessaging API<a class="headerlink" href="#experimental-qimessaging-api" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is still a work in progress, and API may change in the future.</p>
+</div>
+<div class="section" id="what-is-qimessaging">
+<h2>What is qimessaging<a class="headerlink" href="#what-is-qimessaging" title="Permalink to this headline">¶</a></h2>
+<p>qimessaging is a new architecture, allowing you to use NAOqi APIs with a new and
+easier syntax.</p>
+</div>
+<div class="section" id="calling-methods">
+<h2>Calling methods<a class="headerlink" href="#calling-methods" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Instead of creating a proxy to a module, create a session and ask for a service.
+You will get a Python object that has the same methods as the remote module, just
+like before:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">qi</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://nao.local:9559&quot;</span><span class="p">)</span>
+<span class="n">tts</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALTextToSpeech&quot;</span><span class="p">)</span>
+<span class="n">tts</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="s">&quot;Hello, World&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can also call methods asynchronously by using the <strong>_async</strong> keyword:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">qi</span>
+
+<span class="n">HEY_ANIMATION_1</span> <span class="o">=</span> <span class="s">&quot;animations/Stand/Gestures/Hey_1&quot;</span><span class="p">;</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Application</span><span class="p">()</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://nao.local:9559&quot;</span><span class="p">)</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALMemory&quot;</span><span class="p">)</span>
+<span class="n">tts</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALTextToSpeech&quot;</span><span class="p">)</span>
+<span class="n">bhm</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALBehaviorManager&quot;</span><span class="p">)</span>
+<span class="n">motion</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALMotion&quot;</span><span class="p">)</span>
+<span class="n">motion</span><span class="o">.</span><span class="n">wakeUp</span><span class="p">()</span>
+<span class="n">animationDone</span> <span class="o">=</span> <span class="n">bhm</span><span class="o">.</span><span class="n">runBehavior</span><span class="p">(</span><span class="n">HEY_ANIMATION_1</span><span class="p">,</span> <span class="n">_async</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">tts</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="c"># block until the animation is over</span>
+<span class="c"># runBehavior returns nothing so the return value is None</span>
+<span class="n">animationDone</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+<span class="n">motion</span><span class="o">.</span><span class="n">rest</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="subscribing-to-events">
+<h2>Subscribing to events<a class="headerlink" href="#subscribing-to-events" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">You do not need a broker,  and should create a <strong>qi.Application</strong> instead, that
+will take care of creating an event loop, among other things.</p>
+</li>
+<li><p class="first">You no longer need a module to subscribe to an event. Instead, use
+the <strong>subscriber</strong> method on <strong>ALMemory</strong>. It returns an object with a <strong>signal</strong>
+property on which you can connect callbacks:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">qi</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Application</span><span class="p">()</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://nao.local:9559&quot;</span><span class="p">)</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALMemory&quot;</span><span class="p">)</span>
+<span class="n">tts</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALTextToSpeech&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_touched</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="c"># value is 1 when pressed, 0 when released</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">tts</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="s">&quot;ouch&quot;</span><span class="p">)</span>
+
+<span class="n">subscriber</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">subscriber</span><span class="p">(</span><span class="s">&quot;FrontTactilTouched&quot;</span><span class="p">)</span>
+<span class="n">subscriber</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">on_touched</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="writing-services">
+<h2>Writing services<a class="headerlink" href="#writing-services" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Call <strong>session.registerService</strong> with any Python class you want.
+All public methods of the object will be available for other services
+by default.</p>
+</li>
+<li><p class="first">You need to be connected to a special service called <strong>ServiceDirectory</strong> in
+order to register a new service. Such a service is provided by the
+<strong>naoqi</strong> process.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">qi</span>
+
+<span class="k">class</span> <span class="nc">HelloService</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tts</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&quot;ALTextToSpeech&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tts</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="s">&quot;Hello, world&quot;</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Application</span><span class="p">()</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">qi</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://nao.local:9559&quot;</span><span class="p">)</span>
+<span class="n">hello</span> <span class="o">=</span> <span class="n">HelloService</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">registerService</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="n">hello</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="tips-and-tricks.html" title="Python SDK tips and tricks">Python SDK tips and tricks</a>
+     |
+    <a href="index.html" title="Python SDK" accesskey="U">Python SDK</a>
+   |
+    <a href="../../embedded/embedded_index.html" title="Working with NAOqi">Working with NAOqi</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../software/choregraphe/index.html">Choregraphe User Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Python SDK</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="tutorials.html">Python tutorials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples.html">Python Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tips-and-tricks.html">Python SDK tips and tricks</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Experimental: qimessaging API</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Experimental: qimessaging API</a><ul>
+<li><a class="reference internal" href="#what-is-qimessaging">What is qimessaging</a></li>
+<li><a class="reference internal" href="#calling-methods">Calling methods</a></li>
+<li><a class="reference internal" href="#subscribing-to-events">Subscribing to events</a></li>
+<li><a class="reference internal" href="#writing-services">Writing services</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="tips-and-tricks.html" title="Python SDK tips and tricks">previous</a>
+     |
+    <a href="index.html" title="Python SDK" accesskey="U">up</a>
+   |
+    <a href="../../embedded/embedded_index.html" title="Working with NAOqi">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+.. include:: ../../bulk/common.rst
+
+.. _aldiagnosis:
+
+ALDiagnosis
+===========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    aldiagnosis-api
+
+Overview | :ref:`API <aldiagnosis-api>`
+
+--------
+
+
+What it does
+------------
+
+**ALDiagnosis** module allows the robot to detect if there is a hardware trouble
+(mainly electrical connection).
+
+**Passive diagnosis**
+
+The passive diagnosis is running all the time without perturbing the robot behavior.
+
+The main goal of the passive diagnosis is to check every device of the robot and to publish whether
+the device has or has not an error. A device is an actuator or a sensor.
+For further details, see: :ref:`actuator_sensor_list_nao`.
+
+.. or :ref:`actuator_sensor_list_juliette`.
+
+**Active diagnosis**
+
+The active diagnosis runs at **NAOqi** start-up, :cpp:func:`ALMotionProxy::wakeUp`
+and :cpp:func:`ALMotionProxy::rest` without perturbing the robot behavior.
+
+The purpose of the active diagnosis is to verify if every device of the robot is functional and to publish
+whether the device has or has not an error.
+
+If a failure is detected:
+
+- If the severity level requires it, **ALMotion** module reacts in order to protect the robot and
+  the user. For further details about the motion diagnosis reflexes, see: :ref:`reflexes-diagnosis`.
+
+- In *SERIOUS* or *CRITICAL* severity level, a notification is sent.
+  For further details, see:
+  :ref:`notifications_nao`.
+
+..  * |nao| :ref:`notifications_nao` or
+..  * |juju| :ref:`notifications_juliette`.
+
+How it works
+------------
+
+The **ALDiagnosis** module is automatically started with naoqi.
+
+
+Passive diagnosis
+++++++++++++++++++++
+
+Then, the passive diagnosis is launched. It's a thread at 20ms that will deduce if the device
+has an error based on these questions:
+
+- Does the electronic board that supports the sensor or the actuator answer or not?
+
+- Is there a critical error detected on an actuator (over temperature,
+  the position sensor answer...)?
+
+Based on these results, :ref:`almemory` error keys are updated for each device,
+the key format is:
+
+Diagnosis/Passive/*DeviceName*/Error.
+
+A summary of the passive diagnosis is available using
+:cpp:func:`ALDiagnosisProxy::getPassiveDiagnosis`
+
+
+Active diagnosis
+++++++++++++++++
+
+During :cpp:func:`ALMotionProxy::wakeUp` and/or :cpp:func:`ALMotionProxy::rest`, some tests
+are running.
+
+:ref:`almemory` error keys are updated for each device, the key format is:
+
+Diagnosis/Active/*DeviceName*/Error.
+
+A summary of the active diagnosis is available using
+:cpp:func:`ALDiagnosisProxy::getActiveDiagnosis`
+
+For further details see error key :ref:`actuator_sensor_list_nao`.
+
+.. or :ref:`actuator_sensor_list_juliette`.
+
+If a device is in failure mode and depends on his :term:`Level of failure severity`,
+a notification is send:
+
++-------------------+----------------------------------------------------------------------+
+| Severity          | Notification                                                         |
++===================+======================================================================+
+| 0: *NEGLIGIBLE*   | No notification.                                                     |
++-------------------+----------------------------------------------------------------------+
+| 1: *SERIOUS*      | Warning notification.                                                |
++-------------------+----------------------------------------------------------------------+
+| 2: *CRITICAL*     | Error notification.                                                  |
++-------------------+----------------------------------------------------------------------+
+
+For further details, see: :ref:`notif_warning_diagnosis_nao`.
+
+.. or :ref:`notif_warning_diagnosis_juliette` notifications.
+
+
+Active Diagnosis tests
+-----------------------
+
+|nao| |roboN| & |juju| |roboJ|
+
++--------+----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | Test Suite                                         | Test Name               | What it does                                           |
++========+====================================================+=========================+========================================================+
+| Motion | LimitsTest\_":ref:`JointName <Joints>`"            | MotionHalLimitError     | Verify if joint software limits are the same in        |
+|        |                                                    |                         | Motion and HAL. If not this is a software error.       |
+|        +----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | PositionTests\_":ref:`JointName <Joints>`"         | SensorCommandError      | Check motor command/sensor position error              |
+|        |                                                    |                         | Detect if the motor is defective.                      |
++--------+----------------------------------------------------+-------------------------+--------------------------------------------------------+
+| Vision | AnyCameraTests_CameraName                          | GetImage                | Try to get an image from camera.                       |
+|        |                                                    +-------------------------+--------------------------------------------------------+
+|        |                                                    | DataChanged             | Check if data from camera change.                      |
++--------+----------------------------------------------------+-------------------------+--------------------------------------------------------+
+
+
+|juju| |roboJ| *only*
+
++--------+----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | Test Suite                                         | Test Name               | What it does                                           |
++========+====================================================+=========================+========================================================+
+| Sensor | ":ref:`WheelName <ju_WheelFL>`"SensorTest          | WheelSensorTest         | Check command/sensor velocity error.                   |
+|        |                                                    |                         | Detect if the wheel is defective.                      |
+|        +----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | ":ref:`SensorName <actuator_sensor_list_juliette>` | SensorBlockedStatusTest | Verify if metrical sensor data changed.                |
+|        | "BlockedTestSuite                                  |                         | Detect if the sensor is defective.                     |
+|        +----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | InertialSensorTest                                 | InertialSensorTest      | Check the inertial sensor calibration.                 |
+|        +----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | GyrometerSensorTest                                | GyrometerSensorTest     | Check the gyrometer sensor calibration.                |
+|        +----------------------------------------------------+-------------------------+--------------------------------------------------------+
+|        | Brake":ref:`JointNameWithBrake <ju_Brakes>`"Tests  | BrakeBlocked            | Check command/sensor position and current error        |
+|        |                                                    |                         | to determine if the brake is defective.                |
++--------+----------------------------------------------------+-------------------------+--------------------------------------------------------+
+
+
+Performance and Limitations
+----------------------------
+
+**Performance**
+
+The module takes about 0.2% of CPU.
+
+**Limitations**
+
+.. warning:: Make sure people do not touch the robot during a wake up;
+             otherwise the **Active diagnosis** may return false positive results.
+
+If an electrical connection is unstable, the module sends several notifications.
+To disable the notification use:
+:cpp:func:`ALDiagnosisProxy::setEnableNotification`

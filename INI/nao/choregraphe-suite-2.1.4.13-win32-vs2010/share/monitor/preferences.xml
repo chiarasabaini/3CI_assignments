@@ -1,0 +1,6 @@
+<general>
+    <robot_naoqi>
+        <profile name="Local Host" IP="127.0.0.1" port="9559" />
+        <profile name="my robot" IP="10.0.252.188" port="9559" />
+    </robot_naoqi>
+</general>

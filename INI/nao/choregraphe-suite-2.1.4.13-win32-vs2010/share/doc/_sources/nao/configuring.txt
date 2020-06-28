@@ -1,0 +1,26 @@
+﻿.. include:: ../bulk/common.rst
+
+.. _conf_settings_nao:
+
+Configuring and settings
+===========================
+
+
+|roboN| **Web page**
+
++----------------------------------+
+| .. toctree::                     |
+|    :maxdepth: 1                  |
+|                                  |
+|    webpage_access                |
+|    webpage                       |
+|    nao-connecting                |
+|    webpage_registering           |
++----------------------------------+
+
+.. toctree::
+   :hidden:
+
+   configuring_old
+
+**See also**: :ref:`old_configuring-nao`.

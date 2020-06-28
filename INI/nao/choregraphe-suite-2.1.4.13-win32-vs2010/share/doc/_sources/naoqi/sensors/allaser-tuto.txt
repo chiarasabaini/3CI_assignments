@@ -1,0 +1,38 @@
+.. _allaser-tuto:
+
+ALLaser Tutorial
+================
+
+:ref:`naoqi-sensors` - :ref:`Overview <allaser>` | :ref:`API <allaser-api>` | Tutorial
+
+---------------
+
+.. seealso::
+
+  - :ref:`laser-head`
+  - :ref:`monitor-laser`
+
+
+Introduction
+------------
+
+This tutorial explains how to use the ALLaser module from Python script.
+
+
+setDetectingLength
+------------------
+
+:download:`allaser_setdetectinglength.py </samples/python/allaser/allaser_setdetectinglength.py>`
+
+.. literalinclude:: /samples/python/allaser/allaser_setdetectinglength.py
+   :language: py
+
+
+setOpeningAngle
+---------------
+
+:download:`allaser_setopeningangle.py </samples/python/allaser/allaser_setopeningangle.py>`
+
+.. literalinclude:: /samples/python/allaser/allaser_setopeningangle.py
+   :language: py
+

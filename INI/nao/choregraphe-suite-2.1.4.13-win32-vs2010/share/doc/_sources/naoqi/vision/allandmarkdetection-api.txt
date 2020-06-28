@@ -1,0 +1,131 @@
+.. _allandmarkdetection-api:
+
+ALLandMarkDetection API
+=======================
+
+:ref:`naoqi-vision` - :ref:`Overview <allandmarkdetection>` | API |
+:ref:`Tutorials <allandmarkdetection-tuto>`
+
+------------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/allandmarkdetectionproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALLandMarkDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+Event list
+----------
+
+* :naoqi:event:`LandmarkDetected`
+
+
+
+Events
+------
+
+.. naoqi:event:: LandmarkDetected(AL::ALValue value)
+
+  Raised when one or several landmarks are currently being detected.
+
+  :param value: Informations related to the detected landmarks. Further details below.
+
+
+LandMarkDetected Value Structure
+-----------------------------------
+
+The output ALValue is organized as follows:
+
+ALLandMarkDetection
++++++++++++++++++++++++
+
+.. code-block:: guess
+
+   ALLandMarkDetection {
+     TimeStamp,
+     MarkInfo[N],
+     CameraPoseInFrameTorso,
+     CameraPoseInFrameRobot,
+     CurrentCameraName
+   }
+
+with as many **mark_info** tags as marks currently detected.
+
+TimeStamp
++++++++++
+
+This field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+   TimeStamp {
+     TimeStamp_Seconds,
+     Timestamp_Microseconds
+   }
+
+MarkInfo
+++++++++
+
+For each detected mark, we have one **MarkInfo** field:
+
+.. code-block:: guess
+
+   MarkInfo {
+     ShapeInfo,
+     MarkID
+   }
+
+
+ShapeInfo
+^^^^^^^^^
+
+.. code-block:: guess
+
+   ShapeInfo {
+     1,
+     alpha,
+     beta,
+     sizeX,
+     sizeY,
+     heading
+   }
+
+- **alpha** and **beta** represent the location of the NaoMark's center in terms
+  of camera angles in radian.
+
+- **sizeX** and **sizeY** are the mark's size in camera angles.
+
+- the **heading** angle describes how the Naomark is oriented about the vertical
+  axis with regards to the robot's head.
+
+
+MarkID
+^^^^^^
+
+is the number written on the Naomark and which corresponds to its pattern.
+
+
+CameraPoseInFrameTorso
+++++++++++++++++++++++
+
+:term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_TORSO`.
+
+CameraPoseInFrameRobot
+++++++++++++++++++++++
+
+:term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_ROBOT`.
+
+
+CurrentCameraName
++++++++++++++++++++
+
+Name of the camera that was used to take the image ("CameraTop", or "CameraBottom").

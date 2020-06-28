@@ -1,0 +1,113 @@
+.. include:: ../../../bulk/common.rst
+
+.. _activity:
+
+Activity
+========
+
+.. _choregraphe-reference-activity:
+
+What is an Activity
+-------------------
+
+An **Activity** is a specific **Behavior** able to run in the :ref:`autonomouslife` framework.
+
+For further details, see: |nao| :ref:`nao_life`.
+
+There are two kinds of activity:
+
+* **Solitary** activity:
+
+  **Purpose**: intended to prepare, wait for, and encourage entering the interactive state.
+  **Design constrains**: May be interrupted for an **Interactive Activity** at any time.
+
+
+* **Interactive** activity:
+
+  **Purpose**: an **Activity** should be **Interactive** if human interaction is required for it to function.
+  **Design constrains**: will not be interrupted by any other activity, but have to quit properly in order to give the focus back.
+
+
+Creating an Activity
+--------------------
+
+To create an **Activity**:
+
+1. Create a new :ref:`choregraphe-reference-project` containing at least one
+   :ref:`behavior`.
+
+2. In the :ref:`choregraphe-reference-project-properties`,
+   set the **Behavior properties** as follows:
+
+For an Interactive Activity
++++++++++++++++++++++++++++
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Set the **Nature** of the **Behavior** to:
+        "Interactive".
+
+2.      If you want the activity to be launchable by the default dialog activity,
+        set also the **Name**, **Tags**, and  **Trigger Sentences**.
+
+3.      If you want the activity to be autonomously launched by
+        :ref:`autonomouslife`, set the **Launch trigger condition** field,
+        using :ref:`launchtriggerconditions`.
+=====  ==========================================================================
+
+You can also follow the tutorial: :ref:`create_interactive_activity_tuto`.
+
+For a Solitary Activity
++++++++++++++++++++++++
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Set the **Nature** of the **Behavior** to:
+        "Solitary".
+
+2.      Set the **Launch trigger condition** field,
+        using :ref:`launchtriggerconditions`.
+
+        This will allow it to be autonomously launched by :ref:`autonomouslife`.
+=====  ==========================================================================
+
+You can also follow the tutorial: :ref:`create_solitary_activity_tuto`.
+
+Activity - Best practices
+-------------------------
+
+First check the best practices of :ref:`application`.
+
+
+Basic Awareness and Autonomous Moves
+++++++++++++++++++++++++++++++++++++
+
+The developer should assume that :ref:`albasicawareness` and
+:ref:`autonomousmoves` services are already started when an **Activity** is started.
+These two services help smooth the transition between activities, and to help
+ease the developer from re-implementing these features into each of their
+activities in different ways.
+
+Stopping the services for the purpose of managing motor control is not necessary:
+
+The developer may of course stop/start/customize :ref:`albasicawareness` and
+:ref:`autonomousmoves` at any time during an **Activity**.
+The services will be resumed and reset by :ref:`autonomouslife` when an **Activity** exits.
+
+It may be desirable to change the parameters of :ref:`albasicawareness`,
+or temporarily stop it to reclaim CPU.
+
+For further details see: :ref:`albasicawareness`, :ref:`autonomousmoves` and  :ref:`autonomouslife`.
+
+Exiting an activity
++++++++++++++++++++
+
+An activity should always finish: in all cases, there should be a path
+to the output of your Behavior. If it never finishes, the robot will be
+stuck forever in the activity.
+
+
+
+

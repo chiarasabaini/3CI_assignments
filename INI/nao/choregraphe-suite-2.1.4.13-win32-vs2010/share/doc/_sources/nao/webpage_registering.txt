@@ -1,0 +1,143 @@
+﻿.. include:: ../bulk/common.rst
+
+Registering and updating your |roboN|
+=====================================
+
+.. _robot_updates_nao:
+
+Updates
+--------
+
+**Updates** section allows you to set and manage the link to the |cloud|.
+
+.. image:: /medias/wizard/updates.png
+    :width: 531 px
+    :height: 370 px
+
+For further details, see:
+
+* :ref:`registering_robot`,
+* :ref:`upgrading applications`.
+
+
+.. _registering_robot:
+
+Registering your |roboN|
+------------------------
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      On a computer connected to Internet, display the **NAO Web page**.
+
+        For further details, see: :ref:`access_webpage_nao`.
+
+2.      Click the :ref:`robot_updates_nao` page.
+
+3.      Click the **Edit account** button.
+
+        .. image:: /medias/wizard/edit_acount_src.png
+            :width: 461 px
+            :height: 437 px
+
+4.      Type the **Email** and **Password** of your |cloud| account.
+
+5.      Click the **Connect** Button.
+=====  =========================================================================
+
+.. _upgrading applications:
+
+Updating your |roboN|
+---------------------
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure your |roboN| is turned on and connected to the network.
+
+        *Not sure?*
+
+        * Press its **Chest button** once.
+
+        * If |roboN| says its name and IP address, connection is OK.
+
+2.      On a computer connected to Internet, display the **NAO Web page**.
+
+        For further details, see: :ref:`access_webpage_nao`.
+
+3.      Click the :ref:`robot_updates_nao` page.
+
+4.      Applications needing to be updated appear.
+
+        .. image:: /medias/wizard/update_all_src.png
+            :width: 406 px
+            :height: 322 px
+
+5.      Make sure :ref:`alife` is switched off.
+
+        For further details see: :ref:`nao_freeze`.
+
+6.      Click the **Update All** button.
+=====  =========================================================================
+
+When do I need to update my |roboN|
+------------------------------------
+
+You can trigger the update using the **NAO Web page**, when:
+
+* you want to retrieve the last release of already installed applications.
+
+* you have selected new applications on the |store|.
+
+  For further details, see: :ref:`selecting_appli_store`.
+
+.. _system_download:
+
+Downloading a system image
+---------------------------
+
+When a new system image is available for download,
+the **NAO Web page** displays an alert:
+
+.. image:: /medias/wizard/system_update_image.png
+    :width: 438 px
+    :height: 208 px
+
+This automatic download is the result of a a setting defined on the |store|.
+For further details, see: :ref:`nao_store_sysupdate`.
+
+To download the system image:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Download** button.
+
+        A progression bar appears.
+
+        .. image:: /medias/wizard/system_update_bar.png
+            :width: 517 px
+            :height: 172 px
+
+        Then:
+
+        .. image:: /medias/wizard/system_update_reboot.png
+            :width: 473 px
+            :height: 348 px
+
+2.     Check the battery level.
+
+       **Important**: make sure the robot battery is fully charged: a power
+       shortage during upgrading could leave the robot in a fatal state.
+
+       **Tips**: if your battery has a limited autonomy, you should leave
+       the charger plugged during the upgrade. However it could be wise
+       to order a new battery.
+
+3.      Click the **Reboot now** button.
+
+        The boot process can take a long time.
+
+        For further details, see: :ref:`upgrading_process_nao`.
+
+=====  =========================================================================

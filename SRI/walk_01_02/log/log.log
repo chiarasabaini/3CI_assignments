@@ -1,0 +1,839 @@
+Start time: 2020-04-02 14:13:57.993071
+Printing on screen the given directory name: ..\..\
+Analizing directory ..\..\
+Actual directory: ..\..\
+Present subdirectories: ['.git', 'castellani_davide_criptotest_01_01', 'cp_01_01', 'cp_01_02', 'create_structure_01_01', 'create_structure_02_01', 'exp_2020-01-21', 'int81_01_01', 'int81_02_01', 'proc_02_01', 'vbox_02_01', 'vbox_02_02', 'virtualbox_cli_01_01', 'walk_01_01', 'walk_01_02']
+Present python files are: []
+Analizing directory ..\..\.git
+Actual directory: ..\..\.git
+Present subdirectories: ['hooks', 'info', 'logs', 'objects', 'refs']
+Present python files are: []
+Analizing directory ..\..\.git\hooks
+Actual directory: ..\..\.git\hooks
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\info
+Actual directory: ..\..\.git\info
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\logs
+Actual directory: ..\..\.git\logs
+Present subdirectories: ['refs']
+Present python files are: []
+Analizing directory ..\..\.git\logs\refs
+Actual directory: ..\..\.git\logs\refs
+Present subdirectories: ['heads', 'remotes']
+Present python files are: []
+Analizing directory ..\..\.git\logs\refs\heads
+Actual directory: ..\..\.git\logs\refs\heads
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\logs\refs\remotes
+Actual directory: ..\..\.git\logs\refs\remotes
+Present subdirectories: ['origin']
+Present python files are: []
+Analizing directory ..\..\.git\logs\refs\remotes\origin
+Actual directory: ..\..\.git\logs\refs\remotes\origin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects
+Actual directory: ..\..\.git\objects
+Present subdirectories: ['00', '04', '06', '08', '0a', '0d', '0e', '10', '13', '16', '17', '18', '19', '1c', '1d', '1e', '25', '28', '2c', '2d', '30', '34', '36', '37', '38', '3a', '3b', '3d', '3e', '41', '44', '45', '47', '49', '4a', '52', '53', '54', '56', '57', '58', '5c', '5d', '5e', '60', '61', '67', '69', '6a', '6c', '6e', '6f', '70', '71', '73', '74', '76', '78', '79', '7a', '7b', '7e', '7f', '80', '82', '84', '8c', '8e', '91', '93', '94', '99', '9a', '9b', 'a2', 'a8', 'aa', 'ac', 'ad', 'b0', 'b4', 'b5', 'b6', 'bb', 'bc', 'c1', 'c2', 'c7', 'c8', 'c9', 'ca', 'cb', 'ce', 'd1', 'd3', 'd4', 'd5', 'd9', 'da', 'db', 'dc', 'dd', 'de', 'df', 'e1', 'e6', 'e8', 'ed', 'ee', 'ef', 'f0', 'f1', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'fc', 'ff', 'info', 'pack']
+Present python files are: []
+Analizing directory ..\..\.git\objects\00
+Actual directory: ..\..\.git\objects\00
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\04
+Actual directory: ..\..\.git\objects\04
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\06
+Actual directory: ..\..\.git\objects\06
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\08
+Actual directory: ..\..\.git\objects\08
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\0a
+Actual directory: ..\..\.git\objects\0a
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\0d
+Actual directory: ..\..\.git\objects\0d
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\0e
+Actual directory: ..\..\.git\objects\0e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\10
+Actual directory: ..\..\.git\objects\10
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\13
+Actual directory: ..\..\.git\objects\13
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\16
+Actual directory: ..\..\.git\objects\16
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\17
+Actual directory: ..\..\.git\objects\17
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\18
+Actual directory: ..\..\.git\objects\18
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\19
+Actual directory: ..\..\.git\objects\19
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\1c
+Actual directory: ..\..\.git\objects\1c
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\1d
+Actual directory: ..\..\.git\objects\1d
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\1e
+Actual directory: ..\..\.git\objects\1e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\25
+Actual directory: ..\..\.git\objects\25
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\28
+Actual directory: ..\..\.git\objects\28
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\2c
+Actual directory: ..\..\.git\objects\2c
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\2d
+Actual directory: ..\..\.git\objects\2d
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\30
+Actual directory: ..\..\.git\objects\30
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\34
+Actual directory: ..\..\.git\objects\34
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\36
+Actual directory: ..\..\.git\objects\36
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\37
+Actual directory: ..\..\.git\objects\37
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\38
+Actual directory: ..\..\.git\objects\38
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\3a
+Actual directory: ..\..\.git\objects\3a
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\3b
+Actual directory: ..\..\.git\objects\3b
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\3d
+Actual directory: ..\..\.git\objects\3d
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\3e
+Actual directory: ..\..\.git\objects\3e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\41
+Actual directory: ..\..\.git\objects\41
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\44
+Actual directory: ..\..\.git\objects\44
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\45
+Actual directory: ..\..\.git\objects\45
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\47
+Actual directory: ..\..\.git\objects\47
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\49
+Actual directory: ..\..\.git\objects\49
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\4a
+Actual directory: ..\..\.git\objects\4a
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\52
+Actual directory: ..\..\.git\objects\52
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\53
+Actual directory: ..\..\.git\objects\53
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\54
+Actual directory: ..\..\.git\objects\54
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\56
+Actual directory: ..\..\.git\objects\56
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\57
+Actual directory: ..\..\.git\objects\57
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\58
+Actual directory: ..\..\.git\objects\58
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\5c
+Actual directory: ..\..\.git\objects\5c
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\5d
+Actual directory: ..\..\.git\objects\5d
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\5e
+Actual directory: ..\..\.git\objects\5e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\60
+Actual directory: ..\..\.git\objects\60
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\61
+Actual directory: ..\..\.git\objects\61
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\67
+Actual directory: ..\..\.git\objects\67
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\69
+Actual directory: ..\..\.git\objects\69
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\6a
+Actual directory: ..\..\.git\objects\6a
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\6c
+Actual directory: ..\..\.git\objects\6c
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\6e
+Actual directory: ..\..\.git\objects\6e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\6f
+Actual directory: ..\..\.git\objects\6f
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\70
+Actual directory: ..\..\.git\objects\70
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\71
+Actual directory: ..\..\.git\objects\71
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\73
+Actual directory: ..\..\.git\objects\73
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\74
+Actual directory: ..\..\.git\objects\74
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\76
+Actual directory: ..\..\.git\objects\76
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\78
+Actual directory: ..\..\.git\objects\78
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\79
+Actual directory: ..\..\.git\objects\79
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\7a
+Actual directory: ..\..\.git\objects\7a
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\7b
+Actual directory: ..\..\.git\objects\7b
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\7e
+Actual directory: ..\..\.git\objects\7e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\7f
+Actual directory: ..\..\.git\objects\7f
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\80
+Actual directory: ..\..\.git\objects\80
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\82
+Actual directory: ..\..\.git\objects\82
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\84
+Actual directory: ..\..\.git\objects\84
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\8c
+Actual directory: ..\..\.git\objects\8c
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\8e
+Actual directory: ..\..\.git\objects\8e
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\91
+Actual directory: ..\..\.git\objects\91
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\93
+Actual directory: ..\..\.git\objects\93
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\94
+Actual directory: ..\..\.git\objects\94
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\99
+Actual directory: ..\..\.git\objects\99
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\9a
+Actual directory: ..\..\.git\objects\9a
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\9b
+Actual directory: ..\..\.git\objects\9b
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\a2
+Actual directory: ..\..\.git\objects\a2
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\a8
+Actual directory: ..\..\.git\objects\a8
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\aa
+Actual directory: ..\..\.git\objects\aa
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ac
+Actual directory: ..\..\.git\objects\ac
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ad
+Actual directory: ..\..\.git\objects\ad
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\b0
+Actual directory: ..\..\.git\objects\b0
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\b4
+Actual directory: ..\..\.git\objects\b4
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\b5
+Actual directory: ..\..\.git\objects\b5
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\b6
+Actual directory: ..\..\.git\objects\b6
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\bb
+Actual directory: ..\..\.git\objects\bb
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\bc
+Actual directory: ..\..\.git\objects\bc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\c1
+Actual directory: ..\..\.git\objects\c1
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\c2
+Actual directory: ..\..\.git\objects\c2
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\c7
+Actual directory: ..\..\.git\objects\c7
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\c8
+Actual directory: ..\..\.git\objects\c8
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\c9
+Actual directory: ..\..\.git\objects\c9
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ca
+Actual directory: ..\..\.git\objects\ca
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\cb
+Actual directory: ..\..\.git\objects\cb
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ce
+Actual directory: ..\..\.git\objects\ce
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\d1
+Actual directory: ..\..\.git\objects\d1
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\d3
+Actual directory: ..\..\.git\objects\d3
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\d4
+Actual directory: ..\..\.git\objects\d4
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\d5
+Actual directory: ..\..\.git\objects\d5
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\d9
+Actual directory: ..\..\.git\objects\d9
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\da
+Actual directory: ..\..\.git\objects\da
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\db
+Actual directory: ..\..\.git\objects\db
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\dc
+Actual directory: ..\..\.git\objects\dc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\dd
+Actual directory: ..\..\.git\objects\dd
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\de
+Actual directory: ..\..\.git\objects\de
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\df
+Actual directory: ..\..\.git\objects\df
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\e1
+Actual directory: ..\..\.git\objects\e1
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\e6
+Actual directory: ..\..\.git\objects\e6
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\e8
+Actual directory: ..\..\.git\objects\e8
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ed
+Actual directory: ..\..\.git\objects\ed
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ee
+Actual directory: ..\..\.git\objects\ee
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ef
+Actual directory: ..\..\.git\objects\ef
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f0
+Actual directory: ..\..\.git\objects\f0
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f1
+Actual directory: ..\..\.git\objects\f1
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f3
+Actual directory: ..\..\.git\objects\f3
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f4
+Actual directory: ..\..\.git\objects\f4
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f5
+Actual directory: ..\..\.git\objects\f5
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f6
+Actual directory: ..\..\.git\objects\f6
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f7
+Actual directory: ..\..\.git\objects\f7
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f8
+Actual directory: ..\..\.git\objects\f8
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\f9
+Actual directory: ..\..\.git\objects\f9
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\fc
+Actual directory: ..\..\.git\objects\fc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\ff
+Actual directory: ..\..\.git\objects\ff
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\info
+Actual directory: ..\..\.git\objects\info
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\objects\pack
+Actual directory: ..\..\.git\objects\pack
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\refs
+Actual directory: ..\..\.git\refs
+Present subdirectories: ['heads', 'remotes', 'tags']
+Present python files are: []
+Analizing directory ..\..\.git\refs\heads
+Actual directory: ..\..\.git\refs\heads
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\refs\remotes
+Actual directory: ..\..\.git\refs\remotes
+Present subdirectories: ['origin']
+Present python files are: []
+Analizing directory ..\..\.git\refs\remotes\origin
+Actual directory: ..\..\.git\refs\remotes\origin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\.git\refs\tags
+Actual directory: ..\..\.git\refs\tags
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\castellani_davide_criptotest_01_01
+Actual directory: ..\..\castellani_davide_criptotest_01_01
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\castellani_davide_criptotest_01_01\bin
+Actual directory: ..\..\castellani_davide_criptotest_01_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\castellani_davide_criptotest_01_01\doc
+Actual directory: ..\..\castellani_davide_criptotest_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\cp_01_01
+Actual directory: ..\..\cp_01_01
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\cp_01_01\bin
+Actual directory: ..\..\cp_01_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\cp_01_01\doc
+Actual directory: ..\..\cp_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\cp_01_02
+Actual directory: ..\..\cp_01_02
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\cp_01_02\bin
+Actual directory: ..\..\cp_01_02\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\cp_01_02\doc
+Actual directory: ..\..\cp_01_02\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\create_structure_01_01
+Actual directory: ..\..\create_structure_01_01
+Present subdirectories: ['bin', 'doc', 'log']
+Present python files are: []
+Analizing directory ..\..\create_structure_01_01\bin
+Actual directory: ..\..\create_structure_01_01\bin
+Present subdirectories: []
+Present python files are: ['create_structure.py']
+Analizing directory ..\..\create_structure_01_01\doc
+Actual directory: ..\..\create_structure_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\create_structure_01_01\log
+Actual directory: ..\..\create_structure_01_01\log
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\create_structure_02_01
+Actual directory: ..\..\create_structure_02_01
+Present subdirectories: ['bin', 'doc', 'log']
+Present python files are: []
+Analizing directory ..\..\create_structure_02_01\bin
+Actual directory: ..\..\create_structure_02_01\bin
+Present subdirectories: []
+Present python files are: ['create_structure.py']
+Analizing directory ..\..\create_structure_02_01\doc
+Actual directory: ..\..\create_structure_02_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\create_structure_02_01\log
+Actual directory: ..\..\create_structure_02_01\log
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21
+Actual directory: ..\..\exp_2020-01-21
+Present subdirectories: ['exp_a']
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a
+Actual directory: ..\..\exp_2020-01-21\exp_a
+Present subdirectories: ['sabaini_chiara_cp_01_01', 'sabaini_chiara_cp_01_02', 'sabaini_chiara_proc_02_01']
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_01
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_01
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_01\bin
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_01\doc
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_02
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_02
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_02\bin
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_02\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_02\doc
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_cp_01_02\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01
+Present subdirectories: ['bin', 'doc', 'src']
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01\bin
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01\doc
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01\src
+Actual directory: ..\..\exp_2020-01-21\exp_a\sabaini_chiara_proc_02_01\src
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\int81_01_01
+Actual directory: ..\..\int81_01_01
+Present subdirectories: ['bin', 'doc', 'src']
+Present python files are: []
+Analizing directory ..\..\int81_01_01\bin
+Actual directory: ..\..\int81_01_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\int81_01_01\doc
+Actual directory: ..\..\int81_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\int81_01_01\src
+Actual directory: ..\..\int81_01_01\src
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\int81_02_01
+Actual directory: ..\..\int81_02_01
+Present subdirectories: ['bin', 'doc', 'src']
+Present python files are: []
+Analizing directory ..\..\int81_02_01\bin
+Actual directory: ..\..\int81_02_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\int81_02_01\doc
+Actual directory: ..\..\int81_02_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\int81_02_01\src
+Actual directory: ..\..\int81_02_01\src
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\proc_02_01
+Actual directory: ..\..\proc_02_01
+Present subdirectories: ['bin', 'doc', 'src']
+Present python files are: []
+Analizing directory ..\..\proc_02_01\bin
+Actual directory: ..\..\proc_02_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\proc_02_01\doc
+Actual directory: ..\..\proc_02_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\proc_02_01\src
+Actual directory: ..\..\proc_02_01\src
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\vbox_02_01
+Actual directory: ..\..\vbox_02_01
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\vbox_02_01\bin
+Actual directory: ..\..\vbox_02_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\vbox_02_01\doc
+Actual directory: ..\..\vbox_02_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\vbox_02_02
+Actual directory: ..\..\vbox_02_02
+Present subdirectories: ['bin', 'doc', 'log', 'virtualboxm']
+Present python files are: []
+Analizing directory ..\..\vbox_02_02\bin
+Actual directory: ..\..\vbox_02_02\bin
+Present subdirectories: []
+Present python files are: ['vbox.py']
+Analizing directory ..\..\vbox_02_02\doc
+Actual directory: ..\..\vbox_02_02\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\vbox_02_02\log
+Actual directory: ..\..\vbox_02_02\log
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\vbox_02_02\virtualboxm
+Actual directory: ..\..\vbox_02_02\virtualboxm
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\virtualbox_cli_01_01
+Actual directory: ..\..\virtualbox_cli_01_01
+Present subdirectories: ['bin', 'doc']
+Present python files are: []
+Analizing directory ..\..\virtualbox_cli_01_01\bin
+Actual directory: ..\..\virtualbox_cli_01_01\bin
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\virtualbox_cli_01_01\doc
+Actual directory: ..\..\virtualbox_cli_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\walk_01_01
+Actual directory: ..\..\walk_01_01
+Present subdirectories: ['bin', 'doc', 'log']
+Present python files are: []
+Analizing directory ..\..\walk_01_01\bin
+Actual directory: ..\..\walk_01_01\bin
+Present subdirectories: []
+Present python files are: ['walk.py']
+Analizing directory ..\..\walk_01_01\doc
+Actual directory: ..\..\walk_01_01\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\walk_01_01\log
+Actual directory: ..\..\walk_01_01\log
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\walk_01_02
+Actual directory: ..\..\walk_01_02
+Present subdirectories: ['bin', 'doc', 'log']
+Present python files are: []
+Analizing directory ..\..\walk_01_02\bin
+Actual directory: ..\..\walk_01_02\bin
+Present subdirectories: []
+Present python files are: ['walk.py']
+Analizing directory ..\..\walk_01_02\doc
+Actual directory: ..\..\walk_01_02\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\..\walk_01_02\log
+Actual directory: ..\..\walk_01_02\log
+Present subdirectories: []
+Present python files are: []
+Done
+End time: 2020-04-02 14:13:58.077753
+
+Start time: 2020-04-02 14:14:07.711116
+Printing on screen the given directory name: ..\
+Analizing directory ..\
+Actual directory: ..\
+Present subdirectories: ['bin', 'doc', 'log']
+Present python files are: []
+Analizing directory ..\bin
+Actual directory: ..\bin
+Present subdirectories: []
+Present python files are: ['walk.py']
+Analizing directory ..\doc
+Actual directory: ..\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\log
+Actual directory: ..\log
+Present subdirectories: []
+Present python files are: []
+Done
+End time: 2020-04-02 14:14:07.712082
+
+Start time: 2020-04-02 14:14:08.558372
+Printing on screen the given directory name: ..\
+Analizing directory ..\
+Actual directory: ..\
+Present subdirectories: ['bin', 'doc', 'log']
+Present python files are: []
+Analizing directory ..\bin
+Actual directory: ..\bin
+Present subdirectories: []
+Present python files are: ['walk.py']
+Analizing directory ..\doc
+Actual directory: ..\doc
+Present subdirectories: []
+Present python files are: []
+Analizing directory ..\log
+Actual directory: ..\log
+Present subdirectories: []
+Present python files are: []
+Done
+End time: 2020-04-02 14:14:08.559364
+

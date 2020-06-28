@@ -1,0 +1,111 @@
+.. _alcolorblobdetection-api:
+
+ALColorBlobDetection API
+========================
+
+:ref:`naoqi-vision` - :ref:`Overview <alcolorblobdetection>` | API
+
+------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alcolorblobdetectionproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALColorBlobDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* :cpp:func:`ALColorBlobDetectionProxy::setColor`
+* :cpp:func:`ALColorBlobDetectionProxy::setObjectProperties`
+* :cpp:func:`ALColorBlobDetectionProxy::getCircle`
+* :cpp:func:`ALColorBlobDetectionProxy::getAutoExposure`
+* :cpp:func:`ALColorBlobDetectionProxy::setAutoExposure`
+
+
+Event list
+----------
+
+* :naoqi:event:`ALTracker/ColorBlobDetected`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALColorBlobDetectionProxy::setColor(int r, int g, int b, int colorThres)
+
+  Set the color of the blob to find (in RGB space).
+
+  :param R: the Red component, from 0 to 255, of the RGB color to find.
+  :param G: the Green component, from 0 to 255, of the RGB color to find.
+  :param B: the Blue component, from 0 to 255, of the RGB color to find.
+  :param colorThres: the threshold of the color match, from 0 to 255.
+
+
+.. _ALColorBlobDetectionProxy::setObjectProperties1:
+
+.. cpp:function:: void ALColorBlobDetectionProxy::setObjectProperties(int minSize, float span, std::string shape)
+
+  There are two overloads of this function:
+
+  - :ref:`ALColorBlobDetectionProxy::setObjectProperties <ALColorBlobDetectionProxy::setObjectProperties1>`
+  - :ref:`ALColorBlobDetectionProxy::setObjectProperties <ALColorBlobDetectionProxy::setObjectProperties2>` without the *shape* argument.
+
+  Set some properties of the blob to find.
+
+  :param minSize: the minimum size of the blob (in pixels)
+  :param span: span of the object in meters (e.g. for a ball, the diameter)
+  :param shape: shape of the object, use "Circle" if the object to find is circular, "Unknown" otherwise
+
+
+.. _ALColorBlobDetectionProxy::setObjectProperties2:
+
+.. cpp:function:: void ALColorBlobDetectionProxy::setObjectProperties(int minSize, float span)
+
+  Set some properties of the blob to find. By using this function, the shape of the
+  object is automatically set to "Unknown".
+
+  :param minSize: the minimum size of the blob (in pixels)
+  :param span: span of the object in meters (e.g. for a ball, the diameter)
+
+
+.. cpp:function:: AL::ALValue ALColorBlobDetectionProxy::getCircle()
+
+  Retrieve the circle surrounding the blob.
+
+  :return: the outer circle of the found blob as a vector of 3 values: x, y, radius
+           in relative coordinates in the image (i.e. between 0 and 1).
+
+           For example in VGA (640x480), for a circle of 50 pixels in radius and a center
+           located at (123, 71), this function would return [123/640, 71/480, 50/640].
+
+.. cpp:function:: bool ALColorBlobDetectionProxy::getAutoExposure()
+
+  Get the status of the auto exposure option of the camera.
+
+  :return: false if deactivated, true if activated.
+
+.. cpp:function:: void ALColorBlobDetectionProxy::setAutoExposure(bool mode)
+
+  Set the status of the auto exposure option of the camera.
+
+  :param mode: true: on, false: off.
+
+
+Events
+------
+
+.. naoqi:event:: ALTracker/ColorBlobDetected(AL::ALValue value)
+
+  Raised when a color blob is detected.
+
+  :param value: information related to the blob, with a structure that can be used
+                with function :cpp:func:`ALTrackerProxy::trackEvent` of the module **ALTracker**.

@@ -1,0 +1,172 @@
+.. include:: ../bulk/common.rst
+
+.. _create_interactive_activity_tuto:
+
+Creating an Interactive activity
+=================================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+-------------
+
+This tutorial will show you how to create an **Interactive Activity** launched thanks
+to **Trigger conditions** or **Trigger sentences**
+
+*Create the following interactive activity*: when somebody's in zone 2 or when saying
+*Great Success*, the robot congratulates the user on the successful launch of the activity.
+
+Step 1: Create a Behavior
+--------------------------
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Create a new Project and save it as "my_first_interactive".
+
+2.      Right click and rename "behavior_1" folder into "congrats".
+
+3.      Drag and drop **Audio** > **Voice** > **Animated Say** box onto the **Flow Diagram** panel.
+
+4.      Connect its input to the main input of the Behavior and its output to the main output
+        of the Behavior.
+
+5.      Double-click the **Animated Say** box and edit the **Localized Text** box content with:
+
+        .. code-block:: console
+
+          Hello, congratulations on your first interactive application!
+          Let's hope you will do a lot of them so we can do more and more things together.
+=====  ================================================================================================
+
+**Test the Behavior**
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Click the |life-button| **Turn autonomous life off** button.
+
+2.      Click the |play-button| **Play** button.
+=====  ================================================================================================
+
+**Result**
+
+Your |robot| says the sentence.
+
+Step 2: Transform it into an Interactive Activity
+-------------------------------------------------
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Edit the :ref:`choregraphe-reference-project-properties`.
+
+2.      Set the **Application description**.
+
+        For example, you could write:
+
+        .. code-block:: console
+
+           This application contains the following interactive activity: when
+           somebody's in zone 2, or when the interacting user says "Great Success",
+           it congratulate the user on its first interactive activity.
+
+3.      Copy the auto-generated **Application ID**,
+        you will need it to write the **Trigger conditions**.
+
+4.      In the **Package content**, select the Behavior "congrats" in order to display its properties.
+
+5.      Set:
+
+        * the **Name** with "Congratulations",
+
+        * the **Nature** with "Interactive",
+
+        * the **Trigger sentences** with  "Great Success" (panel on the right),
+
+        * the **Loading responses** with "Let me check" (panel on the right) and
+
+        * the **Launch trigger condition** with
+
+          .. code-block:: console
+
+              (('Launchpad/NumPeopleZone2' > 0) ~ 5)
+              && ('Launchpad/PreviousActivity' !="<my_application_id>/congrats")
+
+          Where <my_application_id> is the **Application ID** you have previously copied.
+
+        .. image:: /medias/desktop/choregraphe/tuto_interactive.png
+          :width: 577 px
+          :height: 480 px
+=====  ================================================================================================
+
+**Test the interactive Activity**
+
+.. |install_apps-button| image:: /medias/desktop/choregraphe/application_manager_add_current.png
+   :class: img-inline
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Save the **Project**.
+
+2.      In the **Robot Applications** panel, click the |install_apps-button| **Package and install
+        the current project to the robot** button.
+
+3.      Click the |life_off-button| **Turn autonomous life on** button.
+
+4.      Remain at 2~3 meters in front of your robot.
+
+5.      Go close until dialog/speech recognition triggers, say "Great Success".
+=====  ================================================================================================
+
+**Result**
+
+Your |robot| says the congratulation sentence only once, and will not repeat it
+until another Activity take place, or you say "Great success" again.
+
+
+Understanding the Trigger conditions
+------------------------------------
+
+We want our interactive activity to be autonomously started when there is someone
+detected at some distance for 5 seconds. Thus we are using the event **Launchpad/NumPeopleZone2**
+and the trigger condition looks like this:
+
+.. code-block:: console
+
+  ('Launchpad/NumPeopleZone2' > 0) ~ 5
+
+
+However as we do not want our application to be started continuously if there is none around
+the robot, we added another condition:
+
+.. code-block:: console
+
+  ('Launchpad/PreviousActivity' != "<my_application_id>/congrats")
+
+This Condition makes sure that the activity will be started only once in a row.
+The activity will be able to be focused again if another activity has been focused
+in the meantime.
+
+Thus the final launch trigger condition of our activity becomes:
+
++----------------------------------------+--------------------------------------------+
+| Expression part ...                    | Means ...                                  |
++========================================+============================================+
+| ('Launchpad/NumPeopleZone2' > 0) ~ 5   | At least one person seen in Zone 2 during  |
+|                                        | 5 seconds.                                 |
++----------------------------------------+--------------------------------------------+
+| &&                                     | and                                        |
++----------------------------------------+--------------------------------------------+
+| ('Launchpad/PreviousActivity'          | the last activity was not "congrats",      |
+| !="<my_application_id>/congrats ")     | i.e. another **Activity** took place       |
+|                                        | since the last loneliness complain.        |
++----------------------------------------+--------------------------------------------+
+
+To go further
+.............
+
+To discover all events and expressions you may use as **Launch trigger condition**,
+see:
+
+* :ref:`launchtriggerconditions`.

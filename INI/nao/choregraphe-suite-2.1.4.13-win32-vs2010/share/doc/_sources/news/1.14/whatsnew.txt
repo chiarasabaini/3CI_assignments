@@ -1,0 +1,680 @@
+.. _whats-new-1.14:
+
+What's new - 1.14
+==================
+
+Improving customer support
+-----------------------------
+
+Implementation of an issue reporter
+++++++++++++++++++++++++++++++++++++
+
+Help us improve our software! In case of a **NAOqi** issue,
+you can now send us an issue report, automatically or manually.
+
+For an automatic upload, see: the **Bug report** option in :ref:`opennao-web-page-settings`,
+for a manual upload, see: :ref:`send_crash_report`.
+
+Supported Operating Systems
+----------------------------
+
+64-bits fully supported
+++++++++++++++++++++++++++++
+
+This release fully supports 64-bits OS.
+
+MAC OS X 32-bits no longer supported
++++++++++++++++++++++++++++++++++++++
+
+MAC OS X 32-bits is no longer supported.
+
+Therefore, upgrading Choregraphe is no longer possible on computer running
+non-supported Operating Systems such as Mac OS X version 10.5 Leopard or earlier.
+
+
+Audio
+-------
+
+New voice for Japanese text to speech
+++++++++++++++++++++++++++++++++++++++
+
+NAO Speaks Japanese with a new, much better voice.
+
+**ALTextToSpeech** now uses the speech synthesizer provided by **ACAPELA**
+for all languages, including Japanese.
+
+For further details, see: :ref:`altexttospeech`.
+
+Text to speech: voices have been improved
+++++++++++++++++++++++++++++++++++++++++++
+
+In order to improve voice quality, **ALTextToSpeech** now uses a new version of
+language files.
+
+| Upgrading your robot will automatically update the default languages.
+| For further details see: :ref:`choregraphe-howto-update-nao-system`.
+|
+
+| If you have installed additional languages provided by our Customer support team, contact them to request an update.
+| For further details, see: :ref:`contacting_support`.
+|
+
+Vision
+-------
+
+New module: ALVisualCompass
+++++++++++++++++++++++++++++
+
+**ALVisualCompass** is an extractor which gives the current rotation angles of
+the robot compared to a given reference image along the Y and Z axis.
+
+The module gives the rotation of the FRAME_ROBOT reference, so the whole body of
+the robot and not only its head. This means that if the robot stays standing
+but moves its head, the deviation angles will not change.
+
+For further details, see: :ref:`alvisualcompass`.
+
+New module: ALMovementDetection
++++++++++++++++++++++++++++++++
+
+**ALMovementDetection** extractor enables to detect movements around the
+robot thanks to its camera.
+
+.. warning::
+
+   This module is experimental. In order to improve its performances, it is
+   likely the algorithm used for the detection will change in the next version,
+   which may result in API changes.
+
+For further details, see: :ref:`almovementdetection`.
+
+
+ALVisionToolbox is deprecated
++++++++++++++++++++++++++++++++
+
+Use the following modules instead:
+
+* :ref:`albacklightingdetection` to detect back-lighting situations and be notified by an
+  event when back-lighting occurs.
+* :ref:`aldarknessdetection` to detect darkness situations and be notified by an
+  event when the image becomes dark.
+* :ref:`alphotocapture` to take one or several pictures.
+* :ref:`alvideorecorder` to record video.
+
+Trackers
+--------
+
+ALRedballDetection - ALFaceDetection improved
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tracking is now possible with both cameras.
+
+For further details see: :ref:`naoqi-trackers`.
+
+The camera used for the detection in now precised in the information returned,
+as well as its position in :term:`FRAME_TORSO` and :term:`FRAME_ROBOT`.
+
+For further details, see: :ref:`alredballdetection` and :ref:`alfacedetection`.
+
+Sensors
+--------
+
+Since release 1.14, usage of the **Chest button** LEDs is deprecated.
+The usage of the **Chest button** will be soon restricted in order to use it
+as a system button.
+
+For further details, see: :ref:`alleds`.
+
+
+Motion
+-------
+
+New module: ALNavigation
+++++++++++++++++++++++++++++
+
+**ALNavigation** is a first attempt to make the robot go safely to a different
+:term:`pose` (i.e. location + orientation).
+The robot cannot yet avoid obstacles, but it is able to move cautiously,
+stopping as soon as an obstacle enters its security zone.
+
+For further details, see: :ref:`alnavigation`.
+
+New module: ALRobotPosture
+++++++++++++++++++++++++++++
+
+**ALRobotPosture** module allows you to make the robot go to a different
+:term:`pose`.
+
+For further details, see: :ref:`alrobotposture`.
+
+New methods: wakeUp and rest
++++++++++++++++++++++++++++++
+
+These new methods are convenient to manage the **Stiffness** globally, for the whole robot.
+
+For further details, see: :cpp:func:`ALMotionProxy::wakeUp` and :cpp:func:`ALMotionProxy::rest`.
+
+
+Self-collision avoidance improved
++++++++++++++++++++++++++++++++++
+
+Self-collision avoidance can be deactivated  in any case, even if the current state of the chain in collision.
+
+For further details, see: :cpp:func:`ALMotionProxy::setCollisionProtectionEnabled`.
+
+getLimits returns also maxTorque
++++++++++++++++++++++++++++++++++++
+
+Additionally to minAngle, maxAngle and maxVelocity,
+:cpp:func:`ALMotionProxy::getLimits` returns the maxTorque.
+
+Space names have changed
++++++++++++++++++++++++++
+
+Constant names have changed:
+
+* **SPACE_TORSO** becomes **FRAME_TORSO**
+* **SPACE_WORLD** becomes **FRAME_WORLD**
+* **SPACE_NAO** becomes **FRAME_ROBOT**
+
+Note that for backward compatibility, former constants are still available.
+
+For further details, see: :ref:`motion-effectors-space`.
+
+
+Deprecated module: ALMotionRecorder
+++++++++++++++++++++++++++++++++++++
+
+Use the **Animation Mode** instead.
+
+For further details, see: :ref:`animation_mode`.
+
+ALMotion deprecated methods
+++++++++++++++++++++++++++++
+
+**Walk control becomes Locomotion control**
+
+=====================================================   =====================================================
+Deprecated method                                         Replaced by ...
+=====================================================   =====================================================
+:cpp:func:`ALMotionProxy::walkTo`                        :cpp:func:`ALMotionProxy::moveTo`
+
+:cpp:func:`ALMotionProxy::walkInit`                      :cpp:func:`ALMotionProxy::moveInit`
+
+:cpp:func:`ALMotionProxy::waitUntilWalkIsFinished`       :cpp:func:`ALMotionProxy::waitUntilMoveIsFinished`
+
+:cpp:func:`ALMotionProxy::walkIsActive`                  :cpp:func:`ALMotionProxy::moveIsActive`
+
+:cpp:func:`ALMotionProxy::stopWalk`                      :cpp:func:`ALMotionProxy::stopMove`
+
+:cpp:func:`ALMotionProxy::getFootGaitConfig`             :cpp:func:`ALMotionProxy::getMoveConfig`
+=====================================================   =====================================================
+
+**General Tools**
+
+=====================================================   =====================================================
+Deprecated method                                         Replaced by ...
+=====================================================   =====================================================
+:cpp:func:`ALMotionProxy::getJointNames`                 :cpp:func:`ALMotionProxy::getBodyNames`
+=====================================================   =====================================================
+
+**Motion task**
+
+=====================================================   =====================================================
+Deprecated method                                         Replaced by ...
+=====================================================   =====================================================
+:cpp:func:`ALMotionProxy::killWalk`                      :cpp:func:`ALMotionProxy::killMove`
+=====================================================   =====================================================
+
+Core
+------
+
+New module: ALConnectionManager
+++++++++++++++++++++++++++++++++++
+
+This new module provides methods for network configuration and connection.
+**ALConnectionManager** supports several technologies such as Ethernet, WiFi and Bluetooth.
+
+For further details, see: :ref:`alconnectionmanager`.
+
+ALMemory: 2 new methods
+++++++++++++++++++++++++++
+
+Two new methods allow you to set and get a description for each memory entry.
+
+For further details, see: :cpp:func:`ALMemoryProxy::getDescriptionList` and
+:cpp:func:`ALMemoryProxy::setDescription`.
+
+
+Libraries
++++++++++
+
+**New**
+
+* TBB
+* lttng
+* OpenNI (only in NAO v4 image)
+
+
+**Removed**
+
+Urbi
+
+**Updated**
+
+Several libraries used by NAOqi SDK has been updated:
+
+* eigen    2      => 3
+* python   2.6.6  => 2.7.2
+* boost    1.45.0 => 1.48.0
+* opencv   2.1.0  => 2.3.1a
+* glibc    2.11.3 => 2.13
+
+* net-misc/connman 0.69.4 => 1.1
+* net-wireless/wpa_supplicant 0.7.3 => 1.0
+* wireless-compat 3.2 => 3.4
+
+For further details about OpenCV, see: :ref:`cpp-tutos-opencv`.
+
+Updated Development tools
+++++++++++++++++++++++++++
+
+* gdb        7.2    => 7.3.1
+* strace     4.5.20 => 4.6
+* valgrind   3.5.0  => 3.6.1
+
+
+* Updated toolchain to gcc 4.5.3 in cross-toolchains.
+
+
+Choregraphe - new tools
+------------------------
+
+Resource Viewer panel
+++++++++++++++++++++++
+
+**Resource viewer** is a new panel that dynamically displays the name of the box locking resources.
+
+.. image:: /medias/desktop/choregraphe/resource_viewer_small.png
+   :width: 500 px
+   :height: 250 px
+
+For further details, see: :ref:`chore_resource_viewer_panel`.
+
+
+Memory watcher panel
+++++++++++++++++++++
+
+**Memory watcher** is a new panel allowing you to easily display the value of
+events or data during the execution of a behavior.
+
+.. image:: /medias/desktop/choregraphe/memory_watcher_panel.png
+   :width: 462 px
+   :height: 248 px
+
+**Memory watcher** has a Recording function allowing you to save a CSV file
+containing the history of event or data values during the recording.
+
+For further details, see: :ref:`chore_memory_watcher_panel`.
+
+Forward kinematics in 3D View (Experimental)
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Activate the option **Use 3D controller for motors (Experimental)** in order to
+test new forward kinematics.
+
+.. image:: /medias/desktop/choregraphe/forward_kinematics_option_144.png
+   :width: 333 px
+   :height: 382 px
+
+For further details, see: :ref:`choregraphe-detailed-interface-preferences`
+and :ref:`3d-nao-panel`.
+
+Dialog panel (Experimental)
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Activate the option **Activate dialog widget (Experimental)** in order to
+test new Dialog panel.
+
+.. image:: /medias/desktop/choregraphe/dialog_panel_noletters.png
+   :width: 167 px
+   :height: 259 px
+
+For further details, see: :ref:`choregraphe-detailed-interface-preferences`
+and :ref:`dialog_panel`.
+
+Choregraphe - improvements
+---------------------------
+
+Optimization
+++++++++++++
+
+Optimization has been one of our major priority. More specifically, behavior loading
+is now much faster.
+
+Timeline
+++++++++++
+
+Supports all models
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The **Timeline** tools are now aware of the :ref:`Body type<nao-family::nao-body-type>`
+of the connected robot.
+
+For example, when you are connected to a **T14**, legs joints are not displayed anymore.
+
+.. image:: /medias/desktop/choregraphe/timeline_t14.png
+   :width: 500 px
+   :height: 265 px
+
+For further details, see: :ref:`timeline` and :ref:`choregraphe-detailed-interface-timeline-editor`.
+
+Timeline properties accessible by scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Methods allowing you to manage the Timeline execution have been improved and simplified.
+Now **Timeline** object can be accessed in python using:
+
+* self.getTimeline()
+* self.getParentTimeline()
+
+For further details, see: :ref:`choregraphe-reference-box-script-built-in-functions`.
+
+Animation mode
++++++++++++++++
+
+Animation mode is easier to use:
+
+* it is no more necessary to be in **Recording mode** to use it,
+* vocal commands "Store position" is available in all languages,
+* using **Animation Mode** to define **Motion keyframes** is just as easy as pressing **F8**.
+
+For further details, see: :ref:`choregraphe-howto-use-animation-mode`.
+
+
+Behavior manager panel
++++++++++++++++++++++++
+
+The **Behavior manager** panel has a new, simplified Toolbar.
+
+.. image:: /medias/desktop/choregraphe/behavior_manager_114.png
+   :width: 340 px
+   :height: 179 px
+
+|
+| To install a **Behavior** directly from your computer:
+| Drag and drop a the CRG file or the directory of a behavior into the
+  **Behavior manager** panel.
+
+For further details, see: :ref:`choregraphe-overview-behavior-manager-panel`.
+
+
+Connection Management
++++++++++++++++++++++
+
+The management of connection troubles has been improved: the modal alert has been
+replaced by a tooltip offering guidance to fix the problem.
+
+.. image:: /medias/desktop/choregraphe/connection_management_message.png
+   :width: 467 px
+   :height: 180 px
+
+
+For further details, see: :ref:`chore_connection_management`.
+
+The **Connection widget** has also evolved: now the IP address of the robot is
+displayed and can be refreshed if necessary.
+
+.. image:: /medias/desktop/choregraphe/connection_widget_114.png
+   :width: 550 px
+   :height: 382 px
+
+For further details, see: :ref:`connection-widget`.
+
+
+Flow diagram
+++++++++++++++
+
+New buttons appear on the **Input** and **Output** borders of the **Flow diagram**:
+
+.. image:: /medias/desktop/choregraphe/flow_diagram_add_buttons_114.png
+   :width: 393 px
+   :height: 169 px
+
+To display their names, hold down **Shift-Control**:
+
+.. image:: /medias/desktop/choregraphe/flow_diagram_add_buttons_infobulle_114.png
+   :width: 351 px
+   :height: 166 px
+
+* **(+) Add input** and **(+) Add output**: eases the access to the existing contextual menu.
+* **(+) Add event from ALMemory**: gives an easier access to Events.
+
+For further details, see: :ref:`flow-diagram-input-ouput`.
+
+File > Save project
+++++++++++++++++++++
+
+**File** menu has been simplified: a single command allows saving a **Project**
+as a CRG file or as a directory.
+
+For further details, see :ref:`choregraphe-howto-save-project-as-crg`
+and :ref:`choregraphe-howto-save-project-as-directory`.
+
+
+Resource Editor
++++++++++++++++++
+
+**Resource editor** becomes **Box resource selector**,
+
+improved in order to be more intuitive.
+
+.. image:: /medias/desktop/choregraphe/box_resource_selector.png
+    :width: 249 px
+    :height: 432 px
+
+For further details, see: :ref:`choregraphe-detailed-interface-box-edition-resources`.
+
+
+Inherited parameters
+++++++++++++++++++++++
+
+In order to clarify parameters inheritance, when activated, if a parent parameter
+is found:
+
+* the child parameter Type is disabled and
+* it is no more possible to edit the value of the child parameter.
+
+Automatic free trial license
++++++++++++++++++++++++++++++
+
+When installing **Choregraphe**, it is no more necessary to enter the free trial key.
+User can freely use **Choregraphe** for 90 days.
+
+During 90 days, at startup, a reminder gives the choice to use the free trial or to enter the license key.
+
+
+New Box Libraries
+++++++++++++++++++
+
+the **default** Box Library has been split in 3 box libraries:
+
+* standard,
+* advanced and
+* deprecated.
+
+For further details, see: :ref:`chore_box_libary_panel`.
+
+
+Choregraphe - new boxes
+-----------------------
+
+Audio
+++++++
+
+Sound Peak
+^^^^^^^^^^^
+
+**Audio** > **Sound** > **Sound Peak**:
+
+| Detect sound peaks.
+| Each time a sound peak is detected, the onPeak output is stimulated.
+
+
+Communication
+++++++++++++++
+
+Choregraphe Connection
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Communication** > **Network** > **Choregraphe Connection**:
+
+Check if NAO is connected to Choregraphe and warn when it gets connected or gets
+disconnected.
+
+
+Internet Connection
+^^^^^^^^^^^^^^^^^^^^
+
+**Communication** > **Network** > **Internet Connection**:
+
+This box detects when NAO is connected or disconnected to the Internet.
+
+Motion
++++++++
+
+
+Set Fall Manager
+^^^^^^^^^^^^^^^^
+
+**Advanced** box Library > **Motions** > **Set Fall Manager**:
+
+| Enable or disable the Fall Manager.
+| It is automatically set to its previous state when the behavior is stopped.
+
+
+
+System
+++++++++
+
+Get Date
+^^^^^^^^^
+
+**System** > **Get Date**:
+
+This box provides NAO's local time and date.
+
+
+Get Name
+^^^^^^^^^
+
+**System** > **Get Name**:
+
+| Returns NAO's name.
+| For example: "Patate".
+| Note: You can change the name of your robot on its webpage.
+|
+
+
+Log
+^^^^
+
+**Debug** > **Log**:
+
+Prompt the message in the debug window. You can set a prefix and a priority
+for the message in the parameters.
+
+
+Get Body ID
+^^^^^^^^^^^^^
+
+**Advanced** box Library > **System** > **Get Body ID**:
+
+Returns the ID of NAO's body.
+
+Templates
+++++++++++
+
+3 templates are now available in order to quickly create **Diagram**, **Script**
+or **Timeline boxes**.
+
+
+Trackers
++++++++++
+
+Movement Tracker
+^^^^^^^^^^^^^^^^^^^
+
+**Trackers** > **Movement Tracker**:
+
+Turn the head in the direction of detected movement
+
+
+Vision
++++++++
+
+Record Video
+^^^^^^^^^^^^^^^
+
+**Vision** > **Record Video**:
+
+Record a video from NAO's camera. Stop recording when the duration set in
+parameter is elapsed.
+
+
+
+Take Picture
+^^^^^^^^^^^^^^^
+
+**Vision** > **Take Picture**:
+
+Take a picture with NAO's camera and store it in his memory in
+~/recordings/cameras. The image format is JPG.
+
+
+Unlearn Face
+^^^^^^^^^^^^^^^
+
+**Vision** > **Unlearn Face**:
+
+| Unlearn the face which name is set on the input.
+| Note: If the face has not been learnt before, the onFailure output will be stimulated.
+|
+
+
+
+
+Known issues
+==============
+
+
+* Bug #8104 Nao Web Page: *Language* and *Time zone* combo boxes are not
+  correctly set with Internet Explorer. Workaround: use Chrome or Firefox.
+
+* Bug #8422 Freebox V6 is not supported.
+
+
+* Bug #6554 NAO's webpage is sometimes not available
+
+* Bug #6412 On Vista, you need to be administrator to use the flasher
+
+* Bug #6622 Hand touch sometimes activated by motor usage
+
+* Bug #6135 audio driver: locked in mute (atom)
+
+* Bug #5198 When battery is fully charged and plugged, battery status is not well updated,
+  due to limitation on battery controller.
+
+* Feature #4232 MP3 files start slower than WAV files
+
+
+* Feature #7290 The two parameters *Voice Shapping* and *Speed* of the say box have
+  no effect for Korean.
+
+
+------------------------------
+
+.. |date| date::
+.. |time| date:: %H:%M
+
+This release Note was generated on |date|.

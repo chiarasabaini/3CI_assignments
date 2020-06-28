@@ -1,0 +1,93 @@
+.. _almotion-api:
+
+ALMotion API
+============
+
+:ref:`Overview <almotion>` | API | :ref:`advanced`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alnotificationmanagerproxy.h>
+
+
+ALMotion provides methods that help make the robot move.
+It contains commands allowing you to manipulate joint stiffness, joint angles,
+and a higher level API allowing you to control the walk.
+
+
+Method Group list
+-----------------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALMotionProxy
+
+:ref:`control-stiffness-api`
+
+.. include:: bulk/control-stiffness_toc.rst
+
+
+:ref:`control-joint-api`
+
+.. include:: bulk/control-joint_toc.rst
+
+
+:ref:`control-walk-api`
+
+.. include:: bulk/control-move_toc.rst
+
+
+:ref:`control-cartesian-api`
+
+.. include:: bulk/control-cartesian_toc.rst
+
+
+:ref:`control-wholebody-api`
+
+.. include:: bulk/control-wholebody_toc.rst
+
+
+:ref:`reflexes-collision-avoidance-api`
+
+.. include:: bulk/reflexes-collision-avoidance_toc.rst
+
+:ref:`reflexes-external-collision-api`
+
+.. include:: bulk/reflexes-external-collision_toc.rst
+
+
+:ref:`reflexes-fall-manager-api`
+
+.. include:: bulk/reflexes-fall-manager_toc.rst
+
+
+:ref:`reflexes-smart-stiffness-api`
+
+.. include:: bulk/reflexes-smart-stiffness_toc.rst
+
+:ref:`reflexes-diagnosis-api`
+
+.. include:: bulk/reflexes-diagnosis_toc.rst
+
+:ref:`push_recovery-api`
+
+.. include:: bulk/push_recovery_toc.rst
+
+:ref:`idle-api`
+
+.. include:: bulk/idle_toc.rst
+
+:ref:`tools-general-api`
+
+.. include:: bulk/tools-general_toc.rst
+
+
+:ref:`tools-motion-task-api`
+
+.. include:: bulk/tools-motion-task_toc.rst
+

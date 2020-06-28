@@ -1,0 +1,66 @@
+
+.. _alvisualspacehistory:
+
+ALVisualSpaceHistory
+====================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alvisualspacehistory-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alvisualspacehistory-api>`
+
+-------------------
+
+What it does
+------------
+
+**ALVisualSpaceHistory** keeps track of the head movements of the robot to
+build a timestamped map of the head positions. This can be useful when exploring
+the environment to make the robot look in every direction.
+
+
+How it works
+------------
+
+**ALVisualSpaceHistory** is an ALExtractor that regularly queries the head angles
+of the robot and updates a grid containing the timestamp of the last time the head
+looked in a particular direction.
+
+
+.. glossary::
+
+    Visual grid data
+
+        The "visual space" denotes all the possible head positions of the robot. If we took snapshots
+        of what the camera sees at different locations and stitched them together, we would obtain a
+        "visual map". **ALVisualSpaceHistory** does not store such a map but creates a grid by dividing
+        it into small rectangular cells which contain the timestamp of the last time that the robot's
+        camera could see this area of the visual space.
+
+    Grid precision
+
+        The cell size is determined by the parameter **grid precision** which can be changed by calling
+        :cpp:func:`ALVisualSpaceHistoryProxy::setGridPrecision`.
+
+        This precision is the ratio of the camera field of view in radian divided by the field of view
+        corresponding to one grid cell. If the precision is 2.0, then a grid cell represents a quarter
+        of the camera field of view. A high grid precision gives a more accurate grid but also requires
+        more processing time.
+
+On every grid update the module pushes data to the **ALMemory** key
+:naoqi:memkey:`VisualSpaceHistory/VisualGrid/Data`.
+
+Performances and limitations
+----------------------------
+
+If the robot moves more than its head, the grid must be manually reset
+by calling :cpp:func:`ALVisualSpaceHistoryProxy::resetGrid`.
+
+Indeed, the "visual grid" is build using only the head position, it becomes obsolete
+as soon as the **FRAME_TORSO** space  moves with respect to the **FRAME_WORLD**
+(in case of displacement on the ground for example).
+For further details, see: :ref:`motion-effectors-space`.
+

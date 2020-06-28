@@ -1,0 +1,37 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: blue;
+  }
+  
+li a {
+    display: block;
+    color: yellow;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+li {
+    text-align: center;
+  }
+  
+li:last-child {
+    border-bottom: none;
+  }
+  
+li a.home {
+    background-color:yellow;
+    color: blue;
+  }
+
+li a:hover {
+    background-color: blue;
+    color: yellow;
+  }
+
+li a:hover:not(.home) {
+    background-color: yellow;
+    color: blue;
+  }

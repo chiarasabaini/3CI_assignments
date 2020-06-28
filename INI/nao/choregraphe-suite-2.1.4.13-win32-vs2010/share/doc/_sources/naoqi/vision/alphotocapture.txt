@@ -1,0 +1,82 @@
+.. _alphotocapture:
+
+ALPhotoCapture
+==============
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alphotocapture-api
+    alphotocapture-tuto
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alphotocapture-api>` | :ref:`Tutorial <alphotocapture-tuto>`
+
+------------
+
+What it does
+------------
+
+The **ALPhotoCapture** module allows you to take pictures and using the robot
+cameras and save them on disk.
+
+TakePicture
++++++++++++
+
+This function takes and stores one picture using the module's parameters
+(color space, frame rate, resolution, picture format). All these parameters can
+be set using the appropriate methods (see the :ref:`API <alvideorecorder-api>`
+section).
+The location of the file on the disk is given as argument.
+.. note::
+
+   A button is available in the Monitor GUI for taking pictures by calling this
+   function.
+
+
+TakePictures
+++++++++++++
+
+This function is similar to :cpp:func:`ALPhotoCaptureProxy::takePicture` but allows to take several
+pictures. The final file names are constructed by appending the number of the
+picture to the file name.
+
+
+.. note::
+
+   If you don't manually set the parameters, the following ones will be used by
+   default:
+
+   * Camera ID: default (top camera)
+   * Color space: BGR
+   * Time between two pictures: 200 millisecond (*i.e.* 5 frames per second)
+   * Resolution: VGA (640 x 480)
+   * Picture format: jpg
+
+Performances and Limitations
+----------------------------
+
+A call to :cpp:func:`ALPhotoCaptureProxy::takePicture` or :cpp:func:`ALPhotoCaptureProxy::takePictures`
+takes some time because the module has to subscribe to **ALVideoDevice** and wait a few hundred milliseconds
+for the camera image to stabilize. However, if you need reactivity it is possible to subscribe to
+**ALVideoDevice** before taking the picture(s), thus saving up to a second or more. This is done by
+calling the method :cpp:func:`ALPhotoCaptureProxy::halfPress`. A second call will cause the module
+to unsubscribe from **ALVideoDevice**.
+
+.. note::
+
+   Please note that no change in camera ID, color space, time period, resolution will be taken into account
+   when the *halfPress* mode is on. You have to turn it off and on again for the new settings to be applied.
+
+.. warning::
+
+   Be careful when turning this mode on especially if the requested resolution is high, for it might affect
+   performance of all other modules which get data from **ALVideoDevice**. It is advised to turn the *halfPress*
+   mode off as soon as it is not needed anymore.
+
+Getting started
+---------------
+
+The easiest way to get started with most of these features is to use the corresponding Choregraphe vision boxes.
+Recording capabilities can be easily used through the camera panel of Monitor.
+You will also find working examples on the :ref:`Tutorial <alphotocapture-tuto>` page.

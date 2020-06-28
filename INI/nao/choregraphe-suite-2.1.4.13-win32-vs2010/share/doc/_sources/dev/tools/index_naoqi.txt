@@ -1,0 +1,20 @@
+.. _naoqi-tools:
+
+NAOqi
+=====
+
+.. toctree::
+   :maxdepth: 2
+
+   naoqi
+
+.. toctree::
+   :maxdepth: 1
+
+   naoqi-man
+
+.. toctree::
+   :maxdepth: 1
+
+   robot-simulation
+

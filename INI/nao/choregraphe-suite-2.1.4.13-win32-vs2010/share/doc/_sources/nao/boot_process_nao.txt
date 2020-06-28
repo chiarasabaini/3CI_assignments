@@ -1,0 +1,141 @@
+.. _boot_process_nao:
+
+Understanding the boot process
+==============================
+
+Boot process - status
+---------------------
+
+During the boot process, the color of the **Status** :ref:`LEDs <leds_boot_nao>`
+lets you know if **NAO** is:
+
+* :ref:`simple_boot_nao`, 
+* :ref:`upgrading_process_nao`,
+* or in an :ref:`unusable_nao` state.
+
+.. image:: /medias/nao/boot_process_overview.png
+    :width: 466 px
+    :height: 289 px
+
+Boot process - progress indicator
+---------------------------------
+    
+The boot process may take a long time, especially when upgrading the system.
+The animation displayed by the :ref:`LEDs <leds_boot_nao>` provides detailed 
+information about the boot process.
+
+.. _simple_boot_nao:
+
+Switching on
+------------
+
+**Step 1**
+
+* **NAO V5**
+
+  The **Eye** :ref:`LEDs <leds_boot_nao>` and the **Status** :ref:`LEDs <leds_boot_nao>`
+  fade in, smoothly and repeatedly, from **Black** to **White**.
+
+* **NAO V4 & V3.x**
+
+  The **Eye** :ref:`LEDs <leds_boot_nao>` are alternately  **Blue** / **Red** / **Green**.
+
+  The **Status** :ref:`LEDs <leds_boot_nao>` fade in, smoothly and repeatedly,
+  from **Black** to **White**.
+
+* **All**
+
+  A progress bar is displayed on the **Ear** :ref:`LEDs <leds_boot_nao>`:
+
+  +-----------------+-----------------------------------------------------------------+
+  | Progression bar | Means ...                                                       |
+  +=================+=================================================================+
+  | 0 %             | **NAO** is in the early boot step, initializing the hardware.   |
+  +-----------------+-----------------------------------------------------------------+
+  | 25 %            | Hardware is initialized.                                        |
+  +-----------------+-----------------------------------------------------------------+
+  | 50 %            | Filesystems are ready to use.                                   |
+  +-----------------+-----------------------------------------------------------------+
+  | 75 %            | Network and ssh are started.                                    |
+  +-----------------+-----------------------------------------------------------------+
+  | 100 %           | NAOqi is started.                                               |
+  +-----------------+-----------------------------------------------------------------+
+
+**Step 2**: all :ref:`LEDs <leds_boot_nao>` are off for a while, then **Blue**, then quickly
+**Red** and **Green**.
+
+**Step 3**: **NAO** says "**OGNAK GNOUK**".
+
+.. _upgrading_process_nao:
+
+Upgrading
+---------
+
+In case of system upgrade, the boot process can take much more time
+(30 minutes in case of factory reset) and the :ref:`LEDs <leds_boot_nao>` animation is different.
+
+**Step 1**
+
+* **NAO V5**
+
+  For a while, the **Eye** :ref:`LEDs <leds_boot_nao>` and the **Status**
+  :ref:`LEDs <leds_boot_nao>` fade in, smoothly and repeatedly, from **Black** to **White**.
+
+* **NAO V4 & V3.x**
+
+  The **Eye** :ref:`LEDs <leds_boot_nao>` are alternately  **Blue** / **Red** / **Green**.
+
+  For a while, the **Status** :ref:`LEDs <leds_boot_nao>` fade in, smoothly and repeatedly,
+  from **Black** to **White**.
+
+**Step 2**
+
+* The **Status** :ref:`LEDs <leds_boot_nao>` fade in, repeatedly,
+  from **Black** to **Blue**.
+
+* The progress is displayed on the **Ear** :ref:`LEDs <leds_boot_nao>`:
+
+  +--------------------------------------------------+---------------------------------------------------+
+  | Ear LEDs                                         | Meaning                                           |
+  +==================================================+===================================================+
+  | **A** - The front half-circle is blinking.       | Checking integrity of the image to be flashed.    |
+  +--------------------------------------------------+---------------------------------------------------+
+  | **B** - Animation like a progress bar.           | The OS image is being flashed.                    |
+  +--------------------------------------------------+---------------------------------------------------+
+  | **C** - The rear half-circle is blinking [#f1]_. | Checking integrity of the flashed data.           |
+  +--------------------------------------------------+---------------------------------------------------+
+  | **D** - **Factory reset only**                   |                                                   |
+  |                                                  |                                                   |
+  | The front and rear half-circles are              | Restoring factory settings.                       |
+  | alternately blinking [#f1]_.                     |                                                   |
+  +--------------------------------------------------+---------------------------------------------------+
+
+  .. [#f1] Only on NAO V4 and higher.
+
+**Step 3**: the **Status** :ref:`LEDs <leds_boot_nao>` is still fading in, smoothly and repeatedly,
+from **Black** to **Blue**, while all the steps of a :ref:`simple_boot_nao` are performed.
+
+.. _unusable_nao:
+
+Unusable
+--------
+
+When something wrong occurs during the boot process, and if the system fails to
+recover a usable state, then the **Status** :ref:`LEDs <leds_boot_nao>`
+fade in and out, smoothly and repeatedly, from **Black** to **Red**.
+
+In such case, try to reboot the robot.
+
+If the problem persists, contact the support.
+
+-----
+
+.. _leds_boot_nao:
+
+**LEDs** - **NAO**
+
+.. image:: /medias/nao/boot_leds.png
+    :width: 265 px
+    :height: 334 px
+
+**A** - **Eye** LEDs,  **B** - **Ear** LEDs,  **C** - **Status** LEDs

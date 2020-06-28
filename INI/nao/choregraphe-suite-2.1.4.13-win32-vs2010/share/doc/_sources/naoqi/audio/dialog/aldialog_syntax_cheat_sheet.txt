@@ -1,0 +1,43 @@
+.. _dialog_cheat_sheet:
+
+QiChat - Cheat sheet
+=========================
+
+:ref:`naoqi-audio` - :ref:`Overview <aldialog>` | :ref:`API <aldialog-api>` | QiChat
+| :ref:`Tutorials <aldialog_tuto>`
+
+:ref:`Table of Content<dialog_toc>` | :ref:`Introduction<dialog_concepts>` |
+:ref:`Syntax<dialog_rules>` | :ref:`Overview<dialog_overview>` | Cheat Sheet
+
+------------
+
+Cheat sheet
+------------
+
+=======================================   ===========================  =========================================================================
+Rule                                             syntax                      Example
+=======================================   ===========================  =========================================================================
+Create a topic                             topic: ~name                 topic: ~introduction
+Add a robot proposal                       proposal:                    proposal: speak to me
+Add a Human input                          u:(...)                      u:(what is your name) my name is nao
+Add a private human input                  u:^private(...)              u:^private(what are we talking about?) we are talking about cooking
+Add a list of possible words (or)          []                           u:(i like [chicken fish]) i like it too
+Add an answer                              Answer follows input         u:(input) answer
+Add a sentence                             quote                        u:(["i like it" "i really love it"]) i like it too
+Add a list of optional words               {}                           u:(i feel {very quite} well) nice
+Assign a variable                          $variable=xxx                u:(my name is david) i store your name $name=david
+Display a variable                         $variable                    u:(what is my name) your name is $name
+Condition                                  $variable==xxx               u:(is my name david) ["$name==david yes" "no it is $name"]
+Input selection as variable                _xxx                         u:(my name is _[david robert]) your name is $1
+Subrules                                   u1: u2: u3:                  u:(ask me a question) do you like fish
+                                                                        u1:(yes) it's good for health
+                                                                        u1:(no) i prefer meat
+Event                                      e:Variable                   u:([e:faceDetected "hello"]) Hello human!
+Comment                                    #                            # commented line
+Wildcard (any word)                        \*                           u:(i * love you) i love you too # match i really love you
+Concept                                    ~                            u:(~i love you) me too # match i, me, i am
+Forbidden word (word that unmatch)         !word                        u:(i !not love you) i love you # i not love you will no match the rule
+Repeat the last answer                     e:dialog/Answered            u:(what did you said?) e:dialog/Answered
+Repeat the last user input                 $dialog/LastInput            u:(I Love you) $Dialog/LastInput too
+=======================================   ===========================  =========================================================================
+

@@ -1,0 +1,12 @@
+
+Mastering script creation
+============================
+
+
+**Create Python and Qichat scripts**
+
+.. toctree::
+   :maxdepth: 2
+
+   objects/python_script
+   objects/qichat_script

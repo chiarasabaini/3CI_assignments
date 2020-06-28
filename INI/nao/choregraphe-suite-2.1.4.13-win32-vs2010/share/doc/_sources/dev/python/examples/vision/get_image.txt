@@ -1,0 +1,39 @@
+.. _python-example-vision-getimage:
+
+Retrieving images
+=================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section contains examples showing how to get images from NAO's cameras,
+and how to visualize them with PIL or PyQt.
+
+Get an image
+------------
+
+This example gets an image on the robot.
+
+:download:`videoInput_getImage.py </examples/python/vision/videoInput_getImage.py>`
+
+.. literalinclude:: /examples/python/vision/videoInput_getImage.py
+   :language: py
+
+Visualize an image using PIL
+----------------------------
+
+Get one image from NAO, then display it using `PIL <http://www.pythonware.com/products/pil/>`_.
+
+:download:`vision_getandsaveimage.py </examples/python/vision/vision_getandsaveimage.py>`
+
+.. literalinclude:: /examples/python/vision/vision_getandsaveimage.py
+   :language: py
+
+Visualize live NAO images using PyQt
+------------------------------------
+
+Visualize live NAO images using `PyQt <http://wiki.python.org/moin/PyQt>`_.
+
+:download:`vision_showimages.py </examples/python/vision/vision_showimages.py>`
+
+.. literalinclude:: /examples/python/vision/vision_showimages.py
+   :language: py

@@ -1,0 +1,42 @@
+.. _t14_joints:
+
+T14 - Joints
+==============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  joints_t14_v33
+  joints_t14_v32
+
+
+.. seealso::
+    **V4** | :ref:`V3.3 <t14_joints_v33>` | :ref:`V3.2 <t14_joints_v32>`
+
+    :ref:`nao-t14` | :ref:`robot_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v4.rst
+
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_left_v4.rst
+
+
+Right Arm joints
+------------------
+
+.. include:: ../bulk/joints_arms_right_v4.rst

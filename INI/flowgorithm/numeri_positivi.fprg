@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-21 06:28:30 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjI0OjU4ICI7MzI5Mw=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjI4OjMwICI7MTszMzk1"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;quanti numeri positivi vuoi visualizzare?&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="1" end="n" direction="inc" step="1">
+                <output expression="i" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

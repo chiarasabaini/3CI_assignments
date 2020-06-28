@@ -1,0 +1,53 @@
+.. _aldarknessdetection:
+
+ALDarknessDetection
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   aldarknessdetection-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <aldarknessdetection-api>`
+
+-------------------
+
+What it does
+------------
+
+**ALDarknessDetection** enables to check whether or not the robot
+is in a dark environment.
+
+A darkness value is computed for each frame returned by the camera.
+This value is stored in the **ALMemory**.  When the robot detects
+for the first time that that the environment around it is dark
+(i.e the darkness value is greater than a threshold) an event is raised.
+
+How it works
+------------
+
+This function first computes a value between 0 and 100 corresponding
+to the lighting conditions of the environment around the robot:
+
+* 0: bright environment
+* 100: dark environment
+
+This value is then compared to a darkness threshold:
+
+* if it is smaller than the threshold, the surrounding environment
+  is not considered as dark.
+* if it is greater than the threshold, the surrounding environment
+  is considered as dark.
+
+The darkness threshold value can be accessed with the function
+:cpp:func:`ALDarknessDetectionProxy::getDarknessThreshold`.
+It has a default value of 60 but it can be changed with
+the function :cpp:func:`ALDarknessDetectionProxy::setDarknessThreshold`.
+
+
+Performances and Limitations
+----------------------------
+
+The camera AutoExposition parameter (and the AutoGain parameter, if it exists)
+of the camera must be activated for this module to work properly.

@@ -1,0 +1,78 @@
+.. _alspeechrecognition-tuto:
+
+ALSpeechRecognition Tutorial
+============================
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alspeechrecognition-api>` | Tutorial
+
+------------
+
+This tutorial explains how to recognize words from vocabulary using the
+embedded speech recognition.
+
+.. note::
+
+   All the examples provided are written in Python.
+
+Creating a proxy on the module
+------------------------------
+
+Before using the ASR commands, you need to create a proxy on the ASR
+module.
+
+.. code-block:: guess
+
+  # Creates a proxy on the speech-recognition module
+  from naoqi import ALProxy
+
+  IP = "<ROBOT_IP>"
+  asr = ALProxy("ALSpeechRecognition", IP, 9559)
+
+Changing the language of the speech recognition engine
+------------------------------------------------------
+
+The language of the speech recognition engine can be changed using the setLanguage function.
+The list of the available languages can be obtained with the getAvailableLanguages function.
+
+.. code-block:: python
+
+  # Example: set the language of the speech recognition engine to English:
+  asr.setLanguage("English")
+
+Adding words to the vocabulary
+------------------------------
+
+You need to set the list of words that should be recognized by the speech recognition engine before you start recognition.
+Word spotting is disabled by default when using function setWordListAsVocabulary.
+
+.. code-block:: guess
+
+  # Example: Adds "yes", "no" and "please" to the vocabulary
+  vocabulary = ["yes", "no", "please"]
+  asr.setVocabulary(vocabulary, False)
+  # Or, if you want to enable word spotting:
+  #asr.setVocabulary(vocabulary, True)
+
+
+Starting and stopping the speech recognition engine
+---------------------------------------------------
+
+To start the speech recognition engine, you have to subscribe to the module.
+You can stop it using the unsubscribe method.
+
+.. code-block:: guess
+
+  # Start the speech recognition engine with user Test_ASR
+  asr.subscribe("Test_ASR")
+  # Stop the speech recognition engine with user Test_ASR
+  asr.unsubscribe("Test_ASR")
+
+Full example
+------------
+:download:`audio_speechrecognition.py </examples/python/audio/audio_speechrecognition.py>`
+
+.. literalinclude:: /examples/python/audio/audio_speechrecognition.py
+  :language: py
+
+
+

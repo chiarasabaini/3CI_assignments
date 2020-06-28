@@ -1,0 +1,391 @@
+.. include:: ../../bulk/common.rst
+
+.. _alnavigation-api:
+
+ALNavigation API
+====================
+
+:ref:`Overview <alnavigation>` | API
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/alnavigationproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALNavigationProxy
+
+|juju| |roboJ| only
+++++++++++++++++++++
+
+With |roboJ|, you can use generic navigation methods:
+
+- :cpp:func:`ALNavigationProxy::navigateTo`
+- :cpp:func:`ALNavigationProxy::moveAlong`
+
+**Deprecated methods**
+
+* :cpp:func:`ALNavigationProxy::move` (deprecated, use ALMotion.move instead)
+* :cpp:func:`ALNavigationProxy::moveToward` (deprecated, use ALMotion.moveToward instead)
+* :cpp:func:`ALNavigationProxy::moveTo` (deprecated, use ALMotion.moveTo instead)
+* :cpp:func:`ALNavigationProxy::setSecurityDistance` (deprecated, use ALMotion.setOrthogonalSecurityDistance instead)
+* :cpp:func:`ALNavigationProxy::getSecurityDistance` (deprecated, use ALMotion.getOrthogonalSecurityDistance instead)
+
+
+Event list
+----------
+
+* :naoqi:event:`Navigation/AvoidanceNavigator/Status`
+* :naoqi:event:`Navigation/AvoidanceNavigator/ObstacleDetected`
+* :naoqi:event:`Navigation/AvoidanceNavigator/MovingToFreeZone`
+* :naoqi:event:`Navigation/AvoidanceNavigator/TrajectoryProgress`
+* :naoqi:event:`Navigation/AvoidanceNavigator/AbsTargetModified`
+
+**Deprecated events**
+
+* :naoqi:event:`Navigation/SafeNavigator/Status` (deprecated)
+* :naoqi:event:`Navigation/SafeNavigator/BlockingObstacle` (deprecated, use ALMotion/Safety/MoveFailed instead)
+* :naoqi:event:`Navigation/SafeNavigator/AlreadyAtTarget` (deprecated)
+* :naoqi:event:`Navigation/SafeNavigator/DangerousObstacleDetected` (deprecated)
+
+
+Methods
+-------
+
+.. _ALNavigationProxy::navigateTo1:
+
+.. cpp:function:: bool ALNavigationProxy::navigateTo( const float& x, const float& y)
+
+  There are two overloads of this function:
+
+  - :ref:`ALNavigationProxy::navigateTo <ALNavigationProxy::navigateTo1>`
+  - :ref:`ALNavigationProxy::navigateTo <ALNavigationProxy::navigateTo2>` with configuration options
+
+  Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
+  The robot computes a path to avoid obstacles.
+
+  The robot is likely to perform any safety action to ensure the non collision with the environment. For example look with the head,
+  stop to replan a new path. Thus, no motion timeline that takes the head resource can be run during a navigateTo.
+
+
+  Unlike :cpp:func:`ALMotionProxy::moveTo`, the robot
+  can choose its own path and speed while moving around. The speed decreases the closer the robot gets to obstacles.
+  If the obstacle avoidance becomes too dangerous (as soon as it has detected an obstacle in its security area) the robot
+  stops like in :cpp:func:`ALNavigationProxy::moveTo`.
+
+  The target must be closer than 3m from the robot, otherwise the command will be ignored and a warning will be prompted.
+
+  This is a blocking call.
+
+  :param x: distance along the X axis in meters.
+  :param y: distance along the Y axis in meters.
+  :returns: *True* if the robot reached its target at the end or *False* if it has been stopped by obstacles or if it cannot find a path to the target.
+
+.. code-block:: guess
+
+   navigationProxy.navigateTo(2.0, 0.0)
+
+
+.. _ALNavigationProxy::navigateTo2:
+
+.. cpp:function:: bool ALNavigationProxy::navigateTo( const float& x, const float& y, const AL::ALValue& config)
+
+  :param x: distance along the X axis in meters.
+  :param y: distance along the Y axis in meters.
+  :param velocity: maximum velocity (unitless). [0.0 to 1.0] 0.0 is the slowest speed of the robot, 1.0 is the maximum speed of the robot. The given parameter is clipped if not in the correct range. When the given parameter is very low (near to 0.0) it can be modified to fit the move limits of the robot.
+  :returns: *True* if the robot reached its target at the end or *False* if it has been stopped by obstacles or if it cannot find a path to the target.
+
+
+.. code-block:: guess
+
+   navigationProxy.navigateTo(2.0, 0.0, [["SpeedFactor", 0.5]])
+
+
+.. _ALNavigationProxy::moveAlong:
+
+.. cpp:function:: bool ALNavigationProxy::moveAlong( const AL::ALValue& trajectory )
+
+  :param trajectory: an ALValue describing either a direct trajectory ["Holonomic", pathXY, finalTheta, finalTime],
+                     or a composed trajectory ["Composed", direct trajectories].
+
+                     pathXY is an ALValue describing a 2D path,
+                     either a direct path or a composed one: ["Composed", direct paths].
+
+                     Direct paths can be lines or arc of circles: ["Line", [finalX, finalY]],
+                     ["Circle", [centerX, centerY], spanAngle].
+
+  :returns: *True* when the robot executed the trajectory completely, and also when it has been definitely stopped by obstacles.
+
+  The following command makes the robot move 1 m forward in 5 s, then 1 m backward in 10 s, without pausing:
+
+.. code-block:: guess
+
+   navigationProxy.moveAlong(["Composed", ["Holonomic", ["Line", [1.0, 0.0]], 0.0, 5.0], ["Holonomic", ["Line", [-1.0, 0.0]], 0.0, 10.0]])
+
+
+.. cpp:function:: void ALNavigationProxy::setSecurityDistance ( const float& distance )
+
+  .. deprecated:: 1.22
+    Use :cpp:func:`ALMotionProxy::setOrthogonalSecurityDistance` instead.
+
+  Defines the security distance used by :cpp:func:`ALNavigationProxy::moveTo`.
+
+  :param distance: distance in meters. See :cpp:func:`ALNavigationProxy::getSecurityDistance`.
+
+.. cpp:function:: float ALNavigationProxy::getSecurityDistance ( )
+
+  .. deprecated:: 1.22
+    Use :cpp:func:`ALMotionProxy::getOrthogonalSecurityDistance` instead.
+
+  Gets the current security distance used by :cpp:func:`ALNavigationProxy::moveTo` to check dangerous obstacles.
+
+  :return: distance in meters between any part of the robot and any obstacle in the direction of the motion.
+
+        It defines the security area in which any obstacle detection stops the robot.
+
+        Default value: 0.4m.
+
+
+.. _ALNavigationProxy::move1:
+
+.. cpp:function:: void ALNavigationProxy::move( const float& x, const float& y, const float& theta )
+
+  .. deprecated:: 1.22
+    Use :cpp:func:`ALMotionProxy::move` instead.
+
+  .. warning::
+
+    If you still use this deprecated method, make sure you activate
+    :cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` first.
+
+  There are two overloads of this function:
+
+  - :ref:`ALNavigationProxy::move <ALNavigationProxy::move1>`
+  - :ref:`ALNavigationProxy::move <ALNavigationProxy::move2>` with move configuration
+
+  Like :cpp:func:`ALMotionProxy::move`, makes the robot move at the given velocity,
+  expressed in FRAME_ROBOT.
+  Unlike :cpp:func:`ALMotionProxy::move`, the robot
+  stops as soon as it has detected an obstacle in its security area.
+  This is a non-blocking call.
+
+  :param x: velocity along X-axis, in meters per second. Use negative values for
+            backward motion
+  :param y: velocity along Y-axis, in meters per second. Use positive values to
+            go to the left
+  :param theta: velocity around Z-axis, in radians per second. Use negative
+                values to turn clockwise.
+
+.. _ALNavigationProxy::move2:
+
+.. cpp:function:: void ALNavigationProxy::move( const float& x, const float& y, const float& theta, const AL::ALValue moveConfig)
+
+  .. deprecated:: 1.22 Use :cpp:func:`ALMotionProxy::move` instead.
+
+  .. warning::
+
+    If you still use this deprecated method, make sure you activate
+    :cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` first.
+
+  Like :cpp:func:`ALMotionProxy::move`, makes the robot move at the given velocity,
+  expressed in FRAME_ROBOT, with a move configuration.
+  Unlike :cpp:func:`ALMotionProxy::move`, the robot
+  stops as soon as it has detected an obstacle in its security area.
+  This is a non-blocking call.
+
+  :param x: velocity along X-axis, in meters per second. Use negative values for
+            backward motion
+  :param y: velocity along Y-axis, in meters per second. Use positive values to
+            go to the left
+  :param theta: velocity around Z-axis, in radians per second. Use negative
+                values to turn clockwise.
+  :param moveConfig: an ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+.. _ALNavigationProxy::moveToward1:
+
+.. cpp:function:: void ALNavigationProxy::moveToward( const float& x, const float& y, const float& theta )
+
+  .. deprecated:: 1.22 Use :cpp:func:`ALMotionProxy::moveToward` instead.
+
+  .. warning::
+
+    If you still use this deprecated method, make sure you activate
+    :cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` first.
+
+  There are two overloads of this function:
+
+  - :ref:`ALNavigationProxy::moveToward <ALNavigationProxy::moveToward1>`
+  - :ref:`ALNavigationProxy::moveToward <ALNavigationProxy::moveToward2>` with move configuration
+
+  Like :cpp:func:`ALMotionProxy::moveToward`, makes the robot move at the given
+  normalized velocity, expressed in FRAME_ROBOT.
+  Unlike :cpp:func:`ALMotionProxy::moveToward`, the robot
+  stops as soon as it has detected an obstacle in its security area.
+  This is a non-blocking call.
+
+  :param x: normalized, unitless, velocity along X-axis. +1 and -1 correspond to
+            the maximum velocity in the forward and backward directions,
+            respectively.
+  :param y: normalized, unitless, velocity along Y-axis. +1 and -1 correspond to
+            the maximum velocity in the left and right directions,
+            respectively.
+  :param theta: normalized, unitless, velocity around Z-axis. +1 and -1
+            correspond to the maximum velocity in the counterclockwise and
+            clockwise directions, respectively.
+
+.. _ALNavigationProxy::moveToward2:
+
+.. cpp:function:: void ALNavigationProxy::moveToward( const float& x, const float& y, const float& theta, const AL::ALValue moveConfig)
+
+  .. deprecated:: 1.22 Use :cpp:func:`ALMotionProxy::moveToward` instead.
+
+  .. warning::
+
+    If you still use this deprecated method, make sure you activate
+    :cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` first.
+
+  Like :cpp:func:`ALMotionProxy::moveToward`, makes the robot move at the given
+  normalized velocity, expressed in FRAME_ROBOT, with a move configuration.
+  Unlike :cpp:func:`ALMotionProxy::moveToward`, the robot
+  stops as soon as it has detected an obstacle in its security area.
+  This is a non-blocking call.
+
+  :param x: normalized, unitless, velocity along X-axis. +1 and -1 correspond to
+            the maximum velocity in the forward and backward directions,
+            respectively.
+  :param y: normalized, unitless, velocity along Y-axis. +1 and -1 correspond to
+            the maximum velocity in the left and right directions,
+            respectively.
+  :param theta: normalized, unitless, velocity around Z-axis. +1 and -1
+            correspond to the maximum velocity in the counterclockwise and
+            clockwise directions, respectively.
+  :param moveConfig: an ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+.. _ALNavigationProxy::moveTo1:
+
+.. cpp:function:: bool ALNavigationProxy::moveTo( const float& x, const float& y, const float& theta )
+
+  .. deprecated:: 1.22 Use :cpp:func:`ALMotionProxy::moveTo` instead.
+
+  .. warning::
+
+    If you still use this deprecated method, make sure you activate
+    :cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` first.
+
+  There are two overloads of this function:
+
+  - :ref:`ALNavigationProxy::moveTo <ALNavigationProxy::moveTo1>`
+  - :ref:`ALNavigationProxy::moveTo <ALNavigationProxy::moveTo2>` with move configuration
+
+  Like :cpp:func:`ALMotionProxy::moveTo`, makes the robot move to the given
+  :term:`pose` (i.e. location + orientation). in the ground plane,
+  relative to FRAME_ROBOT. Unlike :cpp:func:`ALMotionProxy::moveTo`, the robot
+  stops as soon as it has detected an obstacle in its security area. This is a blocking call.
+
+  For now bumpers and sonars are used to detect obstacles.
+
+  :param x: distance along the X axis in meters.
+  :param y: distance along the Y axis in meters.
+  :param theta: rotation around the Z axis in radians [-3.1415 to 3.1415].
+
+  :return: True if the robot reached the target, False if the robot was stopped by an obstacle.
+
+
+.. _ALNavigationProxy::moveTo2:
+
+.. cpp:function:: bool ALNavigationProxy::moveTo( const float& x, const float& y, const float& theta, const AL::ALValue &moveConfig)
+
+  .. deprecated:: 1.22 Use :cpp:func:`ALMotionProxy::moveTo` instead.
+
+  .. warning::
+
+    If you still use this deprecated method, make sure you activate
+    :cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` first.
+
+  Like :cpp:func:`ALMotionProxy::moveTo`, makes the robot move to the given :term:`pose` (i.e. location + orientation) in the ground plane,
+  relative to FRAME_ROBOT, with custom move configuration. Unlike :cpp:func:`ALMotionProxy::moveTo`, the robot
+  stops as soon as it has detected an obstacle in its security area. This is a blocking call.
+
+  For now bumpers and sonars are used to detect obstacles.
+
+  :param x: distance along the X axis in meters.
+  :param y: distance along the Y axis in meters.
+  :param theta: rotation around the Z axis in radians [-3.1415 to 3.1415].
+  :param moveConfig: an ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+  :return: True if the robot reached the target, False if the robot was stopped by an obstacle.
+
+Events
+------
+
+.. naoqi:event:: Navigation/AvoidanceNavigator/Status(AL::ALValue status)
+
+  Raised when status of the local navigator changes.
+
+  :param status: New local navigator status. Please refer to :ref:`alnavigation` for details.
+
+.. naoqi:event:: Navigation/AvoidanceNavigator/ObstacleDetected(AL::ALValue position)
+
+  Raised when an obstacle is detected in the close area.
+
+  :param position: Array formatted as [x, y], representing the position of the detected obstacle in :term:`FRAME_ROBOT`.
+
+.. naoqi:event:: Navigation/AvoidanceNavigator/MovingToFreeZone(AL::ALValue status)
+
+  Raised when the robot starts or stops a motion to leave an obstacle neighbourhood.
+
+  :param status: 1.0 when the the robot starts and 0.0 when it has finished its motion.
+
+.. naoqi:event:: Navigation/AvoidanceNavigator/TrajectoryProgress(AL::ALValue progress)
+
+  Raised when the trajectory progress is updated.
+
+  :param progress: percentage of the current trajectory accomplished, between 0.0 and 1.0.
+
+.. naoqi:event:: Navigation/AvoidanceNavigator/AbsTargetModified(AL::ALValue newTarget)
+
+  Raised when the required target is unreachable because it is inside an obstacle.
+
+  The robot then computes the closest target to the initial one.
+
+  :param newTarget: the new target of the robot in :term:`FRAME_WORLD`.
+
+
+.. naoqi:event:: Navigation/SafeNavigator/Status(AL::ALValue status)
+
+  .. deprecated:: 1.22 use :naoqi:event:`ALMotion/Safety/MoveFailed` instead.
+
+  Raised when status of the Safe navigator changes.
+
+  :param status: New safe navigator status. Please refer to :ref:`alnavigation` for details.
+
+.. naoqi:event:: Navigation/SafeNavigator/BlockingObstacle()
+
+  .. deprecated:: 1.22 use :naoqi:event:`ALMotion/Safety/MoveFailed` instead.
+
+  Raised when there is an obstacle preventing the robot from starting its motion.
+
+.. naoqi:event:: Navigation/SafeNavigator/AlreadyAtTarget()
+
+  .. deprecated:: 1.22 use :naoqi:event:`ALMotion/Safety/MoveFailed` instead.
+
+  Raised when robot is already at its target.
+
+.. naoqi:event:: Navigation/SafeNavigator/DangerousObstacleDetected(AL::ALValue position)
+
+  .. deprecated:: 1.22 use :naoqi:event:`ALMotion/Safety/MoveFailed` instead.
+
+  Use :naoqi:event:`ALMotion/Safety/MoveFailed` instead.
+
+  Raised when an obstacle is detected in the security area.
+
+  :param position: Array formatted as [x, y], representing the position of the detected obstacle in :term:`FRAME_ROBOT`.
+

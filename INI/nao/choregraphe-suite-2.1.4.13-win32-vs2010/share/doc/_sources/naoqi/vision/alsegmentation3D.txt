@@ -1,0 +1,103 @@
+.. include:: ../../bulk/common.rst
+
+.. _alsegmentation3D:
+
+ALSegmentation3D
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alsegmentation3D-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alsegmentation3D-api>`
+
+-------------------
+
+|3d| This module requires a robot with a 3D sensor.
+
+What it does
+------------
+
+**ALSegmentation3D** extracts the objects present in the field of view of the robot
+by doing a segmentation of the depth image (returned by the 3D sensor) in blobs of
+similar depth.
+
+It also allows you to track, with the head of the robot, a blob at a specified distance
+or simply track the nearest blob with respect to the camera.
+
+
+How it works
+------------
+
+.. _ALSegmentation3D::segmentationsection:
+
+Segmentation of the depth image
++++++++++++++++++++++++++++++++
+
+In order to segment the depth image into blobs of similar depth, a region growing
+based algorithm: pixels in the depth image can be linked to their neighbors to form blobs
+if the difference of depth between them is below a threshold (**DepthThreshold**). DepthThreshold
+can be changed with the function :cpp:func:`ALSegmentation3DProxy::setDeltaDepthThreshold` and
+the curent value of DepthThreshold can be retrieved, using function :cpp:func:`ALSegmentation3DProxy::getDeltaDepthThreshold`.
+
+Each time a new segmentation is computed, the event :naoqi:event:`Segmentation3D/SegmentationUpdated` is
+raised and the list of blobs is updated in the memory key :naoqi:memkey:`Segmentation3D/BlobsList`.
+
+.. _ALSegmentation3D::topofblobsection:
+
+TopOfBlob property
+++++++++++++++++++
+
+As some of the extracted blobs are people, a specific property, called **TopOfBlob**, is computed for each of
+the segmented blobs. It is constructed in order to fit the best with the position of the top of the potential
+"head" of each blob. This property has real meaning when the blob corresponds with a person. When it does not
+correspond to a person, it is simply the highest pixel in the center of the blob.
+
+.. _ALSegmentation3D::blobtrackingsection:
+
+Blob tracking
++++++++++++++
+
+**ALSegmentation3D** also provides an API to track, with the head of the robot, a blob present in
+the center of the image at a specified distance.
+
+From the list of blobs, it is possible to look for blobs that are at a distance close to the
+given distance and keep only the one which is the most in the center of the image. As long as this
+center blob is tracked with the head of the robot, it will stay in the center of the image, which makes sure
+to track always the same blob.
+
+Blob tracking can be turned on and off using function :cpp:func:`ALSegmentation3DProxy::setBlobTrackingEnabled`.
+In order to know if blob tracking is running, use function :cpp:func:`ALSegmentation3DProxy::isBlobTrackingEnabled`.
+The distance of the blob to track (**BlobTrackingDistance**) must be set before turning on the blob tracking, with
+the function :cpp:func:`ALSegmentation3DProxy::setBlobTrackingDistance`. This distance can be set to -1 to track
+the nearest blob to the camera. Each time the corresponding blob is found, the value of BlobTrackingDistance is
+updated with the real distance between the blob and the camera. At any moment, this distance can be retrieved with
+the function :cpp:func:`ALSegmentation3DProxy::getBlobTrackingDistance`.
+
+The position returned by the blob tracking relies on the position of the
+:ref:`TopOfBlob<ALSegmentation3D::topofblobsection>` so that
+the robot will track the head of the person (when the blob corresponds to a person). However, as TopOfBlob corresponds
+to the potential position of the top of the head, tracking TopOfBlob would make the robot not look at person in his/her
+eyes. Therefore, a vertical offset (**VerticalOffset**) is substracted to the tracked position, when it does not
+belong to the top border of the depth image. This VerticalOffset value (in meters) can be set with
+:cpp:func:`ALSegmentation3DProxy::setVerticalOffset`. 0 disables the use of this offset.
+
+Each time the tracked blob is detected, the event :naoqi:event:`Segmentation3D/BlobTrackerUpdated` is raised and the
+memory key :naoqi:memkey:`Segmentation3D/TopOfTrackedBlob`, containing the information about the top of the blob after
+applying the offset, is updated. On the opposite, each time the tracked blob is not detected, the event
+:naoqi:event:`Segmentation3D/TrackedBlobNotFound` is raised.
+
+
+The event :naoqi:event:`ALTracker/BlobDetected` is also raised when the tracked blob is detected. It
+contains information similar to :naoqi:memkey:`Segmentation3D/TopOfTrackedBlob`, but with a structure
+that can be used with function :cpp:func:`ALTrackerProxy::trackEvent` of the module **ALTracker**.
+
+.. warning::
+
+   Enabling the blob tracking only raises the events and updates the memory keys. It does not make
+   the robot's head move. Thus after enabling the blob tracking in module **ALSegmentation3D**, it is
+   still needed to make the robot look in the direction of the tracked blob each time its position
+   is updated, for example using function :cpp:func:`ALTrackerProxy::trackEvent` of the module
+   **ALTracker**.

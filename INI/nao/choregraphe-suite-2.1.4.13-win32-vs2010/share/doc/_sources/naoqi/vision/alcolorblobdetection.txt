@@ -1,0 +1,35 @@
+.. _alcolorblobdetection:
+
+ALColorBlobDetection
+====================
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alcolorblobdetection-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alcolorblobdetection-api>`
+
+-----------------
+
+
+What it does
+------------
+
+**ALColorBlobDetection** is a module that provides a fast 2D vision-based color blob detector.
+
+
+How it works
+------------
+
+**ALColorBlobDetection** is based on a fast search for a set of pixels of a given color (within a certain threshold).
+The color and its threhsold can be chosen. Similarly, the object span and its minimum size can be defined.
+
+The output is an ALTracker event as defined at :ref:`altracker-api`.
+
+Performances and Limitations
+----------------------------
+
+The detection works faster than the red ball detector and should be used instead. The color has to be provided through
+the API as there is no default value.

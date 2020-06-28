@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-21 07:03:23 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjU2OjM0ICI7MzI5Mg=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA3OjAzOjIzICI7MTszMzkx"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <declare name="n0" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci il numero da cui iniziare a contare:&quot;" newline="True"/>
+            <input variable="n"/>
+            <output expression="&quot;inserisci l'ultimo numero della sequenza:&quot;" newline="False"/>
+            <input variable="n0"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="n"/>
+            <do expression="i&lt;=n0">
+                <output expression="i" newline="True"/>
+                <assign variable="i" expression="i+1"/>
+            </do>
+        </body>
+    </function>
+</flowgorithm>

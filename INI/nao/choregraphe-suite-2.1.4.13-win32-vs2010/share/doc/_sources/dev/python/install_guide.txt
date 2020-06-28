@@ -1,0 +1,161 @@
+.. include:: ../../bulk/common.rst
+
+.. _python-install-guide:
+
+Python SDK Install Guide
+========================
+
+.. _compatible-platforms_py:
+
+Supported Operating Systems
+-----------------------------
+
+============  ===================================================
+OS             Version
+============  ===================================================
+**Linux**      Ubuntu 12.04 LTS (Precise) and later
+
+**Windows**    Microsoft Windows XP Service Pack 3,
+
+               Microsoft Windows 7 and 8
+
+**Mac**        Mac OS X 10.8.3 Mountain Lion
+
+               Mac OS X 10.9.4 Mavericks
+============  ===================================================
+
+
+Installing the SDK
+------------------
+
+Windows
++++++++
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      *Python*
+
+        Make sure to download Python **2.7** - **32 bits**.
+
+        You can find the installer here: http://python.org/download/
+
+2.      *NAOqi for Python*
+
+        Retrieve and run the installer:
+
+        ``pynaoqi-python-2.7-naoqi-x.x-win32.exe``
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+=====  ================================================================================================
+
+Mac
++++
+
+=====  ========================================================================================
+Step       Action
+=====  ========================================================================================
+1.      *Python*
+
+        * Use the release of ``Python 2.7`` that comes by default with your MacOS.
+
+        * Do not use a Python version downloaded from Python.org.
+
+2.      *NAOqi for Python*
+
+        Extract: ``pynaoqi-python-2.7-naoqi-x.x-mac64.tar.gz``
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+3.      Set the environment variables ``PYTHONPATH`` and ``DYLD_LIBRARY_PATH`` to
+        ``/path/to/python-sdk``
+
+        By doing for example:
+
+        .. code-block:: console
+
+            $ export PYTHONPATH=${PYTHONPATH}:/path/to/python-sdk
+            $ export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/path/to/python-sdk
+=====  ========================================================================================
+
+
+Linux
++++++
+
+=====  =======================================================================================
+Step       Action
+=====  =======================================================================================
+1.      *Python*
+
+        Make sure to download the ``python-2.7`` packages.
+
+        You can find the installer here: http://python.org/download/
+
+2.      *NAOqi for Python*
+
+        Extract: ``pynaoqi-python-2.7-naoqi-x.x-linux32.tar.gz``
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+3.      Set the environment variable ``PYTHONPATH`` to
+        ``/path/to/python-sdk``
+
+        By doing for example:
+
+        .. code-block:: console
+
+            $ export PYTHONPATH=${PYTHONPATH}:/path/to/python-sdk
+=====  =======================================================================================
+
+
+Checking the installation of the Python SDK
+--------------------------------------------
+
+Windows
++++++++
+
+Run the default IDE (IDLE) that comes with the python installer.
+
+Mac
++++
+
+If you choose to use the Python2.7 from python.org:
+
+1. Make sure to use ``/usr/local/bin/python``
+
+2. Try to run:
+
+   .. code-block:: python
+
+     import naoqi
+
+
+Linux
++++++
+
+Simply run:
+
+.. code-block:: python
+
+  import naoqi
+
+
+
+If you do not get any error message, congratulations ! You are now ready to use the Python SDK.
+
+
+If you do get an error message, please see: :ref:`python-sdk-troubleshooting`.
+
+
+Note for previous 1.10 users
+----------------------------
+
+Previously, 1.10 users did not have a separate Python SDK and had to set
+PYTHONPATH to ``naoqi/sdk/lib``.
+
+This method will **not** work anymore, (unless you are very lucky),
+so please do use the new Python SDK.
+
+

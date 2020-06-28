@@ -1,0 +1,96 @@
+
+.. _child_passport:
+
+Passport
+=========
+
+The **Passport** page allows **Teachers** and **Parents** to share useful
+information about the child, by displaying several topics,
+such as "Things that help me work well".
+
+.. image:: /medias/asknao/passport_page.png
+   :width: 488 px
+   :height: 335 px
+
+It also displays, at the bottom of the page:
+  
+* the list of adults - **Parents** and **Teachers** - associated with the
+  **Child**. Only them can access and edit the passport. 
+
+* the messages left by those adults.
+
+.. image:: /medias/asknao/passport_page_bottom.png
+   :width: 488 px
+   :height: 304 px
+
+Leaving a message
+-------------------
+
+.. |add_message| image:: /medias/asknao/add_btn.png
+   :class: img-inline
+
+To leave a message:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the message zone.
+
+2.      Type a message.
+
+3.      Click the |add_message| **Add** button.
+
+        The message is added at the bottom of the screen.
+=====  =========================================================================
+
+Editing Child Passport
+-----------------------
+
+.. |edit| image:: /medias/asknao/edit_icon.png
+   :class: img-inline
+
+.. |save| image:: /medias/asknao/save_icon.png
+   :class: img-inline
+   
+.. |add_note| image:: /medias/asknao/add_note.png
+   :class: img-inline
+
+.. |erase_note| image:: /medias/asknao/erase_note.png
+   :class: img-inline
+
+To modify the **Passport** of a **Child**:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the |edit| **Edit** button.
+
+2.      Modify the content of the notes (type new text, erase, etc.).
+
+        You can also:
+        
+        * Click the **Add a new note** button to create a new note,
+          
+          |add_note|
+        
+        * Click the top right corner of a note to erase it.
+        
+          |erase_note|
+           
+3.      Click the |save| **Save** button.
+=====  =========================================================================
+
+Browsing the list
+-------------------
+
+.. image:: /medias/asknao/browse_children_list.png
+   :width: 509 px
+   :height: 191 px
+
++-------+------------------------------------------------------------------------------+
+| Part  |  Description                                                                 |
++=======+==============================================================================+
+| **A** | Click the **Child** tab to come back to the list of children.                |
++-------+------------------------------------------------------------------------------+
+| **B** | Click the left and right arrows to browse trough child passports.            |
++-------+------------------------------------------------------------------------------+

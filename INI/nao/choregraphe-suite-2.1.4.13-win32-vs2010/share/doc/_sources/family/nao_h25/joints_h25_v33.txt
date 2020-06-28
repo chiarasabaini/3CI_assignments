@@ -1,0 +1,53 @@
+.. _h25_joints_v33:
+
+H25 - Joints - V3.3
+=====================
+
+.. seealso::
+    :ref:`V5 & V4<h25_joints>` | **V3.3** |  :ref:`V3.2 <h25_joints_v32>`
+
+    :ref:`nao-h25` | :ref:`robot_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v33.rst
+
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_left_v33.rst
+
+
+Right Arm joints
+------------------
+
+.. include:: ../bulk/joints_arms_right_v33.rst
+
+
+Pelvis joints
+--------------
+
+.. include:: ../bulk/joints_pelvis_v33.rst
+
+
+Left Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_left_v33.rst
+
+
+Right Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_right_v33.rst
+

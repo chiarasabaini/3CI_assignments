@@ -1,0 +1,26 @@
+.. _python-processing-data:
+
+Logging data - Head angles
+==========================
+
+Recording the values of various sensors of the robot is easy.
+
+Here is a simple example:
+
+:download:`data_recording.py </examples/python/data_recording.py>`
+
+.. literalinclude:: /examples/python/data_recording.py
+   :language: py
+
+
+We simply have to call :cpp:func:`ALMemoryProxy::getData` every 50 ms, store the
+values in a matrix, and then write the matrix to a file.
+
+
+.. warning::
+   This method is fairly slow. Do not try to get data at a higher frequency, it
+   may take too much CPU on the robot.
+
+
+.. todo:: Add link to ALMemory fastaccess?
+

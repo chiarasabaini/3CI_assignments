@@ -1,0 +1,16 @@
+
+.. _robot-fsr:
+
+FSRs
+=============================================
+
+.. seealso::
+   
+   :ref:`alfsr`
+
+   :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21`
+   
+--------------------
+
+.. include:: ../bulk/fsr.rst
+

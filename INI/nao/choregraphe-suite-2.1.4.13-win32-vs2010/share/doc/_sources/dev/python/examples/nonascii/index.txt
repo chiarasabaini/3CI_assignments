@@ -1,0 +1,95 @@
+.. _python-example-non-ascii:
+
+Reading non-ASCII text
+======================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+Suppose you have your robot configure to speak in French,
+and you want it to say some sentences from a data file.
+
+Doing so is a bit trickier than it sounds, because you
+have to take care of the encoding.
+
+Example
+-------
+
+First, download the following files and put them on the robot, in the same
+directory:
+
+* :download:`coffee_en.txt </examples/python/nonascii/coffee_en.txt>`
+* :download:`coffee_fr_utf-8.txt </examples/python/nonascii/coffee_fr_utf-8.txt>`
+* :download:`coffee_fr_latin9.txt </examples/python/nonascii/coffee_fr_latin9.txt>`
+* :download:`non_ascii.py </examples/python/nonascii/non_ascii.py>`
+
+
+The ``coffee_en.txt`` file contains the string "I like coffee", the files
+``coffee_fr_utf-8.txt`` and ``coffee_fr_latin9.txt`` hold its French
+translation: `J'aime le café`, so it's best if you robot can speak French in
+addition to English :)
+
+Let's have a closer look on the file
+
+.. literalinclude:: /examples/python/nonascii/non_ascii.py
+   :language: py
+
+First, notice how we do not use ``open`` but ``codecs.open``, specifying the
+encoding.
+
+Also notice how we decode the result of the read from the file.
+The object returned by ``fp.read`` is a ``unicode`` object, and we need to
+encode it back to get a ``str`` object encoded in i'UTF-8', usable the TTS
+proxy.
+
+Trying to run ``print contents`` won't work because Python will try to decode
+the string using the current locale of the robot, which is 'ASCII', leading to
+this error:
+
+.. code-block:: pytb
+
+  Traceback (most recent call last):
+    File "non_ascii.py", line 22, in <module>
+      main()
+    File "non_ascii.py", line 18, in main
+      say_from_file(filename)
+    File "non_ascii", line 10, in say_from_file
+      print contents
+  UnicodeEncodeError: 'ascii' codec can't encode character u'\xe9' in position
+  13: ordinal not in range(128)
+
+Notice at last that regardless of the file encoding, everything gets encoded to
+'UTF-8' before being sent to the text-to-speech proxy.
+
+
+Running the example
+--------------------
+
+
+Open a SSH connection on the robot, and type
+
+.. code-block:: console
+
+   $ python non_ascii.py
+
+
+Going further
+-------------
+
+
+If you are not sure whereas your file is UTF-8 encoded, you can use
+something like:
+
+.. code-block:: python
+
+
+    with codecs.open(filename, encoding="utf-8") as fp:
+        try:
+            contents = fp.read()
+        except UnicodeDecodeError:
+            print filename, "is not UTF-8 encoded"
+            return
+
+
+.. seealso::
+   * `The unicode doc from python <http://docs.python.org/howto/unicode.html>`_
+   * `This article on Joel on Software <http://www.joelonsoftware.com/articles/Unicode.html>`_

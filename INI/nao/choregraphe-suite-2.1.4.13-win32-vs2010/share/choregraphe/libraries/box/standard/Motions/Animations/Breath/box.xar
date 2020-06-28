@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="1" localization="8" tooltip="Activate or deactivate breathing animation on the desired Chain." x="164" y="144">
+        <bitmap>media/images/box/movement/animation_mode.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.motion = ALProxy("ALMotion")
+        self.chainName = "Body"
+        self.amplitude = 0.5
+        self.bpm = 5.0
+        self.isRunning = False
+
+    def onLoad(self):
+        self.BIND_PYTHON(self.getName(), "setParameter")
+
+    def onUnload(self):
+        self.motion.setBreathEnabled("Body", False)
+        self.isRunning = False
+
+    def onInput_onStart(self):
+        self.amplitude = self.getParameter("Amplitude")
+        self.bpm = self.getParameter("Bpm")
+        self.chainName = self.getParameter("Chain Name")
+
+        self.motion.setBreathConfig([['Bpm', self.bpm], ['Amplitude', self.amplitude]])
+        self.motion.setBreathEnabled(self.chainName, True)
+        self.isRunning = True
+
+    def onInput_onStop(self):
+        self.onStopped()
+        self.onUnload()
+
+    def setParameter(self, parameterName, newValue):
+        GeneratedClass.setParameter(self, parameterName, newValue)
+
+        if (parameterName == "Amplitude"):
+            self.amplitude = newValue
+
+        if (parameterName == "Bpm"):
+            self.bpm = newValue
+
+        if (parameterName == "Chain Name"):
+            if self.isRunning:
+                self.motion.setBreathEnabled(self.chainName, False)
+            self.chainName = newValue
+            if self.isRunning:
+                self.motion.setBreathEnabled(self.chainName, True)
+
+        self.motion.setBreathConfig([['Bpm', self.bpm], ['Amplitude', self.amplitude]])]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+        <Parameter name="Chain Name" inherits_from_parent="0" content_type="3" value="Body" default_value="Body" custom_choice="0" tooltip="Chain name to do breathing animation." id="5">
+            <Choice value="Body" />
+            <Choice value="Legs" />
+            <Choice value="Arms" />
+            <Choice value="LArm" />
+            <Choice value="RArm" />
+            <Choice value="Head" />
+        </Parameter>
+        <Parameter name="Amplitude" inherits_from_parent="0" content_type="2" value="0.5" default_value="0.5" min="0" max="1" tooltip="Amplitude of the breathing animation. At high frequencies, only low amplitudes are allowed. Input amplitude may be clipped." id="6" />
+        <Parameter name="Bpm" inherits_from_parent="0" content_type="2" value="12" default_value="12" min="5" max="30" tooltip="Bpm is the breathing frequency in beat per minute." id="7" />
+    </Box>
+</ChoregrapheBox>

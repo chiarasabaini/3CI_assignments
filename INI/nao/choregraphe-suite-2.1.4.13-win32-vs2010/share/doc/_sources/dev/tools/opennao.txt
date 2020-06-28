@@ -1,0 +1,246 @@
+.. include:: ../../bulk/common.rst
+
+.. _opennao_advanced:
+
+NAOqi OS - Getting started
+==========================
+
+.. glossary::
+
+    NAOqi OS
+
+        The Operating System of the robot.
+
+
+        It is a GNU/Linux distribution based on **Gentoo**.
+
+        It's an embedded GNU/Linux distribution specifically developed to fit the
+        Aldebaran robot needs.
+
+        It provides and runs numbers of programs and libraries, among these, all the
+        required one by **NAOqi**, the piece of software giving life to the robot.
+
+
+This page presents miscellaneous tips about the :term:`NAOqi OS` embedded OS.
+
+-------------
+
+.. _opennao-user-account:
+
+NAOqi OS - user accounts
+------------------------
+
+The main user is *nao*, and like any GNU/Linux system, there is the super-user *root*.
+
+By default, passwords are usernames. So, changing user to *root* using the ``su`` command will
+request the password ``root``
+
+Logging in as *root* over ssh is now disabled. However the ``su`` command remains available.
+
+We recommend to change the *nao*'s password using the web page.
+
++--------------+-------------+-------------------------+
+| User         | Password    | Description             |
++==============+=============+=========================+
+| nao          | nao         | default account         |
++--------------+-------------+-------------------------+
+| root         | root        | administrator account   |
++--------------+-------------+-------------------------+
+
+
+.. _opennao-ssh:
+
+Accessing  NAO over ssh
+-----------------------
+
+To login on your |robot|, get its IP address pushing its torse button,
+then connect to your |robot| over ssh:
+
+**Using PuTTy**:
+
+.. image:: /medias/opennao/ssh_putty.png
+
+**in a Linux terminal, run**:
+
+.. code-block:: console
+
+    $ ssh nao@192.168.1.10
+
+.. note::
+
+    For logins and passwords, see: :ref:`opennao-user-account`.
+
+
+.. _opennao-shell:
+
+Shell
+-----
+
+The default shell is ``bash`` with a custom profile.
+
+When logging in as *nao*, the prompt now looks like:
+
+.. code-block:: sh
+
+   <robotname> [<last_command_exit_code>] <current_working_directory> $
+
+When logging in as *root*:
+
+.. code-block:: sh
+
+   root@<robotname> [<last_command_exit_code>] <current_working_directory> $
+
+Example:
+
+.. image:: /medias/opennao/prompt.png
+
+
+Base commands and programs
+--------------------------
+
++--------------+---------------------------------------+
+| Program      | Description                           |
++==============+=======================================+
+| htop         | monitor process activity              |
+|              | (many options are available use F1)   |
++--------------+---------------------------------------+
+| ldd          | list library dependencies             |
++--------------+---------------------------------------+
+| gdbserver    | start a remote gdb server             |
++--------------+---------------------------------------+
+
+
+Sudo and root permissions
+-------------------------
+
+``sudo`` is available on :term:`NAOqi OS`. Its usage is limited for shutting down
+|robot|.
+
+.. code-block:: console
+
+   $ sudo shutdown -h now
+
+For any others commands requiring root permissions, you will have to use ``su``
+and authenticate using the *root* user password.
+
+
+.. _opennao-texteditor:
+
+Text editor
+-----------
+
+Available text editor: ``nano``.
+
+.. _opennao-ftp-access:
+
+FTP Access
+----------
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Start a FTP client on the PC side.
+
+        We recommend `Filezilla <http://filezilla-project.org/download.php>`_.
+
+2.      Fill in the different fields:
+
+        *A.* **Host**: "BonjourName.local" or IP address of the robot
+
+        *B.* **Username**: "nao"
+
+        *C.* **Password**: your nao password
+
+        *D.* **Port**: 21
+
+        .. image:: /medias/opennao/filezilla_ftp.png
+            :width: 540 px
+            :height: 487 px
+
+3.      Click the **Quickconnect** button.
+=====  =========================================================================
+
+Firewall - Network access limitation
+------------------------------------
+
+:term:`NAOqi OS` comes with a firewall with two predefined modes:
+
+* *development*: all ports are open on all network interfaces;
+* *production* : all ports are closed, except *ssh* on the *ethernet wired link*.
+
+By default, the robot is in *development* mode.
+
+You can switch from one to the other mode by running the following command as root:
+
+.. code-block:: console
+
+  /etc/init.d/firewall_mode production
+
+or:
+
+.. code-block:: console
+
+   /etc/init.d/firewall_mode development
+
+To check the current mode, run:
+
+.. code-block:: console
+
+   /etc/init.d/firewall_mode show
+
+To turn the current mode as the default one (i.e. the mode in which the firewall will
+start on the next boot), you have to save it running:
+
+.. code-block:: console
+
+   /etc/init.d/firewall_mode save
+
+This will save the current firewall mode as the default one.
+
+
+.. System organization
+.. -------------------
+
+.. Python
+.. ++++++
+
+.. On the robot, we use Python 2.6.
+
+.. Python usage follows the standard defined by the Python specification.
+.. Please refer to the :ref:`Python usage <naoqi-pythonusage>` section.
+
+.. .. _opennao-system-organization-naoqi:
+
+.. NAOqi
+.. +++++
+
+.. This section reminds and completes the :ref:`NAOqi changes <naoqi>`.
+
+.. From the 1.12 release, NAOqi (the software allowing to use the robot) is now
+.. packaged and installed like any others programs.
+
+.. Thus, libraries are located in ``/usr/lib``, executables in ``/usr/bin`` and
+.. configuration files in ``/etc/naoqi``.
+
+.. Therefore standard provided NAOqi's modules are located in ``/usr/lib/naoqi``.
+.. Please refer to the :ref:`NAOqi users' modules <naoqi-moduleloading>` section
+.. to add your own modules.
+
+.. As usual, it is possible to *start* / *stop* / *restart* / *get the status* of
+.. NAOqi using the following commands:
+
+.. .. code-block:: sh
+
+..     nao start
+..     nao stop
+..     nao restart
+..     nao status
+
+.. .. todo :: This part should be rewritten or removed:
+
+.. As said in the :ref:`dcm` page, the way of dealing with the hardware has
+.. changed from the *old* DCM implemenatation as a NAOqi module to the HAL.
+
+.. We try hard to keep the compatibility of all interfaces. In case it is not
+.. sufficient, it is possible to get back the DCM instead of the HAL though
+.. (refer to :ref:`dcm` page).

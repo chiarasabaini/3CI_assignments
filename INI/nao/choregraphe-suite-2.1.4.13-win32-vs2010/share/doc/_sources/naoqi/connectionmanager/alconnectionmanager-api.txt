@@ -1,0 +1,478 @@
+.. _alconnectionmanager-api:
+
+ALConnectionManager API
+=======================
+
+:ref:`naoqi-core` - :ref:`Overview <alconnectionmanager>` | API  | :ref:`networkinfo` | :ref:`networkinfo-ipinfo`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alconnectionmanagerproxy.h>
+
+
+Method Group list
+-----------------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALConnectionManagerProxy
+
+* :cpp:func:`ALConnectionManagerProxy::state`
+* :cpp:func:`ALConnectionManagerProxy::services`
+* :cpp:func:`ALConnectionManagerProxy::technologies`
+* :cpp:func:`ALConnectionManagerProxy::service`
+* :cpp:func:`ALConnectionManagerProxy::connect`
+* :cpp:func:`ALConnectionManagerProxy::disconnect`
+* :cpp:func:`ALConnectionManagerProxy::forget`
+* :cpp:func:`ALConnectionManagerProxy::setServiceConfiguration`
+* :cpp:func:`ALConnectionManagerProxy::setServiceInput`
+* :cpp:func:`ALConnectionManagerProxy::scan`
+* :cpp:func:`ALConnectionManagerProxy::enableTethering`
+* :cpp:func:`ALConnectionManagerProxy::disableTethering`
+* :cpp:func:`ALConnectionManagerProxy::getTetheringEnable`
+* :cpp:func:`ALConnectionManagerProxy::tetheringName`
+* :cpp:func:`ALConnectionManagerProxy::tetheringPassphrase`
+* :cpp:func:`ALConnectionManagerProxy::countries`
+* :cpp:func:`ALConnectionManagerProxy::country`
+* :cpp:func:`ALConnectionManagerProxy::setCountry`
+* :cpp:func:`ALConnectionManagerProxy::interfaces`
+
+Event list
+----------
+
+* :naoqi:event:`NetworkStateChanged`
+* :naoqi:event:`NetworkDefaultTechnologyChanged`
+
+* :naoqi:event:`NetworkServiceStateChanged`
+* :naoqi:event:`NetworkServiceAdded`
+* :naoqi:event:`NetworkServiceRemoved`
+* :naoqi:event:`NetworkServiceInputRequired`
+
+* :naoqi:event:`NetworkTechnologyAdded`
+* :naoqi:event:`NetworkTechnologyRemoved`
+
+* :naoqi:event:`NetworkConnectStatus`
+
+.. Global API
+
+.. cpp:function:: std::string ALConnectionManagerProxy::state()
+
+  Returns the global state of the network connectivity. Possible
+  values are:
+
+  - "online" if an Internet connection is available.
+
+  - "ready" this state means that at least one service is successfully connected.
+
+  - "offline" this state means there is no network connection.
+
+  .. literalinclude:: /examples/python/connectionmanager/get-state.py
+
+  :return: The global state of the connection manager.
+
+.. cpp:function:: void ALConnectionManagerProxy::scan()
+
+  Scan for neighbor services on all available technologies.
+  This is useful to refresh the list of services, which disappears after a while(specially for WiFi services).
+
+.. cpp:function:: AL::ALValue ALConnectionManagerProxy::services()
+
+  Returns the list of all services with their properties. It might be useful to call the
+  :cpp:func:`ALConnectionManagerProxy::scan` method before.
+
+  :return: An array of NetworkInfo contained in an ALValue. :ref:`networkinfo-alvalue`.
+
+  Listing the available services.
+
+  .. literalinclude:: /examples/python/connectionmanager/list-services.py
+
+.. cpp:function:: AL::ALValue ALConnectionManagerProxy::technologies()
+
+  Returns an array of string representing the available technologies, possible values are:
+
+  - "ethernet"
+
+  - "wifi"
+
+  - "bluetooth"
+
+  :return: A list of available technologies.
+
+  Listing the available technologies
+
+  .. literalinclude:: /examples/python/connectionmanager/list-technologies.py
+
+.. Service API
+
+.. cpp:function:: AL::ALValue ALConnectionManagerProxy::service(const std::string &serviceId)
+
+  Returns the properties of a given service identifier, the NetworkInfo
+  is represented as ALValue: :ref:`ALValue representation of NetworkInfo <networkinfo-alvalue>`.
+
+  :param serviceId: The identifier of the service to get the properties.
+
+  :return: the properties of the given service identifier.
+
+  :throw: ALError when the service is not available.
+
+  Getting the properties of a service.
+
+  .. literalinclude:: /examples/python/connectionmanager/get-service.py
+
+.. cpp:function:: void ALConnectionManagerProxy::connect(const std::string &serviceId)
+
+  Connects to a network service.
+
+  :param serviceId: The identifier for the service to connect.
+
+  :throws: ALError when the service not available.
+
+  .. note:: If some information are required to connect to this service, like a passphrase or the service name (for hidden services) an event will be raised.
+
+  .. seealso:: :naoqi:event:`NetworkServiceInputRequired`, :naoqi:event:`NetworkConnectStatus`
+
+  Connecting to a service.
+
+  .. literalinclude:: /examples/python/connectionmanager/connect-service.py
+
+.. cpp:function:: void ALConnectionManagerProxy::disconnect(const std::string &serviceId)
+
+  Disconnects from the service.
+
+  :param serviceId: The identifier of the service to disconnect.
+
+  :throw: ALError when the service is not available.
+
+  Disconnecting a service
+
+  .. literalinclude:: /examples/python/connectionmanager/disconnect-service.py
+
+.. cpp:function:: void ALConnectionManagerProxy::forget(const std::string &serviceId)
+
+  Removes a favorite service.
+  Requests the given serviceId to forget association information. This will set the favorite and auto-connect boolean to false.
+
+  :param serviceId: The identifier of the network to forget.
+
+  :throw: ALError when the service is not available.
+
+  Removing a preferred service.
+
+  .. literalinclude:: /examples/python/connectionmanager/forget-service.py
+
+.. cpp:function:: void ALConnectionManagerProxy::setServiceConfiguration(const AL::ALValue &configuration)
+
+  Requests to apply static service configuration. The following properties are available for static settings.
+
+  - Autoconnect
+
+  - Domains
+
+  - Nameservers
+
+  - IPv4
+
+  - IPv6 **Experimental**
+
+  :param serviceId: A NetworkInfo contained in a ALValue to apply as configuration.
+
+  :throw: ALError when the service is not available, when the configuration is not valid or when the service doesn't requires an input.
+
+  .. seealso:: :ref:`networkinfo`
+
+.. cpp:function:: void ALConnectionManagerProxy::setServiceInput(const AL::ALValue &input)
+
+  Provides the connection manager module with the inputs required to finish a pending connection.
+  This method must be called when receiving the NetworkServiceInputRequired event.
+
+  :param input: An Input object contained in an ALValue.
+
+  :throw: ALError when the service is not available, or when the input is not valid.
+
+  .. seealso:: :ref:`alconnectionmanager-input-request`
+
+.. cpp:function:: void ALConnectionManagerProxy::scan(const std::string &technology)
+
+  Scans for reachable services.
+
+  :param technology: The type of technology to scan.
+
+.. cpp:function:: void ALConnectionManagerProxy::enableTethering(const std::string &technology)
+
+  Creates a Network Access Point on a given technology and share Internet connection if any. For WiFi technology you have to set the Name and the Passphrase before.
+
+  :param technology: The type of technology on which enabling tethering mode.  **Only support "bluetooth" and "wifi"**
+
+  :throw: ALError when the technology is not supported by tethering mode.
+
+  Enabling Tethering
+
+  .. literalinclude:: /examples/python/connectionmanager/enable-tethering.py
+
+.. cpp:function:: void ALConnectionManagerProxy::enableTethering(const std::string &technology, const std::string &name, const std::string &passphrase)
+
+  Creates a WPA2 secured Network Access Point on a given technology and share Internet connection if any.
+
+  :param technology: The type of technology on which enabling tethering mode. **Only support "wifi"**
+
+  :param name: The name of the network to create.
+
+  A valid network name has a maximum length of 32 characters and a minimum of 1 characters.
+
+  :param passphrase: The WPA2 passphrase to connect to the created network.
+
+  A valid WPA passphrase has a maximum length of 63 characters and a minimum of 8 characters.
+
+  :throw: ALError when the technology is not supported by tethering mode.
+
+.. cpp:function:: void ALConnectionManagerProxy::disableTethering(const std::string &technology)
+
+  Disables the Tethering mode.
+
+  :param technology: The type of technology on which disabling tethering mode.
+
+  :throw: ALError when the technology is not supported by tethering mode.
+
+.. cpp:function:: bool ALConnectionManagerProxy::getTetheringEnable(const std::string &technology)
+
+  :param technology: The type of technology.
+
+  :return: A boolean, true if Tethering mode is enabled false instead.
+
+  :throw: ALError when the technology is not supported by tethering mode.
+
+.. cpp:function:: std::string ALConnectionManagerProxy::tetheringName(const std::string &technology)
+
+  :param technology: The type of technology. **only support "wifi"**
+
+  :return: Returns the service name used for the tethering mode.
+
+  :throw: ALError when the technology is not supported by tethering mode.
+
+.. cpp:function:: std::string ALConnectionManagerProxy::tetheringPassphrase(const std::string &technology)
+
+  :param technology: The type of technology. **only support "wifi"**
+
+  :return: Returns the passphrase used for the tethering mode.
+
+  :throw: ALError when the technology is not supported by tethering mode.
+
+.. cpp:function:: std::vector<std::string> ALConnectionManagerProxy::countries()
+
+  :return: Returns an std::vector<std::string> of known country codes as defined in ISO-3166-1.
+
+.. cpp:function:: std::string ALConnectionManagerProxy::country()
+
+  :return: Returns the country code currently in use for wireless regulatory.
+
+.. cpp:function:: void ALConnectionManagerProxy::setCountry(const std::string &country)
+
+  :param country: The country code to set as defined in ISO-3166-1, to apply as wireless regulatory.
+
+  :throw: ALError when the country code is not known.
+
+.. cpp:function:: AL::ALValue ALConnectionManagerProxy::interfaces()
+
+  .. warning:: API subject to change.
+
+  :return: Returns a list of pairs: interface name, MAC address.
+
+.. _alconnectionmanager-events:
+
+ALConnectionManagerProxy Events
+-------------------------------
+
+.. naoqi:event:: NetworkStateChanged(const std::string &state)
+
+  Raised when the global connectivity state changed.
+
+  :param state: The state of the connection manager (same value as :cpp:func:`ALConnectionManagerProxy::state` ).
+
+.. naoqi:event:: NetworkDefaultTechnologyChanged(const std::string &techology)
+
+  Raised when default technology changed.
+
+  :param technology: The new technology used for outgoing connection.
+
+.. naoqi:event:: NetworkServiceStateChanged(AL::ALValue &serviceState)
+
+  Raised when a service state is changed.
+
+  :param state: A pair which contains the serviceId and the state of the service.
+
+  The state of the service uses the same values as :cpp:func:`NetworkInfo::state`.
+
+.. naoqi:event:: NetworkServiceRemoved(const std::string &serviceId)
+
+  Raised when a service is removed from the service list.
+
+  :param serviceId: the service identifier of the removed service.
+
+.. naoqi:event:: NetworkServiceAdded(const std::string &serviceId)
+
+  Raised when a service is added to the service list.
+
+  :param serviceId: the service identifier of the added service.
+
+.. naoqi:event:: NetworkServiceInputRequired(const AL::ALValue &inputRequest)
+
+  Raised when a connection to a service requires input information to succeed.
+
+  :param inputRequest: the requested inputs stored in a ALValue see :ref:`alconnectionmanager-input-request`
+
+  When this event is reveived you have to provide the required input using :cpp:func:`ALConnectionManagerProxy::setServiceInput`.
+
+  Some examples of possible reply are available bellow. :ref:`alvalue-input-reply`
+
+.. naoqi:event:: NetworkTechnologyAdded(const std::string &technology)
+
+  Raised when a new technology is available.
+
+  :param technology: the name of the technology (same values as :cpp:func:`ALConnectionManagerProxy::technologies`).
+
+.. naoqi:event:: NetworkTechnologyRemoved(const std::string &technology)
+
+  Raised when a new technology is no longer available.
+
+  :param technology: the name of the technology (same values as :cpp:func:`ALConnectionManagerProxy::technologies`).
+
+.. naoqi:event:: NetworkConnectStatus(const AL::ALValue &status)
+
+  Raised when a call to :cpp:func:`ALConnectionManagerProxy::connect` is finished.
+
+  :param status: An array informing about the return of the connect method.
+
+    Entry '0' is an std::string containing the serviceId we try to connect to.
+
+    The entry '1' is a boolean, 'true' if the connect method has succeeded, 'false' otherwise.
+
+    In case of failure the error message is in the entry '3', as a std::string.
+
+
+.. _alconnectionmanager-input-request:
+
+ALValue Input Request
++++++++++++++++++++++
+
+This ALValue notifies the needed inputs to succeed in a network connection.
+
+The **Input Request** is an array of n-pair (key, value).
+
+All the requests contain the key "Network", the identifier for the network service.
+
+The different keys could be:
+
+- "Passphrase" for a WEP or WPA/WPA2 passphrase
+
+- "WPS" for a Wireless Protected Setup enabled Access Point
+
+- "Name" for the name of a hidden network.
+
+- "Identity" for a WPA Enterprise Network. **Experimental**
+
+- "Username" for a WISPr enabled hotspot. **Experimental**
+
+- "Password" for the user password for WPA enterprise or WiSPr Access Point. **Experimental**
+
++------------------+----------------+-----------------------------------------+
+| Key              | Value type     | Value content                           |
++==================+================+=========================================+
+| "ServiceId"      | String         | The service identifier                  |
++------------------+----------------+-----------------------------------------+
+| "Passphrase"     | ALValue        | :ref:`alvalue-input-details`            |
++------------------+----------------+-----------------------------------------+
+| "WPS"            | ALValue        | :ref:`alvalue-input-details`            |
++------------------+----------------+-----------------------------------------+
+| "Name"           | ALValue        | :ref:`alvalue-input-details`            |
++------------------+----------------+-----------------------------------------+
+| "Identity"       | ALValue        | :ref:`alvalue-input-details`            |
++------------------+----------------+-----------------------------------------+
+| "Password"       | ALValue        | :ref:`alvalue-input-details`            |
++------------------+----------------+-----------------------------------------+
+| "Username"       | ALValue        | :ref:`alvalue-input-details`            |
++------------------+----------------+-----------------------------------------+
+
+.. _alvalue-input-details:
+
+ALValue Input Details
+^^^^^^^^^^^^^^^^^^^^^
+
+The **Input Details** is an array of n-pair (key, value).
+
+A network service may support several authentication methods, in this case it will ask you which method you want to use before
+requesting further inputs depending on the chosen authentication method.
+For example most of the recent Access Point support the WPA2 and the WPS as alternative method for the authentication.
+
+The possible keys for the **Input Details** are:
+
++----------------+-----------------+-------------------------------------------------------------------------------+
+| Key            | Value type      | Value content                                                                 |
++================+=================+===============================================================================+
+| "Requirement"  | string          | which represents the requirement for the input                                |
+|                |                 |                                                                               |
+|                |                 | Possible values are "Mandatory" or "alternate"                                |
++----------------+-----------------+-------------------------------------------------------------------------------+
+| "Alternates"   | array of string | representing the alternatives method.                                         |
++----------------+-----------------+-------------------------------------------------------------------------------+
+| "Type"         | string          | The type of the requested input.                                              |
+|                |                 |                                                                               |
+|                |                 | This can be:                                                                  |
+|                |                 |                                                                               |
+|                |                 | * "psk" for a WPA/WPA2 passphrase,                                            |
+|                |                 | * "wpspin" for a WPS pin code,                                                |
+|                |                 | * "string" for a non secret text, or                                          |
+|                |                 | * "passphrase"  or a WPA Enterprise passphrase.                               |
++----------------+-----------------+-------------------------------------------------------------------------------+
+
+.. _alvalue-input-reply:
+
+ALValue Input Reply
++++++++++++++++++++
+
+The **Input Reply** is an array of n-pair (key, value).
+
+All the replies to request input must contain the key "ServiceId" with the network service identifier as value.
+
+The **Input Reply** must also contain all the mandatory fields requested by the event :naoqi:event:`NetworkServiceInputRequired`.
+
+Examples:
+
+* ALValue reply for a WPA/WPA2 Enabled Access Point.
+
+  +-----------------+--------------------------------------------------------------------------------------------------+
+  | Key             | Value content                                                                                    |
+  +=================+==================================================================================================+
+  | "ServiceId"     | string                                                                                           |
+  +-----------------+--------------------------------------------------------------------------------------------------+
+  | "Passphrase"    | "Mysecretpassphrase"                                                                             |
+  +-----------------+--------------------------------------------------------------------------------------------------+
+
+* ALValue reply for a WPA/WPA2 Enabled Access Point with hidden SSID.
+
+  +-----------------+-------------------------------------------------------------------------------------------------+
+  | Key             | Value content                                                                                   |
+  +=================+=================================================================================================+
+  | "ServiceId"     | string                                                                                          |
+  +-----------------+-------------------------------------------------------------------------------------------------+
+  | "Passphrase"    | "Mysecretpassphrase"                                                                            |
+  +-----------------+-------------------------------------------------------------------------------------------------+
+  | "Name"          | "MyHiddenSSID"                                                                                  |
+  +-----------------+-------------------------------------------------------------------------------------------------+
+
+* ALValue reply for a WPS Enabled Access Point with hidden SSID,
+  using the WPS push button method.
+
+  +-----------------+-------------------------------------------------------------------------------------------------+
+  | Key             | Value content                                                                                   |
+  +=================+=================================================================================================+
+  | "ServiceId"     | string                                                                                          |
+  +-----------------+-------------------------------------------------------------------------------------------------+
+  | "WPS"           | "'" (reply an empty string to select push button or give a PIN code to select PIN code method)  |
+  +-----------------+-------------------------------------------------------------------------------------------------+
+  | "Name"          | "MyHiddenSSID"                                                                                  |
+  +-----------------+-------------------------------------------------------------------------------------------------+

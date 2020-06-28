@@ -1,0 +1,36 @@
+
+.. _chore_resource_viewer_panel:
+
+Resource viewer panel
+=====================
+
+What is the Resource viewer panel
+---------------------------------
+
+The **Resource viewer** panel basically enables you to see which resources are
+locked by which box, also known as modules, when using the
+:ref:`Resource Manager.<choregraphe-tuto-resources-manager>`
+
+.. image:: /medias/desktop/choregraphe/resource_viewer.png
+      :width: 582 px
+      :height: 392 px
+
++-----------+----------------------------------------------------------+
+| Column    | Contains                                                 |
++===========+==========================================================+
+| Resources | List of all resources available on the robot.            |
++-----------+----------------------------------------------------------+
+| Owner     |  * Black: Owner of the resource.                         |
+|           |  * Gray: Potential owner, waiting for the resource to be |
+|           |    released.                                             |
++-----------+----------------------------------------------------------+
+
+
+Setting the refresh period
+--------------------------
+
+The **Resource viewer** panel is getting periodically information directly
+from the robot, by request.
+
+Setting the refresh period allows the user to set the time to wait between two
+requests.

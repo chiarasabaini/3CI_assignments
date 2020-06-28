@@ -1,0 +1,6 @@
+.. _naoqi-eventindex:
+
+NAOqi Event Index
+=================
+
+will be overrided

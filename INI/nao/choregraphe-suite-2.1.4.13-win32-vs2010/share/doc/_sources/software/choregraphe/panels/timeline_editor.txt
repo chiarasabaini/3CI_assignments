@@ -1,0 +1,478 @@
+.. |timeline-editor-button| image:: /medias/desktop/choregraphe/timeline_open_editor.png
+   :class: img-inline
+
+.. |timeline-play-button| image:: /medias/desktop/choregraphe/timeline_play.png
+   :class: img-inline
+
+.. |timeline-add-button| image:: /medias/desktop/choregraphe/timeline_add_layers.png
+   :class: img-inline
+
+.. |timeline-delete-button| image:: /medias/desktop/choregraphe/timeline_delete_layers.png
+   :class: img-inline
+
+.. |timeline-enabled-button| image:: /medias/desktop/choregraphe/behavior_layers_blue_round_full.png
+   :class: img-inline
+
+.. |timeline-disabled-button| image:: /medias/desktop/choregraphe/behavior_layers_blue_round_empty.png
+   :class: img-inline
+
+.. |timeline-undoredo-button| image:: /medias/desktop/choregraphe/undo_redo_buttons.png
+   :class: img-inline
+
+.. |timeline-editormode-button| image:: /medias/desktop/choregraphe/timeline_editor_mode.png
+   :class: img-inline
+
+.. |record_toolbar| image:: /medias/desktop/choregraphe/record_toolbar.png
+   :class: img-inline
+
+
+
+.. _choregraphe-detailed-interface-timeline-editor:
+
+Timeline Editor
+==================
+
+What is the Timeline Editor
+----------------------------
+
+The **Timeline Editor** allows you to edit :ref:`choregraphe-reference-box-motion-layer`, providing:
+
+* a :ref:`worksheet` view, displaying a detailed view of the **Motion keyframes**,
+* a :ref:`curves` view, allowing you to modify the **Interpolation** between **Motion keyframes**,
+* an advanced :ref:`recordmode`.
+
+.. image:: /medias/desktop/choregraphe/timeline_editor_window.png
+   :width: 588 px
+   :height: 355 px
+
+
+=====  =============================  ==============================================================================================================
+Part    Buttons                        Description
+=====  =============================  ==============================================================================================================
+**A**   **Undo** and **Redo**          Note that these buttons does not affect only the Timeline.
+                                       They affect most of the actions you made in the behavior, even those which were out of the
+        |timeline-undoredo-button|     **Timeline Editor**.
+
+**B**   **Views**                      Allows you to switch between two views:
+
+        |timeline-editormode-button|   * :ref:`curves` and
+                                       * :ref:`worksheet`.
+
+**C**   **Record** toolbar             Offers an advanced alternative to the :ref:`animation_mode`.
+
+        |record_toolbar|               For further details see: :ref:`recordmode`.
+
+**D**   **Actuators**  panel           Displays the list of **Joints** and **Groups of joints** available for the current robot.
+
+                                       For further details see: :ref:`actuators_panel`.
+=====  =============================  ==============================================================================================================
+
+
+.. _actuators_panel:
+
+Actuators panel
+-----------------
+
+The **Actuators** panel displays the list of **Joints** and **Groups of joints**
+corresponding to the :ref:`robot type <nao-family::nao-body-type>` associated with the current Timeline.
+
+**Actions**
+
+================  =============================================================================================
+Click on ...       To ...
+================  =============================================================================================
+**+** / **-**      Expand / Collapse the group of joints.
+
+a name             Select a Joint or a Group of joints.
+
+a blue circle      Enable / Disable a joint or a group of joints.
+
+                   If the current Timeline has not been designed for the current robot,
+                   a error message appears.
+================  =============================================================================================
+
+**Meaning**
+
+.. list-table::
+   :widths: 25 100
+   :header-rows: 1
+
+
+   * - If the button is ...
+     - joint or Group of joints is ...
+   * - .. image:: /medias/desktop/choregraphe/behavior_layers_blue_round_empty.png
+     - **Disabled**.
+       It will not be loaded nor executed.
+   * - .. image:: /medias/desktop/choregraphe/behavior_layers_blue_round_full.png
+     - **Enabled**.
+
+Adapting the list of joints to a robot type
++++++++++++++++++++++++++++++++++++++++++++
+
+To make sure the current **Timeline** is associated to the current robot:
+
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Right-click a frame in the grey Timeline.
+
+2.         If the command **Associate motion curves to...** is:
+
+           * disabled, the Timeline is already associated to the current robot,
+           * available, choose **Associate motion curves to...**.
+
+           Result: the list of joints has been updated in order to fit with the
+           current robot.
+========  =========================================================================
+
+
+.. _worksheet:
+
+Worksheet
+----------
+
+The **Worksheet** mode displays a detailed view of the :ref:`motion-ruler`.
+
+.. image:: /medias/desktop/choregraphe/timeline_editor_worksheet.png
+    :width: 561 px
+    :height: 332 px
+
+=====  =====================================  ===============================================================================
+Part    Name                                   Description
+=====  =====================================  ===============================================================================
+**A**   **Motion keyframe**                    A **Motion keyframe** is represented by:
+
+                                               * a rectangle when it is unexpanded,
+
+                                               * an oval when it is expanded.
+
+
+**B**   **Actuator values**                    If you keep the mouse on a **Motion keyframe**,
+                                               a tooltip appears with the values of stored joints.
+
+**C**   Selected **Motion keyframe**           A **Motion keyframe** gets:
+
+                                               * orange when it is selected,
+                                               * intermediate greyish orange when only a part of its child keyframes
+                                                 is selected.
+
+                                               Drag a selection rectangle to select several **Motion keyframes**, or
+                                               Ctrl-Click them.
+
+**D**   Selected **range of frames**           The **range of frames** is an alternative mode of selecting
+                                               **Motion keyframes**.
+
+                                               Drag the Frame numbers to create it.
+
+**E**   Insertion point                        Represented by a blue line, the insertion point allows to create or to paste
+                                               **Motion keyframes**.
+=====  =====================================  ===============================================================================
+
+
+Editing Motion keyframes
+++++++++++++++++++++++++++
+
+All the function available in the :ref:`motion-ruler` are also available here.
+
+**Additional tool**
+
+To select all motion keyframes for a joint or a group of joint:
+
+* Right click a **Motion keyframe** and
+* choose **Selection** > **Select from layer** in the contextual menu.
+
+
+.. _curves:
+.. _choregraphe-detailed-interface-timeline-editor-curves:
+
+Curves
+------
+
+The  **Curves mode** allows you to display curves representing the evolution of the values of the selected joint(s).
+
+Each **Motion keyframe** is placed along the horizontal axis as in the Worksheet mode.
+But it is also placed along the vertical axis which represents the angle value of the joint.
+
+Selecting joints to display
++++++++++++++++++++++++++++++
+
+Each **joint** is represented by a **curve** in a different **color**.
+You can:
+
+* Select one or several joint(s) to display,
+* Choose the color of each joint.
+
+.. image:: /medias/desktop/choregraphe/timeline_editor_curves.png
+    :width: 541 px
+    :height: 309 px
+
+=====  ======================  =====================================================
+Part    Name                    Click there to ...
+=====  ======================  =====================================================
+**A**   **Actuators**            Select one or several joints to display.
+
+                                 For further details, see: :ref:`actuators_panel`.
+
+**B**   **Color**                Modify the color of a curve.
+=====  ======================  =====================================================
+
+
+Curve Toolbar
++++++++++++++++
+
+.. image:: /medias/desktop/choregraphe/timeline_curves_toolbar.png
+    :width: 393 px
+    :height: 92 px
+
+=====  =============================  =======================================================================================
+Part    Name                           Allows you to ...
+=====  =============================  =======================================================================================
+**A**   **Interpolation modes**         Set the interpolation modes of the selected **Motion keyframe**.
+
+                                        For further details, see: :ref:`interpolation_modes`.
+
+**B**   **Curve key edit**              Display the **Curve key edit** widget.
+
+                                        For further details, see: :ref:`curve_key_edit`.
+
+**C**   **Simplify**                    Reduce the number of **Motion keyframe** in the curves and still keep a similar
+                                        motion.
+
+                                        For further details, see: :ref:`simplify`.
+
+**D**   **Show tangents**               Display (in blue) the automatic tangents of the curves.
+
+**E**   **View all**                    Adjust the zoom in order to fully display the selected curves.
+
+**F**   **Mode**                        Toggle between 3 modes: **Selection**, **Zoom** and **Scroll**.
+
+                                        For further details, see: :ref:`sel_zoom_scroll_modes`.
+=====  =============================  =======================================================================================
+
+Editing Motion keyframes
++++++++++++++++++++++++++
+
+In the **Curves mode**, you can **Drag**, **Cut**, **Copy** and **paste** **Motion keyframes**.
+
+
+.. _simplify:
+
+Simplifying a movement
++++++++++++++++++++++++
+
+**Simplify** removes useless keys from selection:
+
+=====  ===============================================================================
+Step    Action
+=====  ===============================================================================
+1.      Select a range of keyframes.
+
+        .. image:: /medias/dev/tutos/choregraphe/chore_record_mode5.png
+
+2.      Click the **Simplify** button.
+
+        .. image:: /medias/desktop/choregraphe/simplify_window.png
+           :width: 186 px
+           :height: 89 px
+
+3.      Choose an error margin and click the **Apply** button.
+
+        Non relevant points are now transparent: they will be
+        deleted if you accept the simplification.
+
+4.      If the result does not satisfy you, click the **Reset** button in order to
+        cancel the current simplification.
+
+5.      Click the **Close** button to validate the current state and close the window.
+=====  ===============================================================================
+
+
+Setting the interpolation mode of a Motion keyframe
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+What is the interpolation mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Each **Motion keyframe** is linked with the previous and the next keyframe with interpolated curves.
+
+For each **Motion keyframe**, the interpolation modes of the left and right curves can be adjusted.
+
+| Changing the interpolation modes does not affect the position nor the value of the **Motion keyframe**.
+| It affects the shape of the curves, depending on which interpolation mode is chosen.
+
+How to set the interpolation mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To set the interpolation mode of a **Motion keyframe**:
+
+=====  ===============================================================================
+Step    Action
+=====  ===============================================================================
+1.      Select a **Motion Keyframe**.
+
+2.      Click one of the :ref:`Interpolation modes<interpolation_modes>` button or
+
+        Display the :ref:`curve_key_edit` and set, value and left and right
+        interpolation.
+
+3.      If a black line appears, drag its round handles to adjust the curve.
+=====  ===============================================================================
+
+.. _interpolation_modes:
+
+List of interpolation modes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :widths: 10 100
+
+   * - .. image:: /medias/desktop/choregraphe/chore_tangent_constant.png
+     - **Constant:** the value of the key is applied to the actuator up to the next keyframe.
+       This won't give smooth movements on the robot, but it can be used to implement "robotic movement" effects.
+   * - .. image:: /medias/desktop/choregraphe/chore_tangent_linear.png
+     - **Linear:** the value is interpolated linearly toward the next key.
+   * - .. image:: /medias/desktop/choregraphe/chore_tangent_auto.png
+     - **Automatic Bezier:** a Bezier curve interpolation is used, but the curve
+       parameters are computed automatically by Choregraphe to give smooth and good looking movements.
+       This is the default mode for new keyframes.
+       In that mode, contrary to all other Bezier mode, the tangents of the curve at the key are not displayed by default.
+       They can be shown by checking the "Show tangents" button (described below). Automatic tangents, when visible, are not editable,
+       and are displayed in blue rather than black to distinguish them easily.
+   * - .. image:: /medias/desktop/choregraphe/chore_tangent_bezier.png
+     - **Bezier:** this mode (and the following two) also implements a Bezier interpolation, but here the curve parameters are now adjustable by the user.
+       Two tangent handles will appear next to the key to control the curve slope.
+   * - .. image:: /medias/desktop/choregraphe/chore_tangent_smooth.png
+     - **Smooth:** this is a Bezier mode too, but with an additional constraint, the two tangents of the key (on the left and on the right) must be aligned.
+       Note however that if a key is only smooth on one of its side, the constraint won't be enforced.
+   * - .. image:: /medias/desktop/choregraphe/chore_tangent_symmetrical.png
+     - **Symmetrical:** this is similar to the Smooth mode, with another constraint: the length of the two key tangents have relative sizes,
+       so moving one not only keep the other aligned but also moves it horizontally to have an even smoother movement.
+       Like the Smooth mode, the symmetry constraint will only be applied if both tangents are flagged symmetrical.
+
+.. _curve_key_edit:
+
+Curve key edit widget
+^^^^^^^^^^^^^^^^^^^^^^^
+
+**Curve key edit** widget allows you to set the key value and left and  right interpolation modes.
+
+.. image:: /medias/desktop/choregraphe/curve_key_edit.png
+    :width: 187 px
+    :height: 269 px
+
+.. _sel_zoom_scroll_modes:
+
+Selection, Zoom or Scroll Mode
+++++++++++++++++++++++++++++++++
+
+.. list-table::
+   :widths: 5 100
+
+   * - .. image:: /medias/desktop/choregraphe/chore_key_selection.png
+     - When this button is checked, you are in the selection mode.
+
+       Drawing a rectangle with a left mouse click will select a group of keys.
+   * - .. image:: /medias/desktop/choregraphe/chore_zoom_area_selection.png
+     - When this button is checked, you are in the zoom area selection mode.
+
+       Drawing a rectangle with a left mouse click will zoom the view so that it fits that rectangle.
+   * - .. image:: /medias/desktop/choregraphe/chore_viewport_scroll.png
+     - When this button is checked, you are in the viewport drag mode. In that mode, the mouse cursor becomes a hand.
+
+       Dragging the cursor while pressing the left mouse button will scroll the view.
+
+
+.. _recordmode:
+
+Recording Mode
+--------------------------
+
+Record toolbar
++++++++++++++++
+
+.. list-table::
+   :widths: 10 100
+   :header-rows: 1
+
+   * - Button(s)
+     - Function
+   * - .. image:: /medias/desktop/choregraphe/chore_rec_switch.png
+     - Activates and deactivates the **Recording mode**.
+
+       For further details, see: :ref:`motion_recorder_activated`.
+
+   * - .. image:: /medias/desktop/choregraphe/chore_rec_start.png
+
+       .. image:: /medias/desktop/choregraphe/chore_rec_stop.png
+     - Only enabled when the **Recording mode** is activated.
+
+       **Starts** or **stops** the recording.
+
+       Automatically activates the **Animation mode**.
+
+       A recording can also stop by itself when it reaches the last frame.
+       The recording will be done in the current range selection, or, if there is
+       no such selection, between the :ref:`start <choregraphe-reference-box-frame-start>`
+       and the :ref:`end frame <choregraphe-reference-box-frame-end>` of the current Timeline.
+   * - .. image:: /medias/desktop/choregraphe/chore_rec_settings.png
+     - Edit the **recording settings**.
+
+       For further details, see: :ref:`motion_recorder_settings`.
+
+.. _motion_recorder_settings:
+
+Motion recorder settings
+++++++++++++++++++++++++++
+
+.. image:: /medias/desktop/choregraphe/chore_recording_mode_settings.png
+    :width: 276 px
+    :height: 275 px
+
+=============================  =======================================================================================
+ Name                           Description
+=============================  =======================================================================================
+ **Mode**                       The way you record joint positions.
+
+                                You can choose between:
+
+                                * **Periodic**: positions of the recorded joints are **regularly stored**.
+                                * **Interactive with bumpers**: positions of the recorded joints are stored
+                                  each time you **press the left foot bumper**.
+                                  Pressing on the **right foot bumper** sets the stiffness of the recorded joints.
+                                * **Interactive with chest button**: positions of the recorded joints are stored each
+                                  time you press the **Chest button** or you say **"store position"**.
+                                  NAO's **ear LEDs flash** when he understands "store position".
+
+**Time step**                   Time elapsing between two stored keyframes.
+                                Indeed whatever the way you record joint positions, the keyframes created at each
+                                storage will be the same time step apart.
+
+**Allow timeline extension**    If this option is unchecked, the recording will **automatically stop** when the
+                                :ref:`end frame <choregraphe-reference-box-frame-end>` is encountered.
+
+                                If it is checked, the recording will **continue** as long as the user did
+                                not press the **Stop** button.
+
+                                In that case, the timeline contents after what was supposed to be the last
+                                frame will be "pushed" at the end of the recording.
+=============================  =======================================================================================
+
+.. _motion_recorder_activated:
+
+Recording mode activated
++++++++++++++++++++++++++++
+
+Whenever the **recording mode** is active, two additional columns appear in the table of the joints:
+
+.. list-table::
+   :widths: 10 100
+   :header-rows: 1
+
+   * - Column
+     - Description
+   * - .. image:: /medias/desktop/choregraphe/chore_record.png
+     - If this option is activated, all the children joints of this joint will be **recorded**.
+   * - .. image:: /medias/desktop/choregraphe/chore_replay.png
+     - If this option is activated, all the children joints of this joint will be **played during the recording**.
+

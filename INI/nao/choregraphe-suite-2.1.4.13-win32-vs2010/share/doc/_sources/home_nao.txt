@@ -1,0 +1,69 @@
+.. include:: /bulk/common.rst
+
+.. |nao_home| image:: /_static/doc_naoqi_nao.jpg
+   :class: img-inline
+
+.. |safety_nao_en_fr| image:: /medias/pdf/nao_safety_small_en_fr.png
+   :class: img-inline
+   :target: _downloads/nao_safetyguide_2014_en_fr_sp_pt_gr_it_nl.pdf
+
+.. |safety_nao_ja_zh| image:: /medias/pdf/nao_safety_small_ja_zh.png
+   :class: img-inline
+   :target: _downloads/nao_safetyguide_2014_ja_zh_ko_ru_hi_tr_ar.pdf
+
+.. |hello_nao| image:: /medias/pdf/nao_hello_guide_small.png
+   :class: img-inline
+   :target: _downloads/nao_hello-guide.pdf
+
+.. _home_nao:
+
+|roboN| Documentation
+=======================
+
++------------------------------------------------------------------+---------------------------+
+| **User guide**                                                   |                           |
++------------------------------------------------------------------+                           |
+|                                                                  |                           |
+| .. toctree::                                                     | |nao_home|                |
+|    :maxdepth: 2                                                  |                           |
+|                                                                  |                           |
+|    nao/index                                                     |                           |
++------------------------------------------------------------------+                           |
+| **Technical guide**                                              |                           |
++------------------------------------------------------------------+                           |
+|                                                                  |                           |
+| .. toctree::                                                     |                           |
+|    :hidden:                                                      |                           |
+|                                                                  |                           |
+|    family/index                                                  |                           |
+|                                                                  |                           |
+| * :ref:`all_robots`                                              |                           |
+|                                                                  |                           |
+| * :ref:`actuator_sensor_list_nao`                                |                           |
+|                                                                  |                           |
+| * :ref:`nao_version_bodytype`                                    |                           |
+|                                                                  |                           |
++------------------------------------------------------------------+                           |
+| **See Also**                                                     |                           |
++------------------------------------+-----------------------------+                           |
+| * :ref:`software-update`           | * :ref:`dev-index`          |                           |
+|                                    | * :ref:`references`         |                           |
++------------------------------------+-----------------------------+                           |
+|                                                                  |                           |
+| .. toctree::                                                     |                           |
+|    :maxdepth: 1                                                  |                           |
+|                                                                  |                           |
+|    asknao/index_asknao                                           |                           |
++------------------------------------+-----------------------------+---------------------------+
+| *Related downloadable documentation*                                                         |
+|                                                                                              |
+| |safety_nao_en_fr|                                                                           |
+| |hello_nao|                                                                                  |
+| |safety_nao_ja_zh|                                                                           |
+|                                                                                              |
+| :download:`Safety Guide - A </medias/pdf/nao_safetyguide_2014_en_fr_sp_pt_gr_it_nl.pdf>` -   |
+| :download:`Hello Guide</medias/pdf/nao_hello-guide.pdf>` -                                   |
+| :download:`Safety Guide - B </medias/pdf/nao_safetyguide_2014_ja_zh_ko_ru_hi_tr_ar.pdf>`     |
++------------------------------------------------------------------+---------------------------+
+
+

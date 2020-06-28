@@ -1,0 +1,23 @@
+.. include:: /bulk/common.rst
+
+.. romeo-connectivity:
+
+|roboR| -  Connectivity
+=========================
+
+.. seealso:: :ref:`romeo`
+
+--------------------
+
+
+Ethernet
+----------
+
+1xRJ45 - 10/100/1000 base T
+
+Wifi
+------
+
+**IEEE 802.11 a/b/g/n**
+
+Security: 64/128 bit: WEP, WPA/WPA2

@@ -1,0 +1,106 @@
+.. include:: ../bulk/common.rst
+
+.. _setup_wizard_nao:
+
+Hello Guide
+=============
+
+.. |one| image:: /medias/wizard/one.png
+   :class: img-inline
+
+.. |two| image:: /medias/wizard/two.png
+   :class: img-inline
+
+.. |tre| image:: /medias/wizard/tree.png
+   :class: img-inline
+
+.. |fou| image:: /medias/wizard/four.png
+   :class: img-inline
+
+.. |fiv| image:: /medias/wizard/five.png
+   :class: img-inline
+
+.. |six| image:: /medias/wizard/six.png
+   :class: img-inline
+
+
+|roboN| comes in a box with a graphical
+:download:`Hello Guide</medias/pdf/nao_hello-guide.pdf>` inside.
+
+Here is a more detailed step by step:
+
++------+--------------------------------------------------------------------------+
+|Step  |    Action                                                                |
++======+==========================================================================+
+||one| | Get |roboN| out of its box, and                                          |
+|      | gently set |roboN| in a crouching position.                              |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step1.png                                  |
+|      |     :width: 354 px                                                       |
+|      |     :height: 214 px                                                      |
++------+--------------------------------------------------------------------------+
+||two| | Plug the charger to the mains, and                                       |
+|      | plug the charger cable into |roboN|'s back.                              |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step2.png                                  |
+|      |     :width: 215 px                                                       |
+|      |     :height: 213 px                                                      |
++------+--------------------------------------------------------------------------+
+||tre| | Remove the :term:`hatch behind the head of the robot` to access          |
+|      | to the Ethernet socket and plug an Ethernet cable.                       |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step3.png                                  |
+|      |     :width: 330 px                                                       |
+|      |     :height: 225 px                                                      |
+|      |                                                                          |
+|      | Then connect the Ethernet cable to your Internet box.                    |
+|      |                                                                          |
+|      | For further details, see: :ref:`connect_to_ethernet`.                    |
++------+--------------------------------------------------------------------------+
+||fou| | Press the **Chest button** once, and wait for the completion of          |
+|      | the boot process until the robot says "**OGNAK GNOUK**".                 |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step4.png                                  |
+|      |     :width: 482 px                                                       |
+|      |     :height: 184 px                                                      |
++------+--------------------------------------------------------------------------+
+||fiv| | Press the **Chest button** once.                                         |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step5.png                                  |
+|      |     :width: 160 px                                                       |
+|      |     :height: 205 px                                                      |
+|      |                                                                          |
+|      | |roboN| says the four numbers of its **IP address**: note them.          |
++      +--------------------------------------------------------------------------+
+|      | Open a web browser and enter this **IP address** in the address bar.     |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step5ter.png                               |
+|      |     :width: 210 px                                                       |
+|      |     :height: 164 px                                                      |
+|      |                                                                          |
+|      | **Tips**: make sure you add dots between the numbers.                    |
++      +--------------------------------------------------------------------------+
+|      | An authentication windows appears.                                       |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step5bis.png                               |
+|      |     :width: 284 px                                                       |
+|      |     :height: 124 px                                                      |
++------+--------------------------------------------------------------------------+
+||six| | Complete both **User name** and **Password** with the default value: nao.|
+|      |                                                                          |
+|      | .. image:: /medias/wizard/wiz_step6.png                                  |
+|      |     :width: 233 px                                                       |
+|      |     :height: 168 px                                                      |
+|      |                                                                          |
+|      | **Tips**: make sure you type 'nao' in lower-case.                        |
++      +--------------------------------------------------------------------------+
+|      | A **Getting started** wizard appears.                                    |
+|      |                                                                          |
+|      | .. image:: /medias/wizard/conf_step1.png                                 |
+|      |     :width: 401 px                                                       |
+|      |     :height: 228 px                                                      |
+|      |                                                                          |
+|      | Follow its steps to configure your robot.                                |
+|      |                                                                          |
+|      | For further details, see: :ref:`first_conf`.                             |
++------+--------------------------------------------------------------------------+

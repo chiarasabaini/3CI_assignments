@@ -1,0 +1,6 @@
+.. _naoqi-memoryindex:
+
+NAOqi Memory Index
+==================
+
+will be overrided

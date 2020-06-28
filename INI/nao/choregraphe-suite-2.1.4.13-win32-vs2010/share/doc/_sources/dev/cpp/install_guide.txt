@@ -1,0 +1,258 @@
+.. include:: ../../bulk/common.rst
+
+.. _cpp-install-guide:
+
+C++ SDK Installation
+====================
+
+.. _compatible-platforms_cpp:
+
+Supported Operating Systems
+-----------------------------
+
+============  ===================================================
+OS             Version
+============  ===================================================
+**Linux**      Ubuntu 12.04 LTS (Precise) and later
+
+**Windows**    Microsoft Windows XP Service Pack 3,
+
+               Microsoft Windows 7 and 8
+
+**Mac**        Mac OS X 10.7.1 Lion
+
+               Mac OS X 10.8.3 Mountain Lion
+============  ===================================================
+
+Windows limitations
+++++++++++++++++++++
+
+| No **C++ cross-compiler**.
+| The **C++ cross-compiler** (used to compile code to be run on the robot)
+  is not available on **Windows**.
+|
+
+| **Windows architecture**: make sure to compile for 32-bit.
+| While both architectures (32-bit and 64-bit) are supported to run your favorite IDE,
+  it is mandatory to compile exclusively for 32-bit.
+  The resulting code will run as well on 32-bit or 64-bit environment.
+
+Overview
+--------
+
++-------------------------+----------------------------------------+
+| Steps                   |      comment                           |
++=========================+========================================+
+| :ref:`required-compiler`| Make sure you have the required        |
++-------------------------+ tools.                                 +
+| :ref:`required-buidsys` |                                        |
++-------------------------+----------------------------------------+
+| :ref:`qibuild_install`  | Follow step by step the                |
++-------------------------+ installation guides                    +
+| :ref:`cpp_sdk_install`  |                                        |
++-------------------------+----------------------------------------+
+| :ref:`test_install`     |                                        |
++-------------------------+----------------------------------------+
+
+Requirements
+------------
+
+.. _required-compiler:
+
+A - Compiler and IDE
++++++++++++++++++++++
+
+==========  ===================================================================================
+OS           Compiler and IDE
+==========  ===================================================================================
+Linux        **GCC** version 4.4 or higher and
+
+             a recent version of **QtCreator**.
+
+Windows      **Visual Studio 2010**.
+
+Mac          **XCode**, use the version corresponding to your Mac OS X (Snow Leopard or Lion),
+             and
+
+             a recent version of **QtCreator**.
+==========  ===================================================================================
+
+On **Mac** and **Linux** you can also use **Eclipse** if you are used to it.
+
+.. _required-buidsys:
+
+B - Cross-platform build system
++++++++++++++++++++++++++++++++++
+
+Additionally to the **C++ SDK**, you will have to install **qiBuild**, a tool
+designed to generate cross-platform projects using **CMake**.
+
+CMake generates makefiles and workspaces for any operating system, making the project
+able to be compiled simply on Windows, Mac, Linux and **NAOqi OS**.
+
+The table below lists the prerequisites to **qiBuild** installation.
+
+====================================  ==============================================================================
+Requirement                           Comments
+====================================  ==============================================================================
+**CMake version 2.8.3** or higher     On **Linux**:
+
+                                      Use the cmake package provided by your distribution.
+
+                                      On **Windows** and **Mac**:
+
+                                      * Use the installer from **CMake** official website:
+                                        http://www.cmake.org/cmake/resources/software.html
+
+                                      * When prompted, choose to add CMake to your ``PATH``.
+
+**Python 2.7**                        On **Windows**:
+
+                                      To use scripts written in Python, you have to put in your ``PATH``:
+                                      ``C:\Python27`` and ``c:\Python27\Scripts``
+====================================  ==============================================================================
+
+
+.. _qibuild_install:
+
+C - qiBuild Installation
+-------------------------
+
+=====  ==================================================================================================
+Step       Action
+=====  ==================================================================================================
+1.      *Checking qiBuild prerequisites*
+
+        Make sure you have installed **CMake** and **Python**.
+
+        For further details, see :ref:`required-buidsys`.
+
+2.      *Installing qiBuild*
+
+        Follow the **Installation** step of the:
+        `qiBuild documentation - Getting started <http://doc.aldebaran.com/qibuild/beginner/getting_started.html>`_,
+        and only this step, then come back to this page.
+
+3.      *Configuring qiBuild*
+
+        Run:
+
+        .. code-block:: console
+
+           $ qibuild config --wizard
+
+        You will be prompted to specify:
+
+        * CMake path (if not automatically found),
+        * CMake Generator and
+        * the IDE you will use.
+
+        It is advised to use 'Unix Makefiles' on Linux and Mac, and
+        'Visual Studio' on Windows.
+
+        Note that you can still re-run the config wizard anytime you want.
+
+        Result: a file is generated in ``~/.config/qi/qibuild.xml``.
+        It is shared by all the worktrees you will create.
+=====  ==================================================================================================
+
+
+.. _cpp_sdk_install:
+
+D - SDK Installation
+---------------------
+
+=====  ==================================================================================================
+Step       Action
+=====  ==================================================================================================
+1.      *Checking SDK prerequisites*
+
+        Make sure you have installed one of the recommended compilers and IDE.
+
+        For further details, see :ref:`required-compiler`.
+
+2.      *Retrieving C++ SDK*
+
+        Retrieve the **C++ SDK** archive:
+
+        * naoqi-sdk-x.x.x-``[OS]``.tar.gz or
+        * naoqi-sdk-x.x.x-win32-``[visualStudioversion]``.zip
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+        Be careful to select the archive corresponding to your Operating System (Windows, Mac or Linux).
+
+3.      Extract it on your machine (we'll assume that the extracted folder is called naoqi-sdk).
+
+4.      Create an EMPTY folder where you want to store your C++ SDK (let's call it /path/to/SDKfolder).
+
+        Open a **Command Prompt** and go to that folder.
+
+        Type this command in order to create a worktree.
+
+        .. code-block:: console
+
+            $ qibuild init
+
+5.      Then copy your folder naoqi-sdk into your SDK folder. You should then have something like:
+
+        /path/to/SDKfolder/naoqi-sdk
+
+=====  ==================================================================================================
+
+
+.. _test_install:
+
+E - Compile and run an example
+-------------------------------
+
+
+=====  ==================================================================================================
+Step       Action
+=====  ==================================================================================================
+1.  	In your **SDK** folder, enter the subfolder doc/dev/cpp/examples using your **Command Prompt**.
+
+        .. code-block:: console
+
+            $ cd /path/to/SDKfolder/naoqi-sdk/doc/dev/cpp/examples
+
+
+        For example, Windows users will do (for C++ SDK):
+
+        .. image:: /medias/getting_started/helloworld_cpp_computer.png
+            :width: 558 px
+            :height: 173 px
+
+
+
+2.      Type this command in order to create a toolchain using the feed from the C++ SDK:
+
+        .. code-block:: console
+
+            $ qitoolchain create mytoolchain /path/to/SDKfolder/naoqi-sdk/toolchain.xml
+
+        Where *mytoolchain* is the name you want to give to this specific toolchain (you could have several).
+
+3.      Type this command to create a build configuration associated with this toolchain, and
+        make sure this configuration is the default for this worktree:
+
+        .. code-block:: console
+
+            $ qibuild add-config mytoolchain -t mytoolchain --default
+
+
+4.      Type these commands in order to configure and build the sayhelloworld project:
+
+        .. code-block:: console
+
+            $ cd core/sayhelloworld
+            $ qibuild configure
+            $ qibuild make
+
+5.      You can now run the resulting binary from:
+        sayhelloworld/build-mytoolchain/sdk/bin
+
+        .. note:: On **Mac**, you should set the environment variable ``DYLD_LIBRARY_PATH`` to
+                  ``sayhelloworld/build-mytoolchain/sdk/lib`` first.
+=====  ==================================================================================================

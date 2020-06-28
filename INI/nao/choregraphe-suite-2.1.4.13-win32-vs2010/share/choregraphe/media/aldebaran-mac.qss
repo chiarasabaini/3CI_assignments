@@ -1,0 +1,16 @@
+* {
+  /* Do not set font-family to helvetica, as it might screw up comboboxes looks
+     (as well as other things, maybe)
+
+     cf. #10244
+   */
+}
+
+AR--ScriptTextEdit {
+  font-size: 13pt;
+}
+
+QLineEdit:!enabled {
+  color:gray
+}
+

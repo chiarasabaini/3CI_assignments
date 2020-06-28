@@ -1,0 +1,141 @@
+.. include:: ../bulk/common.rst
+
+.. _access_webpage_nao:
+
+Accessing the |roboN| Web page
+==============================
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure your robot is on.
+
+2.      Press the **Chest button** once.
+
+        |roboN| says the four numbers of its **IP address**: note them.
+
+        .. image:: /medias/wizard/wiz_step5.png
+            :width: 160 px
+            :height: 205 px
+
+        **Troubleshooting**:
+        If |roboN| says "I can't connect to the network":
+
+        1. Check the availability of your local network,
+        2. Turn OFF and ON the robot,
+        3. Check the WiFi settings: :ref:`nao-connecting`.
+
+3.      Open a web browser and enter this **IP address** in the address bar.
+
+        .. image:: /medias/wizard/wiz_step5ter.png
+            :width: 210 px
+            :height: 164 px
+
+        An authentication windows appears.
+
+        .. image:: /medias/wizard/wiz_step5bis.png
+            :width: 284 px
+            :height: 124 px
+
+3.      Complete:
+
+        * **User name**: nao
+        * **Password**: password you have set for the robot.
+
+          | The password default value is *nao*.
+          | If you have lost your password, see:
+            :ref:`opennao-password-lost_nao`.
+=====  =========================================================================
+
+**Result**: the :ref:`webpage_nao` appears.
+
+.. image:: /medias/wizard/myrobot.png
+    :width: 545 px
+    :height: 385 px
+
+.. Note::
+  If the robot has not yet been configured,
+  the :ref:`getting_started` wizard appears instead: follow its steps,
+  you will then have access to the :ref:`webpage_nao`.
+
+  **Tips**: if you have installed **Choregraphe**, you can also try one of the:
+  :ref:`planb_nao`.
+
+.. _planb_nao:
+
+Alternative methods to access to |roboN| Web page
+--------------------------------------------------
+
+* :ref:`access_choregraphe_nao`.
+* :ref:`access_bonjour_nao`.
+
+.. _access_choregraphe_nao:
+
+Accessing |roboN| Web page using Choregraphe
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. |connect-button| image:: /medias/desktop/connect-to_button.png
+   :class: img-inline
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Launch **Choregraphe**.
+
+2.      Choose  **Connection** > **Connect to** or Click the |connect-button|
+        **Connect to**  button.
+
+        The connection widget is displayed.
+
+        .. image:: /medias/desktop/choregraphe/chore_connect_to.png
+            :width: 598 px
+            :height: 394 px
+
+3.      Right-click the green |roboN| and choose **View web page**.
+=====  =========================================================================
+
+.. _access_bonjour_nao:
+
+Accessing |roboN| Web page using |roboN|'s name
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. |bonjour| image:: /medias/opennao/gs_bonjour_icon.png
+   :class: img-inline
+   :width: 26 px
+   :height: 27 px
+
+=====  ========================================================
+Step    Action
+=====  ========================================================
+1.      Open a web browser.
+
+2.      If you know |roboN|'s host name:
+
+        * Type: ``[naoHostName].local`` in the address bar.
+
+          By default, it is: ``nao.local``
+
+        If you don't know |roboN|'s host name:
+
+        * Click the **Bonjour** |bonjour| icon.
+
+        * Double-click on |roboN|'s name.
+=====  ========================================================
+
+**Bonjour** is conceived by Apple and installed by default on Mac OS X and Linux (Avahi) computers.
+On Windows, it is automatically installed during the **Choregraphe** installation process.
+
+For all information about Bonjour, including licensing, please visit the official site:
+http://support.apple.com/kb/DL999
+
+.. _opennao-password-lost_nao:
+
+Lost your password
+------------------
+
+If you have defined then lost the password for the web interface:
+
+* Reset the settings of the robot using the process :ref:`naoflasher_upgrade`
+  with a :term:`Factory reset` option.
+
+

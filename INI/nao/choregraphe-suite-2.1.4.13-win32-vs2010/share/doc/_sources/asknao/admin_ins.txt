@@ -1,0 +1,136 @@
+﻿.. _admin_ins:
+
+Admin Menu
+===========
+
+.. |admin| image:: /medias/asknao/admin_btn.png
+   :class: img-inline
+
+.. |admin01| image:: /medias/asknao/admin_btn01.png
+   :class: img-inline
+
+To display the **admin** specific interface, click the |admin| **admin** button.
+
+.. image:: /medias/asknao/admin_home.png
+   :width: 578 px
+   :height: 372 px
+
+To hide the **admin** specific interface, click the |admin01| **admin** button.
+
+List of users
+--------------
+
+Viewing, Editing or Deleting accounts
+++++++++++++++++++++++++++++++++++++++
+
+To view, edit or delete existing accounts:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the desired user in the list.
+
+        The details of its account is displayed.
+
+        .. image:: /medias/asknao/account_edit.png
+             :width: 429 px
+             :height: 432 px
+
+        You can **Save** or **Cancel** change, and also **Delete this user**.
+=====  =========================================================================
+
+Sorting a list
++++++++++++++++
+
+To sort a list of accounts:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the title you want to use as sorting criteria.
+
+=====  =========================================================================
+
+Actions
+--------
+
+Edit institution
++++++++++++++++++
+
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Edit institution** action.
+
+        .. image:: /medias/asknao/edit_ins_adm.png
+           :width: 462 px
+           :height: 263 px
+
+2.      Fill information.
+
+3.      Click the **Save** button.
+=====  =========================================================================
+
+.. _add_user:
+
+Add a User
++++++++++++
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Add a user** action.
+
+        .. image:: /medias/asknao/adult_crea_adm.png
+            :width: 511 px
+            :height: 378 px
+
+2.      Fill information.
+
+3.      Do not forget to check at least one of the **Role** boxes,
+        according to the rights you want to grant.
+
+4.      Click the **Save** button.
+
+5.      Click the **Back to user list** action.
+=====  =========================================================================
+
+.. _add_child:
+
+Add a Child
+++++++++++++
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Add a child** action.
+
+        .. image:: /medias/asknao/child_create_adm.png
+           :width: 586 px
+           :height: 366 px
+
+2.      Fill information.
+
+3.      Click the **Related adults** zone and select **Teacher** and **Parent**
+        accounts related to the child.
+
+4.      Click the **Save** button.
+
+5.      Click the **Back to user list** action.
+=====  =========================================================================
+
+Import children from file
++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Import children from file** action.
+
+        .. image:: /medias/asknao/import_child_adm.png
+           :width: 554 px
+           :height: 358 px
+
+2.      Follow instructions displayed.
+=====  =========================================================================

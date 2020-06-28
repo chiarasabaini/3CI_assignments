@@ -1,0 +1,71 @@
+.. _alinfrared:
+
+ALInfrared
+==========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alinfrared-api
+    alinfrared-tuto
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <alinfrared-api>` | :ref:`Tutorial <alinfrared-tuto>`
+
+------------
+
+.. seealso::
+
+   - :ref:`IR (Infra-Red) Hardware <robot-infrared>`
+   - :ref:`alinfrared-remote-control`
+
+What it does
+------------
+
+**ALInfrared** allows IR (Infra-Red) communication with the robot.
+It has 3 different purposes:
+
+- use the robot as a remote control,
+
+- set the robot to receive orders from a remote control,
+
+- make several robots communicate together (not recommended).
+
+
+How it works
+------------
+
+ALInfrared works with `"Linux Infrared Remote Control" (LIRC)
+<http://www.lirc.org/>`_ in order to emit/receive IR (Infra-Red) remote keys or
+to emit/receive IR information to/from another robot.
+
+Performance and Limitations
+---------------------------
+
+- ALInfrared only works on the robot. You can't use it on a local NAOqi.
+- Using infra-red to make two robots communicate with each other is generally
+  ill-advised: wifi allows communication with greater range and throughput
+  and without line-of-sight restriction.
+
+Getting started
+---------------
+
+To implement an IR communication:
+
+1. Find or create the configuration file of the remote control you want to use.
+
+   For further details, see sections: :ref:`webpage-search-create-remote-control-conf`.
+
+2. Add and enable the configuration file of the remote control in the robot settings.
+
+   For further details, see sections: :ref:`webpage-add-remove-remote-control`
+   and :ref:`webpage-enable-disable-remote-control`.
+
+3. Check Key names, in order to be able to use them when programming.
+
+   For further details, see sections: :ref:`webpage-check-remote-keys`.
+
+4. Use Choregraphe **Communication > Infrared** Boxes or the bound methods of
+   ALInfrared module.
+
+   For further details, see section: :ref:`alinfrared-tuto`.

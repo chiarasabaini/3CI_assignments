@@ -1,0 +1,81 @@
+.. _python-example-almath:
+
+ALMath
+======
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section contains some examples showing how to use libalmath Python wrapping.
+The C++ documentation of this library can be found :ref:`here <libalmath-doc>`.
+The wrapping allows to use all functions contained in this library, which is very
+useful for computations related with motions (effectors positions for example).
+
+Python wrapping
+---------------
+
+libalmath is wrapped in Python. This makes it possible for example to use this
+library from Choregraphe, or from any Python script.
+
+To import almath, use the following line (after having correctly configured
+the Python SDK path if you are coding outside Choregraphe,
+see :ref:`python-install-guide` ): ::
+
+   import almath
+
+You can now call any method from libalmath with the following line: ::
+
+   almath.methodName(arg0, arg1, ...)
+
+Since libalmath is using particular types, you have to be careful to use
+them correctly. This can cause some difficulties when interfacing with
+other modules, such as ALMotion, which do not give the right format
+directly.
+
+Using ALMath with ALMotion
+--------------------------
+
+This example shows how to retrieve transforms from ALMotion
+using the :cpp:func:`ALMotionProxy::getTransform` method, and how to
+send transforms computed with ALMath back to ALMotion using
+the :cpp:func:`ALMotionProxy::setTransform` for example (but the principle
+is still the same for other methods using transforms).
+
+:download:`almath_transform.py </examples/python/almath/almath_transform.py>`
+
+.. literalinclude:: /examples/python/almath/almath_transform.py
+   :language: py
+
+Using ALMath to generate footsteps
+----------------------------------
+
+ALMath is widely used inside ALMotion. Using ALMath, you can then reproduce some
+of the features included in ALMath, in particular concerning footsteps. If you
+send any footstep to ALMotion, you will get a lot of warnings because they are
+probably dangerous for the robot: they might cause foot collision or be too
+long for NAO. If you want to generate footsteps without any warnings, you have
+to clip them, using ALMath functionnalities.
+
+The following example allows you to lead NAO by its arm. It generates footsteps
+according to the left arm position, and then clips them to make sure they are
+possible for NAO.
+
+To use the example, launch the script giving your NAO's IP as an argument. NAO
+will stand up. When you are ready, take NAO's left arm and press the front tactil
+sensor. You can now guide NAO by inclining its arm forward and backwards, and
+make him turn by turning his left wrist. NAO's eyes will turn green when its arm
+position gives him a target, and blue when the arm position is neutral. To end the
+example, press the rear tactile sensor: NAO will crouch and remove its stiffness.
+
+The code for the robot guide is the
+following: :download:`almath_robot_guide.py </examples/python/almath/almath_robot_guide.py>`.
+Do not forget to put the code for the foot clipping in the same
+folder: :download:`almath_foot_clip.py </examples/python/almath/almath_foot_clip.py>`.
+
+.. literalinclude:: /examples/python/almath/almath_robot_guide.py
+   :language: py
+
+The code for the foot clipping is the
+following:
+
+.. literalinclude:: /examples/python/almath/almath_foot_clip.py
+   :language: py

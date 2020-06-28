@@ -1,0 +1,132 @@
+.. _alvisionextractor-api:
+
+ALVisionExtractor API
+=====================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   almodule-api
+
+
+:ref:`naoqi-core` - :ref:`Overview<extractors>` | :ref:`alextractor-api` | **ALVisionExtractor API**
+
+------------
+
+Method list
+--------------
+
+Any ALVisionExtractor inherits methods from :ref:`alextractor-api` and :ref:`almodule-api`.
+It also has the following specific methods:
+
+**Parameters update**
+  * :cpp:func:`ALVisionExtractor::setFrameRate`
+  * :cpp:func:`ALVisionExtractor::setResolution`
+  * :cpp:func:`ALVisionExtractor::setActiveCamera`
+  * :cpp:func:`ALVisionExtractor::pause`
+
+**Introspection**
+  * :cpp:func:`ALVisionExtractor::getFrameRate`
+  * :cpp:func:`ALVisionExtractor::getResolution`
+  * :cpp:func:`ALVisionExtractor::getActiveCamera`
+  * :cpp:func:`ALVisionExtractor::isPaused`
+  * :cpp:func:`ALVisionExtractor::isProcessing`
+
+**Deprecated methods**
+  * :cpp:func:`ALVisionExtractor::setParameter` (deprecated)
+
+.. _ALVisionExtractor::setFrameRate1:
+
+.. cpp:function:: bool ALVisionExtractor::setFrameRate(const std::string &pSubscribedName, const int& framerate)
+
+  There are two overloads of this function:
+
+  - :ref:`ALVisionExtractor::setFrameRate <ALVisionExtractor::setFrameRate1>` for a subscriber
+  - :ref:`ALVisionExtractor::setFrameRate <ALVisionExtractor::setFrameRate2>` for all the subscribers.
+
+  Sets the extractor frame rate for a chosen subscriber.
+
+  :param pSubscribedName: Name of the subscriber.
+
+  :param framerate: New frame rate.
+
+  :return: True if the update succeeded, False otherwise.
+
+
+.. _ALVisionExtractor::setFrameRate2:
+
+.. cpp:function:: bool ALVisionExtractor::setFrameRate(const int& framerate)
+
+  Sets the extractor frame rate for all the subscribers.
+
+  :param framerate: New frame rate.
+
+  :return: True if the update succeeded, False otherwise.
+
+.. cpp:function:: bool ALVisionExtractor::setResolution(const int& resolution)
+
+  Sets the image resolution for the extractor.
+
+  :param resolution: New resolution (see :ref:`cameraresolution`).
+
+  :return: True if the update succeeded, False otherwise.
+
+.. cpp:function:: bool ALVisionExtractor::setActiveCamera(const int& cameraId)
+
+  Sets the active camera for the extractor.
+
+  :param cameraId: ID of the camera (see :ref:`cameraindex`).
+
+  :return: True if the update successded, False otherwise.
+
+
+.. cpp:function:: void ALVisionExtractor::pause(const bool& paused)
+
+  Pauses or unpauses the extractor.
+
+  :param paused: True to pause the extractor, False to unpause it.
+
+  .. note: This will affect all the subscribers.
+
+.. cpp:function:: int ALVisionExtractor::getFrameRate()
+
+  Gets the current frame rate of the extractor.
+
+  :return: Frame rate of the fastest subscriber.
+
+.. cpp:function:: int ALVisionExtractor::getResolution()
+
+  Gets the current image resolution.
+
+  :return: Image resolution of the extractor.
+
+.. cpp:function:: int ALVisionExtractor::getActiveCamera()
+
+  Gets the current active camera used by the extractor.
+
+  :return: Camera ID.
+
+.. cpp:function:: bool ALVisionExtractor::isPaused()
+
+  Gets the pause status of the extractor.
+
+  :return: True if the extractor is pause, False otherwise.
+
+.. cpp:function:: bool ALVisionExtractor::isProcessing()
+
+  Gets the status of the extractor. An extractor is processing as long as it has at least one subscriber,
+  regardless of its pause status.
+
+  :return: True if the extractor is running, False otherwise.
+
+
+.. cpp:function:: void ALVisionExtractor::setParameter(const std::string& paramName, const AL::ALValue& paramValue)
+
+  .. deprecated:: 1.20 use :cpp:func:`ALVisionExtractor::setResolution` and :cpp:func:`ALVisionExtractor::pause` instead.
+
+  Updates the value of a parameter of the extractor.
+
+  :param paramName: Name of the parameter ("resolution" or "pause").
+
+  :param paramValue: New value of the parameter.

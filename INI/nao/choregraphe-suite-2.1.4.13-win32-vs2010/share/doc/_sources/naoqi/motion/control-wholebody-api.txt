@@ -1,0 +1,169 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-wholebody-api:
+
+Whole Body control API
+++++++++++++++++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <control-wholebody>` | API |
+:ref:`Tutorial <control-wholebody-tuto>`
+
+------------
+
+|nao| |roboN| only - Do not use on |juju| |roboJ|
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/control-wholebody_toc.rst
+
+
+.. cpp:function:: void ALMotionProxy::wbEnable(const bool& isEnabled)
+
+  Enables Whole Body Balancer. It's a Generalized Inverse Kinematics which deals
+  with Cartesian control, balance, redundancy and task priority. The main goal
+  is to generate and stabilized consistent motions without precomputed trajectories
+  and adapt the behavior of the robot to the situation. The generalized inverse kinematic
+  problem takes in account equality constraints (keep foot fix), inequality constraints
+  (joint limits, balance, ...) and quadratic minimization (Cartesian / articular
+  desired trajectories). We solve each step a quadratic programming on the robot.
+
+  :param isEnabled: Activate / Deactivate Whole Body Balancer.
+
+  :download:`almotion_wbenable.cpp </samples/cpp/almotion/almotion_wbenable.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbenable.cpp
+     :language: cpp
+
+
+  :download:`almotion_wbEnable.py </samples/python/almotion/almotion_wbEnable.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wbEnable.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::wbFootState( const std::string& stateName, const std::string& supportLeg )
+
+  Sets the state of the foot (or feet): fixed foot, constrained in a plane or free.
+
+  :param stateName: Name of the foot state. "Fixed" set the foot fixed. "Plane" constrained the foot in the plane. "Free" set the foot free.
+
+  :param supportLeg: Name of the foot. "LLeg", "RLeg" or "Legs".
+
+  :download:`almotion_wbfootstate.cpp </samples/cpp/almotion/almotion_wbfootstate.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbfootstate.cpp
+     :language: cpp
+
+
+  :download:`almotion_wbFootState.py </samples/python/almotion/almotion_wbFootState.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wbFootState.py
+     :language: py
+
+
+
+
+.. cpp:function:: void ALMotionProxy::wbEnableBalanceConstraint( const bool& isEnable, const std::string& supportLeg )
+
+  Enables to keep balance in support polygon.
+
+  :param isEnable: Enable the robot to keep balance.
+
+  :param supportLeg: Name of the support leg: "Legs", "LLeg", "RLeg".
+
+  :download:`almotion_wbenablebalanceconstraint.cpp </samples/cpp/almotion/almotion_wbenablebalanceconstraint.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbenablebalanceconstraint.cpp
+     :language: cpp
+
+
+  :download:`almotion_wbEnableBalanceConstraint.py </samples/python/almotion/almotion_wbEnableBalanceConstraint.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wbEnableBalanceConstraint.py
+     :language: py
+
+
+
+
+.. cpp:function:: void ALMotionProxy::wbGoToBalance( const std::string& supportLeg, const float& duration )
+
+  Advanced Whole Body API: :term:`Com` go to a desired support polygon. This is a blocking call.
+  Use with caution: make sure the starting pose is consistent with the targeted pose.
+  Starting form Init pose is the safer way to use it.
+
+  :param supportLeg: Name of the support leg: "Legs", "LLeg", "RLeg".
+
+  :param duration: Time in seconds.
+
+  :download:`almotion_wbgotobalance.cpp </samples/cpp/almotion/almotion_wbgotobalance.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbgotobalance.cpp
+     :language: cpp
+
+
+  :download:`almotion_wbGoToBalance.py </samples/python/almotion/almotion_wbGoToBalance.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wbGoToBalance.py
+     :language: py
+
+
+
+
+.. cpp:function:: void ALMotionProxy::wbEnableEffectorControl( const std::string& effectorName, const bool& isEnabled )
+
+  Enables whole body Cartesian control of an effector.
+
+  :param effectorName: Name of the effector : "Head", "LArm" or "RArm". The robot goes to posture init. He manages his balance and keep foot fix. "Head" is controlled in rotation. "LArm" and "RArm" are controlled in position.
+
+  :param isEnabled: Activate / Deactivate Effector Control.
+
+  :download:`almotion_wbenableeffectorcontrol.cpp </samples/cpp/almotion/almotion_wbenableeffectorcontrol.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbenableeffectorcontrol.cpp
+     :language: cpp
+
+
+  :download:`almotion_wbEnableEffectorControl.py </samples/python/almotion/almotion_wbEnableEffectorControl.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wbEnableEffectorControl.py
+     :language: py
+
+
+
+.. cpp:function:: void ALMotionProxy::wbSetEffectorControl( const std::string& effectorName, const AL::ALValue& targetCoordinate )
+
+  Sets a new target for controlled effector. This is a non-blocking call.
+
+  :param effectorName: Name of the effector : "Head", "LArm" or "RArm". The robot goes to posture init. He manages his balance and keep foot fix. "Head" is controlled in rotation. "LArm" and "RArm" are controlled in position.
+
+  :param targetCoordinate: "Head" is controlled in rotation (WX, WY, WZ). "LArm" and "RArm" are controlled in position (X, Y, Z). TargetCoordinate must be absolute and expressed in FRAME_ROBOT. If the desired position/orientation is unfeasible, target is resize to the nearest feasible motion.
+
+  :download:`almotion_wbseteffectorcontrol.cpp </samples/cpp/almotion/almotion_wbseteffectorcontrol.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbseteffectorcontrol.cpp
+     :language: cpp
+
+
+  :download:`almotion_wbSetEffectorControl.py </samples/python/almotion/almotion_wbSetEffectorControl.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wbSetEffectorControl.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::wbEnableEffectorOptimization( const std::string& effectorName, const bool& isEnabled )
+
+  Enables whole body Cartesian optimization of an effector.
+
+  :param effectorName: Name of the effector.
+
+  :param isEnabled: Activate / Deactivate Effector Optimization.
+
+  :download:`almotion_wbenableeffectoroptimization.cpp </samples/cpp/almotion/almotion_wbenableeffectoroptimization.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_wbenableeffectoroptimization.cpp
+     :language: cpp
+
+

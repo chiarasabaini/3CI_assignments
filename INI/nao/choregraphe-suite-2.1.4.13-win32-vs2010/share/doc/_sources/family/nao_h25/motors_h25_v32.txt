@@ -1,0 +1,30 @@
+.. _h25_motors_v32:
+
+H25 - Motors - V3.2
+======================
+
+.. seealso::
+    :ref:`V5 <h25_motors>` |  :ref:`V4 <h25_motors_v4>` | :ref:`V3.3 <h25_motors_v33>` | **V3.2**
+
+    :ref:`nao-h25` | :ref:`robot_motors`
+
+--------------------
+
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_h25.png
+   :width: 320 px
+   :height: 413 px
+
+
+.. include:: ../bulk/motors_v32.rst
+
+.. include:: ../bulk/motors_v32_head.rst
+
+.. include:: ../bulk/motors_v32_arms.rst
+
+.. include:: ../bulk/motors_v32_hands.rst
+
+.. include:: ../bulk/motors_v32_legs.rst

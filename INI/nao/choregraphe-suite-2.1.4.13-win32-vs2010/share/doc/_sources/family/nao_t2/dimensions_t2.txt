@@ -1,0 +1,29 @@
+
+.. _t2_dimensions:
+
+T2 - Dimensions
+=============================
+
+.. seealso::
+     
+   :ref:`nao-t2` | :ref:`robot_dimensions` 
+
+
+--------------------
+
+.. image:: /medias/robots/nao_t2_dimensions.png
+   :width: 250 px
+   :height: 263 px
+
+
+Dimensions are specified in millimeters.
+
++---------------+---------------+---------------+
+| Height (mm)   | Depth (mm)    | Width (mm)    |
++===============+===============+===============+
+| 307           | 120           | 205           |
++---------------+---------------+---------------+
+
+
+
+

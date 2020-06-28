@@ -1,0 +1,37 @@
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+
+.. _nao-t14-led:
+
+T14 - LEDs
+===============
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+.. seealso:: :ref:`nao-t14` | :ref:`robot-led`
+
+--------------------
+
+.. image:: /medias/robots/naot14_leds.png
+   :width: 240 px
+   :height: 249 px
+
+===== ============================== ======  ===================================
+Part  Location                        Qty     Description
+===== ============================== ======  ===================================
+**A** Head tactile sensor             12      16 step blue LEDs
+
+**B** Ears                            2x10    16 step blue LEDs
+
+**C** Eyes                            2x8     Full colour RGB LEDs
+
+**D** Chest button                    1       Full colour RGB LED
+===== ============================== ======  ===================================
+
+
+.. include:: ../bulk/leds_tactile_head.rst
+
+.. include:: ../bulk/leds_eyes.rst
+
+.. include:: ../bulk/leds_ears.rst

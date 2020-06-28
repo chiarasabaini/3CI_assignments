@@ -1,0 +1,31 @@
+.. _h25_masses_v32:
+
+H25 - Masses - V3.2
+=======================
+
+.. seealso::
+    :ref:`all_robots` | :ref:`robot_masses`
+
+    :ref:`nao-h25` | :ref:`V5 <h25_masses>` | :ref:`V4 <h25_masses_v4>` | :ref:`V3.3 <h25_masses_v33>` | **V3.2**
+
+--------------------
+
+.. include:: ../bulk/masses_whole.rst
+
+
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 	4.83592
+
+
+.. include:: ../bulk/masses_head_torso_v32.rst
+
+.. include:: ../bulk/masses_arms_v32.rst
+
+.. include:: ../bulk/masses_hands_motorized_v32.rst
+
+.. include:: ../bulk/masses_legs_v32.rst
+

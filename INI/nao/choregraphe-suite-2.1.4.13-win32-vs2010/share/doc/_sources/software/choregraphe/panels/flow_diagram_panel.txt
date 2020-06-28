@@ -1,0 +1,434 @@
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. |onstart-outside-button| image:: /medias/desktop/choregraphe/chore_input_onstart_outside.png
+   :class: img-inline
+
+.. |onstart-inside-button| image:: /medias/desktop/choregraphe/chore_input_onstart_inside.png
+   :class: img-inline
+
+.. |onstopped-outside-button| image:: /medias/desktop/choregraphe/chore_output_onstopped_outside.png
+   :class: img-inline
+
+
+.. _chore_flow_diagram_panel:
+
+
+Flow diagram panel
+===================
+
+What is the Flow diagram panel
+-------------------------------
+
+The **Flow diagram panel** is the place where you can compose NAO's
+:ref:`Behaviors <choregraphe-reference-behavior>`.
+
+.. image:: /medias/desktop/choregraphe/chore-flow-diagram.png
+   :width: 539 px
+   :height: 259 px
+
+The table below describes the main parts of the **Flow diagram panel**:
+
+=====  =================   ================================================================================
+Part    Name                Allows you to ...
+=====  =================   ================================================================================
+**A**   **Box path**        Browse the different levels of the **Flow diagram**
+                            (when a box contains other boxes).
+
+                            For further details, see :ref:`choregraphe-browse-mulitlevel-diagram`.
+
+**B**  **Flow diagram**     Create or edit the :ref:`Flow diagram <choregraphe-reference-box-flow-diagram>`
+                            of the current :ref:`Behavior <choregraphe-reference-behavior>` or
+                            :ref:`box`.
+
+                            For further details, see :ref:`choregraphe-create_flowdiagram`.
+
+**C**  **Input border**     Add, edit or delete inputs of the current
+                            :ref:`Behavior <choregraphe-reference-behavior>` or
+                            :ref:`box`.
+
+                            For further details, see :ref:`flow-diagram-input-ouput`.
+
+**D**  **Output border**    Add, edit or delete outputs of the current
+                            :ref:`Behavior <choregraphe-reference-behavior>` or
+                            :ref:`box`.
+
+                            For further details, see :ref:`flow-diagram-input-ouput`.
+=====  =================   ================================================================================
+
+.. _choregraphe-reference-box-flow-diagram:
+
+What is a Flow diagram
+-----------------------
+
+A **Flow diagram** is a group of boxes linked with each other
+and with at least an input.
+
+**Flow diagram** can be seen at the first level of a :ref:`behavior`.
+It can also be embedded in a :ref:`box`, itself included in a **Flow diagram**.
+
+.. image:: /medias/desktop/choregraphe/chore_flow_diagram_detailed.png
+    :width: 525 px
+    :height: 196 px
+
+In the example above, from the left to the right:
+
+* the main **onStart** input of the Flow diagram **(1)** is linked to
+  the **onStart** input of **Localized Text** box **(2)**;
+* the **onStopped** output of **Localized Text** box **(3)** is linked to the
+  **onStart** input of **Say Text** box **(4)**;
+* the **onStopped** output of **Say Text** box **(5)** is linked to the main
+  **onStopped** output of the Flow diagram **(6)**.
+
+.. _choregraphe-create_flowdiagram:
+
+How to create a Flow diagram
++++++++++++++++++++++++++++++
+
+To create a **Flow diagram**:
+
+=====  ===========================================================   ==================================================
+Step       Action                                                     For further details, see ...
+=====  ===========================================================   ==================================================
+1.      Create a new **Behavior** or a new **Flow diagram box**.      :ref:`choregraphe-howto-create-a-behavior`
+
+                                                                      :ref:`choregraphe-howto-create-flow-diagram-box`
+
+2.      Add or create boxes.                                          :ref:`choregraphe-add_boxes`
+
+3.      Connect the boxes.                                            :ref:`choregraphe-link_boxes`
+=====  ===========================================================   ==================================================
+
+
+.. _choregraphe-add_boxes:
+
+How to add boxes to a Flow diagram
+++++++++++++++++++++++++++++++++++++
+
+To add a box to the current **Flow diagram**:
+
+* Drag and drop a ready-made box from the :ref:`chore_box_libary_panel`.
+
+Once you become familiar with **Choregraphe**, you will be also able to create your
+own new box.
+
+To create:
+
+* a new box grouping existing ones,
+  see :ref:`choregraphe-howto-convert-boxes-to-one-box`.
+* a new box from scratch, see :ref:`choregraphe-create-box`.
+
+.. _choregraphe-link_boxes:
+
+How to create links
++++++++++++++++++++++
+
+To create a link:
+
+* Drag the mouse between the two points you want to link.
+
+  For example, drag the mouse from the |onstopped-outside-button| **onStopped**
+  output of a box to the |onstart-outside-button| **onStart** input of another box.
+
+  This link carries a **simple event**, activating a box when the previous one has done
+  its execution.
+
+Once you become familiar with Choregraphe, you will be also able to create links
+carrying data.
+
+For further details, see :ref:`link-carrying-data`.
+
+The Flow diagram Editor
+-----------------------
+
+
+.. _flow-diagram-input-ouput:
+
+Managing Flow diagram inputs and outputs
+++++++++++++++++++++++++++++++++++++++++++
+
+Buttons appear on the **Input** and **Output** borders of the **Flow diagram**:
+
+.. image:: /medias/desktop/choregraphe/flow_diagram_add_buttons_114.png
+   :width: 393 px
+   :height: 169 px
+
+To display their names, hold down **Shift-Control**:
+
+.. image:: /medias/desktop/choregraphe/flow_diagram_add_buttons_infobulle_114.png
+   :width: 351 px
+   :height: 166 px
+
+
+To add an input or an output to the **Flow diagram**:
+
+* Click one of the plus (+) buttons, or
+
+* Right-click the **Input border** or the **Output border**, and choose the relevant command:
+
+  ================================   =====================================================================
+   Command                            Description
+  ================================   =====================================================================
+   Add input                          Add an input to the current **Flow diagram**.
+
+   Add event from ALMemory            Add an event from **ALMemory** to the current **Flow diagram**.
+
+                                      For further details, see the tutorial:
+                                      :ref:`choregraphe-tuto-right-bumper-almemory`.
+
+   Add output                         Add an output to the current **Flow diagram**.
+  ================================   =====================================================================
+
+To edit or delete an input or an output:
+
+* Right-click the input or the output and choose the relevant command:
+
+  ===========================   ===========================================================================
+   Command                       Description
+  ===========================   ===========================================================================
+   Edit input/output             Displays the :ref:`choregraphe-detailed-interface-ioparam-edition-widget`.
+
+   Delete input/output           Delete the selected input or output.
+  ===========================   ===========================================================================
+
+
+
+Managing boxes
+++++++++++++++++
+
+The table below summarizes the commands allowing you to manage boxes inside a **Flow diagram**.
+
+===================================================  =================================================================
+To ...                                                Action
+===================================================  =================================================================
+Select several boxes                                  Drag the mouse so that the square drawn by your mouse includes
+                                                      the boxes you want to select.
+
+Cut, Copy or Paste one or several box(es)             Right-click it and choose **Cut**, **Copy** or **Paste**.
+
+Select all the boxes of a diagram                     Right-click anywhere on the diagram and choose **Select All**.
+
+Zoom in or out the diagram                            Right-click anywhere on the **Flow diagram**, choose
+                                                      **Zoom** and then the zoom level you want.
+
+                                                      By default the auto-zoom is set so that you can see as many
+                                                      boxes as possible within the **Flow diagram panel**.
+
+Create a new box from scratch                         Right-click the box and choose **Add a new box**.
+
+                                                      For further details, see :ref:`choregraphe-create-box`.
+
+Store a box in a box library                          Right-click the box and choose **Add to library**.
+
+Group several boxes into a single one                 Right-click the box and choose **Convert to box**.
+
+                                                      For further details, see
+                                                      :ref:`choregraphe-howto-convert-boxes-to-one-box`.
+
+Delete the selected box(es)                           Right-click one of them or the background and choose
+                                                      **Delete selection**.
+
+Edit a box and its properties                         Right-click the box and choose **Edit box**.
+
+                                                      The :ref:`choregraphe-detailed-interface-box-edition`
+                                                      appears.
+
+Edit the script of the box                            Right-click the box and choose **Edit box script**.
+
+                                                      The :ref:`chore_script_editor_panel` appears.
+
+Edit the :ref:`choregraphe-reference-box-resource`    Right-click the box and choose **Edit resources**.
+
+                                                      This action opens the
+                                                      :ref:`choregraphe-detailed-interface-box-edition-resources`.
+
+Set the value of the parameters of a box              Click the |parameter-button| **parameter** button of the
+                                                      box or
+
+                                                      Right-click the box and choose **Set Parameters**.
+
+                                                      The :ref:`choregraphe-detailed-interface-setting-box-parameter`
+                                                      appears.
+===================================================  =================================================================
+
+
+Shortcuts to manage box inputs and outputs
++++++++++++++++++++++++++++++++++++++++++++
+
+The table below lists the shortcuts allowing to manage quickly inputs and outputs.
+
+=================================================  ====================================================================
+To ...                                              Action
+=================================================  ====================================================================
+Add a new input (or output) to a box                Right-click one of the existing inputs (or outputs) and select
+                                                    **Add input** (or **Add output**).
+
+Edit an existing input (or output) of a box         Right-click it and choose **Edit**.
+
+Delete an existing input (or output) of a box       Right-click it and choose **Delete**.
+
+Simulate a signal on an input (or an output)        Double-click the input (or the output).
+
+                                                    This action is only available while the behavior is **running**.
+
+                                                    If the event carries a **data**, then you will be asked to enter
+                                                    the data value you want to send through the input (or the output).
+=================================================  ====================================================================
+
+These commands - except simulate a signal - are also available from the
+:ref:`choregraphe-detailed-interface-box-edition`.
+
+
+.. _link-carrying-data:
+
+How to create links carrying data
+++++++++++++++++++++++++++++++++++
+
+To create a link carrying data:
+
+=====  =================================================================================
+Step       Action
+=====  =================================================================================
+1.      Drag the mouse from the output of the source box to the |parameter-button|
+        **Parameter** button of the destination box.
+
+        The window **Connect link to a parameter** appears.
+
+2.      Choose the parameter which you want to change the value of.
+        For instance, you can have a link that changes the speed of the text
+        synthesis on the box **Say**:
+
+        .. image:: /medias/desktop/choregraphe/chore_parameters_link.png
+=====  =================================================================================
+
+
+Multilevel diagrams
+--------------------
+
+
+.. _choregraphe-reference-box-parent:
+
+What are parent box and child box (or sub-box)
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The **parent box** of a box is the box which
+:ref:`Flow diagram <choregraphe-reference-box-flow-diagram>` directly contains this other box.
+
+A **child box** (or a sub-box) of an other box is then a box which is contained
+in the :ref:`Flow diagram <choregraphe-reference-box-flow-diagram>` of this other box.
+
+.. image:: /medias/desktop/choregraphe/chore_ref_parent_child_box.png
+   :width: 476 px
+   :height: 386 px
+
+You can also say that a box is **a parent box** of another if it is its indirect parent
+(for example if it is the parent of its parent box or the parent of the parent of its parent box).
+
+
+
+.. _choregraphe-howto-convert-boxes-to-one-box:
+
+How to group several boxes into a single one
++++++++++++++++++++++++++++++++++++++++++++++
+
+In order to have clear and organized diagram it is possible to gather several
+boxes into one, to do so:
+
+=====  ============================================================================
+Step    Action
+=====  ============================================================================
+1.      Select all the boxes you want to gather, provided that they are linked
+        together and also linked to the main **Flow diagram**.
+
+        .. image:: /medias/desktop/choregraphe/gather_boxes.png
+           :width: 454 px
+           :height: 339 px
+
+        .. note::
+           If the selected boxes are not linked to the main **Flow diagram**
+           ( i.e. to another box which is not selected nor to the main inputs
+           or outputs), the resulting box will have no **input** nor **output**.
+
+2.      Right click the diagram and choose **Convert to box** in the contextual
+        menu.
+
+        The following window appears:
+
+        .. image:: /medias/desktop/choregraphe/chore_group_boxes.png
+           :width: 284 px
+           :height: 375 px
+
+3.      Complete the **Name**, **Description** and **Image** fields,
+        then click **OK** button.
+
+        The new box replaces the selected boxes.
+
+        .. image:: /medias/desktop/choregraphe/gather_boxes_result.png
+           :width: 454 px
+           :height: 340 px
+
+        It is a **Flow diagram** box.
+
+        If you double click on the created box you will see that all the selected
+        boxes are in it.
+=====  ============================================================================
+
+
+
+
+.. _choregraphe-browse-mulitlevel-diagram:
+
+How to navigate in a multilevel diagram
+++++++++++++++++++++++++++++++++++++++++
+
+To access the inner **Flow diagram** of a box (if any):
+
+* Double-click the box.
+
+The inner **Flow diagram** of the box is displayed,
+and the name of the box is added on the **Box path**:
+
+.. image:: /medias/desktop/choregraphe/chore_flow_diagram_upper_line.png
+   :width: 502 px
+   :height: 37 px
+
+To come back to the **parent diagram** (if any):
+
+* Click the label of the parent box on the **Box path**, or
+
+* Double-click the background of the **Flow diagram**.
+
+.. note::
+   A **script box** has no **Flow diagram**.
+   So when you double-click on it, it is the **Script Editor** with the box script which is displayed.
+   Fore further details about this panel, see :ref:`chore_script_editor_panel`.
+
+   A **Timeline box** has also a different structure,
+   so when you double-click on it, the :ref:`Timeline panel <choregraphe-interface-timeline-panel>`
+   is displayed. For further details, see :ref:`timeline-flow-diagram`.
+
+
+.. _timeline-flow-diagram:
+
+Timeline box Flow diagrams
++++++++++++++++++++++++++++
+
+If the :ref:`Timeline of the box <choregraphe-reference-box-timeline>` has no
+:ref:`behavior layer <choregraphe-reference-box-behavior-layer>`, it has no
+**Flow diagram** and then the Flow Diagram panel is empty as shown below.
+
+.. image:: /medias/desktop/choregraphe/chore_flow_diagram_empty.png
+   :width: 412 px
+   :height: 347 px
+
+If it has at least one :ref:`choregraphe-reference-box-behavior-layer`
+and one :ref:`choregraphe-reference-box-behavior-keyframe`,
+the diagram of the selected **Behavior keyframe** is displayed.
+
+.. image:: /medias/desktop/choregraphe/chore_flow_diagram_timeline.png
+   :width: 410 px
+   :height: 343 px
+
+Each **Behavior keyframe** has its own diagram.
+Each **Behavior keyframe diagram** has an **onLoad input**
+stimulated as soon as the diagram is loaded.

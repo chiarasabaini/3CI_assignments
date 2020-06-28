@@ -1,0 +1,144 @@
+.. _allandmarkdetection-tuto:
+
+ALLandMarkDetection Tutorial
+============================
+
+:ref:`naoqi-vision` - :ref:`Overview <allandmarkdetection>` |
+:ref:`API <allandmarkdetection-api>` | Tutorial
+
+----------------
+
+Introduction
+------------
+
+This tutorial explains how to run the ALLandMarkDetection module using Python.
+We use the first approach described above (i.e., we regularly check the ALMemory's
+result variable). Information about the detected landmarks is printed in your
+output window. You can find the tutorial source in
+examples/python/vision_landMarkDetection.py in your SDK directory.
+
+Getting a proxy to ALLandMarkDetection
+--------------------------------------
+
+After some initialization steps, we first instantiate a proxy to the
+ALLandMarkDetection module, and we subscribe to it.
+
+.. code-block:: python
+
+  # This test demonstrates how to use the ALLandMarkDetection module.
+  # - We first instantiate a proxy to the ALLandMarkDetection module
+  #     Note that this module should be loaded on the robot's NAOqi.
+  #     The module output its results in ALMemory in a variable
+  #     called "LandmarkDetected"
+  # - We then read this AlMemory value and check whether we get
+  #   interesting things.
+  import time
+  from naoqi import ALProxy
+
+  # Replace this with your robot's IP address
+  IP = "10.0.252.91"
+  PORT = 9559
+
+  # Create a proxy to ALLandMarkDetection
+  try:
+    landMarkProxy = ALProxy("ALLandMarkDetection", IP, PORT)
+  except Exception, e:
+    print "Error when creating landmark detection proxy:"
+    print str(e)
+    exit(1)
+
+  # Subscribe to the ALLandMarkDetection proxy
+  # This means that the module will write in ALMemory with
+  # the given period below
+  period = 500
+  landMarkProxy.subscribe("Test_LandMark", period, 0.0 )
+
+Reading the result in the ALMemory variable
+-------------------------------------------
+
+Now we need to get a proxy to ALMemory and periodically check the
+ALLandMarkDetection output variable.
+
+.. code-block:: python
+
+  # ALMemory variable where the ALLandMarkdetection module
+  # outputs its results
+  memValue = "LandmarkDetected"
+
+  # Create a proxy to ALMemory
+  try:
+    memoryProxy = ALProxy("ALMemory", IP, PORT)
+  except Exception, e:
+    print "Error when creating memory proxy:"
+    print str(e)
+    exit(1)
+
+  print "Creating landmark detection proxy"
+
+  # A simple loop that reads the memValue and checks
+  # whether landmarks are detected.
+  for i in range(0, 20):
+    time.sleep(0.5)
+    val = memoryProxy.getData(memValue, 0)
+    print ""
+    print "\*****"
+    print ""
+  # Check whether we got a valid output: a list with two fields.
+  if(val and isinstance(val, list) and len(val) >= 2):
+    # We detected landmarks !
+    # For each mark, we can read its shape info and ID.
+    # First Field = TimeStamp.
+    timeStamp = val[0]
+    # Second Field = array of Mark_Info's.
+    markInfoArray = val[1]
+
+    try:
+      # Browse the markInfoArray to get info on each detected mark.
+      for markInfo in markInfoArray:
+        # First Field = Shape info.
+        markShapeInfo = markInfo[0]
+        # Second Field = Extra info (i.e., mark ID).
+        markExtraInfo = markInfo[1]
+        # Print Mark information.
+        print "mark  ID: %d" % (markExtraInfo[0])
+        print "  alpha %.3f - beta %.3f" % (markShapeInfo[1], markShapeInfo[2])
+        print "  width %.3f - height %.3f" % (markShapeInfo[3], markShapeInfo[4])
+        except Exception, e:
+        print "Landmarks detected, but it seems getData is invalid. ALValue ="
+        print val
+        print "Error msg %s" % (str(e))
+  else:
+    print "Error with getData. ALValue = %s" % (str(val))
+
+  # Unsubscribe from the module.
+  landMarkProxy.unsubscribe("Test_LandMark")
+  print "Test terminated successfully."
+
+Results
+-------
+
+Here is what you get when you execute this script. We get different results as
+we occult or present new  landmarks to the robot.
+
+.. code-block:: python
+
+  \*****
+  mark  ID: 130
+  alpha 0.081 - beta -0.001
+  width 0.049 - height 0.049
+  \*****
+  mark  ID: 150
+  alpha 0.062 - beta -0.030
+  width 0.032 - height 0.032
+  mark  ID: 130
+  alpha 0.076 - beta 0.014
+  width 0.049 - height 0.049
+  \*****
+  mark  ID: 134
+  alpha 0.059 - beta -0.013
+  width 0.032 - height 0.032
+  mark  ID: 130
+  alpha 0.074 - beta 0.031
+  width 0.048 - height 0.048
+
+

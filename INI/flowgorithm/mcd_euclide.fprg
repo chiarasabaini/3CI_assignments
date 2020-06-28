@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-01 12:17:13 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMDE7IjEyOjA3OjMzICI7MzI4Mw=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMDE7IjEyOjE3OjEzICI7MTszMzkw"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a" type="Integer" array="False" size=""/>
+            <declare name="b" type="Integer" array="False" size=""/>
+            <declare name="r" type="Integer" array="False" size=""/>
+            <assign variable="r" expression="0"/>
+            <output expression="&quot;inserisci primo numero:&quot;" newline="True"/>
+            <input variable="a"/>
+            <output expression="&quot;inserisci secondo numero:&quot;" newline="True"/>
+            <input variable="b"/>
+            <if expression="b=0">
+                <then>
+                    <output expression="&quot;il MCD di &quot;&amp;a&amp;&quot; e &quot;&amp;b&amp;&quot; &#232; &quot;&amp;a" newline="True"/>
+                </then>
+                <else>
+                    <assign variable="r" expression="a%b"/>
+                    <while expression="r!=0">
+                        <assign variable="a" expression="b"/>
+                        <assign variable="b" expression="r"/>
+                        <assign variable="r" expression="a%b"/>
+                    </while>
+                    <output expression="&quot;il MCD di &quot;&amp;a&amp;&quot; e &quot;&amp;b&amp;&quot; &#232; &quot;&amp;b" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

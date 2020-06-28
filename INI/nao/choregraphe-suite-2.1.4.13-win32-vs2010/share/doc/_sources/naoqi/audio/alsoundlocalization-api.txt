@@ -1,0 +1,97 @@
+.. _alsoundlocalization-api:
+
+ALSoundLocalization API
+=======================
+
+:ref:`naoqi-audio` - :ref:`Overview <alsoundlocalization>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alsoundlocalizationproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALSoundLocalizationProxy
+
+* :cpp:func:`ALSoundLocalizationProxy::setParameter`
+* :cpp:func:`ALSoundLocalizationProxy::subscribe`
+* :cpp:func:`ALSoundLocalizationProxy::unsubscribe`
+
+
+Event list
+----------
+
+* :naoqi:event:`ALSoundLocalization/SoundLocated`
+
+Methods
+-------
+
+.. cpp:function:: void ALSoundLocalizationProxy::setParameter(const std::string& parameter, const AL::ALValue& value)
+
+  Sets parameters.
+
+  :param parameter: Name of the parameter
+  :param value: Value of the parameter
+
+  Available parameters:
+
+  - "EnergyComputation" to True or False (default: False).
+    When set to True, the peak energy of the located sound is estimated.
+    The *ALMemory* key *"ALSoundLocalization/SoundLocated"* where the result of
+    the computation is updated is modified consequently:
+
+  .. code-block:: guess
+
+     [ [time(sec), time(usec)],
+
+       [azimuth(rad), elevation(rad), confidence, energy],
+
+       [Head Position[6D]] in FRAME_TORSO
+       [Head Position[6D]] in FRAME_ROBOT
+     ]
+
+  - "Sensibility": DEPRECATED, use "Sensitivity" instead.
+
+  - "Sensitivity" between 0 and 1 to adjust the minimal sound level to trigger
+    the localization. This parameter is the same as in the *ALSoundDetection*
+    module.
+
+
+
+.. cpp:function:: void ALSoundLocalizationProxy::subscribe(const std::string& name)
+
+  Subscribes to *ALSoundLocalization*.
+  This causes the module to start raising the *"ALSoundLocalization/SoundLocated"*
+  *ALMemory* event which you can subscribe to by using :cpp:func:`ALMemoryProxy::subscribeToMicroEvent`.
+
+  :param name: Name used to identify the subscriber
+
+
+
+.. cpp:function:: void ALSoundLocalizationProxy::unsubscribe(const std::string& name)
+
+  Unsubscribes to *ALSoundLocalization*.
+  This causes the module to stop raising the *"ALSoundLocalization/SoundLocated"*
+  *ALMemory* event.
+
+  :param name: Name with which :cpp:func:`ALSoundLocalizationProxy::subscribe` was called.
+
+
+Events
+------
+
+.. naoqi:event:: ALSoundLocalization/SoundLocated(AL::ALValue value)
+
+  Raised when a sound source has been localized.
+
+  :param value: Array containing information about the localized sounds.
+                Please refer to :ref:`alsoundlocalization` for details.

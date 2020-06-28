@@ -1,0 +1,34 @@
+
+.. _t14-contact-sensors:
+
+T14 - Contact and tactile sensors
+==========================================
+
+
+.. seealso:: :ref:`nao-t14` | :ref:`robot-contact-sensors`
+
+--------------------
+
+
+.. image:: /medias/robots/nao_t14_tactile.png
+   :width: 244 px
+   :height: 239 px
+
+
+===== ============================== 
+Part  Location                       
+===== ============================== 
+**A** Head tactile sensor            
+
+**B** Chest button                          
+
+**C** Tactile hands                         
+===== ============================== 
+
+
+.. include:: ../bulk/contact-sensors_head.rst
+
+.. include:: ../bulk/contact-sensors_chest-button.rst
+
+.. include:: ../bulk/contact-sensors_hands.rst
+

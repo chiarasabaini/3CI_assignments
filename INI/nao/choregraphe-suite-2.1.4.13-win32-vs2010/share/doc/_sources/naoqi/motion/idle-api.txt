@@ -1,0 +1,85 @@
+.. _idle-api:
+
+Idle API
+++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <idle>` | API
+
+------------
+
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/idle_toc.rst
+
+.. cpp:function:: void ALMotionProxy::setIdlePostureEnabled( const std::string& pChainName, const bool& pEnable )
+
+  Starts or stops idle posture control on a chain.
+
+  :param pChainName: The chain name {"Body", "Legs", "Arms", "LArm", "RArm" or "Head"}.
+
+  :param pEnable: Activate or deactivate idle posture control on the desired Chain.
+
+
+.. cpp:function:: bool ALMotionProxy::getIdlePostureEnabled( const std::string& pChainName )
+
+  Gets the status of idle posture control on a chain.
+
+  :param pChainName: The chain name {"Body", "Legs", "Arms", "LArm", "RArm" or "Head"}.
+
+  :return: true if idle posture control is active on the chain, false otherwise.
+
+
+.. cpp:function:: void ALMotionProxy::setBreathEnabled( const std::string& pChainName, const bool& pEnable )
+
+  Starts or stops breathing animation on a chain.
+
+  :param pChainName: The chain name {"Body", "Legs", "Arms", "LArm", "RArm" or "Head"}.
+
+  :param pEnable: Activate or deactivate breathing animation on the desired Chain.
+
+
+.. cpp:function:: bool ALMotionProxy::getBreathEnabled( const std::string& pChainName )
+
+  Gets the status of breathing animation on a chain.
+
+  :param pChainName: The chain name {"Body", "Legs", "Arms", "LArm", "RArm" or "Head"}.
+
+  :return: true if breathing is started on the chain, false otherwise.
+
+
+.. cpp:function:: void ALMotionProxy::setBreathConfig( const AL::ALValue& pConfig )
+
+  Configures the breathing animation.
+
+  :param pConfig: An ALValue of the form ``[["Bpm", pBpm], ["Amplitude", pAmplitude]]``.
+   pBpm is a float between 5 and 30 setting the breathing frequency in beats per minute.
+   pAmplitude is a float between 0 and 1 setting the amplitude of the breathing animation.
+   At high frequencies, only low amplitudes are allowed. Input amplitude may be clipped.
+
+  :download:`almotion_setBreathConfig.cpp </samples/cpp/almotion/almotion_setBreathConfig.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_setBreathConfig.cpp
+     :language: cpp
+
+
+  :download:`almotion_setBreathConfig.py </samples/python/almotion/almotion_setBreathConfig.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setBreathConfig.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getBreathConfig( )
+
+  This function gets the current breathing configuration.
+
+  :return: An ALValue of the form ``[["Bpm", bpm], ["Amplitude", amplitude]]``.
+   bpm is the breathing frequency in beats per minute.
+   amplitude is the normalized amplitude of the breathing animation, between 0 and 1.

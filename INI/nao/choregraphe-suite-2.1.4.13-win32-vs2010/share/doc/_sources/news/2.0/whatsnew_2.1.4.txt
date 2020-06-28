@@ -1,0 +1,59 @@
+.. include:: ../../bulk/common.rst
+
+.. _whats-new_2.1.4:
+
+Release Notes - 2.1.4
+=====================
+
+NAO
+---
+
+Supported Languages - better coverage
++++++++++++++++++++++++++++++++++++++
+
+The level of support and integration of the following languages has been improved,
+they are now available in Dialog boxes:
+
+* Arabic
+* Czech
+* Danish
+* Dutch
+* Finnish
+* Greek
+* Norwegian
+* Polish
+* Brazilian
+* Portuguese
+* Russian
+* Swedish
+* Turkish
+
+For further details, see: :ref:`language_codes`.
+
+Relax stiffness when sit
+++++++++++++++++++++++++
+
+When using the **Stay relaxed** solitary activity to stay seated,
+NAO does not overheat anymore.
+
+NAOqi
+-----
+
+ALVisionRecognition - improved
+++++++++++++++++++++++++++++++
+
+Several issues, impacting performances have been solved.
+
+SDK
+---
+
+Java SDK available
+++++++++++++++++++
+
+The **Java SDK** provides Java bindings to:
+
+* call remote services,
+* create new services, and
+* react to events.
+
+For further details, see: :ref:`dev-index`.

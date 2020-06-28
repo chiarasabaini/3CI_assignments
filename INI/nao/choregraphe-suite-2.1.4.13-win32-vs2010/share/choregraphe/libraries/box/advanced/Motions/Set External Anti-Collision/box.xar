@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="1" localization="8" tooltip="Enable or disable the collision protection on some specific part of the robot&apos;s body with external environment.&#x0A;&#x0A;For example if the protection is enabled on his left arm he will move his arm all the&#x0A;same than when it is not but avoiding his other body parts." x="216" y="217">
+        <bitmap>media/images/box/sensors/anti_collision.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.motion = ALProxy( "ALMotion" )
+
+    def onUnload(self):
+        pass
+
+    def onInput_onSet(self):
+        # is it enable or disable asked?
+        enable = (self.getParameter("Action") == "Enable")
+        # enable/disable collision protection
+        self.motion.setExternalCollisionProtectionEnabled( self.getParameter("Body part"), enable )
+        self.output() # activate output of the box]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The anti-collision feature is enabled or disabled when this input is stimulated." id="2" />
+        <Output name="output" type="1" type_size="1" nature="2" inner="0" tooltip="" id="3" />
+        <Parameter name="Body part" inherits_from_parent="0" content_type="3" value="Arms" default_value="All" custom_choice="0" tooltip="Body part which avoids the collision." id="4">
+            <Choice value="All" />
+            <Choice value="Move" />
+            <Choice value="Arms" />
+            <Choice value="LArm" />
+            <Choice value="RArm" />
+        </Parameter>
+        <Parameter name="Action" inherits_from_parent="0" content_type="3" value="Enable" default_value="Enable" custom_choice="0" tooltip="Enable or disable the collision protection." id="5">
+            <Choice value="Disable" />
+            <Choice value="Enable" />
+        </Parameter>
+    </Box>
+</ChoregrapheBox>

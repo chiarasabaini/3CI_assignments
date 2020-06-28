@@ -1,0 +1,306 @@
+.. include:: ../../bulk/common.rst
+
+.. _vm-setup:
+
+Setting up the NAOqi OS virtual machine
+========================================
+
+This step-by-step tutorial has been done using **VirtualBox**.
+
+Getting the NAOqi OS virtual machine
+---------------------------------------
+
+Retrieve the following file: ``opennao-vm-<VERSION>.ova``
+
+You can download the latest release from |community|.
+For further details, see: :ref:`retrieving_software`.
+
+Importing the NAOqi OS virtual machine into VirtualBox
+---------------------------------------------------------
+
+Prerequisite
+++++++++++++
+
+Get **VirtualBox** on your development machine:
+
++-------------------+----------------------------------------------------------+
+| **Linux**         |    It should be available through the package manager    |
+|                   |    of the installed distribution.                        |
++-------------------+----------------------------------------------------------+
+| **Windows**       |                                                          |
+|                   |    1.  Download it from the Oracle website:              |
+| **Mac OS**        |        https://www.virtualbox.org/wiki/Downloads         |
+|                   |                                                          |
+|                   |    2.  Install **VirtualBox**.                           |
++-------------------+----------------------------------------------------------+
+
+Setting up the NAOqi OS virtual machine in VirtualBox
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Start **VirtualBox**.
+
+        .. image:: /medias/opennao/vm/01.png
+            :width: 477 px
+            :height: 308 px
+
+        *If you launch a newly installed VirtualBox, then there is no existing
+        virtual machine in the left column.*
+
+2.      Choose **File** > **Import Appliance**.
+
+        The following window is displayed:
+
+        .. image:: /medias/opennao/vm/03.png
+            :width: 454 px
+            :height: 357 px
+
+3.      Browse and open the ``*.ova`` file:
+
+        .. image:: /medias/opennao/vm/04.png
+            :width: 429 px
+            :height: 324 px
+
+        The details of the imported virtual machine will be displayed.
+
+        .. image:: /medias/opennao/vm/05.png
+            :width: 455 px
+            :height: 356 px
+
+4.      Click the **Import** button to start the importation.
+
+        This may take few minutes, be patient:
+
+        .. image:: /medias/opennao/vm/06.png
+            :width: 449 px
+            :height: 96 px
+
+        Congratulations! The **NAOqi OS** virtual machine was successfully
+        imported.
+
+        .. image:: /medias/opennao/vm/08.png
+           :width: 477 px
+           :height: 305 px
+=====  =========================================================================
+
+.. _vm-using:
+
+Using the NAOqi OS virtual machine
+-------------------------------------
+
+Launching the NAOqi OS virtual machine
++++++++++++++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      In **VirtualBox**, select the **NAOqi OS** virtual machine,
+        then click the **Start** button.
+
+        It is launched in its own window:
+
+        .. image:: /medias/opennao/vm/12.png
+           :width: 569 px
+           :height: 356 px
+
+2.      Here, you are in a console.
+
+        Refer to  :ref:`opennao-user-account` for logins and passwords.
+=====  =========================================================================
+
+.. _vm-accessing:
+
+Accessing the NAOqi OS virtual machine through ssh
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+By default, the host port ``2222`` is forwarded on the ssh port (``22``) of the
+**NAOqi OS** virtual machine.
+
+Thus, after launching the **NAOqi OS** virtual machine, one can easily log in over
+ssh:
+
+* From a Linux terminal:
+
+  .. image:: /medias/opennao/vm/13.png
+     :width: 579 px
+     :height: 139 px
+
+* From **PuTTy**:
+
+  .. image:: /medias/opennao/vm/14.png
+     :width: 478 px
+     :height: 476 px
+
+Refer to :ref:`opennao-user-account` section for
+logins and passwords.
+
+.. _vm-exchanging-file:
+
+Exchanging data between the host and the **NAOqi OS** virtual machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+..  Here we are...
+    Poor windows users that only know GUI, or are resistant to the powerfulness
+    (I know, that not English, but ...) of the command line, I will only add
+    documentation for CLI tools.
+    BTW, patch welcome!
+
+.. note::
+
+    This problem is only addressed using command line tools.
+
+.. warning::
+
+    All the following commands are run on the host system.
+
+Using a Linux or Mac OS host
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On UNIX hosts, use ``scp``.
+
+Sending data from the host to the **NAOqi OS** virtual machine:
+
+.. code-block:: console
+
+    scp -P 2222 <source path on the host> nao@localhost:<destination path inside the virtual machine>
+
+Retrieving data from the **NAOqi OS** virtual machine on the host:
+
+.. code-block:: console
+
+    scp -P 2222 nao@localhost:<source path inside the virtual machine> <destination path on the host>
+
+Using a Windows host
+^^^^^^^^^^^^^^^^^^^^
+
+On Windows hosts, use ``pscp``, a command line tool, provided within **Putty**.
+
+**Prerequisite**
+~~~~~~~~~~~~~~~~~~
+
+Locate the *Putty* installation directory, assuming it is installed in
+``C:\Program Files\Putty``
+
+Start a command window and go to the *Putty* installation directory:
+
+.. code-block:: console
+
+    cd "C:\Program Files\Putty"
+
+**Sending data from the host to the NAOqi OS virtual machine**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: console
+
+    pscp -P 2222 source <source path on the host> nao@localhost:<destination path inside the virtual machine>
+
+**Retrieving data from the NAOqi OS virtual machine on the host**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: console
+
+    pscp -P 2222 nao@localhost:<source path inside the virtual machine> <destination path on the hos
+
+
+Tweaking the NAOqi OS virtual machine configuration
+----------------------------------------------------
+
+.. warning::
+
+    The **NAOqi OS** virtual machine system does **not** currently **include CDrom**
+    support.
+
+    Thus, installing *guest additions* is not possible.
+
+
+.. _vm-changing-network-config:
+
+Changing the network configuration
+++++++++++++++++++++++++++++++++++
+
+NAT configuration
+^^^^^^^^^^^^^^^^^
+
+By default, the **NAOqi OS** virtual machine network configuration uses
+`NAT <http://en.wikipedia.org/wiki/Network_address_translation>`_.
+
+Using this the **NAOqi OS** virtual machine is reachable, without any knowledge
+about its network settings, just logging on ``localhost`` (see
+:ref:`vm-accessing`).
+
+**Port forwarding**
+~~~~~~~~~~~~~~~~~~~~
+
+The port forwarding settings are available under the menu
+**Machine** > **Settings**, then select the **Network** section (or just click
+**Network** on the right column after selecting the right virtual machine).
+
+Expand the advanced features by clicking on ``Advanced``:
+
+.. image:: /medias/opennao/vm/09.png
+     :width: 538 px
+     :height: 473 px
+
+Open the port forwarding table:
+
+.. image:: /medias/opennao/vm/10.png
+     :width: 486 px
+     :height: 249 px
+
+From here you can set any redirection you want.
+
+**Setting sub-network**
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+It may be necessary to change the default sub-network on which the OpenNAO
+virtual machine is connected.
+
+To make this change, there is no other way but command line:
+
+.. code-block:: console
+
+    VBoxManage modifyvm <virtual machine name> --natnet1 "<network>/<netmask length>"
+
+.. note::
+
+    This command line must be run when the **NAOqi OS** virtual machine is not running.
+
+Example:
+
+.. code-block:: console
+
+    VBoxManage modifyvm opennao-vm --natnet1 "192.168.10.0/24"
+
+Bridge configuration
+^^^^^^^^^^^^^^^^^^^^
+
+If you prefer the **NAOqi OS** virtual machine has its own IP address on the same
+sub-network as the host is, then you migth be interested by using the
+*bridge network configuration*.
+
+To do so, just select *Bridged Adapter* in the *Network* configuration window:
+
+.. image:: /medias/opennao/vm/15.png
+     :width: 538 px
+     :height: 473 px
+
+Then, the easiest way to know the IP address of the **NAOqi OS** virtual machine is:
+
+#. Start the **NAOqi OS** virtual machine;
+
+#. Logging on the **NAOqi OS** virtual machine through the console;
+
+#. Run the following command:
+
+   .. code-block:: console
+
+       ifconfig eth0
+
+   In the following example, the IP address of the **NAOqi OS** virtual machine is:
+   ``10.0.253.196``.
+
+   .. image:: /medias/opennao/vm/16.png
+       :width: 569 px
+       :height: 356 px

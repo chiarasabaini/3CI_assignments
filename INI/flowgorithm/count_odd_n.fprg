@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-10 11:48:44 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMTA7IjExOjQ2OjE5ICI7MzI4OQ=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMTA7IjExOjQ4OjQ0ICI7MTszMzk3"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;fino a che numero vuoi visualizare i numeri dispari?&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="i" end="n" direction="inc" step="1">
+                <if expression="i%2=1">
+                    <then>
+                        <output expression="i" newline="True"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

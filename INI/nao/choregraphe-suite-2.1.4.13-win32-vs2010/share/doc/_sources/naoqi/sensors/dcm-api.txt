@@ -1,0 +1,735 @@
+.. _dcm-api:
+
+DCM API
+=======
+
+:ref:`Overview <dcm>` | API | | :ref:`Advanced <dcm_advanced>`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/dcmproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: DCMProxy
+
+* :cpp:func:`DCMProxy::createAlias`
+* :cpp:func:`DCMProxy::getPrefix`
+* :cpp:func:`DCMProxy::getTime`
+* :cpp:func:`DCMProxy::set`
+* :cpp:func:`DCMProxy::setAlias`
+
+
+Methods
+-------
+
+.. cpp:function:: AL::ALValue DCMProxy::createAlias(const AL::ALValue& alias)
+
+  Creates an Alias or updates its content.
+
+  For further details, see: :ref:`alias`.
+
+  :param alias: ALValue as following:
+
+   alias[0] Alias name (to create or to update).
+
+   alias[1][0] Name of the 1st Actuator.
+
+   alias[1][1] Name of the 2nd Actuator
+
+   alias[1][2]...
+
+   alias[1][x]...
+
+  :return: a validated copy of the input parameter.
+
+    You can use this return to know if one or more Actuator name(s) are wrong.
+
+    Validation process: if an Actuator name is not found, its name is replaced
+    by a an empty string "".
+
+
+  Example 1
+
+  Define a new Alias name "ChestLeds" containing 3 Actuators names:
+  red, green and blue LEDs.
+
+  Python
+
+  .. code-block:: python
+
+     # -*- encoding: UTF-8 -*-
+
+     import naoqi
+     from naoqi import ALProxy
+
+     dcm = ALProxy("DCM","127.0.0.1",9559)
+     dcm.createAlias([
+     "ChestLeds",
+     [
+     "ChestBoard/Led/Red/Actuator/Value",
+     "ChestBoard/Led/Green/Actuator/Value",
+     "ChestBoard/Led/Blue/Actuator/Value"
+     ]
+     ])
+
+  C++
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     ALValue commands;
+     commands.arraySetSize(2);
+     commands[0] = string("ChestLeds");
+     commands[1].arraySetSize(3);
+     commands[1][0] = string("ChestBoard/Led/Red/Actuator/Value");
+     commands[1][1] = string("ChestBoard/Led/Green/Actuator/Value");
+     commands[1][2] = string("ChestBoard/Led/Blue/Actuator/Value");
+     ALValue result = dcm->createAlias(commands);
+     cout << result.toString() << endl;
+     }
+     AL_CATCH_ERR(return false;);
+
+  Example 2
+
+  Same "ChestLeds" Alias defined then used with :cpp:func:`DCMProxy::set`:
+  all LEDs are smoothly set on and set off, 2 times.
+
+  Python
+
+  .. code-block:: guess
+
+    # -*- encoding: UTF-8 -*-
+
+    import naoqi
+    from naoqi import ALProxy
+
+    dcm = ALProxy("DCM","127.0.0.1",9559)
+    dcm.createAlias([
+    "ChestLeds",
+    [
+    "ChestBoard/Led/Red/Actuator/Value",
+    "ChestBoard/Led/Green/Actuator/Value",
+    "ChestBoard/Led/Blue/Actuator/Value"
+    ]
+    ])
+
+    dcm.set([
+    "ChestLeds",
+    "ClearAll",
+    [
+    \[1.0, dcm.getTime(1000)],
+    \[0.0, dcm.getTime(2000)],
+    \[1.0, dcm.getTime(3000)],
+    \[0.0, dcm.getTime(4000)]
+    ]
+    ])
+
+  C++
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     ALValue commandsAlias;
+     ALValue commands;
+     commandsAlias.arraySetSize(2);
+     commandsAlias[0] = string("ChestLeds");
+     commandsAlias[1].arraySetSize(3);
+     commandsAlias[1][0] = string("ChestBoard/Led/Red/Actuator/Value");
+     commandsAlias[1][1] = string("ChestBoard/Led/Green/Actuator/Value");
+     commandsAlias[1][2] = string("ChestBoard/Led/Blue/Actuator/Value");
+     dcm->createAlias(commandsAlias);
+     commands.arraySetSize(3);
+     commands[0] = string("ChestLeds");
+     commands[1] = string("ClearAll");
+     commands[2].arraySetSize(4);
+     commands[2][0].arraySetSize(2);
+     commands[2][0][0] = 1.0;
+     commands[2][0][1] = dcm->getTime(1000);
+     commands[2][1].arraySetSize(2);
+     commands[2][1][0] = 0.0;
+     commands[2][1][1] = dcm->getTime(2000);
+     commands[2][2].arraySetSize(2);
+     commands[2][2][0] = 1.0;
+     commands[2][2][1] = dcm->getTime(3000);
+     commands[2][3].arraySetSize(2);
+     commands[2][3][0] = 0.0;
+     commands[2][3][1] = dcm->getTime(4000);
+     dcm->set(commands);
+     }
+     AL_CATCH_ERR(return false;);
+
+  .. Note::
+     All examples here use dcm.getTime() to get all times for timed-command request.
+     This is just an example, and there are better ways to use it. For example,
+     you can just do one dcm.getTime() at startup and afterwards increment the
+     integer value for each ms. Or you can use the CPU clock if you have a
+     module running on the robot.
+
+
+
+.. cpp:function:: AL::ALValue DCMProxy::getPrefix()
+
+  Returns the prefix name for all devices and subDevices (Actuators and Sensors).
+
+  :return: an array with strings: "Device/SubDeviceList/" and "Device/DeviceList/"
+
+  Python example
+
+  .. code-block:: guess
+
+     # -*- encoding: UTF-8 -*-
+
+     import naoqi
+     from naoqi import ALProxy
+
+     dcm = ALProxy("DCM","127.0.0.1",9559)
+     print dcm.getPrefix(0)
+
+  This program returns: [‘Device/SubDeviceList/’, ‘Device/DeviceList/’]
+
+
+  C++ example
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     cout << dcm->getPrefix().toString() << endl;
+     }
+     AL_CATCH_ERR(return false;);
+
+
+
+.. cpp:function:: int DCMProxy::getTime(const int& offset)
+
+  Returns the absolute time used for all timed command in the DCM, with a number
+  of milliseconds (ms) to add or remove to this time.
+
+  :param offset: optional time in ms (signed) to add/remove.
+
+  :return: An integer (signed), with 1 ms precision. Be careful: it can roll-over.
+
+
+  .. Note::
+     All examples here use dcm.getTime() to get all time for timed-command request.
+     This is just an example, and there are better ways to use it. For example,
+     you can just do one dcm.getTime() at startup and after increment the integer
+     value for each ms. Or you can use the CPU clock if you have a module running
+     on the robot.
+
+
+  Example 1
+
+  Return the absolute time in 10s.
+
+  Python
+
+  .. code-block:: python
+
+     # -*- encoding: UTF-8 -*-
+
+     import naoqi
+     from naoqi import ALProxy
+
+     dcm = ALProxy("DCM","127.0.0.1",9559)
+     print dcm.getTime(10000)
+
+  C++
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     int time = dcm->getTime(10000);
+     cout << time << endl;
+     }
+     AL_CATCH_ERR(return false;);
+
+
+  Example 2
+
+  Return the current time (more the communication delay).
+
+  Python
+
+  .. code-block:: python
+
+     # -*- encoding: UTF-8 -*-
+
+     import naoqi
+     from naoqi import ALProxy
+
+     dcm = ALProxy("DCM","127.0.0.1",9559)
+     print dcm.getTime(0)
+
+  C++
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     int time = dcm->getTime(0);
+     cout << time << endl;
+     }
+     AL_CATCH_ERR(return false;);
+
+
+.. cpp:function:: void DCMProxy::set(const AL::ALValue& request)
+
+  Sends to the DCM buffer a simple request containing a list of timed commands
+  to apply to an Actuator or an Alias.
+
+  This is the basic command to send one or more order(s) (timed command) to an
+  **Actuator**.
+  It could also be an **Alias** name.
+  In this case, each Actuator in the Alias is updated with the same command(s).
+
+
+  :param request: AL::ALValue as follows:
+
+    request[0]: Actuator name (with or without the base name) or Alias Name.
+
+    For further details see: :ref:`actuator_names` and :ref:`alias`.
+
+    request[1]: Update type: "Merge", "ClearAll", "ClearAfter"  or "ClearBefore".
+
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **Merge**          | Add a new timed command.                                                              |
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **ClearAll**       | Delete all timed commands before adding this one.                                     |
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **ClearAfter**     | Delete all commands that are after the time of the 1st one on the list (the soonest). |
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **ClearBefore**    | Delete all commands that are before the time of the last one on the list (the oldest).|
+    +--------------------+---------------------------------------------------------------------------------------+
+
+    For further details, see: :ref:`update_type`.
+
+    request[2][x]: List of x timed commands.
+
+    For further details, see: :ref:`timed_command`.
+
+    request[2][x][0]: Float command (offset and gain are then used).
+
+    request[2][x][1]: the DCM Time for the command to be applied.
+
+    request[2][x][2]: Importance level - optional. Not yet implemented.
+
+  Example 1
+
+  The new value for the red LED in the chest will be 1.0 in 10s.
+  The DCM interpolates with the currently sent value.
+
+  Python
+
+  .. code-block:: guess
+
+     # -*- encoding: UTF-8 -*-
+
+    import naoqi
+    from naoqi import ALProxy
+
+    dcm = ALProxy("DCM","127.0.0.1",9559)
+    dcm.set(\["ChestBoard/Led/Red/Actuator/Value", "Merge", \[[1.0,dcm.getTime(10000)]] ])
+
+  C++
+
+  .. code-block:: cpp
+
+    // Program running in a module. Do not forget the #include "dcmproxy.h"
+    try
+    {
+    DCMProxy* dcm = new DCMProxy(pBroker);
+    ALValue commands;
+    commands.arraySetSize(3);
+    commands[0] = string("ChestBoard/Led/Red/Actuator/Value");
+    commands[1] = string("Merge");
+    commands[2].arraySetSize(1);
+    commands[2][0].arraySetSize(2);
+    commands[2][0][0] = 1.0;
+    commands[2][0][1] = dcm->getTime(10000);
+    dcm->set(commands);
+    }
+    AL_CATCH_ERR(return false;);
+
+  Example 2
+
+  This is a list of 4 commands sent to the green chest LED.
+  In 2sec, the LED value will be at 1.0. In 4sec, it will be at 0.
+  In 6sec at 1.0 again, and back to 0 in 8sec.
+  So you will see a soft increase/decrease of LED twice in 8s.
+
+  Python
+
+  .. code-block:: guess
+
+     # -*- encoding: UTF-8 -*-
+
+    import naoqi
+    from naoqi import ALProxy
+
+    dcm = ALProxy("DCM","127.0.0.1",9559)
+    dcm.set([
+    "ChestBoard/Led/Red/Actuator/Value",
+    "ClearAll",
+    [
+    \[1.0, dcm.getTime(2000) ],
+    \[0.0, dcm.getTime(4000) ],
+    \[1.0, dcm.getTime(6000) ],
+    \[0.0, dcm.getTime(8000) ]
+    ]
+    ])
+
+  C++
+
+  .. code-block:: cpp
+
+    // Program running in a module. Do not forget the #include "dcmproxy.h"
+    try
+    {
+    DCMProxy* dcm = new DCMProxy(pBroker);
+    ALValue commands;
+    commands.arraySetSize(3);
+    commands[0] = string("ChestBoard/Led/Red/Actuator/Value");
+    commands[1] = string("ClearAll");
+    commands[2].arraySetSize(4);
+    commands[2][0].arraySetSize(2);
+    commands[2][0][0] = 1.0;
+    commands[2][0][1] = dcm->getTime(2000);
+    commands[2][1].arraySetSize(2);
+    commands[2][1][0] = 0.0;
+    commands[2][1][1] = dcm->getTime(4000);
+    commands[2][2].arraySetSize(2);
+    commands[2][2][0] = 1.0;
+    commands[2][2][1] = dcm->getTime(6000);
+    commands[2][3].arraySetSize(2);
+    commands[2][3][0] = 0.0;
+    commands[2][3][1] = dcm->getTime(8000);
+    dcm->set(commands);
+    }
+    AL_CATCH_ERR(return false;);
+
+  .. Note::
+
+    All examples here use dcm.getTime() to set the time in timed-command request.
+    This is just an example, and there are better ways to use it. For example,
+    you can just do one dcm.getTime() at startup and after increment the integer
+    value for each ms. Or you can use the CPU clock if you have a module running
+    on the robot.
+
+.. cpp:function:: void DCMProxy::setAlias(const AL::ALValue& request)
+
+  Sends into the DCM buffer a complex request containing several lists of timed
+  commands. Each list is applied to one Actuator, member of an Alias.
+
+  Two formats are available:
+
+  * Time-mixed: you send a specific time to each Actuator timed-command.
+  * Time-separate: you send first the list of all times (for example for times:
+    10ms, 20ms, 30ms, 40ms) and then all commands for these times (If there is 4
+    times, always send 4 commands for each Actuator).
+    This format is a bit more efficient.
+
+  :param request: AL::ALValue as follows:
+
+    request[0]: Alias name.
+
+    For further details see: :ref:`alias`.
+
+    request[1]: Update type: "Merge", "ClearAll", "ClearAfter" or "ClearBefore".
+
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **Merge**          | Add a new timed command.                                                              |
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **ClearAll**       | Delete all timed commands before adding this one.                                     |
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **ClearAfter**     | Delete all commands that are after the time of the 1st one on the list (the soonest). |
+    +--------------------+---------------------------------------------------------------------------------------+
+    | **ClearBefore**    | Delete all commands that are before the time of the last one on the list (the oldest).|
+    +--------------------+---------------------------------------------------------------------------------------+
+
+    For further details, see: :ref:`update_type`.
+
+    request[2]: Format of the request: could be "time-mixed" or "time-separate".
+
+    If the format is "time-mixed":
+
+    =======================   ===================================================
+    request[3][x]:              List of x Actuators.
+
+                                Each x is an Actuator member of the Alias.
+
+    request[3][x][y]:           List of y timed-command for this Actuator.
+
+    request[3][x][y][0]:        Float command (offset and gain are then used).
+
+    request[3][x][y][1]:        DCM Time for the command to be applied.
+
+    request[3][x][y][2]:        Importance level - optional. Not yet implemented.
+    =======================   ===================================================
+
+    If the format is "time-separate":
+
+    ====================   ======================================================
+    request[3]:             Importance level. Not yet implemented.
+                            Must be set to 0.
+
+    request[4]:             List of T time.
+
+    request[4][0]:          the 1st time.
+
+    request[4][1]:          the 2nd time.
+
+    request[4][2]:          ...
+
+    request[4][T]           T time.
+
+    request[5][x]:          List of x command list.
+                            Each x is an Actuator member of the Alias.
+
+    request[5][x][0]:       1st command for this Actuator, and at the 1st time.
+
+    request[5][x][1]:       2nd command for this Actuator, and at the 2nd time.
+
+    request[5][x][2]:       ...
+
+    request[5][x][T]:       T command.
+    ====================   ======================================================
+
+
+
+  Example 1 - With time-mixed
+
+  Sends 2 commands for the red LED (value 1.0 in 4s, and value 0.0 in 6s) and 1
+  command for the 2 others (value 0.25 in 3s for the green, and value 0.125 in
+  2s for the blue).
+
+  Python
+
+  .. code-block:: guess
+
+     # -*- encoding: UTF-8 -*-
+
+     import naoqi
+     from naoqi import ALProxy
+
+     dcm = ALProxy("DCM","127.0.0.1",9559)
+     dcm.createAlias([
+     "ChestLeds",
+     [
+     "ChestBoard/Led/Red/Actuator/Value",
+     "ChestBoard/Led/Green/Actuator/Value",
+     "ChestBoard/Led/Blue/Actuator/Value"
+     ]
+     ])
+     dcm.setAlias([
+     "ChestLeds",
+     "ClearAll",
+     "time-mixed",
+     [
+     [
+     \[1.0, dcm.getTime(4000)],
+     \[0.0, dcm.getTime(6000)]
+     ],
+     [
+     \[0.25, dcm.getTime(3000)]
+     ],
+     [
+     \[0.125,dcm.getTime(2000)]
+     ]
+     ]
+     ])
+
+  C++
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     ALValue commandsAlias;
+     ALValue commands;
+     commandsAlias.arraySetSize(2);
+     commandsAlias[0] = string("ChestLeds");
+     commandsAlias[1].arraySetSize(3);
+     commandsAlias[1][0] = string("ChestBoard/Led/Red/Actuator/Value");
+     commandsAlias[1][1] = string("ChestBoard/Led/Green/Actuator/Value");
+     commandsAlias[1][2] = string("ChestBoard/Led/Blue/Actuator/Value");
+     dcm->createAlias(commandsAlias);
+     commands.arraySetSize(4);
+     commands[0] = string("ChestLeds");
+     commands[1] = string("ClearAll");
+     commands[2] = string("time-mixed");
+     commands[3].arraySetSize(3);
+     //ChestBoard/Led/Red/Actuator/Value
+     commands[3][0].arraySetSize(2);
+     commands[3][0][0].arraySetSize(2);
+     commands[3][0][0][0] = 1.0;
+     commands[3][0][0][1] = dcm->getTime(4000);
+     commands[3][0][1].arraySetSize(2);
+     commands[3][0][1][0] = 0.0;
+     commands[3][0][1][1] = dcm->getTime(6000);
+     //ChestBoard/Led/Green/Actuator/Value
+     commands[3][1].arraySetSize(1);
+     commands[3][1][0].arraySetSize(2);
+     commands[3][1][0][0] = 0.25;
+     commands[3][1][0][1] = dcm->getTime(3000);
+     //ChestBoard/Led/Blue/Actuator/Value
+     commands[3][2].arraySetSize(1);
+     commands[3][2][0].arraySetSize(2);
+     commands[3][2][0][0] = 0.125;
+     commands[3][2][0][1] = dcm->getTime(2000);
+     dcm->setAlias(commands);
+     }
+     AL_CATCH_ERR(return false;);
+
+  Example 2 - With time-separate
+
+
+  Sends 6 commands to every LEDs, in 10s, 20s, 30s, 40s, 50s, and 60s.
+  For the red one, they are 1, 0, 1, 0, 1, 0.
+  For the green one, they are 1, 0.5, 1.0, 0.25, 0.125, 0.
+  For the blue one, they are 0.0625, 0.125, 0.25, 0.50, 0.75, 1.0.
+
+  Python
+
+  .. code-block:: guess
+
+     # -*- encoding: UTF-8 -*-
+
+     import naoqi
+     from naoqi import ALProxy
+
+     dcm = ALProxy("DCM","127.0.0.1",9559)
+     dcm.createAlias([
+     "ChestLeds",
+     [
+     "ChestBoard/Led/Red/Actuator/Value",
+     "ChestBoard/Led/Green/Actuator/Value",
+     "ChestBoard/Led/Blue/Actuator/Value"
+     ]
+     ])
+     t = dcm.getTime(0)
+     dcm.setAlias([
+     "ChestLeds",
+     "ClearAll",
+     "time-separate",
+     0,
+     \[t,t+2000, t+3000, t+4000, t+5000,t+6000],
+     [
+     \[1.0,0.0,1.0,0.0,1.0,0.0],
+     \[1.0,0.5,1.0,0.25,0.125,0.0],
+     \[0.0625,0.125,0.25,0.50,0.75,1.0]
+     ]
+     ])
+
+
+  C++
+
+  .. code-block:: cpp
+
+     // Program running in a module. Do not forget the #include "dcmproxy.h"
+     try
+     {
+     DCMProxy* dcm = new DCMProxy(pBroker);
+     ALValue commandsAlias;
+     ALValue commands;
+     commandsAlias.arraySetSize(2);
+     commandsAlias[0] = string("ChestLeds");
+     commandsAlias[1].arraySetSize(3);
+     commandsAlias[1][0] = string("ChestBoard/Led/Red/Actuator/Value");
+     commandsAlias[1][1] = string("ChestBoard/Led/Green/Actuator/Value");
+     commandsAlias[1][2] = string("ChestBoard/Led/Blue/Actuator/Value");
+     dcm->createAlias(commandsAlias);
+     commands.arraySetSize(6);
+     commands[0] = string("ChestLeds");
+     commands[1] = string("ClearAll");
+     commands[2] = string("time-separate");
+     commands[3] = 0;
+     commands[4].arraySetSize(6);
+     commands[4][0] = dcm->getTime(10000);
+     commands[4][1] = dcm->getTime(20000);
+     commands[4][2] = dcm->getTime(30000);
+     commands[4][3] = dcm->getTime(40000);
+     commands[4][4] = dcm->getTime(50000);
+     commands[4][5] = dcm->getTime(60000);
+     commands[5].arraySetSize(3);
+     // ChestBoard/Led/Red/Actuator/Value
+     commands[5][0].arraySetSize(6);
+     commands[5][0][0] = 1.0;
+     commands[5][0][1] = 0.0;
+     commands[5][0][2] = 1.0;
+     commands[5][0][3] = 0.0;
+     commands[5][0][4] = 1.0;
+     commands[5][0][5] = 0.0;
+     // ChestBoard/Led/Green/Actuator/Value
+     commands[5][1].arraySetSize(6);
+     commands[5][1][0] = 1.0;
+     commands[5][1][1] = 0.5;
+     commands[5][1][2] = 1.0;
+     commands[5][1][3] = 0.25;
+     commands[5][1][4] = 0.125;
+     commands[5][1][5] = 0.0;
+     // ChestBoard/Led/Blue/Actuator/Value
+     commands[5][2].arraySetSize(6);
+     commands[5][2][0] = 0.0625;
+     commands[5][2][1] = 0.125;
+     commands[5][2][2] = 0.25;
+     commands[5][2][3] = 0.50;
+     commands[5][2][4] = 0.75;
+     commands[5][2][5] = 1.0;
+     dcm->setAlias(commands);
+     }
+     AL_CATCH_ERR(return false;);
+
+
+
+.. Note::
+
+  All examples here use dcm.getTime() to get all time for timed-command request.
+  This is just an example, and there are better ways to use it. For example you
+  can just do one dcm.getTime() at startup and after increment the integer value
+  for each ms. Or you can use the CPU clock if you have a module running on the
+  robot
+
+.. Note::
+
+  It’s possible to send a "NAN" float number ("Not A Number") to actuator values
+  using C++ (only from the same process). NAN are not taking into account.
+  It may be useful to send a NAN command to an Alias of many joints for just
+  some joints, so that they do not move.
+
+.. Note::
+
+  For speed improvement in C++, it is better not to create the ALValue at each
+  request, but to keep it and just change values inside if you send to the same
+  alias. Creating and resizing ALValue are heavy operation, while change an
+  already allocated value is a small one.
+
+
+
+
+
+

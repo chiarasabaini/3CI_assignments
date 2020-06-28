@@ -1,0 +1,187 @@
+.. _allogger-api:
+
+ALLogger API
+============
+
+:ref:`naoqi-core` - :ref:`Overview <allogger>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alloggerproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALLoggerProxy
+
+* :cpp:func:`ALLoggerProxy::debug`
+* :cpp:func:`ALLoggerProxy::error`
+* :cpp:func:`ALLoggerProxy::fatal`
+* :cpp:func:`ALLoggerProxy::info`
+* :cpp:func:`ALLoggerProxy::logInFile`
+* :cpp:func:`ALLoggerProxy::logInForwarder`
+* :cpp:func:`ALLoggerProxy::logInStd`
+* :cpp:func:`ALLoggerProxy::logInSys`
+* :cpp:func:`ALLoggerProxy::lowDebug`
+* :cpp:func:`ALLoggerProxy::lowInfo`
+* :cpp:func:`ALLoggerProxy::removeHandler`
+* :cpp:func:`ALLoggerProxy::separator`
+* :cpp:func:`ALLoggerProxy::setFilter`
+* :cpp:func:`ALLoggerProxy::setVerbosity`
+* :cpp:func:`ALLoggerProxy::verbosity`
+* :cpp:func:`ALLoggerProxy::warn`
+
+
+Methods
+-------
+
+
+.. cpp:function:: void ALLoggerProxy::debug(const std::string& moduleName, const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogDebug instead
+
+  Log a debug message.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.
+
+
+.. cpp:function:: void ALLoggerProxy::error(const std::string& moduleName, const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogError instead
+
+  Log an error message.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.
+
+.. cpp:function:: void ALLoggerProxy::fatal(const std::string& moduleName, const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogFatal instead
+
+  Log a fatal message.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.
+
+.. cpp:function:: void ALLoggerProxy::info(const std::string& moduleName, const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogInfo instead
+
+  Log an info message.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.
+
+
+.. cpp:function:: void ALLoggerProxy::logInFile(const std::string& fileName)
+
+  .. deprecated:: 1.12
+    create your own log handler with qilog and add it with qi::log::addHandler.
+    See :ref:`libqi documentation <libqi-doc>` for more details.
+
+  Allows the logger to store logs in a file. Warning: this is not recommended on NAO.
+
+  :param fileName: The fileName to use. Relative to the user naoqi folder.
+
+
+.. cpp:function:: void ALLoggerProxy::logInForwarder(const std::string& inputAddress)
+
+  .. warning:: Should not be used.
+
+  Publish logs to a Log Forwarder. Pass an empty string in order to use the default value:  ``tcp://localhost:5099``
+
+  :param inputAddress: Desired input ZMQ address of the Log Forwarder.
+
+
+.. cpp:function:: void ALLoggerProxy::logInStd()
+
+  .. deprecated:: 1.12
+    does nothing
+
+.. cpp:function:: void ALLoggerProxy::logInSys()
+
+  .. deprecated:: 1.12
+    does nothing
+
+
+.. cpp:function:: void ALLoggerProxy::lowDebug(const std::string& moduleName, const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogDebug instead
+
+  Log an lowDebug message.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.
+
+.. cpp:function:: void ALLoggerProxy::lowInfo(const std::string& moduleName, const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogVerbose instead.
+
+  Log an lowInfo message.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.
+
+
+.. cpp:function:: void ALLoggerProxy::removeHandler(const std::string &name)
+
+  .. deprecated:: 1.12
+    do not use since you cannot add any handler with the API.
+
+
+
+.. cpp:function:: void ALLoggerProxy::separator()
+
+  .. deprecated:: 1.12
+
+  Output a simple line separator
+
+
+.. cpp:function:: void ALLoggerProxy::setFilter()
+
+  .. deprecated:: 1.12
+
+
+.. cpp:function:: void ALLoggerProxy::setVerbosity(const std::string& verbosity)
+
+  .. deprecated:: 1.12
+    use qi::log::setVerbosity instead.
+
+  set verbosity: debug, verbose, info, warning, error, fatal, silent. Default is info
+
+  :param verbosity: verbosity value
+
+.. cpp:function:: int ALLoggerProxy::verbosity()
+
+  .. deprecated:: 1.12
+    use qi::log::verbosity instead.
+
+  Get verbosity level of qi logs: debug(6), verbose(5), info(4), warning(3), error(2), fatal(1), silent(0). Default is info.
+
+  :param verbosity: verbosity value
+
+
+.. cpp:function:: void ALLoggerProxy::warn(const std::string& moduleName,const std::string& message)
+
+  .. deprecated:: 1.12
+    use qiLogWarning instead.
+
+  Log a warning.
+
+  :param moduleName: Name of the module.
+  :param message: Log Message.

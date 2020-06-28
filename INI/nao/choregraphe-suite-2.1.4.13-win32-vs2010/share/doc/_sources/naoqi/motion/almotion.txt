@@ -1,0 +1,256 @@
+.. include:: ../../bulk/common.rst
+
+.. _almotion:
+
+ALMotion
+==========
+
+.. toctree::
+    :hidden:
+
+    almotion-api
+    advanced
+
+    control-stiffness
+    control-joint
+    control-walk
+    control-cartesian
+    control-wholebody
+
+    reflexes-collision-avoidance
+    reflexes-external-collision
+    reflexes-fall-manager
+    reflexes-smart-stiffness
+    reflexes-diagnosis
+    push_recovery
+
+    idle
+    tools-general
+    tools-motion-task
+
+Overview | :ref:`API <almotion-api>` | :ref:`Advanced <advanced>`
+
+------------
+
+.. seealso::
+
+   +------------+---------------------------------------------------------------------------+
+   | Control    | :ref:`Stiffness <control-stiffness>`, :ref:`Joint <control-joint>`,       |
+   |            | :ref:`Locomotion <control-walk>`, :ref:`Cartesian <control-cartesian>`,   |
+   |            | :ref:`Whole body <control-wholebody>`.                                    |
+   +------------+---------------------------------------------------------------------------+
+   | Reflexes   | :ref:`reflexes-collision-avoidance`, :ref:`reflexes-external-collision`,  |
+   |            | :ref:`reflexes-fall-manager`, :ref:`reflexes-smart-stiffness`             |
+   |            | :ref:`reflexes-diagnosis`, :ref:`push_recovery`.                          |
+   +------------+---------------------------------------------------------------------------+
+   | Idle       | :ref:`idle`.                                                              |
+   +------------+---------------------------------------------------------------------------+
+   | Tools      | :ref:`tools-general`, :ref:`tools-motion-task`.                           |
+   +------------+---------------------------------------------------------------------------+
+
+
+What it does
+------------
+
+The **ALMotion** module provides methods which facilitate making the robot move.
+
+Control
++++++++
+
+It contains four major groups of methods for controlling the:
+
+- joint stiffness (basically motor On-Off): see :ref:`control-stiffness`,
+
+- joint position (interpolation, reactive control): see :ref:`control-joint`,
+
+- walk (distance and velocity control, world position and so on): see :ref:`control-walk`,
+
+- robot effector in the Cartesian space
+  (inverse kinematics, whole body constraints): see :ref:`control-cartesian`.
+
+Reflexes
+++++++++
+
+The **ALMotion** module implements also some "reflexes" such as :ref:`reflexes-collision-avoidance`,
+:ref:`reflexes-external-collision`, :ref:`reflexes-fall-manager`,
+:ref:`reflexes-smart-stiffness` and :ref:`reflexes-diagnosis`.
+
+
+| The reflexes are activated by default and modify the behavior of your robot.
+| More specifically, they:
+
+* alter the motion to avoid self or external collision (see :ref:`reflexes-collision-avoidance`,
+  :ref:`reflexes-external-collision`),
+* adjust the stiffness to spare power when the robot is not moving (see :ref:`reflexes-smart-stiffness`),
+* trigger a specific task when a fall is detected (see :ref:`reflexes-fall-manager`),
+  or when issues or errors are raised on a device potentially critical (see reflexes-diagnosis`).
+
+Advanced users may need to deactivate all or part of the reflexes.
+For further details see: :ref:`reflex-deactivation`.
+
+Idle
+++++
+
+The module also provides tools to define the robot behavior when no user command is sent.
+See :ref:`idle`.
+
+Tools
+++++++
+
+This module gives also access to useful information about the robot hardware, such
+as the number of joints, their name, limits, the available sensors and so on.
+See :ref:`tools-general`.
+
+
+How it works
+------------
+
+**ALMotion** runs at 50Hz (cycle of 20ms).
+
+In **ALMotion**, every time you call an API to request a motion, a
+"motion task" is created to handle the job. See :ref:`tools-motion-task` to
+learn how to manage these tasks.
+
+
+Performance and Limitations
+---------------------------
+
+**Performance**
+
+**ALMotion** is a core module. As it manages some reflexes and updates the
+model every cycle, the module consumes a constant CPU. This consumption could
+increase during special tasks like walk.
+
+The table below gives you some hints of **ALMotion** CPU consumption.
+
+=================   =============
+Task \\ Processor   Atom (NAO V4)
+=================   =============
+update Model         3\%
+walking             10.8\%
+=================   =============
+
+Adaptation to |juju| |roboJ| specificities
+------------------------------------------
+
+We have tried hard to maintain a unique **Motion** API for both |roboN|
+and |roboJ|.
+
+However, some adaptations were necessary:
+
++-------------+-------------------------------------------+------------------------------------+
+| Group       | Main adaptations                          | For further details, see ...       |
++=============+===========================================+====================================+
+| Stiffness   | Manual Stiffness control is               | :ref:`control-stiffness`           |
+|             | forbidden for |roboJ|'s lower part.       |                                    |
++-------------+-------------------------------------------+------------------------------------+
+| Locomotion  | Specific stability constraints            |                                    |
+| control     | on the leg.                               |                                    |
+|             |                                           |                                    |
+|             | Locomotion methods are prohibited         | :ref:`control-walk`                |
+|             | if power hatch is open.                   |                                    |
++-------------+-------------------------------------------+------------------------------------+
+| Cartesian   | Most of the methods are unusable.         | :ref:`control-cartesian`           |
+| control     |                                           |                                    |
++-------------+-------------------------------------------+------------------------------------+
+| Whole Body  | Do not use any Whole Body control         | :ref:`control-wholebody`           |
+| control     | methods.                                  |                                    |
++-------------+-------------------------------------------+------------------------------------+
+| Safety      | A specific safety reflex is               | :ref:`push_recovery`               |
+| reflexes    | dedicated.                                |                                    |
+|             +-------------------------------------------+------------------------------------+
+|             | Frontal security distance is              | :ref:`reflexes-external-collision` |
+|             | correlated with speed.                    |                                    |
+|             +-------------------------------------------+------------------------------------+
+|             | Hardware issues trigger specific          | :ref:`diagnosis_effect`            |
+|             | :ref:`rest_reflexes`.                     |                                    |
++-------------+-------------------------------------------+------------------------------------+
+
+
+Getting Started
+---------------
+
+Essential information to deal with **ALMotion**:
+
+Axis definition
++++++++++++++++
+The **X** axis is positive toward the robot's front, the **Y** from right to
+left and the **Z** is vertical.
+
+.. image:: /medias/dev/modules/motion/axis_def.png
+   :width: 191 px
+   :height: 182 px
+
+SI - International System of Unit
+++++++++++++++++++++++++++++++++++
+
+The **ALMotion** module uses the SI - International System of Units
+(meters, second, radian...).
+
+How to name joints and body parts
+++++++++++++++++++++++++++++++++++
+
+Depending on the method chosen, **ALMotion** requires to name joints, group of
+joints or a body part.
+
++-----------------+-----------------------+---------------------------------+
+|                 | called  ...           | are used by ...                 |
++=================+=======================+=================================+
+| Body parts      | **Effectors**         | :ref:`control-cartesian`        |
+|                 |                       | and :ref:`control-wholebody`    |
++-----------------+-----------------------+---------------------------------+
+| Joint names can |  **Chains**           | :ref:`control-stiffness`,       |
+| be  called      |                       | :ref:`control-joint`,           |
+| individually    |                       | :ref:`tools-general` and        |
+| or by groups    |                       | :ref:`tools-motion-task`.       |
++-----------------+-----------------------+---------------------------------+
+
+For further details, see:
+
+* :ref:`effector_chain`,
+* :ref:`body-chain-def`,
+* :ref:`motion-cartesian-effectors`.
+
+
+Advanced Users
+---------------
+
+Motion from scratch
++++++++++++++++++++
+
+If you are familiar with the **ALMotion** definition and you want to go further
+creating advanced behavior in C++ like a new reflex, a better object tracker or
+use at the same time **DCM** module and **ALMotion**, see: :ref:`advanced`.
+
+.. _reflex-deactivation:
+
+Deactivation of the safety reflexes
++++++++++++++++++++++++++++++++++++
+
+Each reflex can be temporarily deactivated, using the relevant
+*setNameOfReflexEnabled* method.
+
+However, deactivation of very critical reflexes will not be effective unless the
+owner of the robot has previously given his consent.
+
+The list below specify whether the reflex deactivation require or not owner consent:
+
++-----------------------------------------------------------------+-----------------------+-------------------------+
+|Method                                                           | User consent required                           |
++                                                                 +-----------------------+-------------------------+
+|                                                                 | |nao| |roboN|         | |juju| |roboJ|          |
++=================================================================+=======================+=========================+
+|:cpp:func:`ALMotionProxy::setCollisionProtectionEnabled`         | No                    | No                      |
++-----------------------------------------------------------------+-----------------------+-------------------------+
+|:cpp:func:`ALMotionProxy::setDiagnosisEffectEnabled`             | No                    | No                      |
++-----------------------------------------------------------------+-----------------------+-------------------------+
+|:cpp:func:`ALMotionProxy::setSmartStiffnessEnabled`              | No                    | No                      |
++-----------------------------------------------------------------+-----------------------+-------------------------+
+|:cpp:func:`ALMotionProxy::setExternalCollisionProtectionEnabled` | No                    |  **Yes**, Arms excepted |
++-----------------------------------------------------------------+-----------------------+-------------------------+
+|:cpp:func:`ALMotionProxy::setFallManagerEnabled`                 | **Yes**               | **Yes**                 |
++-----------------------------------------------------------------+-----------------------+-------------------------+
+|:cpp:func:`ALMotionProxy::setPushRecoveryEnabled`                | NA                    | **Yes**                 |
++-----------------------------------------------------------------+-----------------------+-------------------------+
+
+For further details about owner consent, see: :ref:`safety_reflexes_consent`.

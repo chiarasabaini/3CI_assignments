@@ -1,0 +1,13 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo-battery:
+
+|roboR| -  Battery
+===================
+
+.. seealso:: :ref:`romeo`
+
+--------------------
+
+**TBD**
+

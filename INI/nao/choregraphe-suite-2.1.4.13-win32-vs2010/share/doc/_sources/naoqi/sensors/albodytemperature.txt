@@ -1,0 +1,95 @@
+.. _albodytemperature:
+
+ALBodyTemperature
+=================
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    albodytemperature-api
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <albodytemperature-api>`
+
+--------
+
+What it does
+------------
+
+**ALBodyTemperature** is responsible for raising events when some part of the
+hardware, able to overheat, has reach a concerning level of temperature.
+
+It could be:
+
+* Joints or Actuators,
+* CPU,
+* Battery.
+
+How it works
+------------
+
+CPU - Temperature
++++++++++++++++++
+
+**ALBodyTemperature** retrieves temperature information from the CPU hardware and
+publish it in **ALMemory key**: Device/SubDeviceList/Head/Temperature/Sensor/Value.
+
+For further details, see: :ref:`Cpu`.
+
+Joint, Actuator and Battery Temperature
++++++++++++++++++++++++++++++++++++++++++
+
+**ALBodyTemperature** retrieves temperature information from the
+:term:`Temperature status` of the Joints, the Actuators, and the Battery.
+If at least one of item has a non null status, an :naoqi:event:`HotDeviceDetected`
+event is raised.
+
+For further details about the temperature automatic limitation, see: :term:`Temperature status`.
+
+Notification
+++++++++++++
+
+If one Joint, one Actuator or the battery is hot
+(non null :term:`Temperature status`), a notification is sent.
+
+For further details about the temperature notification, see:
+:ref:`notif_warning_diagnosis`.
+
+The notification can be disabled using :cpp:func:`ALBodyTemperatureProxy::setEnableNotifications`
+
+.. _albodytemperature_diagnosis:
+
+Temperature Diagnosis
++++++++++++++++++++++
+
+**ALBodyTemperature** generates a diagnosis based on the :term:`Temperature status`
+but with a threshold as shown on the figure below:
+
+.. image:: /medias/naoqi/albodytemperature_diagnosis.png
+    :width: 573 px
+    :height: 357 px
+
+**Result**
+
+Based on this diagnosis, :ref:`almemory` error keys are updated for each joint or actuator,
+the key format is: Diagnosis/Temperature/*JointName*/Error.
+For further details see **Diagnosis keys** in: :ref:`actuator_sensor_list_nao`.
+
+.. or :ref:`actuator_sensor_list_juliette`.
+
+A summary of the temperature diagnosis is available using
+:cpp:func:`ALBodyTemperatureProxy::getTemperatureDiagnosis`
+
+**Effect**
+
+This temperature diagnosis has the same behavior than the passive diagnosis (see :ref:`aldiagnosis`)
+and if the :term:`Level of failure severity` requires it, **ALMotion** module reacts in order to
+protect the robot and the user.
+
+For further details about the motion diagnosis reflexes, see: :ref:`reflexes-diagnosis`.
+
+Use Cases
+---------
+
+It allows you to be notified if the temperature of a joint
+reaches the limit triggering an automatic limitation of the **Stiffness**.

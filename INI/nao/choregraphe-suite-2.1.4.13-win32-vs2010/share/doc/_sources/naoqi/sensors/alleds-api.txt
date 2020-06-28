@@ -1,0 +1,377 @@
+.. _alleds-api:
+
+ALLeds API
+==========
+
+:ref:`naoqi-sensors` - :ref:`Overview <alleds>` | API
+
+------------
+
+.. seealso::
+
+   - :ref:`LEDs Hardware <robot-led>`
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alledsproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALLedsProxy
+
+* :cpp:func:`ALLedsProxy::createGroup`
+* :cpp:func:`ALLedsProxy::earLedsSetAngle`
+* :cpp:func:`ALLedsProxy::fade`
+* :cpp:func:`ALLedsProxy::fadeListRGB`
+* :cpp:func:`ALLedsProxy::fadeRGB`
+* :cpp:func:`ALLedsProxy::getIntensity`
+* :cpp:func:`ALLedsProxy::listGroup`
+* :cpp:func:`ALLedsProxy::listGroups`
+* :cpp:func:`ALLedsProxy::listLED`
+* :cpp:func:`ALLedsProxy::listLEDs`
+* :cpp:func:`ALLedsProxy::off`
+* :cpp:func:`ALLedsProxy::on`
+* :cpp:func:`ALLedsProxy::randomEyes`
+* :cpp:func:`ALLedsProxy::rasta`
+* :cpp:func:`ALLedsProxy::reset`
+* :cpp:func:`ALLedsProxy::rotateEyes`
+* :cpp:func:`ALLedsProxy::setIntensity`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALLedsProxy::createGroup( const std::string& groupName, const std::vector<std::string>& ledNames )
+
+  Makes a group name for ease of setting multiple LEDs.
+
+  :param groupName: The name of the group.
+
+  :param ledNames: A vector of the names of the LEDs in the group.
+
+Python:
+^^^^^^^
+
+.. code-block:: guess
+
+  # Replace "127.0.0.1" with the IP of your robot
+  leds = ALProxy("ALLeds","127.0.0.1",9559)
+  # Create a new group
+  names = [
+  "Face/Led/Red/Left/0Deg/Actuator/Value",
+  "Face/Led/Red/Left/90Deg/Actuator/Value",
+  "Face/Led/Red/Left/180Deg/Actuator/Value",
+  "Face/Led/Red/Left/270Deg/Actuator/Value"]
+  leds.createGroup("MyGroup",names)
+  # Switch the new group on
+  leds.on("MyGroup")
+
+C++:
+^^^^
+
+.. code-block:: guess
+
+  boost::shared_ptr<ALLedsProxy> leds = boost::shared_ptr<ALLedsProxy>(new ALLedsProxy(getParentBroker()));
+  // Create a new group
+  std::vector<std::string> names;
+  names.push_back("Face/Led/Red/Left/0Deg/Actuator/Value");
+  names.push_back("Face/Led/Red/Left/90Deg/Actuator/Value");
+  names.push_back("Face/Led/Red/Left/180Deg/Actuator/Value");
+  names.push_back("Face/Led/Red/Left/270Deg/Actuator/Value");
+  leds.createGroup("MyGroup",names);
+  // Switch the new group on
+  leds.on("MyGroup");
+
+
+
+
+.. cpp:function:: void ALLedsProxy::earLedsSetAngle( const int& degrees, const float& duration, const bool& leaveOnAtEnd )
+
+  An animation to show a direction with the ears.
+
+  :param degrees: The angle you want to show in degrees (int). 0 is up, 90 is forwards, 180 is down and 270 is back.
+
+  :param duration: The duration in seconds of the animation.
+
+  :param leaveOnAtEnd: If true the last led is left on at the end of the animation.
+
+
+
+.. cpp:function:: void ALLedsProxy::fade( const std::string& name, const float& intensity, const float& duration )
+
+  Sets the intensity of a LED or Group of LEDs within a given time.
+
+  :param name: The name of the LED or Group.
+
+  :param intensity: The intensity of the LED or Group (a value between 0 and 1).
+
+  :param duration: The duration of the fade in seconds
+
+  :download:`alleds_fade.cpp </samples/cpp/alleds/alleds_fade.cpp>`
+
+  .. literalinclude:: /samples/cpp/alleds/alleds_fade.cpp
+     :language: cpp
+
+
+  :download:`alleds_fade.py </samples/python/alleds/alleds_fade.py>`
+
+  .. literalinclude:: /samples/python/alleds/alleds_fade.py
+     :language: py
+
+
+
+.. cpp:function:: void ALLedsProxy::fadeListRGB( const std::string& name, const AL::ALValue& rgbList, const AL::ALValue& timeList )
+
+  Executes a list of color commands for a LED or a group of LEDs (like a timeline for LEDs).
+
+  :param name: The name of the LED or Group.
+
+  :param rgbList: List of RGB led value, RGB as seen in hexa-decimal: 0x00RRGGBB.
+
+  :param timeList: List of respective time to reach each RGB value.
+
+
+.. _ALLedsProxy::fadeRGB1:
+
+.. cpp:function:: void ALLedsProxy::fadeRGB( const std::string& name, const float& red, const float& green, const float& blue, const float& duration )
+
+  There are three overloads of this function:
+
+  * :ref:`ALLedsProxy::fadeRGB <ALLedsProxy::fadeRGB1>` with RGB color code.
+  * :ref:`ALLedsProxy::fadeRGB <ALLedsProxy::fadeRGB2>` with color names.
+  * :ref:`ALLedsProxy::fadeRGB <ALLedsProxy::fadeRGB3>` with hexadecimal color code.
+
+  Sets the color of an RGB led using RGB color code.
+
+  :param name: The name of the RGB LED or Group.
+
+  :param red: The intensity of red channel (0-1).
+
+  :param green: The intensity of green channel (0-1).
+
+  :param blue: The intensity of blue channel (0-1).
+
+  :param duration: Time used to fade in seconds.
+
+
+.. _ALLedsProxy::fadeRGB2:
+
+.. cpp:function:: void ALLedsProxy::fadeRGB( const std::string& name, const std::string& colorName, const float& duration )
+
+  Sets the color of an RGB led using color names.
+
+  :param name: The name of the RGB LED or Group.
+
+  :param colorName: The name of the color (supported colors: "white", "red", "green", "blue", "yellow", "magenta", "cyan").
+
+  :param duration: Time used to fade in seconds.
+
+
+.. _ALLedsProxy::fadeRGB3:
+
+.. cpp:function:: void ALLedsProxy::fadeRGB( const std::string& name, const int& rgb, const float& duration )
+
+  Sets the color of an RGB led using hexadecimal color code.
+
+  :param name: The name of the RGB LED or Group.
+
+  :param rgb: The RGB value led, RGB as seen in hexadecimal: 0x00RRGGBB.
+
+  :param duration: Time used to fade in seconds.
+
+
+
+.. cpp:function:: AL::ALValue ALLedsProxy::getIntensity(const std::string& name)
+
+  Gets the intensity of a LED.
+
+  :param name: The name of the LED.
+
+  :return: The intensity of the LED.
+
+
+
+.. cpp:function:: std::vector<std::string> ALLedsProxy::listGroup(const std::string& groupName)
+
+  Lists the devices in the group.
+
+  :param groupName: The name of the Group.
+
+  :return: A vector of string device names.
+
+Python:
+^^^^^^^
+
+.. code-block:: guess
+
+  # Replace "127.0.0.1" with the IP of your robot
+  leds = ALProxy("ALLeds","127.0.0.1",9559)
+  # Print the names of all the groups
+  print(leds.listGroup("FaceLedsLeftExternal"))
+
+C++:
+^^^^
+
+.. code-block:: guess
+
+  boost::shared_ptr<ALLedsProxy> leds = boost::shared_ptr<ALLedsProxy>(new ALLedsProxy(getParentBroker()));
+  //  Print the names of all the devices in the group
+  std::vector<std::string> deviceNames = leds.listGroup("FaceLedsLeftExternal");
+  for(unsigned int i=0; i < deviceNames.size(); i++) {
+  std::cout << deviceNames.at(i) << std::endl;
+  }
+
+
+
+.. cpp:function:: std::vector<std::string> ALLedsProxy::listGroups()
+
+  Lists available group names.
+
+  :return: A vector of group names.
+
+
+
+.. cpp:function:: std::vector<std::string> ALLedsProxy::listLED(const std::string& arg1)
+
+  Lists the devices aliased by a short LED name.
+
+  :param arg1: arg
+
+  :return: A vector of device names.
+
+
+
+.. cpp:function:: std::vector<std::string> ALLedsProxy::listLEDs()
+
+  Lists the short LED names.
+
+  :return: A vector of LED names.
+
+
+
+.. cpp:function:: void ALLedsProxy::off(const std::string& name)
+
+  Switch to a minimum intensity a LED or Group of LEDs.
+
+  :param name: The name of the LED or Group.
+
+  samples/cpp/alleds/alleds_off.cpp
+
+  .. literalinclude:: /samples/cpp/alleds/alleds_off.cpp
+     :language: cpp
+
+
+  samples/python/alleds/alleds_off.py
+
+  .. literalinclude:: /samples/python/alleds/alleds_off.py
+     :language: py
+
+
+
+.. cpp:function:: void ALLedsProxy::on(const std::string& name)
+
+  Switch to a maximum intensity a LED or Group of LEDs.
+
+  :param name: The name of the LED or Group.
+
+  :download:`alleds_on.cpp </samples/cpp/alleds/alleds_on.cpp>`
+
+  .. literalinclude:: /samples/cpp/alleds/alleds_on.cpp
+     :language: cpp
+
+
+  :download:`alleds_on.py </samples/python/alleds/alleds_on.py>`
+
+  .. literalinclude:: /samples/python/alleds/alleds_on.py
+     :language: py
+
+
+
+.. cpp:function:: void ALLedsProxy::randomEyes(const float& duration)
+
+  Launch a random animation in eyes
+
+  :param duration: Approximate duration of the animation in seconds.
+
+
+
+.. cpp:function:: void ALLedsProxy::rasta(const float& duration)
+
+  Launch a green/yellow/red rasta animation on all body.
+
+  :param duration: Approximate duration of the animation in seconds.
+
+  samples/cpp/alleds/alleds_rasta.cpp
+
+  .. literalinclude:: /samples/cpp/alleds/alleds_rasta.cpp
+     :language: cpp
+
+
+  samples/python/alleds/alleds_rasta.py
+
+  .. literalinclude:: /samples/python/alleds/alleds_rasta.py
+     :language: py
+
+
+
+.. cpp:function:: void ALLedsProxy::reset(const std::string& name)
+
+  Set a LED or Group of LEDs to their default state.
+
+  :param name: The name of the LED or Group.
+
+
+
+.. cpp:function:: void ALLedsProxy::rotateEyes( const int& rgb, const float& timeForRotation, const float& totalDuration )
+
+  Launch a rotation using the leds of the eyes.
+
+  :param rgb: the RGB value led, RGB as seen in hexa-decimal: 0x00RRGGBB.
+
+  :param timeForRotation: Approximate time to make one turn.
+
+  :param totalDuration: Approximate duration of the animation in seconds.
+
+
+
+.. cpp:function:: void ALLedsProxy::setIntensity( const std::string& name, const float& intensity )
+
+  Sets the intensity of a LED or Group of LEDs.
+
+  :param name: The name of the LED or Group.
+
+  :param intensity: The intensity of the LED or Group (a value between 0 and 1).
+
+Python:
+^^^^^^^
+
+.. code-block:: guess
+
+  # Replace "127.0.0.1" with the IP of your robot
+  leds = ALProxy("ALLeds","127.0.0.1",9559)
+  # Turn the red LED of the left foot half on
+  leds.setIntensity("LFoot/Led/Red/Actuator/Value", 0.5)
+  # Turn the green face LEDs half on
+  leds.setIntensity("LeftFaceLedsGreen", 0.5)
+
+C++:
+^^^^
+
+.. code-block:: guess
+
+  boost::shared_ptr<ALLedsProxy> leds = boost::shared_ptr<ALLedsProxy>(new ALLedsProxy(getParentBroker()));
+  // Turn the red LED of the left foot half on
+  leds->setIntensity("LFoot/Led/Red/Actuator/Value", 0.5f);
+  // Turn the green face LEDs half on
+  leds->setIntensity("LeftFaceLedsGreen", 0.5f);
+
+
+
+

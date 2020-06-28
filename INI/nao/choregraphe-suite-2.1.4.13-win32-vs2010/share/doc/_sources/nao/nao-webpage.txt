@@ -1,0 +1,259 @@
+.. include:: ../bulk/common.rst
+
+.. |bonjour| image:: /medias/opennao/gs_bonjour_icon.png
+   :class: img-inline
+   :width: 26 px
+   :height: 27 px
+
+.. |connect-button| image:: /medias/desktop/connect-to_button.png
+   :class: img-inline
+
+
+.. _opennao-web-page:
+
+Former |roboN| Web page
+========================
+
+.. _opennao-access-web-page:
+
+How to access the former |roboN| Web page
+------------------------------------------
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Access to the |roboN| Web page.
+
+        .. image:: /medias/wizard/myrobot.png
+            :width: 535 px
+            :height: 360 px
+
+        For further details, see: :ref:`access_webpage_nao`.
+
+2.      Choose **?** > **Former robot web page**.
+
+        .. image:: /medias/wizard/conf_menu.png
+            :width: 236 px
+            :height: 142 px
+
+        The screen below is displayed.
+
+        .. image:: /medias/opennao/webpage-login.png
+            :width: 507 px
+            :height: 383 px
+
+3.      Complete the **Password** field and click the **Login** button.
+
+        | The password default value is *nao*.
+        | If you have lost your password, see:
+          :ref:`opennao-password-lost_nao`.
+=====  =========================================================================
+
+
+Former |roboN| Web page
+-------------------------
+
+Home page
++++++++++++
+
+.. image:: /medias/opennao/webpage-about.png
+   :width: 563 px
+   :height: 392 px
+
+======  ===================  ==================================================================================
+Part     Name                 Description
+======  ===================  ==================================================================================
+**A**    Menu                   * **About**: displays the home page.
+                                * :ref:`opennao-network`: allows you to set up |roboN| wireless connection
+                                  and get additional info about its network connections.
+                                * :ref:`opennao-web-page-settings`: allows you to set various preferences.
+                                * :ref:`web-page-advanced`: access more information on NAOqi, system
+                                  and hardware. Mostly useful for troubleshooting.
+                                * **Logout**: ends the connection to the robot.
+
+
+**B**    Key information        Displays a short summary of |roboN|'s system.
+
+                                Click the information to quickly access the corresponding detailed page.
+
+**C**    |roboN|'s picture      Not sure to be connected to the correct robot?
+                                Make him say a short sentence.
+
+                                1. Click |roboN|'s picture to make appear the speech bubble.
+
+                                2. Optionally, edit the text.
+
+                                3. Press Enter key.
+======  ===================  ==================================================================================
+
+
+.. _opennao-network:
+
+Network
++++++++++
+
+.. image:: /medias/opennao/webpage-network.png
+  :width: 526 px
+  :height: 452 px
+
+The table below lists the information displayed by Network screen.
+
+========================   =====================================================================
+ Name                       Displays ...
+========================   =====================================================================
+**Connections**             Address and Mac Address of the **Wired** and **Wireless**
+                            connections currently used.
+
+                            **Tethering** button allows you to activate an advanced feature.
+
+                            For further details see: :ref:`tethering`.
+
+**Country**                 the current country used for WiFi service detection.
+
+**Available networks**      the list of available networks, **Wired** and **Wireless**.
+
+                            To configure a new connection:
+
+                            * Click on the network you want to use.
+
+                              For more details, see :ref:`opennao-wireless`.
+========================   =====================================================================
+
+
+.. _opennao-web-page-settings:
+
+Settings
++++++++++
+
+.. image:: /medias/opennao/webpage-settings.png
+  :width: 522 px
+  :height: 354 px
+
+**List of settings**
+
+.. list-table::
+   :widths: 25 40 25
+   :header-rows: 1
+
+   * - Settings
+     - Description
+     - See also
+   * - **Name**
+     - |roboN| host name. Make sure your |roboN| has a unique name when joining a community.
+     -
+   * - **Password**
+     - For this Web page, but also ftp and ssh connections.
+     - :ref:`opennao-user-account`, :ref:`opennao-ftp-access`, :ref:`opennao-ssh`.
+   * - **Web Services**
+     - Allows you to associate your |roboN| with an authorized Aldebaran Robotics user
+       account only.
+     - :ref:`opennao-web-services`
+   * - |roboN|'s **buddy icon**
+     - The buddy icon or avatar used to represent your robot.
+     - :ref:`connection-widget`
+   * - **Language**
+     - Sets |roboN| language for speech synthesis and recognition.
+     -
+   * - **Time Zone**
+     - Important for the robot to know what time it is.
+     -
+   * - **Volume**
+     - Sets the volume of |roboN| Loudspeakers.
+     - :ref:`choregraphe-howto-set-volume`, :ref:`robot-loudspeaker`.
+   * - **Fall Manager reflex**
+     - Permit deactivation of the safety reflexes.
+     - :ref:`safety_reflexes_consent`
+   * - **Issue Reporting**
+     - When enabled, issue reports are automatically sent to Aldebaran Robotics
+       and then deleted from the robot at boot time.
+     - :ref:`send_crash_report`
+   * - **Remote Controls**
+     - Allows to configure Infra-Red interaction with an external IR device.
+     - :ref:`webpage-settings-remote`
+
+
+.. _web-page-advanced:
+
+Advanced
++++++++++++
+
+.. list-table::
+   :widths: 20 50 20
+   :header-rows: 1
+
+   * - Settings
+     - Description
+     - See also
+   * - **Naoqi**
+     - Allows you to start, stop or restart **NAOqi**, and to visualize currently running modules.
+     - :ref:`monitoring-naoqi`
+   * - **Packages**
+     - Displays the packages currently uploaded.
+     -
+   * - **Memory**
+     - Allows you to search for any memory key in order to check is current value.
+     - :ref:`almemory`
+   * - **Process**
+     - Displays the processes currently running.
+     -
+   * - **Hardware**
+     - Displays useful information about Devices, Joints, Configurations and Temperatures.
+     -
+
+Related topics
+----------------
+
+.. _opennao-web-services:
+
+Aldebaran Robotics Web Services
++++++++++++++++++++++++++++++++++
+
+Every robot can be associated with an authorized Aldebaran Robotics user
+account only. By this way, you will be able to access to extended features as soon as
+they are available online.
+
+To associate your robot:
+
+=====  =====================================================================================
+Step    Action
+=====  =====================================================================================
+1.      Fill in the form with the user name and the password you use to connect
+        Aldebaran Robotics website and click on **Connect**.
+
+2.      Check the box **Remember me** to save your user information, so the robot can
+        automatically reconnect to web services at startup. If unchecked, you will have
+        to fill this form again to associate your robot.
+=====  =====================================================================================
+
+
+.. _safety_reflexes_consent:
+
+Consent for the deactivation of safety reflexes
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To give your consent, you must:
+
+=====  ========================================================================================
+Step    Action
+=====  ========================================================================================
+1.      Access to the  :ref:`opennao-web-page`.
+
+2.      Click the :ref:`opennao-web-page-settings` tab.
+
+3.      Check the **Fall Manager reflex** box.
+
+        .. image:: /medias/dev/modules/motion/motion_fallManagerCheckBox.png
+            :width: 448 px
+            :height: 83 px
+
+        A pop-up asks for confirmation.
+
+        .. image:: /medias/dev/modules/motion/motion_fallManagerPopUp.png
+            :width: 505 px
+            :height: 226 px
+
+4.      By clicking on the button: **I understand the risks**, you allow the
+        deactivation of the **Fall manager** and all other safety reflexes.
+=====  ========================================================================================
+
+For further details, see: :ref:`reflex-deactivation`.

@@ -1,0 +1,376 @@
+.. include:: bulk/common.rst
+
+.. _choregraphe-first-steps:
+
+Your first steps in Choregraphe
+================================
+
+
+.. _choregraphe-howto-make-nao-do-something:
+
+How to make |roboN| do something
+---------------------------------
+
+To make |roboN| do something with **Choregraphe**:
+
+=====  ==============================================================     ==============================================
+Step       Action                                                          For further details, see ...
+=====  ==============================================================     ==============================================
+1.      Create a **Behavior**.                                             :ref:`choregraphe-howto-create-a-behavior`
+
+2.      Connect **Choregraphe** to |roboN|.                                :ref:`choregraphe-howto-connect`
+
+3.      If the behavior includes motion, then wake up |roboN|.             :ref:`choregraphe-howto-enslave`
+
+4.      Play the **Behavior**.                                             :ref:`choregraphe-howto-play-a-behavior`
+=====  ==============================================================     ==============================================
+
+.. _choregraphe-howto-create-a-behavior:
+
+How to create a Behavior
++++++++++++++++++++++++++
+
+To create a :ref:`behavior`:
+
+=====  =====================================================    ==============================================================================
+Step       Action                                                Example: make your robot say "Hello!"
+=====  =====================================================    ==============================================================================
+1.      Select boxes from the                                     Select the **Audio** > **Voice** > **Say** box.
+        :ref:`chore_box_libary_panel`.
+
+2.      Drag and drop them into
+        the :ref:`chore_flow_diagram_panel`.
+
+3.      Connect them so as to define the sequence                Drag the mouse from the |onstart-inside-button| **onStart** input
+        of action to perform.                                    of the behavior to the |onstart-outside-button| **onStart** input of
+                                                                 the box in order to create a link as illustrated on the diagram below.
+
+                                                                 .. image:: /medias/desktop/choregraphe/beginning_hello.png
+                                                                     :width: 222 px
+                                                                     :height: 164 px
+=====  =====================================================    ==============================================================================
+
+
+.. _choregraphe-howto-connect:
+
+How to connect your |roboN|
+++++++++++++++++++++++++++++
+
+To connect **Choregraphe** to |roboN|:
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Choose the **Connection** > **Connect to** menu.
+
+        The :ref:`connection-widget` is displayed.
+
+        .. image:: /medias/desktop/choregraphe/chore_connect_to.png
+            :width: 598 px
+            :height: 394 px
+
+2.      Select your Robot, then click the **Connect to** button.
+=====  ==========================================================================
+
+For further details, see: :ref:`chore_connection_management`.
+
+
+.. _choregraphe-howto-enslave:
+
+How to wake up your |roboN|
+++++++++++++++++++++++++++++++
+
+To wake up |roboN|:
+
+Click the |stiffen-button| **Wake up** button in the toolbar.
+
+Why do I need to wake up |roboN|
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Wake Up** means set the **Stiffness** of all motors on.
+Additionally, if the robot is crouched, he also goes to the **StandInit** posture.
+
+In Choregraphe, set the **Stiffness** or "enslave" is the action to provide power
+to the motors of your robot. When your |roboN| is not stiffened, its limbs are soft
+like a puppet, its motors do not have power. To execute behaviors and see the
+result on your connected robot, you have to stiffen it, giving power to the motors.
+
+To go further
+^^^^^^^^^^^^^^^^
+
+| Instead of stiffening all joints of |roboN|, it is possible to set the **Stiffness** of each joint individually.
+| For further details, see the :ref:`choregraphe-detailed-interface-motion-widget` of :ref:`3d-nao-panel`.
+
+It is also possible to set the **Stiffness**, during the execution of a :ref:`behavior`,
+to an intermediary value, as all actions don't require the same strength. To do so,
+add the **Set Stiffness** box to your Behavior.
+
+
+.. _choregraphe-howto-play-a-behavior:
+
+How to play a Behavior
+++++++++++++++++++++++
+
+To play a :ref:`behavior`:
+
+* Choose **Connection** > **Play** or
+* Click |play-button| **Play** button in the toolbar.
+
+The **Behavior** of your root **Flow diagram** is now executed by the robot you are connected to.
+
+To go further
+^^^^^^^^^^^^^^
+
+Once the **Behavior** has been played, you can also launch unconnected
+boxes alone by double-clicking on their |onstart-outside-button| **onStart** input.
+
+
+Try other key behaviors
+-------------------------
+
+| Lots of easy-to-use boxes are available in the :ref:`chore_box_libary_panel`.
+| Here are some examples and a guideline to discover others by yourself.
+|
+
+.. _choregraphe-howto-make-nao-walk:
+
+How to make |roboN| walk
+++++++++++++++++++++++++++
+
+To make |roboN| walk:
+
+=====  ============================================================================
+Step       Action
+=====  ============================================================================
+1.      Drag and drop the **Motion** > **MoveTo** box.
+
+2.      Click the |parameter-button| **Parameter** button of the box.
+
+
+3.      Set the parameters.
+
+        To read the full definition of each parameter, hold the pointer over it.
+
+        .. image:: /medias/desktop/choregraphe/contextual_tooltip.png
+            :width: 469 px
+            :height: 241 px
+
+        * The first two parameters define the target position of the robot,
+          relative to its position and orientation when the box is triggered.
+
+          X=1 and Y=0 is one meter in front of the robot.
+
+          X=0 and Y=1 is one meter to the left of the robot.
+
+        * The third parameter is the desired orientation of the robot,
+          still relative to its orientation when the box is triggered.
+
+
+4.      Click **OK** button.
+
+5.      Connect the Behavior |onstart-inside-button| **onStart** Input to the
+        |onstart-outside-button| **onStart** Input of the Box.
+
+6.      Click |play-button| **Play** button.
+
+        Your robot walks.
+=====  ============================================================================
+
+Go on and test the various parameters for the walk box.
+
+To go further
+^^^^^^^^^^^^^^
+
+Walking is very complicated movement that can't be designed by keyframe animation.
+This is why we have developed specific tools that should help you.
+One of the main modules of the robot is ALMotion.
+For further details, see the :ref:`naoqi-motion`.
+
+
+.. _choregraphe-howto-make-nao-say-something:
+
+How to make |roboN| say something
+++++++++++++++++++++++++++++++++++++++
+
+To make |roboN| say something different than hello:
+
+=====  ============================================================================
+Step       Action
+=====  ============================================================================
+1.      Drag and drop the **Audio** > **Voice** > **Say** box onto your
+        **Flow diagram**.
+
+2.      Link it to the beginning of the root Behavior.
+
+        Your **Flow diagram** should look like that:
+
+        .. image:: /medias/desktop/choregraphe/beginning_hello.png
+           :width: 222 px
+           :height: 164 px
+
+3.      Double click the **Say** box in order to get into it.
+
+        Your **Flow diagram** should look like that:
+
+        .. image:: /medias/desktop/choregraphe/chore_flow_diagram_inside_say_box.png
+           :width: 441 px
+           :height: 248 px
+
+        The **Say** box has an intern **Flow diagram** gathering two boxes:
+
+        * **Localized Text** box and
+        * a script box that handles the speaking process.
+
+4.      Change the text in the **Localized Text** box to make |roboN|
+        say what you want.
+
+5.      You can also change:
+
+        * |roboN| language, see :ref:`choregraphe-howto-change-nao-language`,
+
+        * the volume of |roboN|'s voice, see :ref:`choregraphe-howto-set-volume`.
+
+6.      Click |play-button| **Play** button.
+
+        Your robot says your text.
+=====  ============================================================================
+
+To come back to the main **Flow diagram**, click the **root** on the **Box path**
+(see :ref:`chore_flow_diagram_panel`).
+
+How to discover other boxes
+++++++++++++++++++++++++++++++
+
+To discover a box:
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Select the box from the
+        :ref:`chore_box_libary_panel`.
+
+        Read the description displayed at the bottom of the
+        :ref:`chore_box_libary_panel`.
+
+2.      Drag and drop it into
+        the :ref:`chore_flow_diagram_panel`.
+
+3.      If there is one, click the |parameter-button|
+        **Parameter** button of the box.
+
+        Read the full definition of each parameter, by holding the pointer over
+        it.
+
+        .. image:: /medias/desktop/choregraphe/contextual_tooltip.png
+            :width: 469 px
+            :height: 241 px
+
+4.      Explore each input and output of the box by holding the pointer over
+        it.
+
+5.      Double click the box and explore its content.
+=====  ==========================================================================
+
+
+Useful settings
+----------------
+
+.. _choregraphe-howto-change-nao-language:
+
+How to change |roboN| language
++++++++++++++++++++++++++++++++++
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+------------------------
+
+To change |roboN| language in **Choregraphe**:
+
+=====  ============================================================================
+Step       Action
+=====  ============================================================================
+1.      Drag and drop the **Audio** > **Voice** > **Set Language** box onto
+        your Flow diagram.
+
+2.      Link the box to the beginning of the root behavior.
+
+        Your diagram should look like that:
+
+        .. image:: /medias/desktop/choregraphe/change_language.png
+            :width: 372 px
+            :height: 258 px
+
+3.      Click the |parameter-button| **Parameter** button of the box.
+
+4.      Select a language and click **OK** button.
+
+        .. note::
+
+           The chosen language must be installed on the robot.
+
+           For further details, see: :ref:`language_management`.
+=====  ============================================================================
+
+Another way to change the language of the robot is to use the robot web page.
+For further details see: :ref:`Web page Settings <opennao-web-page-settings>`.
+
+
+
+.. _choregraphe-howto-set-volume:
+
+How to set |roboN|'s volume
+++++++++++++++++++++++++++++++++++
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+------------------------
+
+In **Choregraphe**, you have different possibilities to set the volume of your robot.
+
+
+You can:
+
+* Click the **Volume** button located in the :ref:`chor_toolbar`.
+
+  This button displays a slider that allows you to set the volume.
+
+  .. image:: /medias/desktop/choregraphe/volume.png
+     :width: 289 px
+     :height: 276 px
+
+
+* Set the Volume using the :ref:`webpage_nao`.
+
+.. or the :ref:`webpage_juliette`.
+
+* Use the **Set Speaker Volume** box.
+
+
+.. _choregraphe-howto-change-active-camera:
+
+How to change |roboN|'s active camera
+++++++++++++++++++++++++++++++++++++++
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+------------------------
+
+To switch camera with **Choregraphe**, use the **Select Camera** box:
+
+=====  ==================================================================================
+Step       Action
+=====  ==================================================================================
+1.      Drag and drop the **Vision** > **Select Camera** box onto your Flow diagram.
+
+2.      Play the behavior by clicking on the |play-button| **Play** button:
+
+3.      Wait until **Choregraphe** has finished sending the behavior to the robot.
+
+4.      Double click on one or the other input of the box.
+
+        You can see in the **Video monitor** panel that the camera has changed.
+
+        To display the **Video monitor** panel, see :ref:`How to display/hide panels
+        <choregraphe-howto-display-hide-panels>` section.
+=====  ==================================================================================
+

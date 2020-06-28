@@ -1,0 +1,80 @@
+
+Nome host:                            W10STAT-7-143
+Nome SO:                              Microsoft Windows 10 Education N
+Versione SO:                          10.0.18362 N/D build 18362
+Produttore SO:                        Microsoft Corporation
+Configurazione SO:                    Workstation membro
+Tipo build SO:                        Multiprocessor Free
+Proprietario registrato:              administrator
+Organizzazione registrata:            ITIS G. Marconi
+Numero di serie:                      00328-70492-00000-AA475
+Data di installazione originale:      29/08/2019, 11:30:57
+Tempo di avvio sistema:               18/10/2019, 09:46:22
+Produttore sistema:                   INTERCOMP
+Modello sistema:                      H81H3-TI2
+Tipo sistema:                         x64-based PC
+Processore:                           1 processore(i) installati.
+                                      [01]: Intel64 Family 6 Model 60 Stepping 3 GenuineIntel ~3201 Mhz
+Versione BIOS:                        American Megatrends Inc. 4.6.5, 04/08/2014
+Directory Windows:                    C:\windows
+Directory di sistema:                 C:\windows\system32
+Dispositivo di avvio:                 \Device\HarddiskVolume1
+Impostazioni locali sistema:          it;Italiano (Italia)
+Impostazioni locali di input:         it;Italiano (Italia)
+Fuso orario:                          (UTC+01:00) Amsterdam, Berlino, Berna, Roma, Stoccolma, Vienna
+Memoria fisica totale:                8.066 MB
+Memoria fisica disponibile:           4.815 MB
+Memoria virtuale: dimensione massima: 9.346 MB
+Memoria virtuale: disponibile:        5.980 MB
+Memoria virtuale: in uso:             3.366 MB
+Posizioni file di paging:             C:\pagefile.sys
+Dominio:                              EDU.MARCONI
+Server di accesso:                    \\EDU-A02
+Aggiornamenti rapidi:                 5 Aggiornamenti rapidi installati.
+                                      [01]: KB4506991
+                                      [02]: KB4503308
+                                      [03]: KB4508433
+                                      [04]: KB4509096
+                                      [05]: KB4512508
+Schede di rete:                       7 NIC installate.
+                                      [01]: VMware Virtual Ethernet Adapter for VMnet8
+                                            Nome connessione: Ethernet 4
+                                            DHCP abilitato:   No
+                                            Indirizzi IP
+                                            [01]: 192.168.180.1
+                                            [02]: fe80::80dc:aea7:9c50:128d
+                                      [02]: VirtualBox Host-Only Ethernet Adapter
+                                            Nome connessione: Ethernet 2
+                                            DHCP abilitato:   No
+                                            Indirizzi IP
+                                            [01]: 192.168.56.1
+                                            [02]: fe80::6891:accd:704e:9d01
+                                      [03]: VMware Virtual Ethernet Adapter for VMnet1
+                                            Nome connessione: Ethernet 3
+                                            DHCP abilitato:   No
+                                            Indirizzi IP
+                                            [01]: 192.168.64.1
+                                            [02]: fe80::5953:ea8d:1aff:ebce
+                                      [04]: Realtek PCIe GBE Family Controller
+                                            Nome connessione: Ethernet
+                                            DHCP abilitato:   No
+                                            Indirizzi IP
+                                            [01]: 172.16.7.143
+                                            [02]: fe80::f869:76a8:e5ed:7b95
+                                      [05]: Microsoft KM-TEST Loopback Adapter
+                                            Nome connessione: Ethernet 6
+                                            DHCP abilitato:   Sç
+                                            Server DHCP:      255.255.255.255
+                                            Indirizzi IP
+                                            [01]: 169.254.82.212
+                                            [02]: fe80::d164:1846:c7e4:52d4
+                                      [06]: 802.11n Wireless LAN Card
+                                            Nome connessione: Wi-Fi
+                                            Stato:            Supporto disconnesso
+                                      [07]: Bluetooth Device (Personal Area Network)
+                                            Nome connessione: Connessione di rete Bluetooth
+                                            Stato:            Supporto disconnesso
+Requisiti Hyper-V:                    Estensioni modalitÖ di monitoraggio macchina virtuale: Sç
+                                      Virtualizzazione abilitata nel firmware: Sç
+                                      Conversione indirizzi di secondo livello: Sç
+                                      Prevenzione esecuzione dati disponibile: Sç

@@ -1,0 +1,59 @@
+
+.. _alfacecharacteristics:
+
+ALFaceCharacteristics
+=====================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alfacecharacteristics-api
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <alfacecharacteristics-api>`
+
+------------
+
+What it does
+------------
+
+**ALFaceCharacteristics** updates every person with some additional information
+such as an estimation of age and gender. It also tries and detects whether the
+person is smiling or what facial expression the person is having.
+
+
+How it works
+------------
+
+Like most perception modules this one works on top of **ALPeoplePerception** which
+will be started automatically by **ALFaceCharacteristics**.
+
+This module analyzes the face of a person and try to find some specific characteristics
+to a gender or an age category. As for the smile, it gives a measurement of the
+"smile degree" on a face, which means it can make the difference between a faint smile
+and a frank smile. An event called :naoqi:event:`FaceCharacteristics/PersonSmiling`
+is raised every time the smile degree is higher than a given threshold. The
+value of this threshold can be changed by calling
+:cpp:func:`ALFaceCharacteristicsProxy::setSmilingThreshold`.
+
+**ALFaceCharacteristics** also analyses facial expressions and tries to estimate
+whether a face is *neutral*, *happy*, *surprised*, *angry* or *sad*.
+
+In addition to the age, gender, smile and facial expression estimations, the module also provides
+a confidence score between 0 and 1 associated to each value to indicate how likely
+an estimation is. 0 means that the estimation is "very unlikely" and 1 means "very likely").
+It makes it possible to filter the results in order to keep the most reliable information
+only.
+
+Performances and limitations
+----------------------------
+
+* Lighting conditions and accessories such as glasses and hat may alter the results.
+* Face deformations (such as a pronounced grin or grimace) can also have an impact on
+  age estimation.
+* Gender estimation on young children may also be less accurate than on adults since
+  they have less distinctive facial features.
+* The estimation results may fluctuate over time because they are computed on different
+  facial images each time. This is to be expected and the age estimation for example
+  can be used to estimate an "age category" (child/adult/elderly for example).
+* Facial expression estimation is not able to recognize too subtle facial expressions.

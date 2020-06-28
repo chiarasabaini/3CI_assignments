@@ -1,0 +1,104 @@
+.. _helloworld_choregraphe:
+
+Hello World 1 - using Choregraphe
+===================================
+
+
+Audience
+----------
+
++-------+-------------------------------------+----------------+-------------------+
+| Level |**All beginners**                    | Time           | **5 min**         |
++-------+-------------------------------------+----------------+-------------------+
+| OS    |**Linux** - **Windows** - **Mac**    | Preparation    | **15 min**        |
++-------+-------------------------------------+----------------+-------------------+
+
+*Preparation time is given for the case you have to install tools prior the tutorial.*
+
+Before starting
+----------------
+
+* Make sure you have a robot ready to use.
+  Otherwise, read :ref:`out_of_the_box_nao`.
+
+..  or :ref:`out_of_the_box_juliette`.
+
+* | Make sure **Choregraphe** is installed on your computer.
+  | If it is not the case, see :ref:`desktop-installation-cho-installing`.
+
+Let's do it
+------------
+
+=====  ===============================================================================================
+Step       Action
+=====  ===============================================================================================
+1.      Start **Choregraphe**.
+
+2.      Click the **Connect to** button and connect **Choregraphe** to your robot.
+
+        .. image:: /medias/getting_started/helloworld_cho_00.png
+           :width: 533 px
+           :height: 390 px
+
+        For further details, see :ref:`choregraphe-howto-connect`.
+
+        Your robot appears in the **Robot view**.
+
+3.      Drag the **Audio** > **Voice** > **Say** box on the grey area.
+
+        .. image:: /medias/getting_started/helloworld_cho_02.png
+           :width: 533 px
+           :height: 387 px
+
+4.      Create a link as below.
+
+        .. image:: /medias/getting_started/helloworld_cho_03.png
+           :width: 533 px
+           :height: 387 px
+
+5.      Click the **Play** button.
+
+        .. image:: /medias/getting_started/helloworld_cho_04.png
+           :width: 534 px
+           :height: 390 px
+=====  ===============================================================================================
+
+Result
+---------
+
+Your robot says "Hello". In the meantime, the **Robot view** displays the message.
+
+.. image:: /medias/getting_started/helloworld_cho_05.png
+   :width: 534 px
+   :height: 382 px
+
+
+How it works
+------------------
+
+* The **Connect to** button allows you to define on which robot you will send your program.
+
+* Dragging and dropping a box creates a ready-to-use copy of a predefined program.
+
+* The **Play** buttons has a 2-in-1 function: it uploads the program on the robot and starts its execution. 
+
+* The execution automatically starts the box linked to the **onStart** input.  
+
+What you have learned
+----------------------
+
+In **Choregraphe**, ready-to-use boxes allow you to create and play behaviors
+without writing a single line of code.
+
+
+To go further
+-------------
+
+While you are there, take the opportunity to discover **Choregraphe** more in details, trying to make your robot walk, for example.
+See: :ref:`choregraphe-first-steps`.
+
+Next step
+------------
+
+| What about creating your first script?
+| Try to create a **Python** script using **Choregraphe** editor: :ref:`helloworld_choregraphe_script`.

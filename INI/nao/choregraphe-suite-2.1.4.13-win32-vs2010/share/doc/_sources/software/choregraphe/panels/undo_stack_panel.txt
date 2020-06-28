@@ -1,0 +1,21 @@
+.. _chore_undo_stack_panel:
+
+Undo stack panel
+================
+
+The **Undo stack** panel allows you to see the complete undo/redo stack.
+
+.. image:: /medias/desktop/choregraphe/chore_undo_stack.png
+   :width: 300 px
+   :height: 182 px
+
+It eases navigation into the different steps that lead to the **current project state**,
+in the current Choregraphe session.
+
+Click onto an action displayed in the **Undo stack panel** to instantly update
+current project to the selected state.
+
+.. warning::
+   A change applied from any state of the current project will **erase** all other changes made since this state.
+
+

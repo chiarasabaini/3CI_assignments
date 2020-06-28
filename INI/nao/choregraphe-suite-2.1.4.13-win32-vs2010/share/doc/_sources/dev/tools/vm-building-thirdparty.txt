@@ -1,0 +1,134 @@
+.. _vm-usage:
+
+Using the NAOqi OS in a virtual machine
+========================================
+
+This section gives some hints about how to build third-party software for NAO.
+
+Before starting, make sure the **NAOqi OS** virtual machine already setup and
+running. If it is not the case:
+
+* refer to :ref:`vm-setup` to setup the **NAOqi OS** virtual machine;
+
+* refer to :ref:`vm-using` to start the **NAOqi OS** virtual machine;
+
+* refer to :ref:`vm-accessing` to login on the **NAOqi OS** virtual machine.
+
+Tweaking the NAOqi OS virtual machine
+--------------------------------------
+
+.. _vm-optimize-builds:
+
+Optimizing builds for Atom targets
+++++++++++++++++++++++++++++++++++
+
+As root, make the ``/etc/portage`` symlink point to:
+
+* ``/etc/portage.generic`` to build x86-generic binary.
+  targets;
+
+* ``/etc/portage.atom`` to build optimized binaries for Atom targets;
+
+To change, just run the following commands:
+
+.. code-block:: console
+
+    # Here, set optimizations for Atom (a.k.a. NAO V4):
+    su
+    rm -fi /etc/portage
+    ln -sfv /etc/portage.atom /etc/portage
+    exit
+
+    # do some developments...
+
+    # Then you can switch back to the generic settings:
+    su
+    rm -fi /etc/portage
+    ln -sfv /etc/portage.generic /etc/portage
+    exit
+
+Building the third-party software
+---------------------------------
+
+.. _vm-usage-emerge:
+
+emerge usage
+++++++++++++
+
+``emerge`` is the package manager used by Gentoo, **NAOqi OS**.
+
+As usual, do not hesitate to checkout the ``emerge`` documentation
+http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=2&chap=1#doc_chap3
+or the its man page:
+
+.. code-block:: console
+
+    man emerge
+
+This section gives the most often used ``emerge`` commands.
+
+.. warning::
+
+    Never run:
+
+    .. code-block:: console
+
+        emerge --sync
+
+    This will upgrade the whole system, all packages build after that may be not
+    compatible with those from the **NAOqi OS** on the robot.
+
+Searching a package
+~~~~~~~~~~~~~~~~~~~
+
+Searching in the package name (quick search):
+
+.. code-block:: console
+
+    emerge -s <some package>
+
+Searching in the package description (a lot slower):
+
+.. code-block:: console
+
+    emerge -S <some package>
+
+.. _vm-usage-pkg-build:
+
+Building and installing a package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To build and install a package and all its dependencies, run (this requires root
+privileges):
+
+.. code-block:: console
+
+    su
+    emerge -ab <package name>
+    exit
+
+After the building and installing some packagea in the virtual machine, the
+binary packages are locally stored in ``/home/nao/opennao-distro/packages``.
+
+The following command will show you all built packages:
+
+.. code-block:: console
+
+    tree ``/home/nao/opennao-distro/packages``
+
+.. _vm-usage-pkg-content:
+
+Package content
++++++++++++++++
+
+To check the content of an installed package:
+
+.. code-block:: console
+
+    equery files <package name>
+
+To know which package a file belongs:
+
+.. code-block:: console
+
+    portageq owners / <full path of the file>

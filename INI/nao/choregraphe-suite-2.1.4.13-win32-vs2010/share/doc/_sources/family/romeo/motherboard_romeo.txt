@@ -1,0 +1,35 @@
+﻿.. include:: /bulk/common.rst
+
+.. romeo-motherboard:
+
+|roboR| - Motherboards
+=========================
+
+.. seealso:: :ref:`romeo`
+
+--------------------
+
+
+Specification
+---------------
+
+4 x CPU: 
+
+* 3 on Head motherboard
+* 1 on Torso motherboard
+
+==============  ==============
+CPU PROCESSOR   ATOM Z530
+
+*Cache memory*  *512 KB*
+
+Clock speed     1.6 Ghz
+
+*FSB speed*     *533 mHz*
+
+RAM             1 GB
+
+*FLASH MEMORY*  *2 GB*
+
+*MICRO SDHC*    *8 GB*
+==============  ==============

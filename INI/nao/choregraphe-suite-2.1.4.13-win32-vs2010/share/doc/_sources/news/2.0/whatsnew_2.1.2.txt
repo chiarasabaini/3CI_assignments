@@ -1,0 +1,60 @@
+.. include:: ../../bulk/common.rst
+
+
+.. _whats-new_2.1.2:
+
+Release Notes - 2.1.2
+=====================
+
+Addendum - 11 December 2014
+---------------------------
+
+Webots - Known issues
+++++++++++++++++++++++
+
+.. warning::
+
+    **Webots 8.0.3** release may experience technical issues.
+    Cyberbotics is working hard to fix them.
+
+    More specifically, the **Webots Guided Tour** has a known issue leading to a crash.
+
+Webots - Tested and supported configurations
+++++++++++++++++++++++++++++++++++++++++++++
+
+* Windows 7 - 64 bits,
+* Ubuntu 14.04 - 64 bits.
+
+Mac not yet properly supported.
+
+
+|roboN| Web page
+-------------------
+
+Setting a connection behind a proxy
++++++++++++++++++++++++++++++++++++
+
+A new option allows connecting |roboN| behind a proxy.
+
+For further details, see: :ref:`connect_behind_proxy`.
+
+New parameter: **Alive by default**
++++++++++++++++++++++++++++++++++++
+
+The parameter **Alive by default** allows you to enable or disable the
+:ref:`alife` at startup.
+
+For further details, see: :ref:`webpage_nao` > :ref:`myrobot_nao`.
+
+Simulators
+-----------
+
+**Webots 8** is available
+++++++++++++++++++++++++++
+
+**Webots 8** is compatible with:
+
+* **Choregraphe V2.1.2**, and with
+* **NAO V5**.
+
+For further details see: :ref:`webots`.

@@ -1,0 +1,50 @@
+Start time: 2020-05-04 18:17:00.295298
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works\osstat_01_01
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01
+Present files: []
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin
+Present files: ['osstat.py', 's.py']
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\osstat.py
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\osstat.py:
+Dimension in byte: 2123 byte
+Last modify: Mon May  4 18:16:59 2020
+Last access: Mon May  4 18:16:59 2020
+Created: Mon May  4 14:57:44 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\s.py
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\s.py:
+Dimension in byte: 2368 byte
+Last modify: Mon May  4 17:12:50 2020
+Last access: Mon May  4 17:12:50 2020
+Created: Mon May  4 17:10:47 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\doc\README.md
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\doc\README.md:
+Dimension in byte: 871 byte
+Last modify: Mon May  4 16:33:41 2020
+Last access: Mon May  4 16:33:41 2020
+Created: Mon May  4 15:37:34 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\log\log.log
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\log\log.log:
+Dimension in byte: 1907 byte
+Last modify: Mon May  4 18:17:00 2020
+Last access: Mon May  4 18:17:00 2020
+Created: Mon May  4 18:15:23 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Done
+End time: 2020-05-04 18:17:00.464202
+Execution time: 0.16990351676940918s
+

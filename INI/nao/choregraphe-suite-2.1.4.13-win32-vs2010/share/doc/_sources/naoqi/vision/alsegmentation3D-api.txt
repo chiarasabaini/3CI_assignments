@@ -1,0 +1,274 @@
+.. include:: ../../bulk/common.rst
+
+.. _alsegmentation3D-api:
+
+ALSegmentation3D API
+=====================
+
+:ref:`naoqi-vision` - :ref:`Overview <alsegmentation3D>` | API
+
+-------------------
+
+|3d| This module requires a robot with a 3D sensor.
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alsegmentation3Dproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALSegmentation3DProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api` and :ref:`alvisionextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALSegmentation3DProxy::getDeltaDepthThreshold`
+  * :cpp:func:`ALSegmentation3DProxy::getBlobTrackingDistance`
+  * :cpp:func:`ALSegmentation3DProxy::getTopOfBlob`
+  * :cpp:func:`ALSegmentation3DProxy::getVerticalOffset`
+  * :cpp:func:`ALSegmentation3DProxy::isBlobTrackingEnabled`
+  * :cpp:func:`ALSegmentation3DProxy::setBlobTrackingDistance`
+  * :cpp:func:`ALSegmentation3DProxy::setBlobTrackingEnabled`
+  * :cpp:func:`ALSegmentation3DProxy::setDeltaDepthThreshold`
+  * :cpp:func:`ALSegmentation3DProxy::setVerticalOffset`
+
+
+
+Events lists
+------------
+
+* :naoqi:event:`ALTracker/BlobDetected`
+* :naoqi:event:`Segmentation3D/BlobTrackerUpdated`
+* :naoqi:event:`Segmentation3D/SegmentationUpdated`
+* :naoqi:event:`Segmentation3D/TrackedBlobNotFound`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`Segmentation3D/BlobsList`
+* :naoqi:memkey:`Segmentation3D/TopOfTrackedBlob`
+
+
+
+Methods
+-------
+
+.. cpp:function:: float ALSegmentation3DProxy::getDeltaDepthThreshold()
+
+   :return: The current value of DepthThreshold (in meters) for the segmentation. The default value is 0.05m.
+            See definition of DepthThreshold in section
+            :ref:`Segmentation<ALSegmentation3D::segmentationsection>`.
+
+.. cpp:function:: float ALSegmentation3DProxy::getBlobTrackingDistance()
+
+   :return: The current value of BlobTrackingDistance (in meters).
+            See definition of BlobTrackingDistance in section
+            :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+.. cpp:function:: AL::ALValue ALSegmentation3DProxy::getTopOfBlob(const float& dist, const int& frame, const bool& applyVerticalOffset)
+
+   This function is like a "one-shot" version of the
+   :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`
+
+   Returns the position of the :ref:`TopOfBlob<ALSegmentation3D::topofblobsection>` of the blob
+   the most in the center, present at a distance near the given distance **dist**.
+
+   :param dist: Distance criterion in order to filter the segmentated blobs. By setting dist to -1,
+                it it possible to bypass this criterion and just select the nearest blob to the robot.
+
+   :param frame: Used to select the frame in which the position will be returned (-1 for the frame of
+                 the image, 0 for :term:`FRAME_TORSO`, 1 for :term:`FRAME_WORLD` and 2 for :term:`FRAME_ROBOT`).
+
+   :param applyVerticalOffset: Used to choose if the VerticalOffset must be applied. This offset will not be
+                               applied if the :ref:`TopOfBlob<ALSegmentation3D::topofblobsection>` belongs
+                               to the top border of the depth image.
+
+   :return: If frame equals -1, result = [xAngle, yAngle, distBlob] where [xAngle,yAngle] are the angular
+            coordinates in the image and distBlob is the real distance of the blob with respect ot the camera.
+            If frame equals 0,1 or 2, result = [x, y, z] where [x,y,z] are the coordinates in the corresponding frame.
+
+.. cpp:function:: float ALSegmentation3DProxy::getVerticalOffset()
+
+   :return: The current value of the VerticalOffset (in meters). The default value is -0.2m.
+            A negative value means that the offset will be substracted to the position of TopOfBlob.
+            See definition of VerticalOffset in section
+            :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+.. cpp:function:: bool ALSegmentation3DProxy::isBlobTrackingEnabled()
+
+   :return: true if blob tracking is running, false otherwise.
+
+.. cpp:function:: void ALSegmentation3DProxy::setBlobTrackingDistance(const float& distance)
+
+   Sets the value of BlobTrackingDistance.
+   See definition of BlobTrackingDistance in section
+   :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+   :param distance: New BlobTrackingDistance (in meters), -1 to track the nearest blob.
+
+.. cpp:function:: void ALSegmentation3DProxy::setBlobTrackingEnabled(const bool& status)
+
+   Turns on or off the blob tracking.
+
+   :param status: true to turn on the blob tracking, false to turn it off.
+
+.. cpp:function:: void ALSegmentation3DProxy::setDeltaDepthThreshold(const float& threshold)
+
+   Sets the value of DepthThreshold (in meters) used for the segmentation.
+   See definition of DepthThreshold in section
+   :ref:`Segmentation<ALSegmentation3D::segmentationsection>`.
+
+   :param threshold: New DepthThreshold value (must be positive).
+
+.. cpp:function:: void ALSegmentation3DProxy::setVerticalOffset(const float& offset)
+
+   Sets the value of VerticalOffset. See definition of VerticalOffset in section
+   :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+   :param threshold: New VerticalOffset value (in meters). A negative value means that the
+                     offset will be substracted to the position of TopOfBlob.
+
+
+
+Events
+------
+
+.. naoqi:event:: ALTracker/BlobDetected(AL::ALValue result)
+
+  Raised each time the tracked blob is detected, with a structure that can
+  be used with function :cpp:func:`ALTrackerProxy::trackEvent` of the module **ALTracker**.
+  For more details, see: :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+.. naoqi:event:: Segmentation3D/BlobTrackerUpdated()
+
+  Raised each time the tracked blob is detected. The information about the updated position
+  of the tracked blob can be accessed using the memory key
+  :naoqi:memkey:`Segmentation3D/TopOfTrackedBlob`.
+  For more details, see: :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+.. naoqi:event:: Segmentation3D/SegmentationUpdated()
+
+  Raised each time segmentation is computed. The description of the blobs of the updated
+  segmentation can be accessed using the memory key :naoqi:memkey:`Segmentation3D/BlobsList`.
+  For more details, see: :ref:`Segmentation<ALSegmentation3D::segmentationsection>`.
+
+.. naoqi:event:: Segmentation3D/TrackedBlobNotFound()
+
+  Raised each time the tracked blob is not detected.
+  For more details, see: :ref:`Blob tracking<ALSegmentation3D::blobtrackingsection>`.
+
+
+Memory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue Segmentation3D/BlobsList
+
+  Contains the list of blobs after segmentation.
+
+Key structure
++++++++++++++
+
+.. code-block:: guess
+
+  BlobsList =
+  [
+    TimeStamp,
+    [BlobInfo_1, BlobInfo_2, ... BlobInfo_n],
+    CameraPose_InTorsoFrame,
+    CameraPose_InRobotFrame,
+    Camera_Id
+  ]
+
+**TimeStamp**: this field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+  TimeStamp [
+    TimeStamp_Seconds,
+    Timestamp_Microseconds
+  ]
+
+
+**BlobInfo_i**: each of these fields contains the description of a blob of similar depth:
+
+.. code-block:: guess
+
+  BlobInfo_i =
+  [
+    PositionOfCog,
+    AngularRoi,
+    MeanDistance,
+    RealSizeRoi,
+    TopOfBlob
+  ]
+
+- **PositionOfCog** = [xAngle,yAngle] contains the angular coordinates (in radians) of the center of gravity
+  of the blob.
+
+- **AngularRoi** = [xAngle,yAngle,width, height] contains information about the smallest rectangle (ROI) in which
+  the blob is included. [xAngle,yAngle] corresponds to the angular coordinates (in radians) of the top left corner
+  of the ROI in the current depth image. [width, height] corresponds to the angular size (in radians)
+  of the ROI.
+
+- **MeanDistance** is the mean distance of the points of the blob, with respect to the depth camera.
+
+- **RealSizeRoi** = [realwidth, realheight] gives the real size (in meters) of the ROI of the cluster.
+
+- **TopOfBlob** = [xAngle,yAngle] contains the angular coordinates (in radians) of the :ref:`TopOfBlob<ALSegmentation3D::topofblobsection>`.
+
+**CameraPose_InTorsoFrame**: describes the :term:`Position6D` of the depth camera at the time the image was taken, in :term:`FRAME_TORSO`.
+
+**CameraPose_InRobotFrame**: describes the :term:`Position6D` of the depth camera at the time the image was taken, in :term:`FRAME_ROBOT`.
+
+**Camera_Id**: gives the Id of the depth camera used for the detection.
+
+
+
+.. naoqi:memkey:: AL::ALValue Segmentation3D/TopOfTrackedBlob
+
+  Contains the infomation about the tracked blob.
+
+Key structure
++++++++++++++
+
+.. code-block:: guess
+
+  TopOfTrackedBlob =
+  [
+    TimeStamp,
+    Position,
+    CameraPose_InTorsoFrame,
+    CameraPose_InRobotFrame,
+    Camera_Id
+  ]
+
+**TimeStamp**: this field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+  TimeStamp [
+    TimeStamp_Seconds,
+    Timestamp_Microseconds
+  ]
+
+
+**Position** = [xAngle,yAngle,distance], where [xAngle,yAngle] are the angular coordinates (in radians) in the image
+of the top of the blob after applying the offset, and distance is the distance between the blob and
+the camera.
+
+**CameraPose_InTorsoFrame**: describes the :term:`Position6D` of the depth camera at the time the image was taken, in :term:`FRAME_TORSO`.
+
+**CameraPose_InRobotFrame**: describes the :term:`Position6D` of the depth camera at the time the image was taken, in :term:`FRAME_ROBOT`.
+
+**Camera_Id**: gives the Id of the depth camera used for the detection.
+
+

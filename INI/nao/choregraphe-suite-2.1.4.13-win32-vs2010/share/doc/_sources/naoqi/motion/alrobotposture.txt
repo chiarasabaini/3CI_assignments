@@ -1,0 +1,155 @@
+.. |posture_standzero| image:: /medias/naoqi/posture_standzero.png
+   :class: img-inline
+
+.. |posture_standinit| image:: /medias/naoqi/posture_standinit.png
+   :class: img-inline
+
+.. |posture_stand| image:: /medias/naoqi/posture_stand.png
+   :class: img-inline
+
+.. |posture_lyingbelly| image:: /medias/naoqi/posture_lyingbelly.png
+   :class: img-inline
+
+.. |posture_lyingback| image:: /medias/naoqi/posture_lyingback.png
+   :class: img-inline
+
+.. |posture_sit| image:: /medias/naoqi/posture_sit.png
+   :class: img-inline
+
+.. |posture_sitrelax| image:: /medias/naoqi/posture_sitrelax.png
+   :class: img-inline
+
+.. |posture_crouch| image:: /medias/naoqi/posture_crouch.png
+   :class: img-inline
+
+
+.. _alrobotposture:
+
+ALRobotPosture
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alrobotposture-api
+
+Overview | :ref:`API <alrobotposture-api>`
+
+-----------------
+
+What it does
+--------------
+
+**ALRobotPosture** module allows you to make the robot go to different
+:term:`predefined postures`.
+
+You can choose between :cpp:func:`ALRobotPostureProxy::goToPosture` and
+:cpp:func:`ALRobotPostureProxy::applyPosture`.
+
+* If you want to do an autonomous application, always choose the
+  :cpp:func:`ALRobotPostureProxy::goToPosture`.
+* If you just want a shortcut to reach the posture quickly when manipulating the
+  robot you can use :cpp:func:`ALRobotPostureProxy::applyPosture` (you will have to help the robot).
+
+
+How it works
+--------------
+
+The robot detects in which :term:`posture` it is, computes a path from its
+current posture to its target posture, and applies it.
+
+It is possible to choose the speed for the posture to be applied.
+
+
+Definitions
+-------------
+
+.. glossary::
+
+   Posture
+
+       A **posture** for a robot is a (unique) configuration of its joints and of inertial
+       sensor.
+
+       As a **posture** is defined by a list of real numbers (i.e. floats) there is an
+       infinite number of postures.
+
+
+   Predefined postures
+
+       Here is the list of the **Predefined Postures** names:
+
+       * **Crouch**,
+       * **LyingBack**,
+       * **LyingBelly**,
+       * **Sit**,
+       * **SitRelax**,
+       * **Stand**,
+       * **StandInit**,
+       * **StandZero**.
+
+
+       Some postures (like **Sit** or **Lying**) are not available for all types
+       of robot (see :ref:`nao-family::nao-body-type`).
+
+       * Use :cpp:func:`ALRobotPostureProxy::getPostureList` to retrieve the list of
+         predefined postures available on your robot.
+
+       * See :ref:`robot_postures` to visualize the different predefined postures.
+
+   Posture family
+
+       As the number of possible postures is infinite, postures are grouped in **Posture families**
+       in order to ease the interpretation of the current posture.
+
+       For example, the posture family **Sitting** contains the postures
+       **SitRelax** and **Sit** as well as all the approaching postures.
+
+       Here is the list of posture families:
+
+       Using :cpp:func:`ALRobotPostureProxy::getPostureFamilyList` you can find out what are the available
+       posture families on your robot. It is a subset of the set bellow.
+
+       +------------------+-------------------------------------------------------+
+       | Posture          | Description                                           |
+       | Family           |                                                       |
+       +==================+=======================================================+
+       | "Standing"       | the weight is supported by the feet and the torso is  |
+       |                  | upright.                                              |
+       +------------------+-------------------------------------------------------+
+       | "Sitting"        | the buttock is in contact with the ground and the     |
+       |                  | torso is upright.                                     |
+       +------------------+-------------------------------------------------------+
+       | "SittingOnChair" | the buttock is in contact with a chair (10cm high)    |
+       |                  | and the torso is upright.                             |
+       +------------------+-------------------------------------------------------+
+       | "LyingBelly"     | stretched and facing down.                            |
+       +------------------+-------------------------------------------------------+
+       | "LyingBack"      | stretched and facing up.                              |
+       +------------------+-------------------------------------------------------+
+       | "LyingLeft"      | stretched and facing to its right side.               |
+       +------------------+-------------------------------------------------------+
+       | "LyingRight"     | stretched and facing to its left side.                |
+       +------------------+-------------------------------------------------------+
+       | "Belly"          | facing down with the trunk lifted.                    |
+       +------------------+-------------------------------------------------------+
+       | "Back"           | facing back with the trunk lifted.                    |
+       +------------------+-------------------------------------------------------+
+       | "Left"           | leaning toward the left and touching the ground with  |
+       |                  | its hand.                                             |
+       +------------------+-------------------------------------------------------+
+       | "Right"          | leaning toward the right and touching the ground      |
+       |                  | with its hand.                                        |
+       +------------------+-------------------------------------------------------+
+
+
+Getting started
+---------------
+
+**Python example**
+
+:download:`alrobotposture.py </samples/python/alrobotposture/alrobotposture.py>`
+
+.. literalinclude:: /samples/python/alrobotposture/alrobotposture.py
+   :language: py

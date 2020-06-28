@@ -1,0 +1,15 @@
+.. _upgrade-software:
+
+Managing my robot
+=================
+
++--------------------------------------------+
+|**Upgrading your robot**                    |
++--------------------------------------------+
+|.. toctree::                                |
+|  :maxdepth: 1                              |
+|                                            |
+|  upgrade                                   |
+|                                            |
+|  ../software/naoflasher/naoflasher         |
++--------------------------------------------+

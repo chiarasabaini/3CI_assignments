@@ -1,0 +1,66 @@
+.. _customizing_layout:
+
+Choregraphe layout
+======================
+
+.. _choregraphe-howto-display-hide-panels:
+
+Displaying / hiding panels
+--------------------------
+
+From the **View** menu, click the panel to display or hide.
+
+.. image:: /medias/desktop/choregraphe/view_menu.png
+   :width: 107 px
+   :height: 285 px
+
+Each panel that is already displayed is marked.
+
+
+.. _choregraphe-howto-move-panels:
+
+Moving panels
+---------------
+
+To move a panel, drag it by its title bar.
+
+**Tip**: to prevent a panel to dock automatically,
+**press Control** before dragging it.
+
+According to the place you dragged it, the panel can:
+
+* Take another corner of the **Choregraphe** window.
+
+  .. image:: /medias/desktop/choregraphe/panel_corner.png
+     :width: 404 px
+     :height: 194 px
+
+* Overlap another panel.
+  Tabs appear in order to let you switch between the 2 panels.
+
+  .. image:: /medias/desktop/choregraphe/panel_overlap.png
+     :width: 404 px
+     :height: 176 px
+
+Click the **resize** button to obtain a floating window.
+
+.. image:: /medias/desktop/choregraphe/panel_floating.png
+   :width: 276 px
+   :height: 181 px
+
+.. _save_layouts:
+
+Saving and loading Layouts
+----------------------------
+
+To save the current position of all panels:
+
+* Choose **View** > **Save Layout...**
+
+To display the panels as you previously saved them:
+
+* Choose **View** > **Load Layout...**
+
+To come back to the default **Layout**:
+
+* Choose **View** > **Reset Views**.

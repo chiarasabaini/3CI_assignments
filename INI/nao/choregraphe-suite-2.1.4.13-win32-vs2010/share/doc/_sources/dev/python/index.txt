@@ -1,0 +1,89 @@
+.. include:: ../../bulk/common.rst
+
+.. _python-introduction:
+
+Python SDK
+==========
+
+.. seealso::
+
+   *Python SDK* | :ref:`python-tutorials` |
+   :ref:`python-examples` | :ref:`python-sdk-tip-and-tricks`
+
+---------------
+
+.. toctree::
+  :hidden:
+
+  tutorials
+  examples
+  tips-and-tricks
+  qimessaging
+
+
+What it does
+----------------
+
+The Python API for |roboS| allows you to:
+
+* use all of the C++ API from a remote machine, or
+* create Python modules that can run remotely or on the robot.
+
+Using Python is one of the easiest ways to program with |roboS|.
+
+Mastering key concepts
+-----------------------
+
+Please make sure to have read the :ref:`naoqi-overview` section first.
+
+The basic approach is:
+
+- Import ALProxy
+- Create an ALproxy to the module you want to use
+- Call a method
+
+This can be seen in the following example, which is explored in detail in the
+tutorial: :ref:`python_making_nao_speak`.
+
+.. code-block:: python
+
+    from naoqi import ALProxy
+    tts = ALProxy("ALTextToSpeech", "<IP of your robot>", 9559)
+    tts.say("Hello, world!")
+
+Or in Japanese:
+
+.. code-block:: python
+
+    # -*- encoding: UTF-8 -*-
+    from naoqi import ALProxy
+    tts = ALProxy("ALTextToSpeech", "<IP of your robot>", 9559)
+    tts.setLanguage("Japanese")
+    tts.say("こんにちは")
+
+
+Installation
+------------
+
+Please read the :ref:`python-install-guide` section.
+
+Samples and tutorials
+---------------------
+
+
+A progressing series of tutorials is available in the
+:ref:`python-tutorials` section.
+
+See also the :ref:`python-examples` section.
+
+
+Reference documentation
+-----------------------
+
+* :ref:`naoqi-python-api`
+
+
+Coming soon
+-------------
+
+* :ref:`qimessaging-python`

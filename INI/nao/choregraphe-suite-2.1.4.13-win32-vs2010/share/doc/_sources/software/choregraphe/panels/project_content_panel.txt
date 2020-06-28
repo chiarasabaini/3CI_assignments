@@ -1,0 +1,320 @@
+.. include:: ../../../bulk/common.rst
+
+.. _chore_project_content:
+
+Project content panel
+======================
+
+What is the Project content panel
+----------------------------------
+
+| The **Project content** panel displays the
+  :ref:`choregraphe-reference-project-properties` and all the files attached
+  to the current :ref:`choregraphe-reference-project`.
+| It allows you to:
+
+* Edit the **Manifest** of the :ref:`application`, through the
+  :ref:`choregraphe-reference-project-properties`.
+
+* Attach additional files to the current **Project**.
+
+.. image:: /medias/desktop/choregraphe/chore_project-content.png
+   :width: 304 px
+   :height: 320 px
+
++-------+------------------------------------------------------------------------------+
+| Part  |  Description                                                                 |
++=======+==============================================================================+
+| **A** | Project icon.                                                                |
++-------+------------------------------------------------------------------------------+
+| **B** | Application title.                                                           |
+|       |                                                                              |
+|       | Displayed in Choregraphe's locale,                                           |
+|       | or in English if the title does not exist in that locale.                    |
++-------+------------------------------------------------------------------------------+
+| **C** | Application ID.                                                              |
++-------+------------------------------------------------------------------------------+
+| **D** | **Properties** button.                                                       |
+|       |                                                                              |
+|       | Click the **Properties** button to display and edit all the properties.      |
+|       |                                                                              |
+|       | For further details, see: :ref:`choregraphe-reference-project-properties`.   |
+|       |                                                                              |
++-------+------------------------------------------------------------------------------+
+| **E** | Files contained in the Project.                                              |
+|       |                                                                              |
+|       | For further details, see: :ref:`proj_files`.                                 |
++-------+------------------------------------------------------------------------------+
+
+.. _choregraphe-reference-project-properties:
+
+Project Properties
+-------------------
+
+To open the **Project Properties**:
+
+* Choose **File** > **Project properties**.
+
+You can also, in the **Project content** panel, click the **Properties** button
+or double-click the **manifest.xml** file.
+
+.. image:: /medias/desktop/choregraphe/manifest_editor.png
+   :width: 499 px
+   :height: 493 px
+
+The layout is organized from the most general view on the left, to the most specific one on the right.
+
+=====  =================================   ================================================================================
+Part    Name                                Allows you to ...
+=====  =================================   ================================================================================
+**A**   **Package content**                 * Select the properties of:
+
+                                              * the **Project**,
+                                              * one of its attached **Behaviors** or
+                                              * one of its attached **Dialog topic**.
+
+                                              For further details, see: :ref:`proj_properties`, :ref:`beha_properties`
+                                              or :ref:`dial_properties`.
+
+                                            * Expose, hide those content through you **Application**.
+
+                                              Check a content to expose it.
+
+**B**   Properties                          Select one property in order to edit it.
+
+**C**   Edition zone                        Modify the content of the selected property.
+
+**D**   **Displayed language**              Browse from page to page when the **Project** supports several languages.
+        menu
+                                            Each translated property is available to edition in each supported language.
+
+**E**   Buttons                             Close the panel validating or cancelling the modifications.
+=====  =================================   ================================================================================
+
+.. _proj_properties:
+
+**Project** property list
+++++++++++++++++++++++++++
+
+=============================   ================================================================================
+ Property                        Description
+=============================   ================================================================================
+**Supported languages**          Allows you to choose the supported languages or to declare that the project
+                                 is **Language independent**, i.e. does not require any language.
+                                 Otherwise, at least one language is required.
+                                 Any language checked will be enforced as a
+                                 description language.
+
+**Description languages**        Allows you to choose the languages in which
+                                 the application will be described in a
+                                 human-readable or robot-speakable way.
+
+                                 Contains at least the **Supported languages**,
+                                 but may contain additional languages.
+
+                                 The selected languages appear in the **Displayed language** menu, in order to
+                                 let you browse from one language to another.
+                                 They also appear when a translated property is edited.
+
+*the icon*                       Allows you to select one Icon representing the **Application**.
+
+**Application title**            Name of the **Application**, defined for each supported language.
+
+**Application ID**               The Application Identifier.
+
+                                 Chain of characters (50 characters max) among:
+
+                                 * lower case letter from a to z
+                                 * numbers from 0 to 9
+                                 * special characters: - and _
+
+                                 Example: fever-dance_redux
+
+                                 .. warning:: this ID must be unique in the |store|.
+                                    Unicity will be checked when you upload the package in the
+                                    |store|.
+
+
+**Application version**          Allows you to set the three digits of the version number.
+
+                                 The third one is automatically incremented each time the
+                                 **Application Package** is built.
+
+**Application description**      Description of the **Application**, defined for each supported language. This
+                                 can be modified on the |store|.
+
+**Robot requirements**           Allows you to restrict which hardware configurations are supported by this
+                                 **Application**.
+
+**NAOqi requirements**           Allows you to restrict which NAOqi configurations are supported by this
+                                 **Application**.
+
+                                 Examples:
+
+                                 * From Any to 1.22.1: all versions under 1.22.1
+
+                                 * From 1.22 to Any: all versions above 1.22
+
+                                 * From 1.22 to 1.22: any 1.22 version
+=============================   ================================================================================
+
+.. _beha_properties:
+
+**Behavior** property list
+++++++++++++++++++++++++++
+
+=============================   ==================================================================================
+ Property                        Description
+=============================   ==================================================================================
+**Name**                         Human-readable name of the **Behavior**,
+                                 defined for each **Description language**.
+
+**Nature**                       Allows you to select the **Behavior**'s Nature among a predefined list:
+
+                                 * **No Nature** The Behavior will not be started by :ref:`autonomouslife`.
+
+                                 * **Interactive** The Behavior is an Interactive :ref:`activity`, thus can
+                                   be started by :ref:`autonomouslife`.
+
+                                 * **Solitary** The Behavior is a Solitary :ref:`activity`, thus can be
+                                   started by :ref:`autonomouslife` and can be interrupted.
+
+**Tags**                         Tags are unique words. If you enter multiple words separated by spaces in the
+                                 widget, your input will be changed in as many tags as words. There is one tag
+                                 list for each **Description language**.
+
+**Description**                  Description of the **Behavior**, defined for each **Description language**.
+
+**Trigger sentences**            Allows you to define which sentences can be used to trigger the **Behavior** by
+                                 voice through the default dialog activity, for each **Description language**.
+
+                                 **Design constrains**: it will only work if the **Behavior** is an :ref:`activity`,
+                                 and if the owner of the **Robot** has subscribed to the :ref:`basic_channel`.
+
+**Loading responses**            Allows you to define, for each **Description language**, which sentence the robot
+                                 will say while loading the **Behavior** before starting it.
+
+                                 **Design constrains**: the sentence will be said only if the **Behavior** is an
+                                 Interactive :ref:`activity`.
+
+**Permissions**                  Allows you to define the permissions needed for the launching of the
+                                 **Behavior** among a predefined list:
+
+                                 * **Behavior can be run on charging station**
+                                   The Behavior can be launch even if the **Robot** is sitting on
+                                   its charging station.
+
+                                 * **Robot may stand up during this behavior**
+                                   The Behavior can make the robot getting up.
+
+                                 * **Robot may sit down during this behavior**
+                                   The Behavior can sit the robot.
+
+**Launch trigger condition**     Allows you to define rules for an automatic launching of the **Behavior**.
+                                 See :ref:`launchtriggerconditions` for more details on how to write these
+                                 conditions.
+=============================   ==================================================================================
+
+.. _dial_properties:
+
+**Dialog topic** property list
+++++++++++++++++++++++++++++++
+
+================   ================================================================================
+ Name               Description
+================   ================================================================================
+**Topic Name**      Name of the **Dialog topic**, read-only.
+
+**Topic Files**     Allows you to select the **Dialog topic**'s language files. It defines in
+                    which languages your **Dialog topic** is available.
+
+                    It is not recommended to edit those files.
+
+                    For further details, see: :ref:`dialog_topic`.
+================   ================================================================================
+
+.. _proj_files:
+
+Project files
+-------------
+
+Displays all the files contained in the current project and allows you to add,
+edit and delete files.
+
+.. image:: /medias/desktop/choregraphe/project_files.png
+   :width: 217 px
+   :height: 369 px
+.. _project_box_toolbar:
+
+Toolbar
++++++++
+
+.. |create_import_btn| image:: /medias/desktop/choregraphe/chore_project_content_import.png
+   :class: img-inline
+
+.. |add_folder_btn| image:: /medias/desktop/choregraphe/chore_project_content_create_folder.png
+   :class: img-inline
+
+.. |delete_btn| image:: /medias/desktop/choregraphe/chore_project_content_remove.png
+   :class: img-inline
+
+============================   ============================================================================
+Button                          Click on this button to ...
+============================   ============================================================================
+|create_import_btn|             Create or import items and files in the current **Project**.
+
+|add_folder_btn|                Create a new folder.
+
+|delete_btn|                    Delete the selected file or folder.
+============================   ============================================================================
+
+
+Double-click on file name to open and edit a file.
+
+File types
++++++++++++
+
++--------------------+------------+--------------------------------------------+
+| Type               | Extension  | Comment                                    |
++====================+============+============================================+
+| -- *Project* --                                                              |
++--------------------+------------+--------------------------------------------+
+| :term:`Manifest`   | .XML       | Properties of the current project.         |
++--------------------+------------+--------------------------------------------+
+| Project main file  | .PML       | Read only file.                            |
++--------------------+------------+--------------------------------------------+
+| -- *Items* --                                                                |
++--------------------+------------+--------------------------------------------+
+| Behavior           | .XAR       | Each **Behavior** is stored in a folder    |
+|                    |            | containing a .XAR file.                    |
++--------------------+------------+--------------------------------------------+
+| Dialog             | .DLG       | The .DLG file contains the list of         |
+|                    | .TOP       | languages supported by the **Dialog**.     |
+|                    |            |                                            |
+|                    |            | Each .TOP file contains the **QiChat**     |
+|                    |            | script for the language specified before   |
+|                    |            | the extension:  _enu, _frf, _jpj, ...      |
++--------------------+------------+--------------------------------------------+
+| Planar Move        | .PMT       | Used as parameter of a **Motion** >        |
+| Trajectory         |            | **Move Along** box.                        |
+|                    |            |                                            |
++--------------------+------------+--------------------------------------------+
+| Attached files     | .WAV .OGG  | The attached files can be any type         |
+|                    | etc        | of file.                                   |
+|                    |            |                                            |
+|                    |            | **Example**: a music used as parameter     |
+|                    |            | of a **Audio** > **Sound** >               |
+|                    |            | **Play Sound** box.                        |
+|                    |            |                                            |
+|                    |            | For further details, see the tutorial:     |
+|                    |            | :ref:`choregraphe-tuto-attach-file-to-box`.|
++--------------------+------------+--------------------------------------------+
+
+.. glossary::
+
+    Manifest
+
+        XML file gathering all the information required by the |store|.
+
+        During the building of an application, the :ref:`choregraphe-reference-project-properties`
+        are used to create the **Manifest**.

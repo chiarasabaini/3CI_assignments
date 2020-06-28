@@ -1,0 +1,148 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-stiffness:
+
+Stiffness control
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   control-stiffness-api
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <control-stiffness-api>`
+
+
+------------
+
+What it does
+------------
+
+| These API control the :term:`Stiffness` of one or several joint(s).
+| The :term:`Stiffness` of the joint is equivalent to a torque limitation into the motors.
+
+* If the joint stiffness is set to 0.0, the joint controller does nothing and the joint is free.
+
+* Else with a value at 1.0 the joint is allowed to use full torque power to reach a given position.
+
+* Between these two extremes, the joint is more or less compliant (tries to reach a position but if
+  torque need to move is higher than the limitation of Stiffness, the joint doesn't reach the
+  target position).
+
+
+| The :term:`Stiffness` can be managed:
+
+* globally, on the whole robot using:
+  :cpp:func:`ALMotionProxy::wakeUp` and :cpp:func:`ALMotionProxy::rest`
+* specifically, for one or several joint(s) using:
+  :cpp:func:`ALMotionProxy::stiffnessInterpolation`,
+  :cpp:func:`ALMotionProxy::getStiffnesses` or
+  :cpp:func:`ALMotionProxy::setStiffnesses`
+
+| A robot is considered awake when it can stand and move around, that is, when its leg joints are stiffnessed. The :naoqi:event:`robotIsWakeUp` event is raised when the awake status of the robot changes.
+
+How it works
+------------
+
+These API just create a higher level of the :term:`DCM` hardness definition and provide
+interpolation in order to have more smooth behavior.
+
+Performances and limitations
+----------------------------
+
+
+|juju| |roboJ| *only*
++++++++++++++++++++++
+
+Manual **Stiffness** control is forbidden for |roboJ|'s lower part.
+
+With the following methods:
+
+* :cpp:func:`ALMotionProxy::stiffnessInterpolation`
+* :cpp:func:`ALMotionProxy::setStiffnesses`
+
+You could only use:
+
+* "Head", "LArm" and "RArm"
+* "LHand" and "RHand"
+
+Workaround:
+
+use :cpp:func:`ALMotionProxy::wakeUp` and :cpp:func:`ALMotionProxy::rest` methods.
+
+
+Use Cases
+---------
+
+Case 1: Stiffness On
+++++++++++++++++++++
+
+When the robot is switched on, he initially has zero Stiffness. When at
+zero Stiffness, you can send any commands to the motors, but he will not
+move.
+
+To give power to the motors, you can call one of Motion's Stiffness methods:
+
+:download:`almotion_stiffnessOn.py </examples/python/motion/almotion_stiffnessOn.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_stiffnessOn.py
+   :language: py
+
+
+Avoiding judder
+^^^^^^^^^^^^^^^^
+
+When changing Stiffness away from zero, it is best to do it gently so
+as to reduce the chance of a judder when powering up the motors.
+
+
+Adapting the Stiffness to task
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Many tasks can be achieved at less than maximum Stiffness (Stiffness = 0.6),
+but tasks such as "Get up" require all the power they can get (Stiffness = 1.0).
+
+Case 2: Stiffness Off
++++++++++++++++++++++
+
+When you reduce the Stiffness to zero, you cut all the power to the motors,
+so you should be careful that the robot is in a self-stable pose, otherwise he
+could fall.
+
+:download:`almotion_stiffnessOff.py </examples/python/motion/almotion_stiffnessOff.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_stiffnessOff.py
+   :language: py
+
+
+Case 3: Stiffness Trajectories
+++++++++++++++++++++++++++++++
+
+Should you wish to vary the Stiffness of a joint over time, you can
+request a 'trajectory' of Stiffness.
+
+.. code-block:: guess
+
+  # Example showing a stiffness trajectory
+  # Here the stiffness of the HeadYaw Joint, rises to
+  # 0.8, then goes back to zero.
+  pNames          = "HeadYaw"
+  pStiffnessLists = [0.0, 0.8, 0.0]
+  pTimeLists      = [0.5, 1.0, 1.5]
+  proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)
+
+Like angle interpolation commands, multiple trajectories can be specified
+in the same command.
+
+.. code-block:: guess
+
+  # Example showing multiple stiffness trajectories
+  # Here the stiffness of the HeadYaw Joint, rises to
+  # 0.5, then goes back to zero, while the HeadPitch
+  # joint rises to 1.0
+  pNames          = ["HeadYaw", "HeadPitch"]
+  pStiffnessLists = [[0.0, 0.5, 0.0], [0.0, 1.0, 0.0]]
+  pTimeLists      = [[0.5, 1.0, 1.5], [0.5, 1.0, 1.5]]
+  proxy.stiffnessInterpolation(pNames, pStiffnessLists, pTimeLists)

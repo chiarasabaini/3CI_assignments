@@ -1,0 +1,74 @@
+.. _tools-motion-task:
+
+Motion task
+===========
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   tools-motion-task-api
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <tools-motion-task-api>`
+
+------------
+
+
+What it does
+------------
+
+In **ALMotion**, every time you call an API to request a motion, a
+"motion task" is created to handle the job. At each ALMotion cycle, the task
+will compute the elementary commands (changes in motor angles and stiffnesses)
+to perform the motion.
+
+Examples of motion tasks include the walk, the fall manager, the joint-space
+interpolator.
+
+
+How it works
+------------
+
+Several motion tasks can coexist. For instance, a task may handle the walk
+while another controls the arms motion.
+To prevent several concurrent tasks from sending inconsistent motion commands
+to the same motors, the tasks are required to declare and book the resources
+they will control, such as a motor angle or stiffness.
+
+If some resources needed for its execution are unavailable, the task manager
+will refuse to start a task. It is however possible to free the resources by
+killing the tasks that are using them.
+
+.. note::
+
+   The resources mentioned here are for ALMotion use only and are different
+   from the ones :ref:`that are used in Choregraphe
+   <choregraphe-reference-box-resource>` and managed by
+   :ref:`alresourcemanager`.
+
+Use Cases
+---------
+
+Case 1: Resource unavailable: tasks get postponed
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In the following example, two motions tasks attempt to control the same joint.
+As the corresponding resource is owned by the first task, the second one is
+postponed until the resource is freed.
+
+:download:`almotion_taskManagement1.py </examples/python/motion/almotion_taskManagement1.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_taskManagement1.py
+  :language: python
+
+Case 2: Moving a joint without delay
+++++++++++++++++++++++++++++++++++++
+
+In this example, motions are required using the ``setAngles`` method, which
+does not lock the resource. The target can be changed without delay.
+
+:download:`almotion_taskManagement2.py </examples/python/motion/almotion_taskManagement2.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_taskManagement2.py
+  :language: python

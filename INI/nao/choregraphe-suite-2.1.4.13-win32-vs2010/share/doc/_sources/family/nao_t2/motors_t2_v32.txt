@@ -1,0 +1,23 @@
+.. _t2_motors_v32:
+
+T2 - Motors - V3.2
+========================
+
+.. seealso::
+    :ref:`V4<t2_motors>` | :ref:`V3.3 <t2_motors_v33>` | **V3.2**
+
+    :ref:`nao-t2` | :ref:`robot_motors`
+
+--------------------
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_t2.png
+   :width: 203 px
+   :height: 262 px
+
+
+.. include:: ../bulk/motors_v32.rst
+
+.. include:: ../bulk/motors_v32_head.rst

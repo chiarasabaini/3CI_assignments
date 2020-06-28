@@ -1,0 +1,31 @@
+.. _allauncher:
+
+ALLauncher
+===========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    allauncher-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <allauncher-api>`
+
+------------
+
+What it does
+------------
+
+This module allows you to load dynamically libraries or import python modules
+into naoqi, run executables, run scripts, and check if modules are loaded...
+
+.. warning::
+
+  This module is deprecated.
+
+  To create and start your own module:
+
+  * use the method described in the following section: :ref:`How to create a basic project <cpp-create-module>` or
+
+  * use the `libqi API reference <../../ref/libqi/index.html>`_ with qi::os::spwan*.
+

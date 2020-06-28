@@ -1,0 +1,28 @@
+.. _naoqi-trackers:
+
+NAOqi Trackers
+==============
+
+.. toctree::
+   :hidden:
+
+   altracker
+   alredballtracker-api
+   alfacetracker-api
+
+
+New generic tracker
+--------------------
+
+- :ref:`altracker`: generic tracker allowing the robot to track different targets
+  (red ball, face, landmark, etc) using different means (head only, whole body, move, etc).
+
+Deprecated trackers
+--------------------
+
+
+- :ref:`alredballtracker-api`: this module is deprecated (use :ref:`altracker` instead).
+
+- :ref:`alfacetracker-api`: this module is deprecated (use :ref:`altracker` instead).
+
+

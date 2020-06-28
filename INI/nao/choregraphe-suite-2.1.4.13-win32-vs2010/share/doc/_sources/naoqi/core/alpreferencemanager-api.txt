@@ -1,0 +1,154 @@
+.. _alpreferencemanager-api:
+
+ALPreferenceManager API
+=======================
+
+:ref:`naoqi-core` - :ref:`Overview <alpreferencemanager>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alpreferencemanagerproxy.h>
+
+ALPreferenceManager allows managing the robot preferences.
+A preference is defined by the tuple:
+
+- Domain of the preference (for instance 'com.aldebaran.modules.tts', 'com.aldebaran.apps.chess', ...)
+- Name of the preference (for instance '/voice/pitch', '/game/level/default', ...)
+- Value of the preference (only string data type is currently supported)
+
+These preferences are stored on the robot as well as in the Cloud, where they can also be accessed and modified.
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALPreferenceManagerProxy
+
+* :cpp:func:`ALPreferenceManagerProxy::getValue`
+* :cpp:func:`ALPreferenceManagerProxy::getValueList`
+* :cpp:func:`ALPreferenceManagerProxy::getDomainList`
+* :cpp:func:`ALPreferenceManagerProxy::importPrefFile`
+* :cpp:func:`ALPreferenceManagerProxy::removeValue`
+* :cpp:func:`ALPreferenceManagerProxy::removeDomainValues`
+* :cpp:func:`ALPreferenceManagerProxy::setValue`
+* :cpp:func:`ALPreferenceManagerProxy::update`
+
+
+Event list
+-----------
+
+* :naoqi:event:`preferenceAdded`
+* :naoqi:event:`preferenceChanged`
+* :naoqi:event:`preferenceRemoved`
+* :naoqi:event:`preferenceDomainRemoved`
+* :naoqi:event:`preferenceSynchronized`
+
+Methods
+-------
+
+.. cpp:function:: AL::ALValue ALPreferenceManagerProxy::getValue(const std::string& domain, const std::string& name)
+
+  Retrieves the value of a preference from its domain and name.
+
+  :param domain: Domain of the preference.
+  :param name: Name of the preference.
+  :return: The value of the preference.
+
+.. cpp:function:: std::list<std::list<ALValue> > ALPreferenceManagerProxy::getValueList(const std::string& domain)
+
+  Retrieves all the preferences associated to a domain.
+
+  :param domain: Domain of the preference.
+  :return: A list containing couples (list of size 2) of preference names and values (example: [ ["/voice/pitch", "60"], ["/voice/speed", "20"] ]).
+
+.. cpp:function:: std::list<string> ALPreferenceManagerProxy::getDomainList()
+
+  Retrieves the list of defined preference domains.
+
+  :return: An array of domain names.
+
+.. cpp:function:: void ALPreferenceManagerProxy::importPrefFile(const std::string& domain, const std::string& applicationName, const std::string& filename, bool override)
+
+  Imports an XML Preference files into the preference system.
+
+  :param domain: Preferences found in the file will be imported using this domain.
+  :param applicationName: Will be used to search for the preference file on disk (in location of type <configurationdirectory>/applicationName/filename).
+  :param filename: Name of the preference XML file.
+  :override: In case the preferences found in XML file already exist, if override is true, they will be overridden.
+
+.. cpp:function:: void ALPreferenceManagerProxy::removeValue(const std::string& domain, const std::string& name)
+
+  Removes a preference.
+
+  :param domain: Domain of the preference.
+  :param name: Name of the preference.
+
+.. cpp:function:: void ALPreferenceManagerProxy::removeDomainValues(const std::string& domain)
+
+  Remove all the preferences associated to a domain.
+
+  :param domain: Domain of the preferences.
+
+
+.. cpp:function:: void ALPreferenceManagerProxy::setValue(const std::string& domain, const std::string& name, const AL::ALValue& value)
+
+  Stores a preference.
+
+  :param domain: Domain of the preference.
+  :param name: Name of the preference.
+  :param value: Value of the preference.
+
+
+.. cpp:function:: void ALPreferenceManagerProxy::update()
+
+  Synchronizes local preferences with preferences stored on a server.
+
+
+
+
+
+
+Events
+------
+
+.. naoqi:event:: preferenceAdded(const AL::ALValue& id)
+
+  Raised when a new preference is added to the system.
+
+  :param id: An array of two values identifying the preference:
+  :param id[0]: The preference domain.
+  :param id[1]: The preference name.
+
+.. naoqi:event:: preferenceChanged(const AL::ALValue& id)
+
+  Raised when the value of a preference has been updated.
+
+  :param id: An array of two values identifying the preference:
+  :param id[0]: The preference domain.
+  :param id[1]: The preference name.
+
+.. naoqi:event:: preferenceRemoved(const AL::ALValue& id)
+
+  Raised when a preference has been removed.
+
+  :param id: An array of two values identifying the preference:
+  :param id[0]: The preference domain.
+  :param id[1]: The preference name.
+
+.. naoqi:event:: preferenceDomainRemoved(const AL::ALValue& id)
+
+  Raised when an entire preference domain has been removed.
+
+  :param id: The removed domain.
+
+.. naoqi:event:: preferenceSynchronized()
+
+  Raised when all preferences have been synchronized from the cloud.

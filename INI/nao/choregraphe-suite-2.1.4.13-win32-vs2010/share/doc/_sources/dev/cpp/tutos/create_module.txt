@@ -1,0 +1,398 @@
+.. _cpp-create-module:
+
+Extending NAO API - Creating a new module
+=========================================
+
+This is a step by step tutorial.
+
+You should have follow all the steps of the :ref:`cpp-install-guide` fist.
+
+Create the skeleton using qibuild create
+----------------------------------------
+
+qisrc create will simply create a new project.
+
+Navigate to the work tree where you want to create your project then enter:
+
+.. code-block:: console
+
+  $ qisrc create mymodule
+
+This will create a new project in work_tree/mymodule.
+We now take a look at what has been generated:
+
+.. code-block:: console
+
+  myproject
+  |__ CMakeLists.txt
+  |__ main.cpp
+  |__ qibuild.cmake
+  |__ qibuild.manifest
+
+
+
+* CMakeLists.txt:   this is a script file that will be read by CMake to generate makefiles, or Visual Studio solutions.
+* main.cpp:         this is just a standard "Hello World".
+* qibuild.cmake:    this file MUST be included by the CMakeLists.txt to find the qiBuild CMake framework.
+* qibuild.manifest: this file MUST be present for qiBuild to know how to build the foo project.
+
+Declare dependency in CMakeLists.txt
+------------------------------------
+
+This file is a standard CMakelists.
+
+.. code-block:: cmake
+
+  cmake_minimum_required(VERSION 2.8)
+
+  # Give a name to the project.
+  project(mymodule)
+
+  # You need this to find the qiBuild CMake framework
+  include("qibuild.cmake")
+
+  # Create a executable named mymodule
+  # with the source file: main.cpp
+  qi_create_bin(mymodule "main.cpp")
+
+To communicate with naoqi you need to use a proxy inside your code. Proxies are
+inside ALCommon library. You **need** to import ALCommon inside your CMakeLists.
+
+Add inside the CMakeLists.txt:
+
+.. code-block:: cmake
+
+  qi_use_lib(<your_project_name> <library_you_want_use_1> <library_you_want_use_2>)
+
+Your CMakeLists will look like:
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstproject/CMakeLists.txt
+   :language: cmake
+
+main.cpp
+++++++++
+
+This generated file is a standard main.cpp, this one only print an "Hello, world" on standard output.
+
+We now extend a little this file to communicate with NAOqi and call bind function from NAOqi's module.
+
+First of all you need to do a small command line option parser with at least ``--pip`` and ``--pport`` option.
+
+You need create a proxy to the module you want use. To do that you must
+include <alcommon/alproxy.h>, then create a proxy to the module and finally you
+can call a method from this module.
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstproject/main.cpp
+   :language: cpp
+
+Now you know how to communicate with NAOqi and a method from a module, we want
+to add some functionality to NAOqi. We will now create a module which it
+extends, adds some new features.
+
+How to create a remote module
+-----------------------------
+
+A remote module is a program which will connect to **NAOqi** over the network.
+It will allow you to extend/add basic NAOqi bind functions.
+
+Right now you have few stuff to do before running a good module.
+
+Create a new class derived from ALModule
+++++++++++++++++++++++++++++++++++++++++
+
+You need to create your own inherited class form ALModule. You'll need ALModule
+and ALBroker.
+
+Here is an example of a basic mymodule.h
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstremotemodule/mymodule.h
+   :language: cpp
+
+Now you want to implement all your methods. Here an example of a basic mymodule.cpp
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstremotemodule/mymodule.cpp
+   :language: cpp
+
+
+Now you already create your inherited class, you can update your main.cpp to
+create broker and to allow every module to communicate with your bind methods.
+
+Update CMakelists.txt
++++++++++++++++++++++
+
+Here you just need to add the new source file you have created (mymodule.cpp, mymodule.h) using *set* CMake function:
+
+.. code-block:: cmake
+
+  set(<variable_name> <source_file>)
+
+Your CMakeLists.txt should look like:
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstremotemodule/CMakeLists.txt
+   :language: cmake
+
+
+Update main.cpp
++++++++++++++++
+
+First of all you need to create a broker, then you must add your new broker into
+the NAOqi's broker manager. Then you can create your custom module and link it
+with the new broker you have just created.
+
+Example of main.cpp
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstremotemodule/main.cpp
+   :language: cpp
+
+
+Congratulations, you now have created your first remote module.
+
+You can find it in a folder named ``build-<name>/sdk/bin/`` where ``name``
+if the name of the toolchain you have created containing the NAOqi C++ SDK.
+
+To use it you just need to launch the program created with your robot IP address
+on parameters.
+
+How to start remote module
+--------------------------
+
+Using binary program
+++++++++++++++++++++
+
+If you want to start your module on remote, you need to launch the program you just compiled:
+
+.. code-block:: sh
+
+  ./mymodule --pip <robot_ip> --pport <robot_port>
+
+Example:
+
+.. code-block:: sh
+
+  ./mymodule --pip 192.168.0.12 --pport 9559
+
+
+Using autoload.ini
+++++++++++++++++++
+
+This way will launch your module at **NAOqi** startup. Be careful you MUST implement
+an option command line parser for ``--pip`` and ``--pport``.
+
+First of all you need to send your program on your robot (using scp or rsync),
+and then add the path to your program into /home/nao/naoqi/preferences/autoload.ini under [program] tag.
+
+Example of autoload.ini:
+
+.. code-block:: ini
+
+  [program]
+  /home/nao/mymodule
+  # or
+  /home/nao/myfolder/whatever/mymodule
+
+
+How to create a local module
+----------------------------
+
+There is a second way to create a module. This is a local module. This one is
+launched in NAOqi's process. Since this is in NAOqi process, this type of module
+by far the fastest one.
+
+This type of module is not a program (binary) anymore. You will create a library.
+You need to modified your Cmakelists.txt to create a library and your main.cpp
+to specified the library entry points.
+
+Modified Cmakelists.txt
++++++++++++++++++++++++
+
+Here you need to replace your **qi_create_bin** by a **qi_create_lib** AND add a
+dependency to BOOST into your **qi_use_lib** (for boost::shared_ptr).
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstlocalmodule/CMakeLists.txt
+   :language: cmake
+
+Once you have update the CMakeLists the only thing you need to do is change the main.cpp
+
+Change main.cpp
++++++++++++++++
+
+When you create a NAOqi plugin (local module) you do not need main function,
+you need the entry and exit points.
+
+They are defined by two functions:
+
+* int _createModule(boost::shared_ptr<AL::ALBroker> broker)
+* int _closeModule()
+
+If you want your library working one Windows you must export those entry point
+using **__declspec(dllexport)**.
+
+Now your main.cpp should looks like:
+
+.. literalinclude:: /dev/cpp/examples/core/module/myfirstlocalmodule/main.cpp
+   :language: cpp
+
+You've just created your first local module for **NAOqi**.
+
+You can find it in a folder named ``build-<name>/sdk/lib/naoqi`` where ``name``
+if the name of the toolchain you have created containing the NAOqi C++ SDK.
+
+
+How to start a local module
+---------------------------
+
+Using autoload.ini
+++++++++++++++++++
+
+Add the path to your library into the [user] tag in autoload.ini file is the first way to start your module.
+This file is located into /home/nao/naoqi/preferences/autoload.ini on your robot.
+
+Example:
+
+.. code-block:: ini
+
+  [user]
+   /path/to/libmymodule.so
+
+When you add the path to you library, at NAOqi startup your module will be automatically
+loaded in NAOqi process. After that you can use your module as classic ones.
+
+
+Note: for this to work on your robot, you must cross-compile your module.
+
+Note: If you are using Visual Studio, make sure to use ``naoqi_d.bat`` if you
+have compiled your module in debug, and ``naoqi.bat`` if you have compiled
+it on release.
+
+Using dynamic linking loader
+++++++++++++++++++++++++++++
+
+If you want to use your module in another one, the good way to do that is to use
+programming interface to dynamic linking loader (dlclose, dlerror, dlopen, dlsym).
+
+The first thing is to find the library on your robot. If you use the standard
+SDK layout described here (FIXME), you can use qi::path::findLib to obtain the
+path to your library. Otherwise, you need to hard code the path to it.
+
+Example:
+
+.. code-block:: cpp
+
+  // Find your library
+  std::string filename = qi::path::findLib("mymodule.so");
+  // Open your library
+  void* handle = qi::os::dlopen(filename.c_str());
+  if (!handle)
+  {
+    // Log the last message coming form dynamic linking function
+    qiLogWarning("mymodule") << "Could not load library:"
+                             << qi::os::dlerror() << std::endl;
+    return -1;
+  }
+
+  myFunc fun;
+  // Find the symbol you want to use
+  fun = (myFunc)qi::os::dlsym(handle, "my_function");
+  if (!fun)
+  {
+    qiLogWarning("mymodule") << "Could not find my_function method in plugin"
+                             << std::endl;
+    return -1;
+  }
+
+  // Use your function
+  bool res = fun(args);
+  if (!res)
+  {
+    qi::os::dlclose(handle);
+    return -1;
+  }
+
+
+
+
+Switching from local to remote using a CMake option
+---------------------------------------------------
+
+
+This is totally optional of course, but that's how all
+our examples are written.
+
+For every example, you can choose whether you want a local
+or a remote module by setting a CMake option looking like
+`MYMODULE_IS_REMOTE`.
+
+Adding a CMake option
+++++++++++++++++++++++
+
+
+You should patch your CMake code to look like:
+
+.. code-block:: cmake
+
+
+  option(MYMODULE_IS_REMOTE
+    "module is compiled as a remote module (ON or OFF)"
+    ON)
+
+
+  if(MYMODULE_IS_REMOTE)
+    add_definitions( " -DMYMODULE_IS_REMOTE ")
+    qi_create_bin(....)
+  else()
+    qi_create_lib(...)
+  endif()
+
+
+
+Note the call to ``add_definitions``. This will make sure you
+can use the same main.cpp, but in one case, create a lib an
+export the ``_createModule`` symbol, and in an other case,
+create a binary with a ``main`` symbol, by adding
+a definition to the compiler.
+
+
+Patching main.cpp
++++++++++++++++++
+
+Finally, you should patch the ``main.cpp`` file to have something like:
+
+.. code-block:: cpp
+
+
+  #ifdef MYMODULE_IS_REMOTE
+  # define ALCALL
+  #else
+  // when not remote, we're in a dll, so export the entry point
+  # ifdef _WIN32
+  #  define ALCALL __declspec(dllexport)
+  # else
+  #  define ALCALL
+  # endif
+  #endif
+
+
+  extern "C"
+  {
+    ALCALL int _createModule(...)
+    // ...
+
+  };
+
+  #ifdef HELLOWORLD_IS_REMOTE
+  int main(int argc, char* argv[])
+  {
+    // pointer to createModule
+    TMainType sig;
+    sig = &_createModule;
+    // call main
+    return ALTools::mainFunction("MyModule", argc, argv, sig);
+  }
+  #endif
+
+
+
+The full resulting example can be found in here:
+:download:`helloworld.zip </dev/cpp/examples/core/helloworld.zip>`
+
+

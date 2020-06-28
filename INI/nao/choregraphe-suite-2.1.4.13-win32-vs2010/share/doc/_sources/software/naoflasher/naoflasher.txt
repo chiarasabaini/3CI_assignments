@@ -1,0 +1,346 @@
+.. include:: ../../bulk/common.rst
+
+.. _naoflasher_upgrade:
+
+Upgrading using NAOFlasher
+============================
+
+Overview
+--------
+
++-----------------------------------------+
+| Steps                                   |
++=========================================+
+| :ref:`prepare_flasher`                  |
++-----------------------------------------+
+| :ref:`image_to_usb`                     |
++-----------------------------------------+
+| :ref:`nao-v4-upgrade-reboot`            |
++-----------------------------------------+
+
+.. _prepare_flasher:
+
+Before starting
+--------------------
+
+| Make sure your robot is ready.
+| For further details, see: :ref:`prepare_upgrade`.
+|
+
+Then:
+
+=====  ==============================================================================
+Step    Action
+=====  ==============================================================================
+1.      Get a **USB** stick:
+
+        * unformatted,
+        * larger or equal to 512MB.
+
+        If necessary, see: :ref:`reuse_usb`.
+
+2.      Get a **NAOFlasher** according to the Operating System of your computer:
+
+        * ``nao-flasher-x.x-win32-vs2008.zip``
+        * ``nao-flasher-x.x-linux32.tar.gz``
+        * ``nao-flasher-x.x-linux64.tar.gz``
+        * ``nao-flasher-x.x-mac64.tar.gz``
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+3.      Get the |roboN| system image.
+
+        ``opennao-atom-system-image-x.x.x.opn``
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+4.      **Factory reset Option**: if you plan to ask a :term:`Factory reset`,
+        get an Ethernet cable, and make sure you have all relevant information to
+        restore the WiFi connection settings afterward.
+
+        For further details, see: :ref:`nao-connecting`.
+=====  ==============================================================================
+
+
+.. _image_to_usb:
+
+I - Writing the image on the USB stick
+----------------------------------------
+
+=====  ===========================================================================
+Step    Action
+=====  ===========================================================================
+1.      Insert your USB stick in your computer.
+
+        .. note::
+
+            On **Windows** and **Mac OS X**, you might encounter a prompt telling
+            you that the USB drive you inserted is not readable, and that you
+            should format it.
+
+            Please ignore this and click the **Cancel** button or similar.
+
+2.      Launch the **flasher** executable.
+
+        It should look roughly like this:
+
+        .. image:: /medias/opennao/nao-flasher01.png
+            :width: 478 px
+            :height: 244 px
+
+        .. note::
+
+            On **Linux** and **Mac OS X**, the program may require **sudo** privileges.
+
+3.      Choose **File** > **Open image** (Ctrl+O) or click the **Browse** button
+        to select the image you want to flash.
+
+        .. image:: /medias/opennao/nao-flasher02.png
+            :width: 479 px
+            :height: 247 px
+
+4.      I not yet done, select your USB stick from the list.
+
+        If your USB stick  does not appear in the list,
+        try the **Refresh** button after inserting it in your computer.
+
+5.      Optionally, check the :term:`Factory reset` option.
+
+        .. warning::
+
+            **Factory Reset** will remove all the data from your robot,
+            please
+            backup your data before running the program.
+
+6.      Click the **Write** button to start the process:
+
+        .. image:: /medias/opennao/nao-flasher03.png
+            :width: 503 px
+            :height: 289 px
+
+7.      If you get an error message telling:
+
+        * the USB stick contains a file system, try:
+          :ref:`reuse_usb`.
+
+        * you don't have administrator privileges, try:
+          :ref:`flasher-admin-rights`.
+
+8.      When the process is completed, it should look like this:
+
+        .. image:: /medias/opennao/nao-flasher04.png
+            :width: 503 px
+            :height: 287 px
+
+        Remove the USB stick.
+=====  ===========================================================================
+
+.. _nao-v4-upgrade-reboot:
+
+II - Plugging the USB stick
+-----------------------------
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Shutdown the robot.
+
+2.      Plug the USB stick you previously flashed into the robot
+        :term:`USB port`.
+
+3.      You can now launch the upgrade.
+
+        For further details see: :ref:`launching_upgrade`.
+=====  =========================================================================
+
+.. glossary::
+
+   Factory reset
+
+       The **Factory reset** option resets the whole system in a similar state
+       as if the robot was just out of the factory.
+
+       .. warning::
+
+           After a **Factory reset**:
+
+           * all user's data put on the robot will be irreparably lost;
+
+           * all settings will be reset to their default values.
+
+       **When should I do a Factory reset**
+
+       * when something goes wrong and |roboN| does not boot normally anymore;
+
+       * when you want to completely reset |roboN| to a known state;
+
+       * (rare) if you want to downgrade to a *former* **NAOqi** software release.
+
+
+       **Alternative method**
+
+       If:
+
+       * |roboN| boots normally,
+       * you do not want to use a release older than the current one, and
+       * you want to keep all user's data and settings,
+
+
+       | Then you may prefer a :ref:`simple-update`.
+
+------------
+
+Troubleshooting
+---------------
+
+.. _flasher_downgrade:
+
+My new USB stick doesn't work!
+++++++++++++++++++++++++++++++
+
+If the USB stick you just flashed doesn't work, it is may be due to the old files in
+your home directory. Try flashing your key again with the **Factory Reset** option enabled.
+
+.. _flasher-admin-rights:
+
+Launching NAOFlasher with administrator privileges
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To Launch **NAOFlasher** with administrator privileges:
+
+1. Find and select the NAOFlasher executable:
+
+   ``[Choregraphe path]\bin\flasher.exe``
+
+2. Right-click it and choose **Run as administrator**.
+
+
+.. _reuse_usb:
+
+Reusing a formatted USB stick
+++++++++++++++++++++++++++++++++
+
+If you want to use an already formatted USB stick, you have to clean it.
+
+.. warning::
+
+    This process erases the whole USB stick.
+
+    Any data on the USB stick will be irreparably lost.
+
+* On **Windows**, try: :ref:`usb-cleanup_windows`,
+* On **Linux**, try: :ref:`usb-cleanup_linux`,
+* On **Mac**, try: :ref:`usb-cleanup_mac`.
+
+.. _usb-cleanup_windows:
+
+Cleaning up your USB stick - Windows
+++++++++++++++++++++++++++++++++++++++
+
+.. warning::
+
+  **DISKPART** is a very dangerous tool if you don't know how to use it.
+  It can potentially erase all your data without warning.
+  Please be careful and don't use it if in doubt.
+
+Launch DISKPART
+^^^^^^^^^^^^^^^
+
+Go to the windows search box and type diskpart.
+Then type *ENTER* or click on the diskpart icon to launch the program.
+
+.. note::
+
+  DISKPART might fail to operate on the drive if the flasher is running.
+  Exit the flasher before running DISKPART.
+
+.. image:: /medias/opennao/cleanup-1.png
+    :width: 370 px
+    :height: 468 px
+
+Clean The Drive
+^^^^^^^^^^^^^^^
+
+.. image:: /medias/opennao/cleanup-2.png
+    :width: 600 px
+    :height: 303 px
+
+|
+
+=====  ==========================================================================================================
+Step    Action
+=====  ==========================================================================================================
+1.      **list volume**: this will list all the volumes present on your computer.
+
+        Find the line that correspond to your USB stick and remember the corresponding letter (**Ltr** column).
+
+2.      **select volume X**: replace X with your drive letter.
+
+        This will enable you to do actions on the drive.
+
+3.      **clean**: erase all data and partitions on the drive. You can't undo this!
+
+4.      **exit**: exits DISKPART. You may now try the flasher again.
+=====  ==========================================================================================================
+
+.. _usb-cleanup_linux:
+
+Cleaning up your USB stick - Linux
+++++++++++++++++++++++++++++++++++++++
+
+You can use, for example, **GParted**.
+
+.. warning::
+
+  **GParted** is a very dangerous tool if you don't know how to use it.
+  It can potentially erase all your data without warning.
+  Please be careful and don't use it if in doubt.
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Launch **GParted** with root privileges.
+
+2.      Select the device corresponding to the usb stick.
+
+3.      On this device, delete all existing partitions.
+
+4.      Click the **Apply** button.
+
+5.      Read carefully the warning.
+
+6.      Triple check that it is selected device is the right one.
+
+7.      Confirm.
+=====  =========================================================================
+
+For further information, read the **GParted** online documentation:
+http://gparted.sourceforge.net/display-doc.php?name=help-manual.
+
+
+.. _usb-cleanup_mac:
+
+Cleaning up your USB stick - Mac
++++++++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.       Launch **Utilities** > **Disk Utility**.
+
+2.       Select the USB disk to erase.
+
+3.       Click the **Partition** tab.
+
+4.       Set **Partition Layout** to *1 Partition*.
+
+5.       Set **Format** to *Free space*.
+
+         .. image:: /medias/opennao/cleanup_mac.png
+             :width: 566 px
+             :height: 491 px
+
+6.       Click **Apply** button.
+=====  =========================================================================

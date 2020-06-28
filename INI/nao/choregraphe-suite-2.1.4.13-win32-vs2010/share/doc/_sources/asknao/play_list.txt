@@ -1,0 +1,121 @@
+.. _playlist_tab:
+
+Playlist tab
+============
+
+The **Playlist** tab allows the **Teacher** to create and manage :ref:`playlist`.
+
+.. image:: /medias/asknao/playlist_tab.png
+   :width: 486 px
+   :height: 289 px
+
+.. _playlist:
+
+Playlists
+---------
+
+**Playlists** allows the **Teacher** to create an educational sequence,
+linking up one or several :ref:`activity_asknao`.
+
+Creating a Playlist
+++++++++++++++++++++
+
+.. |info| image:: /medias/asknao/info_btn.png
+   :class: img-inline
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Create a New Playlist** button.
+
+        .. image:: /medias/asknao/playlist_new02.png
+            :width: 251 px
+            :height: 146 px
+
+2.      Type a **Name** and a **Description** and click the **Create** button.
+
+        The **Playlist Content** is displayed.
+
+        .. image:: /medias/asknao/playlist_new.png
+            :width: 488 px
+            :height: 208 px
+
+3.      Choose and drag at least one **Activity** on the playlist line.
+
+        .. image:: /medias/asknao/playlist_new_01add_apps.png
+            :width: 487 px
+            :height: 448 px
+
+        **Tip**: to make your choice, click the |info| **Information** button to
+        see more information.
+
+4.      For each **Activity**, check the :ref:`parameters_activity`
+        and the :ref:`Extra_material`.
+
+        .. image:: /medias/asknao/paylist_compo.png
+            :width: 394 px
+            :height: 125 px
+
+5.      Optionally, drag one of the **Activities** to reorder or remove it.
+
+6.      Click the **Save** button.
+
+        Note: if you do not save the **Playlist** the changes you have made
+        will be lost.
+=====  =========================================================================
+
+Duplicating a Playlist
+++++++++++++++++++++++
+
+Clicking the **Save As** button will prompt you to save the **Playlist** under
+another **Name** and **Description**.
+
+Editing a Playlist
+++++++++++++++++++
+
+.. |edit_playlist| image:: /medias/asknao/edit_playlist_def.png
+   :class: img-inline
+
+At any moment, you can edit the content of a **Playlist**.
+
+To edit its **Name** and **Description**, click the |edit_playlist| **Edit** button.
+
+.. _activity_asknao:
+
+Activities
+-----------
+
+A typical **Playlist** mixes adequately the 2 types of **Activities**:
+
+* **Tasks** and
+* **Rewards**.
+
+.. _parameters_activity:
+
+Parameters
++++++++++++
+
+Parameters are the rules or boundaries that control what the **Activity** is or
+how it will be performed.
+
+.. |param| image:: /medias/asknao/parameters_btn.png
+   :class: img-inline
+
+Click the |param| **Parameter** button to display the parameters specific to an
+activity.
+
+Select the features which best suit the class or child you are creating the
+lesson for and click the **Save** button in the bottom right corner.
+
+Scroll your mouse cursor above each parameter to get a description of its
+purpose and ability.
+
+.. _Extra_material:
+
+Extra material
++++++++++++++++
+
+.. |extra_mat| image:: /medias/asknao/extra_mat_btn.png
+   :class: img-inline
+
+Click the |extra_mat| **Parameter** button to display the Extra material required by the **Activity**.

@@ -1,0 +1,32 @@
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+.. _robot-led:
+
+LEDs
+===============
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+.. seealso::
+   :ref:`alleds`
+
+   :ref:`nao-h25-led` | :ref:`nao-h21-led` | :ref:`nao-t14-led` | :ref:`nao-t2-led`
+
+--------------------
+
+.. _robot_led_head:
+
+.. include:: ../bulk/leds_tactile_head.rst
+
+.. _robot_led_eyes:
+
+.. include:: ../bulk/leds_eyes.rst
+
+.. _robot_led_ears:
+
+.. include:: ../bulk/leds_ears.rst
+
+.. _robot_led_feet:
+
+.. include:: ../bulk/leds_feet.rst

@@ -1,0 +1,48 @@
+.. _alchestbutton-api:
+
+ALChestButton API
+=================
+
+:ref:`naoqi-sensors` - :ref:`Overview <alchestbutton>` | API
+
+------------
+
+.. seealso::
+
+   - :ref:`Contact Sensors Hardware <robot-contact-sensors>`
+
+
+.. _alchestbutton-event-list:
+
+Event list
+----------
+
+* :naoqi:event:`ChestButtonPressed`
+* :naoqi:event:`ALChestButton/SimpleClickOccurred`
+* :naoqi:event:`ALChestButton/DoubleClickOccurred`
+* :naoqi:event:`ALChestButton/TripleClickOccurred`
+
+
+.. _alchestbutton-events:
+
+Events
+------
+
+.. naoqi:event:: ChestButtonPressed(float val)
+
+  Raised when the chest button is pressed.
+
+  :param val: 1.0 if chest button is pressed.
+
+.. naoqi:event:: ALChestButton/SimpleClickOccurred()
+
+  Raised when the chest button is pressed, i.e pressed and released.
+
+.. naoqi:event:: ALChestButton/DoubleClickOccurred()
+
+  Raised when the chest button is double-clicked, i.e pressed and released twice.
+
+.. naoqi:event:: ALChestButton/TripleClickOccurred()
+
+  Raised when the chest button is triple-clicked, i.e pressed and released thrice.
+

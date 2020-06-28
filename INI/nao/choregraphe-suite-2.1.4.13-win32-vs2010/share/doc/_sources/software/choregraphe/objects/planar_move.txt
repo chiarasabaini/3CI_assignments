@@ -1,0 +1,164 @@
+.. include:: ../../../bulk/common.rst
+
+.. _choregraphe-planar-move:
+
+Planar Move
+===========
+
+.. warning::
+
+  **Planar move** is only available for |roboJ|.
+
+What is a Planar Move
+----------------------
+
+A **Planar move** is a file describing movements of the robot in a plane space.
+
+**Planar move** files have a **PMT** extension.
+
+A move is constituted of **trajectories**, and each trajectory is made of
+several **paths**, linking two **poses**.
+
+When a robot executes a planar move, it does it trajectory per trajectory,
+**marking a stop between trajectories**. In contrary, within a trajectory,
+**paths are chained continuously**, hence they require to be continuous.
+
+**Choregraphe** integrates everything needed for you to be able to:
+
+- :ref:`create a planar move <choregraphe-create-planar-move>`.
+
+- edit a move using the :ref:`planar-move-editor`.
+
+- :ref:`integrate a move inside a behavior<choregraphe-integrate-planar-move>`.
+
+
+.. _choregraphe-create-planar-move:
+
+Creating a Planar Move
+-----------------------
+
+.. |create_import_btn| image:: /medias/desktop/choregraphe/chore_project_content_import.png
+   :class: img-inline
+
+=====  ==============================================================================
+Step       Action
+=====  ==============================================================================
+1.      Choose **File** > **Add new content** > **Planar move...**.
+
+        .. image:: /medias/desktop/choregraphe/add_planar_move.png
+            :width: 175 px
+            :height: 124 px
+
+        Note: you can also click the |create_import_btn| **Add content** button
+        in the :ref:`chore_project_content`, and choose
+        **Create planar move**.
+
+2.      Type a file **Name**.
+
+        .. warning::
+
+            * You won't be able to change it later, so choose it well.
+
+            * Use only alphanumeric characters: no space, no special characters.
+
+3.      Click the **Add** button.
+
+        Your planar move **is created**.
+
+        The file <file_name>.pmt is created and is opened automatically for
+        edition.
+
+        .. image:: /medias/desktop/choregraphe/planar_move_created.png
+            :width: 560 px
+            :height: 445 px
+=====  ==============================================================================
+
+.. _planar-move-editor:
+
+Planar Move Editor
+-------------------
+
+.. |red_end| image:: /medias/desktop/choregraphe/red_end_planar.png
+   :class: img-inline
+
+.. |green_end| image:: /medias/desktop/choregraphe/green_end_planar.png
+   :class: img-inline
+
+
+.. image:: /medias/desktop/choregraphe/planar_move_editor_overview.png
+    :width: 538 px
+    :height: 427 px
+
+=====  =================   ================================================================================
+Part    Name                Description
+=====  =================   ================================================================================
+**A**  Edition zone         Displays the selected **Trajectory(ies)**.
+
+                            Allows you to manipulate the poses and the paths.
+
+                            |red_end| **End pose** is the red one.
+
+                            * Drag it to move it,
+                            * Scroll the mouse wheel to change its orientation.
+
+                            |green_end| **Start pose** is the green one.
+                            It cannot be manipulated.
+
+**B**  **Properties**       Allows you to set the properties of the **Planar move**.
+
+                            * **Offset** is used to delay the trajectories.
+
+                            * **Framerate** and **Tick every** modify only the display of the trajectories.
+
+**C**  **New path**         Allows you to add intermediate points on the current **Trajectory**.
+       button
+                            Once having clicked, move the **End pose** in order to extend
+                            the trajectory starting from this intermediate point.
+
+                            It produces arcs of circles to ensure continuous moves.
+
+**D**  **Trajectory         Allows you to change the edition mode so that the **orientation**
+       orientation**        of the poses are computed automatically or not, in function
+                            of the direction of their leading path.
+
+**E**  **Keyframes**        Allows you to fine-tune the time taken for a trajectory to be executed.
+
+**F**  Preview buttons      Click the **Play** button to preview the trajectory.
+
+**G**  **End point**        Allows you to fine-tune the last pose of your trajectory.
+
+**H**  **Trajectories**     Allows you to add and select a **Trajectory**.
+
+                            All trajectories compounding your planar move are displayed
+                            here, each behind an **index button**.
+
+                            * Click the **New trajectory** button to add a trajectory to the current
+                              **Planar move**.
+                            * Click one index button, to select a trajectory and show it in
+                              the edition zone.
+                            * Shift-Click or Ctrl+A to select several trajectories, their concatenation
+                              is then displayed in the edition zone.
+=====  =================   ================================================================================
+
+
+.. _choregraphe-integrate-planar-move:
+
+Using Planar Moves in Behaviors
+--------------------------------
+
+Open a **Behavior**, and enter the diagram you want your planar move to be
+executed from. **Drag the *.pmt file** from the project content and drop
+it in the diagram editor: it will create a **Move Along box** referring to
+your planar move.
+
+
+.. image:: /medias/desktop/choregraphe/drag_planar_move.png
+    :width: 578 px
+    :height: 380 px
+
+.. note:: you can also find the **Move Along** box in the standard box library.
+
+You can re-use this box everywhere in your project with no additional overhead.
+
+The **Move Along** box is linked to the **Planar Move** file:
+editing the **Planar Move** file modifies the box content.

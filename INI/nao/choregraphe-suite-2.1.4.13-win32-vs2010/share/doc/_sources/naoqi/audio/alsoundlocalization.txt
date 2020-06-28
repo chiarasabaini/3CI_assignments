@@ -1,0 +1,193 @@
+.. include:: ../../bulk/common.rst
+
+.. _alsoundlocalization:
+
+ALSoundLocalization
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alsoundlocalization-api
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alsoundlocalization-api>`
+
+------------
+
+What it does
+------------
+
+**ALSoundLocalization** identifies the direction of any loud enough sound
+heard by the robot.
+
+.. note::
+
+   This module is the newer version of the former
+   :ref:`ALAudioSourceLocalization module <alaudiosourcelocalization>`.
+
+   The API has been kept, except for the *'Sensibility'* parameter (see
+   :cpp:func:`ALSoundLocalizationProxy::setParameter`) and the event name.
+
+
+
+How it works
+------------
+
+As |roboN| and |roboJ| have their microphones located differently,
+the specific operating mode, performances and limitation on |roboJ|
+are specifically described here.
+
+|nao| |roboN|
+++++++++++++++
+
+The sound wave emitted by a source is received at slightly different times on
+each of the |roboN|'s four microphones, from the closest to the farthest.
+
+These differences, known as TDOA (Time Differences Of Arrival), are related to
+the current location of the emitting source. By using this relationship, the
+robot is able to retrieve the direction of the emitting source (azimuthal and
+elevation angles) from the TDOAs measured on the different microphone pairs.
+
+The sound localization is triggered when a sound is detected, using the
+algorithm of ALSoundDetection (but the parameters are independent).
+Each time a sound is detected, its localization is computed and published in the
+**ALMemory** event ``ALSoundLocalization/SoundLocated`` formated as follows:
+
+.. code-block:: guess
+
+   [ [time(sec), time(usec)],
+
+     [azimuth(rad), elevation(rad), confidence],
+
+     [Head Position[6D]] in FRAME_TORSO,
+     [Head Position[6D]] in FRAME_ROBOT
+   ]
+
+|juju| |roboJ|
+++++++++++++++
+
+The sound wave emitted by a source close to the robot is received at slightly different
+times on each of |roboJ|'s four microphones.
+
+For example, if someone talks to |roboJ|,
+on his left side, the corresponding signal first hits the left microphones
+simultaneously, and few milliseconds later the right ones, also simultaneously.
+
+These differences, known as ITD (Interaural Time Differences), are related to the
+current location of the emitting source. By using this relationship, the robot is
+able to retrieve the direction of the emitting source (azimuthal and elevation angles)
+from the ITDs measured on the 4 microphones.
+
+The result of this computation is regularly updated in **ALMemory** in the key
+``ALSoundLocalization/SoundLocated`` formated as follows:
+
+.. code-block:: guess
+
+   [ [time(sec), time(usec)],
+
+     [azimuth(rad), elevation(rad), confidence],
+
+     [Head Position[6D]]
+   ]
+
+Performances and Limitations
+----------------------------
+
+|nao| |roboN| - Performances
++++++++++++++++++++++++++++++
+
+The maximum theoretical accuracy is about 10 degrees for Nao.
+The distance separating the robot and a sound source successfully located can
+reach several meters depending on the situation (reverberation, background
+noise, etc...). Once launched, this feature uses 3-5\% of the CPU constantly and
+up to 10\% for a few milliseconds when the location of a sound is being computed.
+
+|nao| |roboN| - Limitations
+++++++++++++++++++++++++++++
+
+The performance of the sound source localization engine is limited by how
+clearly the sound source can be heard with respect to background noise. Noisy or
+reverberant environments naturally tend to decrease the reliability of the
+module outputs. It will also detect and locate any loud sounds without being
+able by itself to filter out sound source that are not humans. Finally, only one
+sound source can be located at a time. The module can behave in a less reliable
+manner if the robot faces several loud noises at the same time. It will likely
+only output the direction of the loudest source.
+
+|juju| |roboJ| - Performances
++++++++++++++++++++++++++++++++
+
+The angles provided by the sound source localization engine match the real position
+of the source with an average accuracy of 10 degrees, which is satisfactory for most
+uses. Note that the maximum theoretical accuracy depends on the microphones spatial
+configuration and on the sample rate of the measured signal, and is about 7 degrees.
+
+The sound localization has been designed to be robust to reverberation and background
+noise, and if several sources are emitting sound, it will pick the loudest.
+
+|juju| |roboJ| - Limitations
++++++++++++++++++++++++++++++
+
+The performance of the sound source localization engine is limited by how clearly
+the sound source can be heard with respect to background noise. Noisy environments
+naturally tend to decrease the reliability of the module outputs. It will also
+detect and locate any sound without being able by itself to filter out sound source
+that are not humans. Finally, only one sound source can be located at a time.
+The module can behave in a less reliable manner if the robot faces several loud noises
+at the same time. Notice that the confidence indicator will drop in presence of noise,
+to reflect the loss in reliability.
+
+**ALSoundLocalization** is not robust if:
+
+* Signal to Noise Ratio is too weak (generally good at 3dB+)
+* Audio signal saturates (successfully tested at 80 dB / 2m)
+* Person behind the robot (more than 120° from the front)
+
+**ALSoundLocalization** is not robust if:
+
+* Signal to Noise Ratio is too weak (generally good at 3dB+)
+* Audio signal saturates (successfully tested at 80 dB / 2m)
+* Person behind the robot (more than 120° from the front)
+
+Getting started
+---------------
+
+Use the **Sound Tracker** Choregraphe Box after having set the robot's stiffness
+to 1 (to enable head movements).
+
+
+Use Cases
+---------
+
+Here are some possible applications (from the simplest to the more ambitious ones)
+that can be built from the ability to locate sound sources.
+
+**Case 1: Noisy event localization**
+
+Using the ALSoundLocalization to have a person enter the camera field of
+view (as shown in the above example). This allows subsequent vision based features to
+work on relevant images (images showing a person for example). This is consequently
+of interest for these specific tasks:
+
+* Human Detection, Tracking and Recognition
+
+* Noisy Objects Detection, Tracking and Recognition
+
+**Case 2: Sound Source Separation**
+
+The localization estimates of ALSoundLocalization can be used to
+strengthen the Signal/Noise ratio in the corresponding direction - this is known
+as beamforming - and can critically enhance subsequent audio based algorithms
+such as speech recognition.
+
+**Case 3: Multimodal applications**
+
+These possible applications can also be mixed together, making the sound source
+localization the basic block for sophisticated applications such as:
+
+* Remote Monitoring / Security applications (the robot could track noises in an empty
+  room, take pictures and record sounds in relevant directions, etc...)
+
+* Entertainment applications (by knowing who speaks and understanding what is
+  being said, the robot could easily take part in a great variety of games with humans.)

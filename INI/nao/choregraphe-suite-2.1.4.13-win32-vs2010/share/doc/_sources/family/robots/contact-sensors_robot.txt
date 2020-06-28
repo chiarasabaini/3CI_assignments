@@ -1,0 +1,31 @@
+
+.. _robot-contact-sensors:
+
+Contact and tactile sensors
+=============================
+
+.. seealso::
+   :ref:`alsensors`
+
+   :ref:`h25-contact-sensors` | :ref:`h21-contact-sensors` | :ref:`t14-contact-sensors` | :ref:`t2-contact-sensors`
+
+--------------------
+
+
+.. _robot_contact_head:
+
+.. include:: ../bulk/contact-sensors_head.rst
+
+.. _robot_contact_chest:
+
+.. include:: ../bulk/contact-sensors_chest-button.rst
+
+.. _robot_contact_hand:
+
+.. include:: ../bulk/contact-sensors_hands.rst
+
+.. _robot_contact_feet:
+
+.. include:: ../bulk/contact-sensors_feet.rst
+
+

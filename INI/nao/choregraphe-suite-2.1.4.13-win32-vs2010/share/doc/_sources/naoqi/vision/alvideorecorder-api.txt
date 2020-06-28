@@ -1,0 +1,169 @@
+.. _alvideorecorder-api:
+
+ALVideoRecorder API
+===================
+
+:ref:`naoqi-vision` - :ref:`Overview <alvideorecorder>` | API | :ref:`Tutorial <alvideorecorder-tuto>`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alvideorecorderproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALVideoRecorderProxy
+
+* :cpp:func:`ALVideoRecorderProxy::isRecording`
+* :cpp:func:`ALVideoRecorderProxy::getCameraID`
+* :cpp:func:`ALVideoRecorderProxy::getColorSpace`
+* :cpp:func:`ALVideoRecorderProxy::getFrameRate`
+* :cpp:func:`ALVideoRecorderProxy::getResolution`
+* :cpp:func:`ALVideoRecorderProxy::getVideoFormat`
+* :cpp:func:`ALVideoRecorderProxy::setCameraID`
+* :cpp:func:`ALVideoRecorderProxy::setColorSpace`
+* :cpp:func:`ALVideoRecorderProxy::setFrameRate`
+* :cpp:func:`ALVideoRecorderProxy::setResolution`
+* :cpp:func:`ALVideoRecorderProxy::setVideoFormat`
+* :cpp:func:`ALVideoRecorderProxy::startRecording`
+* :cpp:func:`ALVideoRecorderProxy::stopRecording`
+
+
+Methods
+-------
+
+
+.. cpp:function:: bool ALVideoRecorderProxy::isRecording()
+
+  :return: - true if the robot is currently recording a video.
+           - false otherwise.
+
+
+.. cpp:function:: int ALVideoRecorderProxy::getCameraID()
+
+  :return: Current camera ID.
+
+
+.. cpp:function:: int ALVideoRecorderProxy::getColorSpace()
+
+  :return: Current color space.
+
+
+.. cpp:function:: int ALVideoRecorderProxy::getFrameRate()
+
+  :return: Current video framerate.
+
+
+.. cpp:function:: int ALVideoRecorderProxy::getResolution()
+
+  :return: Current frame resolution.
+
+
+.. cpp:function:: std::string ALVideoRecorderProxy::getVideoFormat()
+
+  :return: Current video format used to encode video. See :cpp:func:`ALVideoRecorderProxy::setVideoFormat`
+           for the list of possible return values.
+
+
+.. cpp:function:: void ALVideoRecorderProxy::setCameraID(const int& cameraID)
+
+  Sets the camera used for recording.
+
+  :param cameraID: New camera ID. Must be either 0 (top camera) or 1 (bottom camera).
+
+
+.. cpp:function:: void ALVideoRecorderProxy::setColorSpace(const int& colorSpace)
+
+  Sets the color space used.
+
+  :param colorSpace: New color space. It can be either kBGRColorSpace (color) or kYuvColorSpace (gray scale).
+
+
+.. cpp:function:: void ALVideoRecorderProxy::setFrameRate(const int& frameRate)
+
+  Sets the number of frames per second (FPS).
+
+  :param frameRate: New frame rate between 1 and 30 (with a maximum of 15 FPS in VGA resolution).
+
+.. note::
+
+    MJPG format requires a frame rate greater than 2 FPS.
+
+
+.. cpp:function:: void ALVideoRecorderProxy::setResolution(const int& resolution)
+
+  Sets the frame resolution.
+
+  :param resolution: New resolution, either 0 (QQVGA), 1 (QVGA) or 2 (VGA).
+
+
+.. cpp:function:: void ALVideoRecorderProxy::setVideoFormat(const std::string& videoFormat)
+
+  Sets the codec name used to encode the video.
+
+  :param videoFormat: - "IYUV" (raw avi, color video only)
+                      - "MJPG" (compressed avi, gray scale and color video)
+
+
+.. _ALVideoRecorderProxy::startRecording1:
+
+.. cpp:function:: void ALVideoRecorderProxy::startRecording(const std::string& folderPath, const std::string& fileName)
+
+  There are two overloads of this function:
+
+  - :ref:`ALVideoRecorderProxy::startRecording <ALVideoRecorderProxy::startRecording1>`
+  - :ref:`ALVideoRecorderProxy::startRecording <ALVideoRecorderProxy::startRecording2>` with extra *overwrite* argument.
+
+  Starts recording a video with the current parameters until
+  :cpp:func:`ALVideoRecorderProxy::stopRecording` is called. If the destination
+  file already exists, it will be overwritten.
+
+  :param folderPath: Path were the video file will be save.
+
+  :param fileName: Name used to save the video. If the name does not end with ".avi",
+                   the file extension ".avi" will be automatically added.
+
+.. note::
+
+  Only one record at a time can be made.
+
+.. _ALVideoRecorderProxy::startRecording2:
+
+.. cpp:function:: void ALVideoRecorderProxy::startRecording(const std::string& folderPath, const std::string& fileName, const bool& overwrite)
+
+  Starts recording a video with the current parameters until
+  :cpp:func:`ALVideoRecorderProxy::stopRecording` is called.
+
+  .. warning::
+    Due to technical issues, do not use ARV format anymore.
+
+  :param folderPath: Path were the video file will be save.
+
+  :param fileName: Name used to save the video. If the name does not end with ".avi",
+                   the file extension ".avi" will be automatically added.
+
+  :param overwrite: If you set this value to false and the destination file
+                    already exists, the method will return and throw an
+                    exception. No data will be saved on disk and the existing
+                    file will be preserved.
+
+.. note::
+
+  Only one record at a time can be made.
+
+
+.. cpp:function:: AL::ALValue ALVideoRecorderProxy::stopRecording()
+
+  Stops a video record that was launched with :cpp:func:`ALVideoRecorderProxy::startRecording`.
+  The function returns the number of frames that were recorded, as well as the
+  video absolute path.
+
+
+  :return: Array of two elements [numRecordedFrames, recordAbsolutePath].

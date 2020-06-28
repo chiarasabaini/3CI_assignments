@@ -1,0 +1,35 @@
+.. _dialog_toc:
+
+QiChat - Table of Content
+==========================
+
+:ref:`naoqi-audio` - :ref:`Overview <aldialog>` | :ref:`API <aldialog-api>` | QiChat
+| :ref:`Tutorials <aldialog_tuto>`
+
+Table of Content | :ref:`Introduction<dialog_concepts>` |
+:ref:`Syntax<dialog_rules>` | :ref:`Overview<dialog_overview>` |
+:ref:`Cheat Sheet<dialog_cheat_sheet>`
+
+------------
+
+**Understanding the main concepts**
+
+.. toctree::
+   :maxdepth: 2
+
+   dialog
+
+
+**Full syntax**
+
+.. toctree::
+   :maxdepth: 3
+
+   dialog-syntax_full
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   aldialog_syntax_overview
+   aldialog_syntax_cheat_sheet

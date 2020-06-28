@@ -1,0 +1,37 @@
+.. _alchestbutton:
+
+ALChestButton
+=============
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alchestbutton-api
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <alchestbutton-api>`
+
+--------
+
+
+What it does
+------------
+
+**ALChestButton** is responsible for raising events related to the robot chest button.
+
+For further details, see section: :ref:`ALChestButton list of events <alchestbutton-event-list>`.
+
+How it works
+------------
+
+ALChestButton retrieves data from ALMemory, processes it and raises
+events depending on the situation.
+
+Use Cases
+---------
+
+Detect simple, double and triple click.
+
+At simple click, the robot says his name, ip address and all waiting notifications.
+
+At double click, the stiffness is removed.

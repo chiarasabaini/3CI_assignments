@@ -1,0 +1,29 @@
+.. _python-example-motion-stiffness:
+
+Stiffness
+=========
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+Turns the stiffness on and off.
+
+Stiffness on
+------------
+
+:download:`almotion_stiffnessOn.py </examples/python/motion/almotion_stiffnessOn.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_stiffnessOn.py
+   :language: py
+
+Stiffness off
+-------------
+
+.. warning::
+
+   Please make sure that the robot is not standing before trying this example.
+
+:download:`almotion_stiffnessOff.py </examples/python/motion/almotion_stiffnessOff.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_stiffnessOff.py
+   :language: py
+

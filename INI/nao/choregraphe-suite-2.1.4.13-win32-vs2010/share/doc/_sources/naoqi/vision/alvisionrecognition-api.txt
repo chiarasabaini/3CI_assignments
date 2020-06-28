@@ -1,0 +1,83 @@
+.. _alvisionrecognition-api:
+
+ALVisionRecognition API
+=======================
+
+:ref:`naoqi-vision` - :ref:`Overview <alvisionrecognition>` | API | :ref:`Tutorial<alvisionrecognition-tuto>`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alvisionrecognitionproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALVisionRecognitionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALVisionRecognitionProxy::changeDatabase`
+  * :cpp:func:`ALVisionRecognitionProxy::getParam`
+  * :cpp:func:`ALVisionRecognitionProxy::setParam` (deprecated)
+
+
+Event list
+----------
+
+* :naoqi:event:`PictureDetected`
+
+
+Methods
+-------
+
+
+.. cpp:function:: bool ALVisionRecognitionProxy::changeDatabase(const std::string& databasePath, const std::string& databaseName)
+
+  By default the database is composed of several files with the same name
+  "database" and different extensions. It is located on the robot in
+  "/home/nao/naoqi/share/naoqi/vision/visionrecognition/current/" folder
+  (1.10 SDK and below) or "/home/nao/.local/share/naoqi/vision/visionrecognition/current/" folder (1.12 SDK and higher).
+  This method allows to choose another database by providing its name and folder (:ref:`choregraphe-tuto-learn-object`).
+
+  :param databasePath: Absolute path of the database on the robot, or "" to set default path.
+
+  :param databaseName: Name of the database (without extension), or "" to set default database name.
+
+  :return: true if success.
+
+
+.. cpp:function:: std::string ALVisionRecognitionProxy::getParam(const std::string& paramName)
+
+  Get vision recognition parameters. Available parameters are:
+
+  * "db_path": database path on the robot
+  * "db_name": database name
+
+  :param paramName: Name of the parameter to get.
+
+  :return: Value of the parameter as a string.
+
+
+.. cpp:function:: void ALVisionRecognitionProxy::setParam(const std::string& paramName, const AL::ALValue& paramValue)
+
+  .. deprecated:: 1.22
+                  "resolution" can now be set with :cpp:func:`ALVisionExtractor::setResolution`;
+                  "scoreThreshold" is not used anymore.
+
+
+Events
+------
+
+.. naoqi:event:: PictureDetected(AL::ALValue value)
+
+  Raised when a visual pattern previously learned is recognized.
+
+  :param value: Informations related to the detected picture. Please refer to :ref:`alvisionrecognition` for details.

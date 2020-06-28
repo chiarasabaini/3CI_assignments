@@ -1,0 +1,410 @@
+.. _almemory-api:
+
+ALMemory API
+============
+
+:ref:`naoqi-core` - :ref:`Overview <almemory>` | API | :ref:`Tutorial <almemory-tuto>`
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/almemoryproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALMemoryProxy
+
+* :cpp:func:`ALMemoryProxy::declareEvent`
+* :cpp:func:`ALMemoryProxy::getData`
+* :cpp:func:`ALMemoryProxy::getDataList`
+* :cpp:func:`ALMemoryProxy::getDataListName`
+* :cpp:func:`ALMemoryProxy::getDataOnChange`
+* :cpp:func:`ALMemoryProxy::getDataPtr`
+* :cpp:func:`ALMemoryProxy::getDescriptionList`
+* :cpp:func:`ALMemoryProxy::getEventHistory`
+* :cpp:func:`ALMemoryProxy::getEventList`
+* :cpp:func:`ALMemoryProxy::getExtractorEvent`
+* :cpp:func:`ALMemoryProxy::getListData`
+* :cpp:func:`ALMemoryProxy::getMicroEventList`
+* :cpp:func:`ALMemoryProxy::getSubscribers`
+* :cpp:func:`ALMemoryProxy::getType`
+* :cpp:func:`ALMemoryProxy::getTimestamp`
+* :cpp:func:`ALMemoryProxy::insertData`
+* :cpp:func:`ALMemoryProxy::insertListData`
+* :cpp:func:`ALMemoryProxy::raiseEvent`
+* :cpp:func:`ALMemoryProxy::raiseMicroEvent`
+* :cpp:func:`ALMemoryProxy::removeData`
+* :cpp:func:`ALMemoryProxy::removeMicroEvent`
+* :cpp:func:`ALMemoryProxy::setDescription`
+* :cpp:func:`ALMemoryProxy::subscribeToEvent`
+* :cpp:func:`ALMemoryProxy::subscribeToMicroEvent`
+* :cpp:func:`ALMemoryProxy::unregisterModuleReference`
+* :cpp:func:`ALMemoryProxy::unsubscribeToEvent`
+* :cpp:func:`ALMemoryProxy::unsubscribeToMicroEvent`
+
+Event list
+-----------
+
+* :naoqi:event:`NAOqiReady`
+* :naoqi:event:`ALMemory/KeyAdded`
+* :naoqi:event:`ALMemory/KeyRemoved`
+* :naoqi:event:`ALMemory/KeyTypeChanged`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALMemoryProxy::declareEvent(const std::string& eventName)
+
+  Declares an event to allow future subscriptions to the event
+
+  :param eventName: The name of the event
+
+.. cpp:function:: void ALMemoryProxy::declareEvent(const std::string& eventName, const std::string& extractorName)
+
+  Declares an event to allow future subscriptions to the event
+
+  :param eventName: The name of the event
+  :param extractorName: The name of the extractor capable of creating the event
+
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getData(const std::string& key)
+
+  Gets the value of a key-value pair stored in memory
+
+  :param key: Name of the value.
+  :return: The data as an AL::ALValue. This can often be cast transparently into the original type.
+
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getData(const std::string& key, const int& deprecatedParameter)
+
+  .. deprecated:: 1.12
+    use the version of this method with no second parameter.
+
+  Gets the value of a key-value pair stored in memory
+
+  :param key: Name of the value.
+  :param deprecatedParameter: This parameter has no effect, but is left for compatibility reason.
+  :return: The data as an AL::ALValue
+
+
+.. cpp:function:: std::vector<std::string> ALMemoryProxy::getDataList(const std::string& filter)
+
+  Gets a list of all key names that contain a given string
+
+  :param filter: A string used as the search term
+  :return: A list of all the data key names that contain the given string.
+
+
+.. cpp:function:: std::vector<std::string> ALMemoryProxy::getDataListName()
+
+  Gets the key names for all the key-value pairs in memory
+
+  :return: A list containing the keys in memory
+
+
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getDataOnChange(const std::string& key,const int& deprecatedParameter)
+
+  Blocks the caller until the value of a key changes
+
+  .. deprecated:: 1.12
+    call :cpp:func:`ALMemoryProxy::getData` on your own and compare when the data change.
+
+  :param key: Name of the data.
+  :param deprecatedParameter: this parameter has no effect
+  :return: an array containing all the retrieved data
+
+
+.. cpp:function:: void * ALMemoryProxy::getDataPtr(const std::string& key)
+
+  Gets a pointer to 32 a bit data item. Beware, the pointer will only be valid during the lifetime of the ALMemoryProxy object. Use with care, at initialization, not every loop.
+
+  :param key: Name of the data.
+  :return: A pointer converted to int
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getDescriptionList(const std::vector<std::string>& keys)
+
+  Gets a description of all given keys
+
+  :param keys: List of keys. (empty to get all descriptions)
+  :return: An array of (key, type, description) where type is "data" or "event"
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getEventHistory(const std::string &pName)
+
+  :param key: Name of the variable
+  :return: A list of all the data key names that contain the given string.
+
+.. cpp:function:: std::vector<std::string> ALMemoryProxy::getEventList()
+
+  Gets a list containing the names of all the declared events
+
+  :return: A list containing the names of all events
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getTimestamp(const std::string &memoryKey)
+
+  Gets memoryKey value and its timestamps.
+
+  :param memoryKey: Name of the memoryKey in the ALMemory
+  :return: An ALValue with 3 items:
+           * memoryKey value,
+           * first part of the timestamp (seconds),
+           * second part of the timestamp (microseconds).
+
+.. cpp:function:: std::vector<std::string> ALMemoryProxy::getExtractorEvent(const std::string& extractorName)
+
+  Gets the list of all events generated by a given extractor
+
+  :param extractorName: The name of the extractor
+  :return: A list containing the names of the events associated with the given extractor
+
+
+.. cpp:function:: AL::ALValue ALMemoryProxy::getListData(const AL::ALValue& keyList)
+
+  Gets the values associated with the given list of keys. This is more efficient than calling getData many times, especially over the network.
+
+  :param keyList: An array containing the key names.
+  :return: An array containing all the values corresponding to the given keys.
+
+
+.. cpp:function:: std::vector<std::string> ALMemoryProxy::getMicroEventList()
+
+  Gets a list containing the names of all the declared micro events
+
+  :return: A list containing the names of all the microEvents
+
+
+.. cpp:function:: std::vector<std::string> ALMemoryProxy::getSubscribers(const std::string& name)
+
+  Gets a list containing the names of subscribers to an event.
+
+  :param name: Name of the event or micro-event
+  :return: List of subscriber names
+
+
+.. cpp:function:: std::string ALMemoryProxy::getType(const std::string& key)
+
+  Gets the storage class of the stored data. This is not the underlying POD type.
+
+  :param key: Name of the variable
+  :return: String type: Data, Event, MicroEvent
+
+
+.. cpp:function:: void ALMemoryProxy::insertData(const std::string& key,const int& value)
+
+  Inserts a key-value pair into memory, where value is an int
+
+  :param key: Name of the value to be inserted.
+  :param value: The int to be inserted
+
+
+
+.. cpp:function:: void ALMemoryProxy::insertData(const std::string& key,const float& value)
+
+  Inserts a key-value pair into memory, where value is a float
+
+  :param key: Name of the value to be inserted.
+  :param value: The float to be inserted
+
+
+
+.. cpp:function:: void ALMemoryProxy::insertData(const std::string& key,const std::string& value)
+
+  Inserts a key-value pair into memory, where value is a string
+
+  :param key: Name of the value to be inserted.
+  :param value: The string to be inserted
+
+
+.. cpp:function:: void ALMemoryProxy::insertData(const std::string& key,const AL::ALValue& data)
+
+  Inserts a key-value pair into memory, where value is an ALValue
+
+  :param key: Name of the value to be inserted.
+  :param data: The ALValue to be inserted. This could contain a basic type, or a more complex array. See the ALValue documentation for more information.
+
+
+.. cpp:function:: void ALMemoryProxy::insertListData(const AL::ALValue& list)
+
+  Inserts a list of key-value pairs into memory.
+
+  :param list: An ALValue list of the form [[Key, Value],...]. Each item will be inserted.
+
+
+.. cpp:function:: void ALMemoryProxy::raiseEvent(const std::string& name,const AL::ALValue& value)
+
+  Publishes the given data to all subscribers.
+
+  :param name: Name of the event to raise.
+  :param value: The data associated with the event. This could contain a basic type, or a more complex array. See the ALValue documentation for more information.
+
+.. cpp:function:: void ALMemoryProxy::raiseMicroEvent(const std::string& name,const AL::ALValue& value)
+
+  Publishes the given data to all subscribers.
+
+  :param name: Name of the event to raise.
+  :param value: The data associated with the event. This could contain a basic type, or a more complex array. See the :ref:`libalvalue-doc` documentation for more information.
+
+
+.. cpp:function:: void ALMemoryProxy::removeData(const std::string& key)
+
+  Removes a key-value pair from memory
+
+  :param key: Name of the data to be removed.
+
+
+.. cpp:function:: void ALMemoryProxy::removeMicroEvent(const std::string& name)
+
+  Removes a micro event from memory and unsubscribes any existing subscribers.
+
+  :param name: Name of the event to remove.
+
+.. cpp:function:: void ALMemoryProxy::setDescription(const std::string &name, const std::string &description)
+
+  Sets the description of a memory entry.
+
+  :param name: The name of the key to document
+  :param description: The description
+
+.. cpp:function:: void ALMemoryProxy::subscribeToEvent(const std::string& name,const std::string& callbackModule,const std::string& callbackMethod)
+
+  Subscribes to an event and automatically launches the module that declared itself as the generator of the event if required.
+
+  :param name: The name of the event to subscribe to
+  :param callbackModule: Name of the module to call with notifications
+  :param callbackMethod: Name of the module's method to call when a data is changed
+
+  Look at the following example for details: :ref:`cpp-tutos-create-events`
+
+  C++ callback signature:
+
+  .. code-block:: cpp
+
+    class MyModule : public AL::ALModule {
+    public:
+      void myCallback(const std::string &key, const AL::ALValue &value, const AL::ALValue &message);
+    };
+
+
+  Python callback signature:
+
+  .. code-block:: py
+
+    # create python module
+    class MyModule(ALModule):
+      """ Mandatory docstring.
+          comment needed to create a new python module
+      """
+
+      def myCallback(self, key, value, message):
+        """ Mandatory docstring.
+            comment needed to create a bound method
+        """
+        pass
+
+
+.. cpp:function:: void ALMemoryProxy::subscribeToEvent(const std::string& name,const std::string& callbackModule,const std::string& callbackMessage,const std::string& callbackMethod)
+
+  .. deprecated:: 1.12
+    use the version without the callbackMessage parameter.
+
+  Subscribes to event and automatically launches the module capable of generating
+  the event if it is not already running. Use the version without the callbackMessage parameter.
+
+  :param name: The name of the event to subscribe to
+  :param callbackModule: Name of the module to call with notifications
+  :param callbackMessage: DEPRECATED Message included in the notification.
+  :param callbackMethod: Name of the module's method to call when a data is changed
+
+.. cpp:function:: void ALMemoryProxy::subscribeToMicroEvent(const std::string& name,const std::string& callbackModule,const std::string& callbackMessage,const std::string& callbackMethod)
+
+  Subscribes to a microEvent. Subscribed modules are notified on their callback method whenever the data is updated, even if the new value is the same as the old value.
+
+  :param name: Name of the data.
+  :param callbackModule: Name of the module to call with notifications
+  :param callbackMessage: Message included in the notification. This can be used to disambiguate multiple subscriptions.
+  :param callbackMethod: Name of the module's method to call when a data is changed
+
+  Look at the following example for details: :ref:`cpp-tutos-create-events`
+
+  C++ callback signature:
+
+  .. code-block:: cpp
+
+    class MyModule : public AL::ALModule {
+    public:
+      void myCallback(const std::string &key, const AL::ALValue &value, const AL::ALValue &message);
+    };
+
+
+  Python callback signature:
+
+  .. code-block:: py
+
+    # create python module
+    class MyModule(ALModule):
+      """ Mandatory docstring.
+          comment needed to create a new python module
+      """
+
+      def myCallback(self, key, value, message):
+        """ Mandatory docstring.
+            comment needed to create a bound method
+        """
+        pass
+
+
+.. cpp:function:: void ALMemoryProxy::unregisterModuleReference(const std::string& moduleName)
+
+  Informs ALMemoryProxy that a module doesn't exist anymore.
+
+  :param moduleName: Name of the departing module.
+
+
+.. cpp:function:: void ALMemoryProxy::unsubscribeToEvent(const std::string& name,const std::string& callbackModule)
+
+  Unsubscribes a module from the given event. No further notifications will be received.
+  The module capable of generating the event is automatically stopped when the last subscriber unsubscribes.
+
+  :param name: The name of the event
+  :param callbackModule: The name of the module that was given when subscribing.
+
+
+.. cpp:function:: void ALMemoryProxy::unsubscribeToMicroEvent(const std::string& name,const std::string& callbackModule)
+
+  Unsubscribes from the given event. No further notifications will be received.
+
+  :param name: Name of the event.
+  :param callbackModule: The name of the module that was given when subscribing.
+
+
+Events
+------
+
+.. naoqi:event:: NAOqiReady()
+
+  Raised when all the auto-loaded modules have been loaded.
+  See :ref:`naoqi-process` to understand what is an auto-loaded module.
+
+.. naoqi:event:: ALMemory/KeyAdded(const std::string& keyName)
+
+  Raised after a key is created in ALMemory, carrying the name of the
+  freshly created key.
+
+.. naoqi:event:: ALMemory/KeyRemoved(const std::string& keyName)
+
+  Raised after a key is removed from ALMemory, carrying the name of the
+  concerned key.
+
+.. naoqi:event:: ALMemory/KeyTypeChanged(const std::string& keyName)
+
+  Raised after a key's type is changed, for example when declaring a
+  data key as an event.

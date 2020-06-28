@@ -1,0 +1,28 @@
+.. _control-joint-tuto:
+
+Joint control Tutorial: The Pose Init
+=====================================
+
+:ref:`naoqi-motion` - :ref:`Overview<control-joint>` | :ref:`API <control-joint-api>` | Tutorial
+
+------------
+
+
+Introduction
+------------
+
+| This tutorial explains how to use joint control API in the context of the Aldebaran Robotics
+  definition of the "NAO initial position" known as Stand Init.
+
+.. image:: /medias/dev/modules/motion/motion_initposes.jpg
+
+
+Download
+--------
+
+Please refer to the section: :ref:`python-install-guide` for any troubleshooting linked to python.
+
+:download:`almotion_poseInit.py </examples/python/motion/almotion_poseInit.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_poseInit.py
+   :language: py

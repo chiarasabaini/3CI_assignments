@@ -1,0 +1,603 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Launch trigger conditions &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="ALAutonomousLife" href="autonomouslife.html" />
+    <link rel="next" title="ALAutonomousLife - Advanced" href="autonomouslife_advanced.html" />
+    <link rel="prev" title="ALAutonomousLife API" href="autonomouslife-api.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="autonomouslife-api.html" title="ALAutonomousLife API">previous</a>
+     |
+    <a href="autonomouslife.html" title="ALAutonomousLife" accesskey="U">up</a>
+   |
+    <a href="autonomouslife_advanced.html" title="ALAutonomousLife - Advanced">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-core-triggerconditions">
+            
+  <div class="section" id="launch-trigger-conditions">
+<span id="launchtriggerconditions"></span><h1>Launch trigger conditions<a class="headerlink" href="#launch-trigger-conditions" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-core"><em>NAOqi Core</em></a> - <a class="reference internal" href="autonomouslife.html#autonomouslife"><em>Overview</em></a> | <a class="reference internal" href="autonomouslife-api.html#autonomouslife-api"><em>API</em></a> |
+Launch trigger conditions | <a class="reference internal" href="autonomouslife_advanced.html#autonomouslife-advanced"><em>Advanced</em></a></p>
+<hr class="docutils" />
+<div class="section" id="goal">
+<span id="triggerconditions-overview"></span><h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
+<p>When Life is running on a robot, in solitary state, <a class="reference internal" href="../../software/choregraphe/objects/activity.html#activity"><em>Activities</em></a> with launch trigger conditions
+can be started automatically.</p>
+<p>These conditions can be set in the manifest of the Choregrahe behavior of the activity.
+Refer to the <a class="reference internal" href="../../software/choregraphe/panels/project_content_panel.html#chore-project-content"><em>Choregraphe documentation</em></a> for editing manifest of behaviors.
+To write them, use events and an expression language.
+For further details, see: <a class="reference internal" href="#launchpad-keys"><em>Launch trigger conditions - Event list</em></a> and <a class="reference internal" href="#launchpad-expressions"><em>Conditions expression language</em></a>.</p>
+</div>
+<div class="section" id="launch-trigger-conditions-event-list">
+<span id="launchpad-keys"></span><h2>Launch trigger conditions - Event list<a class="headerlink" href="#launch-trigger-conditions-event-list" title="Permalink to this headline">¶</a></h2>
+<p><strong>About people and movements</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="11%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key Name</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/NumPeopleZone1</td>
+<td>int</td>
+<td>The number of people detected in zone 1</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/NumPeopleZone2</td>
+<td>int</td>
+<td>The number of people detected in zone 2</td>
+</tr>
+<tr class="row-even"><td>Launchpad/NumPeopleZone3</td>
+<td>int</td>
+<td>The number of people detected in zone 3</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/NumMotionZone1</td>
+<td>int</td>
+<td>The number of moving objects detected in zone 1</td>
+</tr>
+<tr class="row-even"><td>Launchpad/NumMotionZone2</td>
+<td>int</td>
+<td>The number of moving objects detected in zone 2</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/NumMotionZone3</td>
+<td>int</td>
+<td>The number of moving objects detected in zone 3</td>
+</tr>
+<tr class="row-even"><td>Launchpad/WavingDetection</td>
+<td>int</td>
+<td>0 while no waving is detected, 1 while waving is detected</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/PeopleNotSeen</td>
+<td>bool</td>
+<td>True when PeoplePerception/VisiblePeopleList is empty</td>
+</tr>
+<tr class="row-even"><td>Launchpad/SameTrackedHuman</td>
+<td>bool</td>
+<td><div class="first last line-block">
+<div class="line">True as long as the same person is being tracked.</div>
+<div class="line">Momentarily false when the tracked person changes.</div>
+<div class="line">The tracked person is determined by BasicAwareness.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/ZoneOfTrackedHuman</td>
+<td>int</td>
+<td>The zone that the tracked person is in.  1, 2, or 3.  0 if no one is tracked.</td>
+</tr>
+<tr class="row-even"><td>Launchpad/TrackedHumanIsLookingAtRobot</td>
+<td>bool</td>
+<td>True when the tracked person is looking at the robot.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>About battery information</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="9%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key Name</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/BatteryLevel</td>
+<td>int</td>
+<td>A number in the set [0, 5]</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/BatteryStatus</td>
+<td>string</td>
+<td>Critical, Low, Half, Full</td>
+</tr>
+</tbody>
+</table>
+<p><strong>About hardware information</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="64%" />
+<col width="12%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key Name</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/RobotType</td>
+<td>string</td>
+<td>nao, romeo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>About the posture of the robot</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="6%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key Name</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/PostureFamily</td>
+<td>string</td>
+<td>One of the <a class="reference internal" href="../motion/alrobotposture.html#term-posture-family"><em class="xref std std-term">Posture family</em></a>.</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/Posture</td>
+<td>string</td>
+<td>One of the <a class="reference internal" href="../motion/alrobotposture.html#term-posture"><em class="xref std std-term">Posture</em></a>.</td>
+</tr>
+<tr class="row-even"><td>Launchpad/RobotFellRecently</td>
+<td>bool</td>
+<td>True if the robot has fallen within the last 13 seconds</td>
+</tr>
+</tbody>
+</table>
+<p><strong>About the temperature of the joints of the robot</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="5%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key Name</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/TemperatureStatus</td>
+<td>string</td>
+<td><div class="first last line-block">
+<div class="line">Complete temperature health of the robot.</div>
+<div class="line">Cold, Warm, Hot, Critical</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/HighestTemperature</td>
+<td>float</td>
+<td>The highest temperature found on the robot, in Celsius.</td>
+</tr>
+<tr class="row-even"><td>Launchpad/HighestJoint</td>
+<td>string</td>
+<td><div class="first last line-block">
+<div class="line">The name of the hottest joint.</div>
+<div class="line">HeadYaw, HeadPitch, LShoulderPitch, LShoulderRoll, LElbowYaw, LElbowRoll,</div>
+<div class="line">LWristYaw, LHand, RShoulderPitch, RShoulderRoll, RElbowYaw, RElbowRoll,</div>
+<div class="line">RWristYaw, RHand, LHipRoll, LHipYawPitch, LHipPitch, LKneePitch, LAnkleRoll,</div>
+<div class="line">LAnklePitch, RHipRoll, RHipYawPitch, RHipPitch, RKneePitch, RAnkleRoll, RAnklePitch</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Additonal information about <a class="reference internal" href="../../family/robots/bodyparts.html#nao-chains"><em>NAO&#8217;s Joints</em></a>.</p>
+<p><strong>About time</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="15%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key Name</th>
+<th class="head">Type</th>
+<th class="head">Example Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/Year</td>
+<td>int</td>
+<td>2013</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/Month</td>
+<td>int</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>Launchpad/MonthName</td>
+<td>string</td>
+<td>January</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/Day</td>
+<td>int</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>Launchpad/DayName</td>
+<td>string</td>
+<td>Sunday</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/Date</td>
+<td>int</td>
+<td>12</td>
+</tr>
+<tr class="row-even"><td>Launchpad/Hour</td>
+<td>int</td>
+<td>14</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/Minute</td>
+<td>int</td>
+<td>42</td>
+</tr>
+<tr class="row-even"><td>Launchpad/Week</td>
+<td>int</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>About activity history</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="4%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">General Keys</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/LifeTime</td>
+<td>int</td>
+<td>The time in seconds since Autonomous Life module has loaded</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/State</td>
+<td>string</td>
+<td><p class="first">The current state of Autonomous Life.</p>
+<p class="last">Can be one of the <a class="reference internal" href="autonomouslife_advanced.html#autonomouslife-states"><em>Autonomous Life states</em></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>Launchpad/PreviousState</td>
+<td>string</td>
+<td><p class="first">The previous state of Autonomous Life.</p>
+<p>Can be one of the <a class="reference internal" href="autonomouslife_advanced.html#autonomouslife-states"><em>Autonomous Life states</em></a>.</p>
+<p class="last">Note, it is possible for the previous state to equal the current state if the current state was re-entered.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>Launchpad/FocusedActivity</td>
+<td>string</td>
+<td><p class="first">The currently focused activity.</p>
+<p class="last">Note, if no activity is running, this will be an empty string (&#8220;&#8221;)</p>
+</td>
+</tr>
+<tr class="row-even"><td>Launchpad/PreviousActivity</td>
+<td>string</td>
+<td><p class="first">The previously focused activity.</p>
+<p class="last">Note, &#8220;&#8221; (no activity running) is not considered for PreviousActivity</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To have condition on the time since your application was last focused, follow this pattern:
+<tt class="docutils literal"><span class="pre">(('Launchpad/FocusedActivity'</span> <span class="pre">!=</span> <span class="pre">&quot;my_attractions/child_attraction1&quot;)</span> <span class="pre">~</span> <span class="pre">60)</span></tt></p>
+<p>For the following, replace myPackageUUID and myActivityPath with the
+corresponding values from your Activity&#8217;s manifest data.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="4%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Per Activity Keys</th>
+<th class="head">Type</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Launchpad/FocusCount/myPackageUUID/myActivityPath</td>
+<td>int</td>
+<td>The count of how many occasions this activity has been focused.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="other-events">
+<h3>Other events<a class="headerlink" href="#other-events" title="Permalink to this headline">¶</a></h3>
+<p>You can also use the events raised by the extractors running in solitary state:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../peopleperception/albasicawareness.html#albasicawareness"><em>ALBasicAwareness</em></a></li>
+<li><a class="reference internal" href="../peopleperception/alpeopleperception.html#alpeopleperception"><em>ALPeoplePerception</em></a></li>
+<li><a class="reference internal" href="../peopleperception/alengagementzones.html#alengagementzones"><em>ALEngagementZones</em></a></li>
+<li><a class="reference internal" href="../peopleperception/algazeanalysis.html#algazeanalysis"><em>ALGazeAnalysis</em></a></li>
+<li><a class="reference internal" href="../peopleperception/alwavingdetection.html#alwavingdetection"><em>ALWavingDetection</em></a></li>
+<li><a class="reference internal" href="../vision/almovementdetection.html#almovementdetection"><em>ALMovementDetection</em></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="conditions-expression-language">
+<span id="launchpad-expressions"></span><h2>Conditions expression language<a class="headerlink" href="#conditions-expression-language" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>* Expression grammar:
+* ---------------------------------------------------------------------------
+*   - Parenthesis ()
+*
+*   - Constant int: 1
+*
+*   - Constant floats: 1.5, 1e4
+*
+*   - Constant strings: double-quoted: "foo", "bar"
+*
+*   - ALMemory keys: unquoted or quoted if having a slash / : key12, 'motion/foo'
+*       A key can be used anywhere a constant or list can be used.
+*       Be careful about the data types of your keys.
+*
+*   - Index a list key: 'motion/foo'[2]
+*
+*   - Lists: [1, 2, foo]
+*
+*   - Mathematical, logical operators: + - / * % &amp;&amp; || == &lt;= &lt; &gt;= &gt; ! !=
+*
+*   - Function calls:
+*        substr("canard", 1, 3) returns "ana"
+*        strlen("coin") returns 4
+*        type("foo") returns "String".  Other types: Invalid, Array, Bool, Int, Float, String
+*        size([1,2,3]) returns 3
+*        concat("a", "b") returns "ab"
+*
+*   - ~ operator: Requires condition to be true for given duration in seconds
+*       to trigger: "(soundVolume &lt; 1) ~ 1".
+*
+*   - subsets operator:
+*       True example: [1, 2] subsets [1, 2, 3, 4]
+*       True example: 1 subsets [1, 2, 3, 4]
+*
+*   - intersects operator:
+*       True example: [4, 5, 6] intersects [1, 2, 3, 4]
+*       True example: [4, 5, 6] intersects 5
+*
+*
+* Order of Operations (highest precedence operation listed first, items on same line have equal precedence):
+* ---------------------------------------------------------------------------
+*   []
+*   !
+*   ~
+*   subsets, intersects
+*   *, /, %
+*   +, -
+*   &lt;, &lt;=, &gt;, &gt;=
+*   ==, !=
+*   &amp;&amp;
+*   ||</pre>
+</div>
+</div>
+<div class="section" id="example-of-a-launch-trigger-condition">
+<span id="triggerconditions-example"></span><h2>Example of a launch trigger condition<a class="headerlink" href="#example-of-a-launch-trigger-condition" title="Permalink to this headline">¶</a></h2>
+<p>A condition for a solitary Activity which attracts a human could look like this:</p>
+<div class="highlight-python"><pre>('Launchpad/NumPeopleZone2' &gt;= 1) ~ 3</pre>
+</div>
+<p><em>There is at least one person detected in zone 2 of ALEngagementZones for at least 3 seconds.</em></p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="autonomouslife-api.html" title="ALAutonomousLife API">ALAutonomousLife API</a>
+     |
+    <a href="autonomouslife.html" title="ALAutonomousLife" accesskey="U">ALAutonomousLife</a>
+   |
+    <a href="autonomouslife_advanced.html" title="ALAutonomousLife - Advanced">ALAutonomousLife - Advanced</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Core</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="autonomouslife.html">ALAutonomousLife</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="autonomouslife-api.html">ALAutonomousLife API</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">Launch trigger conditions</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="autonomouslife_advanced.html">ALAutonomousLife - Advanced</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="albehaviormanager.html">ALBehaviorManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../connectionmanager/index.html">ALConnectionManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="extractors.html">Extractors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almemory.html">ALMemory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almodule.html">ALModule</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../notificationmanager/index.html">ALNotificationManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alpreferencemanager.html">ALPreferenceManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alresourcemanager.html">ALResourceManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alstore.html">ALStore</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alsystem.html">ALSystem</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alusersession.html">ALUserSession</a></li>
+<li class="toctree-l5"><a class="reference internal" href="altabletservice.html">ALTabletService</a></li>
+<li class="toctree-l5"><a class="reference internal" href="worldrepresentation.html">ALWorldRepresentation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="packagemanager.html">PackageManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="albonjour.html">ALBonjour</a></li>
+<li class="toctree-l5"><a class="reference internal" href="allauncher.html">ALLauncher</a></li>
+<li class="toctree-l5"><a class="reference internal" href="allogger.html">ALLogger</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alpreferences.html">ALPreferences</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Launch trigger conditions</a><ul>
+<li><a class="reference internal" href="#goal">Goal</a></li>
+<li><a class="reference internal" href="#launch-trigger-conditions-event-list">Launch trigger conditions - Event list</a><ul>
+<li><a class="reference internal" href="#other-events">Other events</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conditions-expression-language">Conditions expression language</a></li>
+<li><a class="reference internal" href="#example-of-a-launch-trigger-condition">Example of a launch trigger condition</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="autonomouslife-api.html" title="ALAutonomousLife API">previous</a>
+     |
+    <a href="autonomouslife.html" title="ALAutonomousLife" accesskey="U">up</a>
+   |
+    <a href="autonomouslife_advanced.html" title="ALAutonomousLife - Advanced">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

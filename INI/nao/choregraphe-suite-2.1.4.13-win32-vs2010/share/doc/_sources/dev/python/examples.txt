@@ -1,0 +1,57 @@
+.. _python-examples:
+
+Python Examples
+===============
+
+.. toctree::
+   :hidden:
+
+   examples/nonascii/index
+   examples/motion/index
+   examples/almath/index
+   examples/sensors/index
+   examples/vision/index
+
+.. seealso::
+
+   :ref:`python-introduction` | :ref:`python-tutorials` |
+   *Python examples* | :ref:`python-sdk-tip-and-tricks`
+
+---------------
+
+
+Core:
+
++-------------------------------------------------------------------+
+| - :ref:`python-example-non-ascii`                                 |
++-------------------------------------------------------------------+
+
+Motion:
+
++-------------------------------------------------------------------+
+| - :ref:`python-example-almath`                                    |
+| - :ref:`python-example-motion-cartesian`                          |
+| - :ref:`python-example-motion-collisiondetection`                 |
+| - :ref:`python-example-motion-footstepdance`                      |
+| - :ref:`python-example-motion-pose`                               |
+| - :ref:`python-example-motion-stiffness`                          |
+| - :ref:`python-example-motion-walk`                               |
+| - :ref:`python-example-motion-wholebody`                          |
++-------------------------------------------------------------------+
+
+Sensors:
+
++-------------------------------------------------------------------+
+| - :ref:`python-example-sensors`                                   |
++-------------------------------------------------------------------+
+
+Vision:
+
++-------------------------------------------------------------------+
+| - :ref:`python-example-vision-facedetection`                      |
+| - :ref:`python-example-vision-getimage`                           |
+| - :ref:`python-example-vision-landmark`                           |
+| - :ref:`python-example-vision-videorecord`                        |
+| - :ref:`python-example-vision-recognition`                        |
++-------------------------------------------------------------------+
+

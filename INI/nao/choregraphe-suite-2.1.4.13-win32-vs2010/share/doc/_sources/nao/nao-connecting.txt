@@ -1,0 +1,225 @@
+.. include:: ../bulk/common.rst
+
+.. _nao-connecting:
+
+Setting |roboN|'s WiFi connection
+==================================
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Remove the :term:`hatch behind the head of the robot` to access
+        to the Ethernet socket.
+
+2.      Plug an Ethernet cable.
+
+        .. image:: /medias/wizard/wiz_step3.png
+            :width: 330 px
+            :height: 225 px
+
+3.      Connect the Ethernet cable to your Internet box.
+
+        For further details, see: :ref:`connect_to_ethernet`.
+
+4.      Access the |roboN| **Web page** and log-in.
+
+        For further details, see: :ref:`access_webpage_nao`.
+
+5.      In the :ref:`robot_connect_nao` page, choose and
+        configure a WiFi network.
+=====  =========================================================================
+
+**Result**: the WiFi connection is set, you can now disconnect the Ethernet cable
+and close the :term:`hatch behind the head of the robot`.
+
+.. _robot_connect_nao:
+
+Network settings
+-----------------
+
+**Network settings** section allows you to set the connection to the network.
+
+.. |add_wifi_button| image:: /medias/wizard/add_wifi_btn.png
+   :class: img-inline
+
+
+.. image:: /medias/wizard/connection.png
+    :width: 529px
+    :height: 399 px
+
+.. _why_wifi_nao:
+
+Why setting a WiFi connection
+-----------------------------
+
+You can connect |roboN| to your computer using a wired or WiFi connection:
+
+* **Wired** connection is mandatory for the initial settings.
+* **WiFi** connection is highly recommended as soon as |roboN| starts moving.
+
+.. warning::
+
+   Make sure |roboN| is not connected with an Ethernet cable while executing
+   movements which could pull the wire and damage the port.
+
+Setting WiFi connection
+-----------------------
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Select one of the available WiFi networks.
+
+        **Note**: choose a WiFi network having one of the
+        :ref:`supported_personal_security_nao`.
+
+2.      Complete the required parameters, and click the **Connect** button.
+
+        .. image:: /medias/wizard/conf_stepB3bis.png
+            :width: 400 px
+            :height: 230 px
+=====  =========================================================================
+
+.. _supported_personal_security_nao:
+
+Supported personal securities
+++++++++++++++++++++++++++++++
+
+|roboN| supports **WEP**, **WPA** & **WPA 2** personal securities.
+
+.. note::
+  For WEP only the passphrase of 5 characters for WEP40 and 12 characters for WEP104
+  are supported, always prefer the hexadecimal representation which is the only standard.
+
+.. _connect_behind_proxy:
+
+Setting a connection behind a proxy
+------------------------------------
+
+**Tested configuration**: Squid - HTTP CONNECT - without authentication.
+
+To connect |roboN| behind a proxy:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Select one of the available networks.
+
+2.      If the network is not secured, wait for connection, then click again
+        in order to display the parameters.
+
+        .. image:: /medias/wizard/conf_stepB3bis.png
+            :width: 400 px
+            :height: 230 px
+
+3.      Check the **Advanced options** box.
+
+        .. image:: /medias/wizard/wifi_behind_proxy.png
+            :width: 403 px
+            :height: 234 px
+
+4.      In the list, select Manual.
+
+        .. image:: /medias/wizard/wifi_behind_proxy2.png
+            :width: 403 px
+            :height: 227 px
+
+5.      Complete the required parameters, and click the **Connect** button.
+=====  =========================================================================
+
+Setting WiFi connection to a hidden network
+-------------------------------------------
+
+To connect |roboN| to a hidden network:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the |add_wifi_button| **Add WiFi** button.
+
+        **Note**: choose a WiFi network having one of the
+        :ref:`supported_personal_security_nao`.
+
+2.      Complete the required parameters, and click the **Connect** button.
+=====  =========================================================================
+
+Setting wired connection
+-------------------------
+
+.. warning::
+
+   Make sure |roboN| is not connected with an Ethernet cable while executing
+   movements which could pull the wire and damage the port.
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Remove the :term:`hatch behind the head of the robot` to access
+        to the Ethernet socket.
+
+2.      Plug an Ethernet cable.
+
+        .. image:: /medias/wizard/wiz_step3.png
+            :width: 330 px
+            :height: 225 px
+
+3.      Connect the Ethernet cable to your Internet box.
+
+        For further details, see: :ref:`connect_to_ethernet`.
+
+        The **Wired** network appears in the list.
+
+        .. image:: /medias/wizard/set_wired.png
+            :width: 534 px
+            :height: 355 px
+
+4.      Select the **Wired** network.
+=====  =========================================================================
+
+.. _connect_to_ethernet:
+
+Plugging my robot to Ethernet
+++++++++++++++++++++++++++++++
+
+.. |connect-A| image:: /medias/wizard/ethernet_router.png
+   :class: img-inline
+   :width: 172 px
+   :height: 114 px
+
+.. |connect-B| image:: /medias/wizard/ethernet_computer.png
+   :class: img-inline
+   :width: 173 px
+   :height: 116 px
+
+
+.. |connect-c| image:: /medias/wizard/ethernet_computer_bis.png
+   :class: img-inline
+   :width: 171 px
+   :height: 83 px
+
++----------------------------------------------------------------------+-------------+
+| If you have a **router** with a **spare Ethernet port**:             |             |
+|                                                                      |             |
+| * Connect the Ethernet cable to the router.                          | |connect-A| |
+|                                                                      |             |
+| The router will                                                      |             |
+| act as a **DHCP** server and give |roboN| it's IP address.           |             |
++----------------------------------------------------------------------+-------------+
+
++----------------------------------------------------------------------+-------------+
+| **Alternatives**                                                                   |
++----------------------------------------------------------------------+-------------+
+|                                                                      |             |
+| If you have **no spare Ethernet port** or **no router at all**:      |             |
+|                                                                      |             |
+| * Connect the Ethernet cable to your computer.                       | |connect-B| |
+|                                                                      |             |
+| **Linux only**: see :ref:`opennao-local-link` in order to check      |             |
+| if your network manager is set for using link-local.                 |             |
++----------------------------------------------------------------------+             +
+| **Note**:                                                            |             |
+| in case of local connection to a computer,                           | |connect-C| |
+| the |cloud| may not be reachable.                                    |             |
+| Nevertheless, local connection to |roboN| Web page                   |             |
+| and **Choregraphe** is still possible.                               |             |
++----------------------------------------------------------------------+-------------+

@@ -1,0 +1,404 @@
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+Box - Optional components
+=========================
+
+.. _choregraphe-reference-box-parameter:
+
+Parameter of a box
+------------------
+
+What is a parameter
++++++++++++++++++++
+
+A parameter of a box is a value which enables you to slightly change the actions made by your box.
+
+.. note::
+   You can know if a box has parameters if it has a |parameter-button| button displayed at the bottom-left corner of the box.
+
+The value of the parameters can be set using the :ref:`choregraphe-detailed-interface-setting-box-parameter` or by connecting an :abbr:`I/O (input/output)` on it.
+
+A parameter has:
+
+* a **Name** which has to be unique for each box, as you access the parameter value from its name in the :ref:`python_script`.
+* a **Tooltip** which is very important.
+
+  Indeed, you only see the parameter name when you edit its value.
+  So it can be useful to have this little tooltip to describe the purpose of the parameter.
+* an option named **Inherits from parent**.
+
+  When this option is enabled, if there is :ref:`a parent box <choregraphe-reference-box-parent>` of this box which has a parameter with the **same name** as this parameter, then the **value of this parameter** will be the **value of the parameter of this parent box**.
+  Then setting the value of this parameter is useless.
+
+  .. note::
+     Even if the parent box parameter has not the same type, it is its value that is taken into account.
+
+     Also, if there is no parent box with a parameter with the same name, the value of the parameter is directly taken in to account.
+* a **Type**:
+
+  .. list-table:: Type of parameters
+     :widths: 15 25 30
+     :header-rows: 1
+
+     * - Type
+       - Corresponding :ref:`I/O type <choregraphe-reference-box-io-type>`
+       - Display
+     * - Boolean
+       - Dynamic
+       - .. image:: /medias/desktop/choregraphe/chore_parameter_boolean.png
+     * - Integer
+       - Number
+       - .. image:: /medias/desktop/choregraphe/chore_parameter_integer.png
+     * - Float
+       - Number
+       - .. image:: /medias/desktop/choregraphe/chore_parameter_float.png
+     * - String
+       - String
+       - .. image:: /medias/desktop/choregraphe/chore_parameter_string.png
+     * - Attached file
+       - String
+       - .. image:: /medias/desktop/choregraphe/chore_parameter_attached_file.png
+
+* a **Default value** which is the original value of the parameter if you do not change it.
+
+
+.. _choregraphe-detailed-interface-setting-box-parameter:
+
+Widget to set the value of box parameters
++++++++++++++++++++++++++++++++++++++++++
+
+When you click on the **parameter button** |parameter-button| of a box in the flow diagram, or when you right-click on a box and select **Set Parameters**, the following widget is displayed:
+
+.. image:: /medias/desktop/choregraphe/chore_set_parameter_value.png
+
+.. note::
+   If there is no **parameter button** on the box, it means that the box has **no parameter**.
+   So you need either to add some (right-click on the box, **Edit box**) or choose an other box which has parameters.
+
+The **name** of the parameters are on the left and their **value** you can set are on the right.
+
+You can notice in the example above that you can have several types of parameters.
+If you want more information about these types, see the section: :ref:`Parameter of a box <choregraphe-reference-box-parameter>`.
+
+There is an option **Auto-update parameters on robot** at the bottom of the widget.
+If this option is enabled, then the value of the parameters are updated during the execution of the behavior.
+
+For example, let's play a long song with the ``Play Sound`` box.
+To know how to do this, see the tutorial: :ref:`Playing music <playing-music-tuto>`.
+If you set the value of the ``Volume (%)`` parameter while it is playing, then it will be updated.
+It would not be the case if the option **Auto-update parameters on robot** was disabled.
+
+You can also reset the value of all parameters to their **default value** by clicking on the button **Reset to default**.
+
+
+Parameter edition widgets
+++++++++++++++++++++++++++++
+
+When you **create** or **edit** a :ref:`box parameter <choregraphe-reference-box-parameter>`, the following widget is displayed:
+
+.. image:: /medias/desktop/choregraphe/chore_edit_parameter.png
+
+You can here set:
+
+* the **name** of the parameter.
+* the brief **description** of what effect has this parameter on the box in the field **Tooltip**.
+
+  .. note::
+     This description will appear in a tooltip displayed by **passing above the parameter value** in the :ref:`widget to set the value of box parameters <choregraphe-detailed-interface-setting-box-parameter>`.
+
+* the **Inherits from parent** option which says if the parameter value is overwritten by the parent parameter value.
+
+You can also choose the **type** of the parameter and its **content** depending on its type:
+
+.. list-table::
+   :widths: 5 100
+   :header-rows: 1
+
+   * - Type
+     - Content
+   * - Boolean
+     - You can set the **default value** of the parameter (True or False).
+       It is the original value of the parameter if you do not change it.
+   * - Integer
+     - You can set:
+
+       * the **default value** of the parameter (value between **Min value** and **Max value**).
+       * the **minimum value** of the parameter.
+       * the **maximum value** of the parameter.
+   * - Float
+     - You can set:
+
+       * the **default value** of the parameter (value between **Min value** and **Max value**).
+       * the **minimum value** of the parameter.
+       * the **maximum value** of the parameter.
+   * - String
+     - You can set the **default value** of the parameter.
+
+       You can add, edit and remove **possible values** of the parameter in the field **Multiple Choices**.
+
+       Then you can set the list of possible values exclusive or not with the option **Custom string possible**.
+       If this option is disabled, it is exclusive.
+       The **default value** of the parameter is then the value currently displayed in the field **Multiple Choices**.
+
+       If you did not have defined any choice in the field **Multiple Choices**, you can set the option **Password**.
+       When this option is enabled, the value of the parameter is displayed as a password in the :ref:`widget to set the value of box parameters <choregraphe-detailed-interface-setting-box-parameter>` so that each character is hidden.
+   * - Attached file
+     - You can set the **default value** of the parameter (for example ``/sounds/play.wav``).
+
+For further details about these types of parameters, see the section: :ref:`choregraphe-reference-box-parameter`.
+
+
+
+.. _ choregraphe-howto-set-value-box-parameter
+
+How to set the value of a box parameter
+++++++++++++++++++++++++++++++++++++++++
+
+In Choregraphe some boxes such as the **Motion > Walk To** box have parameters,
+those parameters are useful for the execution of the box and need to be set.
+
+Parameters are accessible by the two following ways:
+
+* Click the adjustable wrench on the bottom left corner of the box or
+* Right click the box and choose **Set parameters** in the contextual menu.
+
+Set the parameters and click **ok**.
+
+
+
+.. _choregraphe-howto-add-remove-box-in-out-param:
+
+How to add/remove inputs, outputs, parameters in a box
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. |add| image:: /medias/desktop/choregraphe/add.png
+    :class: img-inline
+
+.. |del| image:: /medias/desktop/choregraphe/del.png
+    :class: img-inline
+
+.. |edit| image:: /medias/desktop/choregraphe/edit.png
+    :class: img-inline
+
+Boxes in Choregraphe can have inputs, outputs and parameters, they are useful to
+communicate data between boxes.
+
+To set box parameters:
+
+=====  ============================================================================
+Step       Action
+=====  ============================================================================
+1.      Right click a box to get to contextual menu and click on **Edit box**.
+
+        The **Edit box** menu is displayed.
+
+        .. image:: /medias/desktop/choregraphe/chore_edit_box.png
+                :width: 261 px
+                :height: 498 px
+
+2.      To edit or remove an item, select it in the list.
+
+3.      Click on:
+
+        |add| button to add inputs, outputs or parameters.
+
+        This will display the **Add a new input/output/parameter** menu that will
+        help you to set the properties of the input/output/parameter you are
+        about to create.
+
+        |del| button to remove the selected item.
+
+        |edit| button to edit the selected item.
+
+        This will display the **Edit existing input/output/parameter** menu that
+        will help you to set the properties of the input/output/parameter you
+        are editing.
+=====  ============================================================================
+
+
+
+.. _choregraphe-reference-attached-files:
+
+Attached files of a behavior or a box
+---------------------------------------
+
+The attached files of a :ref:`behavior <choregraphe-reference-behavior>` (or a :ref:`box <choregraphe-reference-box>`) are the **additional files** which are needed for the **execution** of the behavior (or the box).
+For example, to execute the Tai Chi Chuan dance, you need the music that goes with it.
+
+So in order to **package** the behavior (or the box) with its needed files, they can be attached to the behavior (or the box) so that they automatically come with it.
+To see a practical example of how to attach a file to a behavior and a box, see the tutorial: :ref:`choregraphe-tuto-attach-file-to-box`.
+
+.. warning::
+   If you want to share a behavior which uses a specific **image recognition database**, you may wish to attach the database to the behavior so that NAO uses it during the execution of the behavior.
+   But it is not possible for the time being as there is no available API to send a such database to the robot.
+   The feature is coming soon but unfortunately for now you will have to:
+
+   * **export** the database using the :ref:`video-monitor-panel`.
+   * share it next to the behavior.
+   * precise that, before executing the behavior, the image recognition database needs to be **sent** to the robot using the :ref:`video-monitor-panel`.
+
+When you drag and drop a box which has **attached files** from the :ref:`chore_box_libary_panel` to the :ref:`chore_flow_diagram_panel`,
+the files attached to this box are **added** to the files attached to the current behavior.
+
+.. warning::
+   If a file **already exists** in the list of files attached to the current behavior, then the old file will be **replaced** by the new file.
+
+
+
+.. _choregraphe-reference-box-resource:
+
+Resource of a box
+---------------------
+
+A resource is an element needed for executing a task (a :ref:`box <choregraphe-reference-box>`
+or a :ref:`behavior <choregraphe-reference-behavior>`).
+
+For example, to walk, the robot uses the resource of the legs.
+To dance, the robot uses the resources of the audio player, the arms and the legs.
+
+Many resources can only be used once at a time (the legs for example).
+Thus you need to manage conflicts between tasks which use the same resources.
+
+The :ref:`choregraphe-detailed-interface-box-edition-resources` allows you to set,
+for each box, the resources that are used, and how to manage the resources between boxes.
+
+Managing the resources is important when exchanging behaviors for two reasons:
+
+**For resolving conflicts**
+
+Let's say we have two behaviors:
+
+* One makes the robot dance on a music (``Tai Chi Chuan`` box for example).
+* The second makes the robot walk when the left bumper is pressed.
+
+If they both are running at the same time, the two behaviors may send contradictory
+commands to the legs.
+
+**For synchronizing resources**
+
+If your behavior makes the robot greet with the left hand and say Hello,
+both resources need to be available at the same time for the behavior to start.
+
+
+
+.. _choregraphe-howto-set-resources-for-box:
+
+How to set resources in a box
++++++++++++++++++++++++++++++++
+
+To set the resources of a box:
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Right click the box and choose **Edit resources**.
+
+        The :ref:`choregraphe-detailed-interface-box-edition-resources` appears.
+
+2.      In the Resource list, tick the resources or the group of resources
+        you want.
+
+3.      Set the **At box startup** and **During the box execution** parameters.
+
+        For further details see:
+        :ref:`choregraphe-detailed-interface-box-edition-resources`.
+
+4.      Click the **OK** button.
+=====  ==========================================================================
+
+See also the :ref:`Tutorial about the resource manager <choregraphe-tuto-resources-manager>`.
+
+
+
+
+.. _choregraphe-detailed-interface-box-edition-resources:
+
+Box resource selector
++++++++++++++++++++++++++++
+
+To display the **Box resource selector**, right click the box and choose
+**Edit resources**.
+
+.. image:: /medias/desktop/choregraphe/box_resource_selector_letters.png
+    :width: 341 px
+    :height: 448 px
+
+=====  ======================== ==============================================================================================================
+Part    Name                     Allows you to ...
+=====  ======================== ==============================================================================================================
+**A**   **Resource list**        Tick the resources that are used by your box.
+
+                                 While they are used by your box, they will be only by your box.
+
+**B**  **At box startup**        Choose what happens at the startup of the box.
+
+                                 Indeed if one of the resources you ticked has already been taken by another
+                                 box, then it is **unavailable** for your box.
+                                 Then your box is started, it can react in different ways:
+
+                                 * **Cancel immediately**: The box is not started.
+
+                                 * **Wait** some time: The box waits a certain amount of time for the availability of the resources.
+                                   As soon as the resources are available, the box does not wait anymore and is immediately started.
+                                   If resources are still not available once time is elapsed, then the box is not started.
+
+                                   You can set the time to wait with the spin box which is displayed when you select the option **Wait**.
+
+                                 * **Wait infinitely**: The box waits forever for the resource availability before it can be started.
+                                   As soon as the resources are available, the box does not wait anymore and is immediately started.
+
+**C**   **During box exection**  Choose what happens during the **execution** of your box.
+
+                                 Indeed you need to choose how your box will react if one of the resources it uses is **demanded**
+                                 by another box:
+
+                                 * **Lock**: Your box ignores the demand of the other box and keeps running.
+                                   Then it does not release the resources and the other box cannot be started.
+
+                                 * **Stop the box**: Your box is :ref:`stopped <choregraphe-reference-loading-unloading>` and then releases
+                                   the resources for the other box.
+
+                                   Note that the box may take some time to stop and to release the resources.
+                                   So if the other box resources are set to **Cancel immediately**, it may not be started because
+                                   the resources were not immediately available.
+
+                                 * **Trigger box callback**: The ``onResource(resourceName)`` function, (if any) in the
+                                   :ref:`python_script` of your box, is called.
+                                   The parameter of this function is the name of the demanded resource.
+
+                                 .. note::
+
+                                     This is an option for advanced users only.
+                                     For more information about this kind of built-in functions, see the section:
+                                     :ref:`Built-in functions in the script of a box <choregraphe-reference-box-script-built-in-functions>`.
+
+                                 * **Pause box timeline (deprecated)**: The **Timeline** (if any) of your box is **paused** at the current
+                                   frame. The Timeline is then **played again** as soon as the resources are available again.
+
+                                 .. warning::
+                                     This option is **deprecated** since 1.14 and will be removed in later version.
+
+**D**   **Detect** button        Make Choregraphe try to automatically detect the resources used by your box.
+
+                                 .. warning::
+                                    This function may miss some resource you use in your box.
+                                    So we advise that, after clicking on this button, you make sure yourself that every resource your box uses
+                                    is ticked.
+=====  ======================== ==============================================================================================================
+
+
+.. _choregraphe-reference-box-plugin:
+
+Plugin of a box
+----------------
+
+A box plugin adds a **user interface** directly on the **frontage** of the box.
+For example, if you choose the ``numberedit`` plugin then you will be able to choose a number directly from the box frontage instead of in parameters.
+
+It automatically generates a :ref:`python_script` for the box which then will not be editable.
+
+It can also be useful if you want to make specific commands during the edition of your :ref:`behavior <choregraphe-reference-behavior>`.
+For example, if you choose the ``ui_choice`` plugin then in advanced options (the + button) you will have a button to calculate the approximative recognition confidence of each word.
+
+.. note::
+   We strongly advise you to use :ref:`parameters <choregraphe-reference-box-parameter>` instead of plugin as it is a very advanced feature to use.

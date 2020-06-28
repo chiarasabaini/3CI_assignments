@@ -1,0 +1,19 @@
+.. include:: ../../bulk/common.rst
+
+
+.. _whats-new_2.1.3:
+
+Release Notes - 2.1.3
+=====================
+
+Continuous diagnosis notification fixed
+-----------------------------------------
+
+Fix #29013: Flood of diagnosis notifications
+++++++++++++++++++++++++++++++++++++++++++++
+
+In some cases, when **ShoulderPitch** motor temperature rises over 69 degrees,
+a continuous flow of diagnosis warning notification had an unwanted effect:
+**NAO** beeped continuously, while his **Chest button** flashed.
+
+For further details, see: :ref:`notif_warning_diagnosis_nao`.

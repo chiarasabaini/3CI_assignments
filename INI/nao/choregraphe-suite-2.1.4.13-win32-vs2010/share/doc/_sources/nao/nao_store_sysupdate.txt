@@ -1,0 +1,44 @@
+.. include:: ../bulk/common.rst
+
+.. _nao_store_sysupdate:
+
+Setting automatic system update
+===============================
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      On the |store|, choose **My Apps**.
+
+        .. image:: /medias/store/my_apps.png
+            :width: 578 px
+            :height: 234 px
+
+        For further details, see: :ref:`cloud_access`.
+
+2.      Click the **Set System Update** button.
+
+        .. image:: /medias/store/sys_auto_update.png
+            :width: 474 px
+            :height: 175 px
+
+3.      Choose the parameters you want.
+
+4.      Click the **Use this configuration** button.
+
+        The Robot linked to your account will update its System accordingly.
+=====  =========================================================================
+
+How will I know a system update is ready
+----------------------------------------
+
+When a new system image has been downloaded from the |store|:
+
+* The :ref:`webpage_nao` also displays a message:
+
+  For further details, see: :ref:`system_download`.
+
+* If you do not check the :ref:`webpage_nao`, then a notification informs you
+  and suggests you should reboot your |roboN|.
+
+  For further details, see: :ref:`store_notif`.

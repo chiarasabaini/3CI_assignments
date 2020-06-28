@@ -1,0 +1,105 @@
+.. _monitor-plugin-camera-viewer:
+
+Camera viewer
+-------------
+
+.. seealso::
+
+   - :ref:`monitor-camera-tutorial`
+
+------------------------------------------------------------
+
+The **Camera viewer** allows you to:
+
+* configure robot cameras,
+* display what they see,
+* take pictures or
+* record videos.
+
+To load the **Camera viewer** plugin into **Monitor**, see :ref:`monitor-start`.
+
+Once loaded, the following panel is displayed:
+
+.. image:: /medias/desktop/monitor/monitor_camera_viewer.png
+    :width: 575 px
+    :height: 451 px
+
+.. |monitor-camera-play| image:: /medias/desktop/monitor/play.png
+   :class: img-inline
+.. |monitor-camera-pause| image:: /medias/desktop/monitor/pause.png
+   :class: img-inline
+.. |monitor-camera-record| image:: /medias/desktop/monitor/record_start.png
+   :class: img-inline
+.. |monitor-camera-stop| image:: /medias/desktop/monitor/record.png
+   :class: img-inline
+.. |monitor-camera-snapshot| image:: /medias/desktop/monitor/snapshot.png
+   :class: img-inline
+
+=====  ========================   =======================================================================================
+Part    Name                       Description
+=====  ========================   =======================================================================================
+**A**   **Viewer** settings        The following settings have an impact limited to the display on **Camera viewer**,
+                                   and has no impact on video recording:
+                                   **whatever the settings, videos are recorded in QVGA (320*240)
+                                   at 15 fps, with MJPG compression.**
+
+                                   * **Framerate:** set the maximum framerate you want to display. The lower the
+                                       lighter will be the charge for both your robot's CPU and your LAN.
+
+                                       .. warning::
+                                           High rates of high resolution frames sometimes cannot be reached.
+                                           You can ensure better conditions by stopping all consuming programs and
+                                           by setting a wired connection with your robot.
+
+                                   * **Resolution**
+
+                                   * **Black and white**
+
+                                   * **Mark detection:** detect NAOmarks and locate them on the image.
+
+                                   * **Vision recognition:** detect learnt objects and locate them on the image.
+
+**B**   **Camera** settings        The following settings impact video recording and all the modules which use the
+                                   cameras.
+
+                                   * **Exposure:** check **Auto exposition** to automatically set the exposition
+                                     time. When unchecked, **Exposure** slider is enabled to let you set the
+                                     parameter manually. A long exposition time may slow the framerate, but gets
+                                     a brighter image with less noise.
+
+                                   * **Gain:** check **Auto gain** to automatically set the gain. When unchecked,
+                                     **Gain** slider is enabled to let you set the parameter manually. A great
+                                     gain will make a brighter image, but may amplify noise.
+
+                                   * **Exposure correction:** additional exposure correction taking place after
+                                     exposure and gain operation.
+
+                                   * **White balance:** check **Auto white balance** to automatically set the
+                                     white balance. When unchecked, **Blue / Red chroma:** sliders are enabled
+                                     to let you set color proportions in the image manually.
+
+                                   * **Brightness / Contrast / Hue**
+
+                                   * **Vertical / Horizontal flip**
+
+**C**   Action Buttons             **Play** |monitor-camera-play| starts retrieving and displaying images from your
+                                   robot in the video widget.
+
+                                   **Pause** |monitor-camera-pause| pauses video display and stops requesting images.
+
+                                   **Record** |monitor-camera-record| starts recording a video.
+                                   |monitor-camera-stop| stop recording the video and prompts for a
+                                   destination file.
+
+                                   **Snapshot** |monitor-camera-snapshot| takes three pictures (a,b,c) of what the robot
+                                   sees. The files will be saved to:
+                                   /home/nao/.local/share/naoqi/vision/{timestamp}{a,b,c}.jpg
+
+                                   **Switch camera:** switches between head's front and bottom cameras.
+
+
+**D**   **Video Recorder** tab     This panel allows you to define the file name used to store the video on the robot.
+
+                                   It also displays information about the last recorded video file.
+=====  ========================   =======================================================================================
+

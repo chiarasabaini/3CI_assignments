@@ -1,0 +1,296 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using qibuild with Aldebaran C++ SDKs &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="Building C++ projects with qibuild" href="tutorial.html" />
+    <link rel="next" title="Managing pre-compiled binary packages with qitoolchain" href="../qitoolchain/tutorial.html" />
+    <link rel="prev" title="Building with qiBuild and Visual Studio" href="ide/visual_studio.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="ide/visual_studio.html" title="Building with qiBuild and Visual Studio">previous</a>
+     |
+    <a href="tutorial.html" title="Building C++ projects with qibuild" accesskey="U">up</a>
+   |
+    <a href="../qitoolchain/tutorial.html" title="Managing pre-compiled binary packages with qitoolchain">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="beginner-qibuild-aldebaran">
+            
+  <div class="section" id="using-qibuild-with-aldebaran-c-sdks">
+<span id="qibuild-using-aldebaran-packages"></span><h1>Using qibuild with Aldebaran C++ SDKs<a class="headerlink" href="#using-qibuild-with-aldebaran-c-sdks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="for-the-desktop">
+<h2>For the Desktop<a class="headerlink" href="#for-the-desktop" title="Permalink to this headline">¶</a></h2>
+<p>You can use the C++ packages on Visual Studio 2008 and 2010 (32 bits only),
+Mac and Linux.</p>
+<p>First, get the C++ SDK and extract it, say in <tt class="docutils literal"><span class="pre">/path/to/cpp/sdk</span></tt></p>
+<ul class="simple">
+<li>Create a <a class="reference internal" href="../../hacking/design/python/index.html#term-worktree"><em class="xref std std-term">worktree</em></a> inside the C++ SDK examples folder:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /path/to/cpp/sdk/examples
+<span class="gp">$</span> qibuild init
+</pre></div>
+</div>
+<ul class="simple">
+<li>Create a <a class="reference internal" href="../../hacking/design/cmake/index.html#term-toolchain"><em class="xref std std-term">toolchain</em></a> using the <a class="reference internal" href="../../hacking/design/cmake/index.html#term-feed"><em class="xref std std-term">feed</em></a> from the C++ SDK:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain create naoqi-sdk /path/to/cpp/sdk/toolchain.xml
+</pre></div>
+</div>
+<ul class="simple">
+<li>Create a build configuration associated with the toolchain:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild add-config naoqi-sdk --toolchain naoqi-sdk
+</pre></div>
+</div>
+<ul class="simple">
+<li>Configure and build the helloworld project:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild configure -c naoqi-sdk helloworld
+<span class="gp">$</span> qibuild make -c naoqi-sdk helloworld
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-the-robot">
+<h2>For the robot<a class="headerlink" href="#for-the-robot" title="Permalink to this headline">¶</a></h2>
+<p>You have to be on Linux or Mac to be able to compile code for the robot.</p>
+<p>This if often refer to as <tt class="docutils literal"><span class="pre">cross-compilation</span></tt>.</p>
+<p>First, get the cross-toolchain that matches your robot
+version (atom for V4 and later, geode for previous version),
+and extract it, say in <tt class="docutils literal"><span class="pre">/path/to/atom/ctc</span></tt></p>
+<ul class="simple">
+<li>Create a <a class="reference internal" href="../../hacking/design/cmake/index.html#term-toolchain"><em class="xref std std-term">toolchain</em></a> using the <a class="reference internal" href="../../hacking/design/cmake/index.html#term-feed"><em class="xref std std-term">feed</em></a> from the cross-toolchain</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain create cross-atom /path/to/ctc/toolchain.xml
+</pre></div>
+</div>
+<ul class="simple">
+<li>Create a build configuration associated with the cross-toolchain</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild add-config cross-atom --toolchain cross-atom
+</pre></div>
+</div>
+<ul class="simple">
+<li>Then configure and build as usual</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild configure -c cross-atom
+<span class="gp">$</span> qibuild make -c cross-atom
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cannot-find-alcommon">
+<h3>Cannot find alcommon<a class="headerlink" href="#cannot-find-alcommon" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>Could not find module FindALCOMMON.cmake or a configuration file for
+package ALCOMMON.
+
+Adjust CMAKE_MODULE_PATH to find FindALCOMMON.cmake or set ALCOMMON_DIR to
+the directory containing a CMake configuration file for ALCOMMON. The file
+will have one of the following names:
+
+ALCOMMONConfig.cmake
+alcommon-config.cmake</pre>
+</div>
+<p>This happens because qibuild id not find the CMake files related to <tt class="docutils literal"><span class="pre">ALCOMMON</span></tt>.</p>
+<p>This can be because you did not add any toolchain to <tt class="docutils literal"><span class="pre">qibuild</span></tt>
+You can check with:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qitoolchain info</span>
+</pre></div>
+</div>
+<p>Output should look like</p>
+<div class="highlight-python"><pre>toolchain naoqi-sdk
+  Using feed from /path/to/naoqi-sdk-1.12-linux32/toolchain.xml
+  Packages:
+    libnaoqi
+    in /path/to/naoqi-sdk-1.12-linux32</pre>
+</div>
+<p>Here you can see that the toolchain is named <tt class="docutils literal"><span class="pre">naoqi-sdk</span></tt>, so you have to:</p>
+<ul class="simple">
+<li>make sure qibuild uses the <tt class="docutils literal"><span class="pre">naoqi-sdk</span></tt> toolchain by default (you can do
+that by running the config wizard)</li>
+<li>or tell qibuild to use the <tt class="docutils literal"><span class="pre">naoqi-sdk</span></tt> toolchain:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild configure -c naoqi-sdk
+<span class="gp">$</span> qibuild make -c naoqi-sdk
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="ide/visual_studio.html" title="Building with qiBuild and Visual Studio">Building with qiBuild and Visual Studio</a>
+     |
+    <a href="tutorial.html" title="Building C++ projects with qibuild" accesskey="U">Building C++ projects with qibuild</a>
+   |
+    <a href="../qitoolchain/tutorial.html" title="Managing pre-compiled binary packages with qitoolchain">Managing pre-compiled binary packages with qitoolchain</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to qiBuild documentation !</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">qiBuild: the build framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../getting_started.html">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/git_projects.html">Managing git projects with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tutorial.html">Building C++ projects with qibuild</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="getting_started/linux.html">Getting started with qibuild on Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="getting_started/mac.html">Getting started with qibuild on Mac OS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="getting_started/windows.html">Getting started with qibuild on Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ide/qtcreator.html">Building with qibuild and QtCreator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ide/visual_studio.html">Building with qiBuild and Visual Studio</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Using qibuild with Aldebaran C++ SDKs</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial.html">qiBuild tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/git_projects.html">Managing git projects with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/git-to-qisrc_cookbook.html">Git-to-qisrc cookbook</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tutorial.html">Building C++ projects with qibuild</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="getting_started/linux.html">Getting started with qibuild on Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="getting_started/mac.html">Getting started with qibuild on Mac OS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="getting_started/windows.html">Getting started with qibuild on Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ide/qtcreator.html">Building with qibuild and QtCreator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ide/visual_studio.html">Building with qiBuild and Visual Studio</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Using qibuild with Aldebaran C++ SDKs</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../qitoolchain/tutorial.html">Managing pre-compiled binary packages with qitoolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qipy/tutorial.html">Using Python with qibuild projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qipkg/tutorial.html">qipkg tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Using qibuild with Aldebaran C++ SDKs</a><ul>
+<li><a class="reference internal" href="#for-the-desktop">For the Desktop</a></li>
+<li><a class="reference internal" href="#for-the-robot">For the robot</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#cannot-find-alcommon">Cannot find alcommon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="ide/visual_studio.html" title="Building with qiBuild and Visual Studio">previous</a>
+     |
+    <a href="tutorial.html" title="Building C++ projects with qibuild" accesskey="U">up</a>
+   |
+    <a href="../qitoolchain/tutorial.html" title="Managing pre-compiled binary packages with qitoolchain">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

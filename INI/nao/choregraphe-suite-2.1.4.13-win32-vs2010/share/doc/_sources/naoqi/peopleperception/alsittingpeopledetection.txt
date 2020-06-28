@@ -1,0 +1,38 @@
+
+.. _alsittingpeopledetection:
+
+ALSittingPeopleDetection
+========================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alsittingpeopledetection-api
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <alsittingpeopledetection-api>`
+
+------------
+
+What it does
+------------
+
+**ALSittingPeopleDetection** updates every person with the information of whether
+he or she is sitting (on a chair for example) or standing.
+
+
+How it works
+------------
+
+The distinction between sitting and standing positions is based on the head position
+relative to the ground. If the head is found to be higher than a given threshold
+then the corresponding person will be detected as standing. Otherwise, he or she
+will be considered as sitting.
+
+
+Performances and limitations
+----------------------------
+
+* This module considers that the robot is on the ground. If it is not the case, the threshold value should take the robots elevation into account.
+* This module cannot make the difference between small people (children for instance) and sitting people.
+

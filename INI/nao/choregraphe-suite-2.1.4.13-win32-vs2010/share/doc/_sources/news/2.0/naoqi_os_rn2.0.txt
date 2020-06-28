@@ -1,0 +1,78 @@
+.. include:: ../../bulk/common.rst
+
+.. _whats-new_os_2.0:
+
+**NAOqi OS** 2.1
+==================
+
+**OpenNAO** becomes **NAOqi OS**
+---------------------------------
+
+Text editor
+------------
+
+**NAOqi OS** is provided with  ``nano``.
+
+Note that the text editors previously provided, ``qemacs`` and ``vim``,
+are no longer available.
+
+NAOqi OS VM
+------------
+
+Because the main use of the **NAOqi OS** VM is to build open-source dependencies
+not provided by the Aldebaran's SDKs, the **NAOqi** executable has been removed
+from it.
+
+Miscellaneous
+---------------
+
+The embedded **NAOqi OS** has evolved; among the noticeable changes, there are:
+
+* Switch web server from ``lighttpd`` to ``nginx``;
+
+* Audio modules are now using ``pulseaudio`` on the robot.
+
+Detailed changelog:
+
+Removed packages
++++++++++++++++++
+
+* lighttpd
+* zeromq
+* qemacs
+* vim
+* strace
+* valgrind
+* iftop
+* powertop
+
+New packages
++++++++++++++++++
+
+* unzip
+* zip
+* fftw
+* octomap
+* openni2
+* zbar
+* libftdi1
+* lirc
+* obexd
+* openobex
+* pulseaudio
+* sbc
+* speex
+* webrtc-audio-processing
+* ofono
+* nginx
+
+Updated packages
++++++++++++++++++
+
+
+* opencv    2.3.1a => 2.4.5
+* boost     1.48.0 => 1.55.0
+* alsa-lib  1.0.24.1 => 1.0.26
+* python    2.7.2 => 2.7.3
+* avahi     0.6.30 => 0.6.31
+* bluez     4.96 => 4.101

@@ -1,0 +1,33 @@
+.. _alusersession-gettingstarted2-provider:
+
+ALUserSession Getting Started 2 - User Data Provider Developer
+==============================================================
+
+:ref:`naoqi-core` -
+:ref:`Overview <alusersession>` |
+:ref:`API <alusersession-api>`
+
+:ref:`Getting Started 1 - Activity Developer <alusersession-gettingstarted1-activity>` |
+Getting Started 2 - User Data Provider Developer
+
+------------
+
+If you are writing a module that provides an external datasource, or otherwise
+correlates data with UserSession, please read on.
+
+Providing a data source and/or bindings to your own ID
+------------------------------------------------------
+
+| It is preferred to use UserSessions built-in getters and setters with the built-in database.
+| But you may need to provide an external data source or other ID bindings if:
+
+* You have your own database implementation that you want to be accessible
+  through UserSession.
+* You have a remote database, and need to provide an interface into this.
+* You have a remote or local authentication system, and want this authentication
+  process to be executed before your data is accessible.
+* Your module is representing the user with an ID that is different than the
+  integer of the UserSession ID.
+
+The API to do this is closed for public use, and approval is required from
+Aldebaran Robotics.  Please contact support for access to the API.

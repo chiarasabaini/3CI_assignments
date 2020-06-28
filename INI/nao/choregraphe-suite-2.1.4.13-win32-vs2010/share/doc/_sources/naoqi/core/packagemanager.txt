@@ -1,0 +1,40 @@
+.. include:: ../../bulk/common.rst
+
+.. _packagemanager:
+
+PackageManager
+==============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  packagemanager-api
+
+:ref:`naoqi-core` -  Overview | :ref:`API <packagemanager-api>`
+
+----
+
+What it does
+------------
+
+**PackageManager** allows you to install and manage **Application Packages**.
+
+The Package is a binary format used to  publish an :ref:`application` on the |store|.
+
+How it works
+-------------
+
+**File format**: a package is a zipped file with .pkg extension.
+
+**Mandatory**: the zip file must contain a manifest file.
+
+A manifest is a XML file following a clear schema.
+
+Getting started
+---------------
+
+The friendly way to do packages is using **Choregraphe**.
+
+For further details, see:
+:ref:`choregraphe-howto-build-application-package`.

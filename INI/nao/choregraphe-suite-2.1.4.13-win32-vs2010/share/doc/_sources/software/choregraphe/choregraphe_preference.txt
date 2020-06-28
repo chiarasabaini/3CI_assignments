@@ -1,0 +1,183 @@
+.. include:: ../../bulk/common.rst
+
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. |search-previous| image:: /medias/desktop/choregraphe/search_previous.png
+   :class: img-inline
+
+.. |stiffness_btn| image::  /medias/desktop/choregraphe/chore_asserv_button.png
+   :class: img-inline
+
+
+.. _choregraphe-detailed-interface-preferences:
+
+Choregraphe Preferences
+=========================
+
+How to modify Choregraphe preferences
+--------------------------------------
+
+To modify **Choregraphe** preferences:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Choose **Edit** > **Preferences**.
+
+        The following widget is displayed:
+
+        .. image:: /medias/desktop/choregraphe/chore_edit_preferences.png
+            :width: 378 px
+            :height: 482 px
+
+2.      Click the **OK** button.
+
+3.      Quit and restart the application in order to make sure all preferences are applied.
+=====  ======================================================================================
+
+List of preferences
+--------------------
+
+The **Choregraphe** preferences widget has 3 tabs:
+
+General
+++++++++
+
++-------------------------------------------+-------------------------------------------------------------------------+
+|  Name                                     | Description                                                             |
++===========================================+=========================================================================+
+| **Motor speed (%)**                       | Speed of the robot's motors when:                                       |
+|                                           |                                                                         |
+|                                           | * you move a joint in :ref:`3d-nao-panel`,                              |
+|                                           | * click on a keyframe of a                                              |
+|                                           |   :ref:`Timeline <choregraphe-reference-box-timeline>`, or              |
+|                                           | * select a pose in the                                                  |
+|                                           |   :ref:`chore_pose_library_panel`.                                      |
+|                                           |                                                                         |
+|                                           | **Warning**: It is not advised to exceed 75% as it could                |
+|                                           | prematurely damage the motors of the robot.                             |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **User's box libraries**                  | Allows you to choose one or more **Box libraries** saved on             |
+|                                           | your computer which will be automatically loaded at                     |
+|                                           | Choregraphe startup.                                                    |
+|                                           |                                                                         |
+|                                           | For further details, see: :ref:`customizing_box_library`.               |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **User's pose libraries**                 | Allows you to choose one or more **Pose libraries**                     |
+|                                           | saved on your computer which will be automatically loaded               |
+|                                           | at Choregraphe startup.                                                 |
+|                                           |                                                                         |
+|                                           | For further details, see: :ref:`chore_pose_library_panel`.              |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Automatically save box libraries**      | If enabled, when you exit Choregraphe the opened                        |
+|                                           | **Box libraries** will be automatically saved.                          |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Language**                              | Language of **Choregraphe** interface.                                  |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Background color**                      | Color of the background of **Choregraphe** interface.                   |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Upon external modification**            | Choose the action to take whenever your                                 |
+|                                           | currently opened **Project directory** is modified                      |
+|                                           | by an external application.                                             |
+|                                           |                                                                         |
+|                                           | Select:                                                                 |
+|                                           |                                                                         |
+|                                           | * **Update project content** to update your project content             |
+|                                           |   with the modified files.                                              |
+|                                           | * **Keep project content** to ignore the changes,                       |
+|                                           |   which will be overwritten at save.                                    |
+|                                           | * **Always ask** (selected by default) if you want to be                |
+|                                           |   asked each time a change is detected.                                 |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **When playing current behavior**         | Choose whether the current **Project** files should be saved or not     |
+|                                           | when the current **Behavior** is about to be played.                    |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **When disconnecting while                | Choose whether the current **Behavior** should be stopped or not        |
+| current behavior is running**             | when **Choregraphe** is about to close its connection with the robot.   |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Automatically show the Debug            | If enabled, the :ref:`chore_debug_panel`                                |
+| Window when an error occurs**             | is automatically displayed as soon as an error occurs                   |
+|                                           | in the execution of a Behavior.                                         |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Start Choregraphe without the 3D**      | Replaces the 3D view with a static 2D picture of the robot.             |
+|                                           | So you do not have any feedback anymore about the move                  |
+|                                           | of the robot but it does not take so much processor.                    |
+|                                           |                                                                         |
+|                                           | Moreover, with **H25** and **H21**, you are still able to move the      |
+|                                           | joints of the robot by selecting the body part you want to move.        |
+|                                           |                                                                         |
+|                                           | For further details, see: :ref:`3d-nao-panel`.                          |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Show global stiffness button, only for  | Show on the toolbar, the deprecated button:                             |
+| Nao (advanced users only)**               |                                                                         |
+|                                           | |stiffness_btn|                                                         |
+|                                           | **Set on/off the stiffness** . Enabled only for |roboN|.                |
+|                                           |                                                                         |
+|                                           | **Warning**: only for experimented users.                               |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Display monospaced font                 | If enabled, the font used in the                                        |
+| in script editor**                        | :ref:`script editor <chore_script_editor_panel>` is monospaced.         |
+|                                           |                                                                         |
+|                                           | It means that any character will take the same space on the screen      |
+|                                           | as another (which is not the case of the font used by default).         |
+|                                           |                                                                         |
+|                                           | For further details, see: :ref:`chore_script_editor_panel`.             |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Display code folding buttons in         | If enabled, a **+** / **-** button allows collapsing/expanding          |
+| script editor**                           | script lines.                                                           |
+|                                           |                                                                         |
+|                                           | For further details, see: :ref:`chore_script_editor_panel`.             |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Wrap text in script editor**            | If enabled, the text is wrapped according to the panel width.           |
+|                                           |                                                                         |
+|                                           | For further details, see: :ref:`chore_script_editor_panel`.             |
++-------------------------------------------+-------------------------------------------------------------------------+
+| **Ask for confirmation before             | If enabled, a confirmation message appears when removing a              |
+| removing project files**                  | file from the current project.                                          |
++-------------------------------------------+-------------------------------------------------------------------------+
+
+
+Display
+++++++++
+
+This tab enables to choose the **graph color of each motor** in the :ref:`curve
+editor <choregraphe-detailed-interface-timeline-editor-curves>` of the **Timeline**.
+
+.. _naoqi-settings:
+
+Virtual Robot
+++++++++++++++++
+
+This tab allows you to customize the simulated robot included in **Choregraphe**,
+called **virtual robot**.
+
+For further details, see: :ref:`choregraphe-reference-simulated-robot`.
+
+=========================    ===========================================================================================
+ Name                           Description
+=========================    ===========================================================================================
+**NAOqi runtime path**          Allows you to define a customized NAOqi executable as **virtual robot**.
+
+                                Select the path of the NAOqi executable you want to use.
+
+                                If not specified, **virtual robot** uses the standard **NAOqi**
+                                installed with **Choregraphe**.
+
+**Robot model**                 Allows you to select which version of robot you want to test and display
+                                when the **local NAOqi** is running.
+
+                                Select one of the available configuration file:
+
+                                [Robot_Name][Body_Type][Version].xml
+
+                                Where:
+
+                                * Robot_Name is the name of the robot,
+                                * Body_Type is the :ref:`nao-family::nao-body-type`,
+                                * Version is the  :ref:`nao-family::nao-version`.
+
+                                For example, ``NAOT14V33.xml`` is the version **V3.3** of the **T14 NAO**
+                                which has no leg but arms.
+=========================    ===========================================================================================
+

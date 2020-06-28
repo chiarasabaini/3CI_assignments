@@ -1,0 +1,85 @@
+.. _alfacetracker-api:
+
+ALFaceTracker API
+=================
+
+:ref:`Overview<naoqi-trackers>` | :ref:`alredballtracker-api` |
+ALFaceTracker API
+
+------------
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALFaceTrackerProxy
+
+* :cpp:func:`ALFaceTrackerProxy::getPosition`
+* :cpp:func:`ALFaceTrackerProxy::isActive`
+* :cpp:func:`ALFaceTrackerProxy::isNewData`
+* :cpp:func:`ALFaceTrackerProxy::setWholeBodyOn`
+* :cpp:func:`ALFaceTrackerProxy::startTracker`
+* :cpp:func:`ALFaceTrackerProxy::stopTracker`
+
+
+Methods
+-------
+
+.. cpp:function:: std::vector<float> ALFaceTrackerProxy::getPosition()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Returns the [x, y, z] position of the face in FRAME_TORSO. This is done assuming
+  an average face size, so it might not be very accurate.  This invalidates the
+  isNewData field of the tracker. See :cpp:func:`ALFaceTrackerProxy::isNewData`
+  for more details.
+
+  :return: An Array containing the face position [x, y, z].
+
+.. cpp:function:: bool ALFaceTrackerProxy::isActive()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Return true if the face Tracker is running.
+
+  :return: true if the face Tracker is running.
+
+.. cpp:function:: bool ALFaceTrackerProxy::isNewData()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Return true if a new face was detected since the last getPosition().
+
+  :return: true if a new face was detected since the last getPosition().
+
+.. cpp:function:: void ALFaceTrackerProxy::setWholeBodyOn(const bool& pWholeBodyOn)
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  if true, the tracking will be through a Whole Body Process.
+
+  :param pWholeBodyOn: The whole Body state
+
+.. cpp:function:: void ALFaceTrackerProxy::startTracker()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Start the tracker by Subscribing to Event FaceDetected from :ref:`alfacedetection` module.
+  Then Wait Event FaceDetected from ALFaceDetection module.
+  And finally send information to motion for head tracking.
+  Note: Stiffness of Head must be set to 1.0 to move!
+
+.. cpp:function:: void ALFaceTrackerProxy::stopTracker()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Stop the tracker by Unsubscribing to Event FaceDetected from ALFaceDetection module.
+

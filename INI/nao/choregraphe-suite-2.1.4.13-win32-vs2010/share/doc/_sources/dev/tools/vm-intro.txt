@@ -1,0 +1,80 @@
+﻿.. include:: ../../bulk/common.rst
+
+.. _vm:
+
+NAOqi OS on a virtual machine
+=============================
+
+**Aldebaran Robotics** provides an **NAOqi OS** virtual machine under the open
+standard **OVF/OVA**.
+
+What the NAOqi OS virtual machine contains
+--------------------------------------------
+
+The **NAOqi OS** virtual machine provides a virtualized NAO environment.
+
+Thus, there is no graphical frontend, just a console.
+
+It mainly targets developers and aims at fitting their needs.
+
+It contains:
+
++------------------------+-----------------------------------------------------+
+| **Developer tools**    | * **gcc** compiler suite                            |
+|                        |                                                     |
+|                        | * **CMake**                                         |
+|                        |                                                     |
+|                        | * **qiBuild**                                       |
+|                        |                                                     |
+|                        | * Autotools                                         |
+|                        |                                                     |
+|                        | * **emerge** and **portage** package tree           |
+|                        |                                                     |
+|                        |   Make easier building third-party libraries for    |
+|                        |   |roboS|.                                          |
++------------------------+-----------------------------------------------------+
+| **Aldebaran material** | * libqi/libnaoqi                                    |
++------------------------+-----------------------------------------------------+
+| **Miscellaneous**      | * man pages                                         |
++------------------------+-----------------------------------------------------+
+
+..  missing suff:
+    - man/doc                                            [DONE]
+    - naoqi-simulator                                    [DONE]
+    - libqi/libnaoqi                                     [DONE]
+    - disable breakpad symbol generation                 [DONE]
+    - oss overlay with public repo (aka github repo)
+    - tool to convert gentoo package to qibuild packages [IN_PROGRESS]
+      - debug module name/path
+
+By default, binaries are built for i486 targets, but it is possible to
+enable the optimization for Atom targets (i.e. **NAO V4**).
+For further details, see: :ref:`vm-optimize-builds`.
+
+Supported virtual machine software
+----------------------------------
+
+All virtual machine software supporting **OVF/OVA** exchange format should be
+able to run the **NAOqi OS** virtual machine.
+
+Supported virtual machine software:
+
+* **VirtualBox**
+
+**Unsupported** virtual machine software:
+
+* Parallels (on Mac OS)
+
+* VMware (without OVF-tools)
+
+.. note::
+
+    This documentation has been done using **VirtualBox**.
+
+To go further, see:
+
+* :ref:`vm-setup`
+
+* :ref:`vm-usage`
+
+* :ref:`developing-project-using-3rd-party`

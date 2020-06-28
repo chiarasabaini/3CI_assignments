@@ -1,0 +1,33 @@
+.. _reflexes-diagnosis-api:
+
+Diagnosis effect API
+++++++++++++++++++++
+
+
+:ref:`naoqi-motion` - :ref:`Overview <reflexes-diagnosis>` | API
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/reflexes-diagnosis_toc.rst
+
+
+Methods
+-------
+
+.. cpp:function:: void ALMotionProxy::setDiagnosisEffectEnabled(const bool &enable)
+
+  Enable or Disable the diagnosis reflex.
+
+  :param enable: Enable or disable the diagnosis reflex.
+
+.. cpp:function:: bool ALMotionProxy::getDiagnosisEffectEnabled()
+
+  Allow to know if the diagnosis reflex is activated.
+
+  :return: Return true is the diagnosis reflex is activated.

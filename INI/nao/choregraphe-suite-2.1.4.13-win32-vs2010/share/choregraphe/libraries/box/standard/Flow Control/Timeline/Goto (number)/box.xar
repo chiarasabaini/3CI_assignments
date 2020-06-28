@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Jump to the frame number set in parameters." x="220" y="401">
+        <bitmap>media/images/box/box-timeLine.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onGo(self):
+        self.getParentTimeline().goTo(self.getParameter("Frame number"))]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onGo" type="1" type_size="1" nature="1" inner="0" tooltip="Parent timeline gotoTimeline when a signal is received on this input." id="2" />
+        <Parameter name="Frame number" inherits_from_parent="0" content_type="1" value="1" default_value="1" min="0" max="10000" tooltip="Number of the frame you want to go to." id="3" />
+    </Box>
+</ChoregrapheBox>

@@ -1,0 +1,114 @@
+.. _whats-new-1.12.3:
+
+What's new - 1.12.3
+=====================
+
+NAO firmware
+--------------
+
+After a few weeks of life, NAO V4 needed to be settled, adjusted.
+
+* **Thermal model** has been updated, in order to safely allow him to go further
+  before saying "Motor hot".
+
+* **Current limits** of the motors have been pushed forward, so NAO V4 should be
+  strong enough for the most difficult poses.
+
+* **Head Fan** temperature/speed settings have been also updated in order to
+  minimize unnecessary noise.
+
+* **WiFi** transmission from the robot highly improved.
+
+So don't forget to update your robot: :ref:`choregraphe-howto-update-nao-system`.
+
+
+Choregraphe
+------------
+
+Improved boxes
++++++++++++++++
+
+**Walk to** and **Walk Toward** boxes take less time to stop:
+in order to make NAO react more quickly, **Walk to** and **Walk Toward** boxes
+now use **ALMotion stopWalk()** to stop.
+
+**Stand up** box has been fixed, its behavior is again symmetric.
+
+Installation on a multi user computer
++++++++++++++++++++++++++++++++++++++++
+
+License key activation on a multi user computer is now implemented for
+**Choregraphe Suite**.
+
+So before installing, make sure you are logged as Administrator.
+
+For further details, see :ref:`desktop-installation`.
+
+Temporary directories cleaning
++++++++++++++++++++++++++++++++++++++++++++
+
+In version 1.12.0 and previous ones, **Choregraphe** could have created temporary
+directories in a wrong path where the Windows **Cleaning disk** command has not access.
+
+This issue is now fixed.
+
+To know how to clean manually these temporary files,
+see :ref:`choregraphe-temporary-directories-fix`.
+
+
+
+NAOsim
+----------
+
+Installation on a multi user computer
+++++++++++++++++++++++++++++++++++++++++
+
+License key activation on a multi user computer is now implemented for **NAOsim**.
+
+So before installing, make sure you are logged as Administrator.
+
+
+
+License activation for non connected computers
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+**NAOsim Activator** allows you to activate NAOsim License even if your computer
+has no Internet connection.
+
+
+Supported Operating systems
+-----------------------------
+
+OS X Lion supported
++++++++++++++++++++++
+
+Mac OS X 10.7.1 (Lion) is now supported.
+
+For further details, see :ref:`desktop-index`, :ref:`cpp-install-guide`,
+:ref:`python-install-guide`.
+
+
+New 64-bit packages available
++++++++++++++++++++++++++++++++
+
+We are moving to full support 64-bit.
+
+Here is the list of new packages, already available even if still under validation:
+
+* choregraphe-suite-1.12.1.10-linux64.tar.gz
+* choregraphe-suite-1.12.1.10-mac64.dmg
+* naoqi-sdk-1.12.1.10-linux64.tar.gz
+* naoqi-sdk-1.12.1.10-mac64.tar.gz
+* pynaoqi-python2.6-linux64
+* pynaoqi-python2.7-linux64
+
+
+C++ SDK
+-------------
+
+Read the `qiBuild release notes <../../qibuild/relnotes.html>`_.
+
+
+
+
+

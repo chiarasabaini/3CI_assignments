@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-01 11:37:24 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMDE7IjExOjAxOjEyICI7MzI3Mw=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMDE7IjExOjM3OjI0ICI7MjszMzk0"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="1"/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <output expression="&quot;inserisci numero: &quot;" newline="True"/>
+            <input variable="n"/>
+            <for variable="i" start="i" end="n-1" direction="inc" step="1">
+                <if expression="n%i=0">
+                    <then>
+                        <assign variable="sum" expression="sum+i"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <if expression="sum=n">
+                <then>
+                    <output expression="n&amp;&quot; &#232; un numero perfetto&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="n&amp;&quot; non &#232; un numero perfetto&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

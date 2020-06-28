@@ -1,0 +1,54 @@
+.. _h21_joints_v32:
+
+H21 - Joints - V3.2
+======================
+
+.. seealso::
+    :ref:`V4<h21_joints>` |  :ref:`V3.3 <h21_joints_v33>` | **V3.2** 
+
+    :ref:`nao-h21` | :ref:`robot_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v32.rst
+
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_no_hand_left_v32.rst
+
+
+
+Right Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_no_hand_right_v32.rst
+
+
+Pelvis joints
+--------------
+
+.. include:: ../bulk/joints_pelvis_v32.rst
+
+
+
+Left Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_left_v32.rst
+
+
+Right Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_right_v32.rst

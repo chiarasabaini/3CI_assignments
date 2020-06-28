@@ -1,0 +1,58 @@
+.. _reflexes-fall-manager-api:
+
+Fall manager API
+++++++++++++++++
+
+
+:ref:`naoqi-motion` - :ref:`Overview <reflexes-fall-manager>` | API
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/reflexes-fall-manager_toc.rst
+
+Event list
+-----------
+
+* :naoqi:event:`robotHasFallen`
+* :naoqi:event:`robotIsFalling`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALMotionProxy::setFallManagerEnabled(const bool &enable)
+
+  Enable/disable the fall manager reflex, but only if allowed by the owner.
+  If not allowed, an exception is thrown.
+
+  For further details, see: :ref:`reflex-deactivation`.
+
+  :param enable: Enable or disable the fall manager reflex.
+
+.. cpp:function:: bool ALMotionProxy::getFallManagerEnabled()
+
+  Allow to know if the fall manager reflex is activated.
+
+  :return: Return true is the fall manager reflex is activated.
+
+
+Events
+------
+
+.. naoqi:event:: robotIsFalling(bool val)
+
+  Raised when the fall manager process starts.
+
+  :param val: always True.
+
+.. naoqi:event:: robotHasFallen(bool val)
+
+  Raised when the fall manager process finishes.
+
+  :param val: always True.

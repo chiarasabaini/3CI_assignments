@@ -1,0 +1,321 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Debugging an Activity &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="Debugging" href="debugging.html" />
+    <link rel="next" title="Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline" href="reference.html" />
+    <link rel="prev" title="Debugging a Behavior" href="debug.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="debug.html" title="Debugging a Behavior">previous</a>
+     |
+    <a href="debugging.html" title="Debugging" accesskey="U">up</a>
+   |
+    <a href="reference.html" title="Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-debug_activity">
+            
+  <div class="section" id="debugging-an-activity">
+<span id="debug-activity"></span><h1>Debugging an Activity<a class="headerlink" href="#debugging-an-activity" title="Permalink to this headline">¶</a></h1>
+<p>You have created a <strong>Behavior</strong>. It is operational.
+Otherwise, see: <a class="reference internal" href="debug.html#debug-behavior"><em>Debugging a Behavior</em></a>.</p>
+<p>You have transformed your <strong>Behavior</strong> into an <strong>Activity</strong>.</p>
+<p>Here is how you can fix the bugs.</p>
+<div class="section" id="testing-an-activity-and-its-trigger-conditions">
+<h2>Testing an Activity and its Trigger conditions<a class="headerlink" href="#testing-an-activity-and-its-trigger-conditions" title="Permalink to this headline">¶</a></h2>
+<p>To test an <strong>Activity</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Save the <strong>Project</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>In the <strong>Robot Applications</strong> panel, click the <img alt="install_apps-button" class="img-inline" src="../../_images/application_manager_add_current.png" />
+<strong>Package and install the current project to the robot</strong> button.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="life_off-button" class="img-inline" src="../../_images/chore_life_button.png" /> <strong>Turn autonomous life on</strong> button.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="my-activity-does-not-start">
+<h3>My Activity does not start<a class="headerlink" href="#my-activity-does-not-start" title="Permalink to this headline">¶</a></h3>
+<p>Have a look to the <a class="reference internal" href="panels/project_content_panel.html#choregraphe-reference-project-properties"><em>Project Properties</em></a>:</p>
+<ul>
+<li><p class="first">Make sure the <strong>Behavior</strong> is exposed, i.e. its check-box is checked.</p>
+</li>
+<li><p class="first">Select the <strong>Behavior</strong> and make sure its
+<a class="reference internal" href="panels/project_content_panel.html#beha-properties"><em>Behavior property</em></a> are well set.</p>
+<p>Pay attention to: <strong>Nature</strong>,  <strong>Trigger sentences</strong>
+and/or <strong>Launch trigger condition</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="testing-an-activity-bypassing-its-trigger-conditions">
+<h2>Testing an Activity bypassing its Trigger conditions<a class="headerlink" href="#testing-an-activity-bypassing-its-trigger-conditions" title="Permalink to this headline">¶</a></h2>
+<p>To test an <strong>Activity</strong> bypassing its trigger conditions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Make sure the <strong>Autonomous Life</strong> is on.</p>
+<p class="last">If not, the <img alt="life_off-button" class="img-inline" src="../../_images/chore_life_button.png" /> <strong>Turn autonomous life on</strong> button.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="play-button" class="img-inline" src="../../_images/beginning_play_button.png" /> <strong>Play</strong> button.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result</strong></p>
+<p><strong>Choregraphe</strong>, choose, according to the <strong>Nature</strong> of the <strong>Behavior</strong>
+and the current <strong>Life</strong> state, between the 2 methods:
+<a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::startBehavior__ssCR" title="ALBehaviorManagerProxy::startBehavior"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::startBehavior()</span></tt></a> or
+<a class="reference internal" href="../../naoqi/core/autonomouslife-api.html#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus()</span></tt></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="22%" />
+<col width="22%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" rowspan="2">AutonomousLife states</th>
+<th class="head" colspan="3">Behavior&#8217;s Nature</th>
+</tr>
+<tr class="row-even"><th class="head">No nature</th>
+<th class="head">Solitary</th>
+<th class="head">Interactive</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Disabled</strong></td>
+<td>startBehavior</td>
+<td>startBehavior</td>
+<td>startBehavior</td>
+</tr>
+<tr class="row-even"><td><strong>Solitary</strong></td>
+<td>startBehavior</td>
+<td>switchFocus</td>
+<td>switchFocus</td>
+</tr>
+<tr class="row-odd"><td><strong>Interactive</strong></td>
+<td>startBehavior</td>
+<td>switchFocus*</td>
+<td>switchFocus</td>
+</tr>
+</tbody>
+</table>
+<p>*Calling switchFocus of a <strong>Solitary</strong> Activity while in <strong>Interactive</strong>
+state will not start the <strong>Activity</strong>.</p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="debug.html" title="Debugging a Behavior">Debugging a Behavior</a>
+     |
+    <a href="debugging.html" title="Debugging" accesskey="U">Debugging</a>
+   |
+    <a href="reference.html" title="Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline">Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutos/index.html">Choregraphe Tutorials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="starting_discovery.html">Main panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="main_objects.html">Main objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="debugging.html">Debugging</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="debug.html">Debugging a Behavior</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Debugging an Activity</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="reference.html">Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Debugging an Activity</a><ul>
+<li><a class="reference internal" href="#testing-an-activity-and-its-trigger-conditions">Testing an Activity and its Trigger conditions</a><ul>
+<li><a class="reference internal" href="#my-activity-does-not-start">My Activity does not start</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-an-activity-bypassing-its-trigger-conditions">Testing an Activity bypassing its Trigger conditions</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="debug.html" title="Debugging a Behavior">previous</a>
+     |
+    <a href="debugging.html" title="Debugging" accesskey="U">up</a>
+   |
+    <a href="reference.html" title="Loading, unloading, starting and stopping a behavior, a box, a diagram or a Timeline">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

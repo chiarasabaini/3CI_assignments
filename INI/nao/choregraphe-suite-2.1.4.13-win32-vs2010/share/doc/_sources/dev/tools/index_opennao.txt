@@ -1,0 +1,22 @@
+.. _opennao-tools:
+
+NAOqi OS
+========
+
+**Discover the Operating system of the robot**
+
+.. toctree::
+   :maxdepth: 2
+
+   opennao
+
+
+**Advanced users: run NAOqi OS on a Virtual Machine**
+
+.. toctree::
+   :maxdepth: 1
+
+   vm-intro
+   vm-setup
+   vm-building-thirdparty
+   developing-using-thirdparty

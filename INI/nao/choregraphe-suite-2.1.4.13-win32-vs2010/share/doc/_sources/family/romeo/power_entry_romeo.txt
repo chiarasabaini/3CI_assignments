@@ -1,0 +1,13 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_power_entry:
+
+|roboR| - Power entry
+=====================
+
+.. seealso:: :ref:`romeo`
+
+--------------------
+
+**TBD**
+

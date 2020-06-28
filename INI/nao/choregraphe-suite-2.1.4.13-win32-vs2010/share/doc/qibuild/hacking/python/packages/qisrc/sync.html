@@ -1,0 +1,294 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qisrc.sync – Synchronize a worktree with a manifest &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qisrc modules" href="index.html" />
+    <link rel="next" title="qisrc.review – Using code review (gerrit)" href="review.html" />
+    <link rel="prev" title="qisrc.worktree – Managing git projects" href="worktree.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="worktree.html" title="qisrc.worktree &amp;#8211; Managing git projects">previous</a>
+     |
+    <a href="index.html" title="qisrc modules" accesskey="U">up</a>
+   |
+    <a href="review.html" title="qisrc.review &amp;#8211; Using code review (gerrit)">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-python-packages-qisrc-sync">
+            
+  <div class="section" id="module-qisrc.sync">
+<span id="qisrc-sync-synchronize-a-worktree-with-a-manifest"></span><h1>qisrc.sync &#8211; Synchronize a worktree with a manifest<a class="headerlink" href="#module-qisrc.sync" title="Permalink to this headline">¶</a></h1>
+<p>Handling synchronization of a worktree with some manifests</p>
+<div class="section" id="qisrc-sync-worktreesyncer">
+<h2>qisrc.sync.WorkTreeSyncer<a class="headerlink" href="#qisrc-sync-worktreesyncer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qisrc.sync.WorkTreeSyncer">
+<em class="property">class </em><tt class="descclassname">qisrc.sync.</tt><tt class="descname">WorkTreeSyncer</tt><big>(</big><em>git_worktree</em><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle the manifests of a worktree</p>
+<p>Stores the git url of the manifests and the groups that
+should be used, synchronizes the local manifests with the git
+worktree</p>
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.sync">
+<tt class="descname">sync</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8221; Synchronize with a remote manifest:
+* clone missing repos
+* move repos that needs to be moved
+* reconfigure remotes and default branches
+* synchronizes build profiles
+:returns: True in case of success, False otherwise</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.sync_repos">
+<tt class="descname">sync_repos</tt><big>(</big><em>force=False</em><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.sync_repos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the manifest, inspect changes, and updates the
+git worktree accordingly</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.configure_projects">
+<tt class="descname">configure_projects</tt><big>(</big><em>projects=None</em><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.configure_projects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the given projects so that the actual git config matches
+the one coming from the manifest :</p>
+<p>Configure default remotes, default branches and code review, then save config
+To be called _after_ sync()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.dump_manifest">
+<tt class="descname">dump_manifest</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.dump_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the manifest config in .qi/manifest.xml</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.configure_manifest">
+<tt class="descname">configure_manifest</tt><big>(</big><em>url</em>, <em>branch='master'</em>, <em>groups=None</em>, <em>ref=None</em>, <em>review=True</em>, <em>force=False</em><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.configure_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a manifest to the list. Will be stored in
+.qi/manifests/&lt;name&gt;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.read_remote_manifest">
+<tt class="descname">read_remote_manifest</tt><big>(</big><em>manifest_xml=None</em><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.read_remote_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the manifest file in .qi/manifests/&lt;name&gt;/manifest.xml
+using the settings in .qi/manifest.xml (to know the name and the groups
+to use)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.get_old_repos">
+<tt class="descname">get_old_repos</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.get_old_repos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backup all repos configuration before any synchronisation
+for compute_repo_diff to have the correct value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.sync.WorkTreeSyncer.sync_from_manifest_file">
+<tt class="descname">sync_from_manifest_file</tt><big>(</big><em>xml_path</em><big>)</big><a class="headerlink" href="#qisrc.sync.WorkTreeSyncer.sync_from_manifest_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just synchronize the manifest coming from one xml file.
+Used by <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">check-manifest</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="qisrc-sync-localmanifest">
+<h2>qisrc.sync.LocalManifest<a class="headerlink" href="#qisrc-sync-localmanifest" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qisrc.sync.LocalManifest">
+<em class="property">class </em><tt class="descclassname">qisrc.sync.</tt><tt class="descname">LocalManifest</tt><a class="headerlink" href="#qisrc.sync.LocalManifest" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="qisrc.sync.LocalManifest.name">
+<tt class="descname">name</tt><a class="headerlink" href="#qisrc.sync.LocalManifest.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the manifest</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qisrc.sync.LocalManifest.url">
+<tt class="descname">url</tt><a class="headerlink" href="#qisrc.sync.LocalManifest.url" title="Permalink to this definition">¶</a></dt>
+<dd><p>url of the manifest</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qisrc.sync.LocalManifest.branch">
+<tt class="descname">branch</tt><a class="headerlink" href="#qisrc.sync.LocalManifest.branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>branch of the manifest</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qisrc.sync.LocalManifest.groups">
+<tt class="descname">groups</tt><a class="headerlink" href="#qisrc.sync.LocalManifest.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of group names to use by default
+(default is: all projects)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="worktree.html" title="qisrc.worktree &amp;#8211; Managing git projects">qisrc.worktree &#8211; Managing git projects</a>
+     |
+    <a href="index.html" title="qisrc modules" accesskey="U">qisrc modules</a>
+   |
+    <a href="review.html" title="qisrc.review &amp;#8211; Using code review (gerrit)">qisrc.review &#8211; Using code review (gerrit)</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/python/index.html">qiBuild Python framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/index.html">qiBuild design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">qiBuild Python documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">qiBuild Python packages documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../qisys/index.html">qisys modules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">qisrc modules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="git.html">qisrc.git &#8211; Git related tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="manifest.html">qisrc.manifest &#8211; Parsing manifest files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="git_config.html">qisrc.git_config &#8211; Handling git configurations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="project.html">qisrc.project - git projects in a GitWorkTree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="worktree.html">qisrc.worktree &#8211; Managing git projects</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">qisrc.sync &#8211; Synchronize a worktree with a manifest</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="review.html">qisrc.review &#8211; Using code review (gerrit)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../qibuild/index.html">qibuild modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitest/index.html">qitest modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitoolchain/index.html">qitoolchain modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qidoc/index.html">qidoc modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qilinguist/index.html">qilinguist modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipy/index.html">qipy modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipkg/index.html">qipkg modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qisrc.sync &#8211; Synchronize a worktree with a manifest</a><ul>
+<li><a class="reference internal" href="#qisrc-sync-worktreesyncer">qisrc.sync.WorkTreeSyncer</a></li>
+<li><a class="reference internal" href="#qisrc-sync-localmanifest">qisrc.sync.LocalManifest</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="worktree.html" title="qisrc.worktree &amp;#8211; Managing git projects">previous</a>
+     |
+    <a href="index.html" title="qisrc modules" accesskey="U">up</a>
+   |
+    <a href="review.html" title="qisrc.review &amp;#8211; Using code review (gerrit)">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

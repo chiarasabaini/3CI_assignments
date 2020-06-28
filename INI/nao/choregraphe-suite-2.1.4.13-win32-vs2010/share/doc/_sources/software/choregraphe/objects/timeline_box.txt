@@ -1,0 +1,64 @@
+.. _choregraphe-reference-box-type-timeline:
+
+Timeline box
+=============
+
+What is a Timeline box
+-----------------------
+
+A **Timeline** box is a :ref:`choregraphe-reference-box` which includes
+a :ref:`Timeline <choregraphe-reference-box-timeline>`.
+
+.. image:: /medias/desktop/choregraphe/chore_ref_timeline_box.png
+   :width: 589 px
+   :height: 267 px
+
+
+
+
+
+.. _choregraphe-howto-create-timeline-box:
+
+How to create a Timeline box
+----------------------------
+
+To create a **Timeline** box, you can:
+
+* Drag and drop the **Templates** > **Animation** box from the default box library, or
+
+* Create it from scratch:
+
+=====  ==========================================================================
+Step    Action
+=====  ==========================================================================
+1.      Right click on on the **Flow diagram** wherever you want to create the
+        box.
+
+2.      Choose **Create a new Box** > **Timeline...** in the contextual menu.
+
+        .. image:: /medias/desktop/choregraphe/timeline_box_creation.png
+           :width: 240 px
+           :height: 418 px
+
+3.      Define a **Name** and a **Description** for your box.
+
+4.      **Optional**: set the picture to recognize it among other boxes.
+
+5.      **Optional**: set **Parameters**, **Inputs** and **Outputs**.
+
+        For further details about parameters, see: :ref:`How to add/remove inputs,
+        outputs, parameters in a box
+        <choregraphe-howto-add-remove-box-in-out-param>`.
+
+6.      Click the **OK** button.
+
+        The created **Timeline** box is displayed on the **Flow diagram**.
+
+7.      Double click on your box, to get into and edit the inner **Timeline**.
+
+        .. image:: /medias/desktop/choregraphe/timeline_view.png
+           :width: 568 px
+           :height: 224 px
+=====  ==========================================================================
+
+

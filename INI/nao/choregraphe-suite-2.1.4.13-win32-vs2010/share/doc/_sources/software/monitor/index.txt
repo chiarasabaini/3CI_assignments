@@ -1,0 +1,93 @@
+.. _monitor:
+
+Monitor
+=======
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   tutos/index
+   plugins/camera_viewer
+   plugins/memory_viewer
+   plugins/laser_monitor
+   plugins/3d_sensor_monitor
+   plugins/log_viewer
+
+
+What is Monitor
+---------------
+
+**Monitor** is dedicated to give you an elementary feedback from your robot and a simple
+access to its camera settings.
+
+Its modular architecture allows you to load plugins in different mobile
+widgets, each of them being connected to the robot of your choice.
+That is to say you can connect several robots at a time.
+
+5 plugins are available:
+
+- :ref:`monitor-plugin-camera-viewer`
+
+- :ref:`monitor-plugin-laser-monitor`
+  - for Laser Head NAO owners only.
+
+- :ref:`monitor-plugin-memory-viewer`
+
+- :ref:`monitor-depthsensor`
+  - requires a depth camera plugged to the robot.
+
+- :ref:`monitor-plugin-log-viewer`
+
+How to install Monitor
+-------------------------
+
+**Monitor** is installed along with Choregraphe.
+For further details, see :ref:`desktop-installation-cho-installing`.
+
+.. _monitor-start:
+
+How to launch a Monitor plugin
+-------------------------------
+
+To launch one of the Monitor plugins:
+
+=====  =========================================================================================
+Step    Action
+=====  =========================================================================================
+1.      Run ``monitor`` executable file, located in your Choregraphe installation folder.
+
+        The following window is displayed.
+
+        .. image:: /medias/desktop/monitor/monitor_start.png
+            :width: 508 px
+            :height: 346 px
+
+2.      Choose a plugin in the **Load Plugin** menu.
+
+        The :ref:`connection-widget` is displayed.
+
+3.      Select the robot to monitor.
+
+4.      Click the **Connect to** button.
+
+        A new widget is added to the main window.
+=====  =========================================================================================
+
+
+.. warning::
+   Opening twice the same plugin widget connected to the same robot is
+   possible, but not supported.
+
+.. _monitor-troubleshooting:
+
+FAQ
+----
+
+Why some controls are disabled
++++++++++++++++++++++++++++++++
+
+- If some controls of Monitor are disabled, it might mean that something is
+  going wrong with your connection, but usually it just means the corresponding
+  parameter is disabled.
+

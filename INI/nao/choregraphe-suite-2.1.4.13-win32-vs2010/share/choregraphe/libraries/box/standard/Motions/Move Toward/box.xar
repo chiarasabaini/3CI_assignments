@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Make the robot move in the direction you set in parameters.&#x0A;&#x0A;!!Warning!! the robot will not stop moving by himself. You need to either set x, y and theta to 0 or stop the box to stop him.&#x0A;&#x0A;Note: You can set the period of move direction update in parameters." x="595" y="324">
+        <bitmap>media/images/box/movement/walk_forward.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+
+
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        import threading
+        self.motion = ALProxy("ALMotion")
+        self.x = 0
+        self.y = 0
+        self.theta = 0
+        self.ptask = qi.PeriodicTask()
+        self.lock = threading.RLock()
+
+    def onUnload(self):
+        with self.lock:
+            self.ptask.stop()
+            self.x = 0
+            self.y = 0
+            self.theta = 0
+            self.motion.moveToward(0, 0, 0)
+            self.motion.waitUntilMoveIsFinished()
+
+    def onInput_onStop(self):
+        with self.lock:
+            self.onUnload()
+            self.onStopped()
+
+    def onInput_onStart(self):
+        with self.lock:
+            period = self.getParameter("Period of direction update (s)")
+            us_period = int(period*1000000)
+
+            self.ptask.compensateCallbackTime(True)
+            self.ptask.setCallback(self.updateMovement)
+            self.ptask.setUsPeriod(us_period)
+            self.ptask.start(True)
+
+    def moveFailed(self):
+        self.onUnload()
+        self.onMoveFailed()
+
+    def updateMovement(self):
+        import math
+        with self.lock:
+            enableArms = self.getParameter("Arms movement enabled")
+            self.motion.setMoveArmsEnabled(enableArms, enableArms)
+            x = self.getParameter("X")
+            y = self.getParameter("Y")
+            theta = self.getParameter("Theta")
+            period = self.getParameter("Period of direction update (s)")
+            epsilon = 0.0001
+            dx = math.fabs(x - self.x)
+            dy = math.fabs(y - self.y)
+            dt = math.fabs(theta - self.theta)
+
+            # Update moveToward parameters
+            if(dx > epsilon or dy > epsilon or dt > epsilon):
+                self.x=x
+                self.y=y
+                self.theta=theta
+                self.motion.moveToward(self.x, self.y, self.theta)
+
+            # Check if the move has been canceled
+            if (not self.motion.moveIsActive()):
+                self.moveFailed()
+
+            us_period = int(period*1000000)
+            self.ptask.setUsPeriod(us_period)]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when the box behavior is stopped." id="4" />
+        <Output name="onMoveFailed" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when the motion move task is canceled." id="5" />
+        <Parameter name="X" inherits_from_parent="0" content_type="2" value="0.2" default_value="0.2" min="-1" max="1" tooltip="The distance in meters for forward/backward motion. Positive value&#x0A;means forward, negative value means backward." id="6" />
+        <Parameter name="Y" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-1" max="1" tooltip="The distance in meters for lateral motion. Positive value means left, negative&#x0A;value means right." id="7" />
+        <Parameter name="Theta" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-1" max="1" tooltip="The orientation in radians for final rotation. Positive value means anticlockwise,&#x0A;negative value means clockwise." id="8" />
+        <Parameter name="Period of direction update (s)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0" max="1" tooltip="" id="9" />
+        <Parameter name="Arms movement enabled" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="Enables natural motion of the arms." id="10" />
+        <Resource name="Legs" type="Lock" timeout="0" />
+    </Box>
+</ChoregrapheBox>

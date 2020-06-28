@@ -1,0 +1,97 @@
+.. _aldiagnosis-api:
+
+ALDiagnosis API
+=================
+
+:ref:`Overview<aldiagnosis>` | API
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/aldiagnosisproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALDiagnosisProxy
+
+* :cpp:func:`ALDiagnosisProxy::getActiveDiagnosis`
+* :cpp:func:`ALDiagnosisProxy::getPassiveDiagnosis`
+* :cpp:func:`ALDiagnosisProxy::isNotificationEnabled`
+* :cpp:func:`ALDiagnosisProxy::setEnableNotification`
+
+Event list
+----------
+
+* :naoqi:event:`ActiveDiagnosisErrorChanged`
+* :naoqi:event:`PassiveDiagnosisErrorChanged`
+* :naoqi:event:`ALDiagnosis/RobotIsReady`
+
+
+Methods
+-------
+
+.. cpp:function:: AL::ALValue ALDiagnosisProxy::getActiveDiagnosis()
+
+  Return the actual state of the active diagnosis. Only the highest level of failure is returned.
+
+  :return: Return an ALValue with the actual active diagnosis result with the following form:
+
+           [ int :term:`Level of failure severity`, [AL::ALValue The list of device in failure] ].
+
+           * Level of failure severity: 0 (*NEGLIGIBLE*), 1 (*SERIOUS*) or 2 (*CRITICAL*).
+           * The list of device in failure: a chain name or a sensor name.
+           * Example: [1, ["LArm", "Sonar"]]
+
+.. cpp:function:: AL::ALValue ALDiagnosisProxy::getPassiveDiagnosis()
+
+  Return the actual state of the passive diagnosis. Only the highest level of failure is returned.
+
+  :return: Return an ALValue with the actual passive diagnosis result with the following form:
+
+           [ int :term:`Level of failure severity`, [AL::ALValue The list of device in failure] ].
+
+           * Level of failure severity: 0 (*NEGLIGIBLE*), 1 (*SERIOUS*) or 2 (*CRITICAL*).
+           * The list of device in failure: a chain name or a sensor name.
+           * Example: [1, ["LArm", "Sonar"]]
+
+.. cpp:function:: bool ALDiagnosisProxy::isNotificationEnabled()
+
+  Get notification status. Returns true if notification is active.
+
+  :return: Return true if notification is active.
+
+.. cpp:function:: void ALDiagnosisProxy::setEnableNotification(bool enable)
+
+  Enable / Disable passive diagnosis notification.
+
+  :param enable: If true enables passive diagnosis notification.
+
+Events
+------
+
+.. naoqi:event:: ActiveDiagnosisErrorChanged(AL::ALValue activeDiagnosis)
+
+  Raised when the active diagnosis status has changed.
+
+  :param activeDiagnosis: The same return ALValue as the API
+                          :cpp:func:`ALDiagnosisProxy::getActiveDiagnosis`
+
+.. naoqi:event:: PassiveDiagnosisErrorChanged(AL::ALValue passiveDiagnosis)
+
+  Raised when the passive diagnosis status has changed.
+
+  :param passiveDiagnosis: The same return ALValue as the API
+                           :cpp:func:`ALDiagnosisProxy::getPassiveDiagnosis`
+
+.. naoqi:event:: ALDiagnosis/RobotIsReady(AL::ALValue robotIsReady)
+
+  Raised when the active diagnosis, automatically launched after the NAOqi startup, is finished.
+
+  :param robotIsReady: True if no critical error is detected at start-up diagnosis.

@@ -1,0 +1,55 @@
+.. _autonomousmoves:
+
+ALAutonomousMoves
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   autonomousmoves-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <autonomousmoves-api>`
+
+------------
+
+What it does
+------------
+
+**ALAutonomousMoves** enables subtle movements that the robot does autonomously.
+
+How it works
+-------------
+
+.. _autonomousmoves_expressivelistening:
+
+Expressive Listening
+++++++++++++++++++++
+
+When the expressive listening is enabled, the robot does some slight movements
+showing that he is listening.
+
+.. _background_strategy:
+
+Background Strategy
++++++++++++++++++++
+
+Defines which slight movements the robot does autonomously when its limbs are not moving, i.e. when the motors do not receive any motion orders.
+By default, the strategy is set to "backToNeutral".
+
+**2 strategies exist:**
+
+* **"none"**: The robot will never move automatically.
+
+* **"backToNeutral"**: It depends on the :term:`Posture family`.
+
+  +--------------------------------+------------------------------------------------------------------------------------+
+  | Posture Family                 | Effects                                                                            |
+  +================================+====================================================================================+
+  | **Standing**                   | Call :cpp:func:`ALMotionProxy::setBreathEnabled`.                                  |
+  +--------------------------------+------------------------------------------------------------------------------------+
+  | **Sitting** or                 | Goes back to the nearest :term:`Predefined postures` then call                     |
+  | **SittingOnChair**             | :cpp:func:`ALMotionProxy::setIdlePostureEnabled`).                                 |
+  +--------------------------------+------------------------------------------------------------------------------------+
+  | Any other posture family       | Does nothing.                                                                      |
+  +--------------------------------+------------------------------------------------------------------------------------+

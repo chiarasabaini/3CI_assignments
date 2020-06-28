@@ -1,0 +1,270 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALVoiceEmotionAnalysis &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="NAOqi Audio" href="index.html" />
+    <link rel="next" title="ALVoiceEmotionAnalysis API" href="alvoiceemotionanalysis-api.html" />
+    <link rel="prev" title="ALTextToSpeech Tutorial" href="altexttospeech-tuto.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="altexttospeech-tuto.html" title="ALTextToSpeech Tutorial">previous</a>
+     |
+    <a href="index.html" title="NAOqi Audio" accesskey="U">up</a>
+   |
+    <a href="alvoiceemotionanalysis-api.html" title="ALVoiceEmotionAnalysis API">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-audio-alvoiceemotionanalysis">
+            
+  <div class="section" id="alvoiceemotionanalysis">
+<span id="id1"></span><h1>ALVoiceEmotionAnalysis<a class="headerlink" href="#alvoiceemotionanalysis" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="index.html#naoqi-audio"><em>NAOqi Audio</em></a> - Overview | <a class="reference internal" href="alvoiceemotionanalysis-api.html#alvoiceemotionanalysis-api"><em>API</em></a></p>
+<hr class="docutils" />
+<p><img alt="juju" class="img-inline" src="../../_images/juju.png" /> <em>Pepper</em> only</p>
+<div class="section" id="what-it-does">
+<h2>What it does<a class="headerlink" href="#what-it-does" title="Permalink to this headline">¶</a></h2>
+<p><strong>ALVoiceEmotionAnalysis</strong> identifies the emotion expressed by the speaker&#8217;s voice, independently of
+what is being said.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="underlying-technology">
+<h3>Underlying technology<a class="headerlink" href="#underlying-technology" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALVoiceEmotionAnalysis</strong> relies on the ST Emotion voice analysis technology by AGI.</p>
+<p>The module also depends on <strong>ALSpeechRecognition</strong> for speech detection, so <strong>ALSpeechRecognition</strong>
+(or <strong>ALDialog</strong>) needs to be started correctly for it to work.</p>
+</div>
+<div class="section" id="emotionrecognized-event">
+<span id="id2"></span><h3>EmotionRecognized event<a class="headerlink" href="#emotionrecognized-event" title="Permalink to this headline">¶</a></h3>
+<p>At the end of the utterance, the engine processes the emotion levels and raises the
+<em>&#8220;ALVoiceEmotionAnalysis/EmotionRecognized&#8221;</em> event, which is structured as follows:</p>
+<div class="highlight-none"><div class="highlight"><pre>[
+  [ matched emotion index, matched emotion level ],
+  emotion levels: [ calm, anger, joy, sorrow, laughter ],
+  excitement level
+]
+</pre></div>
+</div>
+<p>Where:</p>
+<ul>
+<li><p class="first">&#8220;Matched emotion index&#8221; is the index of the dominant emotion selected by the engine in the emotion
+levels vector</p>
+<div class="highlight-none"><div class="highlight"><pre>0 = unknown
+1 = calm
+2 = anger
+3 = joy
+4 = sorrow
+</pre></div>
+</div>
+<p>Laughter is not really considered an emotion, so it will never be the dominant one.</p>
+</li>
+<li><p class="first">&#8220;Matched emotion level&#8221; is the level of the dominant emotion</p>
+</li>
+<li><p class="first">&#8220;Emotion levels&#8221; is the vector of the emotions&#8217; scores. Scores are integers between 0 and 5.</p>
+</li>
+<li><p class="first">&#8220;Excitement level&#8221; is a separate value that measures the amount of excitement in the voice. High
+excitement is often linked with joy or anger.</p>
+</li>
+</ul>
+<p>Example: [ [4,3], [0,2,1,3,0], 1 ]
+Here, the matched emotion is sorrow with a level of 3. We can find this value in the emotion levels
+vector as well. Excitement is quite low (1), meaning the voice was quite monotone.</p>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Use the following Choregraphe behavior:
+<a class="reference download internal" href="../../_downloads/VoiceEmotionAnalysis.crg"><tt class="xref download docutils literal"><span class="pre">VoiceEmotionAnalysis.crg</span></tt></a></p>
+<p>The minimum utterance duration can be set in the box parameters (see &#8220;MinSignalLength&#8221; parameter in
+<a class="reference internal" href="alvoiceemotionanalysis-api.html#ALVoiceEmotionAnalysisProxy::setParameter__ssCR.AL::ALValueCR" title="ALVoiceEmotionAnalysisProxy::setParameter"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVoiceEmotionAnalysisProxy::setParameter()</span></tt></a>).</p>
+<p>Note that there is a Speech Recognition box. It&#8217;s purpose is to start ALSpeechRecognition with dummy
+vocabulary so that the speech detection works (speech detection will not work if you merely
+subscribe to ALSpeechRecognition without having added vocabulary).</p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="altexttospeech-tuto.html" title="ALTextToSpeech Tutorial">ALTextToSpeech Tutorial</a>
+     |
+    <a href="index.html" title="NAOqi Audio" accesskey="U">NAOqi Audio</a>
+   |
+    <a href="alvoiceemotionanalysis-api.html" title="ALVoiceEmotionAnalysis API">ALVoiceEmotionAnalysis API</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Audio</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="alanimatedspeech.html">ALAnimatedSpeech</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alaudiodevice.html">ALAudioDevice</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alaudioplayer.html">ALAudioPlayer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alaudiorecorder.html">ALAudioRecorder</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alsoundlocalization.html">ALSoundLocalization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog/aldialog.html">ALDialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alsounddetection.html">ALSoundDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alspeechrecognition.html">ALSpeechRecognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="altexttospeech.html">ALTextToSpeech</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALVoiceEmotionAnalysis</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="alvoiceemotionanalysis-api.html">ALVoiceEmotionAnalysis API</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="alaudiosourcelocalization.html">ALAudioSourceLocalization</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALVoiceEmotionAnalysis</a><ul>
+<li><a class="reference internal" href="#what-it-does">What it does</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a><ul>
+<li><a class="reference internal" href="#underlying-technology">Underlying technology</a></li>
+<li><a class="reference internal" href="#emotionrecognized-event">EmotionRecognized event</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="altexttospeech-tuto.html" title="ALTextToSpeech Tutorial">previous</a>
+     |
+    <a href="index.html" title="NAOqi Audio" accesskey="U">up</a>
+   |
+    <a href="alvoiceemotionanalysis-api.html" title="ALVoiceEmotionAnalysis API">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

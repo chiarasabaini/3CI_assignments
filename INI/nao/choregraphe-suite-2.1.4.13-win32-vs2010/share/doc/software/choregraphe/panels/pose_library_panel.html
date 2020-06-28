@@ -1,0 +1,274 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pose library panel &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="Main panels" href="../starting_discovery.html" />
+    <link rel="next" title="Robot View" href="robot_3d_view.html" />
+    <link rel="prev" title="Flow diagram panel" href="flow_diagram_panel.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="flow_diagram_panel.html" title="Flow diagram panel">previous</a>
+     |
+    <a href="../starting_discovery.html" title="Main panels" accesskey="U">up</a>
+   |
+    <a href="robot_3d_view.html" title="Robot View">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-panels-pose_library_panel">
+            
+  <div class="section" id="pose-library-panel">
+<span id="chore-pose-library-panel"></span><h1>Pose library panel<a class="headerlink" href="#pose-library-panel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-pose-library-panel">
+<h2>What is the Pose library panel<a class="headerlink" href="#what-is-the-pose-library-panel" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Pose library</strong> panel displays specific <strong>Timeline</strong> boxes containing
+<em>NAO</em> preset positions.</p>
+<p>It enables you to easily define and access standard key positions for <em>NAO</em>
+when you create a <strong>Behavior</strong>.</p>
+<img alt="../../../_images/chore_predefined_positions.png" src="../../../_images/chore_predefined_positions.png" style="width: 254px; height: 188px;" />
+<p>Choregraphe includes by default a <strong>Pose library</strong> which is automatically opened when you open the <strong>Pose library</strong> panel.
+It contains some basic positions you could need to create your first animations.</p>
+</div>
+<div class="section" id="using-pose-library-panel">
+<span id="choregraphe-detailed-interface-pose-library-panel"></span><h2>Using Pose library panel<a class="headerlink" href="#using-pose-library-panel" title="Permalink to this headline">¶</a></h2>
+<p>You can use this library to <strong>add boxes to your behavior</strong> by dragging and
+dropping a position from the pose library to the flow diagram as you would do with the box library.
+The resulting box enables you to put <em>NAO</em> directly in this position during your behavior.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These poses are not like the <strong>Stand Up</strong> box you can find in the default box library for example.
+<em>NAO</em> <strong>will not calculate the right animation to go to the position safely</strong>.
+He will directly go to the position, whatever the initial position he currently is in.
+So make sure that your robot can go to it without falling before using a pose.</p>
+</div>
+<p>Clicking on a chosen position will automatically and directly put <em>NAO</em> in the selected position.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A robot first needs to have its joints <strong>stiffened</strong> to go to any position from the pose library,
+unless it is a simulated robot without any physics effect (the virtual robot found in Choregraphe for example).
+For more information about the abilities of a simulated robot, see the definition of a <a class="reference internal" href="../../../dev/tools/robot-simulation.html#choregraphe-reference-simulated-robot"><em>simulated robot</em></a>.</p>
+</div>
+</div>
+<div class="section" id="customizing-pose-library-panel">
+<h2>Customizing Pose library panel<a class="headerlink" href="#customizing-pose-library-panel" title="Permalink to this headline">¶</a></h2>
+<p>You can <strong>add a folder</strong> to organize the pose library as you wish by right-clicking anywhere on the <strong>Pose library</strong> panel and selecting <strong>Create Folder</strong>.</p>
+<p>You can <strong>edit</strong> the name, the description and the image of a pose by right-clicking on it and selecting <strong>Position properties</strong>.
+A new widget will be displayed where you will be able to enter a new <strong>name</strong>, a new <strong>description</strong> and/or choose a new <strong>image</strong> for the position.</p>
+<p>You can <strong>delete</strong> a specific position by right-clicking on it and selecting <strong>Delete</strong>.</p>
+<p>Here are the other actions you can make using the buttons of the toolbar of the <strong>Pose library</strong> panel:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Button</th>
+<th class="head">Function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img alt="../../../_images/chore_pose_library_open.png" class="first last" src="../../../_images/chore_pose_library_open.png" />
+</td>
+<td><strong>Open</strong> an existing pose library from your computer.</td>
+</tr>
+<tr class="row-odd"><td><img alt="../../../_images/chore_pose_library_export.png" class="first last" src="../../../_images/chore_pose_library_export.png" />
+</td>
+<td><strong>Export all</strong> the opened libraries into a single one to your computer.</td>
+</tr>
+<tr class="row-even"><td><img alt="../../../_images/chore_pose_library_add.png" class="first last" src="../../../_images/chore_pose_library_add.png" />
+</td>
+<td><p class="first"><strong>Add position</strong> to the list of the poses in the <strong>Pose library</strong> panel.</p>
+<p>A new widget will be displayed to give a <strong>name</strong>, a <strong>description</strong> and an <strong>image</strong> to your new position.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can take a <strong>screenshot</strong> of the 3D view to illustrate the position.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Feel free to complete the default pose library with your own positions or to create your own pose library.</p>
+<p>To automatically open your own pose libraries at <strong>Choregraphe</strong> startup:</p>
+<ol class="arabic">
+<li><p class="first">Choose <strong>Edit</strong> &gt; <strong>Preferences</strong>.</p>
+</li>
+<li><p class="first">Choose the box libraries you want to be opened in the field <strong>User&#8217;s pose libraries</strong>.</p>
+<p>For further details, see <a class="reference internal" href="../choregraphe_preference.html#choregraphe-detailed-interface-preferences"><em>Choregraphe Preferences</em></a>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="flow_diagram_panel.html" title="Flow diagram panel">Flow diagram panel</a>
+     |
+    <a href="../starting_discovery.html" title="Main panels" accesskey="U">Main panels</a>
+   |
+    <a href="robot_3d_view.html" title="Robot View">Robot View</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutos/index.html">Choregraphe Tutorials</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../starting_discovery.html">Main panels</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="project_content_panel.html">Project content panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="box_libraries_panel.html">Box libraries panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flow_diagram_panel.html">Flow diagram panel</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Pose library panel</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="robot_3d_view.html">Robot View</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Pose library panel</a><ul>
+<li><a class="reference internal" href="#what-is-the-pose-library-panel">What is the Pose library panel</a></li>
+<li><a class="reference internal" href="#using-pose-library-panel">Using Pose library panel</a></li>
+<li><a class="reference internal" href="#customizing-pose-library-panel">Customizing Pose library panel</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="flow_diagram_panel.html" title="Flow diagram panel">previous</a>
+     |
+    <a href="../starting_discovery.html" title="Main panels" accesskey="U">up</a>
+   |
+    <a href="robot_3d_view.html" title="Robot View">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+.. include:: ../../bulk/common.rst
+
+.. _robot-battery:
+
+|roboN| - Battery
+===================
+  
+:ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21` | :ref:`nao-t14` | :ref:`nao-t2`
+
+--------------------
+
+.. seealso::
+
+    :ref:`replacing-battery`, :ref:`charging-battery_nao`, :ref:`albattery`
+
+.. include:: ../bulk/battery.rst
+
+

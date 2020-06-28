@@ -1,0 +1,135 @@
+.. _alsystem-api:
+
+ALSystem API
+=====================
+
+:ref:`naoqi-core` - :ref:`Overview <alsystem>` | API | :ref:`PartitionInfo <partitionInfo>`
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/alsystemproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALSystemProxy
+
+* :cpp:func:`ALSystemProxy::robotName`
+* :cpp:func:`ALSystemProxy::robotIcon`
+* :cpp:func:`ALSystemProxy::setRobotName`
+* :cpp:func:`ALSystemProxy::shutdown`
+* :cpp:func:`ALSystemProxy::reboot`
+* :cpp:func:`ALSystemProxy::systemVersion`
+* :cpp:func:`ALSystemProxy::timezone`
+* :cpp:func:`ALSystemProxy::setTimezone`
+* :cpp:func:`ALSystemProxy::freeMemory`
+* :cpp:func:`ALSystemProxy::totalMemory`
+* :cpp:func:`ALSystemProxy::diskFree`
+* :cpp:func:`ALSystemProxy::previousSystemVersion`
+* :cpp:func:`ALSystemProxy::changePassword`
+
+Event list
+-----------
+
+* :naoqi:event:`ALSystem/RobotNameChanged`
+
+Methods
+-------
+
+.. cpp:function:: std::string ALSystemProxy::robotName()
+
+  Get robot name.  For further details, see: :ref:`opennao-web-page-settings`.
+
+  :return: the robot name
+
+.. cpp:function:: AL::ALValue ALSystemProxy::robotIcon()
+
+  Get the content of the robot icon file, as set in the web page
+  :ref:`opennao-web-page-settings`.
+
+  :return: a buffer containing the robot icon
+
+.. cpp:function:: bool ALSystemProxy::setRobotName(const std::string &name)
+
+  Set robot name. This will raise :naoqi:event:`ALSystem/RobotNameChanged`.
+
+  :param name: Name to use.
+  :return: True if successful, false otherwise.
+
+.. cpp:function:: void ALSystemProxy::shutdown()
+
+  Shut down the robot after going to safety position using
+  :cpp:func:`ALMotionProxy::rest`.
+
+.. cpp:function:: void ALSystemProxy::reboot()
+
+  Reboot the robot after going to safety position using
+  :cpp:func:`ALMotionProxy::rest`.
+
+.. cpp:function:: std::string ALSystemProxy::systemVersion()
+
+  Get **NAOqi OS** version currently run by the robot.
+
+  :return: the version of **NAOqi OS**
+
+.. cpp:function:: std::string ALSystemProxy::timezone()
+
+  Get timezone currently used by the robot.
+
+  :return: Current timezone.
+
+.. cpp:function:: bool ALSystemProxy::setTimezone(const std::string& timezone)
+
+  Set timezone.
+
+  :param timezone: Timezone to use.
+  :return: True if successful, false otherwise.
+
+.. cpp:function:: int ALSystemProxy::freeMemory()
+
+  Amount of available memory in heap.
+
+  :return: Number of kb free on the heap.
+
+.. cpp:function:: int ALSystemProxy::totalMemory()
+
+  Amount of total memory in heap.
+
+  :return: Number of total kb on the heap.
+
+.. cpp:function:: std::vector<AL::PartitionInfo> ALSystemProxy::diskFree(bool all)
+
+  Display free disk space.
+
+  :param all: Show all mount points, including /proc, /dev, /sys.
+  :return: A vector containing all information about the :ref:`PartitionInfo<partitionInfo>`.
+
+.. cpp:function:: std::string ALSystemProxy::previousSystemVersion()
+
+  Previous system version before software update (empty if this is not the 1st boot after a software update).
+
+  :return: Previous system version before software update.
+
+.. cpp:function:: void ALSystemProxy::changePassword(const std::string &old, const std::string &new)
+
+  Change the user password on the robot. This password is required to login into system services such as: webpage, ssh, and ftp.
+
+  :param old: The old password.
+  :param new: The new password.
+
+Events
+------
+
+.. naoqi:event:: ALSystem/RobotNameChanged(const std::string& name)
+
+  Raised when :cpp:func:`ALSystemProxy::setRobotName` is successfully called.
+
+  :param name: the new name of the robot.

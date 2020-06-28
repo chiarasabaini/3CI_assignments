@@ -1,0 +1,35 @@
+.. _h21_motors:
+
+H21 - Motors
+===============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  motors_h21_v33
+  motors_h21_v32
+
+
+.. seealso::
+    **V4** | :ref:`V3.3 <h21_motors_v33>` | :ref:`V3.2 <h21_motors_v32>`
+
+    :ref:`nao-h21` | :ref:`robot_motors`
+
+--------------------
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_h21.png    
+   :width: 334 px                                    
+   :height: 437 px                                   
+
+
+.. include:: ../bulk/motors_v4.rst
+
+.. include:: ../bulk/motors_v4_head.rst
+
+.. include:: ../bulk/motors_v4_arms.rst
+
+.. include:: ../bulk/motors_v4_legs.rst

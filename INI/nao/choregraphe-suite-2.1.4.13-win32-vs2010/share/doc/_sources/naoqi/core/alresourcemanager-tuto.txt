@@ -1,0 +1,74 @@
+.. _alresourcemanager-tuto:
+
+ALResourceManager Tutorial
+=================================
+
+:ref:`naoqi-core` - :ref:`Overview <alresourcemanager>` | :ref:`API <alresourcemanager-api>` | Tutorial
+
+------------
+
+
+Introduction
+------------
+
+This tutorial explains how to use the ALResourceManager module.
+
+.. note::
+
+   The tutorial is written in Python.
+
+Create a resource
+-----------------
+
+
+.. code-block:: python
+
+    # create proxy on resource manager
+    proxy = ALProxy("ALResourceManager","localhost",9559)
+
+    #createResource in root (parent resource is "")
+    proxy.createResource("newResource","")
+
+
+Check if a resource is available
+--------------------------------
+
+.. code-block:: python
+
+    #check resource is free
+    free = proxy.areResourcesFree(["newResource"])
+
+
+Wait resource become available (blocking call)
+----------------------------------------------
+
+.. code-block:: python
+
+    # take resource
+    # acquireResource(resource name, owner name, callback to notify you that someone want the resource, timeout)
+    proxy.acquireResource("newResource", "myFooModule", "", 1)
+
+
+Callbacks on conflict
+---------------------
+
+.. code-block:: python
+
+    class MyFooModule:
+      def myFooCallback(self, resource, currentOwner):
+        #decide what to do with the ressource.
+        #either call releaseResource or pass
+        if iwanttoreleasetheresource:
+          releaseResource(resource, currentOwner)
+
+    # alternatively, you can specify a callback on myFooModule as third parameter that will be called in case of conflict.
+    proxy.acquireResource("newResource", "MyFooModule", "myFooCallback", 1)
+
+
+Release resource taken with waitForResource
+-------------------------------------------
+
+.. code-block:: python
+
+    #release resource
+    proxy.releaseResource("newResource", "myFooModule")

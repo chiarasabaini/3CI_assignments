@@ -1,0 +1,13 @@
+STYLE WEB PAGES
+
+https://materializecss.com/
+https://bulma.io/
+https://fezvrasta.github.io/bootstrap-material-design/
+https://www.codeply.com/bootstrap-4-examples
+http://getskeleton.com/
+https://getuikit.com/
+https://semantic-ui.com/
+https://www.codeply.com/go/C3ZSBLzAZC/bootstrap-4-card-examples
+https://github.com/daneden/animate.css
+https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+https://sass-lang.com/

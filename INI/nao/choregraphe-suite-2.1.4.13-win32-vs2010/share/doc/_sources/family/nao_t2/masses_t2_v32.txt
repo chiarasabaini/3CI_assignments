@@ -1,0 +1,24 @@
+.. _t2_masses_v32:
+
+T2 - Masses - V3.2
+=======================
+
+.. seealso::
+    :ref:`all_robots` | :ref:`robot_masses`
+
+    :ref:`nao-t2` | :ref:`V4 <t2_masses>` | :ref:`V3.3 <t2_masses_v33>` | **V3.2**
+
+--------------------
+
+.. include:: ../bulk/masses_whole_t.rst
+
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 1.6
+
+
+.. include:: ../bulk/masses_head_torso_v32_t2.rst
+

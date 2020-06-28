@@ -1,0 +1,134 @@
+.. _chore_debug_panel:
+
+Log viewer
+============
+
+
+What is the Log viewer
+-------------------------
+
+The **Log viewer** enables you to debug your behavior by displaying **messages**
+coming from running Behaviors.
+
+.. image:: /medias/desktop/choregraphe/chore_debug_window.png
+   :width: 558 px
+   :height: 371 px
+
+Any message displayed includes:
+
+* its :ref:`choregraphe-severity-level`,
+
+* the :ref:`choregraphe-box-path` concerned by the message and
+
+* the **text** of the message.
+
+
+.. note::
+   A message with a debug severity level also contains the corresponding
+   line number in the box script which is in brackets and then the name of
+   the concerned method in the box script.
+
+
+You can:
+
+* define which events are logged (see section :ref:`choregraphe-detailed-interface-debug-panel`),
+
+* edit log list (see section :ref:`choregraphe-editing-log-list`).
+
+.. _choregraphe-severity-level:
+
+Severity level
+---------------
+
+Each message can have a different **level of severity** which are displayed with different **prefixes** and in different **colors**:
+
+.. list-table::
+   :widths: 10 10 100
+   :header-rows: 1
+
+   * - | Level of
+       | Severity
+     - Prefix
+     - Description
+   * - debug
+     - .. image:: /medias/desktop/choregraphe/debug_panel_prefix_debug.png
+     - This is generally used to debug a very specific point in the behavior.
+   * - verbose
+     - .. image:: /medias/desktop/choregraphe/debug_panel_prefix_verbose.png
+     - These logs generally describe what is happening in the behavior step by step.
+   * - info
+     - .. image:: /medias/desktop/choregraphe/debug_panel_prefix_info.png
+     - These logs are generally not essential but can be useful for someone else who would use your behavior.
+   * - warning
+     - .. image:: /medias/desktop/choregraphe/debug_panel_prefix_warning.png
+     - This is generally used to warn you about an important fact which does not threaten the smooth running of the behavior.
+   * - error
+     - .. image:: /medias/desktop/choregraphe/debug_panel_prefix_error.png
+     - This is used for errors which does threaten the smooth running of the behavior.
+
+       .. note::
+          When an error is raised in a box, the specific box and all its :ref:`parents <choregraphe-reference-box-parent>`
+          get red in order to find the cause of the problem more easily.
+
+   * - fatal
+     - .. image:: /medias/desktop/choregraphe/debug_panel_prefix_fatal.png
+     - This is not very used but you can use it for example for errors which surely make the behavior crash.
+
+
+
+.. _choregraphe-box-path:
+
+Path of the box
+----------------
+
+The **path of the box** is contained in a string which looks like the following:
+
+``ALFrameManager__<behavior-id>__<box-path>``
+
+where:
+
+* ``<behavior-id>`` corresponds to the identification number of the behavior (which enables you to determine which behavior does the message come from).
+
+* ``<box-path>`` corresponds to the path of the box which the message comes from.
+
+  For example a box named ``Child`` is in the diagram of a box named ``Parent``.
+  ``Parent`` is in the main diagram.
+  The path of ``Child`` should look like ``root__Parent_2__Child_4``.
+
+  The numbers in the path enables to identify boxes that have the same name so that the path is unique for each box.
+
+.. _choregraphe-detailed-interface-debug-panel:
+
+Defining which events are logged
+---------------------------------
+
+By default, this panel displays only messages caused by **running behaviors** with **info** as a minimal level of severity.
+But you can even get all messages from NAOqi and NAOqi's modules, and get messages from lower level of severity.
+
+* To get **all messages** from NAOqi and NAOqi's modules: check the checkbox **Show all logs**.
+
+* To adjust the **level of severity**: use **Log Level** drop-list.
+
+For example, if **Error** is selected as Log Level, messages displayed in the panel will be only the ones defined as **fatal** or **error**.
+In the same way, if **Debug** is selected, messages of any level will be displayed.
+
+.. warning:: Selecting a very low level will result in having a lot of messages,
+   possibly **reducing the speed** of the whole application.
+
+.. note::
+   You should know that you can send messages yourself **from the scripts of your own boxes**.
+   For more information, see the section: :ref:`choregraphe-reference-box-script-built-in-functions`.
+
+
+.. _choregraphe-editing-log-list:
+
+Editing log list
+----------------
+
+If you right-click in the Debug window, the following menu is displayed:
+
+.. image:: /medias/desktop/choregraphe/debug_panel_context_menu.png
+   :width: 159 px
+   :height: 85 px
+
+

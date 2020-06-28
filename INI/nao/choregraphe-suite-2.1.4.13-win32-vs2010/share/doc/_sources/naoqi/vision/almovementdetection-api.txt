@@ -1,0 +1,114 @@
+.. include:: ../../bulk/common.rst
+
+.. _almovementdetection-api:
+
+ALMovementDetection API
+=======================
+
+:ref:`naoqi-vision` - :ref:`Overview <almovementdetection>` | API
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/almovementdetectionproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMovementDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api` and :ref:`alvisionextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALMovementDetectionProxy::resetDetection`
+
+* And has the following specific methods if 3d camera available:
+
+  * :cpp:func:`ALMovementDetectionProxy::getDepthSensitivity`
+  * :cpp:func:`ALMovementDetectionProxy::setDepthSensitivity`
+
+* Otherwise, on |roboS| without 3d camera, this module has the following
+  specific methods:
+
+  * :cpp:func:`ALMovementDetectionProxy::getColorSensitivity`
+  * :cpp:func:`ALMovementDetectionProxy::setColorSensitivity`
+
+Events lists
+------------
+
+* :naoqi:event:`MovementDetection/MovementDetected`
+* :naoqi:event:`MovementDetection/NoMovement`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`MovementDetection/MovementInfo`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALMovementDetectionProxy::resetDetection()
+
+   Resets to zero the values of the previously seen depth images, which resets the detection
+   of movement. For example, this function is automatically called when the robot just
+   moved, in order to avoid false positives that could be induced by the robot's movements.
+
+.. cpp:function:: float ALMovementDetectionProxy::getColorSensitivity()
+
+   |2d_only|
+
+   Gets the value of the color sensitivity (between 0 and 1) used for the detection of movement
+   with the RGB camera.
+
+.. cpp:function:: void ALMovementDetectionProxy::setColorSensitivity(const float& sensitivity)
+
+   |2d_only|
+
+   Sets the value of the color sensitivity (between 0 and 1) used for the detection of movement
+   with the RGB camera. The lower this sensivity is, the higher the variation of color value of
+   a pixel, between two frames, must be to be detected as movement.
+
+.. cpp:function:: float ALMovementDetectionProxy::getDepthSensitivity()
+
+   |3d_only|
+
+   Gets the value of the depth sensitivity (in meters) used for the detection of movement
+   with a depth camera.
+
+.. cpp:function:: void ALMovementDetectionProxy::setDepthSensitivity(const float& sensitivity)
+
+   |3d_only|
+
+   Sets the value of the depth sensitivity (in meters) used for the detection of movement
+   with a depth camera. The variation of depth of a pixel, between two frames, must be higher
+   than this sensitivity to be detected as movement.
+
+
+Events
+------
+
+.. naoqi:event:: MovementDetection/MovementDetected()
+
+  Raised each time some movement has been detected in the current camera frame (RGB or depth).
+
+.. naoqi:event:: MovementDetection/NoMovement()
+
+  Raised when no movement has been detected in the current camera frame (RGB or depth).
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue MovementDetection/MovementInfo
+
+  Contains the information about the latest detected movement. Please refer to
+  :ref:`almovementdetection` for details.

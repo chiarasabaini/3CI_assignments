@@ -1,0 +1,157 @@
+
+.. _alengagementzones:
+
+ALEngagementZones
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alengagementzones-api
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <alengagementzones-api>`
+
+------------
+
+What it does
+------------
+
+**ALEngagementZones** allows you to classify detected people and/or movements
+using their position in space with respect to the robot and the :ref:`engagementzone_concept`.
+
+.. _engagementzone_concept:
+
+Concept of engagement zones
++++++++++++++++++++++++++++
+
+The space in front of the robot is divided in configurable zones.
+Thus, you can adapt the behavior of the robot depending on the zone a person
+or a movement is detected in.
+
+How it works
+------------
+
+Zone definition
++++++++++++++++
+
+The **Engagement zones** are defined by the following parameters:
+
+=================== =============== ===========================================================
+Name                Defines...      Settings
+=================== =============== ===========================================================
+**FirstDistance**   "near"          :cpp:func:`ALEngagementZonesProxy::setFirstLimitDistance`
+**SecondDistance**  "farther"       :cpp:func:`ALEngagementZonesProxy::setSecondLimitDistance`
+**LimitAngle**      "in front"      :cpp:func:`ALEngagementZonesProxy::setLimitAngle`
+=================== =============== ===========================================================
+
+From these parameters are deduced 3 zones:
+
+* **Zone1** is near, in front,
+* **Zone2** is far in front and also near but on the sides,
+* **Zone3** is far on the side and also "very far" i.e. beyond **SecondDistance**.
+
+Default values
+^^^^^^^^^^^^^^^^
+
+* FirstDistance = 1.5m,
+* SecondDistance = 2.5m and
+* LimitAngle = 90 degrees.
+
+.. image:: /medias/dev/modules/peopleperception/engagementzones2.png
+   :width: 402 px
+   :height: 261 px
+
+Other example
+^^^^^^^^^^^^^^
+
+.. image:: /medias/dev/modules/peopleperception/engagementzones.png
+   :width: 399 px
+   :height: 261 px
+
+
+Getting started
+----------------
+
+**ALEngagementZones** allows you to compute the engagement zone of any other object
+from its position in :term:`FRAME_ROBOT`, using:
+:cpp:func:`ALEngagementZonesProxy::computeEngagementZone`.
+
+**ALEngagementZones** can also be used jointly with other modules.
+For further details, see:
+
+* :ref:`ALEngagementZones::withpeopleperception`,
+* :ref:`ALEngagementZones::withmovementdetection`.
+
+In **Choregraphe**, the :ref:`3d-nao-panel` allows you to see the engagement
+zones and also the people detected by :ref:`alpeopleperception`.
+
+UseCases
+--------
+
+.. _ALEngagementZones::withpeopleperception:
+
+EngagementZones with PeoplePerception
+++++++++++++++++++++++++++++++++++++++
+
+The module **ALEngagementZones** can be used to compute the engagement zone for each person
+in the population detected by the module **ALPeoplePerception**.
+
+.. warning::
+
+   It will only work if **ALPeoplePerception** has also been subscribed to.
+
+The engagement zone of each person is added to the description of this person in the **ALMemory**
+by filling the key :naoqi:memkey:`PeoplePerception/Person/<ID>/EngagementZone`.
+
+The people are then classified depending on their engagement zone. The memory keys
+:naoqi:memkey:`EngagementZones/PeopleInZone1`, :naoqi:memkey:`EngagementZones/PeopleInZone2`
+and :naoqi:memkey:`EngagementZones/PeopleInZone3` store the list of the IDs of the people
+in each zone. Each time at least one of these lists is updated, the event
+:naoqi:event:`EngagementZones/PeopleInZonesUpdated` is raised.
+
+Besides, using **ALEngagementZones** with **ALPeoplePerception** also allows you to detect
+if someone is approaching the robot or moving away:
+
+* When a person moves from one zone to a closer one, the event
+  :naoqi:event:`EngagementZones/PersonApproached` is raised.
+* When a person moves from one zone to a further one, the event
+  :naoqi:event:`EngagementZones/PersonMovedAway` is raised.
+
+In order to be able to trigger some behaviors when people enter a specific zone,
+the events :naoqi:event:`EngagementZones/PersonEnteredZone1`,
+:naoqi:event:`EngagementZones/PersonEnteredZone2` and
+:naoqi:event:`EngagementZones/PersonEnteredZone3` are also raised each time when
+a person leaves one zone to enter another one.
+
+
+.. _ALEngagementZones::withmovementdetection:
+
+EngagementZones with MovementDetection
++++++++++++++++++++++++++++++++++++++++
+
+The module **ALEngagementZones** can be used to compute the engagement zone for each movement
+detected by the module **ALMovementDetection**.
+
+.. warning::
+
+   It will only work if **ALMovementDetection** has also been subscribed to.
+
+The people are then classified depending on their engagement zone. The memory keys
+:naoqi:memkey:`EngagementZones/LastMovementsInZone1`, :naoqi:memkey:`EngagementZones/LastMovementsInZone2`
+and :naoqi:memkey:`EngagementZones/LastMovementsInZone3` store the list of movements
+in each zone. These movement lists have exactly the same structure as the memory key
+**MovementDetection/MovementInfo**, described in :ref:`almovementdetection`.
+Each time at least one of these lists is updated, the event
+:naoqi:event:`EngagementZones/MovementsInZonesUpdated` is raised.
+
+When no movement has been detected, the event :naoqi:event:`EngagementZones/MovementsInZonesUpdated`
+is not raised and the movement lists in the previous memory keys stay the same.
+
+.. warning::
+
+   If the robot is not equipped with a 3D sensor, it is not possible to detect the distance
+   of a movement with respect to the robot, thus to determine which engagement zone it
+   belongs to. Therefore, the movements are all stored in each of the memory keys
+   :naoqi:memkey:`EngagementZones/LastMovementsInZone1`, :naoqi:memkey:`EngagementZones/LastMovementsInZone2`
+   and :naoqi:memkey:`EngagementZones/LastMovementsInZone3`.

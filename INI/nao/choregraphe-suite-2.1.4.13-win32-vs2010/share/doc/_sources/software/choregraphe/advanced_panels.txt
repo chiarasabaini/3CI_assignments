@@ -1,0 +1,41 @@
+
+Advanced panels
+================
+
+Once you master the main panels, go on discovering useful tools provided by advanced panels.
+
+
+**Managing NAO vision and interaction**
+
+.. toctree::
+   :maxdepth: 1
+
+   panels/video_monitor_panel
+   panels/dialog_panel
+
+
+**Managing Scripts, Behaviors**
+
+.. toctree::
+   :maxdepth: 1
+
+   panels/scritp_editor_panel
+   panels/robot_applications
+
+
+**Monitoring Resources and Memeory keys**
+
+.. toctree::
+   :maxdepth: 1
+
+   panels/resource_viewer_panel
+   panels/memory_watcher_panel
+
+
+**Mastering debugging tools**
+
+.. toctree::
+   :maxdepth: 1
+
+   panels/debug_window
+   panels/undo_stack_panel

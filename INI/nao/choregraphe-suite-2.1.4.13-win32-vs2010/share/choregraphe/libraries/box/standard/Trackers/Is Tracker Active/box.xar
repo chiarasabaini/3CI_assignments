@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="5" localization="-1" tooltip='Check if the tracker is active. Output &quot;Yes&quot; is stimulated if tracker is active or output &quot;No&quot; otherwise.' x="337" y="586">
+        <bitmap>media/images/box/interaction/track.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.tracker = ALProxy( "ALTracker" )
+
+    def onUnload(self):
+        pass
+
+    def onInput_onAsk(self):
+        result = self.tracker.isActive()
+        if(result):
+            self.Yes()
+        else:
+            self.No()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onAsk" type="1" type_size="1" nature="1" inner="0" tooltip="When this input is stimulated, the box check if the tracker is active." id="2" />
+        <Output name="Yes" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the tracker is active." id="3" />
+        <Output name="No" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the tracker is not active." id="4" />
+    </Box>
+</ChoregrapheBox>

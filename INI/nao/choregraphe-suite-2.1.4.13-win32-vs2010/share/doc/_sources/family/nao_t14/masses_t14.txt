@@ -1,0 +1,34 @@
+.. _t14_masses:
+
+T14 - Masses
+==============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  masses_t14_v33
+  masses_t14_v32
+
+
+.. seealso::
+    :ref:`all_robots` | :ref:`robot_masses`
+
+    :ref:`nao-t14` | **V4** | :ref:`V3.3 <t14_masses_v33>` | :ref:`V3.2 <t14_masses_v32>`
+
+--------------------
+
+.. include:: ../bulk/masses_whole_t.rst
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 2.8
+
+.. include:: ../bulk/masses_head_torso_t14.rst
+
+.. include:: ../bulk/masses_arms.rst
+
+.. include:: ../bulk/masses_hands_motorized.rst
+

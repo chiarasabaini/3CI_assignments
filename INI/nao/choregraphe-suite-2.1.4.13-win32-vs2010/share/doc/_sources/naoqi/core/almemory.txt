@@ -1,0 +1,147 @@
+.. _almemory:
+
+ALMemory
+========
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   almemory-api
+   almemory-tuto
+
+:ref:`naoqi-core` - Overview | :ref:`API <almemory-api>` | :ref:`Tutorial <almemory-tuto>`
+
+------------
+
+
+What it does
+------------
+
+**ALMemory** is a centralized memory used to store all key information
+related to the hardware configuration of your robot.
+
+More specifically, **ALMemory** provides information about the current state of
+the Actuators and the Sensors.
+For further details, see: :ref:`actuator_sensor_list_nao`.
+
+.. or :ref:`actuator_sensor_list_juliette`.
+
+Customized usage
++++++++++++++++++
+
+**ALMemory** can also be used to store and retrieve named values, and act as
+a hub for the distribution of event notifications.
+
+How it works
+------------
+
+**ALMemory** is a mutexed and unordered boost map. The map contains variant (ALValue).
+
+Mutex are read/write mutex and for performance, can protect:
+
+* The map
+* A value
+* The value history (only for events)
+
+For example:
+
+* Remove a data blocks all readers/writers.
+* Insert an existing data only blocks the modified data.
+* Read data blocks only writers of read data.
+
+The notifications are managed by a threadpool (in local) or by a unique notification
+thread (in remote).
+
+.. _event-micro-event:
+
+Event and MicroEvent
+--------------------
+
+An **Event** is a **MicroEvent** which stores his history into **ALMemory**.
+They are basically the same, but **MicroEvent** is faster.
+
+You can access to event history using :cpp:func:`ALMemoryProxy::getEventHistory`.
+
+Furthermore a Module can autostart when someone subscribe to an **Event**.
+This feature is accessible using :cpp:func:`ALMemoryProxy::declareEvent` with two parameters.
+
+Performances and Limitations
+----------------------------
+
+**ALMemory** is thread safe for normal operations. Reader and writer can access
+variable at the same moment except when you use :cpp:func:`ALMemoryProxy::getDataPtr`.
+
+
+**ALMemory** can store and retrieve variant (ALValue):
+
+====================    ================       ==========================  ================
+type                    C++                    Python                      Java
+====================    ================       ==========================  ================
+integer                 int                    Python integer              int
+boolean                 bool                   Python boolean              Boolean
+float                   float                  Python float                Float
+List                    vector<ALValue>        []                          Java array []
+String                  std::string            Python string               String
+Binary                  ALValue                String                      byte[]
+Variant                 ALValue                Use python type             jnaoqi Variant
+====================    ================       ==========================  ================
+
+
+
+Getting started
+---------------
+
+To access to a value stored in **ALMemory**, use:
+
++-----------------------------------------+-----------------------------------------------+
+| The function ...                        | Providing ...                                 |
++=========================================+===============================================+
+| :cpp:func:`ALMemoryProxy::getDataPtr`   | Fast pointer access.                          |
+|                                         |                                               |
+|                                         | **Warning**: it's not thread safe nor atomic. |
++-----------------------------------------+-----------------------------------------------+
+| :cpp:func:`ALMemoryProxy::getData`      | Thread safe access.                           |
+|                                         |                                               |
+|                                         | It can be used either when your module        |
+|                                         | is local or remote.                           |
++-----------------------------------------+-----------------------------------------------+
+
+Customized usage
++++++++++++++++++
+
+To store values in the memory, use :cpp:func:`ALMemoryProxy::insertData`.
+
+To subscribe to events, use:
+
++-------------------------------------------------------+---------------------------------+
+| The function ...                                      | To subscribe to ...             |
++=======================================================+=================================+
+| :cpp:func:`ALMemoryProxy::subscribeToEvent`           | an event.                       |
++-------------------------------------------------------+---------------------------------+
+| :cpp:func:`ALMemoryProxy::subscribeToMicroEvent`      | a microEvent.                   |
++-------------------------------------------------------+---------------------------------+
+
+For further details, see the following example: :ref:`cpp-tutos-create-events`.
+
+To generate events, use the following functions:
+
+
++---------------------------------------------+------------------------------------------------------------------------+
+| The function ...                            | To  ...                                                                |
++=============================================+========================================================================+
+| :cpp:func:`ALMemoryProxy::raiseMicroEvent`  | insert a value and notify subscribers.                                 |
++---------------------------------------------+------------------------------------------------------------------------+
+| :cpp:func:`ALMemoryProxy::raiseEvent`       | insert a value, notify subscribers, store value history and            |
+|                                             | timestamp (internal).                                                  |
++---------------------------------------------+------------------------------------------------------------------------+
+| :cpp:func:`ALMemoryProxy::declareEvent`     | link a module to a variable.                                           |
+|                                             |                                                                        |
+|                                             | If a module subscribes to variable, the module starts his process once.|
+|                                             | For example, subscribe to ``FaceDetected`` automatically starts the    |
+|                                             | module **ALFaceDetection**. If all subscribers unsubscribe, the module |
+|                                             | stops.                                                                 |
++---------------------------------------------+------------------------------------------------------------------------+
+
+
+

@@ -1,0 +1,16 @@
+.. include:: ../bulk/common.rst
+
+.. _intro_nao:
+
+First steps with |roboN|
+==========================
+
++----------------------------------+
+| .. toctree::                     |
+|    :maxdepth: 1                  |
+|                                  |
+|    out_of_the_box                |
+|    getting_out_of_the_box        |
+|    first_conf                    |
++----------------------------------+
+

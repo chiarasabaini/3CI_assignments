@@ -1,0 +1,88 @@
+.. _choregraphe-reference-box-type-dialog:
+
+Dialog box
+==========
+
+What is a Dialog box
+--------------------
+
+A **Dialog** box is a :ref:`box <choregraphe-reference-box>` which refers to a
+:ref:`Dialog topic <dialog_topic>`.
+
+.. image:: /medias/desktop/choregraphe/def_dialog_box.png
+   :width: 576 px
+   :height: 421 px
+
+.. _choregraphe-how-to-create-dialog-box:
+
+Creating a Dialog box
+----------------------
+
+To create a **Dialog** box:
+
+=====  ==========================================================================
+Step    Action
+=====  ==========================================================================
+1.      Right click the **Flow diagram** wherever you want to create the
+        box.
+
+2.      Click **Create a new box** > **Dialog...** in the contextual menu.
+
+        .. image:: /medias/desktop/choregraphe/dialog_box_creation.png
+           :width: 240 px
+           :height: 418 px
+
+3.      Associate the box with a **Dialog topic**:
+
+        * Choose an existing :ref:`dialog_topic` in the list, or
+        * Click the **Add a new topic** button to create a new one.
+
+        Result: the box name is automatically completed using the name of the
+        chosen :ref:`dialog_topic`.
+        You may optionally redefine it.
+
+4.      Enter a **Description** for your box.
+
+5.      **Optional**: set the picture to recognize it among other boxes.
+
+6.      **Optional**: set **Parameters**, **Inputs** and **Outputs**.
+
+        For further details about parameters, see: :ref:`How to add/remove inputs,
+        outputs, parameters in a box
+        <choregraphe-howto-add-remove-box-in-out-param>`.
+
+7.      Click the **OK** button.
+        The created **Dialog** box is displayed on the Flow diagram.
+
+8.      The box is now linked to a **Dialog topic**.
+
+        To modify the **Dialog topic**, see:
+        :ref:`choregraphe-edit-dialog-topic`.
+=====  ==========================================================================
+
+For further details, see the tutorial: :ref:`how_to_create_a_dialog`.
+
+Associating the box to a different Dialog topic
+------------------------------------------------
+
+To associate the Dialog box to a different  **Dialog topic**:
+
+
+1. Right click the box and choose **Edit box** in the contextual menu.
+2. Select or create a new **Dialog topic**.
+
+Box invalidity
+--------------
+
+Sometimes, a **Dialog topic** gets deleted (either because you deleted it or moved
+it away) while some dialog boxes still refer to it. In that case, said boxes are
+said to be **invalid** and represented with a dashed outline.
+
+.. image:: /medias/desktop/choregraphe/invalid_dialog_box.png
+   :width: 121 px
+   :height: 119 px
+
+
+If you double click an invalid box, you will be presented the :ref:`Box Edit
+Widget <choregraphe-detailed-interface-box-edition>`, from where you will be
+able to associate the box with another topic.

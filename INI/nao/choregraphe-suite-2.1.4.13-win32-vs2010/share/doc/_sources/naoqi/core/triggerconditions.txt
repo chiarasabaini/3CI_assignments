@@ -1,0 +1,248 @@
+.. _launchtriggerconditions:
+
+Launch trigger conditions
+==========================
+
+:ref:`naoqi-core` - :ref:`Overview <autonomouslife>` | :ref:`API <autonomouslife-api>` |
+Launch trigger conditions | :ref:`Advanced <autonomouslife_advanced>`
+
+------------
+
+.. _triggerconditions_overview:
+
+
+Goal
+----
+
+When Life is running on a robot, in solitary state, :ref:`Activities <activity>` with launch trigger conditions
+can be started automatically.
+
+These conditions can be set in the manifest of the Choregrahe behavior of the activity.
+Refer to the :ref:`Choregraphe documentation <chore_project_content>` for editing manifest of behaviors.
+To write them, use events and an expression language.
+For further details, see: :ref:`launchpad_keys` and :ref:`launchpad_expressions`.
+
+
+.. _launchpad_keys:
+
+Launch trigger conditions - Event list
+--------------------------------------
+
+**About people and movements**
+
+====================================== ============== ============
+Key Name                               Type           Explanation
+====================================== ============== ============
+Launchpad/NumPeopleZone1               int            The number of people detected in zone 1
+Launchpad/NumPeopleZone2               int            The number of people detected in zone 2
+Launchpad/NumPeopleZone3               int            The number of people detected in zone 3
+Launchpad/NumMotionZone1               int            The number of moving objects detected in zone 1
+Launchpad/NumMotionZone2               int            The number of moving objects detected in zone 2
+Launchpad/NumMotionZone3               int            The number of moving objects detected in zone 3
+Launchpad/WavingDetection              int            0 while no waving is detected, 1 while waving is detected
+Launchpad/PeopleNotSeen                bool           True when PeoplePerception/VisiblePeopleList is empty
+Launchpad/SameTrackedHuman             bool           | True as long as the same person is being tracked.
+                                                      | Momentarily false when the tracked person changes.
+                                                      | The tracked person is determined by BasicAwareness.
+Launchpad/ZoneOfTrackedHuman           int            The zone that the tracked person is in.  1, 2, or 3.  0 if no one is tracked.
+Launchpad/TrackedHumanIsLookingAtRobot bool           True when the tracked person is looking at the robot.
+
+====================================== ============== ============
+
+
+**About battery information**
+
+================================ ====== ============
+Key Name                         Type   Explanation
+================================ ====== ============
+Launchpad/BatteryLevel           int    A number in the set [0, 5]
+Launchpad/BatteryStatus          string Critical, Low, Half, Full
+
+================================ ====== ============
+
+
+**About hardware information**
+
+================================ ====== ============
+Key Name                         Type   Explanation
+================================ ====== ============
+Launchpad/RobotType              string nao, romeo
+
+================================ ====== ============
+
+
+**About the posture of the robot**
+
+================================ ====== =======================================================
+Key Name                         Type   Explanation
+================================ ====== =======================================================
+Launchpad/PostureFamily          string One of the :term:`Posture family`.
+Launchpad/Posture                string One of the :term:`Posture`.
+Launchpad/RobotFellRecently      bool   True if the robot has fallen within the last 13 seconds
+
+================================ ====== =======================================================
+
+
+**About the temperature of the joints of the robot**
+
+================================ ====== ========================================================================
+Key Name                         Type   Explanation
+================================ ====== ========================================================================
+Launchpad/TemperatureStatus      string | Complete temperature health of the robot.
+                                        | Cold, Warm, Hot, Critical
+Launchpad/HighestTemperature     float  The highest temperature found on the robot, in Celsius.
+Launchpad/HighestJoint           string | The name of the hottest joint.
+                                        | HeadYaw, HeadPitch, LShoulderPitch, LShoulderRoll, LElbowYaw, LElbowRoll,
+                                        | LWristYaw, LHand, RShoulderPitch, RShoulderRoll, RElbowYaw, RElbowRoll,
+                                        | RWristYaw, RHand, LHipRoll, LHipYawPitch, LHipPitch, LKneePitch, LAnkleRoll,
+                                        | LAnklePitch, RHipRoll, RHipYawPitch, RHipPitch, RKneePitch, RAnkleRoll, RAnklePitch
+
+================================ ====== ========================================================================
+
+Additonal information about :ref:`NAO's Joints <nao_chains>`.
+
+
+**About time**
+
+==================== ====== =============
+Key Name             Type   Example Value
+==================== ====== =============
+Launchpad/Year       int    2013
+Launchpad/Month      int    1
+Launchpad/MonthName  string January
+Launchpad/Day        int    0
+Launchpad/DayName    string Sunday
+Launchpad/Date       int    12
+Launchpad/Hour       int    14
+Launchpad/Minute     int    42
+Launchpad/Week       int    2
+
+==================== ====== =============
+
+
+**About activity history**
+
+============================== ====== ======================================
+General Keys                   Type   Explanation
+============================== ====== ======================================
+Launchpad/LifeTime             int    The time in seconds since Autonomous Life module has loaded
+Launchpad/State                string The current state of Autonomous Life.
+
+                                      Can be one of the :ref:`autonomouslife_states`.
+Launchpad/PreviousState        string The previous state of Autonomous Life.
+
+                                      Can be one of the :ref:`autonomouslife_states`.
+
+                                      Note, it is possible for the previous state to equal the current state if the current state was re-entered.
+
+Launchpad/FocusedActivity      string The currently focused activity.
+
+                                      Note, if no activity is running, this will be an empty string ("")
+
+Launchpad/PreviousActivity     string The previously focused activity.
+
+                                      Note, "" (no activity running) is not considered for PreviousActivity
+
+============================== ====== ======================================
+
+To have condition on the time since your application was last focused, follow this pattern:
+``(('Launchpad/FocusedActivity' != "my_attractions/child_attraction1") ~ 60)``
+
+
+For the following, replace myPackageUUID and myActivityPath with the
+corresponding values from your Activity's manifest data.
+
++------------------------------------------------------------+------+----------------------------------------------------------------------------------------+
+| Per Activity Keys                                          | Type | Explanation                                                                            |
++============================================================+======+========================================================================================+
+| Launchpad/FocusCount/myPackageUUID/myActivityPath          | int  | The count of how many occasions this activity has been focused.                        |
++------------------------------------------------------------+------+----------------------------------------------------------------------------------------+
+
+
+Other events
+^^^^^^^^^^^^
+
+You can also use the events raised by the extractors running in solitary state:
+
+* :ref:`albasicawareness`
+* :ref:`alpeopleperception`
+* :ref:`alengagementzones`
+* :ref:`algazeanalysis`
+* :ref:`alwavingdetection`
+* :ref:`almovementdetection`
+
+
+
+
+.. _launchpad_expressions:
+
+Conditions expression language
+------------------------------
+
+::
+
+   * Expression grammar:
+   * ---------------------------------------------------------------------------
+   *   - Parenthesis ()
+   *
+   *   - Constant int: 1
+   *
+   *   - Constant floats: 1.5, 1e4
+   *
+   *   - Constant strings: double-quoted: "foo", "bar"
+   *
+   *   - ALMemory keys: unquoted or quoted if having a slash / : key12, 'motion/foo'
+   *       A key can be used anywhere a constant or list can be used.
+   *       Be careful about the data types of your keys.
+   *
+   *   - Index a list key: 'motion/foo'[2]
+   *
+   *   - Lists: [1, 2, foo]
+   *
+   *   - Mathematical, logical operators: + - / * % && || == <= < >= > ! !=
+   *
+   *   - Function calls:
+   *        substr("canard", 1, 3) returns "ana"
+   *        strlen("coin") returns 4
+   *        type("foo") returns "String".  Other types: Invalid, Array, Bool, Int, Float, String
+   *        size([1,2,3]) returns 3
+   *        concat("a", "b") returns "ab"
+   *
+   *   - ~ operator: Requires condition to be true for given duration in seconds
+   *       to trigger: "(soundVolume < 1) ~ 1".
+   *
+   *   - subsets operator:
+   *       True example: [1, 2] subsets [1, 2, 3, 4]
+   *       True example: 1 subsets [1, 2, 3, 4]
+   *
+   *   - intersects operator:
+   *       True example: [4, 5, 6] intersects [1, 2, 3, 4]
+   *       True example: [4, 5, 6] intersects 5
+   *
+   *
+   * Order of Operations (highest precedence operation listed first, items on same line have equal precedence):
+   * ---------------------------------------------------------------------------
+   *   []
+   *   !
+   *   ~
+   *   subsets, intersects
+   *   *, /, %
+   *   +, -
+   *   <, <=, >, >=
+   *   ==, !=
+   *   &&
+   *   ||
+
+
+.. _triggerconditions_example:
+
+Example of a launch trigger condition
+-------------------------------------
+
+A condition for a solitary Activity which attracts a human could look like this:
+
+::
+
+   ('Launchpad/NumPeopleZone2' >= 1) ~ 3
+
+*There is at least one person detected in zone 2 of ALEngagementZones for at least 3 seconds.*

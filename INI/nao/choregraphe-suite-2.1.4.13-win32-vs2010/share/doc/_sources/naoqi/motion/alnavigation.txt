@@ -1,0 +1,56 @@
+.. include:: ../../bulk/common.rst
+
+.. _alnavigation:
+
+ALNavigation
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alnavigation-api
+
+Overview | :ref:`API <alnavigation-api>`
+
+-----------------
+
+What it does
+--------------
+
+**ALNavigation** API allows the user to perform safe displacements when using
+the robot.
+
+|nao| |roboN|
++++++++++++++
+
+The robot cannot yet avoid obstacles, but it is able to move cautiously,
+stopping as soon as an obstacle enters its security zone.
+
+|juju| |roboJ| *only*
+++++++++++++++++++++++
+
+|roboJ| may also use the **ALNavigation** API in several modes:
+
+* Obstacle avoidance with the :cpp:func:`ALNavigationProxy::navigateTo` method;
+* Safe trajectory execution with the :cpp:func:`ALNavigationProxy::moveAlong` method.
+
+
+How it works
+--------------
+
+|nao| |roboN| & |juju| |roboJ|
+++++++++++++++++++++++++++++++
+
+While moving, the robot tries to detect obstacles in its move direction,
+using all its sensors.
+
+|juju| |roboJ| *only*
+++++++++++++++++++++++
+
+While moving, the robot tries to detect obstacles in its move direction,
+using all its sensors.
+
+.. image:: /medias/naoqi/juliette_alnavigation.png
+   :width: 369 px
+   :height: 261 px

@@ -1,0 +1,273 @@
+.. _alvisualcompass-api:
+
+ALVisualCompass API
+===================
+
+:ref:`naoqi-vision` - :ref:`Overview <alvisualcompass>` | API
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alvisualcompassproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALVisualCompassProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api` and :ref:`alvisionextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALVisualCompassProxy::enableReferenceRefresh`
+  * :cpp:func:`ALVisualCompassProxy::getMatchingQuality`
+  * :cpp:func:`ALVisualCompassProxy::getReferenceImage`
+  * :cpp:func:`ALVisualCompassProxy::moveStraightTo`
+  * :cpp:func:`ALVisualCompassProxy::moveTo`
+  * :cpp:func:`ALVisualCompassProxy::setCurrentImageAsReference`
+  * :cpp:func:`ALVisualCompassProxy::waitUntilTargetReached`
+
+
+Events lists
+------------
+
+* :naoqi:event:`VisualCompass/Deviation`
+* :naoqi:event:`VisualCompass/FinalDeviation`
+* :naoqi:event:`VisualCompass/InvalidReference`
+* :naoqi:event:`VisualCompass/Match`
+* :naoqi:event:`VisualCompass/MoveAbort`
+* :naoqi:event:`VisualCompass/NewReferenceImageSet`
+
+Methods
+-------
+
+.. cpp:function:: void ALVisualCompassProxy::enableReferenceRefresh(const bool& refresh)
+
+   Determines if the reference image is taken again at subscribe (default behavior) or not.
+   If not, the reference image is not reset at next subscribe.
+
+   :param refresh: true / false.
+
+
+.. cpp:function:: AL::ALValue ALVisualCompassProxy::getMatchingQuality()
+
+   Returns the reliability of the matching and the compass deviation computations.
+   It gives both the number of matches and the percentage of inliers for the model.
+   The number of matches must be at least greater than 4 and the percentage over
+   50% for the matching to be significant.
+
+   :return: Quality with the following format:
+
+     * quality[0]: float. Percentage of model inliers amongst matched keypoints.
+       Between 0.0f and 1.0f, must be over 0.5f to be significant.
+     * quality[1]: int. Number of keypoints that were matched.
+
+
+.. cpp:function:: AL::ALValue ALVisualCompassProxy::getReferenceImage()
+
+   Returns an AL::ALValue containing the image used as a reference.
+
+   :return: AL::ALValue formatted like the output of :cpp:func:`ALVideoDeviceProxy::getImageRemote`.
+
+
+.. cpp:function:: void ALVisualCompassProxy::moveStraightTo(const float& pDistance)
+
+    Makes the robot move forward in a straight line of a given distance.
+    A negative distance value will result in moving backward.
+
+    :param pDistance: Algebric distance of which to move.
+
+
+.. cpp:function:: void ALVisualCompassProxy::moveTo(const float& x, const float& y, const float& theta)
+
+   Like :cpp:func:`ALMotionProxy::moveTo`, makes the robot move to the given pose in the ground plane,
+   relative to FRAME_ROBOT. Unlike :cpp:func:`ALMotionProxy::moveTo`, the robot decomposes the movement in
+   pure rotation and pure translation: the robot will turn to face the direction defined by x and y,
+   move forwards until the location is reached, then turn one last time to reach the right orientation.
+
+   Keep in mind that this function cannot make the robot move backwards (instead it will turn around
+   and move forwards). Furthermore, it always chooses the fastest path. Therefore, it cannot
+   be used to proceed to a full turn (the robot will not move, because it will already have the right
+   orientation).
+
+
+   This is a blocking call.
+
+   :param x: Distance along the X axis in meters.
+
+   :param y: Distance along the Y axis in meters.
+
+   :param theta: Rotation around the Z axis in radians.
+
+
+.. cpp:function:: bool ALVisualCompassProxy::setCurrentImageAsReference()
+
+   Clears the old reference image then sets the current image as new reference image.
+
+   :return: *true* if the current image was successfully set as new reference image, *false* otherwise.
+
+
+.. cpp:function:: void ALVisualCompassProxy::waitUntilTargetReached()
+
+   Waits until the end of a :cpp:func:`ALVisualCompassProxy::moveTo`
+   or a :cpp:func:`ALVisualCompassProxy::moveStraightTo`.
+   This is a blocking call.
+
+
+Events
+------
+
+.. naoqi:event:: VisualCompass/Deviation(AL::ALValue value)
+
+
+   Raised each time the deviation of the current image from the compass is
+   computed. The event is formatted as follows:
+
+   .. code-block:: guess
+
+      VisualCompass/Deviation = [
+      DeviationInfo,
+      RobotPosition,
+      TimeStamp
+      ]
+
+   **DeviationInfo** contains the deviation along Z axis (theta angle for
+   the robot pose) and Y axis.
+
+   .. code-block:: guess
+
+      DeviationInfo = [
+        YAxisDeviation,
+        ZAxisDeviation,
+      ]
+
+   **RobotPosition** contains the robot position in WORLD_SPACE when the image
+   was taken.
+
+   .. code-block:: guess
+
+      RobotPosition = [
+        X,
+        Y,
+        Theta
+      ]
+
+   **TimeStamp**: this field is the time stamp of the image that was used to
+   compute the deviation.
+
+   .. code-block:: guess
+
+      TimeStamp =
+      [
+        TimeStamp_Seconds,
+        Timestamp_Microseconds
+      ]
+
+.. naoqi:event:: VisualCompass/FinalDeviation(AL::ALValue value)
+
+   Continually raised by :cpp:func:`ALVisualCompassProxy::moveTo` during rotations.
+   After the rotation, this event allows to access the final deviation.
+
+   The event is formatted as follows:
+
+   **FinalDeviation** contains the final deviation along Z axis (theta angle for
+   the robot pose) and Y axis. After a rotation, *finalWz* will
+   be equal to the angle of which the robot actually turned.
+
+   .. code-block:: guess
+
+      FinalDeviation = [
+        finalWy,
+        finalWz,
+      ]
+
+
+.. naoqi:event:: VisualCompass/InvalidReference(bool isInvalid)
+
+   Raised with true after failing to set a new reference image.
+
+
+.. naoqi:event:: VisualCompass/Match(AL::ALValue value)
+
+   .. note::
+
+      The full name of this event is VisualCompass/Match in ALMemory.
+
+   Raised each time the deviation of the current image from the compass is
+   computed. The event is formatted as follows:
+
+   .. code-block:: guess
+
+      VisualCompass/Match =
+      [
+        ReferenceKeypoints,
+        CurrentKeypoints,
+        Matches,
+        Inliers
+      ]
+
+   **ReferenceKeypoints** is the list of keypoints extracted from the
+   reference image. **CurrentKeypoints** is the list of keypoints extracted
+   from the current processed image. Both are a list of **Keypoint** where:
+
+   .. code-block:: guess
+
+      Keypoint =
+      [
+        [X, Y],
+        Size,
+        Angle,
+        Response,
+        Octave
+      ]
+
+   **X** and **Y** are the coordinates of the center of the keypoints in image
+   coordinates, **Size** is the size of the keypoint, **Angle** is the keypoint
+   orientation, **Response** is the keypoint strength, and **Octave** is the
+   keypoint scale.
+
+
+   **Matches** is the list of the matches between the keypoints. Each **Match**
+   is:
+
+   .. code-block:: guess
+
+      Match =
+      [
+        ReferenceIndex,
+        CurrentIndex,
+        Distance
+      ]
+
+   **ReferenceIndex** is the index of the matched keypoint in the reference
+   list,  **CurrentIndex** is the index of the matched keypoint in the current
+   list, and **Distance** is the distance between the two keypoints.
+
+   **Inliers** is the list of the match indexes for each direction (Y and Z
+   axis) which correspond to inliers for the Ransac: these are the indexes of
+   the coherent matches used to compute the deviation.
+
+   .. code-block:: guess
+
+      Inliers =
+      [
+         InliersWy = [Idx0, Idx1, ...],
+         InliersWz = [Idx0, Idx1, ...]
+      ]
+
+
+.. naoqi:event:: VisualCompass/MoveAbort(bool aborted)
+
+   Raised after the end of a move, with true if the move was aborted
+   or with false if the target was reached.
+
+
+.. naoqi:event:: VisualCompass/NewReferenceImageSet(bool isSet)
+
+   Raised with true after successfully setting a new reference image,
+   raised with false after clearing the reference image.

@@ -1,0 +1,35 @@
+.. include:: ../bulk/common.rst
+
+.. _retrieving_software:
+
+Retrieving software
+====================
+
+.. Warning::
+   You do not have an |robot| yet?
+
+   You will not be able to download any software except **Choregraphe**
+   trial version.
+
+To download software from |community|:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure your |roboN| is registered on your |community_account|.
+
+        For further details, see: :ref:`registering_robot_nao`.
+
+2.      Access the software resources of |community|:
+
+        |community_software_link|
+
+3.      Sign in, using your |community_account| credentials.
+
+        All software available are displayed.
+
+        .. image:: /medias/dev/community_sofware.png
+            :width: 489 px
+            :height: 344 px
+=====  =========================================================================
+

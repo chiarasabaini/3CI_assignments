@@ -1,0 +1,111 @@
+.. _packagemanager-api:
+
+PackageManager API
+==================
+
+:ref:`naoqi-core` - :ref:`Overview <packagemanager>` | API
+
+----
+
+Namespace : **qi**
+
+**PackageManager** does not have yet a specialized proxy.
+
+Method list
+-----------
+
+.. cpp:class:: PackageManager
+
+* :cpp:func:`PackageManager::install`
+* :cpp:func:`PackageManager::installCheckMd5`
+* :cpp:func:`PackageManager::removePkg`
+* :cpp:func:`PackageManager::hasPackage`
+* :cpp:func:`PackageManager::packages2`
+* :cpp:func:`PackageManager::package2`
+* :cpp:func:`PackageManager::packages`
+* :cpp:func:`PackageManager::package`
+* :cpp:func:`PackageManager::packageIcon`
+
+Signals list
+------------
+
+* :cpp:member:`PackageManager::onPackageInstalled2`
+* :cpp:member:`PackageManager::onPackageRemoved2`
+* :cpp:member:`PackageManager::onPackageInstalled`
+* :cpp:member:`PackageManager::onPackageRemoved`
+
+Methods
+-------
+
+.. cpp:function:: bool PackageManager::install(const std::string& path)
+
+  Install a package from a path.
+
+  :param path: The path to the package file.
+
+.. cpp:function:: bool PackageManager::installCheckMd5(const std::string& path, const std::string& md5)
+
+  Check for md5 compatibility then, if successful, install the package from a
+  path.
+
+  :param path: The path to the package file.
+  :param md5: The hash of the package file.
+
+.. cpp:function:: bool PackageManager::hasPackage(const std::string &uuid)
+
+  Check for existence of a package with his uuid.
+
+  :param uuid: The uid of the package to look for.
+
+.. cpp:function:: void PackageManager::removePkg(const std::string &uuid)
+
+  Remove a package with his uuid. Throw if no package has this uuid.
+
+  :param uuid: The uid of the package to remove.
+
+.. cpp:function:: std::vector<qi::PackageInfo2> PackageManager::packages2()
+
+  Get the list of all installed packages.
+
+.. cpp:function:: qi::PackageInfo2 PackageManager::package2(const std::string &uuid)
+
+  Get a package with his uuid. Throw if no package has this uuid.
+
+  :param uuid: The uid of the package.
+
+.. cpp:function:: qi::PackageInfoList PackageManager::packages()
+
+  Get the list of all installed packages.
+  With this function you cannot access to new created fields.
+
+.. cpp:function:: qi::PackageInfo PackageManager::package(const std::string &uuid)
+
+  Get a package with his uuid. Throw if no package has this uuid.
+  With this function you cannot access to new created fields.
+
+  :param uuid: The uid of the package.
+
+.. cpp:function:: std::string PackageManager::packageIcon(const std::string &uuid)
+
+  Get the icon of the package specified by this uuid.
+
+  :param uuid: The uid of the package.
+
+Signals
+--------
+
+.. cpp:member:: qi::Signal<qi::PackageInfo> PackageManager::onPackageInstalled2
+
+  Signal emitted after a package has been installed.
+
+.. cpp:member:: qi::Signal<qi::PackageInfo> PackageManager::onPackageRemoved2
+
+  Signal emitted after a package has been removed.
+
+.. cpp:member:: qi::Signal<qi::PackageInfo> PackageManager::onPackageInstalled
+
+  Signal emitted after a package has been installed.
+
+.. cpp:member:: qi::Signal<qi::PackageInfo> PackageManager::onPackageRemoved
+
+  Signal emitted after a package has been removed.

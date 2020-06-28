@@ -1,0 +1,505 @@
+.. _aldialog-api:
+
+ALDialog API
+=====================
+
+
+:ref:`naoqi-audio` - :ref:`Overview <aldialog>` | API |
+:ref:`QiChat<dialog_toc>` | :ref:`Tutorials <aldialog_tuto>`
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/aldialogproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALDialogProxy
+
+* :cpp:func:`ALDialogProxy::loadTopic`
+* :cpp:func:`ALDialogProxy::unloadTopic`
+
+* :cpp:func:`ALDialogProxy::activateTopic`
+* :cpp:func:`ALDialogProxy::deactivateTopic`
+
+* :cpp:func:`ALDialogProxy::setLanguage`
+
+* :cpp:func:`ALDialogProxy::setFocus`
+
+* :cpp:func:`ALDialogProxy::activateTag`
+* :cpp:func:`ALDialogProxy::deactivateTag`
+
+* :cpp:func:`ALDialogProxy::gotoTopic`
+
+* :cpp:func:`ALDialogProxy::setConcept`
+
+* :cpp:func:`ALDialogProxy::setAnimatedSpeechConfiguration`
+
+* :cpp:func:`ALDialogProxy::setASRConfidenceThreshold`
+* :cpp:func:`ALDialogProxy::getASRConfidenceThreshold`
+
+* :cpp:func:`ALDialogProxy::forceOutput`
+* :cpp:func:`ALDialogProxy::forceInput`
+
+* :cpp:func:`ALDialogProxy::getLoadedTopics`
+* :cpp:func:`ALDialogProxy::getActivatedTopics`
+
+* :cpp:func:`ALDialogProxy::setVariablePath`
+* :cpp:func:`ALDialogProxy::getUserList`
+
+* :cpp:func:`ALDialogProxy::openSession`
+* :cpp:func:`ALDialogProxy::closeSession`
+
+* :cpp:func:`ALDialogProxy::insertUserData`
+* :cpp:func:`ALDialogProxy::getUserData`
+* :cpp:func:`ALDialogProxy::getUserDataList`
+* :cpp:func:`ALDialogProxy::compileAll`
+
+* :cpp:func:`ALDialogProxy::startPush`
+* :cpp:func:`ALDialogProxy::stopPush`
+
+* :cpp:func:`ALDialogProxy::startApp`
+
+* :cpp:func:`ALDialogProxy::resetAll`
+
+* :cpp:func:`ALDialogProxy::startUpdate`
+
+* :cpp:func:`ALDialogProxy::generateSentences`
+
+*Deprecated Methods*
+
+* :cpp:func:`ALDialogProxy::connectionChanged` (deprecated)
+
+* :cpp:func:`ALDialogProxy::endOfUtteranceCallback` (deprecated)
+
+* :cpp:func:`ALDialogProxy::eventReceived` (deprecated)
+
+* :cpp:func:`ALDialogProxy::packageInstalled` (deprecated)
+
+* :cpp:func:`ALDialogProxy::setPushMode` (deprecated)
+
+* :cpp:func:`ALDialogProxy::statusChanged` (deprecated)
+
+* :cpp:func:`ALDialogProxy::tell` (deprecated)
+
+* :cpp:func:`ALDialogProxy::wordRecognized` (deprecated)
+
+* :cpp:func:`ALDialogProxy::wordsRecognizedCallback` (deprecated)
+
+
+.. _dialog_event_list:
+
+Event list
+----------
+
+* :naoqi:event:`Dialog/Answered`
+* :naoqi:event:`Dialog/Failure`
+* :naoqi:event:`Dialog/Fallback`
+* :naoqi:event:`Dialog/IsStarted`
+* :naoqi:event:`Dialog/LastInput`
+* :naoqi:event:`Dialog/NotSpeaking5`
+* :naoqi:event:`Dialog/NotSpeaking10`
+* :naoqi:event:`Dialog/NotSpeaking15`
+* :naoqi:event:`Dialog/NotSpeaking20`
+* :naoqi:event:`Dialog/NotUnderstood`
+* :naoqi:event:`Dialog/NotUnderstood2`
+* :naoqi:event:`Dialog/NotUnderstood3`
+* :naoqi:event:`Dialog/SameRule`
+
+
+Methods
+-------
+
+.. cpp:function:: std::string ALDialogProxy::loadTopic(const std::string& topicPath)
+
+  Loads the topic, exports and compiles the corresponding context files ready to be used in ASR.
+  The name of the topic found in the specified file is given as an output of the function call.
+
+  Note that loading a topic file can be both CPU and time consuming.
+
+  :param topicFilePath: full path of the file to load.
+
+  :return: Name of the topic loaded. Syntax error are thrown as exceptions.
+
+
+.. cpp:function:: void ALDialogProxy::unloadTopic(const std::string& topicName)
+
+  Unloads the specified topic and frees the associated memory load.
+  Any further call to loadTopic of an unloaded topic will require a new export and compilation.
+
+  :param topicName: Topic name as given by loadTopic.
+
+
+.. cpp:function:: void ALDialogProxy::activateTopic(const std::string& topicName)
+
+  Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse inputs.
+  Several topics can be active at the same time but only one will be used to generate proposals
+  (this specific topic is said to have the focus).
+
+  :param topicName: Topic name as given by loadTopic.
+
+
+.. cpp:function:: void ALDialogProxy::deactivateTopic(const std::string& topicName)
+
+  Removes the specified topic from list of the topics that are currently used by the dialog engine to parse inputs.
+  Several topics can be active at the same time but only one will be used to generate proposals.
+  (this specific topic is said to have the focus).
+
+  :param topicName: Topic name as given by loadTopic.
+
+
+.. cpp:function:: void ALDialogProxy::setLanguage(const std::string& language)
+
+  Sets the language of the dialog engine.
+
+  :param language: English name of the language to set.
+
+                   Example: 'French'.
+
+                   For the complete list of supported languages, see:
+                   :ref:`dialog_supported_languages`.
+
+
+.. cpp:function:: void ALDialogProxy::setFocus(const std::string& topicName)
+
+  If multiple topics can be active at the same time, only one of them is used to generate proposals.
+  This topic is said to have the focus. A call to this function forces the focus to the specified topic.
+  After this call, proposals will be generated from this topic and inputs will be first parsed through this topic.
+  However, if a "User Rule" of a different active topic is matched, the focus will change automatically to that topic.
+
+  :param topicName: Topic name as given by loadTopic.
+
+
+
+
+.. cpp:function:: void ALDialogProxy::activateTag(const std::string& tagName, const std::string& topicName)
+
+  Activates the tag in the specified topic.
+
+  :param tagName: Name of the tag to activate.
+  :param topicName: Name of the topic.
+
+
+.. cpp:function:: void ALDialogProxy::deactivateTag(const std::string& tagName, const std::string& topicName)
+
+  Deactivates the tag in the specified topic.
+
+  :param tagName: Name of the tag to deactivate.
+  :param topicName: Name of the topic.
+
+.. cpp:function:: void ALDialogProxy::gotoTopic(const std::string &topicName)
+
+  Sets the focus to the topic then says the first activated proposal of the topic (if any).
+
+  :param topicName: Name of the topic that will get the focus.
+
+
+.. cpp:function:: void ALDialogProxy::setConcept(const std::string& conceptName, const std::string& language, const std::vector<std::string>& content)
+
+  Sets dynamically the specified concept of the specified language with the given word list. The speech recognition must run to call setConcept (else speech recognition won't be updated with concept content)
+
+  :param conceptName: Name of the concept to set.
+
+  :param language: Language that contain the concept (jpj, frf, enu...)
+
+  :param content: Word or sentence list (vector of std::string in C++).
+
+
+.. cpp:function:: void ALDialogProxy::setAnimatedSpeechConfiguration(const ALValue& animatedSpeechConfiguration)
+
+  Sets the ALAnimatedSpeech's configuration used by the dialog.
+
+  :param animatedSpeechConfiguration: The ALAnimatedSpeech's configuration used by the dialog. It follows the same format than the one used by :cpp:func:`ALAnimatedSpeechProxy::say` with local configuration.
+
+
+.. cpp:function:: void ALDialogProxy::setASRConfidenceThreshold(const float& threshold)
+
+  Sets the minimum confidence threshold used validate the output of the Automatic Speech Recognition (ASR) engine.
+
+  :param threshold: Threshold (from 0.0 to 1.0). 0.5 by default.
+
+
+.. cpp:function:: float ALDialogProxy::getASRConfidenceThreshold()
+
+  Gets the minimum confidence threshold currently used to validate the output of the Automatic Speech Recognition (ASR) engine.
+
+  :return: Threshold (from 0.0 to 1.0). 0.5 by default.
+
+
+.. cpp:function:: void ALDialogProxy::forceOutput()
+
+  Forces the robot to say a proposal, if any is available.
+
+
+.. cpp:function:: void ALDialogProxy::forceInput(const std::string& input)
+
+  Inputs are normally provided by the Speech Recognition engine and the event system of the robot.
+  A call to this function will stimulate the dialog engine with the given input as if this input had been given by the ASR engine.
+
+  :param input: Input to match
+
+
+.. cpp:function:: std::vector<std::string> ALDialogProxy::getLoadedTopics(const std::string& language)
+
+  Gets the list of loaded topics in the given language.
+
+  :param language: Language of the topics
+
+
+.. cpp:function:: std::vector<std::string> ALDialogProxy::getActivatedTopics()
+
+  Gets the list of activated topics in the current language.
+
+
+.. cpp:function:: std::vector<std::string> ALDialogProxy::setVariablePath(const std::string& topicName, const std::string& eventName, const std::string& path)
+
+  Allows to change event name at runTime.
+
+  :param topicName: Topic that contain event.
+  :param eventName: Original event name.
+  :param path: New event name.
+
+
+.. cpp:function:: void ALDialogProxy::getUserList()
+
+  Gets the list of user IDs.
+
+  :return: List of user IDs (int).
+
+.. cpp:function:: void ALDialogProxy::openSession(int id)
+
+  Opens a new dialog session. A call to this function restores the dialog user variables to ALMemory from the dialog database.
+
+  :param id: ID of the user.
+
+
+.. cpp:function:: void ALDialogProxy::closeSession()
+
+  Closes the current dialog session and stores all the related ALMemory variables in the database dedicated to ALDialog.
+
+
+.. cpp:function:: void ALDialogProxy::insertUserData(const std::string &variableName, const std::string &variableValue, const int &userID)
+
+  Insert directly a variable in user dialog database.
+
+  :param variableName: Variable name.
+  :param variableValue: Variable value.
+  :param userID: User ID.
+
+
+.. cpp:function:: void ALDialogProxy::getUserData(const std::string &variableName, const int &userID)
+
+  Get a variable value from user dialog database.
+
+  :param variableName: Variable name.
+  :param userID: User ID.
+  :return: Variable value (string).
+
+
+.. cpp:function:: void ALDialogProxy::getUserDataList(const int &userID)
+
+  Get all variable list of a user.
+
+  :param userID: User ID.
+  :return: Variable name list.
+
+
+
+.. cpp:function:: void ALDialogProxy::compileAll()
+
+  Can be optionally called after a series of loadTopic in order to build dialog
+  model and speech recognition model. If not called the compilation occurs once
+  at runtime.
+
+
+.. cpp:function:: void ALDialogProxy::startPush()
+
+  The Dialog engine starts making automatically proposal.
+  After an answer, the dialog engine will automatically say a proposal from the
+  available topics. Dialog engine will first try to say a proposal from the topic
+  having the current focus, then from other topics.
+
+
+.. cpp:function:: void ALDialogProxy::stopPush()
+
+  The Dialog engine stops making automatically proposal.
+
+
+.. cpp:function:: void ALDialogProxy::startApp(const std::string &UNUSED_name, const AL::ALValue &val, const std::string &UNUSED_message)
+
+  Asks the Dialog engine to stop and start an application.
+
+  **Note**: if autonomous Life is running, use
+  :cpp:func:`ALAutonomousLifeProxy::switchFocus` instead.
+
+  :param variableName: Unused.
+  :param ApplicationName: Application to start.
+  :param message: Unused.
+
+
+.. cpp:function:: void ALDialogProxy::resetAll()
+
+  Resets the status of all topics: all proposals are able to be used again.
+
+
+.. cpp:function:: void ALDialogProxy::startUpdate(const std::string &UNUSED_name, const AL::ALValue &val, const std::string &UNUSED_message)
+
+  Allows to update the Dialog model and the speech recognition model at runtime
+  (experimental). Parameter are unused but fit to ALMemory API.
+
+
+.. cpp:function:: void ALDialogProxy::generateSentences(const std::string &destination, const std::string &topic, const std::string &language)
+
+  Generates all possible input sentences in a text file.
+
+  :param destination: destination path file.
+  :param topic: Source topic.
+  :param language: Source topic language.
+
+
+
+.. cpp:function:: void ALDialogProxy::tell(const std::string& input)
+
+   .. deprecated:: 1.18
+     use :cpp:func:`ALDialogProxy::forceInput` instead.
+
+
+.. cpp:function:: void ALDialogProxy::connectionChanged()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::endOfUtteranceCallback()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::eventReceived()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::packageInstalled()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::setPushMode()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::statusChanged()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::wordRecognized()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALDialogProxy::wordsRecognizedCallback()
+
+  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+
+
+Events
+------
+
+.. naoqi:event:: Dialog/Answered(std::string value)
+
+  Raised each time the robot says an output.
+
+  Contains the last robot output.
+
+  Subscribing to this event starts **ALDialog**.
+
+  **Example**
+
+  .. code-block:: ini
+
+     u:(what did you say before) I said $Dialog/Answered
+
+.. naoqi:event:: Dialog/Failure(std::string value)
+
+  Raised when 3 Dialog/Fallback or 3 Dialog/NotUnderstood have been
+  consecutively raised.
+
+.. naoqi:event:: Dialog/Fallback(std::string value)
+
+  Raised when fallback matches.
+
+.. naoqi:event:: Dialog/IsStarted(std::string value)
+
+  True if ALDialog is started.
+
+
+.. naoqi:event:: Dialog/LastInput(std::string value)
+
+  Raised each time the robot catches a human input.
+
+  Contains the last human input.
+
+  **Example**
+
+  .. code-block:: ini
+
+     u:(hello) $Dialog/LastInput
+
+
+.. naoqi:event:: Dialog/NotSpeaking5(std::string value)
+
+  Human hasn't talked for 5 seconds.
+
+  Dialog/NotSpeaking5, Dialog/NotSpeaking10, Dialog/NotSpeaking15, Dialog/NotSpeaking20
+  are raised when the human didn't talk for, respectively 5, 10, 15 and 20 seconds.
+
+  **Example**
+
+  .. code-block:: ini
+
+    u:(e:Dialog/NotSpeaking10) are you still there?
+
+
+.. naoqi:event:: Dialog/NotSpeaking10(std::string value)
+
+  Human hasn't talked for 10 seconds.
+
+
+.. naoqi:event:: Dialog/NotSpeaking15(std::string value)
+
+  Human hasn't talked for 15 seconds.
+
+
+.. naoqi:event:: Dialog/NotSpeaking20(std::string value)
+
+  Human hasn't talked for 20 seconds.
+
+
+.. naoqi:event:: Dialog/NotUnderstood(std::string value)
+
+  Raised when the robot heard some human input but no rule has matched.
+
+  **Example**
+
+  .. code-block:: ini
+
+    u:(e:Dialog/NotUnderstood) sorry, I didn't understand.
+
+
+.. naoqi:event:: Dialog/NotUnderstood2(std::string value)
+
+  Raised when the robot didn't understand 2 chains in a row.
+
+
+.. naoqi:event:: Dialog/NotUnderstood3(std::string value)
+
+  Raised when the robot didn't understand 3 chains in a row.
+
+
+.. naoqi:event:: Dialog/SameRule(std::string value)
+
+  Raised when a rule is triggered twice in a row. Allows you to avoid a repetition.

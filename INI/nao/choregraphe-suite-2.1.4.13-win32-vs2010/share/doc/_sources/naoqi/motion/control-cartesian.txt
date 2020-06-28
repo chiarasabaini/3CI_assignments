@@ -1,0 +1,310 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-cartesian:
+
+Cartesian control
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   control-cartesian-api
+   control-cartesian-tuto
+
+:ref:`naoqi-motion` - Overview | :ref:`API <control-cartesian-api>` | :ref:`Tutorial <control-cartesian-tuto>`
+
+-----------------
+
+What it does
+------------
+
+These APIs are dedicated to control directly the :ref:`motion-cartesian-effectors` of the robot
+in a Cartesian space using an inverse kinematics solver.
+
+Each **Effector** can be controlled individually, or in parallel with other.
+
+There are two kinds of inverse kinematics (IK) solver in **ALMotion** module:
+  * a classical IK solver which uses only the joints of the effector chain to reach a target.
+  * a generalized IK solver (also called :ref:`control-wholebody`) which uses all the robot joints
+    to reach a target.
+
+There are two ways of controlling an effector:
+  * animation methods (time fixed, blocking function):
+      * :cpp:func:`ALMotionProxy::positionInterpolations`
+      * :cpp:func:`ALMotionProxy::transformInterpolations`
+  * reactive methods (could be changed every **ALMotion** cycle, non blocking function):
+      * :cpp:func:`ALMotionProxy::setPositions`
+      * :cpp:func:`ALMotionProxy::setTransforms`
+
+There are also some whole Body user friendly function (balance control, safe Cartesian command
+and so on).
+
+The details of these functions are in :ref:`control-wholebody` section.
+
+How it works
+------------
+
+The geometric model of the robot gives the effector positions (:math:`X = [P_x, P_y, P_z, P_{wx},
+P_{wy}, P_{wz}]`) relative to an absolute space in function of all the joint positions
+(:math:`q = [q_1,...,q_n]`).
+
+.. math::
+    X = f(q)
+
+The direct cinematic model is the derivative of the above equation with respect to time.
+
+.. math::
+    \dot{X} &= \frac{\delta}{\delta t} f(q)\dot{q} \\
+            &= J(q) \dot{q}
+
+where :math:`J(q)` is also called the Jacobian matrix.
+
+In our case, we want to control an effector and deduce the joint position. So, we look at
+the inverse kinematic model:
+
+.. math::
+    \dot{q} = J^{-1}\dot{X}
+
+In many cases, :math:`J` is not invertible directly (matrix not square), in our case we use the
+Moore-Penrose pseudoinverse to solve mathematically this problem.
+
+.. note::
+    The classical IK solver due to robot :term:`singularity` configuration could create huge joint
+    velocity and the robot could lose balance and fall.
+
+    For this reason, all Cartesian motions should be tested in a simulator before being
+    tried on the robot.
+
+Limitations and performances
+----------------------------
+
+|juju| |roboJ|
++++++++++++++++
+
+Most of the methods are unusable for |roboJ|.
+
+Still available methods:
+
+* :cpp:func:`ALMotionProxy::getPosition`
+* :cpp:func:`ALMotionProxy::getTransform`
+
+Do not use:
+
+* :cpp:func:`ALMotionProxy::positionInterpolation`
+* :cpp:func:`ALMotionProxy::positionInterpolations`
+* :cpp:func:`ALMotionProxy::setPosition`
+* :cpp:func:`ALMotionProxy::setPositions`
+* :cpp:func:`ALMotionProxy::changePosition`
+* :cpp:func:`ALMotionProxy::transformInterpolation`
+* :cpp:func:`ALMotionProxy::transformInterpolations`
+* :cpp:func:`ALMotionProxy::setTransform`
+* :cpp:func:`ALMotionProxy::setTransforms`
+* :cpp:func:`ALMotionProxy::changeTransform`
+
+Getting started
+---------------
+
+Essential information to deal with Cartesian control:
+
+Position and orientation
++++++++++++++++++++++++++
+
+Position and orientation of a part of the robot are controlled using two different systems:
+
+* **Position6D** and
+* **Transform**.
+
+Definitions and calculation rules are available in the **ALMath** library:
+`libalmath Overview <../../ref/libalmath/overview.html>`_.
+
+.. _motion-cartesian-effectors:
+
+Effectors
++++++++++
+
+An **Effector** is a predefined 3D point in the robot and it's generally the end of a chain.
+
+We choose these points because with a biped robot, we want for example:
+
+* control the hand in order to catch an object or
+* control the foot to kick in a ball.
+
+For further details, see: :ref:`NAO's Effectors<nao_effector>`.
+
+
+.. _motion-effectors-space:
+
+Frames
+++++++
+
+When creating a command for a robot, much attention needs to be placed on
+the space used to define the command, as a mistake in space could
+lead to disastrous results.
+
+- **FRAME_TORSO**: this is attached to the robot's torso reference, so moves
+  with the robot as he walks and changes orientation as he leans. This space
+  is useful when you have very local tasks, that make sense in the
+  orientation of the torso frame.
+
+- **FRAME_ROBOT**: this is average of the two feet positions projected around a
+  vertical z axis. This space is useful, because the x axis is always
+  forwards, so provides a natural ego-centric reference.
+
+- **FRAME_WORLD**: this is a fixed origin that is never altered. It is left
+  behind when the robot walks, and will be different in z rotation after the
+  robot has turned. This space is useful for calculations which require an
+  external, absolute frame of reference.
+
+.. image:: /medias/naoqi/frame_definition.png
+   :width: 400 px
+   :height: 302 px
+
+.. image:: /medias/naoqi/frame_definition2.png
+   :width: 400 px
+   :height: 389 px
+
+
+When executing a task, the space is determined when the task begins,
+and remains constant throughout the rest of the interpolation. i.e. the
+interpolation, once defined, will not change as the reference changes
+due to the legs moving or the torso orientation changing.
+
+
+.. _motion-axis-masks:
+
+Axis Masks
+++++++++++
+
+When controlling the robot's arms, he does not have enough degrees of freedom
+to be able to realize a task that has six constraints.
+
+Using an Axis Mask, you can define which axis you wish to control. The
+axis mask is passed as a single parameter (an int) which can be calculated
+using the definitions below:
+
+.. code-block:: cpp
+
+  #define AXIS_MASK_X 1
+  #define AXIS_MASK_Y 2
+  #define AXIS_MASK_Z 4
+  #define AXIS_MASK_WX 8
+  #define AXIS_MASK_WY 16
+  #define AXIS_MASK_WZ 32
+
+| These definitions are available in the **ALMath** library.
+  For further details, see: `libalmath API reference <../../ref/libalmath/index.html>`_.
+| For instance in python, if you wish to control just the position, you would do the
+  calculation:
+
+.. code-block:: python
+
+  import almath
+
+  #An Axis Mask for Position only: 7
+  axisMask = almath.AXIS_MASK_X + almath.AXIS_MASK_Y + almath.AXIS_MASK_Z
+
+The axis mask is executed in the same space used to define your task.
+It has the effect of liberating the constraint on each axis which is not
+part of the mask. Note carefully that a mask in space **FRAME_WORLD** is likely
+to be very different to one in space **FRAME_TORSO**.
+
+.. note::
+
+   For the Torso, LLeg and RLeg effectors, the axes which are not part of
+   the mask will have a fixed position. i.e. they will not move while performing the task.
+
+   For the Head, LArm and RArm effectors, the axes which are not part of
+   the mask are not constrained. i.e. free to move in order to perform the task.
+
+
+.. _motion-se3-interpolation:
+
+SE3 Interpolation
++++++++++++++++++
+
+SE3 Interpolation is used for all interpolations that are defined in Cartesian Space.
+It provides a spline-like interpolation which allows for initial speeds and
+points of passage to be taken into account, ensuring smooth trajectories that
+respect speed constraints.
+
+.. image:: /medias/dev/modules/motion/motion_interpolation_se3.png
+   :height: 230 px
+   :width: 400 px
+
+.. warning::
+
+   If the desired motion is unfeasible, the robot can lose balance and fall.
+   All Cartesian motions should be tested in a simulator before being tried on the robot.
+
+
+Use Cases
+---------
+
+Case 1: Arm trajectory
+++++++++++++++++++++++
+
+This example show a simple path composed of two control points, the
+target and the current position. It uses relative coordinates, so
+the current position is all zeros.
+
+:download:`almotion_cartesianArm1.py </examples/python/motion/almotion_cartesianArm1.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianArm1.py
+   :language: py
+
+.. COMMENTS
+    :download:`almotion_cartesianArm2.py </examples/python/motion/almotion_cartesianArm2.py>`
+
+    .. literalinclude:: /examples/python/motion/almotion_cartesianArm2.py
+       :language: py
+
+
+Case 2: Torso and Foot trajectories
++++++++++++++++++++++++++++++++++++
+
+This example shows how to do simultaneous trajectories of the Torso
+and the legs. The non-controlled right leg, will behave as if it received
+a zero relative command.
+
+- Lower the Torso and move to a point above the Right Leg
+
+- Move and turn the Left Foot outwards, with an upright intermediate position.
+
+:download:`almotion_cartesianFoot.py </examples/python/motion/almotion_cartesianFoot.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianFoot.py
+   :language: py
+
+
+Case 3: Multiple Effector Trajectories
+++++++++++++++++++++++++++++++++++++++
+
+The goal of this example is to simultaneously control three effectors:
+the Torso, the Left Arm and the Right Arm.
+
+- Torso motion: non-blocking method;
+
+- Right Arm motion: blocking method during the first half of torso motion;
+
+- Left Arm motion: blocking method during the last half of the torso motion.
+
+:download:`almotion_cartesianTorsoArm1.py </examples/python/motion/almotion_cartesianTorsoArm1.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianTorsoArm1.py
+   :language: py
+
+
+Case 4: Apply rotation
+++++++++++++++++++++++
+
+The goal of this example is to apply 15 degrees rotation around axis y to the Left Arm.
+In this case, it is difficult to compute the desired target as a position6D,
+from current :term:`position6D` of **LArm** and rotation of 15 degrees around the Y axis.
+We cannot add 15 degrees to the wy component.
+In this general case, :term:`Transform` is much simpler to use.
+
+:download:`almotion_advancedCreateRotation.py </samples/python/almotion/almotion_advancedCreateRotation.py>`
+
+.. literalinclude:: /samples/python/almotion/almotion_advancedCreateRotation.py
+   :language: py

@@ -1,0 +1,64 @@
+.. _getting_started_index:
+
+Getting Started
+====================
+
+**Installing**
+
+Set your creative environment:
+
++--------------------------------------------+
+|*Level 1* - **Choregraphe suite**           |
++--------------------------------------------+
+|.. toctree::                                |
+|  :maxdepth: 1                              |
+|                                            |
+|  installing                                |
++--------------------------------------------+
+
++--------------------------------------------+
+|*Level 2* - **Python SDK**                  |
++--------------------------------------------+
+|.. toctree::                                |
+|  :maxdepth: 1                              |
+|                                            |
+|  ../dev/python/install_guide               |
++--------------------------------------------+
+
+
++--------------------------------------------+
+|**Discovering and understanding**           |
++--------------------------------------------+
+|To discover how to take the control         |
+|of your robot, try this:                    |
+|                                            |
+|.. toctree::                                |
+|   :maxdepth: 2                             |
+|                                            |
+|   helloworlds                              |
+|                                            |
++--------------------------------------------+
+
++--------------------------------------------------------------+
+|*Really advanced* - **C++ SDK**                               |
++--------------------------------------------------------------+
+|.. warning::                                                  |
+|                                                              |
+|  Installing **C++** developments tools                       |
+|  requires to understand and master                           |
+|  cross-compilation concepts.                                 |
+|                                                              |
+|  Beginners should prefer **Choregraphe** and **Python**.     |
++--------------------------------------------------------------+
+| .. toctree::                                                 |
+|   :maxdepth: 1                                               |
+|                                                              |
+|   ../dev/cpp/install_guide                                   |
+|                                                              |
++--------------------------------------------------------------+
+
+
+.. toctree::
+  :hidden:
+
+  ../dev/community_software

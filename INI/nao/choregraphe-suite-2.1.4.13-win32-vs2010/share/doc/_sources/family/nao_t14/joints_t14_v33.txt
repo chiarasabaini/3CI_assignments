@@ -1,0 +1,31 @@
+.. _t14_joints_v33:
+
+T14 - Joints - V3.3
+======================
+
+.. seealso::
+    :ref:`V4 <t14_joints>` | **V3.3** |  :ref:`V3.2 <t14_joints_v32>`
+
+    :ref:`nao-t14` | :ref:`robot_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v33.rst
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_left_v33.rst
+
+Right Arm joints
+------------------
+
+.. include:: ../bulk/joints_arms_right_v33.rst

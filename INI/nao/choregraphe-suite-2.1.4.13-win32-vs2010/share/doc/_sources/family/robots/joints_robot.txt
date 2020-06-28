@@ -1,0 +1,78 @@
+.. _robot_joints:
+
+Joints
+=========
+
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  joints_robot_v33
+  joints_robot_v32
+
+.. seealso::
+
+    :ref:`all_robots`
+
+    **V5 & V4** | :ref:`V3.3 <robot_joints_v33>` |  :ref:`V3.2 <robot_joints_v32>`
+
+    :ref:`h25_joints` | :ref:`h21_joints` | :ref:`t14_joints` | :ref:`t2_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+
+.. _robot_joints_v4::head-joints:
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v4.rst
+
+
+.. _robot_joints_v4::left-Arm-joints:
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_left_v4.rst
+
+
+.. _robot_joints_v4::right-Arm-joints:
+
+Right Arm joints
+------------------
+
+.. include:: ../bulk/joints_arms_right_v4.rst
+
+
+.. _robot_joints_v4::pelvis-joints:
+
+Pelvis joints
+--------------
+
+.. include:: ../bulk/joints_pelvis_v4.rst
+
+
+
+.. _robot_joints_v4::left-leg-joints:
+
+Left Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_left_v4.rst
+
+
+
+.. _robot_joints_v4::right-leg-joints:
+
+Right Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_right_v4.rst
+

@@ -1,0 +1,73 @@
+.. include:: /bulk/common.rst
+
+.. _nao_version_bodytype:
+
+|roboN| - Versions and Body Type
+=================================
+
+:ref:`nao-family::nao-version` | :ref:`nao-family::nao-body-type` |
+:ref:`nao-family::nao-version-prog`
+
+---------------
+
+.. _nao-family::nao-version:
+
+|roboN| - Version
+------------------
+
+| Many upgrade of |roboN| body type exist.
+| They can be differentiated with the head's back design.
+
+=================  =============================================================
+Version             Back design
+=================  =============================================================
+**V5**              .. image:: /medias/nao/hardware/head_back_large_zoom_v50.png
+                        :width: 387 px
+                        :height: 282 px
+
+**V4**              .. image:: /medias/nao/hardware/head_back_large_zoom_v40.png
+                        :width: 504 px
+                        :height: 335 px
+
+**V3.3**            .. image:: /medias/nao/hardware/head_back_large_zoom_v33.png
+                        :width: 506 px
+                        :height: 341 px
+
+**V3+**, **V3.2**   .. image:: /medias/nao/hardware/head_back_large_zoom_v32.png
+                        :width: 535 px
+                        :height: 365 px
+=================  =============================================================
+
+.. _nao-family::nao-body-type:
+
+|roboN| - Body type
+--------------------
+
+.. include:: bulk/overview_nao_h25.rst
+
+---------------------
+
+.. include:: bulk/overview_nao_h21.rst
+
+---------------------
+
+.. include:: bulk/overview_nao_t14.rst
+
+---------------------
+
+.. include:: bulk/overview_nao_t2.rst
+
+
+.. _nao-family::nao-version-prog:
+
+Programmatic access to version and body type
+--------------------------------------------
+
+To retrieve dynamically the body type and version of the robot, use:
+:cpp:func:`ALMotionProxy::getRobotConfig` method.
+
+:download:`almotion_getrobotconfig.py </samples/python/almotion/almotion_getRobotConfig.py>`
+
+.. literalinclude:: /samples/python/almotion/almotion_getRobotConfig.py
+   :language: py
+

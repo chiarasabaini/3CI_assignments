@@ -1,0 +1,375 @@
+.. _albehaviormanager-api:
+
+ALBehaviorManager API
+=====================
+
+:ref:`naoqi-core` - :ref:`Overview <albehaviormanager>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/albehaviormanagerproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALBehaviorManagerProxy
+
+* :cpp:func:`ALBehaviorManagerProxy::addDefaultBehavior`
+* :cpp:func:`ALBehaviorManagerProxy::getBehaviorTags`
+* :cpp:func:`ALBehaviorManagerProxy::getBehaviorsByTag`
+* :cpp:func:`ALBehaviorManagerProxy::getBehaviorNature`
+* :cpp:func:`ALBehaviorManagerProxy::getDefaultBehaviors`
+* :cpp:func:`ALBehaviorManagerProxy::getInstalledBehaviors`
+* :cpp:func:`ALBehaviorManagerProxy::getLoadedBehaviors`
+* :cpp:func:`ALBehaviorManagerProxy::getRunningBehaviors`
+* :cpp:func:`ALBehaviorManagerProxy::getTagList`
+* :cpp:func:`ALBehaviorManagerProxy::isBehaviorInstalled`
+* :cpp:func:`ALBehaviorManagerProxy::isBehaviorLoaded`
+* :cpp:func:`ALBehaviorManagerProxy::isBehaviorRunning`
+* :cpp:func:`ALBehaviorManagerProxy::playDefaultProject`
+* :cpp:func:`ALBehaviorManagerProxy::preloadBehavior`
+* :cpp:func:`ALBehaviorManagerProxy::removeDefaultBehavior`
+* :cpp:func:`ALBehaviorManagerProxy::resolveBehaviorName`
+* :cpp:func:`ALBehaviorManagerProxy::runBehavior`
+* :cpp:func:`ALBehaviorManagerProxy::startBehavior`
+* :cpp:func:`ALBehaviorManagerProxy::stopAllBehaviors`
+* :cpp:func:`ALBehaviorManagerProxy::stopBehavior`
+
+**Deprecated methods**
+
+* :cpp:func:`ALBehaviorManagerProxy::getBehaviorNames` (deprecated)
+* :cpp:func:`ALBehaviorManagerProxy::getSystemBehaviorNames`  (deprecated)
+* :cpp:func:`ALBehaviorManagerProxy::getUserBehaviorNames` (deprecated)
+* :cpp:func:`ALBehaviorManagerProxy::installBehavior` (deprecated)
+* :cpp:func:`ALBehaviorManagerProxy::isBehaviorPresent` (deprecated)
+* :cpp:func:`ALBehaviorManagerProxy::removeBehavior` (deprecated)
+
+Event list
+-----------
+
+* :naoqi:event:`ALBehaviorManager/BehaviorAdded`
+* :naoqi:event:`ALBehaviorManager/BehaviorRemoved`
+* :naoqi:event:`ALBehaviorManager/BehaviorUpdated`
+* :naoqi:event:`ALBehaviorManager/BehaviorsAdded`
+* :naoqi:event:`BehaviorsRun`
+
+Signal list
+-----------
+
+* :cpp:func:`ALBehaviorManager::behaviorsRemoved`
+* :cpp:func:`ALBehaviorManager::behaviorFailed`
+* :cpp:func:`ALBehaviorManager::behaviorsAdded`
+* :cpp:func:`ALBehaviorManager::behaviorStopped`
+* :cpp:func:`ALBehaviorManager::behaviorStarted`
+* :cpp:func:`ALBehaviorManager::behaviorLoaded`
+
+Methods
+-------
+
+.. cpp:function:: void ALBehaviorManagerProxy::addDefaultBehavior(const std::string& prefixedBehavior)
+
+  Set the given behavior as default
+
+  :param behavior: Behavior name.
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getBehaviorTags(const std::string& behavior)
+
+  Get tags found on the given behavior. For more details about tags, see: :ref:`alanimatedspeech-advanced`
+
+  :param behavior: The local path towards a behavior or a directory.
+
+  :return: The list of tags found.
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getBehaviorsByTag(const std::string& tag)
+
+  Get installed behaviors directories names and filter it by tag. For more details about tags, see: :ref:`alanimatedspeech-advanced`
+
+  :param tag: A tag to filter the list with.
+
+  :returns: Returns the behaviors list.
+
+.. cpp:function:: std::string ALBehaviorManagerProxy::getBehaviorNature(const std::string& behavior)
+
+  Get the nature of the given behavior. For more details about natures, see: :ref:`beha_properties`
+
+  :param tag: Behavior name.
+
+  :returns: Returns the nature name of the behavior.
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getDefaultBehaviors()
+
+  Get default behaviors
+
+  :return: Return default behaviors
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getInstalledBehaviors()
+
+  :return: Returns the behaviors list
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getLoadedBehaviors()
+
+  Get loaded behaviors
+
+  :return: Returns loaded behaviors
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getRunningBehaviors()
+
+  Get running behaviors
+
+  :return: Return running behaviors
+
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getTagList()
+
+  Get tags found on installed behaviors. For more details about tags, see: :ref:`alanimatedspeech-advanced`
+
+  :return: The list of tags found.
+
+.. cpp:function:: bool ALBehaviorManagerProxy::isBehaviorInstalled(const std::string& name)
+
+  :param name: The behavior directory name
+
+  :return: Returns true if it is a valid behavior
+
+
+.. cpp:function:: bool ALBehaviorManagerProxy::isBehaviorLoaded(const std::string& name)
+
+  Tell if supplied name corresponds to a loaded behavior
+
+  :param name: Behavior name.
+
+  :return: Returns true if the name supplied is a loaded behavior
+
+.. cpp:function:: bool ALBehaviorManagerProxy::isBehaviorRunning(const std::string& name)
+
+  Tell if supplied name corresponds to a running behavior
+
+  :param name: Behavior name.
+
+  :return: Returns true if the name supplied is a running behavior
+
+.. cpp:function:: void ALBehaviorManagerProxy::playDefaultProject()
+
+  Play default behaviors
+
+.. cpp:function:: bool ALBehaviorManagerProxy::preloadBehavior(const std::string& name)
+
+  Load a behavior
+
+  :param name: Behavior name.
+
+  :return: Returns true if it was successfully loaded.
+
+.. cpp:function:: void ALBehaviorManagerProxy::removeDefaultBehavior(const std::string& name)
+
+  Remove the given behavior from the default behaviors
+
+  :param name: Behavior name.
+
+.. cpp:function:: std::string ALBehaviorManagerProxy::resolveBehaviorName(const std::string& behaviorName) const
+
+  Find out the actual <package>/<behavior> path behind a behavior name.
+
+  :param name: name of a behavior
+
+  :return: Returns the actual <package>/<behavior> path if found, else an empty string. Throws an ALERROR if two behavior names conflicted.
+
+
+.. cpp:function:: void ALBehaviorManagerProxy::runBehavior(const std::string& name)
+
+  Start a behavior and wait for its end.
+  Return when the behavior is stopped.
+  Throw if the behavior cannot be started or does not exist.
+
+  :param name: Behavior name.
+
+
+.. cpp:function:: void ALBehaviorManagerProxy::startBehavior(const std::string& name)
+
+  Start a behavior.
+  Return when the behavior is started.
+  Throw if the behavior cannot be started or does not exist.
+
+  :param name: Behavior name.
+
+.. cpp:function:: void ALBehaviorManagerProxy::stopAllBehaviors()
+
+  Stop all behaviors
+
+.. cpp:function:: void ALBehaviorManagerProxy::stopBehavior(const std::string& name)
+
+  Stop a behavior
+
+  :param name: Behavior name.
+
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getBehaviorNames()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALBehaviorManagerProxy::getInstalledBehaviors` instead
+
+  Get behaviors
+
+  :return: Returns the list of behaviors prefixed by their type (User/ or System/).
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getSystemBehaviorNames()
+
+  .. deprecated:: 1.18
+    use  Choregraphe **Application Manager** instead.
+
+  Get system behaviors
+
+  :return: Returns the list of system behaviors prefixed by System/.
+
+.. cpp:function:: std::vector<std::string> ALBehaviorManagerProxy::getUserBehaviorNames()
+
+  .. deprecated:: 1.14
+    use  :cpp:func:`ALBehaviorManagerProxy::getInstalledBehaviors` instead
+
+  Get user's behaviors
+
+  :return: Returns the list of user's behaviors prefixed by User/.
+
+.. _ALBehaviorManagerProxy::installBehavior1:
+
+.. cpp:function:: bool ALBehaviorManagerProxy::installBehavior(const std::string& absolutePath, const std::string& localPath, const bool& overwrite)
+
+  .. deprecated:: 1.18
+    use  Choregraphe **Application Manager** instead.
+
+  There are two overloads of this function:
+
+  - :ref:`ALBehaviorManagerProxy::installBehavior <ALBehaviorManagerProxy::installBehavior1>`
+  - :ref:`ALBehaviorManagerProxy::installBehavior <ALBehaviorManagerProxy::installBehavior2>` to install a behavior already located at the behaviors path
+
+  Install a behavior.
+
+  :param absolutePath: A path on the local file system of a behavior to install.
+  :param localPath: The destination path relative to behaviors path.
+  :param overwrite: Whether to replace existing behaviors if present.
+
+  :return: true on success, false otherwise.
+
+.. _ALBehaviorManagerProxy::installBehavior2:
+
+.. cpp:function:: bool ALBehaviorManagerProxy::installBehavior(const std::string& localPath)
+
+  .. deprecated:: 1.18
+    use  Choregraphe **Application Manager** instead.
+
+  Install a behavior.
+
+  :param localPath: The relative path of the behavior.
+
+  :return: true on success, false otherwise.
+
+.. cpp:function:: bool ALBehaviorManagerProxy::isBehaviorPresent(const std::string& prefixedBehavior)
+
+  .. deprecated:: 1.14
+    use  :cpp:func:`ALBehaviorManagerProxy::isBehaviorInstalled` instead
+
+  Tell if the supplied name corresponds to an existing behavior.
+
+  :param prefixedBehavior: Prefixed behavior.
+
+  :return: Returns true if it is an existing behavior
+
+.. cpp:function:: bool ALBehaviorManagerProxy::removeBehavior(const std::string& name)
+
+  .. deprecated:: 1.18
+    use  Choregraphe **Application Manager** instead.
+
+    Remove a behavior from the filesystem
+
+  :param name: Behavior name.
+
+  :return: Return true if succeeded, else false
+
+
+Events
+------
+
+.. naoqi:event:: ALBehaviorManager/BehaviorAdded(const std::string& behavior)
+
+  Raised when a behavior is installed.
+
+  :param behavior: the name of the behavior installed
+
+.. naoqi:event:: ALBehaviorManager/BehaviorRemoved(const std::string& behavior)
+
+  Raised when a behavior is removed.
+
+  :param behavior: the name of the behavior removed
+
+.. naoqi:event:: ALBehaviorManager/BehaviorUpdated(const std::string& behavior)
+
+  Raised when a behavior is updated.
+
+  :param behavior: the name of the behavior updated
+
+.. naoqi:event:: ALBehaviorManager/BehaviorsAdded(const std::string& behavior)
+
+  Raised when a package containing behaviors is installed.
+
+  :param behavior: a list containing the names of the behaviors installed
+
+.. naoqi:event:: BehaviorsRun(const std::vector<std::string>& runningBehaviorList)
+
+  Raised when the list of running behaviors change.
+
+  :param runningBehaviorList: list of all running behaviors
+
+Signals
+-------
+
+Signals are part of the qimessaging framework, see :ref:`qimessaging-python`.
+
+.. cpp:function:: ALBehaviorManager::behaviorsRemoved(std::vector<std::string> behaviorsRemoved)
+
+   :triggered: When behaviors are removed.
+
+   :param behaviorsRemoved: Paths of the removed behaviors.
+
+.. cpp:function:: ALBehaviorManager::behaviorFailed(std::string behaviorName, std::string boxName, std::string error)
+
+   :triggered: When a behavior stops on error.
+
+   :param behaviorName: Name of the failing behavior.
+   :param boxName: Name of the box where the error occurred.
+   :param error: Error message.
+
+.. cpp:function:: ALBehaviorManager::behaviorsAdded(std::vector<std::string> behaviorsAdded)
+
+   :triggered: When behaviors are added.
+
+   :param: behaviorsAdded: Paths of the added behaviors.
+
+.. cpp:function:: ALBehaviorManager::behaviorStopped(std::string behaviorName)
+
+   :triggered: When a behavior is stopped.
+
+   :param: behaviorName: Name of the stopped behavior.
+
+.. cpp:function:: ALBehaviorManager::behaviorStarted(std::string behaviorName)
+
+   :triggered: When a behavior is started.
+
+   :param: behaviorName: Name of the started behavior.
+
+.. cpp:function:: ALBehaviorManager::behaviorLoaded(std::string behaviorName)
+
+   :triggered: When a behavior is loaded.
+
+   :param: behaviorName: Name of the loaded behavior.
+
+
+
+

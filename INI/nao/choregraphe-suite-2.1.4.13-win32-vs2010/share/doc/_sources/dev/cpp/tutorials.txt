@@ -1,0 +1,26 @@
+.. _cpp-tutos-examples:
+
+
+C++ Tutorial
+=============
+
+.. seealso::
+
+   :ref:`cpp-introduction` | *C++ Tutorials* |
+   :ref:`cpp-examples` | :ref:`tips_and_tricks` | :ref:`gdb`
+
+------------
+
+Tutorial
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+   tutos/create_module
+
+
+
+
+
+

@@ -1,0 +1,346 @@
+.. _autonomouslife-api:
+
+ALAutonomousLife API
+====================
+
+:ref:`naoqi-core` - :ref:`Overview <autonomouslife>` | API |
+:ref:`launchtriggerconditions` | :ref:`Advanced <autonomouslife_advanced>`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alautonomouslifeproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. _ALAutonomousLifeProxy::focus_api:
+.. _ALAutonomousLifeProxy::launchpad_api:
+
+.. cpp:class:: AutonomousLifeProxy
+
+  * Methods for Autonomous Life state management:
+
+    * :cpp:func:`ALAutonomousLifeProxy::setState`
+    * :cpp:func:`ALAutonomousLifeProxy::getState`
+
+    * :cpp:func:`ALAutonomousLifeProxy::setRobotOffsetFromFloor`
+    * :cpp:func:`ALAutonomousLifeProxy::getRobotOffsetFromFloor`
+
+    * :cpp:func:`ALAutonomousLifeProxy::setSafeguardEnabled`
+    * :cpp:func:`ALAutonomousLifeProxy::isSafeguardEnabled`
+
+  * Methods for Activity focus management:
+
+    * :cpp:func:`ALAutonomousLifeProxy::focusedActivity`
+    * :cpp:func:`ALAutonomousLifeProxy::switchFocus`
+    * :cpp:func:`ALAutonomousLifeProxy::stopFocus`
+    * :cpp:func:`ALAutonomousLifeProxy::stopAll`
+
+  * Methods for Activity utilities:
+
+    * :cpp:func:`ALAutonomousLifeProxy::getLifeTime`
+    * :cpp:func:`ALAutonomousLifeProxy::getActivityStatistics`
+    * :cpp:func:`ALAutonomousLifeProxy::getAutonomousActivityStatistics`
+    * :cpp:func:`ALAutonomousLifeProxy::getFocusHistory`
+    * :cpp:func:`ALAutonomousLifeProxy::getStateHistory`
+    * :cpp:func:`ALAutonomousLifeProxy::getActivityNature`
+
+Event list
+----------
+
+* :naoqi:event:`AutonomousLife/State`
+* :naoqi:event:`AutonomousLife/FocusedActivity`
+* :naoqi:event:`AutonomousLife/CompletedActivity`
+* :naoqi:event:`AutonomousLife/NextActivity`
+* :naoqi:event:`AutonomousLife/LaunchSuggestions`
+
+Methods
+-------
+
+.. _ALAutonomousLifeProxy::setState:
+.. cpp:function:: void ALAutonomousLifeProxy::setState(const std::string& state)
+
+   Lets the developer manually set limited state changes in AutonomousLife.
+   For futher details, see: :ref:`autonomouslife_states`.
+
+   When changing the state to "disabled" or "safeguard",
+   :ref:`stopAll() <ALAutonomousLifeProxy::stopAll>`
+   is called internally.
+
+   *Note* Manual change from interactive to solitary state will fail.
+
+   :param state: Can be one of the :ref:`autonomouslife_states`.
+
+.. cpp:function:: std::string ALAutonomousLifeProxy::getState()
+
+   Retrieves the current state of AutonomousLife.
+
+   :return: Can be one of the :ref:`autonomouslife_states`.
+
+.. cpp:function:: void ALAutonomousLifeProxy::setRobotOffsetFromFloor(const float& offset)
+
+   Allows you to set if the robot is on the floor, or higher up such as on a table.
+
+   This notably have an effect on how the robot search for humans with
+   :ref:`Basic Awareness <albasicawareness>`.
+   Set it correctly to enhance tracking success.
+
+   The default offset is 0.
+
+   :param offset: A float value in meters.
+
+.. cpp:function:: float ALAutonomousLifeProxy::getRobotOffsetFromFloor()
+
+   Retrieves the current offset of the robot from the floor.
+
+   The default offset is 0.
+
+   :return: A float value in meters.
+
+.. cpp:function:: void ALAutonomousLifeProxy::setSafeguardEnabled(const std::string& name)
+
+   Sets if a given safeguard will be handled by Autonomous Life or not.
+   Default for all safeguards is true.
+
+   These parameters are automatically reset to default at the end of each activity.
+
+   :param name: Name of the safeguard to consider: RobotPushed, RobotFell,
+                RobotMoved, CriticalDiagnosis, CriticalTemperature
+
+.. cpp:function:: bool ALAutonomousLifeProxy::isSafeguardEnabled(const std::string& name)
+
+   Checks if a given safeguard will be handled by Autonomous Life or not.
+   Default for all safeguards is true.
+
+   :param name: Name of the safeguard to consider: RobotPushed, RobotFell,
+                RobotMoved, CriticalDiagnosis, CriticalTemperature
+
+   :return: A bool, true if Autonomous Life handles the safeguard.
+
+.. cpp:function:: std::string ALAutonomousLifeProxy::focusedActivity()
+
+   Retrieves the current focused activity.
+
+   :return: The name of the focused activity.
+            Is an empty string ("") if no activity is focused.
+
+.. _ALAutonomousLifeProxy::switchFocus:
+.. cpp:function:: void ALAutonomousLifeProxy::switchFocus()
+
+   There are two overloads of this function:
+
+   - :ref:`ALAutonomousLifeProxy::switchFocus(activity_name)
+     <ALAutonomousLifeProxy::switchFocus1>`
+   - :ref:`ALAutonomousLifeProxy::switchFocus(activity_name,flags)
+     <ALAutonomousLifeProxy::switchFocus2>`
+
+.. _ALAutonomousLifeProxy::switchFocus1:
+.. cpp:function:: int ALAutonomousLifeProxy::switchFocus(const std::string& activity_name)
+
+   The focused activity is the one running activity.
+
+   :param activity_name: The name of the activity to start and switch focus to.
+
+                         The current focused activity is stopped first.
+
+                         Format: "package-uuid/behavior-path"
+
+.. _ALAutonomousLifeProxy::switchFocus2:
+.. cpp:function:: int ALAutonomousLifeProxy::switchFocus(const std::string& activity_name, const int& flags)
+
+   The focused activity is the one running activity.
+
+   This function allows to use the stacking feature of activity focus.
+
+   :param activity_name: The name of the activity to start and switch focus to.
+
+                         The current focused activity is stopped first.
+
+                         Format: "package-uuid/behavior-path"
+
+   :param flags: STOP_CURRENT(0) or STOP_AND_STACK_CURRENT(1).
+
+                 If STOP_AND_STACK_CURRENT is used, then the current focused
+                 activity will remain on the stack.  When the newly focused
+                 activity is stopped, the previous one in the stack will
+                 automatically be restarted and regain focus.
+
+.. cpp:function:: void ALAutonomousLifeProxy::stopFocus()
+
+   This will stop the focused activity.
+
+   If there is a previous activity remaining on the stack, it is restarted
+   and focused.
+
+   See :ref:`switchFocus() <ALAutonomousLifeProxy::switchFocus2>` and
+   STOP_AND_STACK_CURRENT to see how to leave activities on the stack when
+   switching focus.
+
+.. _ALAutonomousLifeProxy::stopAll:
+.. cpp:function:: void ALAutonomousLifeProxy::stopAll()
+
+   This will stop the focused activity.
+
+   It will also clear the stack; no stacked activities will automatically be
+   restarted and focused.
+
+   See :ref:`switchFocus() <ALAutonomousLifeProxy::switchFocus2>` and
+   STOP_AND_STACK_CURRENT to see how to leave activities on the stack when
+   switching focus.
+
+.. _ALAutonomousLifeProxy::getLifeTime:
+.. cpp:function:: int ALAutonomousLifeProxy::getLifeTime()
+
+   Gets the time in seconds as life sees it. Based on gettimeofday().
+
+   :return: The int time in seconds as Autonomous Life sees it.
+
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getActivityStatistics()
+
+   Gets focus count, last focused time, etc for each activity.
+
+   Times based on :ref:`getLifeTime() <ALAutonomousLifeProxy::getLifeTime>`
+
+   :return: A map of activity names, with a corresponding map of
+            \"prevFocusTime\", \"prevUnfocusTime\", \"focusCount\",
+            \"totalDuration\". Times are 0 for unlaunched Activities.
+
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getAutonomousActivityStatistics()
+
+   Gets focus count, last focused time, etc just for each autonomous activity.
+   This returns a subset of what :cpp:func:`ALAutonomousLifeProxy::getActivityStatistics` returns.
+   An autonomous activity is one that has launch trigger conditions.
+
+   Times based on :ref:`getLifeTime() <ALAutonomousLifeProxy::getLifeTime>`
+
+   :return: A map of activity names, with a corresponding map of
+            \"prevFocusTime\", \"prevUnfocusTime\", \"focusCount\",
+            \"totalDuration\". Times are 0 for unlaunched Activities.
+
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getFocusHistory()
+
+   There are two overloads of this function.  It is recommended to specify
+   maximum depth to prevent large ALValues from being transmitted.
+
+   - :ref:`ALAutonomousLifeProxy::getFocusHistory()
+     <ALAutonomousLifeProxy::getFocusHistory1>`
+   - :ref:`ALAutonomousLifeProxy::getFocusHistory(depth)
+     <ALAutonomousLifeProxy::getFocusHistory2>`
+
+.. _ALAutonomousLifeProxy::getFocusHistory1:
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getFocusHistory()
+
+   Gets a list of the order that activities that have been focused, and their time focused.
+
+   Times based on :ref:`getLifeTime() <ALAutonomousLifeProxy::getLifeTime>`
+
+   :return: A list of pairs, each pair is ActivityName, PreviousFocusedTime.
+
+.. _ALAutonomousLifeProxy::getFocusHistory2:
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getFocusHistory(const int& depth)
+
+   Gets a list of the order that activities that have been focused, and their time focused.
+
+   Times based on :ref:`getLifeTime() <ALAutonomousLifeProxy::getLifeTime>`
+
+   :param depth: The maximum number of items in history to return, starting from most recent.
+
+   :return: A list of pairs, each pair is ActivityName, PreviousFocusedTime.
+
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getStateHistory()
+
+   There are two overloads of this function.  It is recommended to specify
+   maximum depth to prevent large ALValues from being transmitted.
+
+   - :ref:`ALAutonomousLifeProxy::getStateHistory()
+     <ALAutonomousLifeProxy::getStateHistory1>`
+   - :ref:`ALAutonomousLifeProxy::getStateHistory(depth)
+     <ALAutonomousLifeProxy::getStateHistory2>`
+
+.. _ALAutonomousLifeProxy::getStateHistory1:
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getStateHistory()
+
+   Gets a list of the order that states that have been entered, and their time entered.
+
+   Times based on :ref:`getLifeTime() <ALAutonomousLifeProxy::getLifeTime>`
+
+   :return: A list of pairs, each pair is StateName, PreviousEnteredTime.
+
+.. _ALAutonomousLifeProxy::getStateHistory2:
+.. cpp:function:: AL::ALValue ALAutonomousLifeProxy::getStateHistory(const int& depth)
+
+   Gets a list of the order that states that have been entered, and their time entered.
+
+   Times based on :ref:`getLifeTime() <ALAutonomousLifeProxy::getLifeTime>`
+
+   :param depth: The maximum number of items in history to return, starting from most recent.
+
+   :return: A list of pairs, each pair is StateName, PreviousEnteredTime.
+
+.. cpp:function:: std::string ALAutonomousLifeProxy::getActivityNature(const std::string& activity_name)
+
+   Tells you if an activity has "interactive" or "solitary" nature.
+
+   If you pass a string which is not an activity, this will throw.
+
+   :param activity_name: The name of the activity to query.
+
+                         Format: "package-uuid/behavior-path"
+
+   :return: "interactive" or "solitary"
+
+Events
+------
+
+.. naoqi:event:: AutonomousLife/State(std::string state)
+
+  Raised when the state of autonomous life changes.
+
+  Note that if one interactive activity switches focus to another interactive
+  activity, this event is raised, as the "interactive" state is being
+  reasserted.
+
+  This event is raised after Autonomous Life has completed all necessary
+  internal operations to prepare for the state.
+
+  :param state: The current state of Autonomous Life.
+                Can be one of the :ref:`autonomouslife_states`.
+
+.. naoqi:event:: AutonomousLife/FocusedActivity(std::string activity_name)
+
+  Raised whenever the focused activity changes.
+
+  :param activity_name: The name of the focused activity.
+                        If no activity is focused it is an empty string: ""
+
+.. naoqi:event:: AutonomousLife/CompletedActivity(std::string activity_name)
+
+  Raised whenever an activity completes its execution and exits.
+
+  *Note*  This event is raised before the FocusedActivity event.
+
+  :param activity_name: The name of the previous activity that exited.
+
+.. naoqi:event:: AutonomousLife/NextActivity(std::string activity_name)
+
+  Raised whenever an activity is going to be focused.
+
+  *Note*  This event is raised before the FocusedActivity event.
+
+  :param activity_name: The name of the activity that will be focused next.
+
+.. _ALAutonomousLifeProxy::LaunchSuggestions:
+
+.. naoqi:event:: AutonomousLife/LaunchSuggestions(std::vector<std::string> activity_names)
+
+  Raised whenever there are activities that have launch conditions triggered.
+
+  :param activity_names: The list of activities that currently have their
+                         launch conditions triggered.

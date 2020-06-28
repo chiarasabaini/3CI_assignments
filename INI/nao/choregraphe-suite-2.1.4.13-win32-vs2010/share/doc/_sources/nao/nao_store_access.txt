@@ -1,0 +1,48 @@
+.. include:: ../bulk/common.rst
+
+.. _cloud_access:
+
+Accessing the |store|
+=====================
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+ 1.     On a computer connected to internet, click or type:
+
+        |cloud_link|
+
+        .. image:: /medias/store/store_login.png
+            :width: 586 px
+            :height: 311 px
+
+ 2.     Click the **Sign in** button.
+
+        The **Login or create an account** page appears.
+
+        .. image:: /medias/store/store_login2.png
+           :width: 478 px
+           :height: 267 px
+
+ 3.     Type your **Email** and **Password**.
+
+ 4.     Click the **Sign On** button.
+
+        .. image:: /medias/store/store_home.png
+            :width: 579 px
+            :height: 307 px
+=====  =========================================================================
+
+**Troubleshooting**
+
+* I have no user account:
+
+  =====  =======================================================================
+  Step       Action
+  =====  =======================================================================
+   1.     Click the **Create Account** button.
+
+   2.     Fill the registration form.
+
+   3.     Click the **Create** button.
+  =====  =======================================================================

@@ -1,0 +1,296 @@
+.. _dialog_concepts:
+
+QiChat - Introduction
+=======================
+
+:ref:`naoqi-audio` - :ref:`Overview <aldialog>` | :ref:`API <aldialog-api>` | QiChat
+| :ref:`Tutorials <aldialog_tuto>`
+
+:ref:`Table of Content<dialog_toc>` | Introduction | :ref:`Syntax<dialog_rules>` |
+:ref:`Overview<dialog_overview>` | :ref:`Cheat Sheet<dialog_cheat_sheet>`
+
+------------
+
+.. _dialog_doc_topic:
+
+Topic
+-----
+
+A **Topic** is a script box (or file) containing :ref:`rule`.
+
+Its header contains at least the :ref:`name<topic_name>` and
+the :ref:`topic_language` of the topic.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language: enu
+
+   u:(hello) hello human, pleased to meet you
+
+To create your first **Topic**, see: :ref:`aldialog-tuto`.
+
+
+.. _rule:
+
+Rule
+-----
+
+A **Rule** associates a :ref:`human_input` (what the human says) with a
+relevant :ref:`robot_output` (what the robot answers).
+
+:ref:`delimiter_rule`, :ref:`special_characters` and :ref:`rule_functions`
+allows you to create powerful rules, managing in one line lots of different cases.
+
+There are three type of rules: :ref:`simple_rule`, :ref:`subrules` and :ref:`proposal`.
+
+
+.. _human_input:
+
+Human input
+------------
+
+**Human input** is Part of a :ref:`simple_rule` or a :ref:`subrules` delimited
+by parentheses and containing the message to be recognized by the robot.
+
+When  the **Human input** matches, i.e. the message is recognized, the
+:ref:`rule` is triggered.
+
+When a :ref:`rule` is triggered:
+
+* the :ref:`robot_output` is executed (said and/or done).
+
+* the :ref:`dialog_doc_focus` is set to the :ref:`dialog_doc_topic`
+  containing the rules.
+
+
+.. _robot_output:
+
+Robot output
+-------------
+
+Part of a :ref:`simple_rule`, :ref:`subrules`,  or a :ref:`proposal` containing
+what the robot says and/or does when the rule is triggered.
+
+
+.. _dialog_doc_concepts:
+
+Concept
+--------
+
+| A **Concept** is a list of words and/or phrases that refer to one idea.
+| For example, a list of countries, a list of names, synonyms of a word.
+|
+
+They can be used both in :ref:`human_input` or :ref:`robot_output`.
+
+There are two types of Concepts:
+
++---------+-------------+--------------------+------------------------------------+
+| Type    | Scope       | At run time ...    | May contain ...                    |
++=========+=============+====================+====================================+
+| Static  | global      | cannot be modified | :ref:`or_rule`,                    |
+|         |             |                    | :ref:`optional_delimiter`,         |
+|         |             |                    | concepts (static and               |
+|         |             |                    | :ref:`dialog_dynamic_def`),        |
+|         |             |                    | functions (:ref:`rand_function`,   |
+|         |             |                    | :ref:`first_function`),            |
+|         |             |                    | :ref:`dialog_variable` and         |
+|         |             |                    | :ref:`condition_rule`.             |
+|         |             |                    |                                    |
++---------+-------------+--------------------+------------------------------------+
+| Dynamic | local to a  | must be modified   | a list of words or phrases         |
+|         | **Topic**   |                    | between a single :ref:`or_rule`.   |
+|         |             |                    |                                    |
++---------+-------------+--------------------+------------------------------------+
+
+
+**Examples**
+
+.. code-block:: ini
+
+   concept:(want) ^rand {"i'd * like" "i want {"a lot"}"}
+
+.. code-block:: ini
+
+
+   dynamic:want
+
+
+.. code-block:: ini
+
+   python:
+   setConcept("want","enu", ["i'd like" "i want" "i want a lot"]
+
+
+**Syntax**
+
+* To declare a **Concept**, see: :ref:`dialog_concept_def` and :ref:`dialog_dynamic_def`.
+
+* To use a **Concept**, see: :ref:`dialog_concept`.
+
+.. _activation:
+
+Activated / deactivated
+------------------------
+
+:ref:`Topics<dialog_doc_topic>` and :ref:`rules<rule>` must be activated to be
+taken in account by the **Dialog engine**.
+
+It is possible to activate and deactivate a part of them in order to create
+conversational contexts and/or reduce the number of rules managed in the memory.
+
+Topic activation
++++++++++++++++++
+
+In **Choregraphe**, a **Topic** is activated or deactivated when the
+**Dialog topic** box is loaded and unloaded.
+
+By script, you can also use:
+
+* :cpp:func:`ALDialogProxy::activateTopic`
+* :cpp:func:`ALDialogProxy::deactivateTopic`
+
+Rule activation
+++++++++++++++++
+
+All the **Rules** of a deactivated **Topic** are also deactivated.
+
+All the **Rules** of an activated **Topic** are activated, except if the rule:
+
+* is a :ref:`subrules` and is not attached to the last triggered **Rule**,
+
+* is an already executed :ref:`proposal`,
+
+* contains a deactivated :ref:`tag<tag>`,
+
+* contains the :ref:`private_userrules` function, while its **Topic** has not
+  the :ref:`dialog_doc_focus`.
+
+
+.. _dialog_doc_focus:
+
+Focus
+------
+
+Several :ref:`Topics<dialog_doc_topic>` can be activated simultaneously, but only
+one :ref:`dialog_doc_topic` at a time has the **Focus**.
+
+The **Focus** is given to the :ref:`dialog_doc_topic` containing the last
+triggered rule, except if it has the :ref:`noStay_function` property.
+
+If similar rules are duplicated in several topics, then the topic with
+the focus has the priority, otherwise the choice is random.
+
+In some cases, **Dialog engine** can decide by itself to give the **Focus** to
+a topic and say his first proposal. :ref:`noPick_function` function allows to
+prevent this automatic selection.
+
+**Related functions and properties**
+
+* :ref:`noPick_function`,
+* :ref:`noStay_function`,
+* :ref:`resetOnFocus_function`,
+* :ref:`fallback_property`.
+
+
+.. _recover_section:
+
+Recover section
+----------------
+
+Rules placed after the recover section has a lower priority level.
+
+
+
+recover:
+++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+     recover:
+
+**Usage**
+
+Rules placed after the recover section has a lower priority level.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~topic1()
+   language: frf
+
+   u:(alien) I am not an alien, I am a humanoid robot
+
+   recover:
+   u:(hello) hello human
+
+**Execution**
+
+.. code-block:: ini
+
+   > hello alien
+   I am not an alien, I am a humanoid robot
+
+
+.. _priority:
+
+Priority among rules
+---------------------
+
+The rules are taken into consideration following this order:
+
+==================== ============================================================
+  Order               All the rules located in the ...
+==================== ============================================================
+ **1** - Focus        Main section of the topic having the
+                      :ref:`dialog_doc_focus`.
+
+ **2** - All topics   Main section of all the other activated topics,
+                      :ref:`fallback_property` excepted - randomly ordered.
+
+ **3** - Recover      :ref:`Recover sections<recover_section>` of all
+                      activated Topics.
+
+ **4** - Fallback     Main section of the activated topics having the
+                      :ref:`fallback_property` property.
+==================== ============================================================
+
+Reusing human input
+-------------------
+
+It is possible to store a part of the human input in order to reuse it in the
+robot answer.
+
+For further details, see: :ref:`input_storing`.
+
+.. _dialog_doc_variables:
+
+Variables and events
+---------------------
+
+**ALDialog** uses **ALMemory** to store and retrieve data.
+
+Any stored data can be seen as a variable or as an event.
+
+
+For further details, see: :ref:`variable<dialog_variable>` and :ref:`event<event_rule>`.
+
+
+.. _dialog_doc_skin:
+
+Skin
+----
+
+A **Skin** is a meta rule, defining transformations to be applied on already defined
+:ref:`Robot outputs<robot_output>`.
+
+A **Skin** can be placed in any :ref:`dialog_doc_topic` and is triggered when a
+:ref:`robot_output` matches.
+
+For further details, see: :ref:`transformation_rule`.

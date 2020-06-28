@@ -1,0 +1,23 @@
+
+.. _h25_dimensions:
+
+H25 - Construction
+====================
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  dimensions_h25_v4
+  dimensions_h25_v33
+  dimensions_h25_v32
+
+.. seealso::
+        
+    **V5** | :ref:`V4 <h25_dimensions_v4>` | :ref:`V3.3 <h25_dimensions_v33>` | :ref:`V3.2 <h25_dimensions_v32>`
+
+    :ref:`nao-h25` | :ref:`robot_dimensions` 
+
+--------------------
+
+.. include:: ../bulk/dimensions_h_v5.rst

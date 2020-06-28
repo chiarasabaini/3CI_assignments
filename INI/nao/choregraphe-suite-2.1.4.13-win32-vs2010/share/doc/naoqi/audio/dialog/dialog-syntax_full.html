@@ -1,0 +1,1918 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QiChat - Syntax &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="QiChat - Table of Content" href="aldialog_syntax_toc.html" />
+    <link rel="next" title="QiChat - Overview" href="aldialog_syntax_overview.html" />
+    <link rel="prev" title="QiChat - Introduction" href="dialog.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="dialog.html" title="QiChat - Introduction">previous</a>
+     |
+    <a href="aldialog_syntax_toc.html" title="QiChat - Table of Content" accesskey="U">up</a>
+   |
+    <a href="aldialog_syntax_overview.html" title="QiChat - Overview">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-audio-dialog-dialog-syntax_full">
+            
+  <div class="section" id="qichat-syntax">
+<span id="dialog-rules"></span><h1>QiChat - Syntax<a class="headerlink" href="#qichat-syntax" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../index.html#naoqi-audio"><em>NAOqi Audio</em></a> - <a class="reference internal" href="aldialog.html#aldialog"><em>Overview</em></a> | <a class="reference internal" href="aldialog-api.html#aldialog-api"><em>API</em></a> | QiChat
+| <a class="reference internal" href="aldialog_tuto.html#aldialog-tuto"><em>Tutorials</em></a></p>
+<p><a class="reference internal" href="aldialog_syntax_toc.html#dialog-toc"><em>Table of Content</em></a> | <a class="reference internal" href="dialog.html#dialog-concepts"><em>Introduction</em></a> |
+Syntax | <a class="reference internal" href="aldialog_syntax_overview.html#dialog-overview"><em>Overview</em></a> |
+<a class="reference internal" href="aldialog_syntax_cheat_sheet.html#dialog-cheat-sheet"><em>Cheat Sheet</em></a></p>
+<hr class="docutils" />
+<div class="section" id="header-keywords">
+<span id="basic-rule"></span><h2>Header keywords<a class="headerlink" href="#header-keywords" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="concept">
+<span id="dialog-concept-def"></span><h3>concept<a class="headerlink" href="#concept" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>concept:(name) [word1 word2 "word3 word4"]</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>word1</em> and <em>word2</em> are isolated words,</li>
+<li><em>&#8220;word3 word4&#8221;</em> is a phrase, i.e. a group of several words,</li>
+<li><em>name</em> is the name of the static concept gathering all the items in an ordered list.</li>
+</ul>
+<p><strong>Note</strong>: a static concept can contain <a class="reference internal" href="#or-rule"><em>choices</em></a>,
+<a class="reference internal" href="#optional-delimiter"><em>optional words and phrases</em></a>, concepts
+(static and <a class="reference internal" href="#dialog-dynamic-def"><em>dynamic</em></a>), functions
+(<a class="reference internal" href="#rand-function"><em>^rand</em></a>, <a class="reference internal" href="#first-function"><em>^first</em></a>), <a class="reference internal" href="#dialog-variable"><em>variables</em></a>
+and <a class="reference internal" href="#condition-rule"><em>conditions</em></a>.</p>
+<p><strong>Usage</strong></p>
+<p>Defines a static list of items (words and/or phrases).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Phrase means a group of word, not a sentence, be aware that any
+punctuation character will be automatically removed.</p>
+</div>
+<p>Static concepts are global, in other words, they are usable in different <strong>Topics</strong>.</p>
+<p>To use a concept in a rule, see: <a class="reference internal" href="#dialog-concept"><em>Concept call: ~</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+concept:(greetings) ^rand[hi hello "hey there"]
+
+concept:(wine) [red white] wine
+concept:(alcohol) [beer ~wine]
+
+u:(~greetings) ~greetings
+u:(do you have _~drink) yes, I have $1
+u:(I want to drink something) do you want ~alcohol?</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hey there
+hello
+&gt; do you have white wine?
+yes, I have white wine
+&gt; I want to drink something
+do you want beer?
+&gt; I want to drink something
+do you want red wine?</pre>
+</div>
+</div>
+<div class="section" id="dynamic">
+<span id="dialog-dynamic-def"></span><h3>dynamic<a class="headerlink" href="#dynamic" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>dynamic:name</pre>
+</div>
+<p><strong>Note</strong>: a dynamic concept can only contain a list of words or phrases between
+a single <a class="reference internal" href="#or-rule"><em>choice [ ]</em></a>.</p>
+<p><strong>Usage</strong></p>
+<p>Declares a dynamic list of items (words and/or phrases).
+This list is local to a <strong>Topic</strong>.</p>
+<p><strong>Conditions</strong></p>
+<p>Dynamic concepts must be modified at runtime, using:</p>
+<ul class="simple">
+<li><a class="reference internal" href="aldialog-api.html#ALDialogProxy::setConcept__ssCR.ssCR.std::vector:ss:CR" title="ALDialogProxy::setConcept"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setConcept()</span></tt></a></li>
+</ul>
+<p>To use a concept in a rule, see: <a class="reference internal" href="#dialog-concept"><em>Concept call: ~</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~dynamic()
+language: enu
+
+dynamic:mp3
+u:({please} ["i want" play] _~mp3) let's play $1</pre>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># call it when speech recognition is running</span>
+<span class="n">proxy</span> <span class="o">=</span> <span class="n">ALProxy</span><span class="p">(</span><span class="s">&quot;ALDialog&quot;</span><span class="p">)</span>
+<span class="n">proxy</span><span class="o">.</span><span class="n">setConcept</span><span class="p">(</span><span class="s">&quot;mp3&quot;</span><span class="p">,</span><span class="s">&quot;enu&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;mika&quot;</span><span class="p">,</span> <span class="s">&quot;queen&quot;</span><span class="p">,</span> <span class="s">&quot;village people&quot;</span><span class="p">,</span> <span class="s">&quot;boy george&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Troubleshooting</strong></p>
+<p>If there are several topics in the behavior, <a class="reference internal" href="aldialog-api.html#ALDialogProxy::setConcept__ssCR.ssCR.std::vector:ss:CR" title="ALDialogProxy::setConcept"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setConcept()</span></tt></a>
+may actually not modify the concept in the right topic.</p>
+</div>
+<div class="section" id="include">
+<span id="topic-include"></span><h3>include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>include: file.top</pre>
+</div>
+<p>Includes must be specified just after the <a class="reference internal" href="#topic-name"><em>name</em></a> and the <a class="reference internal" href="#topic-language"><em>language</em></a> of a topic,
+and before the first <a class="reference internal" href="#dialog-concept-def"><em>concept</em></a> or <a class="reference internal" href="#dialog-rule"><em>rule</em></a>.</p>
+<p><strong>Usage</strong></p>
+<p>Includes a file in the topic.</p>
+<p>The included file must be in the same folder than the topic that calls the include.
+An included topic has the same behavior than topic:</p>
+<ul class="simple">
+<li>The included file is loaded as soon as the calling topic is loaded.</li>
+<li>the included file is activated as soon as the calling topic is activated</li>
+</ul>
+<div class="highlight-ini"><pre>topic: ~ok()
+language: enu
+# suppose lexicon_enu contains concept ~confirmation and ~negation
+include:lexicon_enu.top
+u:(hello) are you ok ?
+   u1:(~confirmation) yupi
+   u1:(~negation) Doh !</pre>
+</div>
+</div>
+<div class="section" id="language">
+<span id="topic-language"></span><h3>language<a class="headerlink" href="#language" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>language: enu</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Defines the language of the topic.</p>
+<p>A topic can have the same name in different languages. For example in English
+&#8220;cars&#8221; topic and cars topic in French.
+In a language, a topic mush have a unique name.</p>
+<p>For further details see: <a class="reference internal" href="../../../family/robots/languages.html#dialog-supported-languages"><em>Dialog - List of supported Languages</em></a>.</p>
+</div>
+<div class="section" id="topic">
+<span id="topic-name"></span><h3>topic<a class="headerlink" href="#topic" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~name ()</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Defines the name to the topic.
+A topic must have one name and can have only one.</p>
+<p>The name of a topic must be unique in a given language.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#topic-functions"><em>Topic properties</em></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="rules">
+<span id="dialog-rule"></span><h2>Rules<a class="headerlink" href="#rules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="user-rule">
+<span id="simple-rule"></span><h3>User rule<a class="headerlink" href="#user-rule" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(Input) Answer
+u:(Input)
+  Answer</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>Input</em> is the <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>,</li>
+<li><em>Answer</em> is the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>.</li>
+</ul>
+<p>Indentation and blank lines are ignored.</p>
+<p><strong>Usage</strong></p>
+<p>Makes the robot say or do the <em>Answer</em> when he hears the <em>Input</em>.</p>
+<p><strong>Effect</strong></p>
+<p>If the <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a> matches, then the topic that contains the rule takes the focus.</p>
+<p>For further details, see: <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a>.</p>
+<p><strong>Conditions</strong></p>
+<p>The topic containing the user rules must be activated to answer.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(hello) hello human
+u:(how are you) I feel tired, my batteries are low</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hello
+hello human
+&gt; how are you
+I feel tired, my batteries are low</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#rule-functions"><em>Rule functions and properties</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="user-subrule">
+<span id="subrules"></span><h3>User subrule<a class="headerlink" href="#user-subrule" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input1) answer
+   u1:(input2) answer
+   u1:(input3) answer
+     u2:(input4) answer
+        u3:(input5) answer
+     u2:(input6) answer
+
+proposal: sentence
+   u1:(input7) answer
+   u1:(input8) answer</pre>
+</div>
+<p>Where <strong>u1:</strong>, <strong>u2:</strong> and <strong>u3:</strong> are user subrules.</p>
+<p>The indentation underlines the relationship between a rule and its subrules.</p>
+<p><strong>Usage</strong></p>
+<p>Allows creating several conversational contexts, making some rules activated if
+and only if a main <a class="reference internal" href="#simple-rule"><em>User rule</em></a> or <a class="reference internal" href="#proposal"><em>Proposal</em></a> has previously matched.</p>
+<p><strong>Activation / deactivation</strong></p>
+<p>At first, the <a class="reference internal" href="#simple-rule"><em>User rules</em></a> and <a class="reference internal" href="#proposal"><em>Proposal</em></a> are activated
+while <strong>subrules</strong> are deactivated.</p>
+<ul class="simple">
+<li>If a <a class="reference internal" href="#simple-rule"><em>User rule</em></a> matches and if it has a <a class="reference internal" href="#term-scope"><em class="xref std std-term">scope</em></a>, its <strong>subrules</strong>
+(<strong>u1:</strong>) are activated; the other <a class="reference internal" href="#simple-rule"><em>User rule</em></a> remain activated.</li>
+<li>If one of the <strong>u1:</strong> subrule matches, then its own subrules (<strong>u2:</strong>) are
+activated, and the first-level rules (<strong>u1:</strong>) are deactivated.</li>
+<li>At anytime, if another <a class="reference internal" href="#simple-rule"><em>User rule</em></a> matches, then the previous subrules
+are deactivated.</li>
+</ul>
+<dl class="glossary docutils">
+<dt id="term-scope">Scope</dt>
+<dd><p class="first">The subrules of a rule are called the <strong>scope</strong> of the rule.</p>
+<img alt="../../../_images/dialog_scope.png" class="last" src="../../../_images/dialog_scope.png" style="width: 403px; height: 192px;" />
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(talk about animals) do you have a cat or a dog?
+   u1:(dog) is it a big dog?
+     u2:(yes) make sure he has enough space to run
+     u2:(no) it is so cute
+   u1:(cat) do you live in the countryside?
+     u2:(yes) does your cat goes outside?
+        u3:(yes) does he hunt mouses?
+     u2:(no) i hope your flat is big enough
+   u1:(none) neither do I
+
+u:(talk about sport) what a good idea
+
+proposal: Do you want to talk about sport?
+   u1:(yes) Cool
+   u1:(no) OK</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; talk about animals
+do you have a cat or a dog?
+&gt; I have a cat
+do you live in the countryside?
+&gt; no
+I hope your flat is big enough
+&gt; Now I want to talk about sport
+what a good idea</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#stayinscope-function"><em>^stayInScope</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="proposal">
+<span id="id1"></span><h3>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>proposal: sentence</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>sentence</em> is a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>.</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>While rules are triggered by a <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>, to be said, a <strong>Proposal</strong>
+needs to be triggered with one of the <strong>topic progression</strong> functions:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#previousproposal-function"><em>^previousProposal</em></a>,</li>
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>, or</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+<p><strong>Activation/deactivation</strong></p>
+<p>When a proposal is said, then it cannot be said again except if the proposal is
+re-activated by <a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>.</p>
+<p><strong>Conditions</strong></p>
+<p>The <a class="reference internal" href="dialog.html#dialog-doc-topic"><em>Topic</em></a> containing the user rules must be active.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language: enu
+
+proposal: take a cup and fill it with milk
+proposal: add 3 strawberries
+proposal: add some vanilla ice cream
+proposal: close the cup with the lid and shake it
+proposal: you did it! you can enjoy your milkshake
+
+u:(I want a milkshake)
+    ok, let's do it.
+    follow my instruction and say next when you are ready for the next step.
+
+u:(next) ^nextProposal</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; I want a milkshake
+ok, let's do it.
+follow my instruction and say next when you are ready for the next step.
+&gt;next
+take a cup and fill it with milk
+&gt;next
+add 3 strawberries
+&gt;next
+add some vanilla ice cream
+&gt;next
+close the cup with the lid and shake it
+&gt;next
+you did it! you can enjoy your milkshake
+&gt;next
+(no answer)</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="delimiters">
+<span id="delimiter-rule"></span><h2>Delimiters<a class="headerlink" href="#delimiters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="choice">
+<span id="or-rule"></span><h3>Choice: [ ]<a class="headerlink" href="#choice" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:([word1 word2 wordn]) answer
+u:(input) [word1 word2 wordn]
+u:([word1 word2 wordn]) [word1 word2 wordn] human</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>word1</em> to <em>wordn</em> are words that could substitute with each other.</li>
+</ul>
+<p><strong>Usage</strong></p>
+<ul class="simple">
+<li>In a <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>: creates one rule accepting variations.</li>
+<li>In a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>: if the rule is triggered several times, the words
+will be used sequentially in order to create varying responses.</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:([hi hello]) [hello hi] human</pre>
+</div>
+<p>The <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a> can be &#8216;hello&#8217; or &#8216;hi&#8217;.
+The <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> can be &#8216;hello human&#8217; or &#8216;hi human&#8217;.
+By default answers are in a sequential order.</p>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hello
+hello human
+&gt; hello
+hi human
+&gt; hi
+hello human</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#first-function"><em>^first</em></a>.</li>
+<li><a class="reference internal" href="#rand-function"><em>^rand</em></a>.</li>
+<li><a class="reference internal" href="#repeat-function"><em>^repeat</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="phrase-delimiter">
+<span id="id2"></span><h3>Phrase delimiter: &#8221; &#8220;<a class="headerlink" href="#phrase-delimiter" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:([word1 "phrase 1"]) ["phrase 2" "phrase 3"]</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>word1</em> is a word that could substitute with <em>phrase 1</em>.</li>
+<li><em>phrase 2</em> and <em>phrase 3</em> are phrases used sequentially in order to create
+varying responses.</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>Allows you to place a phrase instead of a single word in a <a class="reference internal" href="#or-rule"><em>choice []</em></a>
+or an <a class="reference internal" href="#optional-delimiter"><em>optional part {}</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(["hello how are you" "hello are you OK"]) ["I am fine" "I am OK"]</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hello are you OK
+I am fine
+&gt; hello how are you
+I am OK</pre>
+</div>
+</div>
+<div class="section" id="optional-part">
+<span id="optional-delimiter"></span><h3>Optional part: { }<a class="headerlink" href="#optional-part" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(beginning of the sentence {optionalWord} end of the sentence) answer
+u:(beginning of the sentence {"optional phrase"} end of the sentence) answer</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>optionalWord</em> is a word that could appear or not in the <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>.</li>
+<li><em>optional phrase</em> is a phrase that could appear or not in the <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>.</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>Optional word or phrase, at the beginning, the middle or the end of a sentence.</p>
+<p><strong>Conditions</strong></p>
+<p>Inside a <a class="reference internal" href="#or-rule"><em>Choice: [ ]</em></a>, optional word can only be used inside a phrase:</p>
+<ul class="simple">
+<li><strong>Not correct</strong>: [chocolate milk {bread}]</li>
+<li><strong>Correct</strong>: [chocolate milk &#8220;{white} bread&#8221;]</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(hello {buddy} how are you) hello I am fine</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt;hello how are you
+hello I am fine
+&gt;hello buddy how are you
+hello I am fine</pre>
+</div>
+</div>
+</div>
+<div class="section" id="special-characters">
+<span id="id3"></span><h2>Special characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="comments">
+<span id="comment-in-rule"></span><h3>Comments:&nbsp;#<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="c1"># comment</span>
+</pre></div>
+</div>
+<p>Comment is defined by character <em>#</em>. All the characters following <em>#</em> in the
+same line will be ignored.</p>
+</div>
+<div class="section" id="wildcard">
+<span id="id4"></span><h3>Wildcard: *<a class="headerlink" href="#wildcard" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(sentence * sentence) answer</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Matches any word or phrase.</p>
+<p><strong>Use wildcards sparingly</strong></p>
+<p>Too many wildcards can degrade performance of the automatic speech recognition.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(my name is *) nice to meet you
+u:(I like to * a lot) it sounds cool</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; my name is David
+nice to meet you
+&gt; I like to dance a lot
+it sounds cool
+&gt; I like to play tennis a lot
+it sounds cool</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#input-storing"><em>Input storing: _</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="forbidden-word">
+<span id="id5"></span><h3>Forbidden word: !<a class="headerlink" href="#forbidden-word" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(sentence !forbiddenWord) answer</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Allows you to define a forbidden word in a <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(tell me a story) OK, a new one?
+u:(!don't tell me a new one) great, I'll tell you a new story!
+u:(don't tell me a new one) Ok, so I'll tell you the story of Peter Pan.</pre>
+</div>
+<p>Execution</p>
+<div class="highlight-ini"><pre>&gt; tell me a story
+OK, a new one?
+&gt; tell me a new one
+great, I'll tell you a new story!</pre>
+</div>
+</div>
+<div class="section" id="tag">
+<span id="id6"></span><h3>Tag: %<a class="headerlink" href="#tag" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>proposal: %tag sentence
+u:(input) %tag answer</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Allows you to identify one or several proposal(s) or rule(s) by a tag.
+Tags can be activated or deactivated. If a tag is deactivated, then the sentence
+is false and won&#8217;t be said.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+proposal: %weather what is the weather like today?
+u:(tell me a story) %story ok, I'll tell you the story of the three bears</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#activate-function"><em>^activate ^deactivate</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="input-storing">
+<span id="id7"></span><h3>Input storing: _<a class="headerlink" href="#input-storing" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(sentence _[word1 word2]) answer $1
+
+u:(sentence _~concept) answer $1
+
+u:(sentence _*) answer $1</pre>
+</div>
+<p>Where:</p>
+<ul>
+<li><p class="first"><em>_[word1 word2]</em> is the choice of words the robot will be able to catch and reuse.</p>
+</li>
+<li><p class="first"><em>$1</em> is the first caught word.</p>
+<p>If there are several <em>_</em>, <em>$2</em> is the second caught word, <em>$3</em> is the third, etc.
+There is no limitation in variable number.</p>
+</li>
+<li><p class="first"><em>_~conceptName</em> allows catching any word included in a concept.
+For further details, see: <a class="reference internal" href="#dialog-concept"><em>Concept call: ~</em></a>.</p>
+</li>
+<li><p class="first"><em>_*</em> allows catching any word said using the speech recognition.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">_* is not available for all robot yet, it requires a specific speech recognition license.</p>
+</div>
+<p><strong>Note</strong>: giving a choice of words to recognize eases the speech recognition.</p>
+</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>Allows catching one or several words in the <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>
+and reuse it within the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> directly following.</p>
+<p><strong>Tips</strong>: if you need to reuse the value elsewhere in the dialog, store it in
+a <a class="reference internal" href="#dialog-variable"><em>variable</em></a>.</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">u:(my name is _*) nice to meet you $1 $name</span><span class="o">=</span><span class="s">$1</span>
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(my name is _*) nice to meet you $1
+u:(I like _[chocolate cheese]) do you want to eat $1 now?</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; my name is David
+nice to meet you David
+&gt; I like cheese
+do you want to eat cheese now?
+&gt; I like chocolate
+do you want to eat chocolate now?</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#wildcard"><em>Wildcard: *</em></a>.</li>
+<li><a class="reference internal" href="#dialog-concept"><em>Concept call: ~</em></a>.</li>
+<li><a class="reference internal" href="#dialog-variable"><em>Variable: $</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="variable">
+<span id="dialog-variable"></span><h3>Variable: $<a class="headerlink" href="#variable" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre># Affect a variable
+u:(input) answer $variableName=value
+
+# Use a variable in a robot answer
+u:(input) answer $variableName</pre>
+</div>
+<p>Where:</p>
+<p><em>variableName</em> is the name of the variable.</p>
+<p><strong>Note</strong>: For each <a class="reference internal" href="#dialog-variable"><em>variable</em></a> <tt class="docutils literal"><span class="pre">$variableName</span></tt>,
+an <a class="reference internal" href="#event-rule"><em>event</em></a> <tt class="docutils literal"><span class="pre">e:variableName</span></tt> is also available. Variable are
+stored in ALMemory.</p>
+<p><strong>Usage</strong></p>
+<p>Variable can be used the same way in <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a> or <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>.</p>
+<p>Variables are global, i.e. they can be used in several behaviors.</p>
+<p>They don&#8217;t have a type and don&#8217;t need to be declared, they can be directly affected and used in rules.</p>
+<p>They can be:</p>
+<ul class="simple">
+<li>set</li>
+<li>used in a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a></li>
+<li>used in conditions (see: <a class="reference internal" href="#condition-rule"><em>Conditions: == &gt; &lt;&gt; &lt;</em></a>).</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+   u:(I want some _[chocolate cheese]) OK $askedFood=$1
+   u:(what did I ask) ^first["you asked $askedFood" "I don't know"]</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; what did I ask
+I don't know
+&gt; I want some chocolate
+OK
+&gt; what did I ask
+you asked chocolate</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#first-function"><em>^first</em></a>,</li>
+<li><a class="reference internal" href="#delete-function"><em>^clear</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="conditions">
+<span id="condition-rule"></span><h3>Conditions: == &gt; &lt;&gt; &lt;<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre># condition on variable
+u:($variableName==value) answer
+
+# answer if variable&gt;value
+u:(input) answer $variableName&gt;value
+
+# answer if variable&lt;value
+u:(input) answer $variableName&lt;value
+
+# answer if variable different from value
+u:(input) answer $variableName&lt;&gt;value
+
+# condition on variable in human input
+u:("input $variableName==value") answer
+
+# condition on variable in answer
+u:(input) ["answer $variableName==value" "another answer"]</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Placed in a <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a> or in a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>, a condition:</p>
+<ul class="simple">
+<li>triggers the rule if true,</li>
+<li>blocks the rule if false.</li>
+</ul>
+<p>A condition based on an empty variable will be ignored.</p>
+<p>The condition ordering does not matter.</p>
+<p>If condition is false anywhere in quote, then the sentence in quote will not be said.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+   u:(I want some _[chocolate cheese]) OK, you want some $1 $askedFood=$1
+   u:(what did I ask) ^first ["you asked $askedFood" "I don't know"]
+   u:(can I have more)
+   ^first["$askedFood==chocolate sorry, too much chocolate could hurt you"
+   "yes, please take more $askedFood"]</pre>
+</div>
+<p>See also: <a class="reference internal" href="#first-function"><em>^first</em></a>.</p>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; I want some chocolate
+OK, you want some chocolate
+&gt; can I have more
+sorry, too much chocolate could hurt you
+&gt; I want some cheese
+OK, you want some cheese
+&gt; can I have more
+yes, please take more cheese</pre>
+</div>
+</div>
+<div class="section" id="robot-events-e-eventname">
+<span id="event-rule"></span><h3>Robot events: e:eventName<a class="headerlink" href="#robot-events-e-eventname" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(e:event) answer
+# will answer whenever the event "event" is raised
+
+u:([e:event sentence]) answer
+# will answer whenever the event "event" is raised or the sentence is said.
+
+u:("e:event sentence") answer
+# will answer whenever the event "event" is raised and then the sentence is said
+# (the event must be raised before saying the sentence)</pre>
+</div>
+<p><strong>Note</strong>: For each <a class="reference internal" href="#event-rule"><em>event</em></a>, <tt class="docutils literal"><span class="pre">e:eventName</span></tt> a
+<a class="reference internal" href="#dialog-variable"><em>variable</em></a> <tt class="docutils literal"><span class="pre">$eventName</span></tt> is also available.</p>
+<p><strong>Note</strong>: in Choregraphe qiChat events and input/output can have the same name.
+If an event have the same name than box input/output, the variable is only linked
+to the box and is not anymore usable with <strong>ALMemory</strong>.</p>
+<p><strong>Usage</strong></p>
+<p>Catches an event.</p>
+<p>Allows to catch:</p>
+<ul class="simple">
+<li>any <a class="reference internal" href="../../../naoqi-eventindex.html"><em>NAOqi Events</em></a> providing information related to
+the robot: movement, battery information, face information,</li>
+<li>more specifically any <a class="reference internal" href="aldialog-api.html#dialog-event-list"><em>ALDialog event list</em></a> providing
+information about the Dialog engine,</li>
+<li>but also the events raised each time a value is assigned to a
+<a class="reference internal" href="dialog.html#dialog-doc-variables"><em>variable</em></a>.</li>
+</ul>
+<p><strong>Note</strong></p>
+<p><a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> cannot occur at high frequency, both data and event are merged.</p>
+<p><strong>Conditions</strong></p>
+<p>The subscribe will only occur when the topic is activated.
+The unsubscribe will occur when the topic is deactivated.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(be my puppet) ok, touch my leg or ask me
+u:(e:LeftBumperPressed "move this leg") ok I move the left leg
+u:(e:LeftBumperPressed "light this leg") ok I turn leds on left leg</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt;be my puppet
+ok, touch my leg or ask me
+&gt;(user touch the left bumper)
+ok I move the left leg
+&gt;(user touch the left bumper) light this leg
+ok I turn leds on left leg</pre>
+</div>
+</div>
+<div class="section" id="concept-call">
+<span id="dialog-concept"></span><h3>Concept call: ~<a class="headerlink" href="#concept-call" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(~conceptName) answer
+u:(input) answer ~conceptName</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>A <strong>Concept</strong> can be used both in <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a> or <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> to
+replace a list of item previously declared.</p>
+<ul class="simple">
+<li>In <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a>, the rule will match if anyone of the items of the list
+is recognized.</li>
+<li>In <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>, one item of the list will be said.
+Each call of the rule will call sequentially another item of the list.</li>
+</ul>
+<p><strong>Conditions</strong></p>
+<p>the <strong>Concept</strong> must be previously defined.</p>
+<p>To define a concept, see: <a class="reference internal" href="#dialog-concept-def"><em>concept</em></a> and
+<a class="reference internal" href="#dialog-dynamic-def"><em>dynamic</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+   concept:(want) [want need desire like]
+   concept:(alcohol) [beer vodka "red wine"]
+   concept:(child-drink) ["orange juice" milk]
+   concept:(drink) [~alcohol ~child-drink]
+
+   u: (what do you do) I can help people with drinks
+
+   u:(I ~want to drink) what you ~want to drink?
+        u1:(* _~drink) do you want me to search $1 for you?</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; what do you do
+I can help people with drinks
+&gt; I need to drink
+what do you want to drink?
+&gt; I want red wine
+do you want me to search red wine for you?</pre>
+</div>
+</div>
+</div>
+<div class="section" id="forbidden-characters">
+<h2>Forbidden characters<a class="headerlink" href="#forbidden-characters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="forbidden-characters-in-human-input">
+<h3>Forbidden characters in Human input<a class="headerlink" href="#forbidden-characters-in-human-input" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Do not use any punctuation mark.</li>
+<li>Type only the words to be recognized.</li>
+<li>like all <a class="reference internal" href="#special-characters"><em>Special characters</em></a>, $ is a reserved word, type dollar instead.</li>
+<li>Apostrophe ( &#8216; ) is allowed but not the typographic apostrophe ( ’ ).</li>
+<li><strong>Japanese only</strong>:
+speech recognition does not support Fullwidth numbers
+[０ １ ２ ３ ４ ５ ６ ７ ８ ９].
+Use Halfwidth numbers [0 1 2 3 4 5 6 7 8 9] instead.</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(have you a dollar for me) No, sorry, I have no pocket!
+u:(I'm rich) good for you. Are you happy?</pre>
+</div>
+</div>
+<div class="section" id="forbidden-characters-in-robot-output">
+<h3>Forbidden characters in Robot output<a class="headerlink" href="#forbidden-characters-in-robot-output" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>like all <a class="reference internal" href="#special-characters"><em>Special characters</em></a>, $ is a reserved word, type dollar instead.</li>
+<li>Apostrophe ( &#8216; ) is allowed but not the typographic apostrophe ( ’ ).</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(have you a dollar for me) No, sorry, I have no pocket!
+u:(I'm rich) good for you. Are you happy?</pre>
+</div>
+</div>
+</div>
+<div class="section" id="rule-functions-and-properties">
+<span id="rule-functions"></span><h2>Rule functions and properties<a class="headerlink" href="#rule-functions-and-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="activate-deactivate">
+<span id="activate-function"></span><h3>^activate ^deactivate<a class="headerlink" href="#activate-deactivate" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer ^deactivate(tag)
+u:(input) answer ^activate(tag)</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p><strong>^deactivate</strong> function deactivates a tag, <strong>^activate</strong> function reactivates a tag.</p>
+<p>If a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> contains a deactivated tag, this <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>
+cannot be triggered.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction()
+language: enu
+
+proposal: %greeting1 hello
+proposal: nice to meet you
+u:(hello) hello ^deactivate(greeting1)
+u:(say something) ^nextProposal</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; Hello
+Hello
+&gt; say something
+nice to meet you</pre>
+</div>
+</div>
+<div class="section" id="clear">
+<span id="delete-function"></span><h3>^clear<a class="headerlink" href="#clear" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) ^clear(variableName)</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Clears a variable. A cleared variables cannot be said. A sentence with cleared
+variable cannot be said. A condition with cleared variable is always false.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(my name is _*) nice to meet you $name=$1
+u:(what is my name) ^first["your name is $name" "I don't know"]
+   u1:(no) OK ^clear(name)</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; my name is David
+nice to meet you
+&gt; what is my name
+your name is David
+&gt; no
+OK
+&gt; what is my name
+I don't know</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#first-function"><em>^first</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="exist-notexist">
+<span id="exist-function"></span><h3>^exist ^notExist<a class="headerlink" href="#exist-notexist" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~exist()
+language: enu
+u:(hello) ["^exist(42) the variable exist" "^notExist(42) the variable doesn't exist $42=1"]</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>A sentence that contains ^exist won&#8217;t be said if the variable parameter doesn&#8217;t exist or is an empty string.</p>
+</div>
+<div class="section" id="first">
+<span id="first-function"></span><h3>^first<a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) ^first [answer1 answer2]
+
+# Inside a choice, requires quotes
+u:(input)  [answer1 "^first [answer2 answer3]"]</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>When added before a <a class="reference internal" href="#or-rule"><em>Choice: [ ]</em></a> in the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> part,
+instead of using each answer in turn, the interpreter always use the first
+valid <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>.</p>
+<p>A valid <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> is an answer:</p>
+<ul class="simple">
+<li>without any condition nor non-affected variable,</li>
+<li>including affected variable(s),</li>
+<li>including a condition tested as true.</li>
+</ul>
+<p>Using a non-affected variable in a robot output will make the rule invalid, i.e.
+the rule will not be said at all.</p>
+<p>To avoid this situation, use the function ^first before a choice [ ].</p>
+<p>This function tries to say the first valid output. If the first element of the
+choice is invalid because it contains a non-affected variable, it will try the
+second element, and so on.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(my name is David) nice to meet you David $name=David
+u:(my name is Paul) nice to meet you Paul $name=Paul
+u:(what is my name) ^first["your name is $name" "I don't know"]</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; what is my name
+I don't know
+&gt; my name is David
+nice to meet you David
+&gt; what is my name
+your name is David</pre>
+</div>
+<p>For further details, see : <a class="reference internal" href="#condition-rule"><em>Conditions: == &gt; &lt;&gt; &lt;</em></a>.</p>
+</div>
+<div class="section" id="goto">
+<span id="goto-function"></span><h3>^goto<a class="headerlink" href="#goto" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input1) %tag Answer
+u:(input2) ^goto(tag)</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>The <strong>^goto</strong> function allows you to:</p>
+<ul class="simple">
+<li>jump to a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> (in a user rule or an activated proposal)
+containing a specific <a class="reference internal" href="#tag"><em>tag</em></a>.</li>
+<li>It can also be used to declare two <a class="reference internal" href="dialog.html#human-input"><em>Human inputs</em></a> as equivalent.</li>
+<li>To jump to a deactivated <a class="reference internal" href="#proposal"><em>Proposal</em></a>, use <a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>.</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(hello how are you) hello ^goto(how)
+u:(how you are) %how I'm fine</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; how are you
+I'm fine
+&gt; hello how are you
+hello I'm fine</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#previousproposal-function"><em>^previousProposal</em></a>,</li>
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="gotorandom">
+<span id="gotorandom-function"></span><h3>^gotoRandom<a class="headerlink" href="#gotorandom" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) ^gotoRandom(tag)
+proposal: %tag answer1
+proposal: %tag answer2</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>The <strong>^gotoRandom</strong> function is identical to <a class="reference internal" href="#goto-function"><em>^goto</em></a> except if the
+tag is used in several rules, it will chose one randomly.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(hello) ^goto(hi)
+proposal %hi hello
+proposal: %hi welcome
+proposal: %hi hey</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hello
+hey
+&gt; hello
+hello
+&gt; hello
+welcome</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#previousproposal-function"><em>^previousProposal</em></a>,</li>
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="gotoreactivate">
+<span id="gotoreactivate-function"></span><h3>^gotoReactivate<a class="headerlink" href="#gotoreactivate" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>proposal: %tag Answer
+u:(input) ^gotoReactivate(tag)</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>The <strong>^gotoReactivate</strong> function allows you to jump to a deactivated
+<a class="reference internal" href="#proposal"><em>Proposal</em></a> and reactivate it.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+proposal: %love I love you
+u:(do you love me) yes, ^gotoReactivate(love)
+u:(are you sure) sure, ^gotoReactivate(love)</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>I love you
+&gt; do you love me
+yes, I love you
+&gt; are you sure
+sure, I love you</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#previousproposal-function"><em>^previousProposal</em></a>,</li>
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="nextproposal">
+<span id="nextproposal-function"></span><h3>^nextProposal<a class="headerlink" href="#nextproposal" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer ^nextProposal</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>The function <strong>^nextProposal</strong> says the first activated proposal in the
+<a class="reference internal" href="dialog.html#dialog-doc-topic"><em>Topic</em></a> which has the <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language: enu
+
+u:(hi) hello ^nextProposal
+
+proposal: how are you?
+  u1:(I'm fine) cool!
+  u1:(I'm tired) oh, you should take a nap
+
+proposal: again!</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hi
+hello how are you?
+&gt; I'm tired
+oh, you should take a nap
+&gt; hi
+hello again!</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="play">
+<span id="play-function"></span><h3>^play<a class="headerlink" href="#play" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language: enu
+u:(play * sound) ^play(sound)</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>^play is a beta function that can be removed at any version. ^play allows playing
+a sound with audio device soundSet instead of animated speech.
+See <a class="reference internal" href="../alaudiodevice.html#alaudiodevice"><em>ALAudioDevice</em></a>.</p>
+</div>
+<div class="section" id="previousproposal">
+<span id="previousproposal-function"></span><h3>^previousProposal<a class="headerlink" href="#previousproposal" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer ^previousProposal</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>The function <strong>^previousProposal</strong> repeats the <a class="reference internal" href="#proposal"><em>Proposal</em></a> said previously
+to the last in the same <a class="reference internal" href="dialog.html#dialog-doc-topic"><em>Topic</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language: enu
+
+u:(hi) hello ^nextProposal
+
+proposal: how are you?
+  u1:(I'm fine) cool!
+  u1:(I'm tired) oh ^nextProposal
+
+proposal: do you want some tea?
+   u1:(yes) I'm bringing you a cup of tea.
+   u1:(no) okay, ^nextProposal
+
+proposal: what about some coffee?
+   u1:(yes) I'm bringing you a cup of coffee.
+   u1:(no) okay, maybe you should just take a nap.
+   u1:(can you repeat please) ^sameProposal ^stayInScope
+   u1:(what did you say before) ^previousProposal ^stayInScope</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hi
+hello how are you?
+&gt; I'm tired
+do you want some tea?
+&gt; no
+OK, what about coffee?
+&gt; can you repeat please
+OK, what about coffee?
+&gt; what did you say before
+do you want some tea?</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#sameproposal-function"><em>^sameProposal</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="private">
+<span id="private-userrules"></span><h3>^private<a class="headerlink" href="#private" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:^private(Input) Answer</pre>
+</div>
+<p><strong>Effect</strong></p>
+<p>Apply a private status to a rule.
+A private <strong>user rule</strong> is only active when
+its corresponding topic has the <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~music ()
+language:enu
+
+u:(I want to talk about music) OK!
+u:^private(what are we talking about) we are talking about music</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; I want to talk about music
+OK!
+&gt; what are we talking about
+we are talking about music</pre>
+</div>
+</div>
+<div class="section" id="rand">
+<span id="rand-function"></span><h3>^rand<a class="headerlink" href="#rand" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) ^rand[answer1 answer2]</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Can be added before a <a class="reference internal" href="#or-rule"><em>choice []</em></a> in the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>.</p>
+<p>Instead of using each answer sequentially, the interpreter will choose randomly
+a valid <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a>.</p>
+<p>A valid <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> is:</p>
+<ul class="simple">
+<li>an answer including a condition tested as true or</li>
+<li>an answer including no condition at all.</li>
+</ul>
+<p>Rand function in a choice needs to be inside quote.</p>
+<p>For further details, see: <a class="reference internal" href="#condition-rule"><em>Conditions: == &gt; &lt;&gt; &lt;</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>u:(hello) ^rand[hello hi "what's up" "hey there"]</pre>
+</div>
+</div>
+<div class="section" id="repeat">
+<span id="repeat-function"></span><h3>^repeat<a class="headerlink" href="#repeat" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(^repeat[word1 word2 word3]) answer</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Allow a free combination of listed words.</p>
+<p>The <a class="reference internal" href="dialog.html#human-input"><em>Human input</em></a> is recognized if one or several word(s) among the list
+are said, regardless of the order.</p>
+</div>
+<div class="section" id="sameproposal">
+<span id="sameproposal-function"></span><h3>^sameProposal<a class="headerlink" href="#sameproposal" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer ^sameProposal</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>The function <strong>^sameProposal</strong> repeats the last <a class="reference internal" href="#proposal"><em>proposal</em></a>
+said in the same topic.</p>
+<p><strong>Best practices</strong></p>
+<p>When using <strong>^sameProposal</strong>, always make the robot say something like
+&#8216;Ok I&#8217;ll repeat&#8217;, &#8216;No problem,&#8217; so that the user knows what to expect.
+It also makes the repetition clearer.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language: enu
+
+u:(hi) hello ^nextProposal
+
+proposal: how are you?
+  u1:(I'm fine) cool!
+  u1:(I'm tired) oh ^nextProposal
+
+proposal: do you want some coffee?
+   u1:(yes) I'm bringing you a cup of coffee.
+   u1:(no) okay, maybe you should just take a nap.
+   u1:(can you repeat please) Ok I'll repeat. ^sameProposal</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hi
+hello how are you?
+&gt; I'm tired
+do you want some coffee?
+&gt; can you repeat please
+Ok I'll repeat. Do you want some coffee?
+&gt; yes
+I'm bringing you a cup of coffee.</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#nextproposal-function"><em>^nextProposal</em></a>,</li>
+<li><a class="reference internal" href="#previousproposal-function"><em>^previousProposal</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#topictag-function"><em>^topicTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="stayinscope">
+<span id="stayinscope-function"></span><h3>^stayInScope<a class="headerlink" href="#stayinscope" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer
+   u1:(input1) answer ^stayInScope
+   u1:(input2) answer</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Used in a rule or subrule to stay in the current scope when the corresponding
+rule has matched.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>u:(let's talk about animals) do you have a cat or a dog?
+   u1:(I {also} have a dog) dogs are funny ^stayInScope
+   u1:(I {also} have a cat) I once met a cat  ^stayInScope</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; let's talk about animals
+do you have a cat or a dog?
+&gt; I have a dog
+I love dogs
+&gt; I also have a cat
+I once met a cat</pre>
+</div>
+</div>
+</div>
+<div class="section" id="animated-speech-functions">
+<h2>Animated speech functions<a class="headerlink" href="#animated-speech-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="switchfocus">
+<span id="switchfocus-function"></span><h3>^switchFocus<a class="headerlink" href="#switchfocus" title="Permalink to this headline">¶</a></h3>
+<p>Stops dialog engine and runs a <strong>Behavior</strong> identified by application <strong>uuid</strong> and <strong>Behavior</strong> name.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If behavior is at the root of the application, then switch focus parameter is ^switchFocus(uuid/.)</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Life needs to be started.</p>
+</div>
+<p><strong>Syntax</strong></p>
+<div class="highlight-QiChat"><div class="highlight"><pre><span class="ow">topic</span>: ~addition()
+<span class="ow">language</span>: enu
+
+# we suppose an application weather is installed on robot.
+<span class="o">u:</span><span class="nv">(start weather)</span> ^switchFocus(weatherApplication/weatherBehavior)
+</pre></div>
+</div>
+</div>
+<div class="section" id="mode">
+<span id="mode-function"></span><h3>^mode<a class="headerlink" href="#mode" title="Permalink to this headline">¶</a></h3>
+<p>Changes the body language mode for the current text.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 "^mode(body_language_mode) word1 word2..." answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+</div>
+<div class="section" id="run">
+<span id="run-function"></span><h3>^run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h3>
+<p>Suspends the speech, runs an animation and resumes the speech.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^run(animation_full_name) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#start-function"><em>^start</em></a>,</li>
+<li><a class="reference internal" href="#stop-function"><em>^stop</em></a>,</li>
+<li><a class="reference internal" href="#wait-function"><em>^wait</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="runtag">
+<span id="runtag-function"></span><h3>^runTag<a class="headerlink" href="#runtag" title="Permalink to this headline">¶</a></h3>
+<p>Suspends the speech, runs an animation which has the mentioned tag and resumes the speech.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^runTag(tag_name) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#starttag-function"><em>^startTag</em></a>,</li>
+<li><a class="reference internal" href="#stoptag-function"><em>^stopTag</em></a>,</li>
+<li><a class="reference internal" href="#waittag-function"><em>^waitTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="runsound">
+<span id="runsound-function"></span><h3>^runSound<a class="headerlink" href="#runsound" title="Permalink to this headline">¶</a></h3>
+<p>Suspends the speech, plays a sound and resumes the speech.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^runSound(soundSet/soundFile) answer2
+u:(input) answer1 ^runSound(soundSet/soundFile, soundVolume) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#startsound-function"><em>^startSound</em></a>,</li>
+<li><a class="reference internal" href="#stopsound-function"><em>^stopSound</em></a>,</li>
+<li><a class="reference internal" href="#waitsound-function"><em>^waitSound</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="start">
+<span id="start-function"></span><h3>^start<a class="headerlink" href="#start" title="Permalink to this headline">¶</a></h3>
+<p>Starts behaviors or animations.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^start(behavior) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#run-function"><em>^run</em></a>,</li>
+<li><a class="reference internal" href="#stop-function"><em>^stop</em></a>,</li>
+<li><a class="reference internal" href="#wait-function"><em>^wait</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="starttag">
+<span id="starttag-function"></span><h3>^startTag<a class="headerlink" href="#starttag" title="Permalink to this headline">¶</a></h3>
+<p>Starts an animation which has the mentioned tag.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^startTag(tag_name) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#runtag-function"><em>^runTag</em></a>,</li>
+<li><a class="reference internal" href="#stoptag-function"><em>^stopTag</em></a>,</li>
+<li><a class="reference internal" href="#waittag-function"><em>^waitTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="startsound">
+<span id="startsound-function"></span><h3>^startSound<a class="headerlink" href="#startsound" title="Permalink to this headline">¶</a></h3>
+<p>Plays a sound in background.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^startSound(soundSet/soundFile) answer2
+u:(input) answer1 ^startSound(^startSound(soundSet/soundFile, soundVolume)) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#runsound-function"><em>^runSound</em></a>,</li>
+<li><a class="reference internal" href="#stopsound-function"><em>^stopSound</em></a>,</li>
+<li><a class="reference internal" href="#waitsound-function"><em>^waitSound</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="stop">
+<span id="stop-function"></span><h3>^stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h3>
+<p>Stops a running behavior or an animation.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^stop(behavior) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#run-function"><em>^run</em></a>,</li>
+<li><a class="reference internal" href="#start-function"><em>^start</em></a>,</li>
+<li><a class="reference internal" href="#wait-function"><em>^wait</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="stoptag">
+<span id="stoptag-function"></span><h3>^stopTag<a class="headerlink" href="#stoptag" title="Permalink to this headline">¶</a></h3>
+<p>Stops a running animation which has the mentioned tag.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^stopTag(tag_name) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#runtag-function"><em>^runTag</em></a>,</li>
+<li><a class="reference internal" href="#starttag-function"><em>^startTag</em></a>,</li>
+<li><a class="reference internal" href="#waittag-function"><em>^waitTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="stopsound">
+<span id="stopsound-function"></span><h3>^stopSound<a class="headerlink" href="#stopsound" title="Permalink to this headline">¶</a></h3>
+<p>Stops a sound.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^stopSound(soundSet/soundFile) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#runsound-function"><em>^runSound</em></a>,</li>
+<li><a class="reference internal" href="#startsound-function"><em>^startSound</em></a>,</li>
+<li><a class="reference internal" href="#waitsound-function"><em>^waitSound</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="wait">
+<span id="wait-function"></span><h3>^wait<a class="headerlink" href="#wait" title="Permalink to this headline">¶</a></h3>
+<p>Waits until a running behavior or an animation has finished.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^wait(animation) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#run-function"><em>^run</em></a>,</li>
+<li><a class="reference internal" href="#start-function"><em>^start</em></a>,</li>
+<li><a class="reference internal" href="#stop-function"><em>^stop</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="waittag">
+<span id="waittag-function"></span><h3>^waitTag<a class="headerlink" href="#waittag" title="Permalink to this headline">¶</a></h3>
+<p>Suspends the speech, waits for the end of the animation which has the mentioned
+tag and resumes the speech.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^waitTag(tag_name) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#runtag-function"><em>^runTag</em></a>,</li>
+<li><a class="reference internal" href="#starttag-function"><em>^startTag</em></a>,</li>
+<li><a class="reference internal" href="#stoptag-function"><em>^stopTag</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="waitsound">
+<span id="waitsound-function"></span><h3>^waitSound<a class="headerlink" href="#waitsound" title="Permalink to this headline">¶</a></h3>
+<p>Suspends the speech, waits for the end of the sound and resumes the speech.</p>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>u:(input) answer1 ^waitSound(soundSet/soundFile) answer2</pre>
+</div>
+<p>For further details, see <a class="reference internal" href="../alanimatedspeech.html#annotated-text"><em>ALAnimatedSpeech: Annotated Text</em></a>.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#runsound-function"><em>^runSound</em></a>,</li>
+<li><a class="reference internal" href="#startsound-function"><em>^startSound</em></a>,</li>
+<li><a class="reference internal" href="#stopsound-function"><em>^stopSound</em></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="topic-properties">
+<span id="topic-functions"></span><h2>Topic properties<a class="headerlink" href="#topic-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="notinembeddedasr">
+<span id="notinembeddedasr-function"></span><h3>^notInEmbeddedASR<a class="headerlink" href="#notinembeddedasr" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ^notInEmbeddedASR ()</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Prevents the automatic loading of the rules in the speech recognition engine.</p>
+<p>By default, the <strong>user rules</strong> contained in a topic are loaded into the embedded
+speech recognition engine.
+If <strong>^notInEmbeddedASR</strong> property is used, none of the <strong>user rules</strong> are
+loaded into the embedded ASR engine. Very short words or rules with many * can
+trigger whatever we say.</p>
+</div>
+<div class="section" id="nopick">
+<span id="nopick-function"></span><h3>^noPick<a class="headerlink" href="#nopick" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ^noPick ()</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Prevents the topic from getting randomly the <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a>.</p>
+<p>The <strong>Topic</strong> can still get the focus when a rule matches, but the
+<strong>Dialog engine</strong> cannot decide by itself to give the focus.</p>
+</div>
+<div class="section" id="nostay">
+<span id="nostay-function"></span><h3>^noStay<a class="headerlink" href="#nostay" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ^noStay ()plus</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Prevents the topic from keeping the <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a>.</p>
+<p>If a rule matches in the topic, the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> is executed,
+but the <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a> stays on the previous topic.</p>
+</div>
+<div class="section" id="resetonfocus">
+<span id="resetonfocus-function"></span><h3>^resetOnFocus<a class="headerlink" href="#resetonfocus" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ^resetOnFocus ()</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>By default a proposal can be said only once.</p>
+<p><strong>^resetOnFocus</strong> reactivates all proposals of a <strong>Topic</strong> when:</p>
+<ul class="simple">
+<li>the topic gets the <a class="reference internal" href="dialog.html#dialog-doc-focus"><em>Focus</em></a> and</li>
+<li>all his proposals has been previously deactivated.</li>
+</ul>
+</div>
+<div class="section" id="fallback">
+<span id="fallback-property"></span><h3>^fallback<a class="headerlink" href="#fallback" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ^fallback ()</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Give the lowest priority to the rules contained in this topic.</p>
+<p>Its rules will be taken in consideration after the rules of:</p>
+<ol class="arabic simple">
+<li>the main section of the Topic having the focus,</li>
+<li>the main section of all Topics - ^fallback excepted,</li>
+<li>the recover sections of all topics.</li>
+</ol>
+</div>
+<div class="section" id="topictag">
+<span id="topictag-function"></span><h3>^topicTag<a class="headerlink" href="#topictag" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>^topicTag(topic,tag)</pre>
+</div>
+<p><strong>Usage</strong></p>
+<p>Allows to go in a specific location in a topic, defined by a <a class="reference internal" href="#tag"><em>tag</em></a>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~topic1()
+language: enu
+
+proposal: %test test</pre>
+</div>
+<div class="highlight-ini"><pre>topic: ~topic2()
+language: enu
+
+u:(test) ^topicTag(topic1,test)</pre>
+</div>
+<p><strong>Related functions</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#activate-function"><em>^activate ^deactivate</em></a>,</li>
+<li><a class="reference internal" href="#goto-function"><em>^goto</em></a>,</li>
+<li><a class="reference internal" href="#gotorandom-function"><em>^gotoRandom</em></a>,</li>
+<li><a class="reference internal" href="#gotoreactivate-function"><em>^gotoReactivate</em></a>,</li>
+<li><a class="reference internal" href="#tag"><em>Tag: %</em></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="transformation-rules">
+<span id="transformation-rule"></span><h2>Transformation rules<a class="headerlink" href="#transformation-rules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="skin-s">
+<span id="skin-rule"></span><h3>Skin: s:<a class="headerlink" href="#skin-s" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>s:(Answer) Modifications
+s:(Answer)
+Modifications</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>Answer</em> is the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> we want to match to apply this skin</li>
+<li><em>Modifications</em> the modifications <a class="reference internal" href="#skin-addword"><em>^addword</em></a> or/and <a class="reference internal" href="#skin-replace"><em>^replace</em></a> we want to apply to the answer</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>When a <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> matches a skin the robot says the <em>Answer</em> after <em>Modifications</em> are applied.</p>
+</div>
+<div class="section" id="addword">
+<span id="skin-addword"></span><h3>^addword<a class="headerlink" href="#addword" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>s:(Answer) ^addword(Expression, Position, Frequency)</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>Answer</em> is the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> to be matched</li>
+<li><em>Expression</em> can be any string (word(s), concept...)</li>
+<li><em>Position</em> is the position where you want to add the expression in the sentence. This parameter can be:<ul>
+<li>an integer: for instance &#8220;2&#8221; if you want to put the <em>Expression</em> in the second position</li>
+<li>&#8220;end&#8221; if you want the <em>Expression</em> to be added at the end of the sentence</li>
+<li>&#8220;start&#8221; if you want the <em>Expression</em> to be added at the beginning of the sentence</li>
+</ul>
+</li>
+<li><em>Frequency</em> represents the probability of the skin to be applied (1:always apply, 0:never apply)</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>Add an <em>Expression</em> in each <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> matching the skin.</p>
+<p><strong>Conditions</strong></p>
+<p>The rule must be active.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(hello) hello human
+u:(how are you) I am fine
+
+s:(hello human) ^addword(I am your father, end, 1)
+s:(*) ^addword(hey, start, 1)</pre>
+</div>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hello
+hey hello human I am your father
+&gt; how are you
+hey I am fine and you</pre>
+</div>
+</div>
+<div class="section" id="replace">
+<span id="skin-replace"></span><h3>^replace<a class="headerlink" href="#replace" title="Permalink to this headline">¶</a></h3>
+<p><strong>Syntax</strong></p>
+<div class="highlight-ini"><pre>s:(Answer) ^replace(Expression1, Expression2, Frequency)</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>Answer</em> is the <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> to be matched</li>
+<li><em>Expression1</em> can be any string (word(s), concept...) you want to replace</li>
+<li><em>Expression2</em> can be any string (word(s), concept...) you want to put instead of <em>Expression1</em></li>
+<li><em>Frequency</em> is the probability of the skin to be applied (1:always, 0:never)</li>
+</ul>
+<p><strong>Usage</strong></p>
+<p>Replaces <em>Expression1</em> with <em>Expression2</em> in each <a class="reference internal" href="dialog.html#robot-output"><em>Robot output</em></a> matching the skin.</p>
+<p><strong>Conditions</strong></p>
+<p>The rule must be active.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>topic: ~introduction ()
+language:enu
+
+u:(hello) hello human
+u:(what do you like to do) I like to speak with you human
+u:(do you want to play) yes human we can play together
+
+s:({*} human {*}) ^replace(human, Michael, 1)
+s:({*} speak {*}) ^replace(speak, play, 1)</pre>
+</div>
+<p>If you are not familiar with {*} check: <a class="reference internal" href="#wildcard"><em>Wildcard: *</em></a> to under <a class="reference internal" href="#optional-delimiter"><em>Optional part: { }</em></a>.</p>
+<p><strong>Execution</strong></p>
+<div class="highlight-ini"><pre>&gt; hello human
+hello Michael
+&gt; what do you like to do
+I like to play with you Michael
+&gt; do you want to play
+yes Michael we can play together</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="dialog.html" title="QiChat - Introduction">QiChat - Introduction</a>
+     |
+    <a href="aldialog_syntax_toc.html" title="QiChat - Table of Content" accesskey="U">QiChat - Table of Content</a>
+   |
+    <a href="aldialog_syntax_overview.html" title="QiChat - Overview">QiChat - Overview</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">NAOqi Audio</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../alanimatedspeech.html">ALAnimatedSpeech</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudiodevice.html">ALAudioDevice</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudioplayer.html">ALAudioPlayer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudiorecorder.html">ALAudioRecorder</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alsoundlocalization.html">ALSoundLocalization</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="aldialog.html">ALDialog</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="aldialog-api.html">ALDialog API</a></li>
+<li class="toctree-l6 current"><a class="reference internal" href="aldialog_syntax_toc.html">QiChat - Table of Content</a><ul class="current">
+<li class="toctree-l7"><a class="reference internal" href="dialog.html">QiChat - Introduction</a></li>
+<li class="toctree-l7 current"><a class="current reference internal" href="">QiChat - Syntax</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="aldialog_syntax_overview.html">QiChat - Overview</a></li>
+<li class="toctree-l7"><a class="reference internal" href="aldialog_syntax_cheat_sheet.html">QiChat - Cheat sheet</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="aldialog_tuto.html">ALDialog Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../alsounddetection.html">ALSoundDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alspeechrecognition.html">ALSpeechRecognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../altexttospeech.html">ALTextToSpeech</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alvoiceemotionanalysis.html">ALVoiceEmotionAnalysis</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudiosourcelocalization.html">ALAudioSourceLocalization</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">QiChat - Syntax</a><ul>
+<li><a class="reference internal" href="#header-keywords">Header keywords</a><ul>
+<li><a class="reference internal" href="#concept">concept</a></li>
+<li><a class="reference internal" href="#dynamic">dynamic</a></li>
+<li><a class="reference internal" href="#include">include</a></li>
+<li><a class="reference internal" href="#language">language</a></li>
+<li><a class="reference internal" href="#topic">topic</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules</a><ul>
+<li><a class="reference internal" href="#user-rule">User rule</a></li>
+<li><a class="reference internal" href="#user-subrule">User subrule</a></li>
+<li><a class="reference internal" href="#proposal">Proposal</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delimiters">Delimiters</a><ul>
+<li><a class="reference internal" href="#choice">Choice: [ ]</a></li>
+<li><a class="reference internal" href="#phrase-delimiter">Phrase delimiter: &#8221; &#8220;</a></li>
+<li><a class="reference internal" href="#optional-part">Optional part: { }</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#special-characters">Special characters</a><ul>
+<li><a class="reference internal" href="#comments">Comments:&nbsp;#</a></li>
+<li><a class="reference internal" href="#wildcard">Wildcard: *</a></li>
+<li><a class="reference internal" href="#forbidden-word">Forbidden word: !</a></li>
+<li><a class="reference internal" href="#tag">Tag: %</a></li>
+<li><a class="reference internal" href="#input-storing">Input storing: _</a></li>
+<li><a class="reference internal" href="#variable">Variable: $</a></li>
+<li><a class="reference internal" href="#conditions">Conditions: == &gt; &lt;&gt; &lt;</a></li>
+<li><a class="reference internal" href="#robot-events-e-eventname">Robot events: e:eventName</a></li>
+<li><a class="reference internal" href="#concept-call">Concept call: ~</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forbidden-characters">Forbidden characters</a><ul>
+<li><a class="reference internal" href="#forbidden-characters-in-human-input">Forbidden characters in Human input</a></li>
+<li><a class="reference internal" href="#forbidden-characters-in-robot-output">Forbidden characters in Robot output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rule-functions-and-properties">Rule functions and properties</a><ul>
+<li><a class="reference internal" href="#activate-deactivate">^activate ^deactivate</a></li>
+<li><a class="reference internal" href="#clear">^clear</a></li>
+<li><a class="reference internal" href="#exist-notexist">^exist ^notExist</a></li>
+<li><a class="reference internal" href="#first">^first</a></li>
+<li><a class="reference internal" href="#goto">^goto</a></li>
+<li><a class="reference internal" href="#gotorandom">^gotoRandom</a></li>
+<li><a class="reference internal" href="#gotoreactivate">^gotoReactivate</a></li>
+<li><a class="reference internal" href="#nextproposal">^nextProposal</a></li>
+<li><a class="reference internal" href="#play">^play</a></li>
+<li><a class="reference internal" href="#previousproposal">^previousProposal</a></li>
+<li><a class="reference internal" href="#private">^private</a></li>
+<li><a class="reference internal" href="#rand">^rand</a></li>
+<li><a class="reference internal" href="#repeat">^repeat</a></li>
+<li><a class="reference internal" href="#sameproposal">^sameProposal</a></li>
+<li><a class="reference internal" href="#stayinscope">^stayInScope</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#animated-speech-functions">Animated speech functions</a><ul>
+<li><a class="reference internal" href="#switchfocus">^switchFocus</a></li>
+<li><a class="reference internal" href="#mode">^mode</a></li>
+<li><a class="reference internal" href="#run">^run</a></li>
+<li><a class="reference internal" href="#runtag">^runTag</a></li>
+<li><a class="reference internal" href="#runsound">^runSound</a></li>
+<li><a class="reference internal" href="#start">^start</a></li>
+<li><a class="reference internal" href="#starttag">^startTag</a></li>
+<li><a class="reference internal" href="#startsound">^startSound</a></li>
+<li><a class="reference internal" href="#stop">^stop</a></li>
+<li><a class="reference internal" href="#stoptag">^stopTag</a></li>
+<li><a class="reference internal" href="#stopsound">^stopSound</a></li>
+<li><a class="reference internal" href="#wait">^wait</a></li>
+<li><a class="reference internal" href="#waittag">^waitTag</a></li>
+<li><a class="reference internal" href="#waitsound">^waitSound</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#topic-properties">Topic properties</a><ul>
+<li><a class="reference internal" href="#notinembeddedasr">^notInEmbeddedASR</a></li>
+<li><a class="reference internal" href="#nopick">^noPick</a></li>
+<li><a class="reference internal" href="#nostay">^noStay</a></li>
+<li><a class="reference internal" href="#resetonfocus">^resetOnFocus</a></li>
+<li><a class="reference internal" href="#fallback">^fallback</a></li>
+<li><a class="reference internal" href="#topictag">^topicTag</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#transformation-rules">Transformation rules</a><ul>
+<li><a class="reference internal" href="#skin-s">Skin: s:</a></li>
+<li><a class="reference internal" href="#addword">^addword</a></li>
+<li><a class="reference internal" href="#replace">^replace</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="dialog.html" title="QiChat - Introduction">previous</a>
+     |
+    <a href="aldialog_syntax_toc.html" title="QiChat - Table of Content" accesskey="U">up</a>
+   |
+    <a href="aldialog_syntax_overview.html" title="QiChat - Overview">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

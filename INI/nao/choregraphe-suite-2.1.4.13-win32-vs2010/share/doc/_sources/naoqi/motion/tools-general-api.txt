@@ -1,0 +1,208 @@
+.. _tools-general-api:
+
+General tools API
++++++++++++++++++
+
+
+:ref:`naoqi-motion` - :ref:`Overview <tools-general>` | API
+
+------------
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/tools-general_toc.rst
+
+
+Methods
+-------
+
+.. cpp:function:: bool ALMotionProxy::areNotificationsEnabled()
+
+  Get notifications status. Return true if notifications are active.
+
+  :return: Return true is notifications are active.
+
+.. cpp:function:: std::vector<std::string> ALMotionProxy::getBodyNames(const std::string& name)
+
+  Gets the names of all the joints in the collection.
+
+  :param name: Name of a chain, "Body", "Chains", "JointActuators", "Joints" or "Actuators".
+
+  :return: Vector of strings, one for each joint in the collection
+
+  :download:`almotion_getbodynames.cpp </samples/cpp/almotion/almotion_getbodynames.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getbodynames.cpp
+     :language: cpp
+
+
+  :download:`almotion_getBodyNames.py </samples/python/almotion/almotion_getBodyNames.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getBodyNames.py
+     :language: py
+
+.. cpp:function:: std::vector<std::string> ALMotionProxy::getJointNames(const std::string& name)
+
+ .. deprecated:: 1.14
+      use :cpp:func:`ALMotionProxy::getBodyNames` instead.
+
+
+  :param name: Name of a chain, "Body", "Chains", "JointActuators", "Joints" or "Actuators".
+
+  :return: Vector of strings, one for each joint in the collection
+
+
+.. cpp:function:: std::vector<std::string> ALMotionProxy::getSensorNames()
+
+  Gets the list of sensors supported on your robot.
+
+  :return: Vector of sensor names
+
+  :download:`almotion_getsensornames.cpp </samples/cpp/almotion/almotion_getsensornames.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getsensornames.cpp
+     :language: cpp
+
+
+  :download:`almotion_getSensorNames.py </samples/python/almotion/almotion_getSensorNames.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getSensorNames.py
+     :language: py
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getLimits(const std::string& name)
+
+  Get the minAngle (rad), maxAngle (rad), maxVelocity (rad.s-1) and maxTorque (N.m). for a given joint or actuator in the body.
+
+  :param name: Name of a joint, chain, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :return: Array of ALValue arrays containing the minAngle, maxAngle, maxVelocity and maxTorque for all the joints specified.
+
+  :download:`almotion_getlimits.cpp </samples/cpp/almotion/almotion_getlimits.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getlimits.cpp
+     :language: cpp
+
+
+  :download:`almotion_getLimits.py </samples/python/almotion/almotion_getLimits.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getLimits.py
+     :language: py
+
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getMotionCycleTime()
+
+  Get the motion cycle time in milliseconds.
+
+  :return: ALValue containing the cycle time in milliseconds as an integer.
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getRobotConfig()
+
+  Get the robot configuration.
+
+  :return: ALValue arrays containing the robot parameter names and the robot parameter values.
+
+  :download:`almotion_getrobotconfig.cpp </samples/cpp/almotion/almotion_getrobotconfig.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getrobotconfig.cpp
+     :language: cpp
+
+
+  :download:`almotion_getRobotConfig.py </samples/python/almotion/almotion_getRobotConfig.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getRobotConfig.py
+     :language: py
+
+
+.. cpp:function:: std::string ALMotionProxy::getSummary()
+
+  Returns a string representation of the Model's state
+
+  :return: A formated string
+
+  :download:`almotion_getsummary.cpp </samples/cpp/almotion/almotion_getsummary.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getsummary.cpp
+     :language: cpp
+
+
+  :download:`almotion_getSummary.py </samples/python/almotion/almotion_getSummary.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getSummary.py
+     :language: py
+
+
+.. cpp:function:: float ALMotionProxy::getMass(const std::string& pName)
+
+  Gets the mass of a joint, chain, "Body" or "Joints".
+
+  :param pName: name of the body which we want the mass. "Body", "Joints" and "Com" give the total mass of the robot. For the chain, it gives the total mass of the chain.
+
+  :return: The mass in kg.
+
+  :download:`almotion_getmass.cpp </samples/cpp/almotion/almotion_getmass.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getmass.cpp
+     :language: cpp
+
+
+  :download:`almotion_getMass.py </samples/python/almotion/almotion_getMass.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getMass.py
+     :language: py
+
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getCOM( const std::string& pName, const int& pSpace, const bool& pUseSensorValues )
+
+  Gets the COM of a joint, chain, "Body" or "Joints".
+
+  :param pName: Name of the body which we want the mass. In chain name case, this function give the com of the chain.
+  :param pSpace: Task space {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+  :param pUseSensorValues: If true, the sensor values will be used to determine the position.
+  :return: The COM position (meter).
+
+  :download:`almotion_getcom.cpp </samples/cpp/almotion/almotion_getcom.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getcom.cpp
+     :language: cpp
+
+
+  :download:`almotion_getCOM.py </samples/python/almotion/almotion_getCOM.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getCOM.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::setMotionConfig(const AL::ALValue& config)
+
+  Internal Use.
+
+  :param config: Internal: An array of ALValues [i][0]: name, [i][1]: value
+
+
+.. cpp:function:: void ALMotionProxy::setEnableNotifications(bool enable)
+
+  Enable / Disable notifications.
+
+  :param enable: If true enable notifications.
+
+
+.. cpp:function:: void ALMotionProxy::updateTrackerTarget( const float& pTargetPositionWy, const float& pTargetPositionWz, const int& pTimeSinceDetectionMs, const bool& pUseOfWholeBody )
+
+  .. deprecated:: 1.18
+      use :ref:`ALTrackerProxy<altracker>` instead.
+
+  Update the target to be followed by the head of the robot.
+
+  :param pTargetPositionWy: The target position wy in FRAME_ROBOT
+
+  :param pTargetPositionWz: The target position wz in  FRAME_ROBOT
+
+  :param pTimeSinceDetectionMs: The time in Ms since the target was detected
+
+  :param pUseOfWholeBody: If true, the target is follow in Cartesian space by the Head with whole Body constraints.
+

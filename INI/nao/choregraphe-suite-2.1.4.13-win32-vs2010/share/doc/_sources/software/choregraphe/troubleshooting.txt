@@ -1,0 +1,250 @@
+.. _choregraphe-troubleshooting:
+
+Troubleshooting
+===============
+
+.. _choregraphe-troubleshooting-connection:
+
+Connection troubles
+-------------------
+
+For connection troubles, see Connection Management :ref:`chore_connection_troubleshooting`.
+
+
+.. _choregraphe-troubleshooting-errorcode:
+
+NAO system update failure
+-------------------------
+
+:ref:`Updating the NAO system using Choregraphe <choregraphe-howto-update-nao-system>`
+may failed (may occur only if the current NAO system version is 1.12 or greater).
+
+The error code tab is given hereafter:
+
++-------+----------------------------+---------------------------------------------+
+| Error | Meaning                    | Solution                                    |
+| code  |                            |                                             |
++=======+============================+=============================================+
+| 1     | Internal error.            | Retry.                                      |
++-------+----------------------------+---------------------------------------------+
+| 2     | Internal error.            | Retry.                                      |
++-------+----------------------------+---------------------------------------------+
+| 3     | Internal error.            | Retry.                                      |
++-------+----------------------------+---------------------------------------------+
+| 4     | Unknown hardware.          | Make sure the target is a real NAO robot.   |
++-------+----------------------------+---------------------------------------------+
+| 5     | Image does not match       | Check the given file is an image,           |
+|       | the target hardware.       | then retry.                                 |
++-------+----------------------------+---------------------------------------------+
+| 6     | Write error.               | Check that there still is enough free space |
+|       | Cannot write the image     | on the robot.                               |
+|       | on the robot.              | An upgrade needs about 200MB.               |
++-------+----------------------------+---------------------------------------------+
+| 7     | Checksum check failed.     | Check the given file, then retry.           |
++-------+----------------------------+---------------------------------------------+
+
+.. COMMENT: raw error code
+    EINVAL=1     # invalid args
+    ENOENT=2     # no such file or directory
+    EREMOTEIO=3  # Remote i/o error (cannot fetch remote file)
+    ENOTSUP=4    # Hardware not supported (unknown hardware)
+    EILSEQ=5     # Illegal byte sequence (file does not match its target)
+    EIO=6        # I/O error (operation error)
+    ECHKSUM=7    # Checksum check failure
+
+
+3D card problem
+---------------
+
+Choregraphe does not work with all the 3D card. If it crashes at start up, it probably means that there is a conflict with your 3D card.
+Please update your graphics card driver and try again. If it does not work, you will see a pop up with an Internet link to the supported graphics card.
+You should check it out (`<http://www.ogre3d.org/tikiwiki/Hardware>`_).
+
+Additionally, on Ubuntu, an official AMD driver is known to cause problems with Choregraphe.
+Its version is :code:`13.101-0ubuntu0.0.1`.
+The previous version, which version is :code:`2:8.960-0ubuntu1`, does not have these problems.
+If you want to downgrade the version of the driver, you can do the following:
+
+.. code-block:: sh
+
+   sudo apt-get remove fglrx fglrx-updates fglrx-amdcccle fglrx-amdcccle-updates
+   sudo apt-get install fglrx=2:8.960-0ubuntu1 fglrx-amdcccle=2:8.960-0ubuntu1
+
+To block the version of your AMD driver, you can do the following:
+
+.. code-block:: sh
+
+   sudo apt-mark hold fglrx fglrx-amdcccle
+
+Find out why a behavior does not work (debug)
+---------------------------------------------
+
+You have created a behavior. It is not yet operational. Here is how you can fix the bugs. That it is only possible if the current behavior is playing.
+
+Testing the boxes one by one
+++++++++++++++++++++++++++++
+
+To control a behavior you can: click on Play to load it on the robot.
+You can double-click on an input or output to stimulate it.
+
+In Timeline mute a layer
+++++++++++++++++++++++++
+
+The small eye next to each layer allows you to "mute" a layer: it will be ignored when the behavior is played.
+This can be useful when you want to debug your behavior.
+
+Checking the modules running on the robot
++++++++++++++++++++++++++++++++++++++++++
+
+Go to the web page of the robot. The modules running on NAO are listed. You can see the details by clicking on their name.
+
+Following the box execution
++++++++++++++++++++++++++++
+
+Each time the link between 2 boxes is simulated, the color of the link changes. It is a good way to check the execution.
+
+Checking the output value
++++++++++++++++++++++++++
+
+When a box has a value as output, the last value displays in the Tooltip.
+
+.. COMMENT: add picture It is easy to check the good execution.
+
+Understand why your box become red
+++++++++++++++++++++++++++++++++++
+
+- It becomes red during the execution: an exception raised. It can be because a module cannot be loaded (local NAOqi), does not exist, etc.
+
+- It becomes red before the execution (just after clicking the Play button): the box code contains an error. It can be a typing problem in a Python script.
+
+- It becomes red when finishing execution (on unloading time) and you get a
+  backtrace where an unexpected call to your python box method happens (for
+  example "onInput_onStart", typically): the method call did not finish before
+  the unloading of the box finished; you must make sure that onUnload call does
+  not finish before any other calls in your box. You can use Python's threading
+  module and its Lock object to prevent this problem.
+
+Using self.logger in a Python script
+++++++++++++++++++++++++++++++++++++
+
+self.logger is standard Python logger created with the Python module Logging.
+
+The log information can be categorized by level of severity (each level has its associated font color in the debug window):
+
+- debug (grey)
+
+- info (black)
+
+- warning (orange)
+
+- error (red)
+
+- critical (purple)
+
+In your Python script, we recommend you to add warning, error and critical logs to inform when you behavior dangerous or erroneous state.
+
+You can also use info and debug to trace execution flow of your behavior.
+
+#. Open the script of a box.
+
+#. Add the self.logger line in a function as below:
+
+   .. code-block:: guess
+
+     def onLoad(self):
+     self.logger.debug("Loaded box %s", self.getName())
+
+#. In the Debug window, select the minimum level of information you want, Debug in our case.
+
+#. Execute the box.
+
+#. All debug message display in the debug window to let you understand what is going on. The potential debug, info, warning, error and critical messages of other functions also display as the minimum level asked is debug.
+
+   If you choose error, you see only error and critical messages.
+
+.. cannot-launch-2-naoqis:
+
+NAOqi disconnected unexpectedly
+-------------------------------
+
+If you get this message while launching Choregraphe, it means the application database NAOqi uses is already locked and therefore the new NAOqi launched by Choregraphe exited/disconnected unexpectedly.
+To ensure there is no lock, be sure to exit well all NAOqi instances or kill its processes ("killall naoqi-bin" command line under Linux/MacOSX, application manager under Windows).
+
+
+.. _choregraphe-temporary-directories-fix:
+
+Windows only - Choregraphe temporary directories
+--------------------------------------------------
+
+In version 1.12.0 and previous ones, Choregraphe could have created temporary directories
+in a wrong path where the Windows **Cleaning disk** command hasn't access.
+
+Those directories, named alprojectXXXX_X, can be safely manually removed from the disk.
+
+Their most common locations depend on Windows version:
+
+- on Windows XP:
+
+  `C:\\Documents and settings\\[username]\\Local Settings\\`
+
+- on Windows 7:
+
+  `C:\\Users\\[username]\\AppData\\Local\\`
+
+  Where `[username]` is your own user login.
+
+.. _linux-drag-and-drop:
+
+Ubuntu 12.04 only - Cannot drag and drop boxes
+--------------------------------------------------
+
+There is an **Ubuntu** known issue, impacting **Choregraphe**,
+when using unity-2D Window Manager with the Launcher bar in auto-hide mode,
+or awesome Window Manager.
+
+This bug is documented for unity-2d here: https://bugs.launchpad.net/unity-2d/+bug/987857
+
+**Note**: This issue is fixed on latest Ubuntu versions (14.04).
+
+To avoid it on Ubuntu 12.04, change:
+
+* your window manager on login screen, or
+
+* your Launcher bar display mode in the settings.
+
+If you have two screens, you can also avoid it by moving the **Choregraphe**
+window to the screen where the Launcher bar is not present.
+
+Also, you can drag your box to the screen edge to make appear the Launcher bar,
+then you will be able to drop it into the **Choregraphe** diagram.
+
+To check what is your window manager, just type in a shell:
+
+.. code-block:: sh
+
+    echo $GDMSESSION
+
+Ubuntu, French keyboard and IBus - cannot type circumflex accent
+----------------------------------------------------------------
+
+You are using a software such as **IBus**, enabling you to type Chinese or
+Japanese characters while having only a French keyboard.
+
+But if you wish to type French characters, unfortunately, in
+**Choregraphe**, you will obtain: '^o' instead of 'ô'.
+
+To avoid this, you have to temporarily disable **IBus** when running
+**Choregraphe**.
+
+To do so:
+
+Set the environment variable XMODIFIERS to an empty string when you are running
+Choregraphe:
+
+.. code-block:: sh
+
+    $ XMODIFIERS='' ./choregraphe
+
+To get **IBus** functionalities back, restart **Choregraphe** while not
+modifying the XMODIFIERS variable.
+

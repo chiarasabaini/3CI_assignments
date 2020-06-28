@@ -1,0 +1,417 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Managing git projects with qisrc &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="qiBuild tutorials" href="../tutorial.html" />
+    <link rel="next" title="Managing code templates with qisrc" href="templates.html" />
+    <link rel="prev" title="qiBuild tutorials" href="../tutorial.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="../tutorial.html" title="qiBuild tutorials">previous</a>
+     |
+    <a href="../tutorial.html" title="qiBuild tutorials" accesskey="U">up</a>
+   |
+    <a href="templates.html" title="Managing code templates with qisrc">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="beginner-qisrc-git_projects">
+            
+  <div class="section" id="managing-git-projects-with-qisrc">
+<span id="qisrc-tutorial"></span><h1>Managing git projects with qisrc<a class="headerlink" href="#managing-git-projects-with-qisrc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The motivation for writing <tt class="docutils literal"><span class="pre">qisrc</span></tt> was :</p>
+<ul class="simple">
+<li>We needed to have a simple way to store the URL of all our git projects</li>
+<li>Neither <tt class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span></tt> nor <tt class="docutils literal"><span class="pre">repo</span></tt> were good enough for our purposes.
+(git submodules are tricky to use, <tt class="docutils literal"><span class="pre">repo</span></tt> is nicer but leaves your
+git worktrees in a strange state)</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<p>First make sure that <tt class="docutils literal"><span class="pre">qiBuild</span></tt> is installed correctly.
+(see <a class="reference internal" href="../getting_started.html#getting-started"><em>Getting Started</em></a>)</p>
+<p>Open a console and type</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild --version</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-git">
+<h3>Install git<a class="headerlink" href="#install-git" title="Permalink to this headline">¶</a></h3>
+<p>See the <tt class="docutils literal"><span class="pre">github</span></tt> documentation for the details.</p>
+</div>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s assume you have several git projects
+This is actually what roughly happens for Aldebaran.</p>
+<ul class="simple">
+<li>An open source project called <tt class="docutils literal"><span class="pre">libqi</span></tt></li>
+<li>A closed source library called <tt class="docutils literal"><span class="pre">libnaoqi</span></tt>, containing libraries you
+want provide a C++ SDK for.</li>
+<li>A proprietary software called <tt class="docutils literal"><span class="pre">choregraphe</span></tt></li>
+</ul>
+<div class="section" id="have-a-fixed-layout-in-every-worktree">
+<h3>Have a fixed layout in every worktree<a class="headerlink" href="#have-a-fixed-layout-in-every-worktree" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span></tt> lets you have your projects in whatever layout you want.
+For instance, you may want to always have libraries in <tt class="docutils literal"><span class="pre">lib/</span></tt> ,
+and the GUIs in <tt class="docutils literal"><span class="pre">gui</span></tt>, so you want to make sure everyone has a layout
+like this:</p>
+<div class="highlight-python"><pre>lib/
+    libqi
+    libnaoqi
+gui/
+    choregraphe</pre>
+</div>
+</li>
+</ul>
+<p>Doing so is easy: just write a manifest looking like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;manifest&gt;</span>
+   <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;origin&quot;</span> <span class="na">url=</span><span class="s">&quot;git@git.aldebaran.lan&quot;</span> <span class="nt">/&gt;</span>
+
+   <span class="nt">&lt;repo</span> <span class="na">project=</span><span class="s">&quot;qi/libqi.git&quot;</span>        <span class="na">remotes=</span><span class="s">&quot;origin&quot;</span> <span class="na">src=</span><span class="s">&quot;lib/libqi&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;repo</span> <span class="na">project=</span><span class="s">&quot;lib/libnaoqi.git&quot;</span>    <span class="na">remotes=</span><span class="s">&quot;origin&quot;</span> <span class="na">src=</span><span class="s">&quot;lib/libnaoqi&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;repo</span> <span class="na">project=</span><span class="s">&quot;gui/choregraphe.git&quot;</span> <span class="na">remotes=</span><span class="s">&quot;origin&quot;</span> <span class="na">src=</span><span class="s">&quot;gui/choregraphe&quot;</span> <span class="nt">/&gt;</span>
+
+ <span class="nt">&lt;/manifest&gt;</span>
+</pre></div>
+</div>
+<p>Obviously, you want to be able to put this file under version control,
+so you create a git project in <tt class="docutils literal"><span class="pre">git&#64;git.aldebaran.lan:qi/manifest.git</span></tt>
+and add this file as a <tt class="docutils literal"><span class="pre">manifest.xml</span></tt> file.</p>
+<p>And then, running:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc init git@git.aldebaran.lan:qi/manifest.git</span>
+</pre></div>
+</div>
+<p>Just works and lets you checkout every project you need to compile Choregraphe,
+in the correct layout.</p>
+</div>
+<div class="section" id="handling-release-branches">
+<h3>Handling release branches<a class="headerlink" href="#handling-release-branches" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">qisrc</span></tt> makes it easy to have several projects all tracking different branches.</p>
+<p>For instance, when doing a Choregraphe release, you may want to make sure everything
+is in the <tt class="docutils literal"><span class="pre">release-1.12</span></tt> branch</p>
+<p>So you create a <tt class="docutils literal"><span class="pre">release-1.12</span></tt> branch on every repository, then a <tt class="docutils literal"><span class="pre">release-1.12</span></tt>
+branch in the manifest repository, and you change the <tt class="docutils literal"><span class="pre">manifest.xml</span></tt>
+file to look like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;manifest&gt;</span>
+   <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;origin&quot;</span> <span class="na">url=</span><span class="s">&quot;git@git.aldebaran.lan&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;repo</span> <span class="na">project=</span><span class="s">&quot;qi/libqi.git&quot;</span> <span class="na">remotes=</span><span class="s">&quot;origin&quot;</span> <span class="na">branch=</span><span class="s">&quot;release-1.12&quot;</span> <span class="nt">/&gt;</span>
+   ...
+ <span class="nt">&lt;/manifest&gt;</span>
+</pre></div>
+</div>
+<p>And then, running:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc init git@git.aldebaran.lan:qi/manifest.git -b release-1.12</span>
+</pre></div>
+</div>
+<p>automatically clones every project you need, with a nice &#8216;release-1.12&#8217;
+local branch ready to track the &#8216;release-1.12&#8217; remote branch.</p>
+<p>Of course, since you have created a branch inside the manifest, it is
+easy to add new repositories just for master.</p>
+<p>If you do not want to create a new worktree, you can also use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc checkout release-1.12</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-profiles">
+<h3>Handling profiles<a class="headerlink" href="#handling-profiles" title="Permalink to this headline">¶</a></h3>
+<p>You may then want to build the documentation of <tt class="docutils literal"><span class="pre">libqi</span></tt> and <tt class="docutils literal"><span class="pre">libnaoqi</span></tt>,
+while making sure the sources of <tt class="docutils literal"><span class="pre">choregraphe</span></tt> never leak.</p>
+<p>Also, the people only working on the documentation don&#8217;t need to clone everything,
+so you create an group in the manifest file where you put only the projects you need.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;manifest&gt;</span>
+  ...
+  <span class="nt">&lt;groups&gt;</span>
+    <span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">&quot;doc&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;libqi&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;libnaoqi&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/group&gt;</span>
+  <span class="nt">&lt;/groups&gt;</span>
+
+<span class="nt">&lt;/manifest&gt;</span>
+</pre></div>
+</div>
+<p>And then, you can use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc init git@git.aldebaran.lan:qi/manifest.git --group doc</span>
+</pre></div>
+</div>
+<p>to clone the required repositories to build the documentation on master.</p>
+<p>Of course, if you need to build the doc for the release, just use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc init git@git.aldebaran.lan:qi/manifest.git --group doc --branch relase-1.12</span>
+</pre></div>
+</div>
+<p>You can also list, add and remove the groups used in your worktree by using
+<tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">list-groups</span></tt>, <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">add-group</span></tt>, <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">rm-group</span></tt></p>
+</div>
+<div class="section" id="handling-development-branches">
+<h3>Handling development branches<a class="headerlink" href="#handling-development-branches" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s say you have two branches for every project in your worktree
+(and thus two branches in your manifest repo)</p>
+<p><tt class="docutils literal"><span class="pre">master</span></tt>, which is a stable branch, and <tt class="docutils literal"><span class="pre">next</span></tt>, where development occurs.
+Bug fixes may be submitted on <tt class="docutils literal"><span class="pre">master</span></tt> directly, so you may want to make
+sure <tt class="docutils literal"><span class="pre">next</span></tt> is always up to date, by rebasing <tt class="docutils literal"><span class="pre">next</span></tt> on top of <tt class="docutils literal"><span class="pre">master</span></tt>.</p>
+<p>To do so, in a worktree configured with the <tt class="docutils literal"><span class="pre">next</span></tt> branch of the manifest,
+use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc rebase master</span>
+</pre></div>
+</div>
+<p>If you are happy with the changes, you can also run:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qisrc rebase master --push</span>
+</pre></div>
+</div>
+<p>(Since this command uses <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span></tt>, use this at your own risk)</p>
+</div>
+<div class="section" id="handling-code-review">
+<h3>Handling code review<a class="headerlink" href="#handling-code-review" title="Permalink to this headline">¶</a></h3>
+<p>If you are using gerrit, you have to do two manual commands before being able
+to push the results under code review:</p>
+<ul class="simple">
+<li>Add a remote in order to be able to push the changes</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">git remote add gerrit ssh://john@gerrit:29418/lib/libqi.git</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Get a hook so that your commits all get a ChangeID:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">scp -P 29418 john@gerrit:hooks/commit-msg .git/hooks</span>
+</pre></div>
+</div>
+<p>And then to upload changes for review you have run something like</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">git push gerrit master:refs/for/master</span>
+</pre></div>
+</div>
+<p>You can get <tt class="docutils literal"><span class="pre">qisrc</span></tt> to perform these operations for you, by adding a
+new <tt class="docutils literal"><span class="pre">gerrit</span></tt> remote to the <tt class="docutils literal"><span class="pre">manifest.xml</span></tt> file:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;manifest&gt;</span>
+   <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;origin&quot;</span> <span class="na">url=</span><span class="s">&quot;git@git.aldebaran.lan&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;gerrit&quot;</span> <span class="na">url=</span><span class="s">&quot;ssh://gerrit.aldebaran.lan:29418&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;qi/libqi.git&quot;</span> <span class="na">path=</span><span class="s">&quot;lib/libqi&quot;</span> <span class="na">remotes=</span><span class="s">&quot;origin gerrit&quot;</span> <span class="nt">/&gt;</span>
+ <span class="nt">&lt;/manifest&gt;</span>
+</pre></div>
+</div>
+<p>And then, <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">sync</span></tt> will setup your project for code review, and using
+<tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">push</span></tt> will be able to upload your changes for code review.</p>
+</div>
+<div class="section" id="handling-several-remotes">
+<h3>Handling several remotes<a class="headerlink" href="#handling-several-remotes" title="Permalink to this headline">¶</a></h3>
+<p>This is useful when you have a fork of an upstream project, and want to
+keep a reference to the upstream url.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;manifest&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;origin&quot;</span> <span class="na">url=</span><span class="s">&quot;git@example.com&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;repo</span> <span class="na">project=</span><span class="s">&quot;foo/bar.git&quot;</span> <span class="na">src=</span><span class="s">&quot;lib/bar&quot;</span> <span class="na">remotes=</span><span class="s">&quot;origin&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;upstream</span> <span class="na">name=</span><span class="s">&quot;my-upstream&quot;</span> <span class="na">url=</span><span class="s">&quot;git@somewhereelse.org&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/repo&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</pre></div>
+</div>
+<p>This will create a remote called <tt class="docutils literal"><span class="pre">my-upstream</span></tt> with the <tt class="docutils literal"><span class="pre">git&#64;somewhereelse.org</span></tt> url.</p>
+</div>
+<div class="section" id="handling-snapshots">
+<h3>Handling snapshots<a class="headerlink" href="#handling-snapshots" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you would like to reset your worktree to a known state.</p>
+<p>The solution is to generate a snapshot of your worktree with
+<tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">snapshot</span> <span class="pre">/path/to/snapshot.json</span></tt> and then use <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">reset</span> <span class="pre">--snaphot</span>
+<span class="pre">/path/to/snapshot.json</span></tt>.</p>
+<p>The format used by the snapshot looks like this:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;format&quot;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nt">&quot;refs&quot;</span> <span class="p">:</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;foo&quot;</span> <span class="p">:</span> <span class="s2">&quot;ab453c&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;manifest&quot;</span> <span class="p">:</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;url&quot;</span> <span class="p">:</span> <span class="s2">&quot;git@example.com:manifest.git&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;branch&quot;</span> <span class="p">:</span> <span class="s2">&quot;master&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;groups&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;ref&quot;</span> <span class="p">:</span> <span class="s2">&quot;b8c64&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The information about the manifest is mandatory, because the keys in the
+<tt class="docutils literal"><span class="pre">refs</span></tt> dictionary are the paths to the projects in the worktree, and those
+paths are allowed to change when the manifest changes.</p>
+<p>You should trust the info generated for you by <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">snapshot</span></tt>.</p>
+<p>Also feel free to edit the snapshot by hand, for instance to use tags instead
+of SHA1s.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="../tutorial.html" title="qiBuild tutorials">qiBuild tutorials</a>
+     |
+    <a href="../tutorial.html" title="qiBuild tutorials" accesskey="U">qiBuild tutorials</a>
+   |
+    <a href="templates.html" title="Managing code templates with qisrc">Managing code templates with qisrc</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to qiBuild documentation !</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">qiBuild: the build framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../getting_started.html">Getting Started</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Managing git projects with qisrc</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qibuild/tutorial.html">Building C++ projects with qibuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial.html">qiBuild tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Managing git projects with qisrc</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git-to-qisrc_cookbook.html">Git-to-qisrc cookbook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qibuild/tutorial.html">Building C++ projects with qibuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qitoolchain/tutorial.html">Managing pre-compiled binary packages with qitoolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qipy/tutorial.html">Using Python with qibuild projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qipkg/tutorial.html">qipkg tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Managing git projects with qisrc</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#install-git">Install git</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li><a class="reference internal" href="#have-a-fixed-layout-in-every-worktree">Have a fixed layout in every worktree</a></li>
+<li><a class="reference internal" href="#handling-release-branches">Handling release branches</a></li>
+<li><a class="reference internal" href="#handling-profiles">Handling profiles</a></li>
+<li><a class="reference internal" href="#handling-development-branches">Handling development branches</a></li>
+<li><a class="reference internal" href="#handling-code-review">Handling code review</a></li>
+<li><a class="reference internal" href="#handling-several-remotes">Handling several remotes</a></li>
+<li><a class="reference internal" href="#handling-snapshots">Handling snapshots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="../tutorial.html" title="qiBuild tutorials">previous</a>
+     |
+    <a href="../tutorial.html" title="qiBuild tutorials" accesskey="U">up</a>
+   |
+    <a href="templates.html" title="Managing code templates with qisrc">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

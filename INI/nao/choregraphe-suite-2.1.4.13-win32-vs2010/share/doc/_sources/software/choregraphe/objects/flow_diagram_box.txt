@@ -1,0 +1,76 @@
+
+.. _choregraphe-reference-box-type-flow-diagram:
+
+Flow diagram box
+================
+
+
+What is a Flow diagram box
+---------------------------
+
+A **Flow diagram** box is a :ref:`Box <choregraphe-reference-box>` which includes
+a :ref:`Flow diagram <choregraphe-reference-box-flow-diagram>`.
+
+.. image:: /medias/desktop/choregraphe/chore_ref_flow_diagram_box.png
+   :width: 525 px
+   :height: 444 px
+
+.. warning::
+
+    In previous versions, **Flow diagram boxes** could embed a script,
+    but this feature is now deprecated and will be removed soon.
+
+Creating a **Flow diagram** box can be useful to encapsulate other boxes into a
+unique behavior.
+
+
+A **Flow diagram** box may contain boxes which in turn may also contain boxes.
+And all these boxes can be connected to each other, thus creating a complex and
+structured behavior.
+
+This enables you to organize your behavior with several levels, each level
+corresponding to the diagram of a box.
+
+
+.. _choregraphe-howto-create-flow-diagram-box:
+
+How to create a Flow diagram box
+--------------------------------
+
+To create a **Flow diagram** box from scratch:
+
+=====  ==========================================================================
+Step    Action
+=====  ==========================================================================
+1.      Right click on on the **Flow diagram** wherever you want to create the box.
+
+2.      Choose **Create a new Box** > **Diagram...** in the contextual menu.
+
+        .. image:: /medias/desktop/choregraphe/diagram_box_creation.png
+           :width: 239 px
+           :height: 397 px
+
+3.      Define a **Name** and a **Description** for your box.
+
+4.      **Optional**: set the picture to recognize it among other boxes.
+
+5.      **Optional**: set **Parameters**, **Inputs** and **Outputs**.
+
+        For further details about parameters, see: :ref:`How to add/remove inputs,
+        outputs, parameters in a box
+        <choregraphe-howto-add-remove-box-in-out-param>`.
+
+6.      Click the **OK** button.
+
+        The created **Flow diagram** box is displayed on the **Flow diagram**.
+
+7.      Double click your box to get into it and edit the inner
+        **Flow diagram**.
+
+        .. image:: /medias/desktop/choregraphe/create_flow_diagram.png
+           :width: 434 px
+           :height: 354 px
+=====  ==========================================================================
+
+To create a new **Flow diagram** box by grouping existing boxes,
+see: :ref:`choregraphe-howto-convert-boxes-to-one-box`.

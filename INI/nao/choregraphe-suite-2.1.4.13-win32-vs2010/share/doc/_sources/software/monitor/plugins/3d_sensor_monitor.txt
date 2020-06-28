@@ -1,0 +1,28 @@
+
+.. |monitor-camera-play| image:: /medias/desktop/monitor/play.png
+   :class: img-inline
+.. |monitor-camera-pause| image:: /medias/desktop/monitor/pause.png
+   :class: img-inline
+
+.. _monitor-depthsensor:
+
+3D Sensor Monitor
+-----------------
+
+The **3D Sensor Monitor** plugin can be used to display the depth image from a
+supported 3D camera connected to the robot. This plugin features a **Play** |monitor-camera-play|
+and a **Pause** |monitor-camera-pause| button to start and stop the image acquisition.
+
+The depth image will be displayed with a resolution of 320x240 and a frame rate of
+10 frames per second. The image is shown as a peudo-color image, where the color
+indicates the distance of a given image region to the camera: similar colors correspond to
+similar distances.
+
+The plugin also prints the exact depth measure (in millimeters) of a given pixel by
+simply clicking on it in the image region. Once the pixel is selected, the distance measurement
+will be updated at every image acquisition. White regions in the image correspond to
+invalid pixel values, which may be caused by objects that are too close/too far from the camera,
+overly reflexive materials or interferences with infrared light sources (sunlight, another depth camera...).
+
+.. warning::
+  The 3D sensor must be plugged *before* starting NAOqi, otherwise it won't be properly detected.

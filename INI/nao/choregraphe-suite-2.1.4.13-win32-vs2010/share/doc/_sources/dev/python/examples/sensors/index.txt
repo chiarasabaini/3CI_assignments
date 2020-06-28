@@ -1,0 +1,35 @@
+.. _python-example-sensors:
+
+Sensors
+=======
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section shows how to get sensors values from :ref:`ALMemory <almemory>` in Python.
+
+To execute them, modify the robot's IP adress inside the example file.
+
+FSR values
+----------
+
+:download:`sensors_getFsrValues.py </examples/python/sensors/sensors_getFsrValues.py>`
+
+.. literalinclude:: /examples/python/sensors/sensors_getFsrValues.py
+   :language: py
+
+Inertial Sensor values
+----------------------
+
+:download:`sensors_getIntertialValues.py </examples/python/sensors/sensors_getInertialValues.py>`
+
+.. literalinclude:: /examples/python/sensors/sensors_getInertialValues.py
+   :language: py
+
+   
+Sonar
+------
+
+:download:`sensors_sonar.py </examples/python/sensors/sensors_sonar.py>`
+
+.. literalinclude:: /examples/python/sensors/sensors_sonar.py
+   :language: py

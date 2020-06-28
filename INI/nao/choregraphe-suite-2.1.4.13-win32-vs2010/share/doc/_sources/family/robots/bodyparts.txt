@@ -1,0 +1,139 @@
+.. _effector_chain:
+
+Effector & Chain definitions
+============================
+
+.. seealso::
+
+    :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21` | :ref:`nao-t14` | :ref:`nao-t2`
+
+--------------------
+
+
+.. image:: /medias/naoqi/almotion_names.png
+   :width: 409 px
+   :height: 494 px
+
+This overview points out the relationship between the different names and
+specifies which model includes which joint:
+
+* **Body** = all Joints + the 2 Actuators added at the end of the arm links
+
+* **Chain** = Joints + Actuators
+
+* **Effectors** = all Chain names + Torso
+
+
+.. _nao_effector:
+
+Effectors
+----------
+
+.. image:: /medias/dev/modules/motion/motion_effectors.jpg
+   :height: 302 px
+   :width: 352 px
+
+These **Effector** names are identical to the **Chain** name except for "Torso".
+
++---------------+--------------------------------+--------------------------------------------+
+| Effector name | Position                       | End transform                              |
++===============+================================+============================================+
+| "Head"        | At the neck joint              | Position3D(0.0, 0.0, 0.0)                  |
++---------------+--------------------------------+--------------------------------------------+
+| "LArm"        | Inside the hand                | Position3D(HandOffsetX, 0.0, -HandOffsetZ) |
++---------------+--------------------------------+--------------------------------------------+
+| "LLeg"        | Below the ankle                | Position3D(0.0, 0.0, -FootHeight)          |
++---------------+--------------------------------+--------------------------------------------+
+| "RLeg"        | Below the ankle                | Position3D(0.0, 0.0, -FootHeight)          |
++---------------+--------------------------------+--------------------------------------------+
+| "RArm"        | Inside the hand                | Position3D(HandOffsetX, 0.0, -HandOffsetZ) |
++---------------+--------------------------------+--------------------------------------------+
+| "Torso"       | A reference point in the torso | Position3D(0.0, 0.0, 0.0)                  |
++---------------+--------------------------------+--------------------------------------------+
+
+All the points are defined in relation of the **Torso** position and depend of
+your :ref:`nao-family::nao-version`.
+
+To see the position of Effectors, see:
+
+* **NAO V4**: :ref:`robot_links`
+
+* **NAO V3.3**: :ref:`robot_links_v33`
+
+* **NAO V3.2**: :ref:`robot_links_v32`
+
+For further details, see: :ref:`motion-cartesian-effectors`.
+
+
+.. _nao_chains:
+
+Chains
+----------
+
+The table below lists the chains and all the joints included in each chain:
+
++---------------+----------------------------------------------------------------------------------------------------------+
+| Body is ...   |   Head + LArm + LLeg + RLeg + RArm                                                                       |
++---------------+-----------+---------------------+-------------------------+------------------------+---------------------+
+| The chain ... |   Head    |        LArm         |           LLeg          |          RLeg          |          RArm       |
++===============+===========+=====================+=========================+========================+=====================+
+|               | HeadYaw   | LShoulderPitch      |  LHipYawPitch\ :sup:`1` | RHipYawPitch\ :sup:`1` | RShoulderPitch      |
+| involves  the +-----------+---------------------+-------------------------+------------------------+---------------------+
+|               | HeadPitch | LShoulderRoll       |  LHipRoll               | RHipRoll               | RShoulderRoll       |
+|               +-----------+---------------------+-------------------------+------------------------+---------------------+
+| joints ...    |           | LElbowYaw           |  LHipPitch              | RHipPitch              | RElbowYaw           |
+|               +-----------+---------------------+-------------------------+------------------------+---------------------+
+|               |           | LElbowRoll          |  LKneePitch             | RKneePitch             | RElbowRoll          |
+|               +-----------+---------------------+-------------------------+------------------------+---------------------+
+|               |           | LWristYaw\ :sup:`2` |  LAnklePitch            | RAnklePitch            | RWristYaw\ :sup:`2` |
+|               +-----------+---------------------+-------------------------+------------------------+---------------------+
+|               |           | LHand\ :sup:`2`     |  RAnkleRoll             | LAnkleRoll             | RHand\ :sup:`2`     |
++---------------+-----------+---------------------+-------------------------+------------------------+---------------------+
+
+.. note::
+
+   \ :sup:`1` LHipYawPitch and RHipYawPitch share the same motor so they move
+   simultaneously and symmetrically. In case of conflicting orders, LHipYawPitch
+   always takes the priority.
+
+   \ :sup:`2` These joints do not exist in the :ref:`nao-family::nao-body-type` "H21".
+
+The group "Body" addresses all the joints of the robot (the number of joints depends on your
+:ref:`nao-family::nao-body-type`).
+
+It is possible to get the list of joints available on your robot using the
+:cpp:func:`ALMotionProxy::getBodyNames` method, described in the section:
+:ref:`general-tools::jointNames`.
+
+Joint range and direction
++++++++++++++++++++++++++
+
+Depends of your :ref:`nao-family::nao-version`, you could access to the joint range and
+direction by following the link below:
+
+**NAO V4**
+
+- :ref:`robot_joints_v4::head-joints`
+- :ref:`robot_joints_v4::left-Arm-joints`, :ref:`robot_joints_v4::right-Arm-joints`
+- :ref:`robot_joints_v4::pelvis-joints`
+- :ref:`robot_joints_v4::left-leg-joints`, :ref:`robot_joints_v4::right-leg-joints`
+
+**NAO V3.3**
+
+- :ref:`robot_joints_v33::head-joints`
+- :ref:`robot_joints_v33::left-Arm-joints`, :ref:`robot_joints_v33::right-Arm-joints`
+- :ref:`robot_joints_v33::pelvis-joints`
+- :ref:`robot_joints_v33::left-leg-joints`, :ref:`robot_joints_v33::right-leg-joints`
+
+**NAO V3.2**
+
+- :ref:`robot_joints_v32::head-joints`
+- :ref:`robot_joints_v32::left-Arm-joints`, :ref:`robot_joints_v32::right-Arm-joints`
+- :ref:`robot_joints_v32::pelvis-joints`
+- :ref:`robot_joints_v32::left-leg-joints`, :ref:`robot_joints_v32::right-leg-joints`
+
+
+
+For further details, see: :ref:`body-chain-def`.
+
+

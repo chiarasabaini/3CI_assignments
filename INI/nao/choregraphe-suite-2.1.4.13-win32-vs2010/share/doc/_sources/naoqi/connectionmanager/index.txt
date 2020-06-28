@@ -1,0 +1,96 @@
+.. _naoqi-connectionmanager:
+.. _alconnectionmanager:
+
+ALConnectionManager
+=======================
+
+.. toctree::
+    :hidden:
+
+    alconnectionmanager-api
+    networkinfo
+    ipinfo
+
+:ref:`naoqi-core` - Overview | :ref:`API <alconnectionmanager-api>`  |
+:ref:`networkinfo` | :ref:`networkinfo-ipinfo`
+
+--------------------
+
+What it does
+------------
+
+
+**ALConnectionManager** provides methods to manage the network connectivity.
+It contains commands allowing you to configure or connect a network,
+but also to get the network properties or to create a network.
+
+ALConnectionManager supports several technologies such as Ethernet, WiFi and Bluetooth.
+
+The main features are:
+
+- List available network services.
+
+- Connect to a network service.
+
+- Create a network service (supports WiFi Access Point and Bluetooth PAN).
+
+- List available network technologies.
+
+- Configure a network service.
+
+This module gives access to useful information about the different network services,
+such as the strength of a WiFi service, its current state or its security requirement.
+
+This module notifies through events the changes about the network connectivity.
+
+How it works
+------------
+
+**ALConnectionManager** is based on the open source software `ConnMan <http://www.connman.net>`_
+to get information about all networks services and connecting to them.
+
+**Aldebaran Robotics** is a contributor to the **ConnMan** project,
+our ConnMan sources are hosted on github `<http://github.com/aldebaran>`_, only a
+few patches differs from the official ConnMan version, our goal is to limit as much
+as possible the differences between the two versions.
+
+The WiFi services are handled by `WPA Supplicant <http://hostap.epitest.fi/wpa_supplicant/>`_.
+The Bluetooth services are handled by `BlueZ <http://www.bluez.org>`_.
+
+Performance and Limitations
+---------------------------
+
+**Limitation**
+
+- ALConnectionManager is only available on the robot.
+
+- ALConnectionManager currently doesn't support WPA entreprise security.
+
+- The list of WiFi services are not available when the tethering mode is enabled.
+
+- ALConnectionManager does not handle bluetooth devices pairing.
+
+.. FIXME add a ref to bluetoothmanager (not coded yet)
+
+Warning about tethering and security issue
+------------------------------------------
+
+The Tethering mode makes the robot acting as an Access Point, but it also shares your Internet connectivity.
+If the robot is connected to a corporate network, you have to verify if this mode is compatible with your network security policy.
+
+Getting Started
+---------------
+
+Essential information to deal with ALConnectionManager:
+
+Services objects from **ConnectionManager** are represented as :ref:`networkinfo`.
+
+**Getting the global state of the network connectivity**
+
+.. literalinclude:: /examples/python/connectionmanager/get-state.py
+
+**Getting the network services list**
+
+.. literalinclude:: /examples/python/connectionmanager/list-services.py
+
+

@@ -1,0 +1,219 @@
+.. include:: ../../../bulk/common.rst
+
+.. _choregraphe-reference-project:
+
+Project
+========
+
+What is a Project
+-----------------
+
+The **Project** allows you to save on your computer, in one folder,
+all the files and content necessary to create an :ref:`application`:
+
+* :ref:`Behavior(s) <behavior>`,
+* :ref:`Dialog topic(s) <dialog_topic>`,
+*  :ref:`choregraphe-planar-move`, and
+* :ref:`Attached file(s) <choregraphe-reference-attached-files>`
+  (music, C++ module, etc.).
+
+How to manage Project
+---------------------
+
+The **File** menu allows you to:
+
+* Create, open and save a **Project**;
+* Import a **Project** from a CRG or a former Directory,
+* Add or import new content to the current **Project**,
+* Modify its :ref:`choregraphe-reference-project-properties`,
+* Export the project as a **CRG**,
+* Build it into an :ref:`application`.
+
+The :ref:`chore_project_content` allows you to:
+
+* Modify its :ref:`choregraphe-reference-project-properties`,
+* Add new content to the current **Project**,
+* Edit, delete and organize in sub-folders the content and files attached
+  to the current **Project**.
+
+.. _external_management:
+
+Tips: external management
+++++++++++++++++++++++++++
+
+You can also modify the content of the **Project** using your favorite
+file management tools.
+
+For example, to import a **Dialog topic** from a **Project** to another:
+
+=====  ========================================================================
+Step    Action
+=====  ========================================================================
+1.      Copy/Paste the folder containing the **Dialog topic**
+        from one **Project** folder to another.
+
+2.      Coming back to **Choregraphe**, accept the imported files.
+
+        .. image:: /medias/desktop/choregraphe/import_dialog.png
+            :width: 371 px
+            :height: 154 px
+
+        .. note::
+
+            If you pressed **No** or **No to All**, this is not final.
+            You still can import your files manually into your project.
+
+            You just have to select **Import content** > **Files...** or
+            **Import content** > **Folder...** from the **File** menu, browse
+            into your project folder, and import the desired files or folder.
+=====  ========================================================================
+
+Project available formats
+--------------------------
+
++------------+------------------------------------------------------------+
+| Extension  | Usage                                                      |
++============+============================================================+
+| .pml       | **Storage format**                                         |
+|            |                                                            |
+|            | A unique file with **PML** extension located at the root   |
+|            | folder of your project references all the Project          |
+|            | files and contents.                                        |
++------------+------------------------------------------------------------+
+| .pkg       | **Publication format**                                     |
+|            |                                                            |
+|            | The Package is a binary format used to  publish            |
+|            | an :ref:`application` on the |store|.                      |
+|            |                                                            |
+|            | For further details, see:                                  |
+|            | :ref:`choregraphe-howto-build-application-package`.        |
++------------+------------------------------------------------------------+
+|            | **Exchange Format**                                        |
+|            |                                                            |
+|.crg        | The **CRG** file format stores the project in a single     |
+|            | compressed file.                                           |
+|            |                                                            |
+|            | The project **CRG** format is an easy way to archive       |
+|            | a project and / or deliver it to someone else.             |
++------------+------------------------------------------------------------+
+
+.. _import_114_project:
+
+Porting a 1.14 Project
+------------------------
+
+1. Importing **1.14** projects files
+++++++++++++++++++++++++++++++++++++++
+
+To import a **Project** created with a former version of **Choregraphe**:
+
+CRG
+^^^^
+
+=====  ========================================================================
+Step    Action
+=====  ========================================================================
+1.      Choose **File** > **Import project from CRG file...**
+
+        .. image:: /medias/desktop/choregraphe/import_crg.png
+            :width: 411 px
+            :height: 206 px
+
+2.      Browse to select the file to import.
+
+3.      Optionally, modify the Project name and/or its path.
+
+4.      Click the **OK** button.
+=====  ========================================================================
+
+Project directory
+^^^^^^^^^^^^^^^^^^
+
+=====  ========================================================================
+Step    Action
+=====  ========================================================================
+1.      Choose **File** > **Import project from former project directory...**
+
+        .. image:: /medias/desktop/choregraphe/import_crg.pngimport_directory.png
+            :width: 407 px
+            :height: 218 px
+
+2.      Browse to select the file to import.
+
+3.      Optionally, modify the Project name and/or its path.
+
+4.      Click the **OK** button.
+=====  ========================================================================
+
+.. _cleaning_project:
+
+2. Cleaning a **1.14** Project
++++++++++++++++++++++++++++++++
+
+Once imported, your **1.14** Project needs to take advantage of the new features:
+
+Check your Python code
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Track deprecated APIs:
+
+* The main evolution impacted **ALMotion**: "walk" becomes "move" in order to support all the |roboS|.
+
+* To see the whole list of deprecated methods and events, see:
+
+  :ref:`whats-new_api_2.0` Release note.
+
+  **Tip**: **CTRL+F** on the page allows you to search for 'deprecated' key word,
+  so you can focus on the cleaning before discovering all the new features.
+
+Cut/replace the deprecated boxes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See the full list of boxes to upgrade in the **Choregraphe** Release Note:
+:ref:`rn_improved_boxes`.
+
+3. To support the new |cloud|
+++++++++++++++++++++++++++++++
+
+Check the **Properties**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Note that the **Project** has now properties allowing you to edit
+directly the manifest of your **Application**.
+
+Pay attention to the unique **Application ID**, automatically generated
+by **Choregraphe**. If needed, this **Application ID** can be changed.
+
+For further details, see:
+:ref:`choregraphe-reference-project-properties`.
+
+4. To support the new |roboN| **V5**
+++++++++++++++++++++++++++++++++++++
+
+Most of the dances created with version 1.14.5 still run on |roboN| **V4**
+and even on **V5**.
+
+But, as the masses slightly evolved, balance breakpoints has also changed.
+
+So for example, if your |roboN| stands on one foot, or strikes a pose at the
+limit of its possibilities (in terms of balance), then a |roboN| **V5** may fall.
+
+Check tune your dances and extreme motions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+=====  ========================================================================
+Step    Action
+=====  ========================================================================
+1.      Make sure you have cut/replaced all the deprecated boxes listed here:
+        :ref:`rn_improved_boxes`.
+
+2.      Test your **Timelines** using |roboN| **V5**
+        :ref:`choregraphe-reference-simulated-robot`.
+
+3.      If your animation fails on **V5**, you can:
+
+        * Reshape a little bit the movement until **V5** keep balanced, or
+
+        * Create a specific **Animation** for each Version, using the
+          :ref:`nao-family::nao-version-prog`.
+=====  ========================================================================

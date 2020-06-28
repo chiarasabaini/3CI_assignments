@@ -1,0 +1,53 @@
+.. include:: ../../bulk/common.rst
+
+.. _naoqi-peopleperception:
+
+NAOqi PeoplePerception
+======================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   albasicawareness
+   alengagementzones
+   alfacecharacteristics
+   alfacedetection
+   algazeanalysis
+   alpeopleperception
+   alsittingpeopledetection
+   alwavingdetection
+
+--------------------------
+
+This section describes the modules that can be used to analyse the people around the robot.
+
+All robots
+++++++++++
+
++---------------------------------+-------------------------------------------------------------------------------+
+| Use ...                         | To ...                                                                        |
++=================================+===============================================================================+
+| :ref:`albasicawareness`         | Make the robot react to its environment's stimuli.                            |
++---------------------------------+-------------------------------------------------------------------------------+
+| :ref:`alengagementzones`        | Analyze the position of a person with respect to the robot.                   |
++---------------------------------+-------------------------------------------------------------------------------+
+| :ref:`alfacecharacteristics`    | Provide estimated human characteristics based on facial analysis.             |
++---------------------------------+-------------------------------------------------------------------------------+
+| :ref:`alfacedetection`          | Make the robot detect and recognize human faces.                              |
++---------------------------------+-------------------------------------------------------------------------------+
+| :ref:`algazeanalysis`           | Analyze the direction of the gaze of a person.                                |
++---------------------------------+-------------------------------------------------------------------------------+
+| :ref:`alpeopleperception`       | Make the robot keep tracks about the people around it.                        |
++---------------------------------+-------------------------------------------------------------------------------+
+| :ref:`alsittingpeopledetection` | Make the robot detect whether a person is sitting or not.                     |
++---------------------------------+-------------------------------------------------------------------------------+
+
+Requiring a 3D sensor
++++++++++++++++++++++
+
++---------------------------------+-------------------------------------------------------------------------------+
+| Use ...                         | To ...                                                                        |
++=================================+===============================================================================+
+| :ref:`alwavingdetection`        | Make the robot detect if a detected person is waving.                         |
++---------------------------------+-------------------------------------------------------------------------------+

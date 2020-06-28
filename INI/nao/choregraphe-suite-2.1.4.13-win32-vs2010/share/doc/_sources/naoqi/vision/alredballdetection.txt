@@ -1,0 +1,93 @@
+.. _alredballdetection:
+
+ALRedBallDetection
+===================
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alredballdetection-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alredballdetection-api>`
+
+-----------------
+
+
+What it does
+------------
+
+**ALRedBallDetection** is a module that provides a fast vision based red ball detector.
+
+
+How it works
+------------
+
+**ALRedBallDetection** is based on the detection of red pixels in the image given by the camera.
+These pixels are filtered depending on their distance to the red value in the YUV colorspace, using
+a threshold that was computed to allow the detection even with changing light conditions.
+Then, from all the detected set of red pixels, only the ones that define a circular shape are kept.
+
+When a set of pixels is found on the current image, the ALMemory key **redBallDetected** is updated.
+
+This key is organized as follows:
+
+.. code-block:: guess
+
+   [
+     TimeStamp,
+     BallInfo,
+     CameraPose_InTorsoFrame,
+     CameraPose_InRobotFrame,
+     Camera_Id
+   ]
+
+**TimeStamp**: this field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+  TimeStamp [
+    TimeStamp_Seconds,
+    Timestamp_Microseconds
+  ]
+
+**BallInfo**
+
+.. code-block:: guess
+
+   BallInfo [
+     centerX,
+     centerY,
+     sizeX,
+     sizeY
+   ]
+
+- **centerX** and **centerY** are the angular coordinates of the center of the ball in angles (radians).
+
+- **sizeX** and **sizeY** are the ball "horizontal and vertical radius" in angles (radians).
+
+The origin of the angles is the middle of the image. **centerX**
+corresponds to the direct (counter-clockwise) rotation along the Z axis,
+and **centerY** corresponds to the direct rotation along the Y axis, as in the
+image below:
+
+.. image:: /medias/dev/modules/vision/vision_cameraangles.png
+   :height: 283 px
+   :width: 476 px
+
+**CameraPose_InTorsoFrame**: describes the :term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_TORSO`.
+
+**CameraPose_InRobotFrame**: describes the :term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_ROBOT`.
+
+**Camera_Id**: gives the Id of the camera used for the detection (0 for the top camera, 1 for the bottom camera).
+
+Performances and Limitations
+----------------------------
+
+The detection is limited to objects that are approximatively red and circular.
+Balls of other colors cannot be detected.
+
+Getting started
+---------------
+
+The easiest way to get started with ALRedBallDetection is to use the Walk Tracker Choregraphe Box and to set the type of object to be tracked as "Red ball".

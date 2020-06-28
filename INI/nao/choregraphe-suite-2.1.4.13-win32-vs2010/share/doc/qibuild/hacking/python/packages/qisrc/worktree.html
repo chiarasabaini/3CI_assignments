@@ -1,0 +1,296 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qisrc.worktree – Managing git projects &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qisrc modules" href="index.html" />
+    <link rel="next" title="qisrc.sync – Synchronize a worktree with a manifest" href="sync.html" />
+    <link rel="prev" title="qisrc.project - git projects in a GitWorkTree" href="project.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="project.html" title="qisrc.project - git projects in a GitWorkTree">previous</a>
+     |
+    <a href="index.html" title="qisrc modules" accesskey="U">up</a>
+   |
+    <a href="sync.html" title="qisrc.sync &amp;#8211; Synchronize a worktree with a manifest">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-python-packages-qisrc-worktree">
+            
+  <div class="section" id="module-qisrc.worktree">
+<span id="qisrc-worktree-managing-git-projects"></span><h1>qisrc.worktree &#8211; Managing git projects<a class="headerlink" href="#module-qisrc.worktree" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="qisrc-worktree-gitworktree">
+<h2>qisrc.worktree.GitWorkTree<a class="headerlink" href="#qisrc-worktree-gitworktree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qisrc.worktree.GitWorkTree">
+<em class="property">class </em><tt class="descclassname">qisrc.worktree.</tt><tt class="descname">GitWorkTree</tt><big>(</big><em>worktree</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores a list of git projects and a list of manifests</p>
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.configure_manifest">
+<tt class="descname">configure_manifest</tt><big>(</big><em>manifest_url</em>, <em>groups=None</em>, <em>branch='master'</em>, <em>ref=None</em>, <em>review=True</em>, <em>force=False</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.configure_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new manifest to this worktree</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.check_manifest">
+<tt class="descname">check_manifest</tt><big>(</big><em>xml_path</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.check_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a sync using just the xml file given as parameter</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.sync">
+<tt class="descname">sync</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates to WorkTreeSyncer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.load_git_projects">
+<tt class="descname">load_git_projects</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.load_git_projects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a list of git projects using the
+xml configuration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.get_git_project">
+<tt class="descname">get_git_project</tt><big>(</big><em>path</em>, <em>raises=False</em>, <em>auto_add=False</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.get_git_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a git project by its sources</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.get_git_projects">
+<tt class="descname">get_git_projects</tt><big>(</big><em>groups=None</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.get_git_projects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the git projects matching a given group</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.find_repo">
+<tt class="descname">find_repo</tt><big>(</big><em>repo</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.find_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for a project configured with the given repo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.snapshot">
+<tt class="descname">snapshot</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a :py:class`.Snapshot` of the current worktree state</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.add_git_project">
+<tt class="descname">add_git_project</tt><big>(</big><em>src</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.add_git_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new git project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.clone_missing">
+<tt class="descname">clone_missing</tt><big>(</big><em>repo</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.clone_missing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new project.
+:returns: a boolean telling if the clone succeeded</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.move_repo">
+<tt class="descname">move_repo</tt><big>(</big><em>repo</em>, <em>new_src</em>, <em>force=False</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.move_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a project in the worktree (same remote url, different
+src)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.checkout">
+<tt class="descname">checkout</tt><big>(</big><em>branch</em>, <em>force=False</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.checkout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">checkout</span></tt></p>
+<p>For each project, checkout the branch if it is different than
+the default branch of the manifest.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.get_projects_on_branch">
+<tt class="descname">get_projects_on_branch</tt><big>(</big><em>branch</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.get_projects_on_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dict (src, project) for every project as configured
+on the given branch of the manifest.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.remove_repo">
+<tt class="descname">remove_repo</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.remove_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a project from the worktree</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.save_project_config">
+<tt class="descname">save_project_config</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.save_project_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the project instance in .qi/git.xml</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisrc.worktree.GitWorkTree.save_git_config">
+<tt class="descname">save_git_config</tt><big>(</big><big>)</big><a class="headerlink" href="#qisrc.worktree.GitWorkTree.save_git_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the worktree config in .qi/git.xml</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="project.html" title="qisrc.project - git projects in a GitWorkTree">qisrc.project - git projects in a GitWorkTree</a>
+     |
+    <a href="index.html" title="qisrc modules" accesskey="U">qisrc modules</a>
+   |
+    <a href="sync.html" title="qisrc.sync &amp;#8211; Synchronize a worktree with a manifest">qisrc.sync &#8211; Synchronize a worktree with a manifest</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/python/index.html">qiBuild Python framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/index.html">qiBuild design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">qiBuild Python documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">qiBuild Python packages documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../qisys/index.html">qisys modules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">qisrc modules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="git.html">qisrc.git &#8211; Git related tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="manifest.html">qisrc.manifest &#8211; Parsing manifest files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="git_config.html">qisrc.git_config &#8211; Handling git configurations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="project.html">qisrc.project - git projects in a GitWorkTree</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">qisrc.worktree &#8211; Managing git projects</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="sync.html">qisrc.sync &#8211; Synchronize a worktree with a manifest</a></li>
+<li class="toctree-l5"><a class="reference internal" href="review.html">qisrc.review &#8211; Using code review (gerrit)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../qibuild/index.html">qibuild modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitest/index.html">qitest modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitoolchain/index.html">qitoolchain modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qidoc/index.html">qidoc modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qilinguist/index.html">qilinguist modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipy/index.html">qipy modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipkg/index.html">qipkg modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qisrc.worktree &#8211; Managing git projects</a><ul>
+<li><a class="reference internal" href="#qisrc-worktree-gitworktree">qisrc.worktree.GitWorkTree</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="project.html" title="qisrc.project - git projects in a GitWorkTree">previous</a>
+     |
+    <a href="index.html" title="qisrc modules" accesskey="U">up</a>
+   |
+    <a href="sync.html" title="qisrc.sync &amp;#8211; Synchronize a worktree with a manifest">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

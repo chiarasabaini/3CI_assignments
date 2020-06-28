@@ -1,0 +1,54 @@
+.. _qimessaging-python:
+
+Experimental: qimessaging API
+=============================
+
+.. warning:: This is still a work in progress, and API may change in the future.
+
+What is qimessaging
+--------------------
+
+qimessaging is a new architecture, allowing you to use NAOqi APIs with a new and
+easier syntax.
+
+Calling methods
+-----------------
+
+* Instead of creating a proxy to a module, create a session and ask for a service.
+  You will get a Python object that has the same methods as the remote module, just
+  like before:
+
+  .. literalinclude:: qi/call.py
+      :language: python
+
+* You can also call methods asynchronously by using the **_async** keyword:
+
+  .. literalinclude:: qi/async.py
+     :language: python
+
+Subscribing to events
+----------------------
+
+* You do not need a broker,  and should create a **qi.Application** instead, that
+  will take care of creating an event loop, among other things.
+
+* You no longer need a module to subscribe to an event. Instead, use
+  the **subscriber** method on **ALMemory**. It returns an object with a **signal**
+  property on which you can connect callbacks:
+
+  .. literalinclude:: qi/event.py
+      :language: python
+
+Writing services
+-----------------
+
+*  Call **session.registerService** with any Python class you want.
+   All public methods of the object will be available for other services
+   by default.
+
+* You need to be connected to a special service called **ServiceDirectory** in
+  order to register a new service. Such a service is provided by the
+  **naoqi** process.
+
+  .. literalinclude:: qi/service.py
+      :language: python

@@ -1,0 +1,105 @@
+.. _alinfrared-api:
+
+ALInfrared API
+==============
+
+:ref:`naoqi-sensors` - :ref:`Overview <alinfrared>` | API | :ref:`Tutorial <alinfrared-tuto>`
+
+------------
+
+.. seealso::
+
+   - :ref:`IR (Infra-Red) Hardware <robot-infrared>`
+   - :ref:`alinfrared-remote-control`
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alinfraredproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALInfraredProxy
+
+* :cpp:func:`ALInfraredProxy::initReception`
+* :cpp:func:`ALInfraredProxy::send32`
+* :cpp:func:`ALInfraredProxy::send8`
+* :cpp:func:`ALInfraredProxy::sendIpAddress`
+* :cpp:func:`ALInfraredProxy::sendRemoteKey`
+* :cpp:func:`ALInfraredProxy::sendRemoteKeyWithTime`
+
+**Deprecated methods**
+
+* :cpp:func:`ALInfraredProxy::confRemoteRecordSave` (deprecated)
+
+
+Methods
+-------
+
+.. cpp:function:: void ALInfraredProxy::initReception(const int& RepeatThreshold)
+
+  Init IR reception (connect as a client to the LIRC daemon).
+
+  :param RepeatThreshold: keep-pressing threshold after which the repetition
+                          of a key is taken into consideration.
+
+.. cpp:function:: void ALInfraredProxy::send32(const std::string& Data_IR)
+
+  Send 4 bytes by IR.
+
+  :param Data_IR: 32 bits number to send through IR, as a string.
+
+.. cpp:function:: void ALInfraredProxy::send32( const int& Byte1, const int& Byte2, const int& Byte3, const int& Byte4 )
+
+  Send 4 bytes by IR.
+
+  :param Byte1: Byte 1 to send through IR.
+
+  :param Byte2: Byte 2 to send through IR.
+
+  :param Byte3: Byte 3 to send through IR.
+
+  :param Byte4: Byte 4 to send through IR.
+
+.. cpp:function:: void ALInfraredProxy::send8(const int& Byte)
+
+  Send 1 byte by IR.
+
+  :param Byte: byte to send through IR.
+
+.. cpp:function:: void ALInfraredProxy::sendIpAddress(const std::string& IP)
+
+  Send an IP address by IR.
+
+  :param IP: IP address to send through IR.
+
+.. cpp:function:: void ALInfraredProxy::sendRemoteKey( const std::string& Remote, const std::string& Key )
+
+  Simulate a remote control (the robot as a remote control).
+
+  :param Remote: IR remote control name.
+
+  :param Key: IR remote control key name.
+
+
+.. cpp:function:: void ALInfraredProxy::sendRemoteKeyWithTime( const std::string& Remote, const std::string& Key, const int& TimeMs )
+
+  Simulate a remote control (the robot as a remote control).
+
+  :param Remote: IR remote control name.
+
+  :param Key: IR remote control key name.
+
+  :param TimeMs: The time in ms when the remote key must be send. 0 deals like sendRemoteKey
+
+
+.. cpp:function:: void ALInfraredProxy::confRemoteRecordSave(void)
+
+   .. deprecated:: 1.22
+     due to technical improvements, this method is not useful anymore. Do not use.

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-21 07:09:51 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA3OjA0OjAyICI7MzI4MQ=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA3OjA5OjUxICI7MTszMzk4"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <declare name="m" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci un numero:&quot;" newline="True"/>
+            <input variable="n"/>
+            <assign variable="m" expression="-n"/>
+            <for variable="m" start="m" end="n" direction="inc" step="1">
+                <output expression="m" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

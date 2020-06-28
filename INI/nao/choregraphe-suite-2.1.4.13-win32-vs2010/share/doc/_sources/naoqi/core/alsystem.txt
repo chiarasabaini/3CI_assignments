@@ -1,0 +1,22 @@
+.. _alsystem:
+
+ALSystem
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alsystem-api
+   partitioninfo
+
+:ref:`naoqi-core` - Overview | :ref:`API <alsystem-api>` | :ref:`PartitionInfo <partitionInfo>`
+
+------------
+
+
+What it does
+------------
+
+**ALSystem** provides primitives that can be used to configure the system and
+perform operations such as shutting down or rebooting.

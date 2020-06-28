@@ -1,0 +1,58 @@
+.. _whats-new_1.14.1:
+
+What's new - 1.14.1
+====================
+
+19 languages supported
+-----------------------
+
+Until release 1.14.0, **NAO** could talk and understand 8 languages:
+
+* Chinese (Mandarin),
+* English,
+* French,
+* German,
+* Italian,
+* Japanese,
+* Korean,
+* Spanish (Castilian).
+
+
+Release 1.14.1 introduces 11 new languages, available for **NAO V4.0**:
+
+* Arabic,
+* Brazilian Portuguese,
+* Czech,
+* Danish,
+* Dutch,
+* Finnish,
+* Polish,
+* Portuguese,
+* Swedish,
+* Russian,
+* Turkish.
+
+For further details, see: :ref:`language_management` and :ref:`language_codes`.
+
+
+New method: setLanguageDefaultVoice
+--------------------------------------
+
+A new method allows defining a default voice for each language installed on your robot.
+
+For further details, see: :cpp:func:`ALTextToSpeechProxy::setLanguageDefaultVoice`
+
+
+Reminder about CMake backward compatibility
+----------------------------------------------
+
+If you still use any code created before 1.12 Release, note that the portage
+of your code is now mandatory.
+
+More specifically, this line, will throw an error::
+
+   use(naoqi-plugin-tools)
+
+For further details, see : :ref:`cpp-tutos-porting-1.12`.
+
+

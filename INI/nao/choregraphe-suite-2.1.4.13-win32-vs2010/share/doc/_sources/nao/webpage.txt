@@ -1,0 +1,95 @@
+.. include:: ../bulk/common.rst
+
+.. _webpage_nao:
+
+|roboN| Web page
+================
+
+**See also**: :ref:`access_webpage_nao`.
+
+.. image:: /medias/wizard/myrobot_main.png
+    :width: 460 px
+    :height: 391 px
+
++-------+---------------------------+----------------------------------------------------+
+| Part  | Name                      | Allows you to ...                                  |
++=======+===========================+====================================================+
+| **A** | |roboN| picture           | Make your |roboN| say a short sentence:            |
+|       |                           |                                                    |
+|       |                           | 1. Click |roboN|'s picture to make appear the      |
+|       |                           |    speech bubble.                                  |
+|       |                           |                                                    |
+|       |                           | 2. Optionally, edit the text.                      |
+|       |                           |                                                    |
+|       |                           | 3. Press Enter key.                                |
++-------+---------------------------+----------------------------------------------------+
+| **B** | **?** menu                | Open:                                              |
+|       |                           |                                                    |
+|       |                           | * :ref:`getting_started`,                          |
+|       |                           | * this on-line Documentation,                      |
+|       |                           | * :ref:`opennao-web-page`.                         |
+|       +---------------------------+----------------------------------------------------+
+|       | **EN** menu               | Choose another language for the current web page.  |
++-------+---------------------------+----------------------------------------------------+
+| **C** | :ref:`myrobot_nao`        | Display and set the general settings of the robot. |
++-------+---------------------------+----------------------------------------------------+
+| **D** | :ref:`robot_connect_nao`  | Set the connection to the network.                 |
++-------+---------------------------+----------------------------------------------------+
+| **E** | :ref:`robot_updates_nao`  | Set and manage the link to the |cloud|.            |
++-------+---------------------------+----------------------------------------------------+
+
+.. _myrobot_nao:
+
+My robot
+---------
+
+**My robot** section displays the main settings of the robot.
+
+.. image:: /medias/wizard/myrobot.png
+    :width: 535 px
+    :height: 360 px
+
++------------------+-----------------------------------------------------------+
+| Name             | Description                                               |
++==================+===========================================================+
+| **Battery**      | Displays the current level of the battery.                |
++------------------+-----------------------------------------------------------+
+| **NAOqi          | Displays the version currently running on |roboN|.        |
+| version**        |                                                           |
++------------------+-----------------------------------------------------------+
+| **Robot          | List of languages installed on |roboN|.                   |
+| language**       |                                                           |
+|                  | Allows you to select the Language currently used          |
+|                  | by |roboN|.                                               |
+|                  |                                                           |
+|                  | **Note**: Avoid setting **Robot language** while          |
+|                  | :ref:`alife` is on.                                       |
+|                  | For further details see: :ref:`nao_freeze`.               |
++------------------+-----------------------------------------------------------+
+| **Volume**       | Allows you to set the volume.                             |
++------------------+-----------------------------------------------------------+
+| **Timezone**     | Allows you to set the time zone.                          |
+|                  |                                                           |
+|                  | This setting is required for the WiFi connection.         |
++------------------+-----------------------------------------------------------+
+| **Shut down**    | Allows you to shut down your |roboN|.                     |
+| button           |                                                           |
++------------------+-----------------------------------------------------------+
+| **Reboot**       | Allows you to reboot |roboN|.                             |
+| button           |                                                           |
++------------------+-----------------------------------------------------------+
+| **Robot's name** | Allows you to set the name of your |roboN|.               |
++------------------+-----------------------------------------------------------+
+| **Robot's        | Allows you to set the password of your |roboN|.           |
+| password**       |                                                           |
++------------------+-----------------------------------------------------------+
+| **Alive by       | Allows you to enable or disable the **Autonomous          |
+| default**        | Life** at startup.                                        |
+|                  |                                                           |
+|                  | **Warning**: if you disable **Autonomous Life** at        |
+|                  | startup, your |roboN| will remain static, and you         |
+|                  | will not be able to chat or launch activities by          |
+|                  | voice.                                                    |
+|                  |                                                           |
+|                  | For further details, see: :ref:`alife`.                   |
++------------------+-----------------------------------------------------------+

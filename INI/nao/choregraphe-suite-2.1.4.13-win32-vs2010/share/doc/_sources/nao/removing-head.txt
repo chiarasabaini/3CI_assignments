@@ -1,0 +1,68 @@
+.. include:: ../bulk/common.rst
+
+.. _removing-head:
+
+Removing |roboN|'s head
+============================
+
+Why removing the head
+----------------------
+
+You will need to remove the head of your robot if:
+
+* your robot does not turn on,
+* you want to change the head, or
+* the support asked you to do so.
+
+Removing the head
+--------------------
+
+To remove the head:
+
+=====  ============================================================================================================
+Step       Action
+=====  ============================================================================================================
+1.      Make sure your robot is:
+
+        * turned off and
+        * unplugged.
+
+        Wait 60 seconds in order to be sure all electronic capacitors are depleted.
+
+2.      Find the head lock buttons.
+
+        To do so, run your fingers under the head: you'll feel square lock buttons on the left and
+        right of the neck.
+
+        .. image:: /medias/nao/clip_head.png
+            :width: 198 px
+            :height: 133 px
+
+3.      Firmly grip the head on either side of the robot's face, and push up on the two lock buttons,
+        making sure they are fully pressed in.
+
+4.      Now lift off the head. There should be no resistance.
+
+        If it is difficult, push the lock buttons up more firmly.
+=====  ============================================================================================================
+
+Replacing the head
+-------------------
+
+To replace |roboN|'s head:
+
+=====  ============================================================================================================
+Step       Action
+=====  ============================================================================================================
+1.      Align the cross-shaped hole of the head with the cross-shaped neck.
+
+2.      Push down.
+
+        You should make sure that the head fully clicks in; both buttons should snap back into place.
+
+3.      Without pressing either lock button, gently attempt to lift the head up to ensure a solid connection.
+
+        The head should be secure.
+
+        If not, repeat the process and be more careful with your alignment.
+=====  ============================================================================================================

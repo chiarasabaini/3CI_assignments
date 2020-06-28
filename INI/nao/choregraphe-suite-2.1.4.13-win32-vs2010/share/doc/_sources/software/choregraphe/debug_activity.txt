@@ -1,0 +1,82 @@
+.. include:: bulk/common.rst
+
+.. _debug_activity:
+
+Debugging an Activity
+=======================
+
+You have created a **Behavior**. It is operational.
+Otherwise, see: :ref:`debug_behavior`.
+
+You have transformed your **Behavior** into an **Activity**.
+
+Here is how you can fix the bugs.
+
+Testing an Activity and its Trigger conditions
+-----------------------------------------------
+
+To test an **Activity**:
+
+.. |install_apps-button| image:: /medias/desktop/choregraphe/application_manager_add_current.png
+   :class: img-inline
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Save the **Project**.
+
+2.      In the **Robot Applications** panel, click the |install_apps-button|
+        **Package and install the current project to the robot** button.
+
+3.      Click the |life_off-button| **Turn autonomous life on** button.
+=====  =========================================================================
+
+My Activity does not start
+++++++++++++++++++++++++++
+
+Have a look to the :ref:`choregraphe-reference-project-properties`:
+
+* Make sure the **Behavior** is exposed, i.e. its check-box is checked.
+
+* Select the **Behavior** and make sure its
+  :ref:`Behavior property<beha_properties>` are well set.
+
+  Pay attention to: **Nature**,  **Trigger sentences**
+  and/or **Launch trigger condition**.
+
+Testing an Activity bypassing its Trigger conditions
+-----------------------------------------------------
+
+To test an **Activity** bypassing its trigger conditions:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure the **Autonomous Life** is on.
+
+        If not, the |life_off-button| **Turn autonomous life on** button.
+
+2.      Click the |play-button| **Play** button.
+=====  =========================================================================
+
+**Result**
+
+**Choregraphe**, choose, according to the **Nature** of the **Behavior**
+and the current **Life** state, between the 2 methods:
+:cpp:func:`ALBehaviorManagerProxy::startBehavior` or
+:cpp:func:`ALAutonomousLifeProxy::switchFocus`.
+
++----------------------+---------------+---------------+---------------+
+|AutonomousLife states |  Behavior's Nature                            |
++                      +---------------+---------------+---------------+
+|                      | No nature     | Solitary      | Interactive   |
++======================+===============+===============+===============+
+| **Disabled**         | startBehavior | startBehavior | startBehavior |
++----------------------+---------------+---------------+---------------+
+| **Solitary**         | startBehavior | switchFocus   | switchFocus   |
++----------------------+---------------+---------------+---------------+
+| **Interactive**      | startBehavior | switchFocus\* | switchFocus   |
++----------------------+---------------+---------------+---------------+
+
+\*Calling switchFocus of a **Solitary** Activity while in **Interactive**
+state will not start the **Activity**.

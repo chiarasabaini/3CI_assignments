@@ -1,0 +1,19 @@
+v3.4
+====
+
+New commands
+-------------
+
+* ``qipkg``: see :ref:`qipkg-tutorial`
+
+* ``qipy``: see :ref:`qipy-tutorial`
+
+qisrc
+-----
+
+* Support multiple remotes
+
+General
+-------
+
+* Worktrees now register themselves to the global config files

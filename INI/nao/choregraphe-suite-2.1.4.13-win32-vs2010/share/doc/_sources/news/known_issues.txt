@@ -1,0 +1,26 @@
+.. include:: ../bulk/common.rst
+
+Known issues
+==============
+
+* **WPA2-Enterprise** not yet supported.
+
+* Bug #25614 Parameters of the box "Set external anti-collision" need reworking.
+
+* Bug #22971 MoveAlong only works on |roboJ|. Planar moves is not yet available
+  for |roboN|.
+
+* Bug #22733 Cannot switch language from a Choregraphe Application.
+
+* Bug #13709 Ubuntu 12.04 only - Cannot drag and drop boxes.
+
+  There is an **Ubuntu** known issue, impacting **Choregraphe**,
+  when using ubuntu-2D for Window Manager with the Launcher bar in auto-hide mode.
+
+  The issue is fixed on latest Ubuntu versions (14.04).
+
+  For further details, see: :ref:`linux-drag-and-drop`.
+
+* Bug #6622 and #8502 Hand touch sometimes activated by motor usage (|roboN| V4).
+
+* Bug #6412 On Vista, you need to be administrator to use the flasher.

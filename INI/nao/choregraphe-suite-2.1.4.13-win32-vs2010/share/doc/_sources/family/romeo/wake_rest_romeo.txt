@@ -1,0 +1,13 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_wake_rest:
+
+|roboR| - Wake up and Rest effect
+==================================
+
+.. seealso::
+    :ref:`romeo`
+
+-----------
+
+**TBD**

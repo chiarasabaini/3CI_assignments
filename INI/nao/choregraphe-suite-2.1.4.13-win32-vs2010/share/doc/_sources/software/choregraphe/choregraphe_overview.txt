@@ -1,0 +1,39 @@
+
+.. |icon_choregraphe| image:: /medias/desktop/choregraphe_ico.png
+   :class: img-inline
+
+.. _choregraphe-overview:
+
+What is **Choregraphe**
+========================
+
+|icon_choregraphe| **Choregraphe** is a multi-platform desktop application,
+allowing you to:
+
+* Create animations, behaviors and dialogs,
+* Test them on a simulated robot, or directly on a real one,
+* Monitor and control you robot,
+* Enrich Choregraphe behaviors with your own Python code.
+
+**Choregraphe** allows you to create applications containing Dialogs, services
+and powerful behaviors, such as interaction with people, dance, e-mails sending,
+without writing a single line of code.
+
+**Installation**
+
+To install the **Choregraphe suite** on your computer, see: :ref:`desktop-installation`.
+
+**Next steps**
+
+* Start your discovery with these simple tutorials:
+
+  * :ref:`helloworld_choregraphe`
+  * :ref:`helloworld_choregraphe_script`
+  * :ref:`helloworld_choregraphe_dialog`
+
+* To get familiar with **Choregraphe** interface, see:
+  :ref:`choregraphe-interface`.
+
+* To learn by doing, try the tutorials:
+  :ref:`choregraphe-tutorials`.
+

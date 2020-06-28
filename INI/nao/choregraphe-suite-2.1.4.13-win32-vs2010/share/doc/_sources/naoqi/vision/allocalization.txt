@@ -1,0 +1,150 @@
+.. _allocalization:
+
+ALLocalization
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   allocalization-api
+   allocalization-tuto
+   allocalization_advanced
+
+
+:ref:`naoqi-vision` - Overview | :ref:`API <allocalization-api>` |
+:ref:`Tutorial <allocalization-tuto>` | :ref:`Advanced <allocalization_adv>`
+
+-------------------
+
+What it does
+------------
+
+**ALLocalization** is a module dedicated to the localization of the robot in an
+*indoor* environment.
+
+How it works
+------------
+
+**ALLocalization** computes the orientation of the
+robot in a robust manner, using information provided by vision.
+
+For further details, see: :ref:`allocalization_adv`.
+
+Getting started
+----------------
+
+You can set a reference pose2D (x, y, theta) called "home" with :cpp:func:`ALLocalizationProxy::learnHome`.
+Then you can return to this pose2D using :cpp:func:`ALLocalizationProxy::goToHome`.
+
+For further details, see: :ref:`allocalization-tuto`.
+
+
+.. Hidded
+  With this module, you will be able to set **nodes**,
+  which are reference points, and then to localize the robot anywhere within 2 meters of any of those **nodes**.
+
+  .. figure:: /medias/naoqi/juliette_allocalization_simple.png
+     :width: 178 px
+     :height: 208 px
+
+     Figure 1: Localization relatively to the **current node**
+
+  We call **current node** the **node** used as a reference point at a given time.
+  It is automatically set as the closest **node** to the estimated
+  location of the robot.
+
+  How it works
+  ------------
+
+  Coordinate systems
+  ++++++++++++++++++
+
+  Each **node** you acquire contains its own coordinate system: the node location serves as origin,
+  and the direction in front of the robot at the beginning of the acquisition serves as x-coordinates.
+  After acquisition, you will be able to express locations either relatively to any of those
+  coordinate systems or in world coordinates.
+
+  When you are using this module, the first thing to do is to define **the world coordinate system**,
+  which will be used as reference to position nodes relatively to each other.
+  This is simply done by acquiring a first **node**, whose coordinate system will be used as world coordinates.
+  Please note that world coordinates are defined once and for all: erasing or replacing the first **node**
+  will not affect the world coordinate system in any way.
+
+  .. figure:: /medias/naoqi/juliette_allocalization_coordinates.png
+     :width: 275 px
+     :height: 204 px
+
+     Figure 2: A few **nodes** and their coordinate systems. The coordinate system
+     of the first **node** (node 0) also serves as world coordinates.
+
+
+  Known zone
+  ++++++++++
+
+  Acquiring the first **node** also creates a **known zone**: an area in which it is possible
+  to use the data stored in **nodes** to retrieve information on the location of the robot.
+  The information obtained can be either an instant rough estimate of the location
+  (using the odometry and the last accurately known location) or the accurate location
+  of the robot (which will take a few seconds to determine).
+
+  At first, the known zone simply consists of all locations within 2m of the first **node**.
+  By acquiring new **nodes**, you can then extend this **known zone** and localize the robot
+  in a vast area. In the **known zone**, the location of the robot is determined by using the
+  data stored in the **current node** as reference.
+
+  .. figure:: /medias/naoqi/juliette_allocalization_known_zone.png
+     :width: 463 px
+     :height: 188 px
+
+     Figure 3: A partially explored environment. In green the **known zone**, where it is
+     possible determine the location of the robot. In blue, the area
+     in which it is not yet possible to determine the location of the robot.
+
+
+  Saving your nodes for later use
+  ++++++++++++++++++++++++++++++++++++
+
+  The data of all the nodes you have acquired is stored in the **default directory**.
+  This module provides functions to save this data into another directory
+  (under the same base path) and to either load or delete data previously saved in
+  a directory.
+
+
+  Moving in the known zone
+  ++++++++++++++++++++++++
+
+  To help you make the best of the **node** you have acquired, this module provides
+  functions to make the robot move to a given position of the **known zone**, or near a given **node**.
+
+  .. warning::
+
+     In the final version of this module, the **nodes** will be connected within a graph
+     along proximity and accessibility criteria in order to move efficiently within
+     the **known zone**.
+
+     As of now, the *nodes* have yet to be connected, and moving
+     between **nodes** is simply done in a straight line. Try to use a convex
+     **known zone** until then.
+
+
+  Parameters
+  ++++++++++
+
+  * **Nodes** are referred to by **ids**.
+    Each **node** has its own **integer id**: the first one is 0, the second one is 1, and so on.
+    Please note that even if the node 0 is erased, the world coordinate-system will remain unchanged.
+  * **Node data** is stored in **directories**, all under the same base path
+    and referred to by **strings containing their relative path to the base directory**.
+    The **default directory** contains the data on the current nodes.
+  * **Locations** are defined by their **coordinates**.
+    Spatial coordinates are expressed in **meters**, and angles in **radians**.
+    The same units are used to express precision on these values.
+
+
+  Implementation details
+  ++++++++++++++++++++++
+
+  Acquiring a **node** involves a panorama setup, and localizing the robot
+  within the vicinity of a **node** implies loading the corresponding panorama
+  and calling the localization function.

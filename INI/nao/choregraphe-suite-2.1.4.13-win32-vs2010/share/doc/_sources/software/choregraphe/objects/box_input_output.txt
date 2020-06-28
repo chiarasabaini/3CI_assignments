@@ -1,0 +1,209 @@
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+
+Box - Inputs/outputs
+======================
+
+.. _choregraphe-reference-box-input:
+
+Input of a box
+++++++++++++++
+
+They are several natures of inputs.
+Some are only accessible from the inside of the box (from its :ref:`diagram <choregraphe-reference-box-flow-diagram>` or its :ref:`Timeline <choregraphe-reference-box-timeline>`), some only from outside (from the parent diagram) and some from both.
+
+To activate those which are available from the outside of the box, you have to **connect** them to either the main input of the diagram, or the :ref:`output <choregraphe-reference-box-output>` of a box.
+
+The others are automatically activated when a special event is raised.
+
+The **picture** displayed on an input depends on its **nature**:
+
+.. list-table:: Nature of the inputs
+   :widths: 15 15 10 100
+   :header-rows: 1
+
+   * - On the box
+     - | Within the
+       | box diagram
+     - Nature
+     - Description
+   * - .. image:: /medias/desktop/choregraphe/chore_input_onstart_outside.png
+     - .. image:: /medias/desktop/choregraphe/chore_input_onstart_inside.png
+     - **onStart**
+     - When this input is stimulated, the box is :ref:`started <choregraphe-reference-loading-unloading>`.
+   * - .. image:: /medias/desktop/choregraphe/chore_input_onstop_outside.png
+     -
+     - **onStop**
+     - When this input is stimulated, the box is :ref:`stopped <choregraphe-reference-loading-unloading>`.
+
+       This input is only visible outside the box (not within the diagram of the box) as it automatically stops everything within the diagram.
+   * - .. image:: /medias/desktop/choregraphe/chore_input_onevent_outside.png
+     - .. image:: /medias/desktop/choregraphe/chore_input_onevent_inside.png
+     - **onEvent**
+     - This input has no specific effect on the box, it does not start nor stop it.
+       When it is stimulated:
+
+       #. The ``onInput_<input_name>`` function of the :ref:`box script <choregraphe-reference-box-script>` is called.
+       #. The signal received on the input is transmitted to the :ref:`diagram <choregraphe-reference-box-flow-diagram>` of the box.
+          Note though that the signal will only be transmitted to the diagram if this diagram is already :ref:`loaded <choregraphe-reference-loading-unloading>`.
+   * -
+     - .. image:: /medias/desktop/choregraphe/chore_input_almemory_inside.png
+     - **ALMemory Input**
+     - This special type of input is only visible within the diagram. So you cannot stimulate it from the outside of the box.
+
+       It is stimulated every time the value of the data stored in :ref:`ALMemory <almemory>` corresponding to this input is updated and an event is raised to tell that it has been updated.
+       Note that these inputs are only active when the diagram is :ref:`loaded <choregraphe-reference-loading-unloading>`.
+
+       To have an example of use of this type of input, see the tutorial :ref:`choregraphe-tuto-right-bumper-almemory`.
+   * -
+     - .. image:: /medias/desktop/choregraphe/chore_input_onload_inside.png
+     - **onLoad**
+     - This type of input is only visible within the diagram and when the box is a Timeline.
+
+       So you cannot stimulate it from the outside of the box.
+       It is only stimulated when the box diagram has been :ref:`loaded <choregraphe-reference-loading-unloading>`.
+
+.. note::
+   All these special natures of inputs have no special effect on a :ref:`script box <choregraphe-reference-box-type-script>` as it has no :ref:`flow diagram <choregraphe-reference-box-flow-diagram>` nor :ref:`Timeline <choregraphe-reference-box-timeline>`.
+   For those accessible from the outside of the box, the ``onInput_<input_name>`` function of the :ref:`box script <choregraphe-reference-box-script>` is just called.
+
+
+.. _choregraphe-reference-box-output:
+
+Output of a box
++++++++++++++++
+
+They are several natures of outputs.
+
+You can stimulate them either from the :ref:`diagram <choregraphe-reference-box-flow-diagram>`
+or the :ref:`Timeline <choregraphe-reference-box-timeline>`
+or the :ref:`script <choregraphe-reference-box-script>` of the box.
+
+To stimulate it from the :ref:`diagram <choregraphe-reference-box-flow-diagram>`
+or the :ref:`Timeline <choregraphe-reference-box-timeline>` of the box, you need
+to connect it to a :ref:`sub-box <choregraphe-reference-box-parent>` output.
+
+To stimulate it from the :ref:`script <choregraphe-reference-box-script>` of the box, you need to call its corresponding method.
+For more information about this corresponding method, see the section: :ref:`choregraphe-reference-box-script-built-in-functions`.
+
+The **picture** displayed on an output depends on its **nature**:
+
+.. list-table:: Nature of the outputs
+   :widths: 15 15 10 100
+   :header-rows: 1
+
+   * - On the box
+     - | Within the
+       | box diagram
+     - Nature
+     - Description
+   * - .. image:: /medias/desktop/choregraphe/chore_output_onstopped_outside.png
+     - .. image:: /medias/desktop/choregraphe/chore_output_onstopped_inside.png
+     - **onStopped**
+     - - **Diagram or Timeline box:** When this output is stimulated from the diagram, the box is :ref:`stopped <choregraphe-reference-loading-unloading>`.
+
+       - **Dialog box:** When this output is stimulated from the diagram or the QiChat script, the dialog topic is deactivated.
+
+       - **Python box:** This output has no specific effect, it does not stop the box.
+   * - .. image:: /medias/desktop/choregraphe/chore_output_ponctual_outside.png
+     - .. image:: /medias/desktop/choregraphe/chore_output_ponctual_inside.png
+     - **punctual**
+     - This output has no specific effect on the box, it does not start nor stop it.
+
+       When it is stimulated, the signal received on the output is transmitted to the parent :ref:`diagram <choregraphe-reference-box-flow-diagram>`.
+
+
+
+.. _choregraphe-reference-box-io-type:
+
+Type of I/O (input/output)
+++++++++++++++++++++++++++
+
+The communication between boxes is **event based**, so a simple event signal can be sent from one box to another.
+But the signal can also **carry information** (such as a string, a number, an array...).
+
+Then an important thing you need to know about :abbr:`I/O (inputs/outputs)` is that the **color** of an :abbr:`I/O (input/output)` depends on the **type** of the data it carries.
+
+Here is a table gathering all types of :abbr:`I/O (inputs/outputs)` with their corresponding color:
+
+.. list-table:: Type of :abbr:`I/O (inputs/outputs)`
+   :widths: 15 15 10 100
+   :header-rows: 1
+
+   * - Input
+     - Output
+     - Type
+     - Description
+   * - .. image:: /medias/desktop/choregraphe/chore_input_onevent_outside.png
+     - .. image:: /medias/desktop/choregraphe/chore_output_ponctual_outside.png
+     - **Bang**
+     - Represents a **simple event**.
+       This type of :abbr:`I/O (input/output)` does not carry any data with it, only the information that it is stimulated.
+   * - .. image:: /medias/desktop/choregraphe/chore_input_number.png
+     - .. image:: /medias/desktop/choregraphe/chore_output_number.png
+     - **Number**
+     - Represents an **event carrying a data**.
+       This data is either a number (float or int) or an array of numbers.
+   * - .. image:: /medias/desktop/choregraphe/chore_input_string.png
+     - .. image:: /medias/desktop/choregraphe/chore_output_string.png
+     - **String**
+     - Represents an **event carrying a data**.
+       This data is either a string or an array of strings.
+   * - .. image:: /medias/desktop/choregraphe/chore_input_dynamic.png
+     - .. image:: /medias/desktop/choregraphe/chore_output_dynamic.png
+     - **Dynamic**
+     - Represents either a **simple event** (as the Bang type) or an **event carrying a data**.
+       This data (if any) is either a number (float or int), a string or an array of numbers, strings and arrays.
+
+Depending on their type, it is not always possible to connect two :abbr:`I/O (inputs/outputs)`: the information the output sends has to be understandable by the input.
+
+.. note::
+   You can connect any type of :abbr:`I/O (input/output)` to a **Bang** input.
+   The data sent will then be lost and will only be understood as a **simple event**.
+
+
+.. _choregraphe-detailed-interface-ioparam-edition-widget:
+
+Input, and output  edition widgets
++++++++++++++++++++++++++++++++++++++
+
+When you **create** or **edit** an :ref:`box input <choregraphe-reference-box-input>`, the following widget is displayed:
+
+.. image:: /medias/desktop/choregraphe/chore_edit_input.png
+   :width: 510 px
+   :height: 454 px
+
+You can here set:
+
+* the **name** of the input.
+* the brief **description** of what is done when this input is stimulated in the field **Tooltip**.
+
+  .. note::
+     This description will appear in a tooltip displayed by **passing above the input** in the flow diagram.
+* the type of **data expected** by this input in the field **Type**:
+  Dynamic, "Bang", Number or String.
+  For further details about these types, see the section: :ref:`choregraphe-reference-box-io-type`.
+
+You can also choose the **nature** of the input:
+onEvent, onStart, onStop or ALMemory Input.
+For more information about these natures, see the section: :ref:`choregraphe-reference-box-input`.
+
+If the input is an ALMemory input, you will be able to choose which value from ALMemory the input will be connected to.
+
+.. note::
+   You need to be connected to a robot if you want to browse the list of available values.
+
+|
+
+When you **create** or **edit** an :ref:`box output <choregraphe-reference-box-output>`, you get a very similar widget:
+
+.. image:: /medias/desktop/choregraphe/chore_edit_output.png
+   :width: 413 px
+   :height: 421 px
+
+But you have no field **ALMemory Value name** and the available **nature** of outputs are different:
+onStopped or punctual.
+For more information about these natures, see the section: :ref:`choregraphe-reference-box-output`.
+
+|

@@ -1,0 +1,63 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo-inertial:
+
+|roboR| - Inertial unit **TBD**
+================================
+
+.. seealso:: :ref:`romeo`
+
+--------------------
+
+Specifications
+--------------
+
+The **Inertial unit** are made of:
+
+- a 3-axis gyrometers with an angular speed of ~500Â°/s,
+
+- a 3-axis accelerometer with an acceleration of ~2g.
+
+Location
+----------
+
+The **Inertial unit** is located in the torso with its own processor.
+
+Position relative to the **Torso** frame.
+
++---------------+-----------+------------+-----------+
+| Device        | X(m)      | Y(m)       | Z(m)      |
++===============+===========+============+===========+
+| Accelerometer | 0.00239   | -0.03575   | 0.00626   |
++---------------+-----------+------------+-----------+
+| Gyrometer     | 0.00204   | -0.03491   | -0.00959  |
++---------------+-----------+------------+-----------+
+
+Output data
+------------
+
+The output data enables an estimation of the torso speed and attitude (Yaw, Pitch, Roll).
+
+Compute Torso Angle Algorithm
+++++++++++++++++++++++++++++++
+
+An **Aldebaran Robotics** algorithm computing the torso Angle from accelerometers and
+gyrometers is implemented inside the inertial board.
+
+This algorithm used the good proprieties of each sensor: accelerometer is the
+only absolute reference and give the good torso angle in static mode.
+When some motion is detected, the output angle is computed with gyrometers
+which have a good behavior in dynamic. However, integration of gyrometers
+creates a bias of the compute angle, so in dynamic mode, a fusion of compute
+angle from accelerometer and gyrometer is done to reduce this bias.
+
+.. figure:: /medias/nao/hardware/hardware_inertial_unit_landmark.png
+   :height: 192 px
+   :width: 420 px
+
+   Definition of AngleX and AngleY. [x, y, z] is the reference frame attached to torso.
+
+Accessing value using :ref:`almemory` key name
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+To access values by using ALMemory key names, see: :ref:`Inertial`.

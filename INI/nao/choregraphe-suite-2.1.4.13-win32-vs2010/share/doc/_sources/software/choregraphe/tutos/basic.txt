@@ -1,0 +1,40 @@
+.. include:: ../bulk/common.rst
+
+.. |browse-button| image:: /medias/desktop/choregraphe/chore_browse_button.png
+   :class: img-inline
+
+.. |import-button| image:: /medias/desktop/choregraphe/chore_content-mgr-import.png
+   :class: img-inline
+
+.. _playing-music-tuto:
+
+Playing music
+==============
+
+=====  ============================================================================
+Step       Action
+=====  ============================================================================
+1.      Drag and drop the **Audio** > **Sound** > **Play Sound** box onto the
+        **Flow Diagram** panel.
+
+        .. image:: /medias/dev/tutos/choregraphe/chore_music_box.png
+           :width: 122 px
+           :height: 112 px
+
+2.      Connect its input and output to the diagram input and output.
+
+3.      Click on its |parameter-button| **parameter** button.
+
+4.      Click the |browse-button| **Browse** button then click |import-button|
+        **Import file** button to import an audio file then select it.
+
+5.      Click **OK** button twice.
+
+        The file is stored. You will not have to upload it again.
+
+6.      Click the |play-button| **Play** button to launch your behavior.
+
+        The music file you have selected is played on |roboN|.
+=====  ============================================================================
+
+

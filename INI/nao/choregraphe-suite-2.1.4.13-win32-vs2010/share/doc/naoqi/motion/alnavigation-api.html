@@ -1,0 +1,767 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALNavigation API &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="ALNavigation" href="alnavigation.html" />
+    <link rel="next" title="ALRecharge" href="alrecharge.html" />
+    <link rel="prev" title="ALNavigation" href="alnavigation.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="alnavigation.html" title="ALNavigation">previous</a>
+     |
+    <a href="alnavigation.html" title="ALNavigation" accesskey="U">up</a>
+   |
+    <a href="alrecharge.html" title="ALRecharge">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-motion-alnavigation-api">
+            
+  <div class="section" id="alnavigation-api">
+<span id="id1"></span><h1>ALNavigation API<a class="headerlink" href="#alnavigation-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="alnavigation.html#alnavigation"><em>Overview</em></a> | API</p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alnavigationproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<p>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><em>ALModule API</em></a>.
+It also has the following specific methods:</p>
+<dl class="class">
+<dt id="ALNavigationProxy">
+<em class="property">class </em><tt class="descname">ALNavigationProxy</tt><a class="headerlink" href="#ALNavigationProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="juju-roboj-only">
+<h3><img alt="juju" class="img-inline" src="../../_images/juju.png" /> <em>Pepper</em> only<a class="headerlink" href="#juju-roboj-only" title="Permalink to this headline">¶</a></h3>
+<p>With <em>Pepper</em>, you can use generic navigation methods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#ALNavigationProxy::navigateTo__floatCR.floatCR" title="ALNavigationProxy::navigateTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::navigateTo()</span></tt></a></li>
+<li><a class="reference internal" href="#ALNavigationProxy::moveAlong__AL::ALValueCR" title="ALNavigationProxy::moveAlong"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveAlong()</span></tt></a></li>
+</ul>
+<p><strong>Deprecated methods</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#ALNavigationProxy::move__floatCR.floatCR.floatCR" title="ALNavigationProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::move()</span></tt></a> (deprecated, use ALMotion.move instead)</li>
+<li><a class="reference internal" href="#ALNavigationProxy::moveToward__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveToward()</span></tt></a> (deprecated, use ALMotion.moveToward instead)</li>
+<li><a class="reference internal" href="#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveTo()</span></tt></a> (deprecated, use ALMotion.moveTo instead)</li>
+<li><a class="reference internal" href="#ALNavigationProxy::setSecurityDistance__floatCR" title="ALNavigationProxy::setSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::setSecurityDistance()</span></tt></a> (deprecated, use ALMotion.setOrthogonalSecurityDistance instead)</li>
+<li><a class="reference internal" href="#ALNavigationProxy::getSecurityDistance" title="ALNavigationProxy::getSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::getSecurityDistance()</span></tt></a> (deprecated, use ALMotion.getOrthogonalSecurityDistance instead)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="event-list">
+<h2>Event list<a class="headerlink" href="#event-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/Status" title="Navigation/AvoidanceNavigator/Status"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/Status()</span></tt></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/ObstacleDetected" title="Navigation/AvoidanceNavigator/ObstacleDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/ObstacleDetected()</span></tt></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/MovingToFreeZone" title="Navigation/AvoidanceNavigator/MovingToFreeZone"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/MovingToFreeZone()</span></tt></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/TrajectoryProgress" title="Navigation/AvoidanceNavigator/TrajectoryProgress"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/TrajectoryProgress()</span></tt></a></li>
+<li><a class="reference internal" href="#Navigation/AvoidanceNavigator/AbsTargetModified" title="Navigation/AvoidanceNavigator/AbsTargetModified"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/AvoidanceNavigator/AbsTargetModified()</span></tt></a></li>
+</ul>
+<p><strong>Deprecated events</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Navigation/SafeNavigator/Status" title="Navigation/SafeNavigator/Status"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/Status()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#Navigation/SafeNavigator/BlockingObstacle" title="Navigation/SafeNavigator/BlockingObstacle"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/BlockingObstacle()</span></tt></a> (deprecated, use ALMotion/Safety/MoveFailed instead)</li>
+<li><a class="reference internal" href="#Navigation/SafeNavigator/AlreadyAtTarget" title="Navigation/SafeNavigator/AlreadyAtTarget"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/AlreadyAtTarget()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#Navigation/SafeNavigator/DangerousObstacleDetected" title="Navigation/SafeNavigator/DangerousObstacleDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/DangerousObstacleDetected()</span></tt></a> (deprecated)</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="alnavigationproxy-navigateto1"></span><dl class="function">
+<dt id="ALNavigationProxy::navigateTo__floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">navigateTo</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::navigateTo__floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alnavigationproxy-navigateto1"><em>ALNavigationProxy::navigateTo</em></a></li>
+<li><a class="reference internal" href="#alnavigationproxy-navigateto2"><em>ALNavigationProxy::navigateTo</em></a> with configuration options</li>
+</ul>
+<p>Makes the robot navigate to a relative metrical target pose2D expressed in FRAME_ROBOT.
+The robot computes a path to avoid obstacles.</p>
+<p>The robot is likely to perform any safety action to ensure the non collision with the environment. For example look with the head,
+stop to replan a new path. Thus, no motion timeline that takes the head resource can be run during a navigateTo.</p>
+<p>Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a>, the robot
+can choose its own path and speed while moving around. The speed decreases the closer the robot gets to obstacles.
+If the obstacle avoidance becomes too dangerous (as soon as it has detected an obstacle in its security area) the robot
+stops like in <a class="reference internal" href="#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveTo()</span></tt></a>.</p>
+<p>The target must be closer than 3m from the robot, otherwise the command will be ignored and a warning will be prompted.</p>
+<p>This is a blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; distance along the X axis in meters.</li>
+<li><strong>y</strong> &#8211; distance along the Y axis in meters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><em>True</em> if the robot reached its target at the end or <em>False</em> if it has been stopped by obstacles or if it cannot find a path to the target.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-guess"><pre>navigationProxy.navigateTo(2.0, 0.0)</pre>
+</div>
+<span class="target" id="alnavigationproxy-navigateto2"></span><dl class="function">
+<dt id="ALNavigationProxy::navigateTo__floatCR.floatCR.AL::ALValueCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">navigateTo</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>config</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::navigateTo__floatCR.floatCR.AL::ALValueCR" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; distance along the X axis in meters.</li>
+<li><strong>y</strong> &#8211; distance along the Y axis in meters.</li>
+<li><strong>velocity</strong> &#8211; maximum velocity (unitless). [0.0 to 1.0] 0.0 is the slowest speed of the robot, 1.0 is the maximum speed of the robot. The given parameter is clipped if not in the correct range. When the given parameter is very low (near to 0.0) it can be modified to fit the move limits of the robot.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><em>True</em> if the robot reached its target at the end or <em>False</em> if it has been stopped by obstacles or if it cannot find a path to the target.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="highlight-guess"><pre>navigationProxy.navigateTo(2.0, 0.0, [["SpeedFactor", 0.5]])</pre>
+</div>
+<span class="target" id="alnavigationproxy-movealong"></span><dl class="function">
+<dt id="ALNavigationProxy::moveAlong__AL::ALValueCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">moveAlong</tt><big>(</big><a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>trajectory</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::moveAlong__AL::ALValueCR" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>trajectory</strong> &#8211; <p>an ALValue describing either a direct trajectory [&#8220;Holonomic&#8221;, pathXY, finalTheta, finalTime],
+or a composed trajectory [&#8220;Composed&#8221;, direct trajectories].</p>
+<p>pathXY is an ALValue describing a 2D path,
+either a direct path or a composed one: [&#8220;Composed&#8221;, direct paths].</p>
+<p>Direct paths can be lines or arc of circles: [&#8220;Line&#8221;, [finalX, finalY]],
+[&#8220;Circle&#8221;, [centerX, centerY], spanAngle].</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><em>True</em> when the robot executed the trajectory completely, and also when it has been definitely stopped by obstacles.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The following command makes the robot move 1 m forward in 5 s, then 1 m backward in 10 s, without pausing:</p>
+</dd></dl>
+
+<div class="highlight-guess"><pre>navigationProxy.moveAlong(["Composed", ["Holonomic", ["Line", [1.0, 0.0]], 0.0, 5.0], ["Holonomic", ["Line", [-1.0, 0.0]], 0.0, 10.0]])</pre>
+</div>
+<dl class="function">
+<dt id="ALNavigationProxy::setSecurityDistance__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">setSecurityDistance</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>distance</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::setSecurityDistance__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setOrthogonalSecurityDistance__floatCR" title="ALMotionProxy::setOrthogonalSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setOrthogonalSecurityDistance()</span></tt></a> instead.</p>
+<p>Defines the security distance used by <a class="reference internal" href="#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveTo()</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>distance</strong> &#8211; distance in meters. See <a class="reference internal" href="#ALNavigationProxy::getSecurityDistance" title="ALNavigationProxy::getSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::getSecurityDistance()</span></tt></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALNavigationProxy::getSecurityDistance">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">getSecurityDistance</tt><big>(</big><big>)</big><a class="headerlink" href="#ALNavigationProxy::getSecurityDistance" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::getOrthogonalSecurityDistance" title="ALMotionProxy::getOrthogonalSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::getOrthogonalSecurityDistance()</span></tt></a> instead.</p>
+<p>Gets the current security distance used by <a class="reference internal" href="#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveTo()</span></tt></a> to check dangerous obstacles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">distance in meters between any part of the robot and any obstacle in the direction of the motion.<p>It defines the security area in which any obstacle detection stops the robot.</p>
+<p>Default value: 0.4m.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-move1"></span><dl class="function">
+<dt id="ALNavigationProxy::move__floatCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">move</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>theta</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::move__floatCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a> instead.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you still use this deprecated method, make sure you activate
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setExternalCollisionProtectionEnabled__ssCR.bCR" title="ALMotionProxy::setExternalCollisionProtectionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setExternalCollisionProtectionEnabled()</span></tt></a> first.</p>
+</div>
+<p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alnavigationproxy-move1"><em>ALNavigationProxy::move</em></a></li>
+<li><a class="reference internal" href="#alnavigationproxy-move2"><em>ALNavigationProxy::move</em></a> with move configuration</li>
+</ul>
+<p>Like <a class="reference internal" href="control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a>, makes the robot move at the given velocity,
+expressed in FRAME_ROBOT.
+Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a>, the robot
+stops as soon as it has detected an obstacle in its security area.
+This is a non-blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; velocity along X-axis, in meters per second. Use negative values for
+backward motion</li>
+<li><strong>y</strong> &#8211; velocity along Y-axis, in meters per second. Use positive values to
+go to the left</li>
+<li><strong>theta</strong> &#8211; velocity around Z-axis, in radians per second. Use negative
+values to turn clockwise.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-move2"></span><dl class="function">
+<dt id="ALNavigationProxy::move__floatCR.floatCR.floatCR.AL::ALValueC">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">move</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>theta</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue</a> <em>moveConfig</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::move__floatCR.floatCR.floatCR.AL::ALValueC" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a> instead.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you still use this deprecated method, make sure you activate
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setExternalCollisionProtectionEnabled__ssCR.bCR" title="ALMotionProxy::setExternalCollisionProtectionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setExternalCollisionProtectionEnabled()</span></tt></a> first.</p>
+</div>
+<p>Like <a class="reference internal" href="control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a>, makes the robot move at the given velocity,
+expressed in FRAME_ROBOT, with a move configuration.
+Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a>, the robot
+stops as soon as it has detected an obstacle in its security area.
+This is a non-blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; velocity along X-axis, in meters per second. Use negative values for
+backward motion</li>
+<li><strong>y</strong> &#8211; velocity along Y-axis, in meters per second. Use positive values to
+go to the left</li>
+<li><strong>theta</strong> &#8211; velocity around Z-axis, in radians per second. Use negative
+values to turn clockwise.</li>
+<li><strong>moveConfig</strong> &#8211; an ALValue with the custom move configuration. For further details, see: <a class="reference internal" href="control-walk.html#move-config"><em>Move config</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-movetoward1"></span><dl class="function">
+<dt id="ALNavigationProxy::moveToward__floatCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">moveToward</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>theta</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::moveToward__floatCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a> instead.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you still use this deprecated method, make sure you activate
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setExternalCollisionProtectionEnabled__ssCR.bCR" title="ALMotionProxy::setExternalCollisionProtectionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setExternalCollisionProtectionEnabled()</span></tt></a> first.</p>
+</div>
+<p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alnavigationproxy-movetoward1"><em>ALNavigationProxy::moveToward</em></a></li>
+<li><a class="reference internal" href="#alnavigationproxy-movetoward2"><em>ALNavigationProxy::moveToward</em></a> with move configuration</li>
+</ul>
+<p>Like <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a>, makes the robot move at the given
+normalized velocity, expressed in FRAME_ROBOT.
+Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a>, the robot
+stops as soon as it has detected an obstacle in its security area.
+This is a non-blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; normalized, unitless, velocity along X-axis. +1 and -1 correspond to
+the maximum velocity in the forward and backward directions,
+respectively.</li>
+<li><strong>y</strong> &#8211; normalized, unitless, velocity along Y-axis. +1 and -1 correspond to
+the maximum velocity in the left and right directions,
+respectively.</li>
+<li><strong>theta</strong> &#8211; normalized, unitless, velocity around Z-axis. +1 and -1
+correspond to the maximum velocity in the counterclockwise and
+clockwise directions, respectively.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-movetoward2"></span><dl class="function">
+<dt id="ALNavigationProxy::moveToward__floatCR.floatCR.floatCR.AL::ALValueC">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">moveToward</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>theta</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue</a> <em>moveConfig</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::moveToward__floatCR.floatCR.floatCR.AL::ALValueC" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a> instead.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you still use this deprecated method, make sure you activate
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setExternalCollisionProtectionEnabled__ssCR.bCR" title="ALMotionProxy::setExternalCollisionProtectionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setExternalCollisionProtectionEnabled()</span></tt></a> first.</p>
+</div>
+<p>Like <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a>, makes the robot move at the given
+normalized velocity, expressed in FRAME_ROBOT, with a move configuration.
+Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a>, the robot
+stops as soon as it has detected an obstacle in its security area.
+This is a non-blocking call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; normalized, unitless, velocity along X-axis. +1 and -1 correspond to
+the maximum velocity in the forward and backward directions,
+respectively.</li>
+<li><strong>y</strong> &#8211; normalized, unitless, velocity along Y-axis. +1 and -1 correspond to
+the maximum velocity in the left and right directions,
+respectively.</li>
+<li><strong>theta</strong> &#8211; normalized, unitless, velocity around Z-axis. +1 and -1
+correspond to the maximum velocity in the counterclockwise and
+clockwise directions, respectively.</li>
+<li><strong>moveConfig</strong> &#8211; an ALValue with the custom move configuration. For further details, see: <a class="reference internal" href="control-walk.html#move-config"><em>Move config</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-moveto1"></span><dl class="function">
+<dt id="ALNavigationProxy::moveTo__floatCR.floatCR.floatCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">moveTo</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>theta</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a> instead.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you still use this deprecated method, make sure you activate
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setExternalCollisionProtectionEnabled__ssCR.bCR" title="ALMotionProxy::setExternalCollisionProtectionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setExternalCollisionProtectionEnabled()</span></tt></a> first.</p>
+</div>
+<p>There are two overloads of this function:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#alnavigationproxy-moveto1"><em>ALNavigationProxy::moveTo</em></a></li>
+<li><a class="reference internal" href="#alnavigationproxy-moveto2"><em>ALNavigationProxy::moveTo</em></a> with move configuration</li>
+</ul>
+<p>Like <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a>, makes the robot move to the given
+<a class="reference internal" href="../../glossary.html#term-pose"><em class="xref std std-term">pose</em></a> (i.e. location + orientation). in the ground plane,
+relative to FRAME_ROBOT. Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a>, the robot
+stops as soon as it has detected an obstacle in its security area. This is a blocking call.</p>
+<p>For now bumpers and sonars are used to detect obstacles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; distance along the X axis in meters.</li>
+<li><strong>y</strong> &#8211; distance along the Y axis in meters.</li>
+<li><strong>theta</strong> &#8211; rotation around the Z axis in radians [-3.1415 to 3.1415].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if the robot reached the target, False if the robot was stopped by an obstacle.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="alnavigationproxy-moveto2"></span><dl class="function">
+<dt id="ALNavigationProxy::moveTo__floatCR.floatCR.floatCR.AL::ALValueCR">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <tt class="descclassname">ALNavigationProxy::</tt><tt class="descname">moveTo</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>x</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>y</em>, <a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>theta</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>moveConfig</em><big>)</big><a class="headerlink" href="#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR.AL::ALValueCR" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>Use <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a> instead.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you still use this deprecated method, make sure you activate
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setExternalCollisionProtectionEnabled__ssCR.bCR" title="ALMotionProxy::setExternalCollisionProtectionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setExternalCollisionProtectionEnabled()</span></tt></a> first.</p>
+</div>
+<p>Like <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a>, makes the robot move to the given <a class="reference internal" href="../../glossary.html#term-pose"><em class="xref std std-term">pose</em></a> (i.e. location + orientation) in the ground plane,
+relative to FRAME_ROBOT, with custom move configuration. Unlike <a class="reference internal" href="control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a>, the robot
+stops as soon as it has detected an obstacle in its security area. This is a blocking call.</p>
+<p>For now bumpers and sonars are used to detect obstacles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> &#8211; distance along the X axis in meters.</li>
+<li><strong>y</strong> &#8211; distance along the Y axis in meters.</li>
+<li><strong>theta</strong> &#8211; rotation around the Z axis in radians [-3.1415 to 3.1415].</li>
+<li><strong>moveConfig</strong> &#8211; an ALValue with the custom move configuration. For further details, see: <a class="reference internal" href="control-walk.html#move-config"><em>Move config</em></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if the robot reached the target, False if the robot was stopped by an obstacle.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/Status">
+<div class="line">Event: <tt class="descname">&quot;Navigation/AvoidanceNavigator/Status&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> status</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/AvoidanceNavigator/Status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when status of the local navigator changes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/Status&#8221;</li>
+<li><strong>status</strong> &#8211; New local navigator status. Please refer to <a class="reference internal" href="alnavigation.html#alnavigation"><em>ALNavigation</em></a> for details.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/ObstacleDetected">
+<div class="line">Event: <tt class="descname">&quot;Navigation/AvoidanceNavigator/ObstacleDetected&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> position</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/AvoidanceNavigator/ObstacleDetected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when an obstacle is detected in the close area.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/ObstacleDetected&#8221;</li>
+<li><strong>position</strong> &#8211; Array formatted as [x, y], representing the position of the detected obstacle in <a class="reference internal" href="../../glossary.html#term-frame-robot"><em class="xref std std-term">FRAME_ROBOT</em></a>.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/MovingToFreeZone">
+<div class="line">Event: <tt class="descname">&quot;Navigation/AvoidanceNavigator/MovingToFreeZone&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> status</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/AvoidanceNavigator/MovingToFreeZone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the robot starts or stops a motion to leave an obstacle neighbourhood.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/MovingToFreeZone&#8221;</li>
+<li><strong>status</strong> &#8211; 1.0 when the the robot starts and 0.0 when it has finished its motion.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/TrajectoryProgress">
+<div class="line">Event: <tt class="descname">&quot;Navigation/AvoidanceNavigator/TrajectoryProgress&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> progress</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/AvoidanceNavigator/TrajectoryProgress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the trajectory progress is updated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/TrajectoryProgress&#8221;</li>
+<li><strong>progress</strong> &#8211; percentage of the current trajectory accomplished, between 0.0 and 1.0.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/AvoidanceNavigator/AbsTargetModified">
+<div class="line">Event: <tt class="descname">&quot;Navigation/AvoidanceNavigator/AbsTargetModified&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> newTarget</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/AvoidanceNavigator/AbsTargetModified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the required target is unreachable because it is inside an obstacle.</p>
+<p>The robot then computes the closest target to the initial one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/AvoidanceNavigator/AbsTargetModified&#8221;</li>
+<li><strong>newTarget</strong> &#8211; the new target of the robot in <a class="reference internal" href="../../glossary.html#term-frame-world"><em class="xref std std-term">FRAME_WORLD</em></a>.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/SafeNavigator/Status">
+<div class="line">Event: <tt class="descname">&quot;Navigation/SafeNavigator/Status&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> status</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/SafeNavigator/Status" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/Safety/MoveFailed" title="ALMotion/Safety/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Safety/MoveFailed()</span></tt></a> instead.</p>
+<p>Raised when status of the Safe navigator changes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/SafeNavigator/Status&#8221;</li>
+<li><strong>status</strong> &#8211; New safe navigator status. Please refer to <a class="reference internal" href="alnavigation.html#alnavigation"><em>ALNavigation</em></a> for details.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/SafeNavigator/BlockingObstacle">
+<div class="line">Event: <tt class="descname">&quot;Navigation/SafeNavigator/BlockingObstacle&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/SafeNavigator/BlockingObstacle" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/Safety/MoveFailed" title="ALMotion/Safety/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Safety/MoveFailed()</span></tt></a> instead.</p>
+<p>Raised when there is an obstacle preventing the robot from starting its motion.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/SafeNavigator/AlreadyAtTarget">
+<div class="line">Event: <tt class="descname">&quot;Navigation/SafeNavigator/AlreadyAtTarget&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/SafeNavigator/AlreadyAtTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/Safety/MoveFailed" title="ALMotion/Safety/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Safety/MoveFailed()</span></tt></a> instead.</p>
+<p>Raised when robot is already at its target.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Navigation/SafeNavigator/DangerousObstacleDetected">
+<div class="line">Event: <tt class="descname">&quot;Navigation/SafeNavigator/DangerousObstacleDetected&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> position</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Navigation/SafeNavigator/DangerousObstacleDetected" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/Safety/MoveFailed" title="ALMotion/Safety/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Safety/MoveFailed()</span></tt></a> instead.</p>
+<p>Use <a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/Safety/MoveFailed" title="ALMotion/Safety/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Safety/MoveFailed()</span></tt></a> instead.</p>
+<p>Raised when an obstacle is detected in the security area.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>eventName</strong> (<em>std::string</em>) &#8211; &#8220;Navigation/SafeNavigator/DangerousObstacleDetected&#8221;</li>
+<li><strong>position</strong> &#8211; Array formatted as [x, y], representing the position of the detected obstacle in <a class="reference internal" href="../../glossary.html#term-frame-robot"><em class="xref std std-term">FRAME_ROBOT</em></a>.</li>
+<li><strong>subscriberIdentifier</strong> (<em>std::string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="alnavigation.html" title="ALNavigation">ALNavigation</a>
+     |
+    <a href="alnavigation.html" title="ALNavigation" accesskey="U">ALNavigation</a>
+   |
+    <a href="alrecharge.html" title="ALRecharge">ALRecharge</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Motion</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="autonomousmoves.html">ALAutonomousMoves</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alrobotposture.html">ALRobotPosture</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="alnavigation.html">ALNavigation</a><ul class="current">
+<li class="toctree-l6 current"><a class="current reference internal" href="">ALNavigation API</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="alrecharge.html">ALRecharge</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almotion.html">ALMotion</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almotionrecorder.html">ALMotionRecorder</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALNavigation API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a><ul>
+<li><a class="reference internal" href="#juju-roboj-only"> <em>Pepper</em> only</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#event-list">Event list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#events">Events</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="alnavigation.html" title="ALNavigation">previous</a>
+     |
+    <a href="alnavigation.html" title="ALNavigation" accesskey="U">up</a>
+   |
+    <a href="alrecharge.html" title="ALRecharge">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

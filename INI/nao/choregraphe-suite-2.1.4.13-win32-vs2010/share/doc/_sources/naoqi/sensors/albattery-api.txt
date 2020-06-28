@@ -1,0 +1,140 @@
+.. include:: ../../bulk/common.rst
+
+.. _albattery-api:
+
+ALBattery API
+=============
+
+:ref:`naoqi-sensors` - :ref:`Overview <albattery>` | API
+
+------------
+
+.. seealso::
+
+   |nao| :ref:`Battery Hardware <robot-battery>`.
+
+.. or |juju| :ref:`Battery Hardware <juliette-battery>`
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/albatteryproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALBatteryProxy
+
+* :cpp:func:`ALBatteryProxy::enablePowerMonitoring`
+* :cpp:func:`ALBatteryProxy::getBatteryCharge`
+
+
+.. _albattery-event-list:
+
+Event list
+----------
+
+* :naoqi:event:`BatteryPowerPluggedChanged`
+* :naoqi:event:`BatteryChargeCellVoltageMinChanged`
+* :naoqi:event:`BatteryChargingFlagChanged`
+* :naoqi:event:`BatteryFullChargedFlagChanged`
+* :naoqi:event:`BatteryDisChargingFlagChanged`
+* :naoqi:event:`BatteryChargeChanged`
+* :naoqi:event:`BatteryEmpty`
+* :naoqi:event:`BatteryLowDetected`
+* :naoqi:event:`BatteryNearlyEmpty`
+* :naoqi:event:`BatteryNotDetected`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALBatteryProxy::enablePowerMonitoring(bool enable)
+
+  Enables or disables power monitoring.
+
+  :param enable: | Choose True to enable the power monitoring and its notifications.
+                 | Choose False to disable the power monitoring and its notifications.
+
+.. cpp:function:: int ALBatteryProxy::getBatteryCharge()
+
+  Get battery charge.
+
+  :return: Return the battery charge in percent.
+
+
+.. _albattery-events:
+
+Events
+------
+
+.. naoqi:event:: BatteryPowerPluggedChanged(bool plugged)
+
+  Raised when the charger is plugged and unplugged.
+
+  Caution: some battery models do not provide information whether the power is plugged or not.
+  In this case, we determine power plugged state with electric current.
+  Unfortunately when the battery is fully charged, the charger stops supplying current.
+  So this event is not raised when battery is fully charged.
+
+  For further details see: :ref:`Battery Hardware <robot-battery>`.
+
+  :param plugged: True if plugged-in, false otherwise.
+
+.. naoqi:event:: BatteryChargeCellVoltageMinChanged(int voltage)
+
+  Raised when the Minimum cell voltage of the battery changes.
+
+  :param voltage: The minimum cell voltage.
+
+.. naoqi:event:: BatteryChargingFlagChanged(bool charging)
+
+  Raised when the flag "battery is charging" changes.
+
+  :param charging: True when the battery is charging, false otherwise.
+
+.. naoqi:event:: BatteryFullChargedFlagChanged(bool fullyCharged)
+
+  Raised when the flag "battery is fully charged" changes.
+
+  :param fullyCharged: True when the battery is fully charged, false otherwise.
+
+.. naoqi:event:: BatteryDisChargingFlagChanged(bool isDischarging)
+
+  Raised when the flag "battery is discharging" changes.
+
+  :param isDischarging: True when the battery is discharging, false otherwise.
+
+.. naoqi:event:: BatteryChargeChanged(int percentage)
+
+  Raised when the battery level percentage changes.
+
+  :param percentage: The percent of the battery that remains.
+
+.. naoqi:event:: BatteryEmpty(std::string message)
+
+  Raised when the battery is empty.
+
+  :param message: System message.
+
+.. naoqi:event:: BatteryLowDetected(bool status)
+
+  Raised when the battery level is low.
+
+  :param status: True if battery level is low.
+
+.. naoqi:event:: BatteryNearlyEmpty(std::string message)
+
+  Raised when the battery is nearly empty and needs charging.
+
+  :param message: System message.
+
+.. naoqi:event:: BatteryNotDetected(bool status)
+
+  Raised when the battery is not detected.
+
+  :param status: True if battery is not detected.

@@ -1,0 +1,11 @@
+
+Customizing Choregraphe
+========================
+
+.. toctree::
+   :maxdepth: 2
+
+   display_hide_panels
+   choregraphe_preference
+
+   

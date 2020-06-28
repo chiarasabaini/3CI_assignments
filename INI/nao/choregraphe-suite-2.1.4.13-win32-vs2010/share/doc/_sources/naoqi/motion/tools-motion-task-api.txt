@@ -1,0 +1,155 @@
+.. _tools-motion-task-api:
+
+Motion task API
++++++++++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <tools-motion-task>` | API
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/tools-motion-task_toc.rst
+
+Methods
+--------
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getTaskList()
+
+  Gets an ALValue structure describing the tasks in the Task List
+
+  :return: An ALValue containing an ALValue for each task. The inner ALValue
+           contains: Name, MotionID
+
+  :download:`almotion_gettasklist.cpp </samples/cpp/almotion/almotion_gettasklist.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_gettasklist.cpp
+     :language: cpp
+
+
+  :download:`almotion_getTaskList.py </samples/python/almotion/almotion_getTaskList.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getTaskList.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: bool ALMotionProxy::areResourcesAvailable(const std::vector<std::string>& resourceNames)
+
+  Returns true if all the desired resources are available. Only motion API's'
+  blocking call takes resources.
+
+  :param resourceNames: A vector of resource names such as joints or
+                        chains names, “Body”, “JointActuators”, “Joints” or “Actuators”.
+                        Use ``getBodyNames("Body")`` to get the list of
+                        the available joints for your robot.
+
+  :return: True if the resources are available
+
+  :download:`almotion_areresourcesavailable.cpp </samples/cpp/almotion/almotion_areresourcesavailable.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_areresourcesavailable.cpp
+     :language: cpp
+
+
+  :download:`almotion_areResourcesAvailable.py </samples/python/almotion/almotion_areResourcesAvailable.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_areResourcesAvailable.py
+     :language: py
+
+
+.. cpp:function:: bool ALMotionProxy::killTask(const int& motionTaskID)
+
+  Kills a motion task.
+
+  :param motionTaskID: TaskID of the motion task you want to kill.
+  :return: Return true if the specified motionTaskId has been killed.
+
+  :download:`almotion_killtask.cpp </samples/cpp/almotion/almotion_killtask.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_killtask.cpp
+     :language: cpp
+
+
+  :download:`almotion_killTask.py </samples/python/almotion/almotion_killTask.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_killTask.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: void ALMotionProxy::killTasksUsingResources(const std::vector<std::string>& resourceNames)
+
+  Kills all tasks that use any of the resources given. Only motion API's'
+  blocking call takes resources and can be killed.
+
+  :param resourceNames: A vector of resource names such as joints or
+                        chains names, “Body”, “JointActuators”, “Joints” or “Actuators”.
+                        Use ``getBodyNames("Body")`` to get the list of
+                        the available joints for your robot.
+
+  :download:`almotion_killtasksusingresources.cpp </samples/cpp/almotion/almotion_killtasksusingresources.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_killtasksusingresources.cpp
+     :language: cpp
+
+
+  :download:`almotion_killTasksUsingResources.py </samples/python/almotion/almotion_killTasksUsingResources.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_killTasksUsingResources.py
+     :language: py
+
+
+
+.. cpp:function:: void ALMotionProxy::killWalk()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::killMove` instead.
+
+  Emergency Stop on Walk task: this method will end the walk task brutally,
+  without attempting to return to a balanced state. If the robot has one foot in
+  the air, he could easily fall.
+
+
+
+.. cpp:function:: void ALMotionProxy::killMove()
+
+  Emergency Stop on Move task: this method will end the move task brutally,
+  without attempting to return to a balanced state. If the robot has one foot in
+  the air, he could easily fall.
+
+  :download:`almotion_killmove.cpp </samples/cpp/almotion/almotion_killmove.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_killmove.cpp
+     :language: cpp
+
+
+  :download:`almotion_killMove.py </samples/python/almotion/almotion_killMove.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_killMove.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::killAll()
+
+  Kills all tasks.
+
+  :download:`almotion_killall.cpp </samples/cpp/almotion/almotion_killall.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_killall.cpp
+     :language: cpp
+
+
+  :download:`almotion_killAll.py </samples/python/almotion/almotion_killAll.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_killAll.py
+     :language: py

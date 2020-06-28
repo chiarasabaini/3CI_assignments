@@ -1,0 +1,335 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Activity &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="Main objects" href="../main_objects.html" />
+    <link rel="next" title="Behavior" href="behavior.html" />
+    <link rel="prev" title="Application" href="application.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="application.html" title="Application">previous</a>
+     |
+    <a href="../main_objects.html" title="Main objects" accesskey="U">up</a>
+   |
+    <a href="behavior.html" title="Behavior">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-objects-activity">
+            
+  <div class="section" id="activity">
+<span id="id1"></span><h1>Activity<a class="headerlink" href="#activity" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-an-activity">
+<span id="choregraphe-reference-activity"></span><h2>What is an Activity<a class="headerlink" href="#what-is-an-activity" title="Permalink to this headline">¶</a></h2>
+<p>An <strong>Activity</strong> is a specific <strong>Behavior</strong> able to run in the <a class="reference internal" href="../../../naoqi/core/autonomouslife.html#autonomouslife"><em>ALAutonomousLife</em></a> framework.</p>
+<p>For further details, see: <img alt="nao" class="img-inline" src="../../../_images/nao.png" /> <a class="reference internal" href="../../../nao/nao_life.html#nao-life"><em>Understanding Autonomous Life settings</em></a>.</p>
+<p>There are two kinds of activity:</p>
+<ul>
+<li><p class="first"><strong>Solitary</strong> activity:</p>
+<p><strong>Purpose</strong>: intended to prepare, wait for, and encourage entering the interactive state.
+<strong>Design constrains</strong>: May be interrupted for an <strong>Interactive Activity</strong> at any time.</p>
+</li>
+<li><p class="first"><strong>Interactive</strong> activity:</p>
+<p><strong>Purpose</strong>: an <strong>Activity</strong> should be <strong>Interactive</strong> if human interaction is required for it to function.
+<strong>Design constrains</strong>: will not be interrupted by any other activity, but have to quit properly in order to give the focus back.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="creating-an-activity">
+<h2>Creating an Activity<a class="headerlink" href="#creating-an-activity" title="Permalink to this headline">¶</a></h2>
+<p>To create an <strong>Activity</strong>:</p>
+<ol class="arabic simple">
+<li>Create a new <a class="reference internal" href="choregraphe_project.html#choregraphe-reference-project"><em>Project</em></a> containing at least one
+<a class="reference internal" href="behavior.html#behavior"><em>Behavior</em></a>.</li>
+<li>In the <a class="reference internal" href="../panels/project_content_panel.html#choregraphe-reference-project-properties"><em>Project Properties</em></a>,
+set the <strong>Behavior properties</strong> as follows:</li>
+</ol>
+<div class="section" id="for-an-interactive-activity">
+<h3>For an Interactive Activity<a class="headerlink" href="#for-an-interactive-activity" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Set the <strong>Nature</strong> of the <strong>Behavior</strong> to:
+&#8220;Interactive&#8221;.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>If you want the activity to be launchable by the default dialog activity,
+set also the <strong>Name</strong>, <strong>Tags</strong>, and  <strong>Trigger Sentences</strong>.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>If you want the activity to be autonomously launched by
+<a class="reference internal" href="../../../naoqi/core/autonomouslife.html#autonomouslife"><em>ALAutonomousLife</em></a>, set the <strong>Launch trigger condition</strong> field,
+using <a class="reference internal" href="../../../naoqi/core/triggerconditions.html#launchtriggerconditions"><em>Launch trigger conditions</em></a>.</td>
+</tr>
+</tbody>
+</table>
+<p>You can also follow the tutorial: <a class="reference internal" href="../tutos/create_interactive_activity.html#create-interactive-activity-tuto"><em>Creating an Interactive activity</em></a>.</p>
+</div>
+<div class="section" id="for-a-solitary-activity">
+<h3>For a Solitary Activity<a class="headerlink" href="#for-a-solitary-activity" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Set the <strong>Nature</strong> of the <strong>Behavior</strong> to:
+&#8220;Solitary&#8221;.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Set the <strong>Launch trigger condition</strong> field,
+using <a class="reference internal" href="../../../naoqi/core/triggerconditions.html#launchtriggerconditions"><em>Launch trigger conditions</em></a>.</p>
+<p class="last">This will allow it to be autonomously launched by <a class="reference internal" href="../../../naoqi/core/autonomouslife.html#autonomouslife"><em>ALAutonomousLife</em></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>You can also follow the tutorial: <a class="reference internal" href="../tutos/create_solitary_activity.html#create-solitary-activity-tuto"><em>Creating a Solitary activity</em></a>.</p>
+</div>
+</div>
+<div class="section" id="activity-best-practices">
+<h2>Activity - Best practices<a class="headerlink" href="#activity-best-practices" title="Permalink to this headline">¶</a></h2>
+<p>First check the best practices of <a class="reference internal" href="application.html#application"><em>Application</em></a>.</p>
+<div class="section" id="basic-awareness-and-autonomous-moves">
+<h3>Basic Awareness and Autonomous Moves<a class="headerlink" href="#basic-awareness-and-autonomous-moves" title="Permalink to this headline">¶</a></h3>
+<p>The developer should assume that <a class="reference internal" href="../../../naoqi/peopleperception/albasicawareness.html#albasicawareness"><em>ALBasicAwareness</em></a> and
+<a class="reference internal" href="../../../naoqi/motion/autonomousmoves.html#autonomousmoves"><em>ALAutonomousMoves</em></a> services are already started when an <strong>Activity</strong> is started.
+These two services help smooth the transition between activities, and to help
+ease the developer from re-implementing these features into each of their
+activities in different ways.</p>
+<p>Stopping the services for the purpose of managing motor control is not necessary:</p>
+<p>The developer may of course stop/start/customize <a class="reference internal" href="../../../naoqi/peopleperception/albasicawareness.html#albasicawareness"><em>ALBasicAwareness</em></a> and
+<a class="reference internal" href="../../../naoqi/motion/autonomousmoves.html#autonomousmoves"><em>ALAutonomousMoves</em></a> at any time during an <strong>Activity</strong>.
+The services will be resumed and reset by <a class="reference internal" href="../../../naoqi/core/autonomouslife.html#autonomouslife"><em>ALAutonomousLife</em></a> when an <strong>Activity</strong> exits.</p>
+<p>It may be desirable to change the parameters of <a class="reference internal" href="../../../naoqi/peopleperception/albasicawareness.html#albasicawareness"><em>ALBasicAwareness</em></a>,
+or temporarily stop it to reclaim CPU.</p>
+<p>For further details see: <a class="reference internal" href="../../../naoqi/peopleperception/albasicawareness.html#albasicawareness"><em>ALBasicAwareness</em></a>, <a class="reference internal" href="../../../naoqi/motion/autonomousmoves.html#autonomousmoves"><em>ALAutonomousMoves</em></a> and  <a class="reference internal" href="../../../naoqi/core/autonomouslife.html#autonomouslife"><em>ALAutonomousLife</em></a>.</p>
+</div>
+<div class="section" id="exiting-an-activity">
+<h3>Exiting an activity<a class="headerlink" href="#exiting-an-activity" title="Permalink to this headline">¶</a></h3>
+<p>An activity should always finish: in all cases, there should be a path
+to the output of your Behavior. If it never finishes, the robot will be
+stuck forever in the activity.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="application.html" title="Application">Application</a>
+     |
+    <a href="../main_objects.html" title="Main objects" accesskey="U">Main objects</a>
+   |
+    <a href="behavior.html" title="Behavior">Behavior</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutos/index.html">Choregraphe Tutorials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../main_objects.html">Main objects</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="choregraphe_project.html">Project</a></li>
+<li class="toctree-l5"><a class="reference internal" href="application.html">Application</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Activity</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="behavior.html">Behavior</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog_topic.html">Dialog topic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="planar_move.html">Planar Move</a></li>
+<li class="toctree-l5"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l5"><a class="reference internal" href="box_input_output.html">Box - Inputs/outputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="box_optional_components.html">Box - Optional components</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flow_diagram_box.html">Flow diagram box</a></li>
+<li class="toctree-l5"><a class="reference internal" href="timeline_box.html">Timeline box</a></li>
+<li class="toctree-l5"><a class="reference internal" href="python_box.html">Python box</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog_box.html">Dialog box</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Activity</a><ul>
+<li><a class="reference internal" href="#what-is-an-activity">What is an Activity</a></li>
+<li><a class="reference internal" href="#creating-an-activity">Creating an Activity</a><ul>
+<li><a class="reference internal" href="#for-an-interactive-activity">For an Interactive Activity</a></li>
+<li><a class="reference internal" href="#for-a-solitary-activity">For a Solitary Activity</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#activity-best-practices">Activity - Best practices</a><ul>
+<li><a class="reference internal" href="#basic-awareness-and-autonomous-moves">Basic Awareness and Autonomous Moves</a></li>
+<li><a class="reference internal" href="#exiting-an-activity">Exiting an activity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="application.html" title="Application">previous</a>
+     |
+    <a href="../main_objects.html" title="Main objects" accesskey="U">up</a>
+   |
+    <a href="behavior.html" title="Behavior">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

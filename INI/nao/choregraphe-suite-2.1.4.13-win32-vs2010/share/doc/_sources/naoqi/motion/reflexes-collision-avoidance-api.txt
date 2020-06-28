@@ -1,0 +1,59 @@
+.. _reflexes-collision-avoidance-api:
+
+Self-collision avoidance API
+++++++++++++++++++++++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <reflexes-collision-avoidance>` | API
+
+------------
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/reflexes-collision-avoidance_toc.rst
+
+
+.. cpp:function:: bool ALMotionProxy::setCollisionProtectionEnabled( const std::string& ChainName, const bool& Enable )
+
+  Enable/Disable Anti-collision protection of the arms of the robot.
+  Use :cpp:func:`ALMotionProxy::isCollision` to know if a chain is in collision and can be inactivated.
+
+  :param ChainName: The chain name {"Arms", "LArm" or "RArm"}.
+
+  :param Enable: Activate or deactivate the anti-collision of the desired Chain.
+
+  :return: A bool which return always true.
+
+  :download:`almotion_setCollisionProtectionEnabled.py </samples/python/almotion/almotion_setCollisionProtectionEnabled.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setCollisionProtectionEnabled.py
+     :language: py
+
+
+.. cpp:function:: bool ALMotionProxy::getCollisionProtectionEnabled(const std::string& ChainName)
+
+  Allow to know if the collision protection is activated on the given chain.
+
+  :param ChainName: The chain name {"LArm" or "RArm"}.
+
+  :return: Return true is the collision protection of the given Arm is activated.
+
+.. cpp:function:: std::string ALMotionProxy::isCollision(const std::string& ChainName)
+
+  Give the collision state of a chain. If a chain has a collision state "none" or "near", it could be deactivates.
+
+  :param ChainName: The chain name {"Arms", "LArm" or "RArm"}.
+
+  :return: A string which notice the collision state: "none" there are no collision, "near" the collision is taking in account in the anti-collision algorithm, "collision" the chain is in contact with an other body. If the chain asked is "Arms" the most unfavorable result is given.
+
+  :download:`almotion_iscollision.cpp </samples/cpp/almotion/almotion_iscollision.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_iscollision.cpp
+    :language: cpp
+
+  :download:`almotion_isCollision.py </samples/python/almotion/almotion_isCollision.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_isCollision.py
+    :language: py

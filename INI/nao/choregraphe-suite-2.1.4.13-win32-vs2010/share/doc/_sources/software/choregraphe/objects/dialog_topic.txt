@@ -1,0 +1,111 @@
+.. _dialog_topic:
+
+Dialog topic
+============
+
+What is a Dialog topic
+----------------------
+
+Creating a **Dialog topic** is an easy way to provide your robot with
+conversational skills.
+
+A **Dialog topic** is a multilingual set of **QiChat scripts**, including:
+
+* a **DLG** file, representing the **Dialog topic** and registering the supported
+  languages, and
+* one to n **TOP** file(s), each one containing the **QiChat script** of
+  language supported by the **Dialog topic**.
+
+Launching a Dialog topic
+------------------------
+
+* By default, a **Dialog topic** can be launched, via a **Dialog box**,
+  in any **Behavior** included in the same **Project**.
+
+* If declared in the project's :term:`Manifest` as a **Collaborative Dialog**,
+  the **Dialog topic** is also launched at robot start up, enriching its global
+  dialog skills.
+
+.. _choregraphe-create-dialog-topic:
+
+Creating a Dialog topic
+-------------------------
+
+.. |create_import_btn| image:: /medias/desktop/choregraphe/chore_project_content_import.png
+   :class: img-inline
+
+
+To create a **Dialog topic**:
+
+=====  ========================================================================
+Step    Action
+=====  ========================================================================
+1.      Choose **File** > **Add new content** > **Dialog topic...**.
+
+        .. image:: /medias/desktop/choregraphe/add_dialog_topic.png
+            :width: 194 px
+            :height: 346 px
+
+        Note: you can also click the |create_import_btn| **Add content** button
+        in the :ref:`chore_project_content`, and choose
+        **Create dialog topic**.
+
+2.      Type a file **Name**.
+
+        .. warning::
+
+            * You won't be able to change it later, so choose it well.
+
+            * Use only alphanumeric characters: no space, no special characters.
+
+3.      Choose the **languages** supported by your **Dialog topic**.
+
+4.      Choose if this **Dialog topic** should appear or not in the 
+        :term:`Manifest` of your application as **collaborative dialog**.
+
+5.      Click the **OK** button.
+
+        Your **Dialog topic** is created.
+
+        All related files are created in a folder named
+        as the topic name, located at the project root.
+
+        .. image:: /medias/desktop/choregraphe/dialog_topic_created.png
+            :width: 197 px
+            :height: 278 px
+=====  ========================================================================
+
+.. _choregraphe-edit-dialog-topic:
+
+Editing a Dialog topic
+-----------------------
+
+To add or remove supported languages for the **Dialog topic**:
+
+* In the **Project content** panel, double click the **.DLG** file.
+
+  .. image:: /medias/desktop/choregraphe/dialog_editor.png
+      :width: 159 px
+      :height: 291 px
+
+To edit the **Qichat** script in a given language:
+
+* In the **Project content** panel, double click the corresponding **.TOP** file.
+
+  .. image:: /medias/desktop/choregraphe/dialog_script_editor.png
+      :width: 482 px
+      :height: 217 px
+
+To go further, see the tutorial: :ref:`aldialog-tuto`.
+
+Importing a Dialog topic in another Project
+-------------------------------------------
+
+To reuse a **Dialog topic** created in another **Project**:
+
+=====  ========================================================================
+Step    Action
+=====  ========================================================================
+1.      Choose **File** > **Import content** > **Folder** and select the folder
+        containing the **Dialog topic** to import.
+=====  ========================================================================

@@ -1,0 +1,29 @@
+.. _python-example-motion-pose:
+
+Poses
+=====
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section shows how to make NAO go to poses Pose Init and Pose Zero outside
+Choregraphe.
+
+Pose Init
+---------
+
+Make NAO go to a good initial position.
+
+:download:`almotion_poseInit.py </examples/python/motion/almotion_poseInit.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_poseInit.py
+   :language: py
+
+Pose Zero
+---------
+
+Put all NAO motors to zero.
+
+:download:`almotion_poseZero.py </examples/python/motion/almotion_poseZero.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_poseZero.py
+   :language: py

@@ -1,0 +1,48 @@
+.. _alaudiorecorder:
+
+
+ALAudioRecorder
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alaudiorecorder-api
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alaudiorecorder-api>`
+
+------------
+
+What it does
+------------
+
+**ALAudioRecorder** provides recording services in "WAV" and "OGG" file format
+of the signals coming from the robot's microphones.
+
+.. note::
+
+   This module is only available on the robot.
+
+How it works
+------------
+
+**ALAudioRecorder** relies on the linux library SNDFile to efficiently
+encode audio inputs in real time. **ALAudioRecorder** collects input signals
+through **ALAudioDevice** as described here :ref:`alaudiodevice`.
+
+Performances and Limitations
+----------------------------
+
+The recording capabilities are for now limited to the following formats:
+
+- four channels 48000Hz in OGG.
+- four channels 48000Hz in WAV.
+- one channels (front, rear, left or right), 16000Hz, in OGG.
+- one channels (front, rear, left or right), 16000Hz, in WAV.
+
+
+Getting started
+---------------
+
+The most straightforward way to start using **ALAudioRecorder** is to use the **Record Sound** box in Choregraphe (Audio boxes section).

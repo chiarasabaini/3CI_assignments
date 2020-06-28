@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="145" y="339">
+        <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self, False)
+
+	def onInput_onStart(self):
+		self.onStopped("")]]>
+</content>
+        </script>
+        <pluginContent>
+            <text />
+        </pluginContent>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
+        <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
+    </Box>
+</ChoregrapheBox>

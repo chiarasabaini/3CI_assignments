@@ -1,0 +1,16 @@
+
+.. _h21_dimensions_v32:
+
+H21 - Dimensions - V3.2
+=============================
+
+.. seealso::
+    :ref:`V4 <h21_dimensions>` | :ref:`V3.3 <h21_dimensions_v33>` | **V3.2**
+
+    :ref:`nao-h21` | :ref:`robot_dimensions`
+
+--------------------
+
+.. include:: ../bulk/dimensions_h_v32.rst
+
+

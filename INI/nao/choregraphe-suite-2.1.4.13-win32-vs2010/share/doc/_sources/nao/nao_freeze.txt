@@ -1,0 +1,91 @@
+.. include:: ../bulk/common.rst
+
+.. |life_btn| image:: /medias/desktop/choregraphe/chore_life_button_on.png
+   :class: img-inline
+
+.. _nao_freeze:
+
+Switching Autonomous life on and off
+=====================================
+
+To enable or disable  :ref:`alife`:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Press the :ref:`Chest Button <chest_btn_nao1>` twice.
+=====  =========================================================================
+
+.. _chest_btn_nao1:
+
+**Chest Button** - |roboN|
+
+.. image:: /medias/wizard/chest_button.png
+    :width: 109 px
+    :height: 176 px
+
+
+**Result**
+
+|roboN| switches its **Life** status.
+
++----------------------------------+--------------------------------------+
+| From **off** to **on**, |roboN|: | From **on** to **off**, |roboN|:     |
++----------------------------------+--------------------------------------+
+| * Pushes a happy grunt, and      | * Sights,                            |
+| * Performs a :ref:`wake_nao`.    | * Stops its **Activities** and       |
+|                                  | * Performs a :ref:`rest_nao` action. |
++----------------------------------+--------------------------------------+
+
+.. _wake_nao:
+
+Waking up
+---------
+
+When requested to wake up, |roboN|:
+
++------------------------------------------------+
+| * Turns the **Stiffness** of its motors on,    |
+|                                                |
+| * Goes to a standing posture,                  |
+|                                                |
+|   **Note**: this step is skipped when |roboN|  |
+|   is sitting, is lying, or has no feet.        |
+|                                                |
+| * Resumes its **life**.                        |
++------------------------------------------------+
+
+.. _rest_nao:
+
+Resting
+--------
+
+When requested to rest, |roboN|:
+
++------------------------------------------------+
+|* Goes to its resting posture.                  |
+|                                                |
+|  **Note**: this step is skipped when |roboN|   |
+|  is sitting, is lying, or has no feet.         |
+|                                                |
+|* Turns the **Stiffness** of its motors off.    |
++------------------------------------------------+
+
+Advanced settings and tools for developers
+------------------------------------------
+
+You may also enable or disable :ref:`alife`, from **Choregraphe**:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the |life_btn| **Life** button.
+=====  =========================================================================
+
+To disable :ref:`alife` by default at startup:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      On the :ref:`webpage_nao`, click the **Alive by default** button.
+=====  =========================================================================

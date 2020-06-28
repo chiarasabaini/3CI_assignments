@@ -1,0 +1,118 @@
+.. _alfacecharacteristics-api:
+
+ALFaceCharacteristics API
+=========================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <alfacecharacteristics>` | API
+
+--------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alfacecharacteristicsproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALFaceCharacteristicsProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALFaceCharacteristicsProxy::analyzeFaceCharacteristics`
+  * :cpp:func:`ALFaceCharacteristicsProxy::getSmilingThreshold`
+  * :cpp:func:`ALFaceCharacteristicsProxy::setSmilingThreshold`
+
+
+Event list
+----------
+
+* :naoqi:event:`FaceCharacteristics/PersonSmiling`
+
+
+ALMemory Key list
+-----------------
+
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/AgeProperties`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/ExpressionProperties`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/GenderProperties`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/SmileProperties`
+
+
+Methods
+-------
+
+.. cpp:function:: bool ALFaceCharacteristicsProxy::analyzeFaceCharacteristics(int id)
+
+  Performs the face analysis on a given person using the ID. This method can be called
+  even if **ALFaceCharacteristics** is not running in order to update the ALMemory data
+  of this person only.
+
+  :param id: ID of the person that should be analyzed.
+
+  :returns: true if the analysis succeeded and false if something went wrong or if
+            the ID is invalid.
+
+
+.. cpp:function:: float ALFaceCharacteristicsProxy::getSmilingThreshold()
+
+  Returns the current smiling threshold value above which the event
+  :naoqi:event:`FaceCharacteristics/PersonSmiling` is raised.
+
+  :returns: threshold value between 0 and 1 (default = 0.7).
+
+
+.. cpp:function:: void ALFaceCharacteristicsProxy::setSmilingThreshold(float threshold)
+
+  Sets the current smiling threshold value.
+
+  :param threshold: New threshold value. It must be between 0 and 1.
+
+Events
+------
+
+.. naoqi:event:: FaceCharacteristics/PersonSmiling(int id)
+
+  Raised when a person has a smile value above the current threshold (default = 0.7).
+
+  :param id: ID of the person as defined by the :ref:`alpeopleperception-api`.
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/AgeProperties
+
+  Age estimation of a person in the form [age, confidence]. The age is limited to
+  the interval [0, 75] and the confidence is in [0, 1].
+
+  | **<ID>** is the ID of the person as defined by the :ref:`alpeopleperception-api`.
+  | See also: :naoqi:event:`PeoplePerception/PeopleList`.
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/ExpressionProperties
+
+  Estimation of the facial expression on a person's face. The associated data is
+  an array containing the detection score of the following five expressions:
+  [*neutral*, *happy*, *surprised*, *angry* or *sad*].
+
+  Each score ranges from 0 and 1 and represents the probability that the person
+  expresses the corresponding expression. As such, the sum of all five properties
+  is equal to 1, except if the detection failed (in that case all five values are
+  set to zero).
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/GenderProperties
+
+  Gender estimation of a person in the form [gender, confidence]. Gender is either
+  0 for female or 1 for male and the confidence is in [0, 1].
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/SmileProperties
+
+  Smile degree estimation of a person in the form [smile degree, confidence].
+  The smile degree is a floating point value between 0 and 1 where 0 means "no smile"
+  and 1 is a large smile. The confidence is in [0, 1].

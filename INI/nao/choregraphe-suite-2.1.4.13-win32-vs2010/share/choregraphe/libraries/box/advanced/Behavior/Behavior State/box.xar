@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="7" localization="8" tooltip="Return on different outputs depending on the behavior&apos;s state." x="254" y="322">
+        <bitmap>media/images/box/box-script.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        self.behaviorManager = ALProxy("ALBehaviorManager")
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_checkBehaviorState(self, p):
+        if not self.behaviorManager.isBehaviorInstalled(p):
+            self.behaviorNotInstalled(p)
+        elif self.behaviorManager.isBehaviorRunning(p):
+            self.behaviorRunning(p)
+        else:
+            self.behaviorStopped(p)]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="checkBehaviorState" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="behaviorRunning" type="3" type_size="1" nature="1" inner="0" tooltip="Sent when the given behavior is running." id="3" />
+        <Output name="behaviorStopped" type="3" type_size="1" nature="1" inner="0" tooltip="Sent when the given behavior is stopped." id="4" />
+        <Output name="behaviorNotInstalled" type="3" type_size="1" nature="1" inner="0" tooltip="Sent the behavior does not exist." id="5" />
+    </Box>
+</ChoregrapheBox>

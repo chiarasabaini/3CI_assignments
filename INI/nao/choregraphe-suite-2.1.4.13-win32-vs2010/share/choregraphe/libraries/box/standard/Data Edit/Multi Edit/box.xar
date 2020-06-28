@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Send the value in front of the input stimulated (can be all python language&#x0A;types: string, int, float, array, etc).&#x0A;&#x0A;You can edit a value by left double-clicking on the line. You can add a&#x0A;value by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a value by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="multiplexer_plugin" x="132" y="165">
+        <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self, False)
+
+	def onInput_input_1(self):
+			self.onStopped("Hello")
+	def onInput_input_2(self):
+			self.onStopped(5)
+	def onInput_input_3(self):
+			self.onStopped("")]]>
+</content>
+        </script>
+        <pluginContent>
+            <keywords>
+                <keyword>&quot;Hello&quot;</keyword>
+                <keyword>5</keyword>
+                <keyword />
+            </keywords>
+        </pluginContent>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="input_1" type="1" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="2" />
+        <Input name="input_2" type="1" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="3" />
+        <Output name="onStopped" type="0" type_size="1" nature="2" inner="0" tooltip="Value correponding to the input stimulated (in front if it)." id="4" />
+    </Box>
+</ChoregrapheBox>

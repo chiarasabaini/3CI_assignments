@@ -1,0 +1,19 @@
+
+.. _child_history:
+
+History
+========
+
+The **History** allows **Teachers** and **Parents** to take a look at the past
+sessions.
+
+.. image:: /medias/asknao/history_page.png
+   :width: 486 px
+   :height: 270 px
+
+Clicking on a session displays the playlist of activities done during that session.
+
+
+.. image:: /medias/asknao/history_page_2.png
+   :width: 489 px
+   :height: 398 px

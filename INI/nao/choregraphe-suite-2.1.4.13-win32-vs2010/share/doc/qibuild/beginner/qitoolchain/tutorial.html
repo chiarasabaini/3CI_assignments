@@ -1,0 +1,358 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Managing pre-compiled binary packages with qitoolchain &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="qiBuild tutorials" href="../tutorial.html" />
+    <link rel="next" title="Building documentation with qidoc" href="../qidoc/tutorial.html" />
+    <link rel="prev" title="Using qibuild with Aldebaran C++ SDKs" href="../qibuild/aldebaran.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="../qibuild/aldebaran.html" title="Using qibuild with Aldebaran C++ SDKs">previous</a>
+     |
+    <a href="../tutorial.html" title="qiBuild tutorials" accesskey="U">up</a>
+   |
+    <a href="../qidoc/tutorial.html" title="Building documentation with qidoc">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="beginner-qitoolchain-tutorial">
+            
+  <div class="section" id="managing-pre-compiled-binary-packages-with-qitoolchain">
+<span id="qitoolchain-tutorial"></span><h1>Managing pre-compiled binary packages with qitoolchain<a class="headerlink" href="#managing-pre-compiled-binary-packages-with-qitoolchain" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="when-to-use-pre-compiled-packages">
+<h2>When to use pre-compiled packages<a class="headerlink" href="#when-to-use-pre-compiled-packages" title="Permalink to this headline">¶</a></h2>
+<p>Pre-compiled packages are useful for third-party libraries.
+For instance, if your code depends on <tt class="docutils literal"><span class="pre">boost</span></tt>, you may want to make sure
+that you are using a specific version of <tt class="docutils literal"><span class="pre">boost</span></tt>, regardless of whatever
+version may be already installed on the user machine.</p>
+<p>Also, you may want to provide users of your software with pre-compiled packages, because
+you do not want to share the source code, or to save some compilation time.</p>
+</div>
+<div class="section" id="creating-packages">
+<h2>Creating packages<a class="headerlink" href="#creating-packages" title="Permalink to this headline">¶</a></h2>
+<p>If the project is using <tt class="docutils literal"><span class="pre">qibuild</span></tt>, all you have to do is to run</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild package</span>
+</pre></div>
+</div>
+<p>If not, you have to create the package by hand. Assuming you want
+to create a pre-compiled package for the <tt class="docutils literal"><span class="pre">foo</span></tt> library which uses
+<tt class="docutils literal"><span class="pre">autotools</span></tt> and depends on the <tt class="docutils literal"><span class="pre">bar</span></tt> library:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">tar xvfz foo-src.tar.gz</span>
+<span class="gp">#</span> Configure, build and install the library as usual:
+<span class="go">./configure</span>
+<span class="go">make</span>
+<span class="go">DESTDIR=/tmp/foo make install</span>
+<span class="go">cd /tmp/foo</span>
+</pre></div>
+</div>
+<p>Now that the project is installed, prepare it so that it follows the
+correct layout:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">mv usr/local* .</span>
+<span class="go">rmdir -p usr/local</span>
+</pre></div>
+</div>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">foo</span>
+<span class="go">  lib</span>
+<span class="go">    libfoo.so</span>
+<span class="go">  include</span>
+<span class="go">    foo.h</span>
+</pre></div>
+</div>
+<p>Then write a CMake module so that the foo library can be found:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd /tmp/foo</span>
+<span class="go">qibuild gen-cmake-module --name foo .</span>
+</pre></div>
+</div>
+<p>This will generate a file named <tt class="docutils literal"><span class="pre">foo-config.cmake</span></tt> in
+<tt class="docutils literal"><span class="pre">share/cmake/foo/foo-config.cmake</span></tt>, that you can edit so that it looks like:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">set</span><span class="p">(</span><span class="s">_root</span> <span class="s2">&quot;${CMAKE_CURRENT_LIST_DIR}/../../..&quot;</span><span class="p">)</span>
+<span class="nb">get_filename_component</span><span class="p">(</span><span class="s">_root</span> <span class="o">${</span><span class="nv">_root</span><span class="o">}</span> <span class="s">ABSOLUTE</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">FOO_LIBRARIES</span>
+  <span class="o">${</span><span class="nv">_root</span><span class="o">}</span><span class="s">/lib/libfoo.so</span>
+  <span class="s">CACHE</span> <span class="s">INTERNAL</span> <span class="s2">&quot;&quot;</span> <span class="s">FORCE</span>
+<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">FOO_INCLUDE_DIRS</span>
+  <span class="o">${</span><span class="nv">_root</span><span class="o">}</span><span class="s">/include</span>
+  <span class="s">CACHE</span> <span class="s">INTERNAL</span> <span class="s2">&quot;&quot;</span> <span class="s">FORCE</span>
+<span class="p">)</span>
+
+<span class="nb">qi_persistent_set</span><span class="p">(</span><span class="s">FOO_DEPENDS</span> <span class="s2">&quot;BAR&quot;</span><span class="p">)</span>
+<span class="nb">export_lib</span><span class="p">(</span><span class="s">FOO</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then write a <tt class="docutils literal"><span class="pre">package.xml</span></tt> file looking like:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!--- in /tmp/foo/package.xml --&gt;</span>
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">version=</span><span class="s">&quot;0.1&quot;</span> <span class="na">target=</span><span class="s">&quot;linux64&quot;</span> <span class="nt">&gt;</span>
+  <span class="nt">&lt;depends</span> <span class="na">buildtime=</span><span class="s">&quot;true&quot;</span> <span class="na">runtime=</span><span class="s">&quot;true&quot;</span> <span class="na">names=</span><span class="s">&quot;bar&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
+</pre></div>
+</div>
+<p>In the end the package tree should look like this:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">foo</span>
+<span class="go">  package.xml</span>
+<span class="go">  lib</span>
+<span class="go">    libfoo.so</span>
+<span class="go">  include</span>
+<span class="go">    foo.h</span>
+<span class="go">  share</span>
+<span class="go">    cmake</span>
+<span class="go">      foo</span>
+<span class="go">        foo-config.cmake</span>
+</pre></div>
+</div>
+<p>Finally, zip the package:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd /tmp/foo</span>
+<span class="go">zip foo-0.1.zip -r .</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="excluding-files-at-installation">
+<h2>Excluding files at installation<a class="headerlink" href="#excluding-files-at-installation" title="Permalink to this headline">¶</a></h2>
+<p>Say you are creating a binary package for Qt on Windows:</p>
+<p>You do not want to include all the compilation tools (such as <tt class="docutils literal"><span class="pre">moc</span></tt>, <tt class="docutils literal"><span class="pre">rcc</span></tt> or <tt class="docutils literal"><span class="pre">uic</span></tt>)
+when you install a project that has a runtime dependency on Qt.</p>
+<p>But you still want to include <tt class="docutils literal"><span class="pre">lrelease</span></tt>, <tt class="docutils literal"><span class="pre">lupdate</span></tt> because your application uses
+these tools at runtime.</p>
+<p>You also want to remove all the debug <tt class="docutils literal"><span class="pre">.dll</span></tt> when you install your application in
+release mode.</p>
+<p>The solution is to create masks in the package looking like this:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> in /path/to/Qt/runtime.mask
+
+<span class="gp">#</span> Remove all tools
+<span class="go">exclude bin/.*\.exe</span>
+
+<span class="gp">#</span> But keep lrelease, lupdate:
+<span class="go">include bin/lrelease\.exe</span>
+<span class="go">include bin/lupdate\.exe</span>
+
+
+<span class="gp">#</span> in /path/to/Qt/release.mask
+
+<span class="go">exclude lib/.*d\.dll</span>
+</pre></div>
+</div>
+<p>Blank lines and comments starting with <tt class="docutils literal"><span class="pre">#</span></tt> are ignored.
+Other lines should contain the word <tt class="docutils literal"><span class="pre">include</span></tt> or <tt class="docutils literal"><span class="pre">exclude</span></tt>,
+followed by a regular expression.</p>
+</div>
+<div class="section" id="creating-a-toolchain-feed">
+<h2>Creating a toolchain feed<a class="headerlink" href="#creating-a-toolchain-feed" title="Permalink to this headline">¶</a></h2>
+<p>You will need a place to host the packages and the feeds. It can be a simple
+HTTP or FTP web server.</p>
+<p>Let&#8217;s assume you have <tt class="docutils literal"><span class="pre">foo</span></tt> and <tt class="docutils literal"><span class="pre">bar</span></tt> packages. Write a feed looking like</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;toolchain&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">version=</span><span class="s">&quot;0.1&quot;</span> <span class="na">url=</span><span class="s">&quot;http://example.com/foo-0.1.zip&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;bar&quot;</span> <span class="na">version=</span><span class="s">&quot;0.2&quot;</span> <span class="na">url=</span><span class="s">&quot;http://example.com/bar-0.2.zip&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/toolchain&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-a-toolchain">
+<h2>Using a toolchain<a class="headerlink" href="#using-a-toolchain" title="Permalink to this headline">¶</a></h2>
+<p>Once the feed has been created, run:</p>
+<div class="highlight-xml"><div class="highlight"><pre>qitoolchain create my-toolchain http://example.com/feed.xml
+</pre></div>
+</div>
+<p>And use:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qibuild add-config my-toolchain --toolchain my-toolchain</span>
+<span class="go">qibuild configure -c my-toolchain</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-binary-packages">
+<h2>Importing binary packages<a class="headerlink" href="#importing-binary-packages" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">qitoolchain</span></tt> also has support for importing binary packages coming from the <tt class="docutils literal"><span class="pre">gentoo</span></tt>
+distribution.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qitoolchain import-package -t my-toolchain --name foo /path/to/foo.tbz2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="putting-binary-packages-in-a-subversion-repository">
+<h2>Putting binary packages in a subversion repository<a class="headerlink" href="#putting-binary-packages-in-a-subversion-repository" title="Permalink to this headline">¶</a></h2>
+<p>Instead of hosting zips on a HTTP server, you may want to host the pre-compiled packages
+in a subversion server. Why subversion ? Because it allows partial checkouts, and it
+is not that bad at managing binary blobs.</p>
+<p>You may have a layout like this on the server:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">&lt;svn root&gt;</span>
+<span class="go"> master</span>
+<span class="go">     win32-vs2010</span>
+<span class="go">       boost</span>
+<span class="go">       qt</span>
+<span class="go">     linux64</span>
+<span class="go">       boost</span>
+<span class="go">       qt</span>
+</pre></div>
+</div>
+<p>Then you can specify packages in the XML feed using a <tt class="docutils literal"><span class="pre">svn_package</span></tt> element:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in feeds/linux64.xml --&gt;</span>
+<span class="nt">&lt;feed&gt;</span>
+  <span class="nt">&lt;svn_package</span> <span class="na">name=</span><span class="s">&quot;boost&quot;</span> <span class="na">url=</span><span class="s">&quot;svn://example.org/toolchains/master/linux64/boost&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;svn_package</span> <span class="na">name=</span><span class="s">&quot;qt&quot;</span> <span class="na">url=</span><span class="s">&quot;svn://example.org/toolchains/master/linux64/qt&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/feed&gt;</span>
+</pre></div>
+</div>
+<p>When using <tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">create</span></tt>, the packages will be created using <tt class="docutils literal"><span class="pre">svn</span> <span class="pre">checkout</span></tt>, and
+then <tt class="docutils literal"><span class="pre">svn</span> <span class="pre">update</span></tt> will be called when using <tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">update</span></tt>.</p>
+<p>You can also specify a revision inside the feed:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in feeds/linux64.xml --&gt;</span>
+<span class="nt">&lt;feed&gt;</span>
+  <span class="nt">&lt;svn_package</span> <span class="na">name=</span><span class="s">&quot;boost&quot;</span> <span class="na">url=</span><span class="s">&quot;svn://example.org/toolchains/master/linux64/boost&quot;</span> <span class="na">revision=</span><span class="s">&quot;42&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/feed&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="../qibuild/aldebaran.html" title="Using qibuild with Aldebaran C++ SDKs">Using qibuild with Aldebaran C++ SDKs</a>
+     |
+    <a href="../tutorial.html" title="qiBuild tutorials" accesskey="U">qiBuild tutorials</a>
+   |
+    <a href="../qidoc/tutorial.html" title="Building documentation with qidoc">Building documentation with qidoc</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to qiBuild documentation !</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">qiBuild: the build framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial.html">qiBuild tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/git_projects.html">Managing git projects with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/templates.html">Managing code templates with qisrc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qisrc/git-to-qisrc_cookbook.html">Git-to-qisrc cookbook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qibuild/tutorial.html">Building C++ projects with qibuild</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Managing pre-compiled binary packages with qitoolchain</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../qidoc/tutorial.html">Building documentation with qidoc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qilinguist/tutorial.html">Translating projects with qilinguist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qipy/tutorial.html">Using Python with qibuild projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../qipkg/tutorial.html">qipkg tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Managing pre-compiled binary packages with qitoolchain</a><ul>
+<li><a class="reference internal" href="#when-to-use-pre-compiled-packages">When to use pre-compiled packages</a></li>
+<li><a class="reference internal" href="#creating-packages">Creating packages</a></li>
+<li><a class="reference internal" href="#excluding-files-at-installation">Excluding files at installation</a></li>
+<li><a class="reference internal" href="#creating-a-toolchain-feed">Creating a toolchain feed</a></li>
+<li><a class="reference internal" href="#using-a-toolchain">Using a toolchain</a></li>
+<li><a class="reference internal" href="#importing-binary-packages">Importing binary packages</a></li>
+<li><a class="reference internal" href="#putting-binary-packages-in-a-subversion-repository">Putting binary packages in a subversion repository</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="../qibuild/aldebaran.html" title="Using qibuild with Aldebaran C++ SDKs">previous</a>
+     |
+    <a href="../tutorial.html" title="qiBuild tutorials" accesskey="U">up</a>
+   |
+    <a href="../qidoc/tutorial.html" title="Building documentation with qidoc">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

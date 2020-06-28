@@ -1,0 +1,24 @@
+
+.. _t14_dimensions:
+
+T14 - Dimensions
+=============================
+
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  dimensions_t14_v33
+  dimensions_t14_v32
+
+.. seealso::
+        
+    **V4** | :ref:`V3.3 <t14_dimensions_v33>` | :ref:`V3.2 <t14_dimensions_v32>`
+
+    :ref:`nao-t14` | :ref:`robot_dimensions` 
+
+--------------------
+
+.. include:: ../bulk/dimensions_t14_v4_v33.rst
+

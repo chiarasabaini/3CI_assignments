@@ -1,0 +1,35 @@
+.. _allogger:
+
+ALLogger
+=========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    allogger-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <allogger-api>`
+
+------------
+
+
+What it does
+------------
+This module allows you to log errors, warnings, and information on the robot from a remote machine. The level verbosity allows you to customize the output.
+
+.. warning::
+
+   This module is deprecated.
+
+   This module is being deprecated because it allows logging information on the
+   robot from a remote machine, which should not be done.
+
+   To log errors: use qiLog. 
+   
+   For more information about: 
+   
+   * qiLog, see `libqi API reference <../../ref/libqi/index.html>`_.
+   
+   * alternative solutions and deprecated methods, see the section: :ref:`ALLogger API <allogger-api>`.
+

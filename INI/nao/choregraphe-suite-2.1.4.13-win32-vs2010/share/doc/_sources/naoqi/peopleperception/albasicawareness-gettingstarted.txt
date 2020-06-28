@@ -1,0 +1,40 @@
+.. _albasicawareness-gettingstarted:
+
+ALBasicAwareness - Getting Started
+==================================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <albasicawareness>` | :ref:`API <albasicawareness-api>`
+| Getting Started
+
+-------------
+
+
+A simple example
+----------------
+
+Here we just start and stop BasicAwareness.
+
+:download:`albasicawareness_useWithASR.py </samples/python/albasicawareness/albasicawareness_example.py>`
+
+.. literalinclude:: /samples/python/albasicawareness/albasicawareness_example.py
+   :language: py
+
+
+Detect someone, track and get information about them
+----------------------------------------------------
+
+In some cases we want to trigger an action when a person is found,
+and then keep focused on this person. The FullyEngaged mode suits this need,
+as it can detect someone and keep engaged with them. We know that the robot has
+found (or lost) someone by catching the events ALBasicAwareness/HumanTracked
+and ALBasicAwareness/PeopleLeft
+(see the :ref:`event handling tutorial<python-reacting-to-events>`).
+It is then possible to trigger an action: in our example we start or stop speech
+recognition, then we get some information related to the tracked person from
+PeoplePerception and print them.
+
+:download:`albasicawareness_human_found.py </samples/python/albasicawareness/albasicawareness_human_found.py>`
+
+.. literalinclude:: /samples/python/albasicawareness/albasicawareness_human_found.py
+   :language: py
+

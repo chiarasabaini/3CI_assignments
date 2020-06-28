@@ -1,0 +1,102 @@
+
+.. _chore_memory_watcher_panel:
+
+Memory watcher panel
+=====================
+
+What is the Memory watcher panel
+---------------------------------
+
+The **Memory watcher** panel allows you to display the value of events or data
+during the execution of a behavior.
+
+**Memory watcher** has a Recording function allowing you to save a CSV file
+containing the history of event or data values during the recording.
+
+.. image:: /medias/desktop/choregraphe/memory_watcher_panel.png
+   :width: 462 px
+   :height: 248 px
+
++-----------+----------------------------------------------------------+
+| Column    | Contains                                                 |
++===========+==========================================================+
+| Name      | Names of selected **Memory keys**.                       |
++-----------+----------------------------------------------------------+
+| Nature    |  DATA / EVENT.                                           |
++-----------+----------------------------------------------------------+
+| Value     | Values of the **Memory keys**, updated according to      |
+|           | **Period**.                                              |
++-----------+----------------------------------------------------------+
+
+Available Memory keys
+----------------------
+
+Be aware that the **Memory keys** displayed by the **Memory watcher** depend on the
+robot **Choregraphe** is connected to:
+
++----------------------+---------------------------------------------------------+
+| A ...                | Will display ...                                        |
++======================+=========================================================+
+| Real robot           | All possible **Memory keys** for the robot.             |
++----------------------+---------------------------------------------------------+
+| Choregraphe          | A fewer amount of **Memory keys**, according to         |
+| simulated robot      | its simulated skills:                                   |
+|                      |                                                         |
+|                      | Example: no camera, no battery.                         |
++----------------------+---------------------------------------------------------+
+| Simulated robot      | **Memory keys** related to the perceived                |
+| evolving in a virtual| virtual world.                                          |
+| 3D world             |                                                         |
+|                      | Example: virtual camera but still no virtual battery.   |
++----------------------+---------------------------------------------------------+
+
+
+Selecting Memory key to watch
+------------------------------
+
+To select the set of **Memory keys** to watch:
+
+=====  ===================================================================================
+Step       Action
+=====  ===================================================================================
+1.      Double-click the empty line displaying the *<Select memory keys to watch>*.
+
+        The list of available **Memory keys** is displayed.
+
+2.      Click the checkboxes to select  **Memory keys**.
+
+3.      Click the **OK** button.
+=====  ===================================================================================
+
+Setting the refresh period
+--------------------------
+
+The **Memory watcher** panel is getting periodically information directly
+from the robot, by request.
+
+Setting the refresh period allows the user to set the time to wait between two
+requests.
+
+**Note**: the refresh period is supported down to 0.01s on a real robot, and 0.2s on a virtual one.
+
+Recording changing values of the Memory keys
+---------------------------------------------
+
+To record **Memory keys** evolution:
+
+=====  ===================================================================================
+Step       Action
+=====  ===================================================================================
+1.      Select **Memory keys** to watch.
+
+2.      Set the refresh period.
+
+3.      Click the **Start Recording** button.
+
+4.      Launch the behavior you want to audit.
+
+5.      When the behavior to survey is done, click the **Stop Recording** button.
+
+        You are then prompted to save the CSV file.
+=====  ===================================================================================
+

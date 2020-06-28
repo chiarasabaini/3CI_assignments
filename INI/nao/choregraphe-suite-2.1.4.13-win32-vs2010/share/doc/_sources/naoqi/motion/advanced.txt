@@ -1,0 +1,100 @@
+.. _advanced:
+
+Motion - advanced
+==================
+
+:ref:`Overview <almotion>` |  :ref:`API <almotion-api>` | Advanced
+
+-----------------
+
+
+Synchronization with ALMotion cycle
+-------------------------------------
+
+When writing reactive code that needs to send a new command
+every cycle, or use fresh sensor data, it can be helpful
+to synchronize with ALMotion's cycles.
+
+ALMotion cycle
+++++++++++++++++++
+
+The ALMotion cycle contains the following steps:
+
+- **preProcess** event is raised
+
+- sensor data is refreshed from memory
+
+- Cartesian data are updated and available
+
+- :ref:`motion tasks <tools-motion-task>` provide their new intentions
+
+- intentions are executed on the model
+
+- intentions are sent to the DCM
+
+- **postProcess** event is raised
+
+- sleep
+
+The motion thread uses a real time priority just lower than the DCM,
+and will try to execute on the anniversary of start up time + CycleNumber * 20ms.
+Should we fall behind by more than 20ms we will
+stop trying to catch up, and continue from the present.
+
+Using ALMotion cycle events
++++++++++++++++++++++++++++++
+
+From a NAOqi module, perhaps made with the module generator,
+you have access to the broker, and can use it to create a
+connection to Motion's **preProcess** or **postProcess** events. This allows
+being awakened at the beginning or end of each cycle to do some processing:
+get the current state of the robot, and prepare some commands.
+
+.. code-block:: guess
+
+  // Your method that will be called
+  void YourModule::motionPreProcessCallback() {
+  // Do something very small every 20ms.
+  // You are in a real time thread, so beware.
+  // If you wish to do heavy processing, you should
+  // raise a signal that is consumed by another thread
+  }
+  void YourModule::subscribeMotionPreProcess() {
+  try {
+  // Register the callback
+  // The specialized proxy does not give access
+  // to the underlying module needed for this binding,
+  // so we get a generic proxy from the parent broker
+  getParentBroker()->getProxy("ALMotion")->getModule()->atPreProcess(
+  boost::bind(&YourModule::motionPreProcessCallback,this));
+  } catch(const AL::ALError& e) {
+  std::cout << "Motion preProcess callback registration failed" << std::endl;
+  }
+  }
+
+DCM and ALMotion cohabitation
+-----------------------------
+
+| It is possible to use at the same time :term:`DCM` and **ALMotion** but it requires some precautions.
+| It is not really well-made and we will improve it on the next version.
+
+Using DCM after Motion
+++++++++++++++++++++++
+
+| Deactivate :ref:`Smart Stiffness <reflexes-smart-stiffness-api>`: ALMotion does not get the
+  command angles directly sent to :term:`DCM` and cannot manage the :term:`Stiffness`
+  for the given posture.
+| With Smart Stiffness, the robot should have not enough stiffness to realize the desired motion.
+
+
+Using Motion after DCM
+++++++++++++++++++++++
+
+After using :term:`DCM`, ALMotion's command angles are not updated to the internal model.
+To avoid jerky transition between using :term:`DCM` and ALMotion, there are two options:
+
+* Reset the joint angles to the previous **ALMotion** posture before using the :term:`DCM`, or
+* Remove and reset the Stiffness of the joints moved by :term:`DCM`
+   (:cpp:func:`ALMotionProxy::setStiffnesses`).
+
+

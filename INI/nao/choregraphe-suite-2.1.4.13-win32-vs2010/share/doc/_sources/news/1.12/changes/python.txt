@@ -1,0 +1,23 @@
+Python SDK changes
+==================
+
+The Python SDK is now disctinct from the C++ SDK.
+
+.. warning:: You will still find naoqi.py, _inaoq.dll files inside the C++
+   SDK, but those are used by the naoqi executable. Do NOT use them to
+   write Python code outside Choregraphe.
+
+
+On Windows the supported version is Python2.7.
+
+On Mac, you can now choose between the Python from Apple, already present on
+your OS, Python 2.6.1, or use Python2.7 from Python.org.
+
+.. note:: 
+   The Python SDK is now in 64bits, so you no longer need the
+   VERSIONER_PYTHON_PREFER_32_BITS environment variable.
+
+
+On Linux, Python 2.7 and Python 2.6 are now supported, allowing you
+to use the Python SDK on the latest Ubuntu release as well as on the latest
+LTS release.

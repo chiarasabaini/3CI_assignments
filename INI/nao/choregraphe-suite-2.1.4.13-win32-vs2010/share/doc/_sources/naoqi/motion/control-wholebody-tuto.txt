@@ -1,0 +1,119 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-wholebody-tuto:
+
+Whole Body control Tutorial: A dance
+====================================
+
+:ref:`naoqi-motion` - :ref:`Overview<control-wholebody>` | :ref:`API <control-wholebody-api>` | Tutorial
+
+------------
+
+|nao| |roboN| only - Do not use on |juju| |roboJ|
+
+Introduction
+------------
+
+This tutorial explains how to use whole body Cartesian control API in order to make
+the robot dance with foot constraints, torso and arms Cartesian commands.
+
+
+.. note::
+
+   The tutorial is written in Python.
+
+Download
+--------
+
+You can download the whole Body multiple effectors control example here:
+:download:`almotion_wbMultipleEffectors.py </examples/python/motion/almotion_wbMultipleEffectors.py>`
+
+For any troubleshooting linked to python, see :ref:`python-install-guide` section.
+
+
+Code review
+-----------
+
+In this section we describe each important piece of code of the example.
+
+NAOqi tools
++++++++++++++
+
+First, we import some external libraries:
+ - argparse: toolbox useful to define parameter
+ - motion: some useful definitions such as FRAME.
+ - almath: an optimized mathematic toolbox for robotics.
+   For further details, see: `libalmath API reference <../../ref/libalmath/index.html>`_.
+ - time: mainly for the function *sleep*
+ - ALProxy: create proxy to motion and robotposture modules
+
+
+Then, the proxy to **ALMotion** module is created. This proxy is useful to called **ALMotion** API.
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+  :language: python
+  :start-after: # -*- encoding: UTF-8 -*-
+  :end-before: # end initialize proxy, begin go to Stand Init
+
+Initialization of the robot
+++++++++++++++++++++++++++++
+
+| When doing Cartesian control, it's important to be sure that the robot is in a good configuration.
+  To have the maximum range of control, the maximum stability and far away of :term:`singularity`.
+| A :ref:`PoseInit <control-joint-tuto>` is a good posture before a Cartesian control
+  of the Torso.
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+  :language: python
+  :start-after: # end initialize proxy, begin go to Stand Init
+  :end-before: # end go to Stand Init, begin initialize whole body
+
+Whole body initialization
++++++++++++++++++++++++++
+
+Here, we specify the whole body constraints:
+
+- enable whole body
+- both legs are fixed
+- balance on double support
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+  :language: python
+  :start-after: # end go to Stand Init, begin initialize whole body
+  :end-before: # end initialize whole body, define arms motions
+
+Arms motion
++++++++++++
+
+| This code is dedicated to create motion with left and right arms in parallel.
+| By executing only this code, you will see all the robot move, but only the arms effectors
+  are controlled.
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+  :language: python
+  :start-after: # end initialize whole body, define arms motions
+  :end-before: # end define arms motions, define torso motion
+
+Torso motion
+++++++++++++
+
+| This code is dedicated to create Cartesian motion of the robot's torso.
+| During execution the arms will be fixed in :term:`FRAME_ROBOT`.
+| This is due to the fact that a previous called (positionInterpolation) on Arms effector has
+  automatically set effector optimization to *True* ( wbEnableEffectorOptimization(Arms, True) ).
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+  :language: python
+  :start-after: # end define arms motions, define torso motion
+  :end-before: # end define torso motion, disable whole body
+
+
+Release constraint and disable whole body
++++++++++++++++++++++++++++++++++++++++++
+
+This part is **essential** and stops the whole body balancer.
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+  :language: python
+  :start-after: # end define torso motion, disable whole body
+  :end-before: # end script

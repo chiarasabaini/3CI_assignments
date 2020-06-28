@@ -1,0 +1,24 @@
+
+.. _robot-microphone:
+
+Microphones
+================================
+
+.. seealso::
+    :ref:`naoqi-audio`
+
+    :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21` | :ref:`nao-t14` | :ref:`nao-t2`
+
+--------------------
+
+NAO V5 - Evolution
+*******************
+
+.. include:: ../bulk/microphone_v5.rst
+
+
+Former versions
+****************
+
+.. include:: ../bulk/microphone.rst
+

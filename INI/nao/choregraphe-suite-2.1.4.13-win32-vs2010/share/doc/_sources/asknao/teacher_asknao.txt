@@ -1,0 +1,34 @@
+.. _teacher_home:
+
+Teacher home
+=============
+
+The **Teacher** home shares the :ref:`child_tab` with **Parents**.
+
+Additionally, the **Teacher** home displays the:
+:ref:`playlist_tab`, :ref:`play_tab`, and :ref:`create_tab`.
+
+.. image:: /medias/asknao/teacher_home.png
+   :width: 577 px
+   :height: 404 px
+
+Customizing Child Tab
+----------------------
+
+The **Child Tab** displays condensed profiles of the children who already have
+accounts created.
+Children have to be registered through the administration account.
+
+Please provide a list of children names and birthdays to your **ASK NAO Administrator**
+and request accounts created under your profile.
+
+To find out who is the **ASK NAO Administrator**:
+
+* Click the **Add a new child** button:
+
+  The error message below displays the names and emails of all the
+  **ASK NAO Administrator**.
+
+.. image:: /medias/asknao/get_admin_emails.png
+   :width: 579 px
+   :height: 332 px

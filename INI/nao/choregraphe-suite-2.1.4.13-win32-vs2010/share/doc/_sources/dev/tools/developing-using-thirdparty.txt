@@ -1,0 +1,218 @@
+.. _developing-project-using-3rd-party:
+
+Developing a project for NAO using third-party software
+=======================================================
+
+Here is a quick tutorial to explain how you can develop your project using some
+third-party software not provided by the **NAOqi OS**.
+
+.. warning::
+
+    This section deals with cross-compilation which is currently not available
+    on Windows.
+
+Before starting
+---------------
+
+Make sure you have the latest version of **qiBuild**.
+
+.. code-block:: console
+
+    sudo pip install qibuild --upgrade
+
+For further details, see:
+`qiBuild documentation - Getting started <doc.aldebaran.com/qibuild/beginner/getting_started.html>`_.
+
+Overview
+--------
+
+Assuming you are developing a project called *bar* depending on *libupnp*.
+
+Before being able to run the final application on the robot, there are some
+steps to successfully build then deploy this application. Briefly they are:
+
+#.  Build the third-party dependencies in the **NAOqi OS** virtual machine;
+
+#.  Convert the binary package built in the **NAOqi OS** virtual machine
+    into a qiBuild package;
+
+#.  Add the qiBuild package to the cross-toolchain;
+
+#.  Build the application;
+
+#.  Deploy the application on the robot.
+
+Hereafter is the step-by-step tutorial.
+
+Building the third-party software
+++++++++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step    Action (in the virtual machine)
+=====  =========================================================================
+1.      Search for the missing dependency:
+
+        .. code-block:: console
+
+            emerge -s libupnp
+
+        Luckily, ``libupnp`` is provided by ``portage``.
+
+2.      Install the missing dependency:
+
+        .. code-block:: console
+
+            su
+            emerge libupnp
+            exit
+
+        After the installation of a package in the virtual machine, the binary
+        packages are locally stored in ``/home/nao/opennao-distro/packages``.
+
+        The following command will show you all built packages:
+
+        .. code-block:: console
+
+            tree ``/home/nao/opennao-distro/packages``
+
+3.      Checking the content of the newly installed package:
+
+        .. code-block:: console
+
+            equery files libupnp
+=====  =========================================================================
+
+For further details about ``emerge`` usage, see :ref:`vm-usage-emerge`.
+
+From here, you can retrieve the binary package on the host system (i.e. outside
+the **NAOqi OS** virtual machine):
+
+=====  =========================================================================
+Step    Action (from the host system)
+=====  =========================================================================
+4.      Retrieve the binary package on the host system:
+
+        .. code-block:: console
+
+            scp -r -P 2222 nao@localhost:/home/nao/opennao-distro/packages/net-libs/ .
+=====  =========================================================================
+
+For further details about exchanging data between the host system and the
+**NAOqi OS** virtual machine, see :ref:`vm-exchanging-file`.
+
+Importing Gentoo binary packages into a cross-toolchain
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. warning::
+
+    This section deals with cross-compilation which is currently not available
+    on Windows.
+
+Once the binary package is on the host system, import it into a cross-toolchain
+running:
+
+.. code-block:: console
+
+    qitoolchain import-package -c cross-atom libupnp /path/to/libupnp-1.6.6.tar.bz2
+
+This will look for any **CMake** module provided by the package itself or by
+**qiBuild**. If none is found, then it will open an automatically generated
+**CMake** module in a text-editor. Here you can remove some unnecessary ``flib``
+lines (e.g. test libraries, etc). After that, save it and the package is
+automatically added to the cross-toolchain.
+
+To check out all packages added to the cross-toolchain:
+
+.. code-block:: console
+
+    qitoolchain info cross-atom
+
+For further details about qiBuild, see:
+`qiBuild online documentation <doc.aldebaran.com/qibuild/>`_.
+
+Building an application linking against third-party software
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Once the third-party software package has been added to the cross-toolchain, it
+is possible to build the whole project you are working on, then deploying it on
+the robot.
+
+Say you write an executable called *bar* which belongs to the project *bar* and
+depends on *libupnp*.
+
+Here's what the *CMakeLists* should look like:
+
+.. code-block:: cmake
+
+    cmake_minimum_required(VERSION 2.8)
+    project(bar)
+    find_package(qibuild)
+
+    qi_create_bin(bar bar.cpp)
+    qi_use_lib(bar UPNP)
+
+Then, you should be able to use:
+
+.. code-block:: console
+
+    qibuild configure -c cross-atom
+    qibuild make -c cross-atom
+
+Deploying the application
++++++++++++++++++++++++++
+
+..  TODO:
+    @dim: do you plan to allow passing package file to 'qibuild deploy'?
+
+The last step is to use **qiBuild** to generate a standalone package,
+check out **qibuild** man page.
+
+First, edit the *qiproject.xml* to look like:
+
+.. code-block:: xml
+
+    <project name="bar">
+      <depends buildtime="true" runtime="true" names="libupnp" />
+    </project>
+
+This will tell **qiBuild** that the *bar* project needs the *libupnp* library
+both for compilation (buildtime), and for execution (runtime).
+
+Then, run:
+
+.. code-block:: console
+
+    qibuild package --include-deps --runtime --release -c cross-atom bar
+
+This will configure and build the *bar* project, then
+install the *runtime* components from both the *bar* project and the *libupnp*
+package, in a temporary directory, and then generate a nice *.tar.gz* out of the
+temporary install directory.
+
+The package is relocatable, which means once it is extracted on the robot, the
+*bar* executable will always be able to find the *libupnp* library.
+
+This means that you can put the package in */home/nao* on the robot, without
+having to become root or risking changing the system libraries.
+
+The last thing to do here is sending the package on the robot:
+
+.. code-block:: console
+
+    scp bar.tar.gz nao@nao.local:.
+
+Extract the package on the robot:
+
+.. code-block:: console
+
+    ssh nao@nao.local
+    tar xaf bar.tar.gz
+
+And run the *bar* executable on the robot:
+
+.. code-block:: console
+
+    ssh nao@nao.local
+    ./bar/bin/bar
+
+Enjoy ;-)

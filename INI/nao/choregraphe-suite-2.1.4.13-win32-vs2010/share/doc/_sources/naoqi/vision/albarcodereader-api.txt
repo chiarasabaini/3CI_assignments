@@ -1,0 +1,68 @@
+.. _albarcodereader-api:
+
+ALBarcodeReader API
+===================
+
+:ref:`naoqi-vision` - :ref:`Overview <albarcodereader>` | API | :ref:`Tutorial <albarcodereader-tuto>`
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/albarcodereaderproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALBarcodeReaderProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api` and :ref:`alvisionextractor-api`.
+
+Events list
+-----------
+
+* :naoqi:event:`BarcodeReader/BarcodeDetected`
+
+
+.. _events_barcode_reader:
+
+Events
+------
+
+.. naoqi:event:: BarcodeReader/BarcodeDetected(AL::ALValue value)
+
+
+   Raised each time one or several barcodes are decyphered. The associated data
+   is structured as follows:
+
+   .. code-block:: guess
+
+      BarcodeReader/BarcodeDetected = [
+	CodeData[N]
+      ]
+
+   **CodeData** contains the data itself in a string representation and the
+   position of the bar code in the image:
+
+   .. code-block:: guess
+
+      CodeData = [
+        Data,
+        Position
+      ]
+
+   Where **Position** contains the coordinates of all four corners in the image
+   (see :ref:`Overview <albarcodereader>` for an explanation about corner ordering).
+
+   .. code-block:: guess
+
+      Position = [
+        [x0, y0],
+        [x1, y1],
+        [x2, y2],
+        [x3, y3]
+      ]

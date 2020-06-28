@@ -1,0 +1,72 @@
+.. _alaudiodevice:
+
+ALAudioDevice
+==============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alaudiodevice-api
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alaudiodevice-api>`
+
+------------
+
+What it does
+------------
+
+**ALAudioDevice** provides other NAOqi modules with an access to NAO's audio inputs (microphones) and outputs (loudspeakers).
+
+Every NAOqi module intended to process signals coming from NAO's microphones or that needs to send signals to NAO's loudspeakers should use the API provided by **ALAudioDevice**.
+
+
+How it works
+------------
+
+**ALAudioDevice** is based on the standard Linux ALSA (Advanced Linux Sound Library) library to communicate with NAO's sound driver and subsequently to microphones and speakers.
+
+Any NAOqi module can send data to NAO's loudspeakers by calling, when needed, one of the two appropriate ALAudioDevice methods. Provided that the data is correctly formated, such a call can be made without having to configure anything else.
+
+To process data coming from the microphones, the procedure is different. Indeed, a NAOqi module willing to process such data will first "subscribe" to **ALAudioDevice** and
+specify the format of the data that it requires (number of channels, sample rate, etc...). The data correctly formated will then be automatically and regularly sent to the requesting module
+by using one of its methods as a callback.
+
+
+Performances and Limitations
+----------------------------
+
+**ALAudioDevice** can provide the sound coming from the microphones formated in one of these ways:
+
+- four channels interleaved, 48000Hz, 170ms buffer (this is the default setting)
+- four channels deinterleaved, 48000Hz, 170ms buffer
+- one channels (front, rear, left or right), 16000Hz, 170ms buffer
+
+**ALAudioDevice** can send data to loudspeakers in one of these following framerate:
+
+- two channels interleaved, 16000Hz (default when an asian language is set)
+- two channels interleaved, 22050Hz (default when a non asian language is set)
+- two channels interleaved, 44100Hz
+- two channels interleaved, 48000Hz
+
+
+Getting started
+---------------
+
+To get started about writing a NAOqi module that can process NAO's microphones data,
+please refer to the following example that can be used as a nutshell:
+
+:download:`alsoundprocessing.h </dev/cpp/examples/audio/soundprocessing/alsoundprocessing.h>`
+
+:download:`alsoundprocessing.cpp </dev/cpp//examples/audio/soundprocessing/alsoundprocessing.cpp>`
+
+To get started about writing a NAOqi module that can send data to NAO's loudspeakers,
+please refer to the following example:
+
+:download:`alsoundplayback.h </dev/cpp//examples/audio/soundplayback/alsoundplayback.h>`
+
+:download:`alsoundplayback.cpp </dev/cpp//examples/audio/soundplayback/alsoundplayback.cpp>`
+
+The projects (that can be easily compiled) corresponding to these files can
+be found in the audio examples directory.
+

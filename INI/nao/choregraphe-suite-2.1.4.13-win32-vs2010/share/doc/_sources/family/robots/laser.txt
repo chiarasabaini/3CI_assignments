@@ -1,0 +1,52 @@
+
+.. _laser-head:
+
+Laser head v.3.2
+=================
+
+.. seealso::
+
+   - :ref:`allaser`
+   - :ref:`monitor-laser`
+
+----------------------
+
+
+Aims
+-------
+
+This device is designed for advanced research such as SLAM (Simultaneous
+Localization And Mapping).
+
+It is not designed to support all NAO standard behaviors. Better use the standard
+head for voice recognition or animations involving fall hazard.
+
+Key data
+----------
+
+- Wave length: 785nm.
+- Resolution: 3 percent.
+- Detection range: 0.2m - 5.6m.
+- Angular range: 240°.
+
+
+Offset of the laser plane
+-----------------------------
+
+As shown on the diagram, z is equivalent to 106.6 mm between the
+rotation center and the laser plane.
+
+.. image:: /medias/dev/modules/hardware/allaser_axis.png
+
+
+Safety
+--------
+
+.. warning::
+
+   A fall could damage the laser head.
+
+Version 3.2 is not yet protected against damages occurring during a fall.
+
+Contact our support team to learn how you can protect the head from fall hazard.
+

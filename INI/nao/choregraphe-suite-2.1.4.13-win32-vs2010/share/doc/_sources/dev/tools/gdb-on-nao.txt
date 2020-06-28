@@ -1,0 +1,205 @@
+.. _gdb:
+
+Debugging C/C++ on the robot
+============================
+
+.. seealso::
+
+   :ref:`cpp-introduction` | :ref:`cpp-tutos-examples` |
+   :ref:`cpp-examples` | :ref:`tips_and_tricks` | *Debugging C/C++ on the robot*
+
+------------
+
+
+This section gives you some hints about debugging methods and ``gdb`` usage on
+the robot.
+
+.. note::
+
+    A *first approach* when developing NAOqi modules is to **build it as a
+    remote module**, using the debugger already installed on the host computer.
+
+    The *second step* is **cross-compiling this module for the robot** using the
+    cross-toolchain.
+
+
+.. warning::
+
+    The followings intends to provide help in case of *cross-compilation*.
+
+    However, the usage of ``gdb`` remains most of all the same.
+
+    For further information about ``gdb``, please refer to the ``gdb`` manual:
+    `http://www.gnu.org/software/gdb/documentation/`, or run ``help`` inside
+    gdb.
+
+.. note::
+
+    All the tools used for debugging are **already installed on the robot** or
+    **provided by the cross-toolchain**.
+
+Starting gdb
+------------
+
+There are two ways of debugging some C/C++ binaries on your robot.
+
+You can run the debugger either:
+
+* *locally* (i.e. only running ``gdb`` on the robot) or
+
+* *remotely* (i.e. running ``gdbserver`` on the robot and ``gdb`` on the host
+  computer).
+
+.. note::
+
+    Those debugging methods explained hereafter imply that the **cross-compiled
+    binaries** have been **sent on the robot before being run**.
+
+.. warning::
+
+    **Cross-compiled binaries must be run on the robot**.
+
+    Any attempt of execution on another system is a misunderstanding of the
+    cross-compilation.
+
+    Such attempts will lead to:
+
+    * in the best case: no execution at all;
+
+    * in the worst case: an execution complaining about weird and incomprehensible
+      warnings or errors.
+
+Running debugger locally on the robot
++++++++++++++++++++++++++++++++++++++
+
+.. warning::
+
+    Make sure you have built the module enabling the debug symbols (this is the
+    default behavior when **using the cross-toolchain**).
+
+On the robot, just run:
+
+.. code-block:: console
+
+    $ gdb naoqi-bin
+
+Then, execute any ``gdb`` commands you want. For further details, see :ref:`gdb-using`.
+
+Running debugger remotely
++++++++++++++++++++++++++
+
+.. warning::
+
+    Currently, this is **only available on Linux host**.
+
+.. note::
+
+    All the tools used for debugging are **already installed on the robot** or
+    **provided by the cross-toolchain**.
+
+Assuming the host computer, from which you are working, has ``192.168.0.2`` as
+IP address, and ``192.168.0.10`` is the one of the robot:
+
+#. On the robot:
+
+   .. code-block:: console
+
+       $ gdbserver 192.168.0.2:2345 naoqi-bin [args]
+
+   ``2345`` is the port number to use (this is just an example).
+
+#. On the host computer:
+
+   .. code-block:: console
+
+       $ ~/.local/share/qi/toolchains/*/*-ctc/cross/bin/i686-aldebaran-linux-gnu-gdb naoqi-bin
+       (gdb) set solib-absolute-prefix /path/to/your/build-directory
+       (gdb) target remote 192.168.0.10:2345
+
+Then, execute any ``gdb`` commands you want in the debugger running on the host
+computer. For further details, see :ref:`gdb-using`.
+
+.. _gdb-using:
+
+Using gdb
+---------
+
+The followings only give some basics about ``gdb``.
+
+For further information about ``gdb``:
+
+* refer to the ``gdb`` manual: http://www.gnu.org/software/gdb/documentation/ , or
+* run ``help`` inside gdb.
+
+Managing breakpoints
+++++++++++++++++++++
+
+.. code-block:: console
+
+    (gdb) break <absolute path of the source file on the host computer>:<line number>
+
+or
+
+.. code-block:: console
+
+    (gdb) break <absolute path of the source file on the host computer>:<function name>
+
+Once created, a breakpoint *id* number is automatically associated.
+
+You can then enable or disable any breakpoints by their *id* numbers:
+
+.. code-block:: console
+
+    (gdb) enable <breakpoint id>
+    (gdb) disable <breakpoint id>
+
+Execution inside gdb
+++++++++++++++++++++
+
+Start the program passing some arguments:
+
+.. code-block:: console
+
+    (gdb) run <arg1> <arg2>
+
+For ``naoqi-bin``, you might want to set a higher context level (refer to
+:ref:`naoqi-man` or the :ref:`qiLog API from libqi<libqi-doc>`), to do so:
+
+.. code-block:: console
+
+    (gdb) run -d -c 7
+
+To pause the execution, just press **Ctrl-C**, then press **C** to continue.
+
+To quit ``gdb``:
+
+.. code-block:: console
+
+    (gdb) quit
+
+Exploiting breakpoints
+++++++++++++++++++++++
+
+Once the program has triggered a breakpoint, it execution is paused.
+
+Then, you can:
+
+* Display the source code around the breakpoint (this requires the sources at
+  the same location on the robot as they are on the host):
+
+  .. code-block:: console
+
+      (gdb) list
+
+* Display the backtrace:
+
+  .. code-block:: console
+
+      (gdb) bt
+
+* Move up and down in the backtrace:
+
+  .. code-block:: console
+
+      (gdb) up
+      (gdb) down

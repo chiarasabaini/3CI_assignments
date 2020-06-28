@@ -1,0 +1,405 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>External-collision avoidance &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="ALMotion" href="almotion.html" />
+    <link rel="next" title="External-collision avoidance API" href="reflexes-external-collision-api.html" />
+    <link rel="prev" title="Self-collision avoidance API" href="reflexes-collision-avoidance-api.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="reflexes-collision-avoidance-api.html" title="Self-collision avoidance API">previous</a>
+     |
+    <a href="almotion.html" title="ALMotion" accesskey="U">up</a>
+   |
+    <a href="reflexes-external-collision-api.html" title="External-collision avoidance API">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-motion-reflexes-external-collision">
+            
+  <div class="section" id="external-collision-avoidance">
+<span id="reflexes-external-collision"></span><h1>External-collision avoidance<a class="headerlink" href="#external-collision-avoidance" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="index.html#naoqi-motion"><em>NAOqi Motion</em></a> - Overview | <a class="reference internal" href="reflexes-external-collision-api.html#reflexes-external-collision-api"><em>API</em></a></p>
+<hr class="docutils" />
+<div class="section" id="what-it-does">
+<h2>What it does<a class="headerlink" href="#what-it-does" title="Permalink to this headline">¶</a></h2>
+<p>The aim is to avoid damaging the robot, its environment, and first of all avoid hurting people.</p>
+<p>Arms anticollision, and move anticollision aim to avoid bumping into something or someone.</p>
+<p>This implies checking the environment with the metrical sensors of the robot in order to see if
+an arm or the base is not going to hit something or someone:</p>
+<ul class="simple">
+<li><strong>Arm velocity clipping:</strong> The articular max velocity of one arm may be clipped
+if something is too close to this arm. If the person or the object is really too
+close to the arm, the authorized velocity is nearly zero. A memory event called
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/Safety/ChainVelocityClipped" title="ALMotion/Safety/ChainVelocityClipped"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Safety/ChainVelocityClipped()</span></tt></a> is raised when max velocity
+is clipped.</li>
+<li><strong>Secure Move API:</strong> If you try to launch a move with a motion API, in case
+there is a blocking obstacle in the direction of the move, this move will not
+be launched or will be stopped as soon as an obstacle enters its security zone
+and you will get a warning. A memory event called
+<a class="reference internal" href="reflexes-external-collision-api.html#ALMotion/MoveFailed" title="ALMotion/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/MoveFailed()</span></tt></a> is raised when a move is stopped or
+not launched.</li>
+</ul>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This reflexes need <a class="reference internal" href="alnavigation.html#alnavigation"><em>ALNavigation</em></a> module to run.
+So this features are only available if <a class="reference internal" href="alnavigation.html#alnavigation"><em>ALNavigation</em></a> module is running.</p>
+</div>
+<p><a class="reference internal" href="alnavigation.html#alnavigation"><em>ALNavigation</em></a> module provides obstacle descriptions and <strong>ALMotion</strong> module
+defines if an obstacle is too close, in which case it activates the corresponding
+reflex.</p>
+<p>While moving, the robot tries to detect obstacles, using all its sensors.
+As soon as an obstacle enters its security area, the robot stops.</p>
+<div class="section" id="nao-robon">
+<h3><img alt="nao" class="img-inline" src="../../_images/nao.png" /> <em>NAO</em><a class="headerlink" href="#nao-robon" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="security-distances">
+<h4>Security distances<a class="headerlink" href="#security-distances" title="Permalink to this headline">¶</a></h4>
+<img alt="../../_images/alnavigation.png" src="../../_images/alnavigation.png" style="width: 371px; height: 310px;" />
+<div class="section" id="tangential-or-low-speed">
+<h5>Tangential (or low speed)<a class="headerlink" href="#tangential-or-low-speed" title="Permalink to this headline">¶</a></h5>
+<p>The <a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setTangentialSecurityDistance__floatCR" title="ALMotionProxy::setTangentialSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setTangentialSecurityDistance()</span></tt></a> sets the
+minimum distance between the robot and any obstacle during a move.</p>
+<p>For example if you set a <strong>Tangential security distance</strong> of 0.5m, the robot cannot
+move closer than 0.5m to an obstacle.</p>
+<div class="line-block">
+<div class="line"><strong>Default value</strong>: 0.10m.</div>
+<div class="line">The <strong>Tangential security distance</strong> must be positive, if you try to set a negative distance
+it will be set to 0.0m.</div>
+</div>
+</div>
+<div class="section" id="orthogonal-and-full-speed">
+<h5>Orthogonal (and full speed)<a class="headerlink" href="#orthogonal-and-full-speed" title="Permalink to this headline">¶</a></h5>
+<p>The <a class="reference internal" href="reflexes-external-collision-api.html#ALMotionProxy::setOrthogonalSecurityDistance__floatCR" title="ALMotionProxy::setOrthogonalSecurityDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setOrthogonalSecurityDistance()</span></tt></a> sets the
+minimum distance the robot can approach an obstacle while moving at full speed.</p>
+<p>For example, if you have set an <strong>Orthogonal security distance</strong> of 1m and the robot is
+moving directly toward an obstacle at full speed, the robot will stop at 1m in
+front of the obstacle.</p>
+<div class="line-block">
+<div class="line"><strong>Default value</strong>: 0.40m.</div>
+<div class="line">The <strong>Orthogonal security distance</strong> must be greater than the  <strong>Tangential security distance</strong>,
+if you try to set a smaller distance, it will be set to the tangential security distance.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="juju-roboj">
+<h3><img alt="juju" class="img-inline" src="../../_images/juju.png" /> <em>Pepper</em><a class="headerlink" href="#juju-roboj" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="move-security-distances">
+<span id="id1"></span><h4>Move security distances<a class="headerlink" href="#move-security-distances" title="Permalink to this headline">¶</a></h4>
+<p>ALMotion <strong>tangential security distance</strong> is the minimum distance between any
+point of the robot and any obstacle during a move. Its default value is 0.1m
+on <em>Pepper</em>.</p>
+<p>ALMotion <strong>orthogonal security distance</strong> is the frontal distance at which the
+robot will stop when moving directly towards an obstacle at full speed. Its
+default value is 0.4m on <em>Pepper</em>.</p>
+<p>At any time, the frontal distance at which the robot will stop when moving
+directly towards an obstacle is proportional to the robot
+stopping distance. It lies between the <strong>tangential security distance</strong> and the
+<strong>orthogonal security distance</strong>. The following table shows the frontal security
+distance at different speeds on <em>Pepper</em>, with default security distance
+parameters.</p>
+<table border="1" class="docutils">
+<caption>Frontal security distance</caption>
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Speed (m/s)</th>
+<th class="head">Frontal security distance (m)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0.1  (min)</td>
+<td>0.12</td>
+</tr>
+<tr class="row-odd"><td>0.2</td>
+<td>0.17</td>
+</tr>
+<tr class="row-even"><td>0.3</td>
+<td>0.25</td>
+</tr>
+<tr class="row-odd"><td>0.35 (default)</td>
+<td>0.30</td>
+</tr>
+<tr class="row-even"><td>0.4</td>
+<td>0.35</td>
+</tr>
+<tr class="row-odd"><td>0.5</td>
+<td>0.40</td>
+</tr>
+<tr class="row-even"><td>0.55 (max)</td>
+<td>0.40</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="blind-zones">
+<span id="id2"></span><h4>Blind zones<a class="headerlink" href="#blind-zones" title="Permalink to this headline">¶</a></h4>
+<p>The sensor equipment of the robot does not allow to perceive the environment
+360° round. Between the different sensors, there are some &#8220;blind&#8221; zones.</p>
+<p>There are four main &#8220;blind zones&#8221; in which the robot cannot detect anything without
+moving its base or its head. Note that bumper can detect obstacles in contact with the robot.
+They are presented in the following figure.</p>
+<img alt="../../_images/blind_zone_def.png" src="../../_images/blind_zone_def.png" style="width: 500px;" />
+<p>In order to avoid dangerous movements in the blind zones, the arm speed is reduced
+when moving inside an unknown zone. The robot can then collide with an obstacle
+but it is not dangerous as the speed is low.</p>
+<img alt="../../_images/arm_velocity_clipping.png" src="../../_images/arm_velocity_clipping.png" style="width: 300px;" />
+<p>An unknown zone is an area in which there is no information about to presence of obstacles.</p>
+<p>They are defined between the fields of view of the lasers in front and betwen
+the lasers and the sonar in the back.</p>
+<p>All the blind zones are updated by ALNavigation when safety is enabled.
+If no obstacle is detected inside the zone <strong>and</strong> if some unknown space remain
+inside the zone, <strong>then</strong> the zone is unknown.</p>
+<p>Every known space is slowly becoming unknown in a specified time (5s by default)
+when it is out of every sensors field of view. This means that if the robot does not move,
+the blind zones will become unknown in 5s maximum.</p>
+<p>The update of those blind zones consist in moving them closer or further away
+from the robot.
+By default, an unknown zone starts <strong>0.2m</strong> away from the robot, and a known one starts
+<strong>1.0m</strong> away from the robot.</p>
+<p>The following picture shows in red the regions in which the arm speed is reduced.
+The top-left and bottom-right zones are unknown, hence closer to the robot to ensure
+that the arms won&#8217;t collide with any undetected obstacle.
+The top-right and bottom-left zones are known, because of a recent movement with
+the base (laser sensor) or with the head (3D sensor). The zones are hence
+further away from the robot so the arms are not being slowered when moving through it.</p>
+<img alt="../../_images/blind_zones_detection.png" src="../../_images/blind_zones_detection.png" style="width: 300px;" />
+</div>
+</div>
+</div>
+<div class="section" id="performances-and-limitations">
+<h2>Performances and limitations<a class="headerlink" href="#performances-and-limitations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="surroundings-map">
+<h3>Surroundings map<a class="headerlink" href="#surroundings-map" title="Permalink to this headline">¶</a></h3>
+<p>The robot may lose sight of an obstacle, if a sensor is obstructed or if the
+obstacle gets out of its field of view.</p>
+<p>However, a surroundings map, limited in space and time, allows the robot to keep
+in mind that, potentially, an obstacle is still there.</p>
+</div>
+</div>
+<div class="section" id="use-case">
+<h2>Use case<a class="headerlink" href="#use-case" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Avoid collision with environment pending a move.</li>
+<li>Avoid arms collision with environment.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="reflexes-collision-avoidance-api.html" title="Self-collision avoidance API">Self-collision avoidance API</a>
+     |
+    <a href="almotion.html" title="ALMotion" accesskey="U">ALMotion</a>
+   |
+    <a href="reflexes-external-collision-api.html" title="External-collision avoidance API">External-collision avoidance API</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Motion</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="autonomousmoves.html">ALAutonomousMoves</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alrobotposture.html">ALRobotPosture</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alnavigation.html">ALNavigation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alrecharge.html">ALRecharge</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="almotion.html">ALMotion</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="almotion-api.html">ALMotion API</a></li>
+<li class="toctree-l6"><a class="reference internal" href="advanced.html">Motion - advanced</a></li>
+<li class="toctree-l6"><a class="reference internal" href="control-stiffness.html">Stiffness control</a></li>
+<li class="toctree-l6"><a class="reference internal" href="control-joint.html">Joint control</a></li>
+<li class="toctree-l6"><a class="reference internal" href="control-walk.html">Locomotion control</a></li>
+<li class="toctree-l6"><a class="reference internal" href="control-cartesian.html">Cartesian control</a></li>
+<li class="toctree-l6"><a class="reference internal" href="control-wholebody.html">Whole Body control</a></li>
+<li class="toctree-l6"><a class="reference internal" href="reflexes-collision-avoidance.html">Self-collision avoidance</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">External-collision avoidance</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="reflexes-external-collision-api.html">External-collision avoidance API</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="reflexes-fall-manager.html">Fall manager</a></li>
+<li class="toctree-l6"><a class="reference internal" href="reflexes-smart-stiffness.html">Smart Stiffness</a></li>
+<li class="toctree-l6"><a class="reference internal" href="reflexes-diagnosis.html">Diagnosis effect</a></li>
+<li class="toctree-l6"><a class="reference internal" href="push_recovery.html">Push Recovery</a></li>
+<li class="toctree-l6"><a class="reference internal" href="idle.html">Idle</a></li>
+<li class="toctree-l6"><a class="reference internal" href="tools-general.html">General tools</a></li>
+<li class="toctree-l6"><a class="reference internal" href="tools-motion-task.html">Motion task</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="almotionrecorder.html">ALMotionRecorder</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">External-collision avoidance</a><ul>
+<li><a class="reference internal" href="#what-it-does">What it does</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a><ul>
+<li><a class="reference internal" href="#nao-robon"> <em>NAO</em></a><ul>
+<li><a class="reference internal" href="#security-distances">Security distances</a><ul>
+<li><a class="reference internal" href="#tangential-or-low-speed">Tangential (or low speed)</a></li>
+<li><a class="reference internal" href="#orthogonal-and-full-speed">Orthogonal (and full speed)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#juju-roboj"> <em>Pepper</em></a><ul>
+<li><a class="reference internal" href="#move-security-distances">Move security distances</a></li>
+<li><a class="reference internal" href="#blind-zones">Blind zones</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performances-and-limitations">Performances and limitations</a><ul>
+<li><a class="reference internal" href="#surroundings-map">Surroundings map</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-case">Use case</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="reflexes-collision-avoidance-api.html" title="Self-collision avoidance API">previous</a>
+     |
+    <a href="almotion.html" title="ALMotion" accesskey="U">up</a>
+   |
+    <a href="reflexes-external-collision-api.html" title="External-collision avoidance API">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="5" localization="8" tooltip="Stimulate output repeatedly with the specified interval.&#x0A;Can be stopped anytime. &#x0A;Stimulating the input again restarts the timer.&#x0A;" x="124" y="340">
+        <bitmap>media/images/box/wait.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.timer = None
+
+    def onUnload(self):
+        self.cancelTimer()
+
+    def cancelTimer(self):
+        if self.timer:
+            self.timer.stop()
+        self.timer = None
+
+    def onTimer(self):
+        self.timerOutput()
+
+    def startTimer(self):
+        import qi
+        self.timer = qi.PeriodicTask()
+        self.timer.setCallback(self.onTimer)
+        self.timer.setUsPeriod(int(self.getParameter("Period (s)") * 1000 * 1000))
+        self.timer.start(True)
+
+    def onInput_onStart(self):
+        self.cancelTimer()
+        self.startTimer()
+
+    def onInput_onStop(self):
+        if self.timer and self.timer.isRunning():
+            self.onStopped()
+        self.onUnload()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Start the timer using the configured period value." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Stop the timer." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when the box is stopped." id="4" />
+        <Output name="timerOutput" type="1" type_size="1" nature="2" inner="0" tooltip="Send a bang periodically." id="5" />
+        <Parameter name="Period (s)" inherits_from_parent="0" content_type="2" value="1" default_value="1" min="0" max="5000" tooltip="Defines the period of the timer box (in seconds).&#x0A;&#x0A;For example, if this parameter is equal to 1s, the timerOutput will be stimulated&#x0A;every second until the onStop input is stimulated." id="6" />
+    </Box>
+</ChoregrapheBox>

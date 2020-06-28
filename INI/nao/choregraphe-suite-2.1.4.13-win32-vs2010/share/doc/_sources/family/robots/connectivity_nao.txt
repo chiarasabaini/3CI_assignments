@@ -1,0 +1,85 @@
+.. _connectivity-nao:
+
+Connectivity
+============
+
+Ethernet
+----------
+
+Main usage
++++++++++++
+
+Setting the WiFi connection.
+
+Specification
+++++++++++++++
+
+1×RJ45 - 10/100/1000 base T.
+
+Location
++++++++++
+
+
+.. glossary::
+
+    Ethernet port
+
+        To access to the **Ethernet** port, remove the
+        :term:`hatch behind the head of the robot`.
+
+
+WiFi
+------
+
+Main usage
++++++++++++
+
+Communication between **Choregraphe** and the robot.
+
+Specification
+++++++++++++++
+
+==========================  ====================================================
+ NAO **V5**                  IEEE 802.11 a/b/g/n
+
+ NAO **V4** and **V3.x**     IEEE 802.11 b/g/n
+==========================  ====================================================
+
+Security: 64/128 bit: WEP, WPA/WPA2.
+
+
+USB
+-----
+
+Main usage
++++++++++++
+
+Usually used to update the system of the robot, you can also use the **USB** port
+to connect external devices such as:
+
+* **Kinect** or **Asus** 3D sensor, or
+* **Arduino** device. See an example of implementation provided by our partner:
+  http://www.humarobotics.com/en/robotics-lab/nao-and-arduino.html
+
+Location
++++++++++
+
+.. glossary::
+
+   USB port
+
+      To access to the **USB** port, remove the
+      :term:`hatch behind the head of the robot`.
+
+-------
+
+.. glossary::
+
+   Hatch behind the head of the robot
+
+      .. image:: /medias/nao/hardware/head_back_large_zoom_v40.png
+        :width: 504 px
+        :height: 335 px
+
+
+

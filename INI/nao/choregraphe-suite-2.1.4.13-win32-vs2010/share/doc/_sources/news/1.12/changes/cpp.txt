@@ -1,0 +1,760 @@
+.. _news-cpp:
+
+C++ Changes
+===========
+
+
+
+.. highlight:: cpp
+
+Previously there was almost no distinction between Aldebaran's public headers
+and private headers.
+
+Now this distinction has been made.
+
+We continue to provide our private headers, but please keep in mind that
+backward-compatibility will **not** be guaranteed on those headers.
+
+We also went through a lot of cleaning, which explains why some attributes are
+no longer available, and why you must use an accessor instead, for instance.
+
+After each table, you will find an example that hopefully will help you get rid
+of your dependencies on deprecated or private headers.
+
+
+Below are the complete list of C++ changes.
+If you have code from 1.10 version, please see the section :ref:`cpp-tutos-porting-1.12`
+
+
+Deprecated libraries
+++++++++++++++++++++
+
+
+
++---------------------------+------------------------------------------------------------+
+|    Name                   |                   Replacement                              |
++===========================+============================================================+
+|                           |                                                            |
+| ALCORE, LIBCORE           | - :libalerror:`AL::ALError` and                            |
+|                           |   :libalerror:`AL::ALNetworkError` for exception           |
+|                           | - assert for AL_ASSERT,AL_VERIFY                           |
+|                           | - boost::shared_ptr for ALPtr                              |
++---------------------------+------------------------------------------------------------+
+| ALTOOLS, TOOLS            | - std::stringstream for string conversion                  |
+|                           | - :libqi:`qi::os::gettimeofday`, :libqi:`qi::os::timeval`, |
+|                           |   :libqi:`qi::os::sleep`, :libqi:`qi::os::msleep`          |
+|                           |   for time related functions.                              |
+|                           | - :libqi:`qi::os::system` and related for                  |
+|                           |   launchshellcommand                                       |
+|                           | - boost::date_time to handle date                          |
++---------------------------+------------------------------------------------------------+
+| ALFILE                    | :libqi:`qi::path`, boost::filesystem                       |
++---------------------------+------------------------------------------------------------+
+| ALLOG                     | :libqi:`qi::log`                                           |
++---------------------------+------------------------------------------------------------+
+| ALTHREAD                  | boost::thread or pthread                                   |
++---------------------------+------------------------------------------------------------+
+| NAOQICLIENT               | alcommon or simulator-sdk                                  |
++---------------------------+------------------------------------------------------------+
+
+**ALPtr**
+
+
+*old*::
+
+  #include <alcore/alptr.h>
+  AL::Ptr<AL::Proxy> proxy = ...
+
+*new*::
+
+  #include <boost/shared_ptr.hpp>
+  boost::shared_ptr<AL::ALProxy> proxy = ....
+
+
+**Logs**
+
+*old*::
+
+  #include <allog/allog.h>
+  alinfo("This is an old information");
+  alsinfo("This is an old information");
+  alminfo("This is an old information");
+
+*new*::
+
+  #include <qi/log.hpp>
+  // C style
+  qiLogInfo("category", "This is an new information\n");
+
+  // C++ style
+  qiLogInfo("category") << "This is an new information" << std::endl;
+
+There is now 7 logs levels that you can change using --log-level (-L) [log_level_number] option in order form 0 to 6:
+
+* silent: hide logs.
+* fatal: This one is used before exit the program if a fatal error occured,
+* error: classical error,
+* warning: useful to warn user,
+* info: useful to user informations, logs level by default (also show all lower log level).
+* verbose: not mandatory but useful to user informations, not show by default. If you want them you need to use --verbose (-v) option on naoqi command line.
+* debug: useful to developer informations. Show on debug comilaption using --debug (-d) option on naoqi command line. :strong:`Not compile on release`.
+
+For each verbosity there is only one macro to use:
+
+* qiLogFatal (old: alfatal, alsfatal, almfatal)
+* qiLogError (old: alerror, alserror, almerror)
+* qiLogWarning (old: alwarning, alswarning, almwarning)
+* qiLogInfo (old: alinfo, alsinfo, alminfo)
+* qiLogVerbose (old: nothing)
+* qiLogDebug (old: aldebug, alsdebug, almdebug)
+
+C++ Headers
+-----------
+
+
++----------------------------+--------------------------------------------------------------------------------+
+| Deprecated header          |       Replacement                                                              |
++============================+================================================================================+
+| alvisiondefinitions.h      |   :libalvision:`alvision/alvisiondefinitions.h <alvisiondefinitions.h>`        |
++----------------------------+--------------------------------------------------------------------------------+
+| alvideo.h                  |   :libalvision:`alvision/alvideo.h <alvideo.h>`                                |
++----------------------------+--------------------------------------------------------------------------------+
+| alimage.h                  |   :libalvision:`alvision/alimage.h <alimage.h>`                                |
++----------------------------+--------------------------------------------------------------------------------+
+| alcore/alerror.h           |   :libalerror:`alerror/alerror.h <alerror.h>`                                  |
++----------------------------+--------------------------------------------------------------------------------+
+| alcore/alnetworkerror.h    |   :libalerror:`alerror/alnetworkerror.h <alnetworkerror.h>`                    |
++----------------------------+--------------------------------------------------------------------------------+
+| alcore/configcore.h        |  removed                                                                       |
++----------------------------+--------------------------------------------------------------------------------+
+| alcore/altypes.h           |  deprecated                                                                    |
++----------------------------+--------------------------------------------------------------------------------+
+
+Subdirectories
+++++++++++++++
+
+
+We made sure every header was in it's own subdirectory, for consistency and
+to prevent conflicts.
+
+
+*old*::
+
+  #include <alvisiondefinitions.h>
+
+*new*::
+
+  #include <alvision/alvisiondefinitions.h>
+
+
+
+ALError
++++++++
+
+Also, please note that since alcore is now a private library, a new header-only
+library has been create to contains :libalerror:`AL::ALError` and :libalerror:`AL::ALNetworkError` classes
+
+*old*::
+
+  #include <alcore/alerror.h>
+
+*new*::
+
+  #include <alerror/alerror.h>
+
+
+Missing headers
++++++++++++++++
+
+
+
+Also, we went through a lot of cleaning so including "alproxy.h" includes much
+less headers than it used to, so you probably will have to add missing includes
+here and there.
+
+Here are of symbols that are now deprecated but used to be available via
+`alproxy.h` or `almodule.h` inclusion:
+
++----------------+------------------------+-------------------------------------------------+
+| Symbol         |      Header            |         Replacement                             |
++================+========================+=================================================+
+| AL_ASSERT      |  alcore/alerror.h      |  assert                                         |
++----------------+------------------------+-------------------------------------------------+
+| AL_VERIFY      |  alcore/alerror.h      |  assert                                         |
++----------------+------------------------+-------------------------------------------------+
+| - TIntArrary   |  alcore/altypes        |  - std::vector<int>                             |
+| - TFloatArray  |                        |  - std::vector<float>                           |
+| - ...          |                        |                                                 |
++----------------+------------------------+-------------------------------------------------+
+| AL_CATCH_ERR   |  alcore/alcatcherror.h |  cath(const :libalerror:`AL::ALError` &e) {...} |
++----------------+------------------------+-------------------------------------------------+
+
+
+You can either fix compilation of your code by re-adding the deprecated header
+(if you are in a hurry), but it's advised to fix the code instead.
+
+
+Cross-platforms issues
+++++++++++++++++++++++
+
+
+This was not very well handled by our various headers.
+
+We chose to make things simpler by writing a POSIX compatibility layer for
+Visual Studio, see the :libqi:`qi::os` namespace.
+
+
+* ``alcore/alconficore.h`` used to contain a few #defines like ``OE_CROSS_BUILD``.
+
+``OE_CROSS_BUILD`` is now set by CMake as soon as you are using your
+cross-toolchain, so you simply do not need to include this file anymore.
+
+
+.. note:: OE_CROSS_BUILD is also deprecated, and you should use the I_AM_A_ROBOT define
+   instead
+
+
+* ``alcore/altypes.h`` contains a few very dangerous defines, mostly to hide
+  differences between the str* C functions on Visual Studio and for other compilers.
+
+You must now handle those differences yourself:
+
+*old*::
+
+  #include <alcore/altypes.h>
+
+  snprintf(...)
+
+*new*::
+
+  #ifdef _MSC_VER
+     sprintf_s(...)
+  #else
+     snprintf(...)
+  #endif
+
+
+
+You have the same problems for other functions, mosty ``sleep`` and ``gettimeofday``.
+
+
+*old*::
+
+  SleepMs(...)
+  gettimeofday(...)
+
+*new*::
+
+  #include <qi/os.hpp>
+
+  qi::os::msleep(...);
+  qi::os::gettimeofday(...);
+
+
+Typedefs and macros
+--------------------
+
+
++--------------------------------------------+------------------------------------------+
+| Removed typedef                            |     Replacement                          |
++============================================+==========================================+
+| TALModuleInfoVector                        |  std::vector<ALModuleInfo>               |
++--------------------------------------------+------------------------------------------+
+| CITALModuleInfoVector                      |  std::vector<ALModuleInfo>::iterator     |
++--------------------------------------------+------------------------------------------+
+| ALModuleCore::ConstPtr                     |  boost::shared_ptr<const ALModuleCore>   |
++--------------------------------------------+------------------------------------------+
+| ALModuleCore::ConstWeakPtr                 |  boost::weak_ptr<const ALModuleCore>     |
++--------------------------------------------+------------------------------------------+
+| ALBroker::Ptr                              |  boost::shared_ptr<ALBroker>             |
++--------------------------------------------+------------------------------------------+
+| ALBroker::WeakPtr                          |  boost::weak_ptr<ALBroker>               |
++--------------------------------------------+------------------------------------------+
+| ALProxy::Ptr                               |  boost::shared_ptr<ALProxy>              |
++--------------------------------------------+------------------------------------------+
+| ALProxy::WeakPtr                           |  boost::weak_ptr<ALProxy>                |
++--------------------------------------------+------------------------------------------+
+| ALModuleCore::Ptr                          |  boost::shared_ptr<ALModuleCore>         |
++--------------------------------------------+------------------------------------------+
+| ALModuleCore::WeakPtr                      |  boost::weak_ptr<ALModuleCore>           |
++--------------------------------------------+------------------------------------------+
+| AL_DEBUG_LINE                              |  use :libqi:`qi::log` instead            |
++--------------------------------------------+------------------------------------------+
+
+
+
+
+Methods
+-------
+
++--------------------------------------------+----------------------------------------------------------------------------------+
+| Removed method                             |     Replacement/Reason                                                           |
++============================================+==================================================================================+
+| ALBehavior::log                            | use :libqi:`qi::log` instead                                                     |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::setParentBroker              |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing0               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing1               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing2               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing3               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing4               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing5               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALModuleCore::methodMissing6               |  private, used for Python wrapping                                               |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::getParentBrokerName               |  :libalcommon:`AL::ALProxy::remoteBrokerName`                                    |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::TGenericCall_CallbackOnFinished   |  :libalcommon:`AL::ALProxy::onFinishedCallback`                                  |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::isScript                          |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::subscribeToTask                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::isIPPC                            |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::isForcedLocal                     |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::isNoLoadDepends                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::isMainProxy                       |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::CALL_METHODS                      |  :libalcommon:`AL::ALProxy::genericCall`                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::PCALL_METHODSNoID                 |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::PCALL_METHODS                     |  :libalcommon:`AL::ALProxy::genericPCall`                                        |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::callLocal(name)                   |  boost::dynamic_pointer_cast<modulename>(ALProxy::getModule())->name()           |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::callLocal(name, p1)               |  boost::dynamic_pointer_cast<modulename>(ALProxy::getModule())->name(p1)         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::callLocal(name, p1, p2)           |  boost::dynamic_pointer_cast<modulename>(ALProxy::getModule())->name(p1, p2)     |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALProxy::callLocal(name, p1, p2, p3)       |  boost::dynamic_pointer_cast<modulename>(ALProxy::getModule())->name(p1, p2, p3) |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::unregisterBroker                 |  :libalcommon:`AL::ALBrokerManager::removeBroker`                                |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::registerBroker                   |  :libalcommon:`AL::ALBrokerManager::addBroker`                                   |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::setCurrentIP                     |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getChildNumber                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::checkHeartBeat                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getConnectionInformation         |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::TaskID                           |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getChildBrokers                  |  :libalcommon:`AL::ALBroker::getBrokerList`                                      |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::moduleID                         |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::updateIPFromOS                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::launchNetwork                    |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::ippcGetPort                      |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getModuleByName(3 params)        |  :libalcommon:`AL::ALBroker::getModuleByName`                                    |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::unregisterModuleReference        |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::removeAllProxies                 |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::removeProxy                      |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::removeProxyFromBroker            |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::removeParentBrokerProxy          |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::initProxy                        |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::init                             |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::sendBackIP                       |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::translateModuleInfo              |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getBrokerInfo                    |  :libalcommon:`AL::ALBroker::getIP`, :libalcommon:`AL::ALBroker::getPort`        |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::exploreToGetModuleByName         |  :libalcommon:`AL::ALBroker::getGlobalModuleList`                                |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::runServer                        |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::configureClient                  |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::registerClient                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getMethodList                    |  :libalcommon:`AL::ALModuleCore::getMethodList`                                  |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::version                          |  :libalcommon:`AL::ALModuleCore::version`                                        |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getInfo                          |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getModuleInfo                    |  :libalcommon:`AL::ALModuleCore::getModuleInfo`                                  |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::isFullDisplay                    |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::HasParent                        |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getBrokerSoap                    |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::setIP                            |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::setPort                          |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getParentBrokerProxy             |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getParentBrokerInfo              |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getThreadPool                    |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getCallQueueManager              |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getTaskMonitor                   |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::isDebug                          |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getSpecialisedProxy              |  private                                                                         |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| ALBroker::getThreadPool()->enqueue(mytask) |  boost::thread or pthread                                                        |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| - ALBroker::getExecutableName              |  use :libqi:`qi::program`, after calling :libqi:`qi::init` in your main function |
+| - ALBroker::setExecutableName              |                                                                                  |
++--------------------------------------------+----------------------------------------------------------------------------------+
+| - ALBroker::getForcedPath                  |  use :libqi:`qi::path` instead                                                   |
+| - ALBroker::setForcedPath                  |                                                                                  |
+| - ALBroker::isValidPath                    |                                                                                  |
+| - ALBroker::getALPath                      |                                                                                  |
+| - ALBroker::getLogPath                     |                                                                                  |
+| - ALBroker::getModuleBinPath               |                                                                                  |
+| - ALBroker::getModuleLibPath               |                                                                                  |
+| - ALBroker::getBinPath                     |                                                                                  |
+| - ALBroker::getPreferencesPath             |                                                                                  |
++--------------------------------------------+----------------------------------------------------------------------------------+
+
+
+
+Some getters of ALBroker were returning pointers to other classes, but they are now private.
+
+``getTaskMonitor`` was removed, and the ``ALTaskMonitor`` class is no longer available.
+
+But there was only one useful method in ALTaskMonitor: ``isRequireStop``.
+
+Wen you call ``stop`` on a method with :libalcommon:`AL::ALProxy::stop`, you
+must use ``isRequiredStop`` inside your implementation for the stop to really work,
+otherwise it has no effect.
+
+This method has moved to :libalcommon:`AL::ALModule::isStopRequired`.
+
+
+Old ::
+
+  void MyModule::doSomething()
+  {
+    bool shouldStop = false;
+    while (! shouldStop)
+    {
+      doStep();
+      SleepMs(500);
+      shouldStop = getParentBroker()->getTaskMonitor()->isRequireStop();
+    }
+
+
+New ::
+
+  void MyModule::doSomething()
+  {
+    while (! isStopRequired())
+    {
+      doStep();
+      qi::os::msleep(500);
+    }
+  }
+
+
+
+
+Removed attributes
+-------------------
+
++--------------------------------------------+-----------------------------------------------------------------+
+| Removed attribute                          |    Replacement/Reason                                           |
++============================================+=================================================================+
+| ALBroker::fStopServer                      | private                                                         |
++--------------------------------------------+-----------------------------------------------------------------+
+| ALBroker::fBrokerManager                   | private                                                         |
++--------------------------------------------+-----------------------------------------------------------------+
+| ALBroker::fFileMutex                       | private                                                         |
++--------------------------------------------+-----------------------------------------------------------------+
+| ALModuleCore::fName                        | :libalcommon:`AL::ALModuleCore::getName()`                      |
++--------------------------------------------+-----------------------------------------------------------------+
+| ALModuleCore::fMethodDesc                  | :libalcommon:`AL::ALModuleCore::getCurrentMethodDescription()`  |
++--------------------------------------------+-----------------------------------------------------------------+
+| ALImage::fTimeStamp                        | :libalvision:`AL::ALImage::getTimeStamp()`                      |
++--------------------------------------------+-----------------------------------------------------------------+
+
+
+Some public members are now protected, so we added accessors for these.
+
+*old*::
+
+  timeStamp = alimage->fTimeStamp;
+
+*new*::
+
+  timeStamp = alimage->getTimeStamp();
+
+
+Few attributes have been removed in favor of Private pointer implementation,
+this should help having ABI compatibles
+modules with the next versions.
+
+``fMethodDesc`` was used for binding overloaded methods.
+
+
+
+
+
+Deprecated methods
+------------------
+
++--------------------------------------------+--------------------------------------------------------+
+| Old method                                 |     Replacement                                        |
++============================================+========================================================+
+| ALBroker::getMemoryProxy                   |     use ALMemoryProxy constructor instead              |
++--------------------------------------------+--------------------------------------------------------+
+| ALBroker::getLedsProxy                     |     use ALLedsProxy constructor instead                |
++--------------------------------------------+--------------------------------------------------------+
+| ALBroker::getLoggerProxy                   |     use ALLoggerProxy constructor instead              |
++--------------------------------------------+--------------------------------------------------------+
+| ALBroker::getMotionProxy                   |     use ALMotionProxy constructor instead              |
++--------------------------------------------+--------------------------------------------------------+
+| ALBroker::getPreferencesProxy              |     use ALPreferencesProxy  constructor instead        |
++--------------------------------------------+--------------------------------------------------------+
+| ALBroker::getDcmProxy                      |     use DCMProxy constructor instead                   |
++--------------------------------------------+--------------------------------------------------------+
+|  - ALError::getDescription                 |     :libalerror:`AL::ALError` inherits from            |
+|  - ALError::getFileName                    |     std::exception, so simply use `e.what()`           |
+|  - ALError::getLine                        |                                                        |
+|  - ALError::getMethodName                  |                                                        |
+|  - ALError::getModuleName                  |                                                        |
+|  - ALError::toString                       |                                                        |
++--------------------------------------------+--------------------------------------------------------+
+
+
+First version ``ALError`` did not inherit from ``std::exception``, leading to a lot of confustion.
+
+This is now fixed, so we got rid of the useless methods.
+
+.. note:: The line and the filename where the exception occured are no
+          longer displayed in e.what()
+
+*old*::
+
+  try
+  {
+    ...
+  }
+  catch(const ALError &e)
+  {
+    std::cerr << "Error occured! "
+              << "For module: " << e.getModuleName()
+              << " and method : " << e.getMethodName()
+              ....
+              << std::endl;
+  }
+
+*new*::
+
+  try
+  {
+    ...
+  }
+  catch(const ALError &e)
+  {
+    std::cerr << "Error occured! "
+              << e.what()
+              << std::endl;
+  }
+
+
+
+
+Moved methods
+-------------
+
++--------------------------------------------+---------------------------------------------------------+
+| Old name                                   |     New name                                            |
++============================================+=========================================================+
+| AL::_get_type<T>                           |  AL::detail::_get_type<T>                               |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<AL::ALValue>                 |  AL::detail::_get_type<AL::ALValue>                     |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<bool>                        |  AL::detail::_get_type<bool>                            |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<const T>                     |  AL::detail::_get_type<const T>                         |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<float>                       |  AL::detail::_get_type<float>                           |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<int>                         |  AL::detail::_get_type<int>                             |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<std::string>                 |  AL::detail::_get_type<std::string>                     |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<std::vector< float>>         |  AL::detail::_get_type<std::vector< float>>             |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<std::vector< int>>           |  AL::detail::_get_type<std::vector< int>>               |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<std::vector< std::string>>   |  AL::detail::_get_type<std::vector< std::string>>       |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<T &>                         |  AL::detail::_get_type<T &>                             |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<T \*>                        |  AL::detail::_get_type<T \*>                            |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_get_type<void>                        |  AL::detail::_get_type<void>                            |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall                                 |  AL::detail::_pcall                                     |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall0                                |  AL::detail::_pcall0                                    |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall1<P1>                            |  AL::detail::_pcall1<P1>                                |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall2<P1, P2>                        |  AL::detail::_pcall2<P1, P2>                            |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall3<P1, P2, P3>                    |  AL::detail::_pcall3<P1, P2, P3>                        |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall4<P1, P2, P3, P4>                |  AL::detail::_pcall4<P1, P2, P3, P4>                    |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall5<P1, P2, P3, P4, P5>            |  AL::detail::_pcall5<P1, P2, P3, P4, P5>                |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcall6<P1, P2, P3, P4, P5, P6>        |  AL::detail::_pcall6<P1, P2, P3, P4, P5, P6>            |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcalln                                |  AL::detail::_pcalln                                    |
++--------------------------------------------+---------------------------------------------------------+
+| AL::_pcallScript                           |  AL::detail::_pcallScript                               |
++--------------------------------------------+---------------------------------------------------------+
+
+
+Removed classes
+----------------
+
++--------------------------------------------+--------------------------------------------+
+| Removed class                              |     Reason/ Replacement                    |
++============================================+============================================+
+| AL::al__ALModuleInfoNaoqi                  |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALBrokerInfo                           |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALBrokerInfoIPC                        |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALBrokerInfoRPC                        |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALBrokerProxy                          |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALBrokerProxyIPC                       |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALCallQueue                            |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALCallQueueManager                     |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALConnection                           |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALConnectionInformation                |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALEnqueueRequest                       |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALFileManager                          |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALFunctionMonitoring                   |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALLogSection                           |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALMonitoredSection                     |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALNetwork                              |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALRemotePCallPool                      |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::ALTaskMonitor                          |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::AsynchronousCallTools                  |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::AsynchronousTask                       |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::AsynchronousTaskModule                 |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::AsynchronousTaskMonitor                |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::AsynchronousTaskMonitorModule          |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::BrokerTask                             |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::enqueue_request                        |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| AL::remotePCallElement                     |   private                                  |
++--------------------------------------------+--------------------------------------------+
+| - ALSharedClass                            | use:                                       |
+| - dummySharedClass                         | - :libqi:`qi::os::dlerror`                 |
+|                                            | - :libqi:`qi::os::dlopen`                  |
+|                                            | - :libqi:`qi::os::dlclose`                 |
+|                                            | - :libqi:`qi::os::dlsym`                   |
+|                                            |                                            |
++--------------------------------------------+--------------------------------------------+
+
+
+``ALSharedClass`` was just a tiny library to help handling ``dlopen`` and ``dlsym`` in an
+cross-platform way, and this is now done by cross-platform functions.
+
+*new*::
+
+  const char* libPath = ....;
+  void* handle;
+  handle = qi::os::dlopen(libPath);
+  if (!handle)
+  {
+    std::cerr << "Could not load: " << libPath
+              << std::endl
+              << "Error was: " << qi::os::dlerror()
+              << std::endl;
+    return;
+  }
+  // We are going to find the symbol for a function with
+  // no parameters returning an int, named _register_plugin
+  typedef int register_plugin_t();
+  register_plugin_t*  register_plugin = qi::os::dlsym(handle, "register_plugin");
+  if (!register_plugin)
+  {
+    std::cerr << "Could not find symbol 'register_plugin' in " << libPath
+              << std::endl;
+              << "Error was: " << qi::os::dlerror()
+              << std::endl;
+    return;
+  }
+
+  // Do something with register_plugin...
+
+
+
+.. note:: the argument of ``qi::os::dlopen`` is **the full path** of the library
+   (including the 'lib' prefix on unix, and the '.so', '.dll' or '.dylib' prefix)
+   See ``qi::path::findLib()`` for a cross-platform way of finding a library
+
+
+
+
+Renamed classes
+----------------
+
+
++--------------------------------------------+---------------------------------------------+
+| Old name                                   |   New name                                  |
++============================================+=============================================+
+| ALVisionImage                              |   :libalvision:`AL::ALImage`                |
++--------------------------------------------+---------------------------------------------+

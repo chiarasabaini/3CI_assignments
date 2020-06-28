@@ -1,0 +1,144 @@
+.. include:: ../../bulk/common.rst
+
+.. _alsonar:
+
+ALSonar
+=======
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alsonar-api
+
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <alsonar-api>`
+
+--------
+
+.. seealso::
+
+   - :ref:`Sonars Hardware <robot-sonar>`
+
+What it does
+------------
+
+**ALsonar** module retrieves ultrasonic sensor value from  :ref:`ALMemory <almemory>`,
+process it and raises events according to the situation.
+
+How it works
+------------
+
+In order to save battery power, ultrasonic sensors are not activated by default.
+
+There are 4 different ultrasonic events: ``SonarLeftDetected``, ``SonarRightDetected``,
+``SonarLeftNothingDetected``, ``SonarRightNothingDetected``.
+
+
+.. list-table::
+   :widths: 13 50 100
+   :header-rows: 1
+
+   * - Case
+     - Raised events
+     - Description
+   * - .. image:: /medias/naoqi/sonar_front_left.png
+     - ``SonarLeftDetected``
+     - There is something in front of NAO (left side) at less
+       than 0.5m. This means that NAO can't go forward and has to stop and turn right
+       to avoid the obstacle.
+   * - .. image:: /medias/naoqi/sonar_front_right.png
+     - ``SonarRightDetected``
+     - There is something in front of NAO (right side) at less
+       than 0.5m. This means that NAO can't go forward and has to stop and turn left
+       to avoid the obstacle.
+   * - .. image:: /medias/naoqi/sonar_right.png
+     - ``SonarLeftNothingDetected``
+     - There is nothing in front of NAO nor on his left side,
+       this means NAO can go forward or turn left. An obstacle is present on the right
+       side at less than 0.5m but it is not a problem if NAO goes forward.
+   * - .. image:: /medias/naoqi/sonar_left.png
+     - ``SonarRightNothingDetected``
+     - There is nothing in front of NAO nor on his right side,
+       this means NAO can go forward or turn right. An obstacle is present on the left
+       side at less than 0.5m but it is not a problem if NAO goes forward.
+   * - .. image:: /medias/naoqi/sonar_front_none.png
+     - ``SonarLeftNothingDetected`` and ``SonarRightNothingDetected``
+     - There is no obstacle, both ``SonarLeftNothingDetected`` and
+       ``SonarRightNothingDetected`` are raised at the same time.
+
+.. note::
+
+   If you want to perform your own detection with sonars you can also retrieve
+   ultrasonic sensor values from ALMemory (find corresponding keys in
+   :ref:`sonars`).
+   If you are not familiar with this consult getData function of :ref:`almemory-api`.
+
+Performance and Limitations
+----------------------------
+
+The obstacle detection threshold is 0.5m (it is a software threshold).
+Detected obstacles are seen only if the distance is less than this threshold.
+
+The sonar values are updated by the HAL every 100ms. Hence the readable value
+accessible through ALMemory or the events are updated at the corresponding frequency.
+
+Only one sonar event is raised at the same time. This is because at a given time
+we use both left and right ultrasonic sensor data, to determine in which
+situation we are so as to raise the corresponding event.
+
+.. _alsonar-getting-started:
+
+Getting started
+---------------
+
+**Starting ultrasonic hardware**
+
+Ultrasonic sensor hardware is not started by default. To start it,
+subscribe to ALSonar module (use ``ALSonarProxy::subscribe``, inherited from
+:cpp:func:`ALExtractor::subscribe`).
+Doing so starts the ultrasonic sensor hardware automatically.
+
+**Checking the hardware**
+
+To check that your ultrasonic sensor works properly you can start
+Choregraphe and launch a Sonar box. First ensure that you are connected to your
+real NAO hardware. Then drag and drop a sonar box in your diagram and run the
+behavior.
+
+**Observing the signal**
+
+When a Sonar box is launched, you can watch the signal of the ultrasonic
+sensor with Monitor.
+
+**Stopping ultrasonic hardware**
+
+To stop it, unsubscribe from the ALSonar module (use ``ALSonarProxy::unsubscribe``,
+inherited from :cpp:func:`ALExtractor::unsubscribe`).
+If there are multiple subscribers, the ultrasonic sensor hardware will remain
+active as long as remains at least one subscriber.
+
+
+:download:`sensors_sonar.py </examples/python/sensors/sensors_sonar.py>`
+
+.. literalinclude:: /examples/python/sensors/sensors_sonar.py
+   :language: py
+
+Use Cases
+---------
+
+You can use ultrasonic sensor to perform obstacle detection.
+
+FAQ
+---
+
+**How can I start and stop my ultrasonic sensors**
+
+Please see :ref:`alsonar-getting-started` section.
+
+**When connected to choregraphe, sonar box returns only left or nothing**
+
+Check that you are connected to your real |roboN| and not to the local **NAOqi**
+provided by **Choregraphe**.
+
+
+

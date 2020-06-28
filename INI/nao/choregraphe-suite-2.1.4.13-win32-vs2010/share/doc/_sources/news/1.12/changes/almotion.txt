@@ -1,0 +1,75 @@
+.. _motion-release-notes:
+
+ALMotion Changes
+=================
+
+New methods
+-----------
+
+These methods correspond to newly developped features.
+
++-----------------------------------------------------------+-------------------------------------------------+
+| Method                                                    | Aim                                             |
++===========================================================+=================================================+
+| :cpp:func:`ALMotionProxy::getFootGaitConfig`              | Get the footsteps configuration (height,        |
+|                                                           | frequency etc)                                  |
++-----------------------------------------------------------+-------------------------------------------------+
+| :cpp:func:`ALMotionProxy::getFootSteps`                   | Get the list of footsteps to done               |
++-----------------------------------------------------------+-------------------------------------------------+
+| | :cpp:func:`ALMotionProxy::setFootSteps`                 | Set the next foot steps                         |
+| | :cpp:func:`ALMotionProxy::setFootStepsWithSpeed`        |                                                 |
++-----------------------------------------------------------+-------------------------------------------------+
+| :cpp:func:`ALMotionProxy::stopWalk`                       | Stop the walk quickly but securely              |
++-----------------------------------------------------------+-------------------------------------------------+
+| :cpp:func:`ALMotionProxy::walkInit`                       | Sets the robot in a convenient position for walk|
++-----------------------------------------------------------+-------------------------------------------------+
+| | :cpp:func:`ALMotionProxy::getCollisionProtectionEnabled`| Manage the self collision avoidance relfex      |
+| | :cpp:func:`ALMotionProxy::setCollisionProtectionEnabled`|                                                 |
++-----------------------------------------------------------+-------------------------------------------------+
+| :cpp:func:`ALMotionProxy::isCollision`                    | Get the collision state of a chain              |
++-----------------------------------------------------------+-------------------------------------------------+
+| | :cpp:func:`ALMotionProxy::setFallManagerEnabled`        | Manage the fall manager relfex                  |
+| | :cpp:func:`ALMotionProxy::getFallManagerEnabled`        |                                                 |
++-----------------------------------------------------------+-------------------------------------------------+
+| | :cpp:func:`ALMotionProxy::setSmartStiffnessEnabled`     | Manage the smart stiffness relfex               |
+| | :cpp:func:`ALMotionProxy::setFootStepsWithSpeed`        |                                                 |
++-----------------------------------------------------------+-------------------------------------------------+
+
+
+Overloaded methods
+------------------
+
+These overloadings allow you to give more parameters to walk methods, such as
+footsteps Gait configuration.
+
++-----------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| Method                                                                                  | Overloadings                                                     |
++=========================================================================================+==================================================================+
+| :ref:`ALMotionProxy::setWalkTargetVelocity <ALMotionProxy::setWalkTargetVelocity2>`     | Adding the feet gait config to the walk target velocity control  |
++-----------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| :ref:`ALMotionProxy::setWalkTargetVelocity <ALMotionProxy::setWalkTargetVelocity3>`     | Adding separate foot gait config to walk target velocity control |
++-----------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo2>`                                   | Adding the feet gait config to the walk                          |
++-----------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo3>`                                   | Giving consecutive control points to the walk                    |
++-----------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo4>`                                   | Giving consecutive control points to the walk with feet gait     |
+|                                                                                         | config                                                           |
++-----------------------------------------------------------------------------------------+------------------------------------------------------------------+
+
+Deprecated methods
+------------------
+
+These methods are deprecated: their replacement methods should be used instead.
+
++---------------------------------------------------+-----------------------------------------------------+
+| Method                                            | Replacement                                         |
++===================================================+=====================================================+
+| ``ALMotionProxy::getWalkArmsEnable``              | :cpp:func:`ALMotionProxy::getWalkArmsEnabled`       |
++---------------------------------------------------+-----------------------------------------------------+
+| ``ALMotionProxy::setWalkArmsEnable``              | :cpp:func:`ALMotionProxy::setWalkArmsEnabled`       |
++---------------------------------------------------+-----------------------------------------------------+
+| ``ALMotionProxy::stepTo``                         | :cpp:func:`ALMotionProxy::setFootStepsWithSpeed` or |
+|                                                   | :cpp:func:`ALMotionProxy::setFootSteps`             |
++---------------------------------------------------+-----------------------------------------------------+
+

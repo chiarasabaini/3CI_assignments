@@ -1,0 +1,250 @@
+.. _alinfrared-tuto:
+
+ALInfrared Tutorial
+===================
+
+:ref:`naoqi-sensors` - :ref:`Overview <alinfrared>` | :ref:`API <alinfrared-api>` | Tutorial
+
+-------------
+
+.. seealso::
+
+   - :ref:`IR (Infra-Red) Hardware <robot-infrared>`
+   - :ref:`alinfrared-remote-control`
+
+.. note::
+
+   This chapter explains how use a robot with remote controls,
+   not the use of the infrared communication between two robots.
+
+
+
+Send and receive infrared
+-------------------------
+
+.. _infrared-nao-as-remote-control:
+
+The robot as a remote control
+++++++++++++++++++++++++++++++
+
+To use the robot as a remote control:
+
+1. Make sure the remote control and the Key name you want to use are declared in
+   the robot web page (Settings), as explained in the section: :ref:`webpage-settings-remote`.
+
+2. Call the following bound methods with the remote device name and the remote
+   button name as parameters.
+
+.. code-block:: guess
+
+  /\**
+  * Function sendRemoteKey is used as an IR remote control.
+  * @param pRemote: string containing the remote control name
+  * @param pKey: string containing the button name
+  \*/
+  void sendRemoteKey(const std::string& pRemote, const std::string& pKey );
+
+Python example to switch ON your TV:
+
+.. code-block:: guess
+
+  import naoqi
+  from naoqi import ALProxy
+  lirc=ALProxy("ALInfrared","127.0.0.1",9559)
+  lirc.sendRemoteKey("My_TV_name", "KEY_POWER")
+
+After sending a remote key, the following data will be saved in
+ALMemory:
+
++--------------+--------+--------------------------------------------------------------+-----------------------+
+| Event / Data | Type   | ALMemory                                                     | Description           |
++==============+========+==============================================================+=======================+
+| Data         | string | "Device/SubDeviceList/IR/LIRC/Remote/Remote/Actuator/Value/" | Last remote name sent |
++--------------+--------+--------------------------------------------------------------+-----------------------+
+| Data         | string | "Device/SubDeviceList/IR/LIRC/Remote/Key/Actuator/Value/"    | Last button name sent |
++--------------+--------+--------------------------------------------------------------+-----------------------+
+
+
+Initialize infrared reception
++++++++++++++++++++++++++++++
+
+To be able to receive infrared data you should call the following bound method:
+
+.. code-block:: guess
+
+  /\**
+  * Function initReception
+  * is called to initialize receiving IR information from a remote control or a robot
+  * @param pRepeatThreshold: number which set the repetition threshold of buttons
+  \*/
+  void initReception(const int& pRepeatThreshold);
+
+Python example:
+
+.. code-block:: guess
+
+  import naoqi
+  from naoqi import ALProxy
+  lirc=ALProxy("ALInfrared","127.0.0.1",9559)
+  lirc.initReception(10);
+
+The parameter ``pRepeatThreshold`` is only useful with some remote controls.
+It avoids thousands of event receptions if the remote control sends the same
+button frame several times with only one tap! If you don't care about it,
+just set it to -1 and the default value will be set or it will keep the
+previous value if you already called this method:
+
+.. code-block:: guess
+
+  lirc.initReception(-1);
+
+
+Control the robot with a remote control
+++++++++++++++++++++++++++++++++++++++++
+
+When ALInfrared receives a remote control button, it raises an event
+containing all information about it. The event name is
+``InfraRedRemoteKeyReceived``.
+
+All information about the event are also kept in ALMemory.
+
+The event array and the related data are described in the following table:
+
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+| Event / Data | Type   | ALMemory                                                     | Description                                                            |
++==============+========+==============================================================+========================================================================+
+| Event        | array  | "InfraRedRemoteKeyReceived"                                  | Contains the 5 following data                                          |
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+| Data         | string | "Device/SubDeviceList/IR/LIRC/Remote/LircCode/Sensor/Value/" | LIRC hexa code (                                                       |
+|              |        |                                                              | `online LIRC documentation <http://www.lirc.org/html/index.html>`_)    |
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Remote/Repeat/Sensor/Value/"   | Same frame of the button receive in one shot                           |
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+| Data         | string | "Device/SubDeviceList/IR/LIRC/Remote/Key/Sensor/Value/"      | Name of the button                                                     |
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+| Data         | string | "Device/SubDeviceList/IR/LIRC/Remote/Remote/Sensor/Value/"   | Name of the remote (device model)                                      |
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Remote/IrSide/Sensor/Value/"   | 0 means received on the left eye, 7 means on the right eye.            |
++--------------+--------+--------------------------------------------------------------+------------------------------------------------------------------------+
+
+Python example to receive and display remote buttons event:
+
+:download:`alinfrared_receiveremotekey.py </samples/python/alinfrared/alinfrared_receiveremotekey.py>`
+
+.. literalinclude:: /samples/python/alinfrared/alinfrared_receiveremotekey.py
+   :language: py
+
+
+Send data to a robot
++++++++++++++++++++++
+
+It is possible to send 3 kinds of data:
+
+- a 8 bits unsigned integer (0-255)
+
+- a 32 bits unsigned integer (0-4294967295)
+
+- an IP address (e.g. "192.168.0.56")
+
+To do that use respectively the 3 following bound methods:
+
+.. code-block:: guess
+
+  /\**
+  * Function sendIpAddress is called to send an IP address
+  * @param pIP: string containing an IP address (e.g. "127.0.15.129")
+  \*/
+  void sendIpAddress(const std::string& pIP);
+  /\**
+  * Function send8 is called to send 1 byte
+  * @param pByte: Integer containing an byte
+  \*/
+  void send8(const int& pByte);
+  /\**
+  * Function send32 is called to send 4 bytes
+  * @param pData_IR: string containing a 4 byte value (be careful it's a string)
+  \*/
+  void send32(const std::string& pData_IR);
+  // OR
+  /\**
+  * Function send32 is called to send 4 bytes
+  * @param pByte1: 1st byte of the 32 bits value
+  * @param pByte2: 2nd byte of the 32 bits value
+  * @param pByte3: 3rd byte of the 32 bits value
+  * @param pByte4: 4th byte of the 32 bits value
+  \*/
+  void send32(const int& pByte1, const int& pByte2, const int& pByte3, const int& pByte4);
+
+Python example to send successively the 3 kinds of data:
+
+:download:`alinfrared_sendtonao.py </samples/python/alinfrared/alinfrared_sendtonao.py>`
+
+.. literalinclude:: /samples/python/alinfrared/alinfrared_sendtonao.py
+   :language: py
+
+.. warning::
+
+   It takes around 0.5 seconds to send an byte and around 2 seconds to
+   send 4 bytes or an IP address.
+
+.. warning::
+
+   A delay (~0.5'') between every sending is necessary for a reliable transfer.
+
+After having sent a value, the corresponding data will be saved in ALMemory:
+
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+| Event / Data | Type | ALMemory                                                         | Description                               |
++==============+======+==================================================================+===========================================+
+| Data         | int  | "Device/SubDeviceList/IR/LIRC/Data/IP/Actuator/Value/"           | IP address                                |
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+| Data         | int  | "Device/SubDeviceList/IR/LIRC/Data/uInt8/Byte/Actuator/Value/"   | Unsigned 8 bits integer                   |
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+| Data         | int  | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte1/Actuator/Value/" | 1st byte of the 32 bits unsigned integer  |
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+| Data         | int  | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte2/Actuator/Value/" | 2nd byte of the 32 bits unsigned integer  |
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+| Data         | int  | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte3/Actuator/Value/" | 3rd byte of the 32 bits unsigned integer  |
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+| Data         | int  | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte4/Actuator/Value/" | 4th byte of the 32 bits unsigned integer  |
++--------------+------+------------------------------------------------------------------+-------------------------------------------+
+
+Receive data from a robot
+++++++++++++++++++++++++++
+
+When ALInfrared receives data from an other robot, it raises an event
+containing the data.
+
+All information about the event are also kept in ALMemory.
+
+The event array and the related data are described in the following
+table:
+
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Event / Data | Type   | ALMemory                                                       | Description                   |
++==============+========+================================================================+===============================+
+| Event        | string | "InfraRedIpAdressReceived"                                     | IP address                    |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Data         | string | "Device/SubDeviceList/IR/LIRC/Data/uInt8/Byte/Sensor/Value/"   | IP address                    |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Event        | int    | "InfraRedOneByteReceived"                                      | 8 bits value                  |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Data/uInt8/Byte/Sensor/Value/"   | 8 bits value                  |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Event        | array  | "InfraRedFourBytesReceived"                                    | array containing the 4 bytes  |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte1/Sensor/Value/" | 1st byte                      |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte2/Sensor/Value/" | 2nd byte                      |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte3/Sensor/Value/" | 3rd byte                      |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+| Data         | int    | "Device/SubDeviceList/IR/LIRC/Data/uInt32/Byte4/Sensor/Value/" | 4th byte                      |
++--------------+--------+----------------------------------------------------------------+-------------------------------+
+
+Python example to receive an IP address:
+
+:download:`alinfrared_receiveanip.py </samples/python/alinfrared/alinfrared_receiveanip.py>`
+
+.. literalinclude:: /samples/python/alinfrared/alinfrared_receiveanip.py
+   :language: py

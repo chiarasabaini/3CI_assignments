@@ -1,0 +1,88 @@
+.. _alsittingpeopledetection-api:
+
+ALSittingPeopleDetection API
+============================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <alsittingpeopledetection>` | API
+
+---------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alsittingpeopledetectionproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALSittingPeopleDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALSittingPeopleDetectionProxy::getSittingThreshold`
+  * :cpp:func:`ALSittingPeopleDetectionProxy::setSittingThreshold`
+
+
+Event list
+----------
+
+* :naoqi:event:`SittingPeopleDetection/PersonSittingDown`
+* :naoqi:event:`SittingPeopleDetection/PersonStandingUp`
+
+
+ALMemory Key list
+-----------------
+
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsSitting`
+
+
+Methods
+-------
+
+.. cpp:function:: float ALSittingPeopleDetectionProxy::getSittingThreshold()
+
+  Returns the threshold used to distinguish between sitting and standing people.
+
+.. cpp:function:: void ALSittingPeopleDetectionProxy::setSittingThreshold(const float& threshold)
+
+  :param threshold: Threshold in meters used to distinguish between sitting and standing people. The default value is 1.5 meter.
+
+.. _events_sitting_people:
+
+Events
+------
+
+.. naoqi:event:: SittingPeopleDetection/PersonSittingDown(int id)
+
+  Raised when a person goes from standing to sitting position.
+
+  :param id: ID of the person as defined by the :ref:`alpeopleperception-api`.
+
+.. naoqi:event:: SittingPeopleDetection/PersonStandingUp(int id)
+
+  Raised when a person goes from sitting to standing position.
+
+  :param id: ID of the person as defined by the :ref:`alpeopleperception-api`.
+
+
+.. _memory-keys_sitting_people:
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: int PeoplePerception/Person/<ID>/IsSitting
+
+  Posture of a person:
+
+  * 0 means that the person is standing,
+  * 1 means sitting,
+  * 2 means that the posture is unknown.
+
+  | **<ID>** is the ID of the person as defined by the :ref:`alpeopleperception-api`.
+  | See also: :naoqi:memkey:`PeoplePerception/PeopleList`.

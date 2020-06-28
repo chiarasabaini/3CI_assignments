@@ -1,0 +1,141 @@
+.. include:: ../../bulk/common.rst
+
+.. _whats-new_2.0:
+
+Release Notes - 2.1
+====================
+
+Quick upgrade guide
+-------------------
+
+1. Check compatibility
++++++++++++++++++++++++
+
+Be aware that:
+
+* you cannot mix **1.14** and **2.0** pieces of software.
+
+* **2.x** runs on |roboN| **V4** and **V5**.
+
+  .. image:: /medias/compat.png
+     :width: 179 px
+     :height: 133 px
+
+  | Owner of former :ref:`nao-family::nao-version` should contact our customer support.
+  | For further details, see: :ref:`contacting_support_nao`.
+
+2. Upgrade your robot first!
+++++++++++++++++++++++++++++++
+
+To upgrade all your tools easily, make sure you follow this order:
+
+=====  ==============================================================
+Step       Action
+=====  ==============================================================
+1.      Upgrade your robot first, using **Choregraphe 1.14**.
+
+        For further details, see: :ref:`upgrade_from_1_to_2`.
+
+        Be aware: your |robot|  starts moving and seeking your
+        attention as soon as you turn it on!
+
+        For further details, see: :ref:`rn_life`.
+
+2.      Complete the upgrade thanks to the :ref:`rn_cloud`.
+
+3.      Upgrade **Choregraphe**.
+
+        For further details, see: :ref:`desktop-installation`.
+
+4.      Upgrade all the **SDKs** you usually use.
+=====  ==============================================================
+
+3. Port your 1.14 projects
+++++++++++++++++++++++++++++
+
+For further details, see: :ref:`import_114_project`.
+
+
+Keys features
+--------------
+
+.. _rn_life:
+
+Life on start-up
+++++++++++++++++
+
+This version of **NAOqi** comes with a disruptive new feature: the robot is now
+able to launch autonomously any of its installed applications.
+
+This ability, called **Life** and orchestrated by the module :ref:`autonomouslife`,
+is active by default and starts to operate after the boot of the robot.
+
+If needed, **Life** can be temporarily deactivated.
+For further details, see: :ref:`nao_freeze`.
+
+When the **Life** is active, what you see depends on the applications installed
+on your robot.
+For further details, see: :ref:`nao_life`.
+
+New **Web Page**
++++++++++++++++++
+
+The |robot| Web page has been fully redesigned.
+
+It is simpler to use and when the robot is configured for the first time,
+a wizard mode welcomes beginners.
+Yet, advanced users may still access to the former and deprecated Web page.
+
+For further details, see:
+
+* |nao| :ref:`webpage_nao` and :ref:`getting_started`.
+
+
+.. * |juju| :ref:`webpage_juliette` and :ref:`getting_started_juliette`.
+
+
+.. _rn_cloud:
+
+New |cloud|
++++++++++++++
+
+Retrieve applications and system updates automatically!
+
+To access to |cloud|:
+
+* Follow this link: |cloud_link|
+
+* You can also click the **install new apps** link available from the **Web page**.
+
+
+Meet the **Aldebaran** robot family
+++++++++++++++++++++++++++++++++++++
+
+**Aldebaran** software suite welcomes new robots:
+|roboN| **V5**, |roboR| and |roboJ|.
+
+* Have a look at their specific documentation corners:
+
+  :ref:`home_nao` | :ref:`home_romeo`
+
+  .. | :ref:`home_juliette`
+
+* Or ask **Choregraphe** 2.0 to display them!
+
+  =====  ========================================================================
+  Step       Action
+  =====  ========================================================================
+  1.      Choose **Edit** > **Preferences**.
+
+  2.      Click the **Virtual robot** tab.
+
+  3.      Choose a **Robot model**.
+
+  4.      Click **OK** button.
+
+          *Result*
+
+  5.      Choose **Connection** > **Connect to virtual robot**.
+
+          See the new robot model displayed in the :ref:`3d-nao-panel`.
+  =====  ========================================================================

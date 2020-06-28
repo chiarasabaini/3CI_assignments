@@ -1,0 +1,131 @@
+.. _albodytemperature-api:
+
+ALBodyTemperature API
+=====================
+
+:ref:`naoqi-sensors` - :ref:`Overview <albodytemperature>` | API
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/albodytemperatureproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALBodyTemperatureProxy
+
+* :cpp:func:`ALBodyTemperatureProxy::getTemperatureDiagnosis`
+* :cpp:func:`ALBodyTemperatureProxy::areNotificationsEnabled`
+* :cpp:func:`ALBodyTemperatureProxy::setEnableNotifications`
+
+
+.. _albodytemperature-event-list:
+
+Event list
+----------
+
+* :naoqi:event:`HotDeviceDetected`
+* :naoqi:event:`DeviceNoLongerHotDetected`
+* :naoqi:event:`TemperatureDiagnosisErrorChanged`
+* :naoqi:event:`HeadProcessorIsHot`
+* :naoqi:event:`HeadProcessorIsCriticallyHot`
+* :naoqi:event:`TemperatureStatusChanged`
+
+
+*Deprecated Events*
+
+* :naoqi:event:`HotJointDetected`
+
+
+Methods
+-------
+.. cpp:function:: AL::ALValue ALBodyTemperatureProxy::getTemperatureDiagnosis()
+
+  Return the actual state of the temperature diagnosis.
+  Only the highest level of failure is returned.
+
+  :return: Return an AL::ALValue with the actual temperature diagnosis result with the follwing form:
+
+           [ int :term:`Level of failure severity`, [vector<string> The list chain in failure] ].
+
+           * Level of failure severity: 0(*NEGLIGIBLE*), 1(*SERIOUS*) or 2(*CRITICAL*).
+           * The list of device in failure: a chain name.
+
+.. cpp:function:: bool ALBodyTemperatureProxy::areNotificationsEnabled()
+
+  Get notifications status. Return true if notifications are active.
+
+  :return: Return true is notifications are active.
+
+.. cpp:function:: void ALBodyTemperatureProxy::setEnableNotifications(bool enable)
+
+  Enables / Disables temperature notifications.
+
+  :param enable: If true enable temperature notifications.
+
+
+.. _albodytemperature-events:
+
+Events
+------
+
+.. naoqi:event:: HotJointDetected(AL::ALValue hotJoints)
+
+.. deprecated:: 1.22
+  Use :naoqi:event:`HotDeviceDetected` instead.
+
+  Raised when at least one joint has a high temperature.
+
+  :param hotJoints: the list of joints with high temperature.
+
+
+.. naoqi:event:: HotDeviceDetected(AL::ALValue hotDevices)
+
+  Raised when at least one device (joint, actuator, sensor) has a high temperature.
+
+  :param hotJoints: the list of devices with high temperature.
+
+
+.. naoqi:event:: DeviceNoLongerHotDetected(AL::ALValue deviceNoLongerHot)
+
+  Raised when at least one device is no longer hot.
+
+  :param hotJoints: the list of devices no longer hot.
+
+
+.. naoqi:event:: TemperatureDiagnosisErrorChanged(AL::ALValue temperatureDiagnosis)
+
+  Raised when the temperature diagnosis status has changed.
+
+  :param temperatureDiagnosis: The same return ALValue as the API
+                               :cpp:func:`ALBodyTemperatureProxy::getTemperatureDiagnosis`
+
+.. naoqi:event:: HeadProcessorIsHot(float temperature)
+
+  Raised when the head processor is hot.
+
+  :param temperature: The current processor temperature in degree celsius.
+
+.. naoqi:event:: HeadProcessorIsCriticallyHot(float temperature)
+
+  Raised when the head processor is critically hot.
+
+  :param temperature: The current processor temperature in degree celsius.
+
+.. naoqi:event:: TemperatureStatusChanged(AL::ALValue temperatureStatus)
+
+  Raised when the temperature status has changed.
+
+  :param temperatureStatus: Return an AL::ALValue with the actual temperature status with the follwing form:
+
+           [ int :term:`Temperature status`, [vector<string> The list of devices in failure] ].
+
+           * Temperature status 0(*NORMAL*), 1(*HIGH*), 2(*VERY HIGH*) or 3(*CRITICAL*).
+           * The list of devices in failure: could be a chain name, sensor name or actuator name.

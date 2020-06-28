@@ -1,0 +1,28 @@
+.. _almotionrecorder:
+
+ALMotionRecorder
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   almotionrecorder-api
+
+Overview | :ref:`API <almotionrecorder-api>`
+
+-----------------
+
+Introduction
+------------
+
+What it does
+++++++++++++
+
+**ALMotionRecorder** is a module giving the possibility to record the robot's motors poses.
+
+.. warning::
+
+   This module is deprecated.
+
+   Use the :ref:`animation_mode` instead.

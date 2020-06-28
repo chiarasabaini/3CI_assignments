@@ -1,0 +1,40 @@
+.. _choregraphe:
+
+Choregraphe User Guide
+=======================
+
+:ref:`desktop-installation`
+
+-------
+
+.. toctree::
+   :maxdepth: 1
+
+   choregraphe_overview
+
++---------------------------------------+---------------------------------------+
+| **Reference**                                                                 |
++---------------------------------------+---------------------------------------+
+| .. toctree::                          | .. toctree::                          |
+|    :maxdepth: 1                       |    :maxdepth: 1                       |
+|                                       |                                       |
+|    interface                          |    tutos/index                        |
++---------------------------------------+---------------------------------------+
+| .. toctree::                          | .. toctree::                          |
+|    :maxdepth: 2                       |    :maxdepth: 2                       |
+|                                       |                                       |
+|    starting_discovery                 |    main_objects                       |
+|    advanced_panels                    |    mouvement                          |
+|    connecting                         |    scripting                          |
++---------------------------------------+---------------------------------------+
+| .. toctree::                          | .. toctree::                          |
+|    :maxdepth: 2                       |    :maxdepth: 1                       |
+|                                       |                                       |
+|    customizing                        |    debugging                          |
+|                                       |    troubleshooting                    |
++---------------------------------------+---------------------------------------+
+| .. toctree::                                                                  |
+|    :maxdepth: 1                                                               |
+|                                                                               |
+|    ../monitor/index                                                           |
++---------------------------------------+---------------------------------------+

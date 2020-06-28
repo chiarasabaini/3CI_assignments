@@ -1,0 +1,51 @@
+.. _access_ask_nao:
+
+How to access to the ASK NAO Interface - V2
+============================================
+
+To log into **ASK NAO Interface - V2**:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the link:
+        https://interface2.asknao.com/
+
+        The **Login or create an account** page appears.
+
+        .. image:: /medias/asknao/login.png
+           :width: 478 px
+           :height: 267 px
+
+        *I cannot click the link*:
+
+        * Open a web browser (Internet Explorer, Chrome, Mozilla, Safari, etc).
+        * In the address bar, type: interface2.asknao.com
+        * Hit the **Enter** key.
+
+2.      Type your **Email** and **Password**.
+
+        Use the password you received by email.
+
+3.      Click the **Sign On** button.
+
+        *First login only*
+
+        if a message "Asknao is requesting permission to do the following",
+
+        .. image:: /medias/asknao/permission.png
+           :width: 482 px
+           :height: 238 px
+
+        Click the **Allow** button.
+
+        The home page appears, according to your profile:
+
+        * :ref:`parent_home`
+        * :ref:`teacher_home`
+        * :ref:`admin_home`
+=====  =========================================================================
+
+**Tip**:
+
+* You may create a bookmark or add to your favourite to keep the address.

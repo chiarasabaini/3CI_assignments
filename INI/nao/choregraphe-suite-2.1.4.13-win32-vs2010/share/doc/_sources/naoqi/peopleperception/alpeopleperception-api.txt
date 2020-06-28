@@ -1,0 +1,316 @@
+.. _alpeopleperception-api:
+
+ALPeoplePerception API
+======================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <alpeopleperception>` | API
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alpeopleperceptionproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALPeoplePerceptionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALPeoplePerceptionProxy::getMaximumDetectionRange`
+  * :cpp:func:`ALPeoplePerceptionProxy::getTimeBeforePersonDisappears`
+  * :cpp:func:`ALPeoplePerceptionProxy::getTimeBeforeVisiblePersonDisappears`
+
+  * :cpp:func:`ALPeoplePerceptionProxy::isFaceDetectionEnabled`
+  * :cpp:func:`ALPeoplePerceptionProxy::isFastModeEnabled`
+  * :cpp:func:`ALPeoplePerceptionProxy::isGraphicalDisplayEnabled`
+  * :cpp:func:`ALPeoplePerceptionProxy::isMovementDetectionEnabled`
+
+  * :cpp:func:`ALPeoplePerceptionProxy::resetPopulation`
+
+  * :cpp:func:`ALPeoplePerceptionProxy::setFastModeEnabled`
+  * :cpp:func:`ALPeoplePerceptionProxy::setGraphicalDisplayEnabled`
+  * :cpp:func:`ALPeoplePerceptionProxy::setMaximumDetectionRange`
+  * :cpp:func:`ALPeoplePerceptionProxy::setMovementDetectionEnabled`
+  * :cpp:func:`ALPeoplePerceptionProxy::setTimeBeforePersonDisappears`
+  * :cpp:func:`ALPeoplePerceptionProxy::setTimeBeforeVisiblePersonDisappears`
+
+  * :cpp:func:`ALPeoplePerceptionProxy::setFaceDetectionEnabled` (deprecated)
+
+Events lists
+------------
+
+* :naoqi:event:`PeoplePerception/JustArrived`
+* :naoqi:event:`PeoplePerception/JustLeft`
+* :naoqi:event:`PeoplePerception/PeopleDetected`
+* :naoqi:event:`PeoplePerception/PopulationUpdated`
+
+* :naoqi:event:`PeoplePerception/PeopleList`
+* :naoqi:event:`PeoplePerception/NonVisiblePeopleList`
+* :naoqi:event:`PeoplePerception/VisiblePeopleList`
+
+* :naoqi:event:`PeoplePerception/MaximumDetectionRangeUpdated`
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/AnglesYawPitch`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/Distance`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsFaceDetected`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsVisible`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/NotSeenSince`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/PositionInRobotFrame`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/PositionInTorsoFrame`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/PositionInWorldFrame`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/PresentSince`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/RealHeight`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/ShirtColor`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/ShirtColorHSV`
+
+
+Methods
+-------
+
+.. cpp:function:: float ALPeoplePerceptionProxy::getMaximumDetectionRange()
+
+  :return: Maximum detection and tracking range in meters. The default value is 3.5 meters.
+
+.. cpp:function:: float ALPeoplePerceptionProxy::getTimeBeforePersonDisappears()
+
+  :return: Time after which a person disappears from the PeopleList. The default value is 10 seconds.
+           See :cpp:func:`ALPeoplePerceptionProxy::setTimeBeforePersonDisappears` for a description
+           of this parameter.
+
+.. cpp:function:: float ALPeoplePerceptionProxy::getTimeBeforeVisiblePersonDisappears()
+
+  :return: Time after which a visible person disappears from the PeopleList.
+           The default value is 2 seconds.
+           See :cpp:func:`ALPeoplePerceptionProxy::setTimeBeforeVisiblePersonDisappears`
+           for a description of this parameter.
+
+.. cpp:function:: bool ALPeoplePerceptionProxy::isFaceDetectionEnabled()
+
+  :return: true if the module uses the face detection, false otherwise.
+
+.. cpp:function:: bool ALPeoplePerceptionProxy::isFastModeEnabled()
+
+  :return: true if the *fast mode* is enabled, false otherwise.
+
+.. cpp:function:: bool ALPeoplePerceptionProxy::isGraphicalDisplayEnabled()
+
+  :return: true if the module currently pushes data to **ALMemory** for graphical
+           display in Choregraphe, false otherwise.
+
+.. cpp:function:: bool ALPeoplePerceptionProxy::isMovementDetectionEnabled()
+
+  :return: true if the module uses the movement detection, false otherwise.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::resetPopulation()
+
+  Empties the current population and erases all data related to People Perception and associated modules from ALMemory.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setFastModeEnabled(const bool& enable)
+
+  Enables or disables the *fast mode*. When enabled, all optional detections
+  (face and movement for example) are disabled. If this method is called with
+  *enable = false*, all optional detections will be turned on.
+
+  :param enable: true or false.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setGraphicalDisplayEnabled(const bool& enable)
+
+  Enables or disables the push of debug data into **ALMemory**. These data are
+  used by Choregraphe to display spheres representing humans in the *Robot View*.
+
+  :param enable: true or false.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setMaximumDetectionRange(const float& range)
+
+  Sets the maximum detection and tracking range. Any person further away than this distance
+  will not be tracked. Setting this range to a smaller value can help preventing the background
+  noise from being detected as a human shape but will require humans to get
+  closer to the robot in order to be successfully detected and tracked.
+
+  :param range: Maximum detection and tracking range in meters.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setMovementDetectionEnabled(const bool& enable)
+
+  Enables or disables the movement detection to detect people. This can make the overall
+  process slower if enabled.
+
+  :param enable: true or false.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setTimeBeforePersonDisappears(const float& seconds)
+
+  Sets the time after which a person disappears from the PeopleList (see :ref:`events`) if he/she is no more visible
+  because the robot looks away. The robot knows that it moved and that the person cannot be seen anymore if he/she stays
+  at the same position.
+
+  :param seconds: Timeout in seconds.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setTimeBeforeVisiblePersonDisappears(const float& seconds)
+
+  Sets the time after which a person disappears from the PeopleList (see :ref:`events`) if he/she is no more visible
+  because he/she moved or is hidden from the camera. In this case the robot didn't move but doesn't see the person anymore.
+
+  :param seconds: Timeout in seconds.
+
+.. cpp:function:: void ALPeoplePerceptionProxy::setFaceDetectionEnabled(const bool& enable)
+
+  .. deprecated:: 1.22 The face detection is always enabled.
+
+.. _events:
+
+Events
+------
+
+.. naoqi:event:: PeoplePerception/JustArrived(int)
+
+  Raised when a new person is detected and added to the population.
+
+  :param id: ID of the person
+
+.. naoqi:event:: PeoplePerception/JustLeft(int)
+
+  Raised when a person is removed from the population.
+
+  :param id: ID of the person
+
+.. naoqi:event:: PeoplePerception/PeopleDetected(AL::ALValue)
+
+  Raised whenever at least one person is visible by the robot. Contains information
+  about the detected people, it is used by **ALTracker** to track people.
+
+  It is organized as follows:
+
+  .. code-block:: guess
+
+    MovementInfo =
+    [
+      [TimeStamp_Seconds, TimeStamp_Microseconds],
+      [PersonData_1, PersonData_2, ... PersonData_n],
+      CameraPose_InTorsoFrame,
+      CameraPose_InRobotFrame,
+      Camera_Id
+    ]
+
+  **TimeStamp**: this field is the time stamp of the image that was used to perform the detection.
+
+  **PersonData_i**: each of these fields contains the description of a person. It has the following structure:
+
+  .. code-block:: guess
+
+    PersonData_i =
+    [
+      Id,
+      DistanceToCamera,
+      PitchAngleInImage,
+      YawAngleInImage
+    ]
+
+  where **PitchAngleInImage** and **YawAngleInImage** are angular coordinates of the person's head in the image, in radians.
+
+  **CameraPose_InTorsoFrame**: describes the :term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_TORSO`.
+
+  **CameraPose_InRobotFrame**: describes the :term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_ROBOT`.
+
+  **Camera_Id**: gives the Id of the camera used for the detection.
+
+.. naoqi:event:: PeoplePerception/PopulationUpdated()
+
+  Raised every time the population data has been updated.
+
+
+.. naoqi:event:: PeoplePerception/PeopleList(AL::ALValue list)
+
+  Raised every time the list of persons in the current population changes. The
+  associated data is a list of people IDs (integers) in the current population.
+  These IDs are used to search ALMemory for each person's attributes.
+  PeopleList is the union of NonVisiblePeopleList and VisiblePeopleList.
+
+  For further details, see: :naoqi:event:`PeoplePerception/NonVisiblePeopleList`
+  and :naoqi:event:`PeoplePerception/VisiblePeopleList` .
+
+.. naoqi:event:: PeoplePerception/NonVisiblePeopleList(AL::ALValue list)
+
+  Raised every time the list of people who are currently not visible by the robot
+  (the *IsVisible* attribute equals 0) changes. This list is a subset of the
+  PeopleList.
+
+.. naoqi:event:: PeoplePerception/VisiblePeopleList(AL::ALValue list)
+
+  Raised every time the list of people who are currently visible by the robot
+  (the *IsVisible* attribute equals 1) changes. This list is a subset of the
+  PeopleList.
+
+.. naoqi:event:: PeoplePerception/MaximumDetectionRangeUpdated(float)
+
+  Raised when the value of the maximum detection range has been modified.
+
+.. _memory-keys:
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/AnglesYawPitch
+
+  Yaw and Pitch angles (in radians) of the top of the shape of a person relative to the robot's torso.
+
+.. naoqi:memkey:: float PeoplePerception/Person/<ID>/Distance
+
+  Distance (in meters) between the person and the camera.
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsFaceDetected
+
+  Says whether the face of the person is detected or not. This key may not be
+  present in memory if the face detection has never been performed on a specific
+  person.
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsVisible
+
+  Says whether the person is seen by the robot or not.
+
+.. naoqi:memkey:: int PeoplePerception/Person/<ID>/NotSeenSince
+
+  Time elapsed (in seconds) since the last time this person was detected.
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/PositionInRobotFrame
+
+  3D head position of the person in the :term:`FRAME_ROBOT` space.
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/PositionInTorsoFrame
+
+  3D head position of the person in the :term:`FRAME_TORSO` space.
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/PositionInWorldFrame
+
+  3D head position of the person in the :term:`FRAME_WORLD` space.
+
+.. naoqi:memkey:: int PeoplePerception/Person/<ID>/PresentSince
+
+  Time elapsed (in seconds) since the first time this person was detected.
+
+.. naoqi:memkey:: float PeoplePerception/Person/<ID>/RealHeight
+
+  Estimated height of a person in meters. It is computed as the maximum detected
+  height over time.
+
+.. naoqi:memkey:: std::string PeoplePerception/Person/<ID>/ShirtColor
+
+  The primary color of clothing of the person. It can be either "Black", "Gray",
+  "White", "Red", "Orange", "Yellow", "Green", "Blue" or "Purple".
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/ShirtColorHSV
+
+  The H, S and V components of the primary color of clothing of the person in the `HSV Colorspace <http://en.wikipedia.org/wiki/HSL_and_HSV>`_.
+
+  * Hue (H) is in the [0, 360[ range,
+  * Saturation (S) is in [0, 1],
+  * Value (V) is in [0, 1].

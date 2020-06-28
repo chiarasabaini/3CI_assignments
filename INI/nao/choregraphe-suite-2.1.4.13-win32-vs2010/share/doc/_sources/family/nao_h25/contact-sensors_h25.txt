@@ -1,0 +1,39 @@
+
+.. _h25-contact-sensors:
+
+H25 - Contact and tactile sensors
+==========================================
+
+
+.. seealso:: :ref:`nao-h25` | :ref:`robot-contact-sensors`
+
+--------------------
+
+
+.. image:: /medias/robots/nao_h25_tactile.png
+   :width: 240 px
+   :height: 335 px
+
+
+===== ============================== 
+Part  Location                       
+===== ============================== 
+**A** Head tactile sensor            
+
+**B** Chest button                          
+
+**C** Tactile hands                           
+
+**D** Feet bumpers                         
+===== ============================== 
+
+
+.. include:: ../bulk/contact-sensors_head.rst
+
+.. include:: ../bulk/contact-sensors_chest-button.rst
+
+.. include:: ../bulk/contact-sensors_hands.rst
+
+.. include:: ../bulk/contact-sensors_feet.rst
+
+

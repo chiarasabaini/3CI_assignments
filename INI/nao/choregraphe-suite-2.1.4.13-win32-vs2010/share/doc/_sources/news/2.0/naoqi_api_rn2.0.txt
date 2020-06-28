@@ -1,0 +1,894 @@
+.. include:: ../../bulk/common.rst
+
+.. _whats-new_api_2.0:
+
+**NAOqi API** & **SDks** 2.1
+=============================
+
+Addendum - 23 September 2014
+-----------------------------
+
+**ALFaceDetection**: **OMRON** solution instead of **OKI**
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**ALFaceDetection** is now based on a face detection/recognition
+solution provided by **OMRON**.
+
+As the two technologies, OMRON and OKI, do not provide the same set of data, and
+for backward-compatibility, the structure of the data returned has not been modified,
+but the pieces of data formerly provided by **OKI** have been replaced by null values.
+
+For further details, see: :ref:`facedetected_event_value`.
+
+Few steps toward human behavior
+--------------------------------
+
+New module: **ALDialog**
+++++++++++++++++++++++++
+
+The **ALDialog** module allows you to endow your robot with conversational skills
+by using a list of "rules" written and categorized in an appropriate way.
+
+For further details, see: :ref:`aldialog`.
+
+New module: **ALAnimatedSpeech**
+++++++++++++++++++++++++++++++++++
+
+The **ALAnimatedSpeech** module allows you to make the robot talk in an expressive way.
+
+For further details, see: :ref:`alanimatedspeech`.
+
+
+New tracking system
+--------------------------
+
+New module: **ALTracker**
+++++++++++++++++++++++++++++++
+
+**ALFaceTracker** and **ALRedBallTracker** are now deprecated.
+They are replaced by a new and more generic module: **ALTracker**.
+
+**ALTracker** module allows the robot to track different targets (red ball,
+face, landmark, etc) using different means (head only, whole body, move, etc).
+
+The main goal of this module is to establish a bridge between target detection
+and motion in order to make the robot keep in view the target in the middle of the camera.
+
+For further details, see: :ref:`altracker`.
+
+
+New extractors - Basics
+----------------------------
+
+New module: **ALVisualSpaceHistory**
+++++++++++++++++++++++++++++++++++++++
+
+**ALVisualSpaceHistory** keeps track of the head movements of the robot to
+build a timestamped map of the head positions. This can be useful when exploring
+the environment to make the robot look in every directions.
+
+For further details, see: :ref:`alvisualspacehistory`.
+
+New module: **ALSegmentation3D**
+++++++++++++++++++++++++++++++++++++++
+
+|3d| This module requires a robot with a 3D sensor.
+
+**ALSegmentation3D** extracts the objects present in the field of view of the robot
+by doing a segmentation of the depth image (returned by the 3D sensor) in blobs of
+similar depth.
+
+It also allows you to track, with the head of the robot, a blob at a specified distance
+or simply track the nearest blob with respect to the camera.
+
+For further details, see: :ref:`alsegmentation3D`.
+
+
+New extractors - For People Perception
+----------------------------------------
+
+New module: **ALBasicAwareness**
+++++++++++++++++++++++++++++++++++++++
+
+**ALBasicAwareness** is a simple way to make the robot establish and keep eye
+contact with people.
+
+For further details, see: :ref:`albasicawareness`.
+
+New module: **ALPeoplePerception**
+++++++++++++++++++++++++++++++++++++++
+**ALPeoplePerception** is an extractor which keeps track of the people around
+the robot and provides basic information about them. It gathers visual
+information from RGB cameras and a 3D sensor if available.
+
+For further details, see: :ref:`alpeopleperception`.
+
+New module: **ALEngagementZones**
+++++++++++++++++++++++++++++++++++++++
+
+**ALEngagementZones** allows you to detect if someone is approaching
+the robot, or moving away, using the concept of engagement zones.
+
+For further details, see: :ref:`alengagementzones`.
+
+New module: **ALFaceCharacteristics**
+++++++++++++++++++++++++++++++++++++++
+
+**ALFaceCharacteristics** updates every person with some additional information
+such as an estimation of age and gender. It also tries and detects whether the
+person is smiling.
+
+For further details, see: :ref:`alfacecharacteristics`.
+
+New module: **ALGazeAnalysis**
+++++++++++++++++++++++++++++++++
+
+**ALGazeAnalysis** allows you to analyze the direction of the gaze of a detected person,
+in order to know if he/she is looking at the robot.
+
+For further details, see: :ref:`algazeanalysis`.
+
+New module: **ALSittingPeopleDetection**
++++++++++++++++++++++++++++++++++++++++++++
+
+|3d| This module requires a robot with a 3D sensor.
+
+**ALSittingPeopleDetection** updates every person with the information of whether
+he or she is sitting (on a chair for example) or standing.
+
+For further details, see: :ref:`alsittingpeopledetection`.
+
+New module: **ALWavingDetection**
+++++++++++++++++++++++++++++++++++++++
+
+|3d| This module requires a robot with a 3D sensor.
+
+**ALWavingDetection** allows you to detect if a person is moving in order to catch
+the robot's attention (for example waving at the robot).
+
+For further details, see: :ref:`alwavingdetection`.
+
+
+Core - New modules
+---------------------------
+
+New module: **ALAutonomousLife**
+++++++++++++++++++++++++++++++++++++++
+
+Autonomous Life facilitates the autonomous launching of Activities,
+and keeps the robot visually alive at all times.
+
+For further details, see: :ref:`autonomouslife`.
+
+
+New module: **ALAutonomousMoves**
++++++++++++++++++++++++++++++++++++
+
+**ALAutonomousMoves** enables subtle movements that the robot does autonomously.
+
+For further details, see: :ref:`autonomousmoves`.
+
+New module: **ALTabletService**
++++++++++++++++++++++++++++++++++
+
+**ALTabletService** allows tablet operations. It can be used to:
+
+* load web application,
+* play videos, and
+* manage the tablet itself (WiFi, brightness).
+
+For further details, see: :ref:`altabletservice`.
+
+
+New module: **ALUserSession**
++++++++++++++++++++++++++++++++
+
+**ALUserSession** manages the state of active users, and the bindings to their data.
+
+For further details, see: :ref:`alusersession`.
+
+New module: **ALWorldRepresentation**
+++++++++++++++++++++++++++++++++++++++
+
+**ALWorldRepresentation** is a module dedicated to the long term storage of
+data about generic objects. It allows you to persistently store some data, but also
+to make some generic queries on the stored data with intelligent criterions.
+
+For further details, see: :ref:`alworldrepresentation`.
+
+Note that the :ref:`3d-nao-panel` displays the stored objects.
+
+New module: **ALSystem**
++++++++++++++++++++++++++++
+
+**ALSystem** provides primitives that can be used to configure the system and
+perform operations such as shutting down or rebooting.
+
+For further details, see: :ref:`alsystem`.
+
+New module: **PackageManager**
+++++++++++++++++++++++++++++++++
+
+**PackageManager** lets you install packages on the robot.
+
+For further details, see: :ref:`packagemanager`.
+
+New module: **ALPreferenceManager**
+++++++++++++++++++++++++++++++++++++
+
+**ALPreferenceManager** allows managing the robot preferences.
+Preferences are used to store, among other, all the settings for the applications
+running in the robot.
+
+For further details, see: :ref:`alpreferencemanager`.
+
+
+Core - Improvements
+----------------------------
+
+Deprecated: **ALPreferences**
+++++++++++++++++++++++++++++++++++++++
+
+Use :ref:`alpreferencemanager` instead.
+
+**ALConnectionManager**: new methods and event
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Methods**
+
+* :cpp:func:`ALConnectionManagerProxy::countries`
+* :cpp:func:`ALConnectionManagerProxy::country`
+* :cpp:func:`ALConnectionManagerProxy::setCountry`
+* :cpp:func:`ALConnectionManagerProxy::interfaces`
+
+**event**
+
+:naoqi:event:`NetworkConnectStatus`
+
+**ALExtractor**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+**Methods**
+
+* :cpp:func:`ALExtractor::getEventList`
+* :cpp:func:`ALExtractor::getMemoryKeyList`
+* :cpp:func:`ALExtractor::getSubscribersInfo`
+
+
+**ALBehaviorManager**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALBehaviorManagerProxy::getLoadedBehaviors`
+* :cpp:func:`ALBehaviorManagerProxy::isBehaviorLoaded`
+* :cpp:func:`ALBehaviorManagerProxy::resolveBehaviorName`
+
+
+**ALBehaviorManager** partially deprecated
+++++++++++++++++++++++++++++++++++++++++++++++
+
+* Installation/removal of Behaviors is now managed by the  **Package Manager**, so
+  :cpp:func:`ALBehaviorManagerProxy::installBehavior`,
+  :cpp:func:`ALBehaviorManagerProxy::removeBehavior` and
+  :cpp:func:`ALBehaviorManagerProxy::getSystemBehaviorNames` are deprecated.
+
+* Referring to behaviors with the User or System prefix when using
+  **ALBehaviorManager** is also deprecated.
+
+For further details, see: :ref:`albehaviormanager-api`.
+
+
+
+**ALLauncher**: removal of deprecated methods
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+* ``ALLauncherProxy::getGlobalModuleList``
+* ``ALLauncherProxy::isModulePresent``
+* ``ALLauncherProxy::launchExecutable``
+* ``ALLauncherProxy::launchPythonModule``
+* ``ALLauncherProxy::launchScript``
+
+
+**ALResourceManager**: removal of deprecated methods
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* ``ALResourceManagerProxy::releaseLocalResource``
+* ``ALResourceManagerProxy::waitForLocalResource``
+* ``ALResourceManagerProxy::waitForLocalResources``
+* ``ALResourceManagerProxy::waitForLocalResourcesTree``
+* ``ALResourceManagerProxy::declareEvent``
+* ``ALResourceManagerProxy::getData``
+* ``ALResourceManagerProxy::getDataList``
+* ``ALResourceManagerProxy::getDataListName``
+
+
+
+Motion - Improvements
+----------------------------
+
+New reflex: **Diagnosis effect**
+++++++++++++++++++++++++++++++++++++++
+
+**Diagnosis effect** is a reflex designed to protect the robot and the user in case of
+a malfunctioning actuator or sensor.
+
+For further details, see: :ref:`reflexes-diagnosis`.
+
+New reflex: **External-collision avoidance**
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+The aim of **External-collision avoidance** is to avoid damaging the robot, its
+environment, and first of all avoid hurting people.
+
+For further details, see: :ref:`reflexes-external-collision`.
+
+
+**ALMotion**: new event
+++++++++++++++++++++++++++++++++++++++
+
+* :naoqi:event:`robotIsFalling`
+* :naoqi:event:`ALMotion/MoveFailed`
+
+New animation: **Breath**
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALMotionProxy::setBreathEnabled`
+* :cpp:func:`ALMotionProxy::getBreathEnabled`
+* :cpp:func:`ALMotionProxy::setBreathConfig`
+* :cpp:func:`ALMotionProxy::getBreathConfig`
+
+For further details, see: :ref:`breath`.
+
+|roboN| Kinematics models updated
+++++++++++++++++++++++++++++++++++++++
+
+The **Masses** as well as the **Center of Mass** positions taken in account
+in the robot models have been updated in order to remove the slight
+dissymmetry between left and right limbs.
+
+For further details, see: :ref:`robot_masses`.
+
+**ALMotion**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALMotionProxy::areNotificationsEnabled`
+* :cpp:func:`ALMotionProxy::setEnableNotifications`
+
+
+**ALRobotPosture**: new method
+++++++++++++++++++++++++++++++++++++++
+
+A new methods, **getPosture** allows knowing the name of the current posture.
+
+For further details, see: :cpp:func:`ALRobotPostureProxy::getPosture`.
+
+**ALRobotPosture**: new events
+++++++++++++++++++++++++++++++++++++++
+
+* :naoqi:event:`PostureFamilyChanged`
+* :naoqi:event:`PostureChanged`
+
+**ALRobotPosture**: new predefined posture
+++++++++++++++++++++++++++++++++++++++++++++
+
+A new predefined posture has been defined: **SittingOnChair**.
+
+For further details, see: :term:`Predefined postures`.
+
+
+**Stiffness Control**: new method and events
+++++++++++++++++++++++++++++++++++++++++++++++
+
+:ref:`control-stiffness-api` has a new method and a new event::
+
+**Method**
+
+* :cpp:func:`ALMotionProxy::robotIsWakeUp`
+
+**Events**
+
+* :naoqi:event:`robotIsWakeUp`
+* :naoqi:event:`ALMotion/Stiffness/wakeUpStarted`
+* :naoqi:event:`ALMotion/Stiffness/restStarted`
+* :naoqi:event:`ALMotion/Stiffness/wakeUpFinished`
+* :naoqi:event:`ALMotion/Stiffness/restFinished`
+
+**ALMotion**: deprecated methods
+++++++++++++++++++++++++++++++++++++++
+
+================================================  ==================================================
+Deprecated Methods                                  Instead, use ...
+================================================  ==================================================
+:cpp:func:`ALMotionProxy::setWalkTargetVelocity`    :cpp:func:`ALMotionProxy::moveToward`
+
+:cpp:func:`ALMotionProxy::getWalkArmsEnabled`       :cpp:func:`ALMotionProxy::getMoveArmsEnabled`
+
+:cpp:func:`ALMotionProxy::setWalkArmsEnabled`       :cpp:func:`ALMotionProxy::setMoveArmsEnabled`
+================================================  ==================================================
+
+**ALNavigation**: deprecated methods and events
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In a first step, safe displacements were created outside ALMotion module in order
+to fully test and qualify the concept. We are now in the process of integrating
+this safety mechanism in the main **ALMotion** module, so **ALNavigation** is
+progressively deprecated.
+
+================================================  ==================================================
+Deprecated Methods                                  Instead, use ...
+================================================  ==================================================
+:cpp:func:`ALNavigationProxy::move`                 :cpp:func:`ALMotionProxy::move`
+:cpp:func:`ALNavigationProxy::moveToward`           :cpp:func:`ALMotionProxy::moveToward`
+:cpp:func:`ALNavigationProxy::moveTo`               :cpp:func:`ALMotionProxy::moveTo`
+================================================  ==================================================
+
+===================================================================  ==================================================
+Deprecated Events                                                       Instead, use ...
+===================================================================  ==================================================
+:naoqi:event:`Navigation/SafeNavigator/Status`
+:naoqi:event:`Navigation/SafeNavigator/BlockingObstacle`                :naoqi:event:`ALMotion/MoveFailed`
+:naoqi:event:`Navigation/SafeNavigator/AlreadyAtTarget`
+:naoqi:event:`Navigation/SafeNavigator/DangerousObstacleDetected`
+===================================================================  ==================================================
+
+Audio - new module
+----------------------------
+
+New module: **ALVoiceEmotionAnalysis**
+++++++++++++++++++++++++++++++++++++++
+
+**ALVoiceEmotionAnalysis** identifies the emotion expressed by the speaker's voice,
+independently of what is being said.
+
+For further details, see: :ref:`alvoiceemotionanalysis`.
+
+
+Audio - Improvements
+----------------------------
+
+**ALAudioPlayer** on a virtual robot
+++++++++++++++++++++++++++++++++++++++
+
+**AlAudioPlayer** can now run on a virtual robot, but with limited functionalities:
+
+* OGG and WAV files can run on a virtual robot, but MP3 cannot.
+* :cpp:func:`ALAudioPlayerProxy::playFileInLoop` and
+  :cpp:func:`ALAudioPlayerProxy::playInLoop`
+  are not available on virtual robot.
+
+For further details, see:  :ref:`alaudioplayer`.
+
+**ALAudioPlayer**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALAudioPlayerProxy::getInstalledSoundSetsList`
+* :cpp:func:`ALAudioPlayerProxy::isSoundSetFileInstalled`
+* :cpp:func:`ALAudioPlayerProxy::isSoundSetInstalled`
+* :cpp:func:`ALAudioPlayerProxy::isSoundSetLoaded`
+* :cpp:func:`ALAudioPlayerProxy::loadSoundSet`
+* :cpp:func:`ALAudioPlayerProxy::playSoundSetFile`
+* :cpp:func:`ALAudioPlayerProxy::unloadSoundSet`
+
+
+**ALSpeechRecognition**: new methods and event
++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Methods**
+
+* :cpp:func:`ALSpeechRecognitionProxy::getAudioExpression`
+* :cpp:func:`ALSpeechRecognitionProxy::getRules`
+
+* :cpp:func:`ALSpeechRecognitionProxy::saveContextSet`
+* :cpp:func:`ALSpeechRecognitionProxy::loadContextSet`
+* :cpp:func:`ALSpeechRecognitionProxy::eraseContextSet`
+
+Grammar files (.bnf) can be compiled and loaded in the speech recognition
+engine with the following functions:
+
+* :cpp:func:`ALSpeechRecognitionProxy::compile`
+* :cpp:func:`ALSpeechRecognitionProxy::addContext`
+* :cpp:func:`ALSpeechRecognitionProxy::removeContext`
+* :cpp:func:`ALSpeechRecognitionProxy::removeAllContext`
+* :cpp:func:`ALSpeechRecognitionProxy::activateRule`
+* :cpp:func:`ALSpeechRecognitionProxy::deactivateRule`
+* :cpp:func:`ALSpeechRecognitionProxy::activateAllRules`
+* :cpp:func:`ALSpeechRecognitionProxy::deactivateAllRules`
+* :cpp:func:`ALSpeechRecognitionProxy::addWordListToSlot`
+
+**Event**
+
+* :naoqi:event:`WordRecognizedAndGrammar`
+
+**ALSpeechRecognition**: event updated
+++++++++++++++++++++++++++++++++++++++
+
+When the :ref:`word_spotting` is activated, :naoqi:event:`WordRecognized`
+may now contain the following chain: **<...>**.
+
+
+**ALSpeechRecognition**: new parameter
+++++++++++++++++++++++++++++++++++++++
+
+:cpp:func:`ALSpeechRecognitionProxy::setParameter` and :cpp:func:`ALSpeechRecognitionProxy::getParameter`
+support a new parameter: **NbHypotheses** Number of hypotheses returned by the engine.
+
+
+**ALTextToSpeech**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALAnimatedSpeechProxy::addTagsToWords`
+* :cpp:func:`ALAnimatedSpeechProxy::declareAnimationsPackage`
+* :cpp:func:`ALTextToSpeechProxy::locale`
+
+**ALTextToSpeech**: new event
+++++++++++++++++++++++++++++++++++++++
+
+* :naoqi:event:`ALTextToSpeech/TextInterrupted`
+
+**ALTextToSpeech**: deprecated method
+++++++++++++++++++++++++++++++++++++++
+
+Due to technical improvements, there is no point to generate a file and playing it after,
+so :cpp:func:`ALTextToSpeechProxy::sayToFileAndPlay` has been deprecated.
+
+
+**ALAudioSourceLocalization** changed name to **ALSoundLocalization**
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Module name **ALAudioSourceLocalization** is deprecated, please use
+**ALSoundLocalization** instead (same API).
+
+For further details, see: :ref:`alsoundlocalization`.
+
+
+**ALSoundLocalization** and **ALSoundDetection**: parameter change
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The 'Sensibility' parameter has been deprecated and replaced by a 'Sensitivity'
+parameter with a more usable scale.
+
+
+**ALAudioDevice**: methods
+++++++++++++++++++++++++++++++++
+
+Added in the documentation:
+
+* :cpp:func:`ALAudioDeviceProxy::isAudioOutMuted`
+* :cpp:func:`ALAudioDeviceProxy::isInputClosed`
+* :cpp:func:`ALAudioDeviceProxy::isOutputClosed`
+* :cpp:func:`ALAudioDeviceProxy::muteAudioOut`
+
+**ALAudioDevice** removal of deprecated methods
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* ``ALAudioDeviceProxy::subscribeRemoteModule`` (deprecated in 1.12)
+* ``ALAudioDeviceProxy::unSubscribeRemoteModule`` (deprecated in 1.12)
+
+**ALAudioDevice**: deprecated parameter
++++++++++++++++++++++++++++++++++++++++++
+
+Due to technical improvements, **inputBufferSize** parameter has no effect anymore.
+
+
+**ALSoundDetection** removal of deprecated methods
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* ``ALSoundDetection::getDescription`` (deprecated in 1.12)
+* ``ALSoundDetection::getEvents`` (deprecated in 1.12)
+
+
+
+Vision  - new modules
+----------------------------
+
+New module: **ALBarcodeReader**
+++++++++++++++++++++++++++++++++++++++
+
+**ALBarcodeReader** scans an image from the camera and looks for a barcode. If
+a barcode is found in the image, the module tries to decipher it.
+
+For further details, see: :ref:`albarcodereader`.
+
+New module: **ALCloseObjectDetection**
+++++++++++++++++++++++++++++++++++++++
+
+|3d| This module requires a robot with a 3D sensor.
+
+**ALCloseObjectDetection** allows you to detect objects that are too close to the robot
+to be directly detected by the 3D sensor.
+
+For further details, see: :ref:`alcloseobjectdetection`.
+
+New module: **ALColorBlobDetection**
+++++++++++++++++++++++++++++++++++++++
+
+**ALColorBlobDetection** is a module that provides a fast 2D vision-based color blob detector.
+
+For further details, see: :ref:`alcolorblobdetection`.
+
+New module: **ALLocalization**
+++++++++++++++++++++++++++++++++++++++
+
+**ALLocalization** is a module dedicated to the localization of the robot in an
+*indoor* environment.
+
+For further details, see: :ref:`allocalization`.
+
+
+Vision  - Improvements
+----------------------------
+
+**ALMovementDetection**: fully reshaped
++++++++++++++++++++++++++++++++++++++++++++
+
+**ALMovementDetection** allows you to detect movement in the field of view of the robot.
+
+The detection uses the best available camera:
+
+1. a **depth camera**, if the robot has one, or if not,
+2. an **RGB camera**.
+
+Two new methods have been added to **ALMovementDetection**:
+
+* :cpp:func:`ALMovementDetectionProxy::setColorSensitivity`
+* :cpp:func:`ALMovementDetectionProxy::getColorSensitivity`
+
+For further details, see: :ref:`almovementdetection`.
+
+**ALPhotoCapture**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+Two new methods have been added to **ALPhotoCapture**:
+
+* :cpp:func:`ALPhotoCaptureProxy::setHalfPressEnabled`
+* :cpp:func:`ALPhotoCaptureProxy::isHalfPressEnabled`
+
+
+**ALVideoDevice** re-factored
+++++++++++++++++++++++++++++++++++++++
+
+The complete refactoring of **ALVideoDevice** module has been continued.
+
+For further details, see: :ref:`alvideodevice` and :ref:`alvideodevice-api`.
+
+
+**ALVisualCompass**: new method and event
++++++++++++++++++++++++++++++++++++++++++++
+
+**Method**
+
+* :cpp:func:`ALVisualCompassProxy::moveTo`
+* :cpp:func:`ALVisualCompassProxy::moveStraightTo`.
+* :cpp:func:`ALVisualCompassProxy::setCurrentImageAsReference`
+* :cpp:func:`ALVisualCompassProxy::waitUntilTargetReached`
+
+**Events**
+
+* :naoqi:event:`VisualCompass/FinalDeviation`
+* :naoqi:event:`VisualCompass/InvalidReference`
+* :naoqi:event:`VisualCompass/MoveAbort`
+* :naoqi:event:`VisualCompass/NewReferenceImageSet`
+
+
+**ALVisualCompass**: removal of deprecated methods
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* ``ALVisualCompassProxy::getCurrentImage``
+* ``ALVisualCompassProxy::getReferenceQuality``
+
+**ALVisionRecognition**: new method
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALVisionRecognitionProxy::getParam`
+
+**ALVisionRecognition**: deprecated method
+++++++++++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALVisionRecognitionProxy::setParam`
+
+
+People Perception - Improvements
+----------------------------------
+
+
+**ALFaceDetection**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALFaceDetectionProxy::isRecognitionEnabled`
+* :cpp:func:`ALFaceDetectionProxy::setRecognitionEnabled`
+* :cpp:func:`ALFaceDetectionProxy::setTrackingEnabled`
+* :cpp:func:`ALFaceDetectionProxy::forgetPerson`
+
+
+**ALFaceDetection**: deprecated methods
++++++++++++++++++++++++++++++++++++++++++
+
+====================================================  ========================================================
+Deprecated Methods                                     Instead, use ...
+====================================================  ========================================================
+:cpp:func:`ALFaceDetectionProxy::enableRecognition`    :cpp:func:`ALFaceDetectionProxy::setRecognitionEnabled`
+
+:cpp:func:`ALFaceDetectionProxy::enableTracking`       :cpp:func:`ALFaceDetectionProxy::setTrackingEnabled`
+====================================================  ========================================================
+
+
+Sensors  - New modules
+----------------------------
+
+New module: **ALTouch**
+++++++++++++++++++++++++++++++++++++++
+
+The **ALTouch** module is responsible for raising events when the robot is touched.
+
+For further details, see: :ref:`altouch`.
+
+New module: **ALChestButton**
+++++++++++++++++++++++++++++++++++++++
+
+Former **ALSentinel** events: ``SimpleClickOccured``, :``DoubleClickOccured``
+and ``TripleClickOccured`` are now **ALChestButton** events:
+
+* :naoqi:event:`ALChestButton/SimpleClickOccurred`
+* :naoqi:event:`ALChestButton/DoubleClickOccurred`
+* :naoqi:event:`ALChestButton/TripleClickOccurred`
+
+For further details, see: :ref:`alchestbutton`.
+
+
+
+Sensors  - Improvements
+----------------------------
+
+**ALBodyTemperature**: **Actuators** monitored
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Additionally to **Joints** and CPU, **ALBodyTemperature** now monitors
+**Actuators** temperature.
+
+For further details, see: :ref:`albodytemperature`.
+
+
+**ALBodyTemperature**: new and deprecated events
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**New event**
+
+* :naoqi:event:`DeviceNoLongerHotDetected`
+* :naoqi:event:`HotDeviceDetected`
+* :naoqi:event:`HeadProcessorIsHot`
+* :naoqi:event:`HeadProcessorIsCriticallyHot`
+* :naoqi:event:`TemperatureStatusChanged`
+
+
+**Deprecated event**
+
+========================================  ==================================================
+Deprecated Events                            Instead, use ...
+========================================  ==================================================
+:naoqi:event:`HotJointDetected`              :naoqi:event:`HotDeviceDetected`
+========================================  ==================================================
+
+
+**ALBattery**: new methods
+++++++++++++++++++++++++++++++++++++++
+
+New methods have been added to **ALBattery**:
+
+* :cpp:func:`ALBatteryProxy::getBatteryCharge`
+* :cpp:func:`ALBatteryProxy::enablePowerMonitoring`
+
+
+**ALLeds**: new method
+++++++++++++++++++++++++++++++++++++++
+
+* :cpp:func:`ALLedsProxy::reset`
+
+
+**ALLeds**: method improved
+++++++++++++++++++++++++++++++++++++++
+
+:cpp:func:`ALLedsProxy::rotateEyes`: eyes animation smoother with a better timing.
+
+Diagnosis - New module
+-------------------------
+
+New module: **ALDiagnosis**
+++++++++++++++++++++++++++++++++++++++
+
+**ALDiagnosis** module allows the robot to detect if there is an hardware trouble
+(mainly electrical connection).
+
+For further details, see: :ref:`aldiagnosis`.
+
+--------------
+
+SDKs, Bindings
+----------------
+
+Control NAO from your web browser - QiMessaging JavaScript
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**QiMessaging** provides **JavaScript** bindings to use QiMessaging services
+(modules) in a web browser. It allows you to build HTML5 application for your robot.
+
+For further details, see: :ref:`qimessaging_javascript`.
+
+
+Python SDK: Python2.7 only
++++++++++++++++++++++++++++
+
+Python 2.6 is not anymore supported.
+
+Moreover, **Choregraphe** uses now **Python 2.7** to interpret its scripts.
+
+C++ SDK: end of VS2008 support
+++++++++++++++++++++++++++++++++
+
+Support for Visual Studio 2008 is gone. This will let us focus on supporting new
+compilers (Visual Studio 2012),
+and new architectures (windows 64 bits) in the future.
+
+C++ SDK: end of Ubuntu 10.04 LTS (Lucid) support
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Ubuntu 10.04 LTS (Lucid) is not anymore supported.
+
+This release only supports Ubuntu 12.04 LTS (Precise) and later.
+
+For further details, see: :ref:`compatible-platforms`.
+
+
+C++ SDK: change in qiBuild numbering
+++++++++++++++++++++++++++++++++++++++
+
+**qiBuild** has now its own release cycle.
+This means:
+
+* **qiBuild** now has its own version number (2.5 at the moment of writing),
+  distinct from the version number of the SDK.
+
+* There are now new **qiBuild** releases every months or so: follow the
+  project on github (https://github.com/aldebaran/qibuild)
+  to be informed of new releases.
+
+This should not change anything because the latest **qiBuild** release
+will always be retro-compatible with the latest Aldebaran **C++ SDK**.
+
+C++ SDK: breaking changes
++++++++++++++++++++++++++++
+
+During the re-factoring of the framework libraries, some minor incompatible
+changes were introduced.
+
+* ``BIND_METHOD`` macro call must now be followed by a colon:
+
+
+  .. code-block:: cpp
+
+    // old:
+    BIND_METHOD("myMethod", "MyModule", "Documentation for myMethod")
+
+    // new
+    BIND_METHOD("myMethod", "MyModule", "Documentation for myMethod");
+
+
+* ALCOMMON no longer depends on ALTHREAD, so if you are using it, you must
+  patch the CMake code
+
+  .. code-block:: cmake
+
+    # Old:
+    qi_use_lib(my_module ALCOMMON)
+
+    # New:
+    qi_use_lib(my_module ALTHREAD ALCOMMON)
+
+
+Simulator SDK: multiple robot Models
+++++++++++++++++++++++++++++++++++++++
+
+Support for multiple robot models was added.
+
+Simulator SDK: NAOqi automatic Launch
++++++++++++++++++++++++++++++++++++++++
+
+**NAOqi** is now automatically launched at startup.

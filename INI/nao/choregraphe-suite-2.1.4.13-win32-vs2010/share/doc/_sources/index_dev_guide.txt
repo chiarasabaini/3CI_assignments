@@ -1,0 +1,12 @@
+﻿.. _naoqi_dev:
+
+NAOqi Developer guide
+=====================
+
+.. toctree::
+   :maxdepth: 2
+
+   getting_started/index
+   dev/programming_index
+   ref/index
+   embedded/upgrade_index

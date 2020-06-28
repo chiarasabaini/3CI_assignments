@@ -1,0 +1,90 @@
+.. include:: ../bulk/common.rst
+
+.. _webpage-settings-remote:
+.. _alinfrared-remote-control:
+
+Set a remote control
+=====================
+
+.. seealso::
+
+   - :ref:`alinfrared`
+
+.. _webpage-search-create-remote-control-conf:
+
+Search configuration file for remote Controls
+-----------------------------------------------------
+
+1. Check on http://www.lirc.org if your remote model is supported.
+
+2. If yes, download the configuration file on your computer.
+
+.. _webpage-add-remove-remote-control:
+
+Add or remove remote Controls
+------------------------------
+
+In |roboN| **web page** > **Settings** > **Remote Controls**,
+are declared configuration files of the remote controls known by your robot.
+
+To add a new configuration file from your computer,
+
+1. Click on the **Add** button.
+
+.. image:: /medias/dev/tutos/add_file.png
+
+The  **Browse** button appears:
+
+.. image:: /medias/dev/tutos/browse_file.png
+
+2. Click on **Browse**
+
+3. Select the configuration file on your computer.
+
+4. Click on **Submit**.
+
+.. image:: /medias/dev/tutos/submit_file.png
+
+If for any reason you want to remove a file,
+click on **Remove**.
+
+.. note::
+
+   At this step, configuration files of remote controls are available on the robot,
+   but not enabled.
+
+.. _webpage-enable-disable-remote-control:
+
+Enable or disable remote controls
+----------------------------------
+
+In |roboN| **web page** > **Settings** > **Remote Controls**,
+the second list box contains the configuration files of enabled remote controls.
+
+To enable a remote control:
+
+1. Click on the blue arrows to enable or disable a remote control.
+
+2. Click on **Save** to confirm your modifications.
+
+.. image:: /medias/dev/tutos/save_config.png
+
+.. warning::
+
+   Do not enable too many remotes (5 max), or infrared recognition may become unreliable.
+
+
+.. _webpage-check-remote-keys:
+
+Check Remote/Keys name
+-----------------------
+
+When you click on an available remote, its name is displayed on the right
+together with the available keys. *These are the names you have to use* in
+choregraphe for the boxes **IR Send Key**, **IR Get Key**, and in the bound
+methods described in the section: :ref:`infrared-nao-as-remote-control`.
+
+For example if you want to open the slot of your DVD player, select its remote
+name and **KEY_OPEN**.
+
+.. image:: /medias/dev/tutos/keys_name.png

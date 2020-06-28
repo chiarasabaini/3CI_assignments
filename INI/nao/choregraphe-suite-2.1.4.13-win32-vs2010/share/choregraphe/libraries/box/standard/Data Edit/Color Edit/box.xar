@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Send a color encoded as [R,G,B] values." plugin="coloredit_plugin" x="142" y="12">
+        <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self, False)
+
+	def onInput_onStart(self):
+		self.onStopped([0, 81, 255])]]>
+</content>
+        </script>
+        <pluginContent>
+            <color>#0051ff</color>
+        </pluginContent>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the color on the output." id="2" />
+        <Output name="onStopped" type="2" type_size="3" nature="2" inner="0" tooltip="[R,G,B] with R, G and B between 0 and 255." id="3" />
+    </Box>
+</ChoregrapheBox>

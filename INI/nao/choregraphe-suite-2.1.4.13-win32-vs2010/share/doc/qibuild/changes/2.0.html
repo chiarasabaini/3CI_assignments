@@ -1,0 +1,472 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>v2.0 &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../index.html" />
+    <link rel="up" title="Changelog" href="../changelog.html" />
+    <link rel="next" title="v1.14.1" href="1.14.1.html" />
+    <link rel="prev" title="v2.1" href="2.1.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../search.html">Search</a>
+         |
+        <a title="Index" href="../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="2.1.html" title="v2.1">previous</a>
+     |
+    <a href="../changelog.html" title="Changelog" accesskey="U">up</a>
+   |
+    <a href="1.14.1.html" title="v1.14.1">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="changes-2.0">
+            
+  <div class="section" id="v2-0">
+<h1>v2.0<a class="headerlink" href="#v2-0" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="command-line">
+<h2>Command line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">make</span></tt>: add <tt class="docutils literal"><span class="pre">--coverity</span></tt> option to build with <tt class="docutils literal"><span class="pre">cov-analisys</span></tt>.</p>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">clean</span></tt>: syntax closer to other commands, cleans deep by default and</dt>
+<dd><p class="first last">respects <tt class="docutils literal"><span class="pre">--config</span></tt> <tt class="docutils literal"><span class="pre">--single</span></tt> and [project] options</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Nicer output for all commands.</p>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">configure</span></tt>: add a <tt class="docutils literal"><span class="pre">--summarize-options</span></tt> argument to</dt>
+<dd><p class="first last">print a summary of the build options at the end of the configuration</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">configure</span></tt>: add  <tt class="docutils literal"><span class="pre">--trace-cmake</span></tt> to trace CMake function calls</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">make</span></tt> get rid of confusing and useless &#8220;&#8211;target&#8221; option</p>
+</li>
+<li><p class="first">Added a lot of short options (&#8220;-n&#8221; for &#8220;&#8211;dry-run&#8221;, &#8220;-f&#8221; for &#8220;&#8211;force&#8221;)</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">init</span></tt>: add a <tt class="docutils literal"><span class="pre">--config</span></tt> argument to set the default config used by
+the worktree</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span></tt>: improve argument parsing.</p>
+<ul class="simple">
+<li>Do not configure everything when running <tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">configure</span></tt> from an unknown subdirectory</li>
+<li>Automatically add projects to the worktree when running <tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">configure</span></tt> for a project
+not yet added to the worktree</li>
+<li>qibuild commands now accepts both project names and project paths</li>
+</ul>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span></tt>: change dependency resolution</p>
+<ul class="simple">
+<li>Now take both build dependencies and runtime dependencies into account by default.
+Use <tt class="docutils literal"><span class="pre">--build-deps</span></tt> to get only the build dependencies.</li>
+</ul>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qidoc</span></tt> by-pass sphinx-build bug on mac</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qidoc</span></tt> make it work on archlinux  (using sphinx-build2 by default)</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qidoc</span> <span class="pre">open</span></tt> to view generated documentation in a web browser</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qidoc</span> <span class="pre">list</span></tt> list the known documentation projects in a worktree</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">list</span></tt> better error message when there is no toolchain</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qidoc</span> <span class="pre">build</span></tt> improve argument parsing, smarter when no argument is given,
+can build a doc project by passing its name</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">remove</span></tt></p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">list</span></tt> list the projects paths of a worktree</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">grep</span></tt> to grep on every project of a worktree</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qicd</span></tt> (inspired by <tt class="docutils literal"><span class="pre">roscd</span></tt>)</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">init</span></tt> can now be used with a git url (<a class="reference external" href="mailto:git&#37;&#52;&#48;foo">git<span>&#64;</span>foo</a>:manifest.git) (ala repo)</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">init</span></tt> : add <tt class="docutils literal"><span class="pre">-p,</span>&nbsp; <span class="pre">--profile</span></tt> option to choose from several profiles  (different xml files in the git url)</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">init</span></tt> : add <tt class="docutils literal"><span class="pre">-b,</span> <span class="pre">--branch</span></tt> option to choose a branch in the manifest url</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">status</span></tt> : now also display a message when the current branch is ahead or behind the remote branch</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">sync</span></tt></p>
+<ul class="simple">
+<li>configure local and remote branches</li>
+<li>automatically setup code review</li>
+<li>automatically synchronize git submodules</li>
+</ul>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">push</span></tt> : upload changes to code review</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">deploy</span></tt>, to deploy code to a remote device</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">test</span></tt>: learned <tt class="docutils literal"><span class="pre">--slow</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">test</span></tt>: learned <tt class="docutils literal"><span class="pre">-n,</span> <span class="pre">--dry-run</span></tt> to  just list the test names</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">test</span></tt>: learned <tt class="docutils literal"><span class="pre">--perf</span></tt> to run performance tests</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">test</span></tt>: <tt class="docutils literal"><span class="pre">--test-name</span></tt> has been removed, use <tt class="docutils literal"><span class="pre">-k</span> <span class="pre">PATTERN</span></tt></p>
+</li>
+<li><p class="first">Removed <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">fetch</span></tt>, use <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">init</span></tt> instead</p>
+</li>
+<li><p class="first">Removed <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">pull</span></tt>, use <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">sync</span></tt> instead</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">convert-package</span></tt>, to turn a binary package into a qiBuild package</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">convert-package</span></tt>, to turn a binary package or  package
+directory into a qiBuild package</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">import-package</span></tt> learned <tt class="docutils literal"><span class="pre">--batch</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qitoolchain</span> <span class="pre">import-package</span></tt> learned to import package directory</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">make</span></tt> learned <tt class="docutils literal"><span class="pre">--verbose-make</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span></tt> learned <tt class="docutils literal"><span class="pre">reset</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc</span></tt> learned <tt class="docutils literal"><span class="pre">snapshot</span></tt></p>
+</li>
+</ul>
+</div>
+<div class="section" id="cmake">
+<h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Added <a class="reference internal" href="../advanced/cmake/api/codegen.html#qi_generate_src" title="qi_generate_src"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_generate_src</span></tt></a>,  <a class="reference internal" href="../advanced/cmake/api/codegen.html#qi_generate_header" title="qi_generate_header"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_generate_header</span></tt></a></p>
+</li>
+<li><p class="first">Added <a class="reference internal" href="../advanced/cmake/api/swig/java.html#qi_swig_wrap_java" title="qi_swig_wrap_java"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_swig_wrap_java</span></tt></a></p>
+</li>
+<li><p class="first">Added <a class="reference internal" href="../advanced/cmake/api/install.html#qi_install_python" title="qi_install_python"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_install_python</span></tt></a></p>
+</li>
+<li><p class="first">Added <a class="reference internal" href="../advanced/cmake/api/stage.html#qi_stage_dir" title="qi_stage_dir"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_stage_dir</span></tt></a>, to find files from source directories</p>
+</li>
+<li><p class="first">Added <a class="reference internal" href="../advanced/cmake/api/tests.html#qi_create_perf_test" title="qi_create_perf_test"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_create_perf_test</span></tt></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../advanced/cmake/api/tests.html#qi_create_gtest" title="qi_create_gtest"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_create_gtest</span></tt></a> and <a class="reference internal" href="../advanced/cmake/api/tests.html#qi_create_test" title="qi_create_test"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_create_test</span></tt></a> learned
+the <tt class="docutils literal"><span class="pre">SLOW</span></tt> keyword so that tests are not run by default.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../advanced/cmake/api/stage.html#qi_use_lib" title="qi_use_lib"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_use_lib</span></tt></a> learned the <tt class="docutils literal"><span class="pre">ASSUME_SYSTEM_INCLUDE</span></tt> flag
+to use <tt class="docutils literal"><span class="pre">-isystem</span></tt> on the dependencies</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../advanced/cmake/api/target.html#qi_create_config_h" title="qi_create_config_h"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_create_config_h</span></tt></a> learned to use <tt class="docutils literal"><span class="pre">configure_file</span></tt> flags
+such as <tt class="docutils literal"><span class="pre">&#64;ONLY</span></tt></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../advanced/cmake/api/install.html#qi_install_conf" title="qi_install_conf"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_install_conf</span></tt></a> learned to install configuration files in a
+SYSCONDIR outside the CMAKE_INSTALL_PREFIX subtree.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild configure foo
+<span class="gp">$</span> qibuild install foo --prefix<span class="o">=</span>/usr /tmp/without_sysconfdir
+<span class="gp">$</span> tree /tmp/without_sysconfdir
+<span class="go">/tmp/without_sysconfdir/</span>
+<span class="go">    usr/</span>
+<span class="go">        etc/</span>
+<span class="go">            foo.conf</span>
+<span class="go">        lib/</span>
+<span class="go">            libfoo.so</span>
+
+<span class="gp">$</span> qibuild configure foo -D <span class="nv">SYSCONFDIR</span><span class="o">=</span>/etc
+<span class="gp">$</span> qibuild install foo --prefix<span class="o">=</span>/usr /tmp/with_sysconfdir
+<span class="gp">$</span> tree /tmp/with_sysconfdir
+<span class="go">/tmp/with_sysconfdir/</span>
+<span class="go">    etc/</span>
+<span class="go">        foo.conf</span>
+<span class="go">    usr/</span>
+<span class="go">        lib/</span>
+<span class="go">            libfoo.so</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference internal" href="../advanced/cmake/api/swig/python.html#qi_swig_wrap_python" title="qi_swig_wrap_python"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_swig_wrap_python</span></tt></a> learned to install python modules in the
+standard location</p>
+</li>
+<li><p class="first">qibuild cmake modules:</p>
+<ul class="simple">
+<li>Added <tt class="docutils literal"><span class="pre">hdf5</span></tt>, <tt class="docutils literal"><span class="pre">openssl</span></tt>, <tt class="docutils literal"><span class="pre">libevent_openssl</span></tt>,
+<tt class="docutils literal"><span class="pre">qt_qtdbus</span></tt>, <tt class="docutils literal"><span class="pre">qt_qttest</span></tt>, <tt class="docutils literal"><span class="pre">boost_unit_test_framework</span></tt>,
+<tt class="docutils literal"><span class="pre">boost_test_exec_monitor</span></tt>, <tt class="docutils literal"><span class="pre">boost_timer</span></tt>, <tt class="docutils literal"><span class="pre">boost_chrono</span></tt>,
+<tt class="docutils literal"><span class="pre">rrd</span></tt>, <tt class="docutils literal"><span class="pre">rrd_th</span></tt>, <tt class="docutils literal"><span class="pre">jsoncpp</span></tt>, <tt class="docutils literal"><span class="pre">zbar</span></tt></li>
+<li>Renamed dbus into dbus-1, and dbus-glib into dbus-glib-1</li>
+<li><tt class="docutils literal"><span class="pre">qi_use_lib(OPENGL)</span></tt> now uses upstream&#8217;s <tt class="docutils literal"><span class="pre">FindOpenGL.cmake</span></tt></li>
+<li>ogre-tools: Allow to use more than one plugin.</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../advanced/cmake/api/tests.html#qi_add_test" title="qi_add_test"><tt class="xref cmake cmake-function docutils literal"><span class="pre">qi_add_test</span></tt></a> can now handle test script as target instead of binary.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc.sync</span></tt> for synchronizing a worktree with a manifest</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc.review</span></tt> for configuring a project to use gerrit</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qibuild.deploy</span></tt> to handle deploying code to a remote target</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qibuild.gdb</span></tt> to allow stripping debug symbols out of the libraries</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qibuild.ui</span></tt> for tools to interact with the user</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qixml</span></tt> to help XML parsing, get rid of <tt class="docutils literal"><span class="pre">lxml</span></tt> dependency</p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc.git.get_repo_root</span></tt></p>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qisrc.git.is_submodule</span></tt></p>
+</li>
+<li><p class="first">Renamed <cite>qisrc.worktree.worktree_open</cite> to <tt class="docutils literal"><span class="pre">qisrc.worktree.open_worktree</span></tt></p>
+</li>
+<li><p class="first">Renamed <tt class="docutils literal"><span class="pre">qibuild.worktree</span></tt> to <tt class="docutils literal"><span class="pre">qisrc.worktree</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild.config.QiBuildConfig.read</span></tt>: learned <tt class="docutils literal"><span class="pre">create_if_missing</span></tt> option</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">install-qibuild.sh</span></tt> now installs <tt class="docutils literal"><span class="pre">qibuild</span></tt> scripts in <tt class="docutils literal"><span class="pre">~/.local/bin</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc.git.Git.call</span></tt> fix using <tt class="docutils literal"><span class="pre">quiet=True</span></tt> with <tt class="docutils literal"><span class="pre">raises=False</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc.git.Git.get_current_branch</span></tt> : return None when in &#8216;detached HEAD&#8217; state</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild.command.call</span></tt> learned <tt class="docutils literal"><span class="pre">quiet</span></tt> option</p>
+</li>
+<li><p class="first">Usage of <tt class="docutils literal"><span class="pre">qibuild.log</span></tt> and <tt class="docutils literal"><span class="pre">logging.py</span></tt> has been deprecated, use <tt class="docutils literal"><span class="pre">qibuild.ui</span></tt> instead</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">toc.test_project</span></tt> has been removed, use <tt class="docutils literal"><span class="pre">qibuild.ctest</span></tt> instead</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">toc.resolve_deps</span></tt> has been removed, use <tt class="docutils literal"><span class="pre">qibuild.cmdparse.deps_from_args</span></tt> instead</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qisrc.git.get_current_branch</span></tt> : return None when in &#8216;detached HEAD&#8217; state</p>
+</li>
+<li><p class="first">Add <tt class="docutils literal"><span class="pre">qixml</span></tt> to help XML parsing, get rid of <tt class="docutils literal"><span class="pre">lxml</span></tt> dependency</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">qibuild.command.call</span></tt> add <tt class="docutils literal"><span class="pre">quiet</span></tt> option</p>
+</li>
+<li><p class="first">Remove usage of <tt class="docutils literal"><span class="pre">qibuild.log</span></tt> and <tt class="docutils literal"><span class="pre">logging.py</span></tt> to display nice colorized messages
+to the console, use <tt class="docutils literal"><span class="pre">qibuild.ui</span></tt> module.</p>
+</li>
+<li><p class="first">Refactoring of the whole module <tt class="docutils literal"><span class="pre">qibuild.archive</span></tt>:</p>
+<ul class="simple">
+<li>Non-compatible APIs</li>
+<li>Removed APIs:<ul>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.extracted_name</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.archive_name</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.extract_tar</span></tt>: use <tt class="docutils literal"><span class="pre">qibuild.archive.extract</span></tt> instead</li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.extract_zip</span></tt>: use <tt class="docutils literal"><span class="pre">qibuild.archive.extract</span></tt> instead</li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.zip</span></tt>: use <tt class="docutils literal"><span class="pre">qibuild.archive.compress</span></tt> instead</li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.zip_unix</span></tt>: use <tt class="docutils literal"><span class="pre">qibuild.archive.compress</span></tt> instead</li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.zip_win</span></tt>: use <tt class="docutils literal"><span class="pre">qibuild.archive.compress</span></tt> instead</li>
+</ul>
+</li>
+<li>New APIs:<ul>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.compress</span></tt>: include <tt class="docutils literal"><span class="pre">algo</span></tt> option, which is set
+to  <tt class="docutils literal"><span class="pre">zip</span></tt> when unspecified</li>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.guess_algo</span></tt>: guessing the compression method
+from the archive extension</li>
+</ul>
+</li>
+<li>Updated APIs:<ul>
+<li><tt class="docutils literal"><span class="pre">qibuild.archive.extract</span></tt>:<ul>
+<li>support for the <tt class="docutils literal"><span class="pre">topdir</span></tt> option has been removed</li>
+<li>add <tt class="docutils literal"><span class="pre">algo</span></tt> option, when unspecified <tt class="docutils literal"><span class="pre">algo</span></tt> is set to <tt class="docutils literal"><span class="pre">zip</span></tt> on all platform</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first">Added <tt class="docutils literal"><span class="pre">qibuild.cmake.modules</span></tt> to handle CMake module generation</p>
+</li>
+<li><p class="first">Renamed <tt class="docutils literal"><span class="pre">qibuild.cmdparse</span></tt> to <tt class="docutils literal"><span class="pre">qibuild.script</span></tt></p>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">qibuild.cmdparse</span></tt> now centralize the parsing of qibuild actions arguments</dt>
+<dd><p class="first last">(guessing project from working directory and so on)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Now using <a class="reference external" href="http://tox.readthedocs.org/en/latest/">tox</a> to run the tests on Jenkins,
+get rid of <tt class="docutils literal"><span class="pre">run_tests.py</span></tt></li>
+<li>Now using <a class="reference external" href="http://pytest.org/latest/">py.test</a> to write the automatic tests</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="2.1.html" title="v2.1">v2.1</a>
+     |
+    <a href="../changelog.html" title="Changelog" accesskey="U">Changelog</a>
+   |
+    <a href="1.14.1.html" title="v1.14.1">v1.14.1</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../changelog.html">Changelog</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="3.9.2.html">v3.9.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.9.1.html">v3.9.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.9.html">v3.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.8.3.html">v3.8.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.8.2.html">v3.8.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.8.1.html">v3.8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.8.html">v3.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.7.1.html">v3.7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.7.html">v3.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.6.2.html">v3.6.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.6.1.html">v3.6.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.6.html">v3.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.5.3.html">v3.5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.5.2.html">v3.5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.5.1.html">v3.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.5.html">v3.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.4.1.html">v3.4.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.4.html">v3.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3.1.html">v3.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3.html">v3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2.5.html">v3.2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2.4.html">v3.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2.3.html">v3.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2.2.html">v3.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2.1.html">v3.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2.html">v3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.1.2.html">v3.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.1.1.html">v3.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.1.html">v3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.0.1.html">v3.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.0.html">v3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.6.html">v2.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.5.html">v2.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.4.html">v2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3.html">v2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2.html">v2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.1.html">v2.1</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">v2.0</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1.14.1.html">v1.14.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.14.html">v1.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.12.1.html">v1.12.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.12.html">v1.12</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <h3><a href="../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">v2.0</a><ul>
+<li><a class="reference internal" href="#command-line">Command line</a></li>
+<li><a class="reference internal" href="#cmake">CMake</a></li>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#misc">Misc</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="2.1.html" title="v2.1">previous</a>
+     |
+    <a href="../changelog.html" title="Changelog" accesskey="U">up</a>
+   |
+    <a href="1.14.1.html" title="v1.14.1">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+.. _audio-release-notes:
+
+ALAudio Changes
+================
+
+Language package installation
+------------------------------
+
+The procedure to install additional language package has changed and the former
+packages used on previous version of NaoQi are no longer usable.
+Please contact the hotline to obtain the new packages.
+
+New methods
+-----------
+
+ALAudioPlayer
+++++++++++++++
+
++---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| Method                                                              | Returns ...                                                                                                               |
++=====================================================================+===========================================================================================================================+
+| :cpp:func:`ALAudioPlayerProxy::getLoadedFilesNames`                 |  the names of the files which have been loaded with the loadFile method                                                   |
++---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| :cpp:func:`ALAudioPlayerProxy::getLoadedFilesIds`                   |  the ids of the files which have been loaded with the loadFile method                                                     |
++---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| :cpp:func:`ALAudioPlayerProxy::getCurrentPosition`                  |  the position in the file which is currently played                                                                       |
++---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| :cpp:func:`ALAudioPlayerProxy::getFileLength`                       |  the length of the file which is currently played                                                                         |
++---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+
+ALAudioDevice
+++++++++++++++
+
++---------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Method                                                              | Replaces ...                                                                                                       |
++=====================================================================+====================================================================================================================+
+|  :cpp:func:`ALAudioDeviceProxy::subscribe`                          |  "subscribeLocalModule" and "subscribeRemoteModule" to handle the subscription of a ALSoundExtractor module        |
++---------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+|  :cpp:func:`ALAudioDeviceProxy::unsubscribe`                        |  "unsubscribeLocalModule" and "unsubscribeRemoteModule" to handle the unsubscription of a ALSoundExtractor module  |
++---------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+
+Deprecated methods
+------------------
+
+These methods are deprecated: their replacement methods should be used instead.
+
++-------------------------------------------------------------+-----------------------------------------------------------+
+| Method                                                      | Replacement                                               |
++=============================================================+===========================================================+
+| :cpp:func:`ALAudioDeviceProxy::subscribeRemoteModule`       | :cpp:func:`ALAudioDeviceProxy::subscribe`                 |
++-------------------------------------------------------------+-----------------------------------------------------------+
+| :cpp:func:`ALAudioDeviceProxy::unSubscribeRemoteModule`     | :cpp:func:`ALAudioDeviceProxy::unsubscribe`               |
++-------------------------------------------------------------+-----------------------------------------------------------+
+| ``ALAudioDeviceProxy::subscribeLocalModule``                | :cpp:func:`ALAudioDeviceProxy::subscribe`                 |
++-------------------------------------------------------------+-----------------------------------------------------------+
+| ``ALAudioDeviceProxy::unSubscribeLocalModule``              | :cpp:func:`ALAudioDeviceProxy::unsubscribe`               |
++-------------------------------------------------------------+-----------------------------------------------------------+

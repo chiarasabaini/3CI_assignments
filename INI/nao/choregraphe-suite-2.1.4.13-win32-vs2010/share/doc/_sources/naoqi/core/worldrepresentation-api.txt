@@ -1,0 +1,418 @@
+.. _alworldrepresentation-api:
+
+ALWorldRepresentation API
+=========================
+
+:ref:`Overview <alworldrepresentation>` | API
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alworldrepresentationproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALWorldRepresentationProxy
+
+* :cpp:func:`ALWorldRepresentationProxy::addAttributeToCategory`
+* :cpp:func:`ALWorldRepresentationProxy::clearObject`
+* :cpp:func:`ALWorldRepresentationProxy::clearOldPositions`
+* :cpp:func:`ALWorldRepresentationProxy::createObjectCategory`
+* :cpp:func:`ALWorldRepresentationProxy::deleteObjectAttribute`
+* :cpp:func:`ALWorldRepresentationProxy::findObject`
+* :cpp:func:`ALWorldRepresentationProxy::getChildrenNames`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectNames`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectAttributes`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectAttributeValues`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectLatestAttributes`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectParentName`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectCategory`
+* :cpp:func:`ALWorldRepresentationProxy::getObjectsInCategory`
+* :cpp:func:`ALWorldRepresentationProxy::getPosition`
+* :cpp:func:`ALWorldRepresentationProxy::getPosition6D`
+* :cpp:func:`ALWorldRepresentationProxy::getPosition6DAtTime`
+* :cpp:func:`ALWorldRepresentationProxy::getRootName`
+* :cpp:func:`ALWorldRepresentationProxy::removeObjectCategory`
+* :cpp:func:`ALWorldRepresentationProxy::save`
+* :cpp:func:`ALWorldRepresentationProxy::select`
+* :cpp:func:`ALWorldRepresentationProxy::selectWithOrder`
+* :cpp:func:`ALWorldRepresentationProxy::storeObject`
+* :cpp:func:`ALWorldRepresentationProxy::storeObjectWithReference`
+* :cpp:func:`ALWorldRepresentationProxy::storeObjectAttribute`
+* :cpp:func:`ALWorldRepresentationProxy::updatePosition`
+* :cpp:func:`ALWorldRepresentationProxy::updatePositionWithReference`
+* :cpp:func:`ALWorldRepresentationProxy::updateAttribute`
+
+
+**Deprecated methods**
+
+* :cpp:func:`ALWorldRepresentationProxy::load`
+* :cpp:func:`ALWorldRepresentationProxy::setObjectsLook`
+* :cpp:func:`ALWorldRepresentationProxy::startDisplaying`
+* :cpp:func:`ALWorldRepresentationProxy::stopDisplaying`
+
+
+Methods
+-------
+
+.. cpp:function:: int ALWorldRepresentationProxy::addAttributeToCategory(const std::string& categoryName, const std::string& attributeName, const AL::ALValue& attributeFields)
+
+   Add a new attribute to an existing category. The new category is added to
+   the attribute with the specified fields. Each attribute is unique.
+
+   :param categoryName: Name of the category to modify.
+
+   :param attributeName: Name of the new attribute.
+
+   :param fields: Fields of the new attribute. Has the format [[FieldName, FieldType], ...]
+
+   :return: 0 if success.
+
+.. cpp:function:: int ALWorldRepresentationProxy::clearObject(const std::string& objectName)
+
+  Remove an object and all its descendants from the world.
+
+  :param objectName: The name of the object to remove.
+
+  :return: 0 if success.
+
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::clearOldPositions(const std::string& databaseName, const int& maxAge)
+
+  Clear the stored positions (if relevant) of an object type which are older
+  than a given number of seconds.
+
+  :param objectName: Name of the object.
+
+  :param maxAge: Number of seconds for which the position is outdated.
+
+  :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::createObjectCategory(const std::string& categoryName, const bool& resetCategory)
+
+   Create a new object category, with the possibility to retrieved previously
+   stored information on the category.
+
+   :param category: Name of the new category.
+
+   :param resetCategory: True if the content of the category is reset at
+                         the category creation.
+
+   :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::deleteObjectAttribute(const std::string& objectName, const std::string& attributeName, const std::string& criterion)
+
+   Delete object attributes according to a given criterion (for example,
+   with criterion="LastSeen>42 OR Size < 1").
+
+   :param objectName: Name of the object.
+
+   :param attributeName: Name of the attribute.
+
+   :param criterion: Criterion following the SQL criterion syntax.
+
+   :return: 0 if success.
+
+
+.. cpp:function:: bool ALWorldRepresentationProxy::findObject(const std::string& objectName)
+
+   Check if an object is present.
+
+
+.. cpp:function:: std::vector<std::string> ALWorldRepresentationProxy::getChildrenNames(const std::string& objectName)
+
+  Get the objects which are direct children of the given object.
+
+  :param objectName: Name of the object.
+
+  :return: Vector of the object names.
+
+
+.. cpp:function:: std::string ALWorldRepresentationProxy::getObjectCategory(const std::string& objectName)
+
+   Get the category of an object.
+
+   :param objectName: Name of the object.
+   :return: Name of the the category (empty string if the object does not exist).
+
+
+.. cpp:function:: std::vector<std::string> ALWorldRepresentationProxy::getObjectNames()
+
+  Get the names of all objects from the world.
+
+  :return: Vector of the object names.
+
+
+.. cpp:function:: AL::ALValue ALWorldRepresentationProxy::getObjectAttributes(const std::string& objectName)
+
+   Get all object attributes from an object.
+
+   :param objectName: Name of the object.
+
+   :return: List of all attributes [[AttributeName, AttributeFields] ] where
+            AttributeFields = "(FieldName fieldtype, ...)".
+
+.. cpp:function:: AL::ALValue ALWorldRepresentationProxy::getObjectLatestAttributes(const std::string& objectName, const int& latestCount)
+
+   Gets all the latest values for all attributes for a specific object.
+
+   :param objectName: Name of the query object
+   :param latestCount: Max number of values of the attributes (ordered by timestamp).
+   :return: All latests attributes value for each attribute with the following format [[AttributeName, [[field0Value, field1Value, ...]]], ]
+
+.. cpp:function:: AL::ALValue ALWorldRepresentationProxy::getObjectAttributeValues(const std::string& objectName, const std::string& attributeName, const int& latestCount)
+
+   Gets the latest values of a given attributes for a specific object.
+
+   :param objectName: Name of the query object.
+   :param attributeName: Name of the query attribute.
+   :param latestCount: Maximum number of values queried for the attributes (ordered by timestamp)
+   :return: All latests attribute values for the given attribute, with the following format [field0Value, field1Value, ...]
+            following the attributes fields. Empty if the attribute or the object do not exist.
+
+.. cpp:function:: std::vector<std::string> ALWorldRepresentationProxy::getObjectsInCategory(const std::string& objectName)
+
+   Get all objects that belong to a given category.
+
+   :param categoryName: Name of the category.
+
+   :return: Vector of all object names.
+
+.. cpp:function:: std::string ALWorldRepresentationProxy::getObjectParentName(const std::string& objectName)
+
+   Get the parent object name of a given object, if applicable.
+
+   :param objectName: Name of the given object.
+
+   :return: Name of the parent object, or the object itself if it is the root.
+
+
+.. cpp:function:: AL::ALValue ALWorldRepresentationProxy::getPosition(const std::string& referenceName, const std::string& objectName)
+
+   Get the position of an object relative to another one with quaternion and translation.
+
+   :param referenceName: Name of the reference object.
+   :param objectName: Name of the object.
+   :return: [quaternion, translation] where quaternion = [w, x, y, z] and translation = [x, y, z]
+
+
+.. cpp:function:: std::vector<float> ALWorldRepresentationProxy::getPosition6D(const std::string& referenceName, const std::string& objectName)
+
+  Get the position of an object from the world relatively to another reference
+  object in the world (with translation and Euler angles).
+
+  :param referenceName: Name of the reference object.
+
+  :param objectName: Name of the object.
+
+  :return: Position of the object relative to the reference object. This is a
+           6 dimensional vector containing [x, y, z, Wx, Wy, Wz] where Wx is the
+           rotation around the X axis etc. Will be [0, 0, 0, 0, 0, 0] if one of
+           the two objects does not exist.
+
+.. cpp:function:: std::vector<float> ALWorldRepresentationProxy::getPosition6DAtTime(const std::string& referenceName, const std::string& objectName, const int& secondsAgo, const int& interpType)
+
+  :param referenceName: Name of the reference object.
+
+
+  :param objectName: Name of the object.
+
+  :param secondsAgo: Age in seconds of the interpolated position.
+
+  :param interType: Type of interpolation. 0 is linear interpolation, 1 is `Slerp interpolation <http://en.wikipedia.org/wiki/Slerp>`_.
+
+  :return: Position of the object relative to the reference object. This is a
+           6 dimensional vector containing [x, y, z, Wx, Wy, Wz] where Wx is the
+           rotation around the X axis etc.  Will be [0, 0, 0, 0, 0, 0] if one of
+           the two objects does not exist.
+
+
+.. cpp:function:: std::string ALWorldRepresentationProxy::getRootName()
+
+   :return: The name of the root object in the world representation.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::removeObjectCategory(const std::string& categoryName)
+
+   Completely remove a category and all objects belonging to this category.
+
+   :param categoryName: Name of the category to be removed.
+
+   :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::save()
+
+  Save the graph and databases to the disk.
+
+  :return: 0 if success.
+
+
+.. cpp:function:: AL::ALValue ALWorldRepresentationProxy::select(const std::string& criterion, const std::string& categoryName, const std::string& attributeName, const std::string& fields)
+
+  Select attributes in a category which match a given criterion.
+
+  :param criterion: The criterion to match. The criterion is defined using SQL
+                    syntax for the WHERE clause (see
+                    `here <http://www.w3schools.com/sql/sql_where.asp>`_ for
+                    example): it uses common operators on the field value. For
+                    example, a valid criterion is "Name='Robert' AND Age=42".
+
+  :param categoryName: Name of the category.
+
+  :param attributeName: Name of the attribute.
+
+  :param fields: List of attribute fields that will be selected. "*" means all fields of
+                 the attribute, else the format must be
+                 "FieldName0, FieldName1, ...".
+
+  :return: The attribute fields that match, with the following format: [Row0, Row1, ... ]
+           where Rowi = [FieldValue0, FieldValue1, ...]. The field values are
+           given in the order of the attribute definition when the selected fields
+           are "*", or else in the order given by the fields argument.
+
+
+.. cpp:function:: AL::ALValue ALWorldRepresentationProxy::selectWithOrder(const std::string& criterion, const std::string& orderBy, const std::string& categoryName, const std::string& attributeName, const std::string& fields)
+
+  Select attributes from a category which match a given criterion and
+  order them according to one field value.
+
+  :param criterion: The criterion to match. The criterion is defined using SQL
+                    syntax for the WHERE clause (see
+                    `here <http://www.w3schools.com/sql/sql_where.asp>`_ for
+                    example): it uses common operators on the field value. For
+                    example, a valid criterion is "Name='Robert' AND Age=42".
+
+  :param orderBy: The ordering, with the format "FieldName ASC" for ascending
+                  order and "FieldName DESC" for descending.
+
+  :param categoryName: Name of the category.
+
+  :param attributeName: Name of the attribute.
+
+  :param fields: List of fields that will be selected. "*" means all fields of
+                 the attribute, else the format must be
+                 "FieldName0, FieldName1, ...".
+
+  :return: The attributes that match, with the following format: [Row0, Row1, ... ]
+           where Rowi = [FieldValue0, FieldValue1, ...]. The field values are
+           given in the order of the attribute definition when the selected fields
+           are "*", or else in the order given by the fields argument. The rows
+           are ordered according to the field value.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::storeObject(const std::string& objectName, const std::string& parentName, const std::vector<float>& position6D, const std::string& categoryName, const AL::ALValue& attributes)
+
+   Store a new object.
+
+   :param objectName: Name of the new object. Must be unique.
+
+   :param parentName: Name of the parent object. Must exist.
+
+   :param position6D: Position of the new object relative to its parent.
+
+   :param categoryName: Name of the category of the object. Must exist.
+
+   :param attributes: Attributes of the object. Has a format
+                      [[attributeName, attributeFields], ... ] where
+                      attributeFields = [[FieldName, fieldvalue], ... ]
+
+   :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::storeObjectWithReference(const std::string& objectName, const std::string& referenceName, const std::string& parentName, const std::vector<float>& position6D, const std::string& categoryName, const AL::ALValue& attributes)
+
+  Store a new object in the world, giving its position relative to a reference
+  object and attaching it to a different parent object.
+
+  :param objectName: Name of the new object. Must be unique.
+
+  :param parentName: Name of the parent object. Must exist.
+
+  :param referenceName: Name of the reference object. Must exist.
+
+  :param position6D: Position of the new object relative to its parent.
+
+  :param categoryName: Name of the category of the object. Must exist.
+
+  :param attributes: Attributes of the object. Has a format
+                     [[attributeName, attributeFields], ... ] where
+                     attributeFields = [[FieldName, fieldvalue], ... ]
+
+  :return: 0 if success.
+
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::storeObjectAttribute(const std::string& objectName, const std::string& attributeName, const AL::ALValue& attributeFields)
+
+   Store a new attribute value of an object.
+
+   :param objectName: Name of the object.
+
+   :param attributeName: Name of the object attribute. Must be part of the object category.
+
+   :param attributeFields: Attribute value, with the format attributeFields = [[FieldName, fieldvalue], ... ]i
+
+   :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::updatePosition(const std::string& objectName, const std::vector<float>& position6D, const bool& storePosition)
+
+  Update the position of an object relative to its parent.
+
+  :param objectName: Name of the object.
+
+  :param position6D: Position of the object relative to its parent
+                     ([x, y, z, Wx, Wy, Wz])
+
+  :param storePosition: Store the position in the position attribute of the object or not.
+
+  :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::updatePositionWithReference(const std::string& objectName, const std::string& referenceName, const std::vector<float>& position6D, const bool& storePosition)
+
+  Update the position of an object relative to a reference object.
+
+  :param objectName: Name of the object.
+
+  :param position6D: Position of the object relative to the reference
+                     ([x, y, z, Wx, Wy, Wz])
+
+  :param storePosition: Store the position in the position attribute of the object or not.
+
+  :return: 0 if success.
+
+
+.. cpp:function:: int ALWorldRepresentationProxy::updateAttribute(const std::string& objectName, const std::string& attributeName, const std::string &criterion, const AL::ALValue &attributeFields)
+
+   Update an attribute value of an object.
+
+   :param objectName: Name of an object.
+   :param attributeName: Name of the object attribute. Must be part of the object category.
+   :param criterion: Criterion the attribute must match to be updated. 1 for all.
+   :param attributeFields: Attribute value. attributeFields = [[FieldName, fieldvalue], ... ]
+
+   :return: 0 if success.
+
+.. cpp:function:: void ALWorldRepresentationProxy::load()
+
+	  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALWorldRepresentationProxy::setObjectsLook( const std::string&, const ALValue&)
+
+	  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALWorldRepresentationProxy::startDisplaying()
+
+	  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+
+.. cpp:function:: void ALWorldRepresentationProxy::stopDisplaying()
+
+	  .. deprecated:: 1.22 unstable and inconclusive trial. Do not use.
+

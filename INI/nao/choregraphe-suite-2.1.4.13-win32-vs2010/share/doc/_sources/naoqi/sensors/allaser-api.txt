@@ -1,0 +1,64 @@
+.. _allaser-api:
+
+ALLaser API
+===========
+
+:ref:`naoqi-sensors` - :ref:`Overview <allaser>` | API | :ref:`Tutorial <allaser-tuto>`
+
+---------------
+
+.. seealso::
+
+  - :ref:`laser-head`
+  - :ref:`monitor-laser`
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/allaserproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALLaserProxy
+
+* :cpp:func:`ALLaserProxy::laserOFF`
+* :cpp:func:`ALLaserProxy::laserON`
+* :cpp:func:`ALLaserProxy::setDetectingLength`
+* :cpp:func:`ALLaserProxy::setOpeningAngle`
+
+
+Methods
+-------
+
+
+.. cpp:function:: void ALLaserProxy::laserOFF()
+
+  Disable laser light, the motor will keep turning.
+
+
+.. cpp:function:: void ALLaserProxy::laserON()
+
+  Enable laser light and sampling
+
+
+.. cpp:function:: void ALLaserProxy::setDetectingLength( const int& length_min_l, const int& length_max_l )
+
+  Set detection threshold of the laser
+
+  :param length_min_l: int containing the min length that the laser will detect(mm), this value must be greater than 20 mm
+  :param length_max_l: int containing the max length that the laser will detect(mm), this value must be lower than 5600 mm
+
+
+.. cpp:function:: void ALLaserProxy::setOpeningAngle( const float& angle_min_f, const float& angle_max_f)
+
+  Set openning angle of the laser
+
+  :param angle_min_f: float containing the min value in rad, this value must be upper than -2.35619449
+  :param angle_max_f: float containing the max value in rad, this value must be lower than 2.092349795
+

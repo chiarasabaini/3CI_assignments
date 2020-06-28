@@ -1,0 +1,41 @@
+.. _python_making_nao_speak:
+
+Using the API - Making NAO speak
+================================
+
+Making NAO speak
+----------------
+
+Try to run the following code:
+
+.. code-block:: python
+
+  from naoqi import ALProxy
+  tts = ALProxy("ALTextToSpeech", "<IP of your robot>", 9559)
+  tts.say("Hello, world!")
+
+
+Using a proxy
+-------------
+
+``ALProxy`` is an object that gives you acces to all the methods or the module your
+are going to connect to.
+
+.. py:class:: ALProxy(name, ip, port)
+
+  * name - The name of the module
+  * ip   - The IP of your robot
+  * port - The port on which NAOqi listens (9559 by default)
+
+  Every method of the module are directly accessible through the object, for
+  instance::
+
+    almemory = ALProxy("ALMemory", "nao.local", 9559)
+    pings = almemory.ping()
+
+.. seealso::
+
+   - :ref:`naoqi-overview`
+   - :ref:`naoqi-proxy`
+   - :ref:`python-sdk-troubleshooting`
+

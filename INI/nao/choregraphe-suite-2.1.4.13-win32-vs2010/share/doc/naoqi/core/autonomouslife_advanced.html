@@ -1,0 +1,391 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALAutonomousLife - Advanced &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="ALAutonomousLife" href="autonomouslife.html" />
+    <link rel="next" title="ALBehaviorManager" href="albehaviormanager.html" />
+    <link rel="prev" title="Launch trigger conditions" href="triggerconditions.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="triggerconditions.html" title="Launch trigger conditions">previous</a>
+     |
+    <a href="autonomouslife.html" title="ALAutonomousLife" accesskey="U">up</a>
+   |
+    <a href="albehaviormanager.html" title="ALBehaviorManager">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-core-autonomouslife_advanced">
+            
+  <div class="section" id="alautonomouslife-advanced">
+<span id="autonomouslife-advanced"></span><h1>ALAutonomousLife - Advanced<a class="headerlink" href="#alautonomouslife-advanced" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-core"><em>NAOqi Core</em></a> - <a class="reference internal" href="autonomouslife.html#autonomouslife"><em>Overview</em></a> | <a class="reference internal" href="autonomouslife-api.html#autonomouslife-api"><em>API</em></a> |
+<a class="reference internal" href="triggerconditions.html#launchtriggerconditions"><em>Launch trigger conditions</em></a> | Advanced</p>
+<hr class="docutils" />
+<div class="section" id="autonomous-life-states">
+<span id="autonomouslife-states"></span><h2>Autonomous Life states<a class="headerlink" href="#autonomous-life-states" title="Permalink to this headline">¶</a></h2>
+<p><strong>ALAutonomousLife</strong> states exist for prioritization and automation of starting
+activities and other services.</p>
+<div class="section" id="list-of-autonomous-life-states">
+<h3>List of Autonomous Life states<a class="headerlink" href="#list-of-autonomous-life-states" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">State name</th>
+<th class="head">For further details, see ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#8220;solitary&#8221;</td>
+<td><a class="reference internal" href="#autonomouslife-solitary"><em>Solitary state</em></a></td>
+</tr>
+<tr class="row-odd"><td>&#8220;interactive&#8221;</td>
+<td><a class="reference internal" href="#autonomouslife-interactive"><em>Interactive state</em></a></td>
+</tr>
+<tr class="row-even"><td>&#8220;disabled&#8221;</td>
+<td><a class="reference internal" href="#autonomouslife-disabled"><em>Disabled state</em></a></td>
+</tr>
+<tr class="row-odd"><td>&#8220;safeguard&#8221;</td>
+<td><a class="reference internal" href="#autonomouslife-safeguard"><em>Safeguard state</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="solitary-state">
+<span id="autonomouslife-solitary"></span><h3>Solitary state<a class="headerlink" href="#solitary-state" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/state_solitary_interactive.png" src="../../_images/state_solitary_interactive.png" />
+<p><strong>Solitary state is entered from any state</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">From ...</th>
+<th class="head">Solitary state is entered ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>disabled</strong></td>
+<td>programmatically.</td>
+</tr>
+<tr class="row-odd"><td><strong>interactive</strong></td>
+<td>when interactive Activity stack finished.</td>
+</tr>
+<tr class="row-even"><td><strong>safeguard</strong></td>
+<td>when safeguard successfully processed.</td>
+</tr>
+<tr class="row-odd"><td><strong>solitary</strong></td>
+<td>when a solitary Activity finished.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>When this state is entered</strong>:</p>
+<ul class="simple">
+<li>Basic Awareness and Breathing services are started and parameters reset.</li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> is started.</li>
+<li>Only plugins for &#8220;solitary&#8221; group are enabled by default.</li>
+</ul>
+<p><strong>During this state</strong>:</p>
+<ul class="simple">
+<li>Any activity can be started via <a class="reference internal" href="autonomouslife-api.html#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus()</span></tt></a>.</li>
+<li>Starting interactive Activity will switch to <strong>interactive</strong> state.</li>
+<li>The <strong>safeguard</strong> and <strong>disabled</strong> states may be entered.</li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> can not be stopped,
+and its suggested activities will be automatically focused, potentially
+interrupting running Activity.</li>
+</ul>
+<p><strong>Launchpad Activity prioritization</strong>:</p>
+<ul class="simple">
+<li>If a solitary and interactive both have true conditions at the same time,
+interactive will get priority.</li>
+<li>When multiple activities have true conditions at the same time,
+the one that was focused least recently will get priority.</li>
+<li>During a solitary Activity, an interactive Activity may interrupt it to take the focus.</li>
+<li>A solitary Activity will not be interrupted another solitary Activity (this behavior could change in the future)</li>
+</ul>
+</div>
+<div class="section" id="interactive-state">
+<span id="autonomouslife-interactive"></span><h3>Interactive state<a class="headerlink" href="#interactive-state" title="Permalink to this headline">¶</a></h3>
+<p><strong>Interactive state is only entered</strong>:</p>
+<ul class="simple">
+<li>when an Interactive Activity is focused.</li>
+</ul>
+<p><strong>When this state is entered</strong>:</p>
+<ul class="simple">
+<li>Basic Awareness and Breathing services will be started and parameters reset.</li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> will be stopped.</li>
+</ul>
+<p><strong>During this state</strong>:</p>
+<ul class="simple">
+<li>Interactive activities can be started via
+<a class="reference internal" href="autonomouslife-api.html#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus()</span></tt></a><ul>
+<li>Focusing a new interactive Activity will re-enter the interactive state.</li>
+<li>Solitary activities may not be started, this would cause the solitary state
+to enforce its rules and create a bad life cycle with the user. (This could
+change in the future)</li>
+</ul>
+</li>
+<li>The <strong>safeguard</strong> and <strong>disabled</strong> state may be entered.</li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> can be started,
+it will not enforce focusing its suggestions. It will not interrupt the running Activity.</li>
+<li>When an entire stack of interactive activities has exited, solitary state
+will be entered.</li>
+<li>When all humans have been lost, the interactive Activity will be forcibly exited.
+(This is not yet implemented)</li>
+</ul>
+</div>
+<div class="section" id="disabled-state">
+<span id="autonomouslife-disabled"></span><h3>Disabled state<a class="headerlink" href="#disabled-state" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/state_disabled.png" src="../../_images/state_disabled.png" />
+<p><strong>When this state is entered</strong>:</p>
+<ul class="simple">
+<li>Focused Activity will be stopped and stack cleared.</li>
+<li>Basic Awareness and Breathing services will be stopped if they are running.</li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em>. will be stopped.</li>
+</ul>
+<p><strong>During this state</strong>:</p>
+<ul class="simple">
+<li>No Activity can be started via <a class="reference internal" href="autonomouslife-api.html#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus()</span></tt></a></li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> can not be started.</li>
+<li>The <strong>safeguard</strong> or <strong>interactive</strong> state may not be entered.</li>
+</ul>
+<p><strong>To exit this state</strong>:</p>
+<ul class="simple">
+<li>the developer may call <a class="reference internal" href="autonomouslife-api.html#ALAutonomousLifeProxy::setState__ssCR" title="ALAutonomousLifeProxy::setState"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::setState()</span></tt></a></li>
+<li>This action will be provided in a default startup behavior where desired.</li>
+</ul>
+</div>
+<div class="section" id="safeguard-state">
+<span id="autonomouslife-safeguard"></span><h3>Safeguard state<a class="headerlink" href="#safeguard-state" title="Permalink to this headline">¶</a></h3>
+<p><strong>Safeguard state is entered when</strong>:</p>
+<ul class="simple">
+<li>A critical reflex raised.</li>
+<li>The developer should not enter this state. Entering this state is reserved for
+critical Aldebaran code.</li>
+<li>A critical reflex is raised when <a class="reference internal" href="../sensors/albodytemperature.html#albodytemperature"><em>ALBodyTemperature</em></a> sees that a critical joint
+is too hot to function, or if <a class="reference internal" href="../diagnosis/aldiagnosis.html#aldiagnosis"><em>ALDiagnosis</em></a> sees that critical hardware is not
+functioning properly, as defined in <a class="reference internal" href="../../family/nao_dcm/actuator_sensor_names.html#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>.</li>
+</ul>
+<p><strong>When this state is entered</strong>:</p>
+<ul class="simple">
+<li>Focused Activity is stopped and stack cleared.</li>
+<li>Basic Awareness and Breathing services are stopped if they are running.</li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> is stopped.</li>
+<li>The reflex is then processed.</li>
+<li>Based on the outcome of the reflex, the <strong>solitary</strong> state may be re-entered.<ul>
+<li>For damaged hardware, the robot does not exit <strong>safeguard</strong> state.</li>
+<li>For overheating, the robot exits the <strong>safeguard</strong> state after cooling down
+sufficiently.</li>
+</ul>
+</li>
+</ul>
+<p><strong>During this state</strong>:</p>
+<ul class="simple">
+<li>No Activity can be started via <a class="reference internal" href="autonomouslife-api.html#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus()</span></tt></a></li>
+<li><em class="xref std std-ref">Autonomous Launchpad</em> can not be started.</li>
+<li>The <strong>safeguard</strong> state may be re-entered for a higher priority reflex.</li>
+</ul>
+<img alt="../../_images/state_safeguard.png" src="../../_images/state_safeguard.png" style="width: 545px; height: 251px;" />
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="triggerconditions.html" title="Launch trigger conditions">Launch trigger conditions</a>
+     |
+    <a href="autonomouslife.html" title="ALAutonomousLife" accesskey="U">ALAutonomousLife</a>
+   |
+    <a href="albehaviormanager.html" title="ALBehaviorManager">ALBehaviorManager</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Core</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="autonomouslife.html">ALAutonomousLife</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="autonomouslife-api.html">ALAutonomousLife API</a></li>
+<li class="toctree-l6"><a class="reference internal" href="triggerconditions.html">Launch trigger conditions</a></li>
+<li class="toctree-l6 current"><a class="current reference internal" href="">ALAutonomousLife - Advanced</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="albehaviormanager.html">ALBehaviorManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../connectionmanager/index.html">ALConnectionManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="extractors.html">Extractors</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almemory.html">ALMemory</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almodule.html">ALModule</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../notificationmanager/index.html">ALNotificationManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alpreferencemanager.html">ALPreferenceManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alresourcemanager.html">ALResourceManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alstore.html">ALStore</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alsystem.html">ALSystem</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alusersession.html">ALUserSession</a></li>
+<li class="toctree-l5"><a class="reference internal" href="altabletservice.html">ALTabletService</a></li>
+<li class="toctree-l5"><a class="reference internal" href="worldrepresentation.html">ALWorldRepresentation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="packagemanager.html">PackageManager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="albonjour.html">ALBonjour</a></li>
+<li class="toctree-l5"><a class="reference internal" href="allauncher.html">ALLauncher</a></li>
+<li class="toctree-l5"><a class="reference internal" href="allogger.html">ALLogger</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alpreferences.html">ALPreferences</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALAutonomousLife - Advanced</a><ul>
+<li><a class="reference internal" href="#autonomous-life-states">Autonomous Life states</a><ul>
+<li><a class="reference internal" href="#list-of-autonomous-life-states">List of Autonomous Life states</a></li>
+<li><a class="reference internal" href="#solitary-state">Solitary state</a></li>
+<li><a class="reference internal" href="#interactive-state">Interactive state</a></li>
+<li><a class="reference internal" href="#disabled-state">Disabled state</a></li>
+<li><a class="reference internal" href="#safeguard-state">Safeguard state</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="triggerconditions.html" title="Launch trigger conditions">previous</a>
+     |
+    <a href="autonomouslife.html" title="ALAutonomousLife" accesskey="U">up</a>
+   |
+    <a href="albehaviormanager.html" title="ALBehaviorManager">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

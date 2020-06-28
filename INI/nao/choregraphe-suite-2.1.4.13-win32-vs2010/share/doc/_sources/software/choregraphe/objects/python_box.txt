@@ -1,0 +1,59 @@
+.. _choregraphe-reference-box-type-python:
+
+Python box
+==========
+
+What is a Python box
+--------------------
+
+A **Python** box is a :ref:`box <choregraphe-reference-box>` which includes
+a Python script. See :ref:`python_script` to learn the specificities of
+Python in Choregraphe.
+
+.. image:: /medias/desktop/choregraphe/chore_ref_script_box.png
+   :width: 514 px
+   :height: 544 px
+
+.. _choregraphe-howto-create-script-box:
+
+How to create a Python box
+--------------------------
+
+To create a **Python** box:
+
+=====  ==========================================================================
+Step    Action
+=====  ==========================================================================
+1.      Right click on the **Flow diagram** wherever you want to create the box.
+
+2.      Choose **Create a new box** > **Python...** in the contextual menu.
+
+        .. image:: /medias/desktop/choregraphe/python_box_creation.png
+           :width: 238 px
+           :height: 412 px
+
+3.      Define a **Name** and a **Description** for your box.
+
+4.      **Optional**: set the picture to recognize it among other boxes.
+
+5.      **Optional**: set **Parameters**, **Inputs** and **Outputs**.
+
+        For further details about parameters, see: :ref:`How to add/remove inputs,
+        outputs, parameters in a box
+        <choregraphe-howto-add-remove-box-in-out-param>`.
+
+6.      Click the **OK** button.
+        The created **Python** box is displayed on the Flow diagram.
+
+7.      Double click on your box.
+
+        The **Script editor** is opened and displays the python script of the box.
+
+        The structure of the script is automatically generated and should look
+        like that:
+
+        .. image:: /medias/desktop/choregraphe/create_script_box.png
+           :width: 352 px
+           :height: 415 px
+=====  ==========================================================================
+

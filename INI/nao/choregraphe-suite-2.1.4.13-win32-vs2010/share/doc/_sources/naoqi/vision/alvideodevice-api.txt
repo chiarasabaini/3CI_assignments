@@ -1,0 +1,1598 @@
+.. include:: ../../bulk/common.rst
+
+.. _alvideodevice-api:
+
+ALVideoDevice API
+=================
+
+:ref:`naoqi-vision` - :ref:`Overview <alvideodevice>` | API |
+:ref:`Tutorial <alvideodevice-tuto>` | :ref:`API-advanced`
+
+--------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alvideodeviceproxy.h>
+
+
+Method list
+------------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALVideoDeviceProxy
+
+* :ref:`ALVideoDevice::ModuleSubscriptionManagement`
+
+  * :cpp:func:`ALVideoDeviceProxy::subscribeCamera`
+  * :cpp:func:`ALVideoDeviceProxy::subscribeCameras`
+  * :cpp:func:`ALVideoDeviceProxy::unsubscribe`
+  * :cpp:func:`ALVideoDeviceProxy::getSubscribers`
+
+* :ref:`ALVideoDevice::CameraManagement`
+
+  * :cpp:func:`ALVideoDeviceProxy::getCameraIndexes`
+  * :cpp:func:`ALVideoDeviceProxy::hasDepthCamera`
+  * :cpp:func:`ALVideoDeviceProxy::getCameraModel`
+  * :cpp:func:`ALVideoDeviceProxy::getCameraName`
+  * :ref:`ALVideoDeviceProxy::getActiveCamera()<ALVideoDeviceProxy::getActiveCamera_camera>`
+  * :cpp:func:`ALVideoDeviceProxy::setActiveCamera`
+  * :ref:`ALVideoDeviceProxy::getFrameRate()<ALVideoDeviceProxy::getFrameRate_camera>`
+  * :ref:`ALVideoDeviceProxy::getResolution()<ALVideoDeviceProxy::getResolution_camera>`
+  * :ref:`ALVideoDeviceProxy::getColorSpace()<ALVideoDeviceProxy::getColorSpace_camera>`
+  * :cpp:func:`ALVideoDeviceProxy::getHorizontalFOV`
+  * :cpp:func:`ALVideoDeviceProxy::getVerticalFOV`
+  * :cpp:func:`ALVideoDeviceProxy::getParameter`
+  * :cpp:func:`ALVideoDeviceProxy::getParameterRange`
+  * :cpp:func:`ALVideoDeviceProxy::setParameter`
+  * :cpp:func:`ALVideoDeviceProxy::setParameterToDefault`
+  * :cpp:func:`ALVideoDeviceProxy::setAllParametersToDefault`
+  * :cpp:func:`ALVideoDeviceProxy::openCamera`
+  * :cpp:func:`ALVideoDeviceProxy::closeCamera`
+  * :cpp:func:`ALVideoDeviceProxy::isCameraOpen`
+  * :cpp:func:`ALVideoDeviceProxy::startCamera`
+  * :cpp:func:`ALVideoDeviceProxy::stopCamera`
+  * :cpp:func:`ALVideoDeviceProxy::isCameraStarted`
+
+* :ref:`ALVideoDevice::MonoStreamManagement`
+
+  * :ref:`ALVideoDeviceProxy::getActiveCamera()<ALVideoDeviceProxy::getActiveCamera_monostream>`
+  * :cpp:func:`ALVideoDeviceProxy::setActiveCamera`
+  * :ref:`ALVideoDeviceProxy::getFrameRate() <ALVideoDeviceProxy::getFrameRate_monostream>`
+  * :cpp:func:`ALVideoDeviceProxy::setFrameRate`
+  * :ref:`ALVideoDeviceProxy::getResolution()<ALVideoDeviceProxy::getResolution_monostream>`
+  * :cpp:func:`ALVideoDeviceProxy::setResolution`
+  * :ref:`ALVideoDeviceProxy::getColorSpace()<ALVideoDeviceProxy::getColorSpace_monostream>`
+  * :cpp:func:`ALVideoDeviceProxy::setColorSpace`
+  * :cpp:func:`ALVideoDeviceProxy::getCameraParameter`
+  * :cpp:func:`ALVideoDeviceProxy::getCameraParameterRange`
+  * :cpp:func:`ALVideoDeviceProxy::setCameraParameter`
+  * :cpp:func:`ALVideoDeviceProxy::setCameraParameterToDefault`
+  * :cpp:func:`ALVideoDeviceProxy::setAllCameraParametersToDefault`
+  * :cpp:func:`ALVideoDeviceProxy::getDirectRawImageLocal`
+  * :cpp:func:`ALVideoDeviceProxy::getDirectRawImageRemote`
+  * :cpp:func:`ALVideoDeviceProxy::releaseDirectRawImage`
+  * :cpp:func:`ALVideoDeviceProxy::getImageLocal`
+  * :cpp:func:`ALVideoDeviceProxy::getImageRemote`
+  * :cpp:func:`ALVideoDeviceProxy::releaseImage`
+
+* :ref:`ALVideoDevice::MultiStreamManagement`
+
+  * :cpp:func:`ALVideoDeviceProxy::getActiveCameras`
+  * :cpp:func:`ALVideoDeviceProxy::setActiveCameras`
+  * :cpp:func:`ALVideoDeviceProxy::getResolutions`
+  * :cpp:func:`ALVideoDeviceProxy::setResolutions`
+  * :cpp:func:`ALVideoDeviceProxy::getColorSpaces`
+  * :cpp:func:`ALVideoDeviceProxy::setColorSpaces`
+  * :cpp:func:`ALVideoDeviceProxy::getCamerasParameter`
+  * :cpp:func:`ALVideoDeviceProxy::setCamerasParameter`
+  * :cpp:func:`ALVideoDeviceProxy::setCamerasParameterToDefault`
+  * :cpp:func:`ALVideoDeviceProxy::getDirectRawImagesLocal`
+  * :cpp:func:`ALVideoDeviceProxy::getDirectRawImagesRemote`
+  * :cpp:func:`ALVideoDeviceProxy::releaseDirectRawImages`
+  * :cpp:func:`ALVideoDeviceProxy::getImagesLocal`
+  * :cpp:func:`ALVideoDeviceProxy::getImagesRemote`
+  * :cpp:func:`ALVideoDeviceProxy::releaseImages`
+
+* :ref:`ALVideoDevice::Simulation`
+
+  * :cpp:func:`ALVideoDeviceProxy::putImage`
+  * :cpp:func:`ALVideoDeviceProxy::getExpectedImageParameters`
+
+* :ref:`ALVideoDevice::Conversion`
+
+  * :cpp:func:`ALVideoDeviceProxy::getAngularPositionFromImagePosition`
+  * :cpp:func:`ALVideoDeviceProxy::getImagePositionFromAngularPosition`
+  * :cpp:func:`ALVideoDeviceProxy::getAngularSizeFromImageSize`
+  * :cpp:func:`ALVideoDeviceProxy::getImageSizeFromAngularSize`
+  * :cpp:func:`ALVideoDeviceProxy::getImageInfoFromAngularInfo`
+  * :cpp:func:`ALVideoDeviceProxy::getImageInfoFromAngularInfoWithResolution`
+
+* :ref:`ALVideoDevice::DeprecatedMethods`
+
+  * :cpp:func:`ALVideoDeviceProxy::onClientDisconnected`
+
+  * :cpp:func:`ALVideoDeviceProxy::subscribe`
+  * :cpp:func:`ALVideoDeviceProxy::unsubscribeAllInstances`
+
+  * :cpp:func:`ALVideoDeviceProxy::getVIMResolution`
+  * :cpp:func:`ALVideoDeviceProxy::getVIMColorSpace`
+  * :cpp:func:`ALVideoDeviceProxy::getVIMFrameRate`
+  * :cpp:func:`ALVideoDeviceProxy::getGVMResolution`
+  * :cpp:func:`ALVideoDeviceProxy::getGVMColorSpace`
+  * :cpp:func:`ALVideoDeviceProxy::getGVMFrameRate`
+  * :ref:`ALVideoDeviceProxy::startFrameGrabber()<ALVideoDeviceProxy::startFrameGrabber_camera>`
+  * :ref:`ALVideoDeviceProxy::stopFrameGrabber()<ALVideoDeviceProxy::stopFrameGrabber_camera>`
+  * :ref:`ALVideoDeviceProxy::isFrameGrabberOff()<ALVideoDeviceProxy::isFrameGrabberOff_camera>`
+
+  * :cpp:func:`ALVideoDeviceProxy::getCameraModelID`
+
+  * :cpp:func:`ALVideoDeviceProxy::setParam`
+  * :cpp:func:`ALVideoDeviceProxy::getParam`
+  * :cpp:func:`ALVideoDeviceProxy::setParamDefault`
+
+  * :cpp:func:`ALVideoDeviceProxy::getAngPosFromImgPos`
+  * :cpp:func:`ALVideoDeviceProxy::getAngSizeFromImgSize`
+  * :cpp:func:`ALVideoDeviceProxy::getImgInfoFromAngInfo`
+  * :cpp:func:`ALVideoDeviceProxy::getImgInfoFromAngInfoWithRes`
+  * :cpp:func:`ALVideoDeviceProxy::getImgPosFromAngPos`
+  * :cpp:func:`ALVideoDeviceProxy::getImgSizeFromAngSize`
+
+  * :ref:`ALVideoDeviceProxy::getExpectedImageParameters()<ALVideoDeviceProxy::getExpectedImageParameters_deprecated>`
+  * :cpp:func:`ALVideoDeviceProxy::setSimCamInputSize`
+  * :ref:`ALVideoDeviceProxy::putImage()<ALVideoDeviceProxy::getExpectedImageParameters_deprecated>`
+
+  * :cpp:func:`ALVideoDeviceProxy::resolutionToSizes`
+  * :cpp:func:`ALVideoDeviceProxy::sizesToResolution`
+
+  * :ref:`ALVideoDeviceProxy::startFrameGrabber()<ALVideoDeviceProxy::startFrameGrabber_deprecated>`
+  * :ref:`ALVideoDeviceProxy::stopFrameGrabber()<ALVideoDeviceProxy::stopFrameGrabber_deprecated>`
+  * :ref:`ALVideoDeviceProxy::isFrameGrabberOff()<ALVideoDeviceProxy::isFrameGrabberOff_deprecated>`
+
+  * :cpp:func:`ALVideoDeviceProxy::getHorizontalAperture`
+  * :cpp:func:`ALVideoDeviceProxy::getVerticalAperture`
+
+  * :cpp:func:`ALVideoDeviceProxy::recordVideo`
+  * :cpp:func:`ALVideoDeviceProxy::stopVideo`
+
+
+.. _ALVideoDevice::ModuleSubscriptionManagement:
+
+Module Subscription Management
+------------------------------
+
+.. cpp:function:: std::string ALVideoDeviceProxy::subscribeCamera(const std::string &Name, const int &CameraIndex, const int &Resolution, const int &ColorSpace, const int &Fps)
+
+  Subscribes to ALVideoDevice. When a Video Module registers to ALVideoDevice, a buffer of the requested image format is added to the buffers list.
+  Returns an handle which identifies the module in ALVideoDevice. (This handle is based on the name parameter,e.g. the 3rd one getting _3 added to its name for instance to build this handle).
+
+  :param Name: Name of the subscribing module.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param Resolution: Resolution requested (see :ref:`cameraresolution`).
+
+  :param ColorSpace: Colorspace requested (see :ref:`cameracolorspace`).
+
+  :param Fps: Fps (frames per second) requested to the video source (see :ref:`cameraframerate`).
+
+  :return: String handle under which the module is known from ALVideoDevice, empty string if error occurred.
+
+  .. warning::
+   The same Name could be used only six time.
+
+  .. note::
+   Compared to a local module, the obtained framerate for a remote module will depend on the network available bandwith (e.g. we can reach raw ``1280x960@10fps`` using a Gigabit Ethernet connection with the HD camera).
+
+.. cpp:function:: std::string ALVideoDeviceProxy::subscribeCameras(const std::string &Name, const AL::ALValue &CameraIndexes, const AL::ALValue &Resolutions, const AL::ALValue &ColorSpaces, const int &Fps)
+
+  Subscribes to Video Input System. When a Video Module subscribes to ALVideoDevice, a buffer of the requested image resolution is added to the list of buffers for each camera.
+
+  :param Name: Name of the subscribing module.
+
+  :param CameraIndexes: Array of the requested camera indexes. You can't have the same camera index several time (see :ref:`cameraindex`).
+
+  :param Resolutions: Array of the resolutions requested (see :ref:`cameraresolution`).
+
+  :param ColorSpaces: Array of the color spaces requested (see :ref:`cameracolorspace`.
+
+  :param Fps: Fps (frames per second) requested to the video source (see :ref:`cameraframerate`).
+
+  :return: String handle under which the module is known from ALVideoDevice.
+
+  .. warning::
+   The same Name could be used only six time.
+
+  .. note::
+   - By default the active camera will be the first camera in the array.
+   - Returned registered name could be different to the subscribing module name.
+
+.. cpp:function:: bool ALVideoDeviceProxy::unsubscribe(const std::string &Handle)
+
+  Unregisters a module from ALVideoDevice.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: true if success, false otherwise.
+
+:download:`alvideodevice_subscribe.cpp </samples/cpp/alvideodevice/alvideodevice_subscribe.cpp>`
+
+.. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_subscribe.cpp
+  :language: cpp
+
+.. cpp:function:: AL::ALValue  ALVideoDeviceProxy::getSubscribers()
+
+  Gets a list containing all the handle name of the subscribers.
+
+  :return: Array of string containing the subscriber names.
+
+.. _ALVideoDevice::CameraManagement:
+
+Camera Management
+-----------------
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getCameraIndexes()
+
+  Gets list of available camera indexes.
+
+  :return: Array of camera index (see :ref:`cameraindex`).
+
+.. cpp:function:: bool ALVideoDeviceProxy::hasDepthCamera()
+
+  Asks if a depth camera was detected by ALVideoDevice. If present, a depth
+  camera can be accessed with the index *kDepthCamera*.
+
+  :return: true if a depth camera is present, false otherwise.
+
+.. cpp:function:: int ALVideoDeviceProxy::getCameraModel(const int &CameraIndex)
+
+  Gets the camera model of the specified camera.
+
+  :param CameraIndex: Index of the camera in the video system.
+
+                      For further details, see: :ref:`cameraindex`.
+
+  :return: :ref:`cameramodel`.
+
+.. cpp:function:: std::string ALVideoDeviceProxy::getCameraName(const int &CameraIndex)
+
+  Gets the name of the specified camera.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: name of the camera (sensor name used by motion).
+
+.. _ALVideoDeviceProxy::getActiveCamera_camera:
+.. cpp:function:: int ALVideoDeviceProxy::getActiveCamera()
+
+  Gets the index of the current default active camera.
+
+  :return: :ref:`cameraindex`.
+
+  :download:`alvideodevice_subscribe.cpp </samples/cpp/alvideodevice/alvideodevice_getactivecamera.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_getactivecamera.cpp
+    :language: cpp
+
+.. cpp:function:: bool ALVideoDeviceProxy::setActiveCamera(const int &ActiveCamera)
+
+  Sets the current default active camera for the system.
+
+  :param ActiveCamera: Camera index (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDeviceProxy::getFrameRate_camera:
+.. cpp:function:: int ALVideoDeviceProxy::getFrameRate(const int &CameraIndex)
+
+  Gets the internal frame rate of the video source.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: video source framerate. -1: can't access video source.
+
+.. _ALVideoDeviceProxy::getResolution_camera:
+.. cpp:function:: int ALVideoDeviceProxy::getResolution(const int &CameraIndex)
+
+  Gets the resolution of the video source before eventual conversion.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: :ref:`cameraresolution` or -1: can't access video source.
+
+.. _ALVideoDeviceProxy::getColorSpace_camera:
+.. cpp:function:: int ALVideoDeviceProxy::getColorSpace(const int &CameraIndex)
+
+  Get the color space of the video source before eventual conversion.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: :ref:`cameracolorspace` or -1: can't access video source.
+
+.. cpp:function:: float ALVideoDeviceProxy::getHorizontalFOV(const int& CameraIndex)
+
+  Gets the camera horizontal field of view for the specified camera.
+
+  :param CameraIndex: Index to the camera in the video system (see :ref:`cameraindex`).
+
+  :return: Horizontal field of view of the camera (in radian).
+
+.. cpp:function:: float ALVideoDeviceProxy::getVerticalFOV(const int& CameraIndex)
+
+  Gets the camera vertical field of view for the specified camera.
+
+  :param CameraIndex: Index to the camera in the video system (see :ref:`cameraindex`).
+
+  :return: Vertical field of view of the camera (in radian).
+
+.. cpp:function:: int ALVideoDeviceProxy::getParameter(const int& CameraIndex, const int& parameter)
+
+  Gets camera internal parameter.
+
+  :param CameraIndex: Index to the camera whose module wants image (see :ref:`cameraindex`).
+
+  :param parameter: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :return: Value of the camera parameter.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getParameterRange(const int& CameraIndex, const int& Id)
+
+  Gets the range of a camera's parameter.
+
+  :param CameraIndex: Index to the camera whose module wants image (see :ref:`cameraindex`).
+
+  :param Id: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :return: An ALValue containing the minimum and maximum value for the requested parameter.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setParameter(const int& CameraIndex, const int& parameter, const int& newValue)
+
+  Modifies camera internal parameter.
+
+  :param CameraIndex: index to the camera whose module wants image (see :ref:`cameraindex`).
+
+  :param parameter: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :param newValue: value to set.
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setParameterToDefault(const int& CameraIndex, const int& parameter)
+
+  Resets camera internal parameter to its default value.
+
+  :param CameraIndex: Index to the camera whose module wants image (see :ref:`cameraindex`).
+
+  :param parameter: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setAllParametersToDefault(const int& CameraIndex)
+
+  Resets all camera internal parameters to their default value.
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::openCamera(const int& CameraIndex)
+
+  Opens and initializes the video source device.
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::closeCamera(const int& CameraIndex)
+
+  Closes the video source device, releasing resources.
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::isCameraOpen(const int& CameraIndex)
+
+  Detects if the video device is open (i.e. locked).
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::startCamera(const int& CameraIndex)
+
+  Starts the video capture of the specified video device.
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::stopCamera(const int& CameraIndex)
+
+  Stops the video capture of the specified video device.
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::isCameraStarted(const int& CameraIndex)
+
+  Detects if the video device is running (i.e. capture images).
+
+  :param CameraIndex: Index to the camera (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDevice::MonoStreamManagement:
+
+Mono Stream Management
+----------------------
+
+.. _ALVideoDeviceProxy::getActiveCamera_monostream:
+.. cpp:function:: int ALVideoDeviceProxy::getActiveCamera(const std::string &Handle)
+
+  Gets the current active camera for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: :ref:`cameraindex` or -1: can't access video source.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setActiveCamera(const std::string &Handle, const int &ActiveCamera)
+
+  Sets the current active camera for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param ActiveCamera: Camera index (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDeviceProxy::getFrameRate_monostream:
+.. cpp:function:: int ALVideoDeviceProxy::getFrameRate(const std::string &Handle)
+
+  Gets the frame rate that a particular Vision Module has requested to the camera.
+  This doesn't mean the video source is able to run at this frame rate
+  (see :cpp:func:`ALVideoDeviceProxy::getFrameRate` to know the video source framerate).
+  This doesn't either mean that a remote module will obtain images at this framerate due to network bandwith limitations.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: module framerate or -1: can't access video source.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setFrameRate(const std::string &Handle, const int &Fps)
+
+  Changes the framerate requested to the video source by the subscribed module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Fps: Fps (frames per second) requested to the video source (see :ref:`cameraframerate`).
+
+  .. note::
+   The requested framerate will be achieved locally. Remotely, the achieved framerate will depend on the network available bandwith (e.g. we can reach raw ``1280x960@10fps`` using a Gigabit Ethernet connection with the HD camera).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDeviceProxy::getResolution_monostream:
+.. cpp:function:: int ALVideoDeviceProxy::getResolution(const std::string &Handle)
+
+  Gets the current resolution requested for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: :ref:`cameraresolution`.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setResolution(const std::string &Handle, const int &Resolution)
+
+  Sets the size of the output image for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Resolution: Resolution requested (see :ref:`cameraresolution`).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDeviceProxy::getColorSpace_monostream:
+.. cpp:function:: int ALVideoDeviceProxy::getColorSpace(const std::string &Handle)
+
+  Gets the current color space requested for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: :ref:`cameracolorspace` or -1: can't access video source.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setColorSpace(const std::string &Handle, const int &ColorSpace)
+
+  Sets the current color space requested for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param ColorSpace: Colorspace requested (see :ref:`cameracolorspace`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: int ALVideoDeviceProxy::getCameraParameter(const std::string &Handle, const int &Id)
+
+  Gets a camera's parameter from the module current active camera. This method will probe for value of the current active camera of the module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Id: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :return: Parameter’s value.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getCameraParameterRange(const std::string& Handle, const int& Id)
+
+  Gets the range of a camera's parameter from the module current active camera.
+
+  :param Handle: Handle under which the module is known from the video system.
+
+  :param Id: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :return: An ALValue containing the minimum and maximum of the requested parameter.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setCameraParameter(const std::string &Handle, const int &Id, const int &NewValue)
+
+  Sets the value of a specific parameter for the module current active camera.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Id: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :param NewValue: New value to set.
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setCameraParameterToDefault(const std::string &Handle, const int &Id)
+
+  Sets a camera's parameter to its default value.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Id: Id of the camera parameter  (see :ref:`cameraparameter`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: bool ALVideoDeviceProxy::setAllCameraParametersToDefault(const std::string& Handle)
+
+  Resets all camera internal parameters to their default value.
+
+  :param Handle: Handle under which the module is known from the video system.
+
+  :return: true if successful, false otherwise.
+
+.. cpp:function:: AL::ALImage * ALVideoDeviceProxy::getDirectRawImageLocal(const std::string &Handle)
+
+  Retrieves the latest image from the video source and returns a pointer to the locked :cpp:type:`AL::ALImage`, with data array pointing directly to raw data. There is no format conversion and no copy of the raw buffer.
+
+  .. warning::
+     - Direct raw images are encoded using the same layout than the one used with AL::kYUV422ColorSpace.
+     - When image is not necessary anymore, a call to releaseDirectRawImage() is requested.
+     - When using this mode for several modules, if they need raw data for more than 25ms check that you have strictly less modules in this requesting direct raw images than the amount of kernel buffers.
+     - Release all kernel buffers (using releaseDirectRawImage) before doing any action requesting a modification of the video source mode (e.g. resolution, switch between cameras).
+     - Image pointer is valid only for local modules. For remote modules, the address space is different from the one of NAOqi.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Pointer to the locked :cpp:type:`AL::ALImage` buffer, NULL if error.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getDirectRawImageRemote(const std::string &Handle)
+
+  Retrieves the latest image from the video source and send the data coming directly from the raw buffer as an ALValue through the network (no format conversion).
+
+  .. warning::
+     - Direct raw images are encoded using the same layout than the one used with AL::kYUV422ColorSpace.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Container of image_.
+
+.. cpp:function:: bool ALVideoDeviceProxy::releaseDirectRawImage(const std::string &Handle)
+
+  Release image buffer locked by getDirectRawImageLocal().
+  If the module has no locked image buffer, does nothing.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: true if success
+
+.. cpp:function:: AL::ALImage * ALVideoDeviceProxy::getImageLocal(const std::string &Handle)
+
+  Retrieves the latest image from the video source, applies eventual transformations
+  to the image to provide the format requested by the vision module and returns
+  a pointer to a locked :cpp:type:`AL::ALImage`.
+
+  .. warning::
+     - When the image is not necessary anymore, a call to releaseImage() is requested. If the module didn't release the previous image, returns NULL.
+     - Image pointer is valid only if your module is running locally, not for remote modules.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Pointer to the locked image buffer, NULL if error (e.g. if the previous image was not released).
+
+:download:`alvideodevice_imagelocal.cpp </samples/cpp/alvideodevice/alvideodevice_imagelocal.cpp>`
+
+.. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_imagelocal.cpp
+  :language: cpp
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getImageRemote(const std::string &Handle)
+
+  Retrieves the latest image from the video source, applies eventual transformations to the image to provide the format requested by the vision module and send it as an ALValue through the network.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Container of image_.
+
+:download:`alvideodevice_imageremote.cpp </samples/cpp/alvideodevice/alvideodevice_imageremote.cpp>`
+
+.. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_imageremote.cpp
+  :language: cpp
+
+.. cpp:function:: bool ALVideoDeviceProxy::releaseImage(const std::string &Handle)
+
+  Release image buffer locked by getImageLocal(). If module had no locked image buffer, does nothing.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: true if success
+
+  .. note::
+   It is not mandatory to use releaseImage to release an image obtained by
+   getImageRemote. However, it's a good habit to place it in order to ease the switch
+   from a remote behavior to a local one and this will not use CPU (this method
+   returns directly when it follows a getImageRemote).
+
+:download:`alvideodevice_imagelocal.cpp </samples/cpp/alvideodevice/alvideodevice_imagelocal.cpp>`
+
+.. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_imagelocal.cpp
+  :language: cpp
+
+.. _ALVideoDevice::MultiStreamManagement:
+
+Multi Stream Management
+-----------------------
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getActiveCameras(const std::string &Handle)
+
+  Gets current active cameras for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Array of camera indexes (see :ref:`cameraindex`) or -1: can't access video source.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::setActiveCameras(const std::string &Handle, const AL::ALValue &ActiveCameras)
+
+  Sets the current active cameras for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param ActiveCameras: Array of the requested camera indexes (see :ref:`cameraindex`).
+
+  :return: Array of booleans with true if success.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getResolutions(const std::string &Handle)
+
+  Gets the current resolutions requested for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Array of resolutions (see :ref:`cameraresolution`).
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::setResolutions(const std::string &Handle, const AL::ALValue &Resolutions)
+
+  Sets the size of the output image for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Resolution: Array of resolutions requested (see :ref:`cameraresolution`).
+
+  :return: Array of booleans with true if success.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getColorSpaces(const std::string &Handle)
+
+  Gets the current color spaces requested for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Array of color spaces (see :ref:`cameracolorspace`).
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::setColorSpaces(const std::string &Handle, const AL::ALValue &ColorSpaces)
+
+  Sets the current color spaces requested for the specified module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param ColorSpaces: Array of color spaces requested (see :ref:`cameracolorspace`).
+
+  :return: Array of booleans with true if success
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getCamerasParameter(const std::string &Handle, const int &Id)
+
+  Gets a camera's parameter from the module current active cameras. This method will probe for value of the current active camera of the module.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Id: Id of the cameras parameter (see :ref:`cameraparameter`).
+
+  :return: Parameter’s values.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::setCamerasParameter(const std::string &Handle, const int &Id, const AL::ALValue &NewValue)
+
+  Sets the values of a specific parameter for the module current active cameras.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Id: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :param NewValue: New value to set.
+
+  :return: Array of booleans with true if success.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::setCamerasParameterToDefault(const std::string &Handle, const int &Id)
+
+  Sets a camera's parameter to its default value.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :param Id: Id of the camera parameter (see :ref:`cameraparameter`).
+
+  :return: Array of booleans with true if success.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getDirectRawImagesLocal(const std::string &Handle)
+
+  Retrieves the latest images from the video source and returns pointers to the locked :cpp:type:`AL::ALImage`, with data array pointing directly to raw data. There is no format conversion and no copy of the raw buffer.
+
+  .. warning::
+     - When images are not necessary anymore, a call to releaseDirectRawImages() is requested.
+     - When using this mode for several modules, if they need raw data for more than 25ms check that you have strictly less modules in this requesting direct raw images than the amount of kernel buffers.
+     - Release all kernel buffers (using releaseDirectRawImages) before doing any action requesting a modification of the video source mode (e.g. resolution, switch between cameras).
+     - Image pointers are valid only for local modules. For remote modules, the address space is different from the one of NAOqi.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Array of pointers to the locked :cpp:type:`AL::ALImage` buffer, NULL if error.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getDirectRawImagesRemote(const std::string &Handle)
+
+  Retrieves the latest images from the video source and send the data coming directly from the raw buffer as an ALValue through the network (no format conversion).
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Container of images_.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::releaseDirectRawImages(const std::string &Handle)
+
+  Release image buffer locked by getDirectRawImagesLocal().
+  If the module has no locked image buffer, does nothing.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: true if success
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getImagesLocal(const std::string &Handle)
+
+  Retrieves the latest images from the video source, applies eventual transformations
+  to the images to provide the format requested by the vision module and returns
+  pointers to locked :cpp:type:`AL::ALImage`.
+
+  .. warning::
+     - When the images are not necessary anymore, a call to releaseImages() is requested. If the module didn't release the previous image, returns NULL.
+     - Image pointers are valid only if your module is running locally, not for remote modules.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Array of pointers to locked :cpp:type:`AL::ALImage` buffers, NULL if error (e.g. if the previous images was not released).
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getImagesRemote(const std::string &Handle)
+
+  Retrieves the latest images from the video source, applies eventual transformations to the images to provide the format requested by the vision module and send it as an ALValue through the network.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Container of images_.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::releaseImages(const std::string &Handle)
+
+  Release image buffers locked by getImagesLocal(). If module had no locked image buffers, does nothing.
+
+  :param Handle: Handle to identify the subscriber.
+
+  :return: Array of booleans with true if success.
+
+  .. note::
+   It is not mandatory to use releaseImages to release an image obtained by
+   getImagesRemote. However, it's a good habit to place it in order to ease the switch
+   from a remote behavior to a local one and this will not use CPU (this method
+   returns directly when it follows a getImagesRemote).
+
+.. _ALVideoDevice::Simulation:
+
+Simulation
+----------
+
+.. cpp:function:: bool ALVideoDeviceProxy::putImage(const int &CameraIndex, const int &Width, const int &Height, const AL::ALValue &ImageBuffer)
+
+  Loads Image into kernel circular buffer. Simulates acquisition of a new image by the virtual camera.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param Width: Width of the image buffer among 1280, 640, 320, 160.
+
+  :param Height: Height of the image buffer among 960, 480, 240, 120.
+
+  :param ImageBuffer: The image Buffer in Bitmap form (i.e. RGB 24bits).
+
+  :return: true if success, false otherwise.
+
+  .. warning::
+   This method only works in simulation.
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getExpectedImageParameters(const int &CameraIndex)
+
+  Called by the simulator to know expected image parameters
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: ALValue of expected parameters: [int height, int width, int framerate]
+
+  .. warning::
+   This method only works in simulation.
+
+.. _ALVideoDevice::Conversion:
+
+Conversion
+----------
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getAngularPositionFromImagePosition(const int &CameraIndex, const std::vector<float> &ImagePosition)
+
+  Returns position as angles relative to camera axis given a normalized position in the image.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param ImagePosition: Vector of size 2 containing the normalized position along the horizontal and vertical dimensions of the image.
+                        The two values must be in the range [0.0 - 1.0].
+
+  :return: corresponding angles values in radians (vector of size 2).
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImagePositionFromAngularPosition(const int &CameraIndex, const std::vector<float> &AngularPosition)
+
+  Returns a normalized position in the image from a position expressed with camera angles in radians.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param AngularPosition: Vector of size 2 containing the camera angle values in radians along the horizontal and vertical dimensions of the image.
+
+  :return: corresponding normalized position in the image [0.0 - 1.0] (vector of size 2).
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getAngularSizeFromImageSize(const int &CameraIndex, const std::vector<float> &ImageSize)
+
+  From a normalized size in the image, returns size expressed as angles in radian relative to camera axis.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param ImageSize: Vector of size 2 containing the normalized position along the horizontal and vertical dimensions of the image.
+                    The two values must be in the range [0.0 - 1.0].
+
+  :return: corresponding angles values in radians (vector of size 2).
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImageSizeFromAngularSize(const int &CameraIndex, const std::vector<float> &AngularSize)
+
+  Returns a normalized size from a size expressed with camera angles in radians.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param AngularSize: Vector of size 2 containing the camera angle values in radians along the horizontal and vertical dimensions of the image.
+
+  :return: corresponding normalized position in the image [0.0 - 1.0] (vector of size 2).
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImageInfoFromAngularInfo(const int &CameraIndex, const std::vector<float> &AngularInfo)
+
+  Returns [X, Y, width, height] normalized info in the image from these info expressed as angles in radians (as returned by vision extractors).
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param AngularInfo: Vector of size 2 containing the camera angle values in radians along the horizontal and vertical dimensions of the image.
+
+  :return: corresponding normalized position and size info: [X, Y, width, height].
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImageInfoFromAngularInfoWithResolution(const int &CameraIndex, const std::vector<float> &AngularInfo, const int &ResolutionIndex)
+
+  Returns [X, Y, width, height] info as pixels in the image from these info expressed as angles in radians (as returned by vision extractors).
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :param AngularInfo: Vector of size 2 containing the camera angle values in radians along the horizontal and vertical dimensions of the image.
+
+  :param ResolutionIndex: image resolution
+
+  :return: corresponding pixels position and size info: [X, Y, width, height].
+
+.. _ALVideoDevice::DeprecatedMethods:
+
+Deprecated Methods
+------------------
+
+.. cpp:function:: void ALVideoDeviceProxy::onClientDisconnected( const std::string& eventName, const AL::ALValue& eventContents, const std::string& message )
+
+  .. deprecated:: 1.16
+
+
+  Callback when client is disconnected
+
+  :param eventName: The echoed event name
+
+  :param eventContents: The name of the client that has disconnected
+
+  :param message: Message provided when subscribing.
+
+.. cpp:function:: std::string ALVideoDeviceProxy::subscribe(const std::string &Name, const int &resolution, const int &colorSpace, const int &fps)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::subscribeCamera` instead.
+
+  Subscribe to ALVideoDevice. When a Video Module registers to ALVideoDevice, a buffer of the requested image format is added to the buffers list.
+  Returns the name under which the V.M. will be known from ALVideoDevice (useful when several V.M. try to subscribe using the same name, the 3rd one getting _3 added to its name for instance).
+
+  :param Name: Name of the subscribing module.
+
+  :param resolution: Resolution requested. (see :ref:`cameraresolution`)
+
+  :param colorSpace: Colorspace requested. (see :ref:`cameracolorspace`)
+
+  :param fps: Fps (frames per second) requested to the video source. The OV7670 VGA camera can only run at 30fps, the MT9M114 HD camera will be able to run faster with some special modes in a near future.
+
+  :return: Name under which the V.M. is known from ALVideoDevice, NULL if failed.
+
+  .. note::
+     Compared to a local module, the obtained framerate for a remote module will depend on the network available bandwith (e.g. we can reach raw ``1280x960@10fps`` using a Gigabit Ethernet connection with the HD camera).
+
+.. cpp:function:: void ALVideoDeviceProxy::unsubscribeAllInstances(const std::string &Name)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::unsubscribe` instead.
+
+  Used to unsubscribe all instances for a given module (e.g. VisionModule and VisionModule_5) from ALVideoDevice.
+
+  :param Name: Name of the subscribing module.
+
+.. cpp:function:: int ALVideoDeviceProxy::getVIMResolution()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getResolution` instead.
+
+  Gets the resolution of the video source before eventual conversion.
+
+  :return: { 0 = kQQVGA, 1 = kQVGA, 2 = kVGA, 3 = k4VGA }  -1: can't access video source
+
+.. cpp:function:: int ALVideoDeviceProxy::getVIMColorSpace()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getColorSpace` instead.
+
+  Gets the color space of the video source before eventual conversion.
+
+  :return: { 0 = kYuv, 9 = kYUV422, 10 = kYUV, 11 = kRGB, 12 = kHSY, 13 = kBGR }  -1 can't access video source
+
+.. cpp:function:: int ALVideoDeviceProxy::getVIMFrameRate()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getFrameRate` instead.
+
+  Gets the internal frame rate of the video source.
+
+  :return: video source framerate. -1: can't access video source
+
+.. cpp:function:: int ALVideoDeviceProxy::getGVMResolution(const std::string& id)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getResolution` instead.
+
+  Gets the resolution of a particular Vision Module
+
+  :param id: Name under which the V.M. is known from ALVideoDevice.
+
+  :return: :ref:`cameraresolution` or -1: can't access video source
+
+.. cpp:function:: int ALVideoDeviceProxy::getGVMColorSpace(const std::string& id)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getColorSpace` instead.
+
+  Gets the color space of a particular Vision Module.
+
+  :param id: Name under which the V.M. is known from ALVideoDevice.
+
+  :return: :ref:`cameracolorspace`  -1: can't access video source
+
+.. cpp:function:: int ALVideoDeviceProxy::getGVMFrameRate(const std::string& id)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getFrameRate` instead.
+
+  Gets the frame rate that a particular Vision Module has requested to the camera.
+  This doesn't mean the video source is able to run at this frame rate
+  (see :cpp:func:`ALVideoDeviceProxy::getVIMFrameRate` to know the video source framerate).
+  This doesn't either mean that a remote module will obtain images at this framerate due to network bandwith limitations.
+
+  :param id: Name under which the V.M. is known from ALVideoDevice.
+
+  :return: The Vision Module framerate, or -1 if we can't access video source
+
+.. _ALVideoDeviceProxy::startFrameGrabber_camera:
+.. cpp:function:: bool ALVideoDeviceProxy::startFrameGrabber(const int &CameraIndex)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALVideoDeviceProxy::openCamera` or
+    :cpp:func:`ALVideoDeviceProxy::startCamera` according to your need.
+
+  Opens and initializes the video source device if it was not already opened.
+  Then starts the image acquisition.
+
+  .. note::
+     The first module subscribing to ALVideoDevice will launch it automatically,
+     so the main purpose of this method is to reduce time when the first vision module is subscribing.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDeviceProxy::stopFrameGrabber_camera:
+.. cpp:function:: bool ALVideoDeviceProxy::stopFrameGrabber(const int &CameraIndex)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALVideoDeviceProxy::stopCamera` or
+    :cpp:func:`ALVideoDeviceProxy::closeCamera` according to your need.
+
+  Stops image acquisition, then releases and closes the video source device.
+
+  .. note::
+     When the last vision module subscribed to ALVideoDevice unsubscribes, this
+     doesn't close the video source device as we assume that if some video was
+     requested before, video will be again requested latter. But if this is not
+     the case, closing the video source will save processing resources.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. _ALVideoDeviceProxy::isFrameGrabberOff_camera:
+.. cpp:function:: bool ALVideoDeviceProxy::isFrameGrabberOff(const int &CameraIndex)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALVideoDeviceProxy::isCameraOpen` or
+    :cpp:func:`ALVideoDeviceProxy::isCameraStarted` according to your need.
+
+  Asks if the framegrabber is running or not.
+
+  :param CameraIndex: Index of the camera in the video system (see :ref:`cameraindex`).
+
+  :return: true if success, false otherwise.
+
+.. cpp:function:: int ALVideoDeviceProxy::getCameraModelID()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getCameraModel` instead.
+
+  Gets the camera model index of the current default active camera.
+
+  :return: :ref:`cameramodel`.
+
+.. cpp:function:: int ALVideoDeviceProxy::getParam(const int &Param)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getCameraParameter` instead.
+
+  Gets a parameter value of the currently default active camera.
+
+  .. warning::
+   Depending on the type of the video source, available parameters may change.
+
+  :param Param: Parameter's reference (see :ref:`cameraparameter`).
+
+  :return: Parameter's value.
+
+  :download:`alvideodevice_getparam.cpp </samples/cpp/alvideodevice/alvideodevice_getparam.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_getparam.cpp
+     :language: cpp
+
+.. cpp:function:: void ALVideoDeviceProxy::setParam(const int &Param, const int &NewValue)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::setCameraParameter` instead.
+
+  Sets the value of a specific parameter for the currently default active camera.
+
+  :param Param: Parameter's reference (see :ref:`cameraparameter`).
+
+  :param NewValue: Parameter's new value.
+
+  :download:`alvideodevice_setparam.cpp </samples/cpp/alvideodevice/alvideodevice_setparam.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_setparam.cpp
+     :language: cpp
+
+.. cpp:function:: void ALVideoDeviceProxy::setParamDefault(const int &Param)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::setCameraParameterToDefault` instead.
+
+  Sets a specific parameter for the video source at its default value.
+
+  :param param: Parameter's reference (see :ref:`cameraparameter`).
+
+  :download:`alvideodevice_setparamdefault.cpp </samples/cpp/alvideodevice/alvideodevice_setparamdefault.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_setparamdefault.cpp
+    :language: cpp
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getAngPosFromImgPos(const std::vector<float>& imgPos)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getAngularPositionFromImagePosition` instead.
+
+  Returns position as angles relative to camera axis given a normalized position in the image.
+
+  :param imgPos: normalized position in the image [0.0 - 1.0]
+
+  :return: corresponding angles values in radians.
+
+  :download:`alvideodevice_subscribe.cpp </samples/cpp/alvideodevice/alvideodevice_imagetoangle.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_imagetoangle.cpp
+     :language: cpp
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getAngSizeFromImgSize(const std::vector<float>& imgSize)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getAngularSizeFromImageSize` instead.
+
+  From a normalized size in the image, returns size expressed as angles in radian relative to camera axis.
+
+  :param imgSize: normalized position in the image [0.0 - 1.0]
+
+  :return: corresponding angles values in radians.
+
+  :download:`alvideodevice_subscribe.cpp </samples/cpp/alvideodevice/alvideodevice_imagetoangle.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_imagetoangle.cpp
+     :language: cpp
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImgInfoFromAngInfo(const std::vector<float>& angles)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getImageInfoFromAngularInfo` instead.
+
+  Returns [X, Y, width, height] normalized info in the image from these info expressed as angles in radians (as returned by vision extractors).
+
+  :param angles: camera angle values in radians.
+
+  :return: corresponding normalized position and size info: [X, Y, width, height].
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImgInfoFromAngInfoWithRes( const std::vector<float>& angInfo, const int& resIndex )
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getImageInfoFromAngularInfoWithResolution` instead.
+
+  Returns [X, Y, width, height] info as pixels in the image from these info expressed as angles in radians (as returned by vision extractors).
+
+  :param angInfo: camera angle values in radians.
+
+  :param resIndex: image resolution
+
+  :return: corresponding pixels position and size info: [X, Y, width, height].
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImgPosFromAngPos(const std::vector<float>& angPos)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getImagePositionFromAngularPosition` instead.
+
+  Returns a normalized position in the image from a position expressed with camera angles in radians.
+
+  :param angPos: camera angle values in radians.
+
+  :return: corresponding normalized position in the image [0.0 - 1.0]
+
+  :download:`alvideodevice_angletoimage.cpp </samples/cpp/alvideodevice/alvideodevice_angletoimage.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_angletoimage.cpp
+     :language: cpp
+
+.. cpp:function:: std::vector<float> ALVideoDeviceProxy::getImgSizeFromAngSize(const std::vector<float>& angSize)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getImageSizeFromAngularSize` instead.
+
+  Returns a normalized size from a size expressed with camera angles in radians.
+
+  :param angSize: camera angle values in radians.
+
+  :return: corresponding normalized position in the image [0.0 - 1.0]
+
+  :download:`alvideodevice_subscribe.cpp </samples/cpp/alvideodevice/alvideodevice_angletoimage.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_angletoimage.cpp
+     :language: cpp
+
+.. _ALVideoDeviceProxy::getExpectedImageParameters_deprecated:
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::getExpectedImageParameters()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getExpectedImageParameters` instead.
+
+  Called by the simulator to know expected image parameters
+
+  :return: ALValue of expected parameters: [int height, int width, int framerate]
+
+.. cpp:function:: bool ALVideoDeviceProxy::setSimCamInputSize(const int &Width, const int &Height)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::putImage` instead.
+
+  Set parameters for the images that the simulator will provide.
+
+  :param Width: width of images among 1280, 640, 320, 160
+
+  :param Height: height of images among 960, 480, 240, 120
+
+  :return: true if success
+
+.. _ALVideoDeviceProxy::putImage_deprecated:
+.. cpp:function:: bool ALVideoDeviceProxy::putImage(const AL::ALValue &ImageBuffer)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::putImage` instead.
+
+  Allow image buffer pushing
+
+  :param ImageBuffer: The image buffer in bitmap form
+
+  :return: true if success
+
+.. cpp:function:: AL::ALValue ALVideoDeviceProxy::resolutionToSizes(const int &Resolution)
+
+  .. deprecated:: 1.14
+    use ``AL::setSizeFromResolution`` instead.
+    For further details, see: :ref:`libalvision API reference <libalvision-doc>`.
+
+  return the width and the height of a resolution
+
+  :param resolution: { 0 = kQQVGA, 1 = kQVGA, 2 = kVGA }
+
+  :return: array of sizes: (return [-1;-1] if the format is invalid) [0] : width; [1] : height;
+
+  :download:`alvideodevice_resolutiontosizes.cpp </samples/cpp/alvideodevice/alvideodevice_resolutiontosizes.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_resolutiontosizes.cpp
+     :language: cpp
+
+.. cpp:function:: int ALVideoDeviceProxy::sizesToResolution(const int &Width, const int &Height)
+
+  .. deprecated:: 1.14
+    use ``AL::getResolutionFromSize`` instead.
+    For further details, see: :ref:`libalvision API reference <libalvision-doc>`.
+
+  return the resolution from sizes
+
+  :param width: width of the image
+
+  :param height: height of the image
+
+  :return: :ref:`cameraresolution` or -1 if the inputs are invalid
+
+  :download:`alvideodevice_siizestoresolution.cpp </samples/cpp/alvideodevice/alvideodevice_sizestoresolution.cpp>`
+
+  .. literalinclude:: /samples/cpp/alvideodevice/alvideodevice_sizestoresolution.cpp
+     :language: cpp
+
+.. _ALVideoDeviceProxy::startFrameGrabber_deprecated:
+.. cpp:function:: bool ALVideoDeviceProxy::startFrameGrabber()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::openCamera` instead.
+
+  Opens and initialize the video source device if it was not already opened.
+
+  .. note::
+     The first module subscribing to ALVideoDevice will launch it automatically, so the main purpose of this method is to reduce time when the first vision module is subscribing.
+
+  :return: true if success
+
+.. _ALVideoDeviceProxy::stopFrameGrabber_deprecated:
+.. cpp:function:: bool ALVideoDeviceProxy::stopFrameGrabber()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::closeCamera` instead.
+
+  Close the video source device.
+
+  .. note::
+   When the last vision module subscribed to ALVideoDevice unsubscribes, this
+   doesn't close the video source device as we assume that if some video was
+   requested before, video will be again requested latter. But if this is not
+   the case, closing the video source will save processing resources.
+
+  :return: true if success
+
+.. _ALVideoDeviceProxy::isFrameGrabberOff_deprecated:
+.. cpp:function:: int ALVideoDeviceProxy::isFrameGrabberOff()
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::isCameraOpen` instead.
+
+  Asks if the framegrabber is running or not.
+
+  :return: true if off
+
+.. cpp:function:: float ALVideoDeviceProxy::getHorizontalAperture(const int& CameraIndex)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getHorizontalFOV` instead.
+
+  Gets the camera horizontal field of view for the specified camera.
+
+  :param CameraIndex: Index to the camera in the video system.
+
+  :return: Horizontal field of view of the camera (in radian).
+
+.. cpp:function:: float ALVideoDeviceProxy::getVerticalAperture(const int& CameraIndex)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALVideoDeviceProxy::getVerticalFOV` instead.
+
+  Gets the camera vertical field of view for the specified camera.
+
+  :param CameraIndex: Index to the camera in the video system.
+
+  :return: Vertical field of view of the camera (in radian).
+
+.. cpp:function:: bool ALVideoDeviceProxy::recordVideo(const std::string &Name, const std::string &Path, const int &TotalNumber, const int &Period)
+
+  .. deprecated:: 1.20
+    use :cpp:func:`ALVideoRecorderProxy::startRecording` instead.
+
+  Records in background an .arv raw format video from the images processed by the module.
+
+  .. warning::
+    Due to technical issues, do not use ARV format any longer.
+
+  :param Name: Name of the subscribing module.
+
+  :param Path: Name with the absolute path (pathToMyFile/filename.arv) of the ``arv`` video file to record
+
+  :param TotalNumber: number of images to be recorded. 0xFFFFFFFF for "unlimited"
+
+  :param Period: one image recorded every pPeriod images
+
+  :return: true if success.
+
+.. cpp:function:: bool ALVideoDeviceProxy::stopVideo(const std::string &Name)
+
+  .. deprecated:: 1.20
+    use :cpp:func:`ALVideoRecorderProxy::stopRecording` instead.
+
+  Stops writing the video sequence.
+
+  :param Name: Name of the subscribing module.
+
+  :return: true if success.
+
+Cameras
+-------
+
+Cameras specifiactions
++++++++++++++++++++++++
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+|  :ref:`robot_video`               |
++-----------------------------------+
+
+
+.. _cameraindex:
+
+Camera Indexes
+^^^^^^^^^^^^^^
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+| :ref:`cameraindex_nao`            |
++-----------------------------------+
+
+.. _cameramodel:
+
+Camera model
+^^^^^^^^^^^^
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+| :ref:`cameramodel_mt9m114`        |
++-----------------------------------+
+
+.. _cameraparameter:
+
+Camera parameters
+^^^^^^^^^^^^^^^^^^
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+| :ref:`cameraparameter_mt9m114`    |
++-----------------------------------+
+
+.. _cameracolorspace:
+
+Supported colorspaces
+^^^^^^^^^^^^^^^^^^^^^^
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+| :ref:`cameracolorspace_mt9m114`   |
++-----------------------------------+
+
+.. _cameraresolution:
+
+Supported resolutions
+^^^^^^^^^^^^^^^^^^^^^^
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+| :ref:`cameraresolution_mt9m114`   |
++-----------------------------------+
+
+.. _cameraframerate:
+
+Supported framerates
+^^^^^^^^^^^^^^^^^^^^^^
+
++-----------------------------------+
+| |nao| |roboN|                     |
++-----------------------------------+
+| :ref:`cameraframerate_ov5640`     |
++-----------------------------------+
+
+
+
+.. Cameras
+   -------
+   
+   Cameras specifiactions
+   +++++++++++++++++++++++
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     | |juju| |roboJ|                        |
+   +-----------------------------------+---------------------------------------+
+   |  :ref:`robot_video`               |  :ref:`juliette_video`                |
+   +-----------------------------------+---------------------------------------+
+   
+   
+   .. _cameraindex:
+   
+   Camera Indexes
+   ^^^^^^^^^^^^^^
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     |  |juju| |roboJ|                       |
+   +-----------------------------------+---------------------------------------+
+   | :ref:`cameraindex_nao`            |  :ref:`cameraindex_juju`              |
+   +-----------------------------------+---------------------------------------+
+   
+   .. _cameramodel:
+   
+   Camera model
+   ^^^^^^^^^^^^
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     |  |juju| |roboJ|                       |
+   +-----------------------------------+---------------------------------------+
+   | :ref:`cameramodel_mt9m114`        |:ref:`cameramodel_ov5640`              |
+   +-----------------------------------+---------------------------------------+
+   
+   .. _cameraparameter:
+   
+   Camera parameters
+   ^^^^^^^^^^^^^^^^^^
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     |  |juju| |roboJ|                       |
+   +-----------------------------------+---------------------------------------+
+   | :ref:`cameraparameter_mt9m114`    | :ref:`cameraparameter_ov5640`         |
+   +-----------------------------------+---------------------------------------+
+
+   .. _cameracolorspace:
+   
+   Supported colorspaces
+   ^^^^^^^^^^^^^^^^^^^^^^
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     |  |juju| |roboJ|                       |
+   +-----------------------------------+---------------------------------------+
+   | :ref:`cameracolorspace_mt9m114`   | :ref:`cameracolorspace_ov5640`        |
+   +-----------------------------------+---------------------------------------+
+   
+   .. _cameraresolution:
+   
+   Supported resolutions
+   ^^^^^^^^^^^^^^^^^^^^^^
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     |  |juju| |roboJ|                       |
+   +-----------------------------------+---------------------------------------+
+   | :ref:`cameraresolution_mt9m114`   | :ref:`cameraresolution_ov5640`        |
+   +-----------------------------------+---------------------------------------+
+   
+   .. _cameraframerate:
+   
+   Supported framerates
+   ^^^^^^^^^^^^^^^^^^^^^^
+   
+   +-----------------------------------+---------------------------------------+
+   | |nao| |roboN|                     |  |juju| |roboJ|                       |
+   +-----------------------------------+---------------------------------------+
+   | :ref:`cameraframerate_ov5640`     | :ref:`cameraframerate_ov5640`         |
+   +-----------------------------------+---------------------------------------+
+
+Internal Types
+--------------
+
+.. _image:
+
+**Image**
+
+Image container is an array as follow:
+
+- [0]: width.
+- [1]: height.
+- [2]: number of layers.
+- [3]: ColorSpace.
+- [4]: time stamp (seconds).
+- [5]: time stamp (micro-seconds).
+- [6]: binary array of size height * width * nblayers containing image data.
+- [7]: camera ID (kTop=0, kBottom=1).
+- [8]: left angle (radian).
+- [9]: topAngle (radian).
+- [10]: rightAngle (radian).
+- [11]: bottomAngle (radian).
+
+.. _images:
+
+**Images**
+
+Images container is an array of image_ containers as follow:
+
+- [0] First Image, an array containing:
+
+  - [0]: width.
+  - [1]: height.
+  - [2]: number of layers.
+  - [3]: ColorSpace.
+  - [4]: time stamp (seconds).
+  - [5]: time stamp (micro-seconds).
+  - [6]: binary array of size height * width * nblayers containing image data.
+  - [7]: camera ID (kTop=0, kBottom=1).
+  - [8]: left angle (radian).
+  - [9]: topAngle (radian).
+  - [10]: rightAngle (radian).
+  - [11]: bottomAngle (radian).
+
+- [1] Second Image.
+
+  - [0]: width.
+  - [1]: height.
+  - [2]: number of layers.
+  - [3]: ColorSpace.
+  - [4]: time stamp (seconds).
+  - [5]: time stamp (micro-seconds).
+  - [6]: binary array of size height * width * nblayers containing image data.
+  - [7]: camera ID (kTop=0, kBottom=1).
+  - [8]: left angle (radian).
+  - [9]: topAngle (radian).
+  - [10]: rightAngle (radian).
+  - [11]: bottomAngle (radian).

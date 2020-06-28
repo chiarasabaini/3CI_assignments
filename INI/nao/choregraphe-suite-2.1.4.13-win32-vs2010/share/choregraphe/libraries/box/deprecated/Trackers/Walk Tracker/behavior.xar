@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" tooltip="This box is dedicated to make the robot walk toward a predefined target.&#x0A;First, the robot tracks the target with his head and then sends information to the walk engine to make the robot&#x0A;walk toward the target.&#x0A;&#x0A;Note: The target can be set in the parameters and could be either a red ball with a radius of 6cm or a&#x0A;human face." x="162" y="115">
+        <bitmap>media/images/box/tracker/walk_tracker.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload()
+            self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="4" />
+        <Output name="foundTarget" type="1" type_size="1" nature="2" inner="0" tooltip="A signal is sent when the robot starts to track the target. The signal is stimulated every&#x0A;time it starts the tracking of the target." id="5" />
+        <Output name="isLost" type="1" type_size="1" nature="2" inner="0" tooltip='A signal is sent every time the robot looses the target. &#x0A;Note: the wait time before this signal is sent is defined in the &quot;Time before lost&quot; parameter.' id="6" />
+        <Parameter name="Target choice" inherits_from_parent="0" content_type="3" value="Red Ball" default_value="Red Ball" custom_choice="0" tooltip="This parameter is used to define which target to track." id="7">
+            <Choice value="Red Ball" />
+            <Choice value="Face" />
+        </Parameter>
+        <Parameter name="Threshold for walk forward" inherits_from_parent="0" content_type="2" value="0.5" default_value="0.5" min="0" max="1" tooltip="This parameter defines the distance threshold in meters to make the robot walk&#x0A;forward." id="8" />
+        <Parameter name="Threshold for walk backward" inherits_from_parent="0" content_type="2" value="0.3" default_value="0.3" min="0" max="1" tooltip="This parameter defines the distance threshold in meters to make the robot walk&#x0A;backward." id="9" />
+        <Parameter name="Time before lost (s)" inherits_from_parent="0" content_type="2" value="1" default_value="1" min="0" max="5" tooltip="If there is no detection of the target after this period of time, then the target is&#x0A;considered as lost and the isLost output is activated." id="10" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Tracker" id="7" tooltip="This box is dedicated to track a target using the two head joints.&#x0A;The target can be set in the parameters and could be either a red ball with a radius&#x0A;of 6cm or a human face." x="201" y="115">
+                            <bitmap>media/images/box/tracker/tracker.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.trackerProxy = None
+        # to be sure that motion is here
+        motionProxy =  ALProxy("ALMotion")
+        self.lost = True
+        self.track = False
+        self.threadTime = 0.2
+        self.countLost = 0
+        self.TargetName = None
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bMustStop = True
+        if (self.bIsRunning):
+            time.sleep(self.threadTime)
+            if(self.trackerProxy != None):
+                if(self.trackerProxy.isActive()):
+                    self.trackerProxy.stopTracker()
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+
+    def onInput_onStart(self):
+        if(not self.bIsRunning):
+            self.bIsRunning = True
+            self.bMustStop = False
+            try:
+                TargetName = self.getParameter("Target choice")
+                if(self.TargetName != TargetName):
+                    self.TargetName = TargetName
+                if (self.TargetName == "Red Ball"):
+                    self.trackerProxy = ALProxy("ALRedBallTracker")
+                else:
+                    self.trackerProxy = ALProxy("ALFaceTracker")
+                if( self.trackerProxy != None and not self.bMustStop ):
+                    if( not self.trackerProxy.isActive() ):
+                        self.trackerProxy.setWholeBodyOn(False)
+                        self.trackerProxy.startTracker()
+                        while( not self.bMustStop ):
+                            self.getTargetInformation()
+                            if( not self.bMustStop ):
+                                time.sleep(self.threadTime)
+            finally:
+                self.onStopped()
+                self.bIsRunning = False
+
+    def onInput_onStop(self):
+        self.onUnload()
+
+    def getTargetInformation(self):
+        TargetName = self.getParameter("Target choice")
+        if(self.TargetName != TargetName):
+            self.bMustStop = True
+            self.bIsRunning = False
+            time.sleep(self.threadTime)
+            if(self.trackerProxy != None):
+                if(self.trackerProxy.isActive()):
+                    self.trackerProxy.stopTracker()
+
+            self.onInput_onStart()
+            return
+
+        if(self.trackerProxy != None):
+            if (self.trackerProxy.isNewData()):
+                self.countLost = 0
+                if( not self.track ):
+                    self.track = True
+                    self.lost = False
+                    self.foundTarget()
+                targetPosition = self.trackerProxy.getPosition()
+                #output target angle
+                self.position(targetPosition)
+            else:
+                self.countLost = self.countLost + 1
+                if(self.countLost*self.threadTime > self.getParameter("Time before lost (s)")):
+                    if ( not self.lost ):
+                        self.lost = True
+                        self.track = False
+                        self.isLost()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="foundTarget" type="1" type_size="1" nature="2" inner="0" tooltip="A signal is sent when the robot starts to track the target. The signal is stimulated every&#x0A;time it starts the tracking of the target." id="5" />
+                            <Output name="position" type="2" type_size="3" nature="2" inner="0" tooltip="This output is the target position (x, y, z) in TORSO_SPACE." id="6" />
+                            <Output name="isLost" type="1" type_size="1" nature="2" inner="0" tooltip='A signal is sent every time the robot looses the target. &#x0A;Note: the wait time before this signal is sent is defined in the &quot;Time before lost&quot; parameter.' id="7" />
+                            <Parameter name="Target choice" inherits_from_parent="1" content_type="3" value="Red Ball" default_value="Red Ball" custom_choice="0" tooltip="This parameter is used to define which target to track." id="8">
+                                <Choice value="Red Ball" />
+                                <Choice value="Face" />
+                            </Parameter>
+                            <Parameter name="Time before lost (s)" inherits_from_parent="1" content_type="2" value="1" default_value="1" min="0" max="5" tooltip="If there is no detection after this period of time, then the target is considered as lost&#x0A;and the isLost output is activated." id="9" />
+                            <Resource name="Head" type="Lock" timeout="0" />
+                        </Box>
+                        <Box name="WalkToTarget" id="11" tooltip="This box is dedicated to make the robot walk toward a target which position is received on its second&#x0A;input." x="375" y="19">
+                            <bitmap>media/images/box/tracker/walk_to_target.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+import math
+import motion
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.motionProxy = ALProxy("ALMotion")
+        self.threadTime = 0.1
+        self.retard = 1.0 #second
+        self.thresholdTheta  = 10*motion.TO_RAD
+        self.stepFrequency = 1.0
+        self.minStepPeriod = 21
+        self.maxStepPeriod = 30
+        self.stepPeriod = 21
+        self.theta = 0.0
+        self.targetTheta = 0.0
+        self.maxTheta = 20*motion.TO_RAD
+        self.maxSpeedTheta = self.maxTheta/(21*0.02)
+        self.computeErrorTheta = False
+        self.x = 0.0
+        self.firstRobotPositionTheta = []
+        
+    def onLoad(self):
+        self.bIsRunning = False
+        self.bMustStop = False
+
+    def onUnload(self):
+        self.bMustStop = True
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+            
+    def onInput_onStart(self):
+        if( self.bIsRunning ):
+            return
+        self.bIsRunning = True # launch thread
+        self.bMustStop = False
+        try:
+            while( not self.bMustStop ):
+                self.computeWalkVelocity()
+                if( not self.bMustStop ):
+                    time.sleep(self.threadTime)
+            self.motionProxy.setWalkTargetVelocity(0.0, 0.0, 0.0, 1.0)
+            self.motionProxy.setAngles("HeadYaw", 0.0, 0.2)
+        finally:
+            self.onStopped()
+            self.bIsRunning = False
+
+    def onInput_targetPosition(self, p):
+        # Compute target distance
+        targetDistance = math.sqrt( math.pow(p[0],2) +  math.pow(p[1],2) )
+        targetDistance = int(targetDistance / 0.1) * 0.1
+        if( targetDistance > self.getParameter("Threshold for walk forward") ):
+            self.x = 1.0
+        elif( targetDistance < self.getParameter("Threshold for walk backward") ):
+            self.x = -1.0
+        else:
+            self.x = 0.0
+        # Compute target angle
+        targetAngle = math.atan2(p[1], p[0])
+        targetAngle = int(targetAngle/(5.0*motion.TO_RAD))*(5.0*motion.TO_RAD)
+        self.targetTheta = targetAngle
+        self.computeErrorTheta = True
+        self.firstRobotPositionTheta = self.motionProxy.getRobotPosition(False)
+
+    def onInput_onStop(self):
+        self.onUnload()
+
+    def computeWalkVelocity(self):
+        if( self.stepFrequency != self.getParameter("Step frequency") ):
+            self.stepFrequency = self.getParameter("Step frequency")
+            self.stepPeriod = self.maxStepPeriod - self.stepFrequency*(self.maxStepPeriod-self.minStepPeriod)
+        currentRobotPosition = self.motionProxy.getRobotPosition(False)
+        currentRobotVelocity = self.motionProxy.getRobotVelocity()
+        # Compute theta velocity to send to the robot
+        if (self.computeErrorTheta and self.firstRobotPositionTheta != []):
+            # Compute Robot Position
+            robotDeplacementTheta = currentRobotPosition[2] - self.firstRobotPositionTheta[2]
+            # Compute robotPosition with retard second
+            nextRobotTheta = currentRobotVelocity[2]*self.retard + robotDeplacementTheta
+            errorTheta = self.targetTheta - nextRobotTheta
+            dTheta = 0.0
+            self.maxSpeedTheta = self.maxTheta/(self.stepPeriod*0.02)
+            if(abs(errorTheta) <= self.thresholdTheta):
+                self.computeErrorTheta = False
+            else:
+                self.computeErrorTheta = True
+                if ( errorTheta/(self.stepPeriod*0.02) > self.maxSpeedTheta*0.5):
+                    dTheta =self.maxSpeedTheta*0.5
+                elif( errorTheta/(self.stepPeriod*0.02)  < -self.maxSpeedTheta*0.5):
+                    dTheta = -self.maxSpeedTheta*0.5
+                else:
+                    dTheta = errorTheta/(self.stepPeriod*0.02)
+            self.theta = dTheta/self.maxSpeedTheta
+        else:
+            self.theta = 0.0
+        if( not self.bMustStop ):
+            self.motionProxy.setWalkTargetVelocity(self.x, 0.0, self.theta, self.stepFrequency)
+            if( self.x == 0 and self.theta == 0 ):
+                self.motionProxy.setAngles("HeadYaw", 0.0, 0.2)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="targetPosition" type="2" type_size="3" nature="1" inner="0" tooltip="The target position (x, y, z) in NAO_SPACE." id="3" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="4" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="5" />
+                            <Parameter name="Step frequency" inherits_from_parent="0" content_type="2" value="1" default_value="1" min="0" max="1" tooltip="This parameter defines the walk step frequency. Two particular values:&#x0A;* 0.0, then the robot walk slowly.&#x0A;* 1.0, then the robot walk as fast as he can." id="6" />
+                            <Parameter name="Threshold for walk forward" inherits_from_parent="1" content_type="2" value="0.5" default_value="0.5" min="0" max="1" tooltip="This parameter defines the distance threshold in meters to make the robot walk&#x0A;forward." id="7" />
+                            <Parameter name="Threshold for walk backward" inherits_from_parent="1" content_type="2" value="0.3" default_value="0.3" min="0" max="1" tooltip="This parameter defines the distance threshold in meters to make the robot walk&#x0A;backward." id="8" />
+                            <Resource name="Legs" type="Lock" timeout="0" />
+                            <Resource name="Legs" type="Lock" timeout="0" />
+                        </Box>
+                        <Link inputowner="11" indexofinput="4" outputowner="7" indexofoutput="7" />
+                        <Link inputowner="11" indexofinput="4" outputowner="7" indexofoutput="4" />
+                        <Link inputowner="11" indexofinput="3" outputowner="7" indexofoutput="6" />
+                        <Link inputowner="11" indexofinput="2" outputowner="7" indexofoutput="5" />
+                        <Link inputowner="0" indexofinput="5" outputowner="7" indexofoutput="5" />
+                        <Link inputowner="0" indexofinput="6" outputowner="7" indexofoutput="7" />
+                        <Link inputowner="7" indexofinput="2" outputowner="0" indexofoutput="2" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

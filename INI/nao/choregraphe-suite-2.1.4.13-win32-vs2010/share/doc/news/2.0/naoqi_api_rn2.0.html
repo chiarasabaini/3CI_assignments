@@ -1,0 +1,1115 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NAOqi API &amp; SDks 2.1 &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="What’s new" href="../index.html" />
+    <link rel="next" title="NAOqi OS 2.1" href="naoqi_os_rn2.0.html" />
+    <link rel="prev" title="NAOqi API &amp; SDks 2.1.2" href="naoqi_api_rn2.1.2.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="naoqi_api_rn2.1.2.html" title="&lt;strong&gt;NAOqi API&lt;/strong&gt; &amp;amp; &lt;strong&gt;SDks&lt;/strong&gt; 2.1.2">previous</a>
+     |
+    <a href="../index.html" title="What’s new" accesskey="U">up</a>
+   |
+    <a href="naoqi_os_rn2.0.html" title="&lt;strong&gt;NAOqi OS&lt;/strong&gt; 2.1">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="news-2.0-naoqi_api_rn2.0">
+            
+  <div class="section" id="naoqi-api-sdks-2-1">
+<span id="whats-new-api-2-0"></span><h1><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1<a class="headerlink" href="#naoqi-api-sdks-2-1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="addendum-23-september-2014">
+<h2>Addendum - 23 September 2014<a class="headerlink" href="#addendum-23-september-2014" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="alfacedetection-omron-solution-instead-of-oki">
+<h3><strong>ALFaceDetection</strong>: <strong>OMRON</strong> solution instead of <strong>OKI</strong><a class="headerlink" href="#alfacedetection-omron-solution-instead-of-oki" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALFaceDetection</strong> is now based on a face detection/recognition
+solution provided by <strong>OMRON</strong>.</p>
+<p>As the two technologies, OMRON and OKI, do not provide the same set of data, and
+for backward-compatibility, the structure of the data returned has not been modified,
+but the pieces of data formerly provided by <strong>OKI</strong> have been replaced by null values.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/alfacedetection.html#facedetected-event-value"><em>FaceDetected Event</em></a>.</p>
+</div>
+</div>
+<div class="section" id="few-steps-toward-human-behavior">
+<h2>Few steps toward human behavior<a class="headerlink" href="#few-steps-toward-human-behavior" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-aldialog">
+<h3>New module: <strong>ALDialog</strong><a class="headerlink" href="#new-module-aldialog" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>ALDialog</strong> module allows you to endow your robot with conversational skills
+by using a list of &#8220;rules&#8221; written and categorized in an appropriate way.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/audio/dialog/aldialog.html#aldialog"><em>ALDialog</em></a>.</p>
+</div>
+<div class="section" id="new-module-alanimatedspeech">
+<h3>New module: <strong>ALAnimatedSpeech</strong><a class="headerlink" href="#new-module-alanimatedspeech" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>ALAnimatedSpeech</strong> module allows you to make the robot talk in an expressive way.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/audio/alanimatedspeech.html#alanimatedspeech"><em>ALAnimatedSpeech</em></a>.</p>
+</div>
+</div>
+<div class="section" id="new-tracking-system">
+<h2>New tracking system<a class="headerlink" href="#new-tracking-system" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-altracker">
+<h3>New module: <strong>ALTracker</strong><a class="headerlink" href="#new-module-altracker" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALFaceTracker</strong> and <strong>ALRedBallTracker</strong> are now deprecated.
+They are replaced by a new and more generic module: <strong>ALTracker</strong>.</p>
+<p><strong>ALTracker</strong> module allows the robot to track different targets (red ball,
+face, landmark, etc) using different means (head only, whole body, move, etc).</p>
+<p>The main goal of this module is to establish a bridge between target detection
+and motion in order to make the robot keep in view the target in the middle of the camera.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/trackers/altracker.html#altracker"><em>ALTracker</em></a>.</p>
+</div>
+</div>
+<div class="section" id="new-extractors-basics">
+<h2>New extractors - Basics<a class="headerlink" href="#new-extractors-basics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-alvisualspacehistory">
+<h3>New module: <strong>ALVisualSpaceHistory</strong><a class="headerlink" href="#new-module-alvisualspacehistory" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALVisualSpaceHistory</strong> keeps track of the head movements of the robot to
+build a timestamped map of the head positions. This can be useful when exploring
+the environment to make the robot look in every directions.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/alvisualspacehistory.html#alvisualspacehistory"><em>ALVisualSpaceHistory</em></a>.</p>
+</div>
+<div class="section" id="new-module-alsegmentation3d">
+<h3>New module: <strong>ALSegmentation3D</strong><a class="headerlink" href="#new-module-alsegmentation3d" title="Permalink to this headline">¶</a></h3>
+<p><img alt="3d" class="img-inline" src="../../_images/3d.png" /> This module requires a robot with a 3D sensor.</p>
+<p><strong>ALSegmentation3D</strong> extracts the objects present in the field of view of the robot
+by doing a segmentation of the depth image (returned by the 3D sensor) in blobs of
+similar depth.</p>
+<p>It also allows you to track, with the head of the robot, a blob at a specified distance
+or simply track the nearest blob with respect to the camera.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/alsegmentation3D.html#alsegmentation3d"><em>ALSegmentation3D</em></a>.</p>
+</div>
+</div>
+<div class="section" id="new-extractors-for-people-perception">
+<h2>New extractors - For People Perception<a class="headerlink" href="#new-extractors-for-people-perception" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-albasicawareness">
+<h3>New module: <strong>ALBasicAwareness</strong><a class="headerlink" href="#new-module-albasicawareness" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALBasicAwareness</strong> is a simple way to make the robot establish and keep eye
+contact with people.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/albasicawareness.html#albasicawareness"><em>ALBasicAwareness</em></a>.</p>
+</div>
+<div class="section" id="new-module-alpeopleperception">
+<h3>New module: <strong>ALPeoplePerception</strong><a class="headerlink" href="#new-module-alpeopleperception" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALPeoplePerception</strong> is an extractor which keeps track of the people around
+the robot and provides basic information about them. It gathers visual
+information from RGB cameras and a 3D sensor if available.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/alpeopleperception.html#alpeopleperception"><em>ALPeoplePerception</em></a>.</p>
+</div>
+<div class="section" id="new-module-alengagementzones">
+<h3>New module: <strong>ALEngagementZones</strong><a class="headerlink" href="#new-module-alengagementzones" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALEngagementZones</strong> allows you to detect if someone is approaching
+the robot, or moving away, using the concept of engagement zones.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/alengagementzones.html#alengagementzones"><em>ALEngagementZones</em></a>.</p>
+</div>
+<div class="section" id="new-module-alfacecharacteristics">
+<h3>New module: <strong>ALFaceCharacteristics</strong><a class="headerlink" href="#new-module-alfacecharacteristics" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALFaceCharacteristics</strong> updates every person with some additional information
+such as an estimation of age and gender. It also tries and detects whether the
+person is smiling.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/alfacecharacteristics.html#alfacecharacteristics"><em>ALFaceCharacteristics</em></a>.</p>
+</div>
+<div class="section" id="new-module-algazeanalysis">
+<h3>New module: <strong>ALGazeAnalysis</strong><a class="headerlink" href="#new-module-algazeanalysis" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALGazeAnalysis</strong> allows you to analyze the direction of the gaze of a detected person,
+in order to know if he/she is looking at the robot.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/algazeanalysis.html#algazeanalysis"><em>ALGazeAnalysis</em></a>.</p>
+</div>
+<div class="section" id="new-module-alsittingpeopledetection">
+<h3>New module: <strong>ALSittingPeopleDetection</strong><a class="headerlink" href="#new-module-alsittingpeopledetection" title="Permalink to this headline">¶</a></h3>
+<p><img alt="3d" class="img-inline" src="../../_images/3d.png" /> This module requires a robot with a 3D sensor.</p>
+<p><strong>ALSittingPeopleDetection</strong> updates every person with the information of whether
+he or she is sitting (on a chair for example) or standing.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/alsittingpeopledetection.html#alsittingpeopledetection"><em>ALSittingPeopleDetection</em></a>.</p>
+</div>
+<div class="section" id="new-module-alwavingdetection">
+<h3>New module: <strong>ALWavingDetection</strong><a class="headerlink" href="#new-module-alwavingdetection" title="Permalink to this headline">¶</a></h3>
+<p><img alt="3d" class="img-inline" src="../../_images/3d.png" /> This module requires a robot with a 3D sensor.</p>
+<p><strong>ALWavingDetection</strong> allows you to detect if a person is moving in order to catch
+the robot&#8217;s attention (for example waving at the robot).</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/peopleperception/alwavingdetection.html#alwavingdetection"><em>ALWavingDetection</em></a>.</p>
+</div>
+</div>
+<div class="section" id="core-new-modules">
+<h2>Core - New modules<a class="headerlink" href="#core-new-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-alautonomouslife">
+<h3>New module: <strong>ALAutonomousLife</strong><a class="headerlink" href="#new-module-alautonomouslife" title="Permalink to this headline">¶</a></h3>
+<p>Autonomous Life facilitates the autonomous launching of Activities,
+and keeps the robot visually alive at all times.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/autonomouslife.html#autonomouslife"><em>ALAutonomousLife</em></a>.</p>
+</div>
+<div class="section" id="new-module-alautonomousmoves">
+<h3>New module: <strong>ALAutonomousMoves</strong><a class="headerlink" href="#new-module-alautonomousmoves" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALAutonomousMoves</strong> enables subtle movements that the robot does autonomously.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/motion/autonomousmoves.html#autonomousmoves"><em>ALAutonomousMoves</em></a>.</p>
+</div>
+<div class="section" id="new-module-altabletservice">
+<h3>New module: <strong>ALTabletService</strong><a class="headerlink" href="#new-module-altabletservice" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALTabletService</strong> allows tablet operations. It can be used to:</p>
+<ul class="simple">
+<li>load web application,</li>
+<li>play videos, and</li>
+<li>manage the tablet itself (WiFi, brightness).</li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/altabletservice.html#altabletservice"><em>ALTabletService</em></a>.</p>
+</div>
+<div class="section" id="new-module-alusersession">
+<h3>New module: <strong>ALUserSession</strong><a class="headerlink" href="#new-module-alusersession" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALUserSession</strong> manages the state of active users, and the bindings to their data.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/alusersession.html#alusersession"><em>ALUserSession</em></a>.</p>
+</div>
+<div class="section" id="new-module-alworldrepresentation">
+<h3>New module: <strong>ALWorldRepresentation</strong><a class="headerlink" href="#new-module-alworldrepresentation" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALWorldRepresentation</strong> is a module dedicated to the long term storage of
+data about generic objects. It allows you to persistently store some data, but also
+to make some generic queries on the stored data with intelligent criterions.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/worldrepresentation.html#alworldrepresentation"><em>ALWorldRepresentation</em></a>.</p>
+<p>Note that the <a class="reference internal" href="../../software/choregraphe/panels/robot_3d_view.html#d-nao-panel"><em>Robot View</em></a> displays the stored objects.</p>
+</div>
+<div class="section" id="new-module-alsystem">
+<h3>New module: <strong>ALSystem</strong><a class="headerlink" href="#new-module-alsystem" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALSystem</strong> provides primitives that can be used to configure the system and
+perform operations such as shutting down or rebooting.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/alsystem.html#alsystem"><em>ALSystem</em></a>.</p>
+</div>
+<div class="section" id="new-module-packagemanager">
+<h3>New module: <strong>PackageManager</strong><a class="headerlink" href="#new-module-packagemanager" title="Permalink to this headline">¶</a></h3>
+<p><strong>PackageManager</strong> lets you install packages on the robot.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/packagemanager.html#packagemanager"><em>PackageManager</em></a>.</p>
+</div>
+<div class="section" id="new-module-alpreferencemanager">
+<h3>New module: <strong>ALPreferenceManager</strong><a class="headerlink" href="#new-module-alpreferencemanager" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALPreferenceManager</strong> allows managing the robot preferences.
+Preferences are used to store, among other, all the settings for the applications
+running in the robot.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/alpreferencemanager.html#alpreferencemanager"><em>ALPreferenceManager</em></a>.</p>
+</div>
+</div>
+<div class="section" id="core-improvements">
+<h2>Core - Improvements<a class="headerlink" href="#core-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="deprecated-alpreferences">
+<h3>Deprecated: <strong>ALPreferences</strong><a class="headerlink" href="#deprecated-alpreferences" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="../../naoqi/core/alpreferencemanager.html#alpreferencemanager"><em>ALPreferenceManager</em></a> instead.</p>
+</div>
+<div class="section" id="alconnectionmanager-new-methods-and-event">
+<h3><strong>ALConnectionManager</strong>: new methods and event<a class="headerlink" href="#alconnectionmanager-new-methods-and-event" title="Permalink to this headline">¶</a></h3>
+<p><strong>Methods</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/connectionmanager/alconnectionmanager-api.html#ALConnectionManagerProxy::countries" title="ALConnectionManagerProxy::countries"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALConnectionManagerProxy::countries()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/connectionmanager/alconnectionmanager-api.html#ALConnectionManagerProxy::country" title="ALConnectionManagerProxy::country"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALConnectionManagerProxy::country()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/connectionmanager/alconnectionmanager-api.html#ALConnectionManagerProxy::setCountry__ssCR" title="ALConnectionManagerProxy::setCountry"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALConnectionManagerProxy::setCountry()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/connectionmanager/alconnectionmanager-api.html#ALConnectionManagerProxy::interfaces" title="ALConnectionManagerProxy::interfaces"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALConnectionManagerProxy::interfaces()</span></tt></a></li>
+</ul>
+<p><strong>event</strong></p>
+<p><a class="reference internal" href="../../naoqi/connectionmanager/alconnectionmanager-api.html#NetworkConnectStatus" title="NetworkConnectStatus"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">NetworkConnectStatus()</span></tt></a></p>
+</div>
+<div class="section" id="alextractor-new-methods">
+<h3><strong>ALExtractor</strong>: new methods<a class="headerlink" href="#alextractor-new-methods" title="Permalink to this headline">¶</a></h3>
+<p><strong>Methods</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/core/alextractor-api.html#ALExtractor::getEventList" title="ALExtractor::getEventList"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALExtractor::getEventList()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/core/alextractor-api.html#ALExtractor::getMemoryKeyList" title="ALExtractor::getMemoryKeyList"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALExtractor::getMemoryKeyList()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/core/alextractor-api.html#ALExtractor::getSubscribersInfo" title="ALExtractor::getSubscribersInfo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALExtractor::getSubscribersInfo()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="albehaviormanager-new-methods">
+<h3><strong>ALBehaviorManager</strong>: new methods<a class="headerlink" href="#albehaviormanager-new-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::getLoadedBehaviors" title="ALBehaviorManagerProxy::getLoadedBehaviors"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::getLoadedBehaviors()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::isBehaviorLoaded__ssCR" title="ALBehaviorManagerProxy::isBehaviorLoaded"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::isBehaviorLoaded()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::resolveBehaviorName__ssCRC" title="ALBehaviorManagerProxy::resolveBehaviorName"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::resolveBehaviorName()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="albehaviormanager-partially-deprecated">
+<h3><strong>ALBehaviorManager</strong> partially deprecated<a class="headerlink" href="#albehaviormanager-partially-deprecated" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Installation/removal of Behaviors is now managed by the  <strong>Package Manager</strong>, so
+<a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::installBehavior__ssCR.ssCR.bCR" title="ALBehaviorManagerProxy::installBehavior"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::installBehavior()</span></tt></a>,
+<a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::removeBehavior__ssCR" title="ALBehaviorManagerProxy::removeBehavior"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::removeBehavior()</span></tt></a> and
+<a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#ALBehaviorManagerProxy::getSystemBehaviorNames" title="ALBehaviorManagerProxy::getSystemBehaviorNames"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBehaviorManagerProxy::getSystemBehaviorNames()</span></tt></a> are deprecated.</li>
+<li>Referring to behaviors with the User or System prefix when using
+<strong>ALBehaviorManager</strong> is also deprecated.</li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/core/albehaviormanager-api.html#albehaviormanager-api"><em>ALBehaviorManager API</em></a>.</p>
+</div>
+<div class="section" id="allauncher-removal-of-deprecated-methods">
+<h3><strong>ALLauncher</strong>: removal of deprecated methods<a class="headerlink" href="#allauncher-removal-of-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ALLauncherProxy::getGlobalModuleList</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALLauncherProxy::isModulePresent</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALLauncherProxy::launchExecutable</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALLauncherProxy::launchPythonModule</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALLauncherProxy::launchScript</span></tt></li>
+</ul>
+</div>
+<div class="section" id="alresourcemanager-removal-of-deprecated-methods">
+<h3><strong>ALResourceManager</strong>: removal of deprecated methods<a class="headerlink" href="#alresourcemanager-removal-of-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::releaseLocalResource</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::waitForLocalResource</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::waitForLocalResources</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::waitForLocalResourcesTree</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::declareEvent</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::getData</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::getDataList</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALResourceManagerProxy::getDataListName</span></tt></li>
+</ul>
+</div>
+</div>
+<div class="section" id="motion-improvements">
+<h2>Motion - Improvements<a class="headerlink" href="#motion-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-reflex-diagnosis-effect">
+<h3>New reflex: <strong>Diagnosis effect</strong><a class="headerlink" href="#new-reflex-diagnosis-effect" title="Permalink to this headline">¶</a></h3>
+<p><strong>Diagnosis effect</strong> is a reflex designed to protect the robot and the user in case of
+a malfunctioning actuator or sensor.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/motion/reflexes-diagnosis.html#reflexes-diagnosis"><em>Diagnosis effect</em></a>.</p>
+</div>
+<div class="section" id="new-reflex-external-collision-avoidance">
+<h3>New reflex: <strong>External-collision avoidance</strong><a class="headerlink" href="#new-reflex-external-collision-avoidance" title="Permalink to this headline">¶</a></h3>
+<p>The aim of <strong>External-collision avoidance</strong> is to avoid damaging the robot, its
+environment, and first of all avoid hurting people.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/motion/reflexes-external-collision.html#reflexes-external-collision"><em>External-collision avoidance</em></a>.</p>
+</div>
+<div class="section" id="almotion-new-event">
+<h3><strong>ALMotion</strong>: new event<a class="headerlink" href="#almotion-new-event" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/motion/reflexes-fall-manager-api.html#robotIsFalling" title="robotIsFalling"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">robotIsFalling()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/reflexes-external-collision-api.html#ALMotion/MoveFailed" title="ALMotion/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/MoveFailed()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="new-animation-breath">
+<h3>New animation: <strong>Breath</strong><a class="headerlink" href="#new-animation-breath" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/motion/idle-api.html#ALMotionProxy::setBreathEnabled__ssCR.bCR" title="ALMotionProxy::setBreathEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setBreathEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/idle-api.html#ALMotionProxy::getBreathEnabled__ssCR" title="ALMotionProxy::getBreathEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::getBreathEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/idle-api.html#ALMotionProxy::setBreathConfig__AL::ALValueCR" title="ALMotionProxy::setBreathConfig"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setBreathConfig()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/idle-api.html#ALMotionProxy::getBreathConfig" title="ALMotionProxy::getBreathConfig"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::getBreathConfig()</span></tt></a></li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/motion/idle.html#breath"><em>Idle</em></a>.</p>
+</div>
+<div class="section" id="robon-kinematics-models-updated">
+<h3><em>NAO</em> Kinematics models updated<a class="headerlink" href="#robon-kinematics-models-updated" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>Masses</strong> as well as the <strong>Center of Mass</strong> positions taken in account
+in the robot models have been updated in order to remove the slight
+dissymmetry between left and right limbs.</p>
+<p>For further details, see: <a class="reference internal" href="../../family/robots/masses_robot.html#robot-masses"><em>Masses</em></a>.</p>
+</div>
+<div class="section" id="almotion-new-methods">
+<h3><strong>ALMotion</strong>: new methods<a class="headerlink" href="#almotion-new-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/motion/tools-general-api.html#ALMotionProxy::areNotificationsEnabled" title="ALMotionProxy::areNotificationsEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::areNotificationsEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/tools-general-api.html#ALMotionProxy::setEnableNotifications__b" title="ALMotionProxy::setEnableNotifications"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setEnableNotifications()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alrobotposture-new-method">
+<h3><strong>ALRobotPosture</strong>: new method<a class="headerlink" href="#alrobotposture-new-method" title="Permalink to this headline">¶</a></h3>
+<p>A new methods, <strong>getPosture</strong> allows knowing the name of the current posture.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/motion/alrobotposture-api.html#ALRobotPostureProxy::getPosture" title="ALRobotPostureProxy::getPosture"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALRobotPostureProxy::getPosture()</span></tt></a>.</p>
+</div>
+<div class="section" id="alrobotposture-new-events">
+<h3><strong>ALRobotPosture</strong>: new events<a class="headerlink" href="#alrobotposture-new-events" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/motion/alrobotposture-api.html#PostureFamilyChanged" title="PostureFamilyChanged"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">PostureFamilyChanged()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/alrobotposture-api.html#PostureChanged" title="PostureChanged"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">PostureChanged()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alrobotposture-new-predefined-posture">
+<h3><strong>ALRobotPosture</strong>: new predefined posture<a class="headerlink" href="#alrobotposture-new-predefined-posture" title="Permalink to this headline">¶</a></h3>
+<p>A new predefined posture has been defined: <strong>SittingOnChair</strong>.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/motion/alrobotposture.html#term-predefined-postures"><em class="xref std std-term">Predefined postures</em></a>.</p>
+</div>
+<div class="section" id="stiffness-control-new-method-and-events">
+<h3><strong>Stiffness Control</strong>: new method and events<a class="headerlink" href="#stiffness-control-new-method-and-events" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#control-stiffness-api"><em>Stiffness control API</em></a> has a new method and a new event:</p>
+<div class="highlight-python"><pre>**Method**</pre>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#ALMotionProxy::robotIsWakeUp" title="ALMotionProxy::robotIsWakeUp"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::robotIsWakeUp()</span></tt></a></li>
+</ul>
+<p><strong>Events</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#robotIsWakeUp" title="robotIsWakeUp"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">robotIsWakeUp()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#ALMotion/Stiffness/wakeUpStarted" title="ALMotion/Stiffness/wakeUpStarted"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Stiffness/wakeUpStarted()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#ALMotion/Stiffness/restStarted" title="ALMotion/Stiffness/restStarted"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Stiffness/restStarted()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#ALMotion/Stiffness/wakeUpFinished" title="ALMotion/Stiffness/wakeUpFinished"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Stiffness/wakeUpFinished()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/motion/control-stiffness-api.html#ALMotion/Stiffness/restFinished" title="ALMotion/Stiffness/restFinished"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/Stiffness/restFinished()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="almotion-deprecated-methods">
+<h3><strong>ALMotion</strong>: deprecated methods<a class="headerlink" href="#almotion-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Deprecated Methods</th>
+<th class="head">Instead, use ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::setWalkTargetVelocity__floatCR.floatCR.floatCR.floatCR" title="ALMotionProxy::setWalkTargetVelocity"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setWalkTargetVelocity()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::getWalkArmsEnabled" title="ALMotionProxy::getWalkArmsEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::getWalkArmsEnabled()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::getMoveArmsEnabled__ssCR" title="ALMotionProxy::getMoveArmsEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::getMoveArmsEnabled()</span></tt></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::setWalkArmsEnabled__bCR.bCR" title="ALMotionProxy::setWalkArmsEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setWalkArmsEnabled()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::setMoveArmsEnabled__bCR.bCR" title="ALMotionProxy::setMoveArmsEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::setMoveArmsEnabled()</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="alnavigation-deprecated-methods-and-events">
+<h3><strong>ALNavigation</strong>: deprecated methods and events<a class="headerlink" href="#alnavigation-deprecated-methods-and-events" title="Permalink to this headline">¶</a></h3>
+<p>In a first step, safe displacements were created outside ALMotion module in order
+to fully test and qualify the concept. We are now in the process of integrating
+this safety mechanism in the main <strong>ALMotion</strong> module, so <strong>ALNavigation</strong> is
+progressively deprecated.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Deprecated Methods</th>
+<th class="head">Instead, use ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#ALNavigationProxy::move__floatCR.floatCR.floatCR" title="ALNavigationProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::move()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::move__floatCR.floatCR.floatCR" title="ALMotionProxy::move"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::move()</span></tt></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#ALNavigationProxy::moveToward__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveToward()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::moveToward__floatCR.floatCR.floatCR" title="ALMotionProxy::moveToward"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveToward()</span></tt></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#ALNavigationProxy::moveTo__floatCR.floatCR.floatCR" title="ALNavigationProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::moveTo()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/control-walk-api.html#ALMotionProxy::moveTo__floatCR.floatCR.floatCR" title="ALMotionProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::moveTo()</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Deprecated Events</th>
+<th class="head">Instead, use ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#Navigation/SafeNavigator/Status" title="Navigation/SafeNavigator/Status"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/Status()</span></tt></a></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#Navigation/SafeNavigator/BlockingObstacle" title="Navigation/SafeNavigator/BlockingObstacle"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/BlockingObstacle()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/motion/reflexes-external-collision-api.html#ALMotion/MoveFailed" title="ALMotion/MoveFailed"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALMotion/MoveFailed()</span></tt></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#Navigation/SafeNavigator/AlreadyAtTarget" title="Navigation/SafeNavigator/AlreadyAtTarget"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/AlreadyAtTarget()</span></tt></a></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../naoqi/motion/alnavigation-api.html#Navigation/SafeNavigator/DangerousObstacleDetected" title="Navigation/SafeNavigator/DangerousObstacleDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Navigation/SafeNavigator/DangerousObstacleDetected()</span></tt></a></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="audio-new-module">
+<h2>Audio - new module<a class="headerlink" href="#audio-new-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-alvoiceemotionanalysis">
+<h3>New module: <strong>ALVoiceEmotionAnalysis</strong><a class="headerlink" href="#new-module-alvoiceemotionanalysis" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALVoiceEmotionAnalysis</strong> identifies the emotion expressed by the speaker&#8217;s voice,
+independently of what is being said.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/audio/alvoiceemotionanalysis.html#alvoiceemotionanalysis"><em>ALVoiceEmotionAnalysis</em></a>.</p>
+</div>
+</div>
+<div class="section" id="audio-improvements">
+<h2>Audio - Improvements<a class="headerlink" href="#audio-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="alaudioplayer-on-a-virtual-robot">
+<h3><strong>ALAudioPlayer</strong> on a virtual robot<a class="headerlink" href="#alaudioplayer-on-a-virtual-robot" title="Permalink to this headline">¶</a></h3>
+<p><strong>AlAudioPlayer</strong> can now run on a virtual robot, but with limited functionalities:</p>
+<ul class="simple">
+<li>OGG and WAV files can run on a virtual robot, but MP3 cannot.</li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::playFileInLoop__ssCR" title="ALAudioPlayerProxy::playFileInLoop"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playFileInLoop()</span></tt></a> and
+<a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::playInLoop__iCR" title="ALAudioPlayerProxy::playInLoop"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playInLoop()</span></tt></a>
+are not available on virtual robot.</li>
+</ul>
+<p>For further details, see:  <a class="reference internal" href="../../naoqi/audio/alaudioplayer.html#alaudioplayer"><em>ALAudioPlayer</em></a>.</p>
+</div>
+<div class="section" id="alaudioplayer-new-methods">
+<h3><strong>ALAudioPlayer</strong>: new methods<a class="headerlink" href="#alaudioplayer-new-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::getInstalledSoundSetsList" title="ALAudioPlayerProxy::getInstalledSoundSetsList"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::getInstalledSoundSetsList()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::isSoundSetFileInstalled__ssCR.ssCR" title="ALAudioPlayerProxy::isSoundSetFileInstalled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::isSoundSetFileInstalled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::isSoundSetInstalled__ssCR" title="ALAudioPlayerProxy::isSoundSetInstalled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::isSoundSetInstalled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::isSoundSetLoaded__ssCR" title="ALAudioPlayerProxy::isSoundSetLoaded"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::isSoundSetLoaded()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::loadSoundSet__ssCR" title="ALAudioPlayerProxy::loadSoundSet"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::loadSoundSet()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::playSoundSetFile__ssCR" title="ALAudioPlayerProxy::playSoundSetFile"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::playSoundSetFile()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudioplayer-api.html#ALAudioPlayerProxy::unloadSoundSet__ssCR" title="ALAudioPlayerProxy::unloadSoundSet"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioPlayerProxy::unloadSoundSet()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alspeechrecognition-new-methods-and-event">
+<h3><strong>ALSpeechRecognition</strong>: new methods and event<a class="headerlink" href="#alspeechrecognition-new-methods-and-event" title="Permalink to this headline">¶</a></h3>
+<p><strong>Methods</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::getAudioExpression" title="ALSpeechRecognitionProxy::getAudioExpression"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::getAudioExpression()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::getRules__ssCR.ssCR" title="ALSpeechRecognitionProxy::getRules"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::getRules()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::saveContextSet__ssCR" title="ALSpeechRecognitionProxy::saveContextSet"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::saveContextSet()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::loadContextSet__ssCR" title="ALSpeechRecognitionProxy::loadContextSet"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::loadContextSet()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::eraseContextSet__ssCR" title="ALSpeechRecognitionProxy::eraseContextSet"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::eraseContextSet()</span></tt></a></li>
+</ul>
+<p>Grammar files (.bnf) can be compiled and loaded in the speech recognition
+engine with the following functions:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::compile__ssCR.ssCR.ssCR" title="ALSpeechRecognitionProxy::compile"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::compile()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::addContext__ssCR.ssCR" title="ALSpeechRecognitionProxy::addContext"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::addContext()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::removeContext__ssCR" title="ALSpeechRecognitionProxy::removeContext"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::removeContext()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::removeAllContext" title="ALSpeechRecognitionProxy::removeAllContext"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::removeAllContext()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::activateRule__ssCR.ssCR" title="ALSpeechRecognitionProxy::activateRule"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::activateRule()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::deactivateRule__ssCR.ssCR" title="ALSpeechRecognitionProxy::deactivateRule"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::deactivateRule()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::activateAllRules__ssCR" title="ALSpeechRecognitionProxy::activateAllRules"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::activateAllRules()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::deactivateAllRules__ssCR" title="ALSpeechRecognitionProxy::deactivateAllRules"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::deactivateAllRules()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::addWordListToSlot__ssCR.ssCR.std::vector:ss:CR" title="ALSpeechRecognitionProxy::addWordListToSlot"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::addWordListToSlot()</span></tt></a></li>
+</ul>
+<p><strong>Event</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#WordRecognizedAndGrammar" title="WordRecognizedAndGrammar"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">WordRecognizedAndGrammar()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alspeechrecognition-event-updated">
+<h3><strong>ALSpeechRecognition</strong>: event updated<a class="headerlink" href="#alspeechrecognition-event-updated" title="Permalink to this headline">¶</a></h3>
+<p>When the <a class="reference internal" href="../../naoqi/audio/alspeechrecognition.html#word-spotting"><em>Word Spotting option</em></a> is activated, <a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#WordRecognized" title="WordRecognized"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">WordRecognized()</span></tt></a>
+may now contain the following chain: <strong>&lt;...&gt;</strong>.</p>
+</div>
+<div class="section" id="alspeechrecognition-new-parameter">
+<h3><strong>ALSpeechRecognition</strong>: new parameter<a class="headerlink" href="#alspeechrecognition-new-parameter" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::setParameter__ssCR.floatCR" title="ALSpeechRecognitionProxy::setParameter"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::setParameter()</span></tt></a> and <a class="reference internal" href="../../naoqi/audio/alspeechrecognition-api.html#ALSpeechRecognitionProxy::getParameter__ssCR" title="ALSpeechRecognitionProxy::getParameter"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSpeechRecognitionProxy::getParameter()</span></tt></a>
+support a new parameter: <strong>NbHypotheses</strong> Number of hypotheses returned by the engine.</p>
+</div>
+<div class="section" id="altexttospeech-new-methods">
+<h3><strong>ALTextToSpeech</strong>: new methods<a class="headerlink" href="#altexttospeech-new-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/alanimatedspeech-api.html#ALAnimatedSpeechProxy::addTagsToWords__AL::ALValueCR" title="ALAnimatedSpeechProxy::addTagsToWords"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAnimatedSpeechProxy::addTagsToWords()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alanimatedspeech-api.html#ALAnimatedSpeechProxy::declareAnimationsPackage__ssCR" title="ALAnimatedSpeechProxy::declareAnimationsPackage"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAnimatedSpeechProxy::declareAnimationsPackage()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/altexttospeech-api.html#ALTextToSpeechProxy::locale" title="ALTextToSpeechProxy::locale"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALTextToSpeechProxy::locale()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="altexttospeech-new-event">
+<h3><strong>ALTextToSpeech</strong>: new event<a class="headerlink" href="#altexttospeech-new-event" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/altexttospeech-api.html#ALTextToSpeech/TextInterrupted" title="ALTextToSpeech/TextInterrupted"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALTextToSpeech/TextInterrupted()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="altexttospeech-deprecated-method">
+<h3><strong>ALTextToSpeech</strong>: deprecated method<a class="headerlink" href="#altexttospeech-deprecated-method" title="Permalink to this headline">¶</a></h3>
+<p>Due to technical improvements, there is no point to generate a file and playing it after,
+so <a class="reference internal" href="../../naoqi/audio/altexttospeech-api.html#ALTextToSpeechProxy::sayToFileAndPlay__ssCR" title="ALTextToSpeechProxy::sayToFileAndPlay"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALTextToSpeechProxy::sayToFileAndPlay()</span></tt></a> has been deprecated.</p>
+</div>
+<div class="section" id="alaudiosourcelocalization-changed-name-to-alsoundlocalization">
+<h3><strong>ALAudioSourceLocalization</strong> changed name to <strong>ALSoundLocalization</strong><a class="headerlink" href="#alaudiosourcelocalization-changed-name-to-alsoundlocalization" title="Permalink to this headline">¶</a></h3>
+<p>Module name <strong>ALAudioSourceLocalization</strong> is deprecated, please use
+<strong>ALSoundLocalization</strong> instead (same API).</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/audio/alsoundlocalization.html#alsoundlocalization"><em>ALSoundLocalization</em></a>.</p>
+</div>
+<div class="section" id="alsoundlocalization-and-alsounddetection-parameter-change">
+<h3><strong>ALSoundLocalization</strong> and <strong>ALSoundDetection</strong>: parameter change<a class="headerlink" href="#alsoundlocalization-and-alsounddetection-parameter-change" title="Permalink to this headline">¶</a></h3>
+<p>The &#8216;Sensibility&#8217; parameter has been deprecated and replaced by a &#8216;Sensitivity&#8217;
+parameter with a more usable scale.</p>
+</div>
+<div class="section" id="alaudiodevice-methods">
+<h3><strong>ALAudioDevice</strong>: methods<a class="headerlink" href="#alaudiodevice-methods" title="Permalink to this headline">¶</a></h3>
+<p>Added in the documentation:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/audio/alaudiodevice-api.html#ALAudioDeviceProxy::isAudioOutMuted" title="ALAudioDeviceProxy::isAudioOutMuted"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioDeviceProxy::isAudioOutMuted()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudiodevice-api.html#ALAudioDeviceProxy::isInputClosed" title="ALAudioDeviceProxy::isInputClosed"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioDeviceProxy::isInputClosed()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudiodevice-api.html#ALAudioDeviceProxy::isOutputClosed" title="ALAudioDeviceProxy::isOutputClosed"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioDeviceProxy::isOutputClosed()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/audio/alaudiodevice-api.html#ALAudioDeviceProxy::muteAudioOut__bCR" title="ALAudioDeviceProxy::muteAudioOut"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAudioDeviceProxy::muteAudioOut()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alaudiodevice-removal-of-deprecated-methods">
+<h3><strong>ALAudioDevice</strong> removal of deprecated methods<a class="headerlink" href="#alaudiodevice-removal-of-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ALAudioDeviceProxy::subscribeRemoteModule</span></tt> (deprecated in 1.12)</li>
+<li><tt class="docutils literal"><span class="pre">ALAudioDeviceProxy::unSubscribeRemoteModule</span></tt> (deprecated in 1.12)</li>
+</ul>
+</div>
+<div class="section" id="alaudiodevice-deprecated-parameter">
+<h3><strong>ALAudioDevice</strong>: deprecated parameter<a class="headerlink" href="#alaudiodevice-deprecated-parameter" title="Permalink to this headline">¶</a></h3>
+<p>Due to technical improvements, <strong>inputBufferSize</strong> parameter has no effect anymore.</p>
+</div>
+<div class="section" id="alsounddetection-removal-of-deprecated-methods">
+<h3><strong>ALSoundDetection</strong> removal of deprecated methods<a class="headerlink" href="#alsounddetection-removal-of-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ALSoundDetection::getDescription</span></tt> (deprecated in 1.12)</li>
+<li><tt class="docutils literal"><span class="pre">ALSoundDetection::getEvents</span></tt> (deprecated in 1.12)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="vision-new-modules">
+<h2>Vision  - new modules<a class="headerlink" href="#vision-new-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-albarcodereader">
+<h3>New module: <strong>ALBarcodeReader</strong><a class="headerlink" href="#new-module-albarcodereader" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALBarcodeReader</strong> scans an image from the camera and looks for a barcode. If
+a barcode is found in the image, the module tries to decipher it.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/albarcodereader.html#albarcodereader"><em>ALBarcodeReader</em></a>.</p>
+</div>
+<div class="section" id="new-module-alcloseobjectdetection">
+<h3>New module: <strong>ALCloseObjectDetection</strong><a class="headerlink" href="#new-module-alcloseobjectdetection" title="Permalink to this headline">¶</a></h3>
+<p><img alt="3d" class="img-inline" src="../../_images/3d.png" /> This module requires a robot with a 3D sensor.</p>
+<p><strong>ALCloseObjectDetection</strong> allows you to detect objects that are too close to the robot
+to be directly detected by the 3D sensor.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/alcloseobjectdetection.html#alcloseobjectdetection"><em>ALCloseObjectDetection</em></a>.</p>
+</div>
+<div class="section" id="new-module-alcolorblobdetection">
+<h3>New module: <strong>ALColorBlobDetection</strong><a class="headerlink" href="#new-module-alcolorblobdetection" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALColorBlobDetection</strong> is a module that provides a fast 2D vision-based color blob detector.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/alcolorblobdetection.html#alcolorblobdetection"><em>ALColorBlobDetection</em></a>.</p>
+</div>
+<div class="section" id="new-module-allocalization">
+<h3>New module: <strong>ALLocalization</strong><a class="headerlink" href="#new-module-allocalization" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALLocalization</strong> is a module dedicated to the localization of the robot in an
+<em>indoor</em> environment.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/allocalization.html#allocalization"><em>ALLocalization</em></a>.</p>
+</div>
+</div>
+<div class="section" id="vision-improvements">
+<h2>Vision  - Improvements<a class="headerlink" href="#vision-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="almovementdetection-fully-reshaped">
+<h3><strong>ALMovementDetection</strong>: fully reshaped<a class="headerlink" href="#almovementdetection-fully-reshaped" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALMovementDetection</strong> allows you to detect movement in the field of view of the robot.</p>
+<p>The detection uses the best available camera:</p>
+<ol class="arabic simple">
+<li>a <strong>depth camera</strong>, if the robot has one, or if not,</li>
+<li>an <strong>RGB camera</strong>.</li>
+</ol>
+<p>Two new methods have been added to <strong>ALMovementDetection</strong>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/vision/almovementdetection-api.html#ALMovementDetectionProxy::setColorSensitivity__floatCR" title="ALMovementDetectionProxy::setColorSensitivity"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMovementDetectionProxy::setColorSensitivity()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/almovementdetection-api.html#ALMovementDetectionProxy::getColorSensitivity" title="ALMovementDetectionProxy::getColorSensitivity"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMovementDetectionProxy::getColorSensitivity()</span></tt></a></li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/almovementdetection.html#almovementdetection"><em>ALMovementDetection</em></a>.</p>
+</div>
+<div class="section" id="alphotocapture-new-methods">
+<h3><strong>ALPhotoCapture</strong>: new methods<a class="headerlink" href="#alphotocapture-new-methods" title="Permalink to this headline">¶</a></h3>
+<p>Two new methods have been added to <strong>ALPhotoCapture</strong>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/vision/alphotocapture-api.html#ALPhotoCaptureProxy::setHalfPressEnabled__bCR" title="ALPhotoCaptureProxy::setHalfPressEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALPhotoCaptureProxy::setHalfPressEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/alphotocapture-api.html#ALPhotoCaptureProxy::isHalfPressEnabled" title="ALPhotoCaptureProxy::isHalfPressEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALPhotoCaptureProxy::isHalfPressEnabled()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alvideodevice-re-factored">
+<h3><strong>ALVideoDevice</strong> re-factored<a class="headerlink" href="#alvideodevice-re-factored" title="Permalink to this headline">¶</a></h3>
+<p>The complete refactoring of <strong>ALVideoDevice</strong> module has been continued.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/vision/alvideodevice.html#alvideodevice"><em>ALVideoDevice</em></a> and <a class="reference internal" href="../../naoqi/vision/alvideodevice-api.html#alvideodevice-api"><em>ALVideoDevice API</em></a>.</p>
+</div>
+<div class="section" id="alvisualcompass-new-method-and-event">
+<h3><strong>ALVisualCompass</strong>: new method and event<a class="headerlink" href="#alvisualcompass-new-method-and-event" title="Permalink to this headline">¶</a></h3>
+<p><strong>Method</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#ALVisualCompassProxy::moveTo__floatCR.floatCR.floatCR" title="ALVisualCompassProxy::moveTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVisualCompassProxy::moveTo()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#ALVisualCompassProxy::moveStraightTo__floatCR" title="ALVisualCompassProxy::moveStraightTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVisualCompassProxy::moveStraightTo()</span></tt></a>.</li>
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#ALVisualCompassProxy::setCurrentImageAsReference" title="ALVisualCompassProxy::setCurrentImageAsReference"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVisualCompassProxy::setCurrentImageAsReference()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#ALVisualCompassProxy::waitUntilTargetReached" title="ALVisualCompassProxy::waitUntilTargetReached"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVisualCompassProxy::waitUntilTargetReached()</span></tt></a></li>
+</ul>
+<p><strong>Events</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#VisualCompass/FinalDeviation" title="VisualCompass/FinalDeviation"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">VisualCompass/FinalDeviation()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#VisualCompass/InvalidReference" title="VisualCompass/InvalidReference"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">VisualCompass/InvalidReference()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#VisualCompass/MoveAbort" title="VisualCompass/MoveAbort"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">VisualCompass/MoveAbort()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/vision/alvisualcompass-api.html#VisualCompass/NewReferenceImageSet" title="VisualCompass/NewReferenceImageSet"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">VisualCompass/NewReferenceImageSet()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alvisualcompass-removal-of-deprecated-methods">
+<h3><strong>ALVisualCompass</strong>: removal of deprecated methods<a class="headerlink" href="#alvisualcompass-removal-of-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ALVisualCompassProxy::getCurrentImage</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ALVisualCompassProxy::getReferenceQuality</span></tt></li>
+</ul>
+</div>
+<div class="section" id="alvisionrecognition-new-method">
+<h3><strong>ALVisionRecognition</strong>: new method<a class="headerlink" href="#alvisionrecognition-new-method" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/vision/alvisionrecognition-api.html#ALVisionRecognitionProxy::getParam__ssCR" title="ALVisionRecognitionProxy::getParam"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVisionRecognitionProxy::getParam()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alvisionrecognition-deprecated-method">
+<h3><strong>ALVisionRecognition</strong>: deprecated method<a class="headerlink" href="#alvisionrecognition-deprecated-method" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/vision/alvisionrecognition-api.html#ALVisionRecognitionProxy::setParam__ssCR.AL::ALValueCR" title="ALVisionRecognitionProxy::setParam"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALVisionRecognitionProxy::setParam()</span></tt></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="people-perception-improvements">
+<h2>People Perception - Improvements<a class="headerlink" href="#people-perception-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="alfacedetection-new-methods">
+<h3><strong>ALFaceDetection</strong>: new methods<a class="headerlink" href="#alfacedetection-new-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::isRecognitionEnabled" title="ALFaceDetectionProxy::isRecognitionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::isRecognitionEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::setRecognitionEnabled__bCR" title="ALFaceDetectionProxy::setRecognitionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setRecognitionEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::setTrackingEnabled__bCR" title="ALFaceDetectionProxy::setTrackingEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setTrackingEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::forgetPerson__ssCR" title="ALFaceDetectionProxy::forgetPerson"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::forgetPerson()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alfacedetection-deprecated-methods">
+<h3><strong>ALFaceDetection</strong>: deprecated methods<a class="headerlink" href="#alfacedetection-deprecated-methods" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Deprecated Methods</th>
+<th class="head">Instead, use ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::enableRecognition__bCR" title="ALFaceDetectionProxy::enableRecognition"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::enableRecognition()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::setRecognitionEnabled__bCR" title="ALFaceDetectionProxy::setRecognitionEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setRecognitionEnabled()</span></tt></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::enableTracking__bCR" title="ALFaceDetectionProxy::enableTracking"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::enableTracking()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/peopleperception/alfacedetection-api.html#ALFaceDetectionProxy::setTrackingEnabled__bCR" title="ALFaceDetectionProxy::setTrackingEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALFaceDetectionProxy::setTrackingEnabled()</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="sensors-new-modules">
+<h2>Sensors  - New modules<a class="headerlink" href="#sensors-new-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-altouch">
+<h3>New module: <strong>ALTouch</strong><a class="headerlink" href="#new-module-altouch" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>ALTouch</strong> module is responsible for raising events when the robot is touched.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/sensors/altouch.html#altouch"><em>ALTouch</em></a>.</p>
+</div>
+<div class="section" id="new-module-alchestbutton">
+<h3>New module: <strong>ALChestButton</strong><a class="headerlink" href="#new-module-alchestbutton" title="Permalink to this headline">¶</a></h3>
+<p>Former <strong>ALSentinel</strong> events: <tt class="docutils literal"><span class="pre">SimpleClickOccured</span></tt>, :<tt class="docutils literal"><span class="pre">DoubleClickOccured</span></tt>
+and <tt class="docutils literal"><span class="pre">TripleClickOccured</span></tt> are now <strong>ALChestButton</strong> events:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/sensors/alchestbutton-api.html#ALChestButton/SimpleClickOccurred" title="ALChestButton/SimpleClickOccurred"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALChestButton/SimpleClickOccurred()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/alchestbutton-api.html#ALChestButton/DoubleClickOccurred" title="ALChestButton/DoubleClickOccurred"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALChestButton/DoubleClickOccurred()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/alchestbutton-api.html#ALChestButton/TripleClickOccurred" title="ALChestButton/TripleClickOccurred"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALChestButton/TripleClickOccurred()</span></tt></a></li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/sensors/alchestbutton.html#alchestbutton"><em>ALChestButton</em></a>.</p>
+</div>
+</div>
+<div class="section" id="sensors-improvements">
+<h2>Sensors  - Improvements<a class="headerlink" href="#sensors-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="albodytemperature-actuators-monitored">
+<h3><strong>ALBodyTemperature</strong>: <strong>Actuators</strong> monitored<a class="headerlink" href="#albodytemperature-actuators-monitored" title="Permalink to this headline">¶</a></h3>
+<p>Additionally to <strong>Joints</strong> and CPU, <strong>ALBodyTemperature</strong> now monitors
+<strong>Actuators</strong> temperature.</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/sensors/albodytemperature.html#albodytemperature"><em>ALBodyTemperature</em></a>.</p>
+</div>
+<div class="section" id="albodytemperature-new-and-deprecated-events">
+<h3><strong>ALBodyTemperature</strong>: new and deprecated events<a class="headerlink" href="#albodytemperature-new-and-deprecated-events" title="Permalink to this headline">¶</a></h3>
+<p><strong>New event</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#DeviceNoLongerHotDetected" title="DeviceNoLongerHotDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">DeviceNoLongerHotDetected()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#HotDeviceDetected" title="HotDeviceDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">HotDeviceDetected()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#HeadProcessorIsHot" title="HeadProcessorIsHot"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">HeadProcessorIsHot()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#HeadProcessorIsCriticallyHot" title="HeadProcessorIsCriticallyHot"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">HeadProcessorIsCriticallyHot()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#TemperatureStatusChanged" title="TemperatureStatusChanged"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">TemperatureStatusChanged()</span></tt></a></li>
+</ul>
+<p><strong>Deprecated event</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Deprecated Events</th>
+<th class="head">Instead, use ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#HotJointDetected" title="HotJointDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">HotJointDetected()</span></tt></a></td>
+<td><a class="reference internal" href="../../naoqi/sensors/albodytemperature-api.html#HotDeviceDetected" title="HotDeviceDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">HotDeviceDetected()</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="albattery-new-methods">
+<h3><strong>ALBattery</strong>: new methods<a class="headerlink" href="#albattery-new-methods" title="Permalink to this headline">¶</a></h3>
+<p>New methods have been added to <strong>ALBattery</strong>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/sensors/albattery-api.html#ALBatteryProxy::getBatteryCharge" title="ALBatteryProxy::getBatteryCharge"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBatteryProxy::getBatteryCharge()</span></tt></a></li>
+<li><a class="reference internal" href="../../naoqi/sensors/albattery-api.html#ALBatteryProxy::enablePowerMonitoring__b" title="ALBatteryProxy::enablePowerMonitoring"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALBatteryProxy::enablePowerMonitoring()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alleds-new-method">
+<h3><strong>ALLeds</strong>: new method<a class="headerlink" href="#alleds-new-method" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../naoqi/sensors/alleds-api.html#ALLedsProxy::reset__ssCR" title="ALLedsProxy::reset"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::reset()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="alleds-method-improved">
+<h3><strong>ALLeds</strong>: method improved<a class="headerlink" href="#alleds-method-improved" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../naoqi/sensors/alleds-api.html#ALLedsProxy::rotateEyes__iCR.floatCR.floatCR" title="ALLedsProxy::rotateEyes"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALLedsProxy::rotateEyes()</span></tt></a>: eyes animation smoother with a better timing.</p>
+</div>
+</div>
+<div class="section" id="diagnosis-new-module">
+<h2>Diagnosis - New module<a class="headerlink" href="#diagnosis-new-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="new-module-aldiagnosis">
+<h3>New module: <strong>ALDiagnosis</strong><a class="headerlink" href="#new-module-aldiagnosis" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALDiagnosis</strong> module allows the robot to detect if there is an hardware trouble
+(mainly electrical connection).</p>
+<p>For further details, see: <a class="reference internal" href="../../naoqi/diagnosis/aldiagnosis.html#aldiagnosis"><em>ALDiagnosis</em></a>.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="sdks-bindings">
+<h2>SDKs, Bindings<a class="headerlink" href="#sdks-bindings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="control-nao-from-your-web-browser-qimessaging-javascript">
+<h3>Control NAO from your web browser - QiMessaging JavaScript<a class="headerlink" href="#control-nao-from-your-web-browser-qimessaging-javascript" title="Permalink to this headline">¶</a></h3>
+<p><strong>QiMessaging</strong> provides <strong>JavaScript</strong> bindings to use QiMessaging services
+(modules) in a web browser. It allows you to build HTML5 application for your robot.</p>
+<p>For further details, see: <a class="reference internal" href="../../dev/js/index.html#qimessaging-javascript"><em>QiMessaging JavaScript</em></a>.</p>
+</div>
+<div class="section" id="python-sdk-python2-7-only">
+<h3>Python SDK: Python2.7 only<a class="headerlink" href="#python-sdk-python2-7-only" title="Permalink to this headline">¶</a></h3>
+<p>Python 2.6 is not anymore supported.</p>
+<p>Moreover, <strong>Choregraphe</strong> uses now <strong>Python 2.7</strong> to interpret its scripts.</p>
+</div>
+<div class="section" id="c-sdk-end-of-vs2008-support">
+<h3>C++ SDK: end of VS2008 support<a class="headerlink" href="#c-sdk-end-of-vs2008-support" title="Permalink to this headline">¶</a></h3>
+<p>Support for Visual Studio 2008 is gone. This will let us focus on supporting new
+compilers (Visual Studio 2012),
+and new architectures (windows 64 bits) in the future.</p>
+</div>
+<div class="section" id="c-sdk-end-of-ubuntu-10-04-lts-lucid-support">
+<h3>C++ SDK: end of Ubuntu 10.04 LTS (Lucid) support<a class="headerlink" href="#c-sdk-end-of-ubuntu-10-04-lts-lucid-support" title="Permalink to this headline">¶</a></h3>
+<p>Ubuntu 10.04 LTS (Lucid) is not anymore supported.</p>
+<p>This release only supports Ubuntu 12.04 LTS (Precise) and later.</p>
+<p>For further details, see: <em class="xref std std-ref">compatible-platforms</em>.</p>
+</div>
+<div class="section" id="c-sdk-change-in-qibuild-numbering">
+<h3>C++ SDK: change in qiBuild numbering<a class="headerlink" href="#c-sdk-change-in-qibuild-numbering" title="Permalink to this headline">¶</a></h3>
+<p><strong>qiBuild</strong> has now its own release cycle.
+This means:</p>
+<ul class="simple">
+<li><strong>qiBuild</strong> now has its own version number (2.5 at the moment of writing),
+distinct from the version number of the SDK.</li>
+<li>There are now new <strong>qiBuild</strong> releases every months or so: follow the
+project on github (<a class="reference external" href="https://github.com/aldebaran/qibuild">https://github.com/aldebaran/qibuild</a>)
+to be informed of new releases.</li>
+</ul>
+<p>This should not change anything because the latest <strong>qiBuild</strong> release
+will always be retro-compatible with the latest Aldebaran <strong>C++ SDK</strong>.</p>
+</div>
+<div class="section" id="c-sdk-breaking-changes">
+<h3>C++ SDK: breaking changes<a class="headerlink" href="#c-sdk-breaking-changes" title="Permalink to this headline">¶</a></h3>
+<p>During the re-factoring of the framework libraries, some minor incompatible
+changes were introduced.</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">BIND_METHOD</span></tt> macro call must now be followed by a colon:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// old:</span>
+<span class="n">BIND_METHOD</span><span class="p">(</span><span class="s">&quot;myMethod&quot;</span><span class="p">,</span> <span class="s">&quot;MyModule&quot;</span><span class="p">,</span> <span class="s">&quot;Documentation for myMethod&quot;</span><span class="p">)</span>
+
+<span class="c1">// new</span>
+<span class="n">BIND_METHOD</span><span class="p">(</span><span class="s">&quot;myMethod&quot;</span><span class="p">,</span> <span class="s">&quot;MyModule&quot;</span><span class="p">,</span> <span class="s">&quot;Documentation for myMethod&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">ALCOMMON no longer depends on ALTHREAD, so if you are using it, you must
+patch the CMake code</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c"># Old:</span>
+<span class="nb">qi_use_lib</span><span class="p">(</span><span class="s">my_module</span> <span class="s">ALCOMMON</span><span class="p">)</span>
+
+<span class="c"># New:</span>
+<span class="nb">qi_use_lib</span><span class="p">(</span><span class="s">my_module</span> <span class="s">ALTHREAD</span> <span class="s">ALCOMMON</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="simulator-sdk-multiple-robot-models">
+<h3>Simulator SDK: multiple robot Models<a class="headerlink" href="#simulator-sdk-multiple-robot-models" title="Permalink to this headline">¶</a></h3>
+<p>Support for multiple robot models was added.</p>
+</div>
+<div class="section" id="simulator-sdk-naoqi-automatic-launch">
+<h3>Simulator SDK: NAOqi automatic Launch<a class="headerlink" href="#simulator-sdk-naoqi-automatic-launch" title="Permalink to this headline">¶</a></h3>
+<p><strong>NAOqi</strong> is now automatically launched at startup.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="naoqi_api_rn2.1.2.html" title="&lt;strong&gt;NAOqi API&lt;/strong&gt; &amp;amp; &lt;strong&gt;SDks&lt;/strong&gt; 2.1.2"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1.2</a>
+     |
+    <a href="../index.html" title="What’s new" accesskey="U">What’s new</a>
+   |
+    <a href="naoqi_os_rn2.0.html" title="&lt;strong&gt;NAOqi OS&lt;/strong&gt; 2.1"><strong>NAOqi OS</strong> 2.1</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">What’s new</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="whatsnew_2.1.4.html">Release Notes - 2.1.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whatsnew_2.1.3.html">Release Notes - 2.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whatsnew_2.1.2.html">Release Notes - 2.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whatsnew.html">Release Notes - 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="choregraphe_rn2.0.html"><strong>Choregraphe</strong> 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naoqi_api_rn2.1.2.html"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1.2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href=""><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="naoqi_os_rn2.0.html"><strong>NAOqi OS</strong> 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html">ChangeLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.14/index.html">Release notes - 1.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.12/index.html">Release notes - 1.12</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><strong>NAOqi API</strong> &amp; <strong>SDks</strong> 2.1</a><ul>
+<li><a class="reference internal" href="#addendum-23-september-2014">Addendum - 23 September 2014</a><ul>
+<li><a class="reference internal" href="#alfacedetection-omron-solution-instead-of-oki"><strong>ALFaceDetection</strong>: <strong>OMRON</strong> solution instead of <strong>OKI</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#few-steps-toward-human-behavior">Few steps toward human behavior</a><ul>
+<li><a class="reference internal" href="#new-module-aldialog">New module: <strong>ALDialog</strong></a></li>
+<li><a class="reference internal" href="#new-module-alanimatedspeech">New module: <strong>ALAnimatedSpeech</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#new-tracking-system">New tracking system</a><ul>
+<li><a class="reference internal" href="#new-module-altracker">New module: <strong>ALTracker</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#new-extractors-basics">New extractors - Basics</a><ul>
+<li><a class="reference internal" href="#new-module-alvisualspacehistory">New module: <strong>ALVisualSpaceHistory</strong></a></li>
+<li><a class="reference internal" href="#new-module-alsegmentation3d">New module: <strong>ALSegmentation3D</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#new-extractors-for-people-perception">New extractors - For People Perception</a><ul>
+<li><a class="reference internal" href="#new-module-albasicawareness">New module: <strong>ALBasicAwareness</strong></a></li>
+<li><a class="reference internal" href="#new-module-alpeopleperception">New module: <strong>ALPeoplePerception</strong></a></li>
+<li><a class="reference internal" href="#new-module-alengagementzones">New module: <strong>ALEngagementZones</strong></a></li>
+<li><a class="reference internal" href="#new-module-alfacecharacteristics">New module: <strong>ALFaceCharacteristics</strong></a></li>
+<li><a class="reference internal" href="#new-module-algazeanalysis">New module: <strong>ALGazeAnalysis</strong></a></li>
+<li><a class="reference internal" href="#new-module-alsittingpeopledetection">New module: <strong>ALSittingPeopleDetection</strong></a></li>
+<li><a class="reference internal" href="#new-module-alwavingdetection">New module: <strong>ALWavingDetection</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-new-modules">Core - New modules</a><ul>
+<li><a class="reference internal" href="#new-module-alautonomouslife">New module: <strong>ALAutonomousLife</strong></a></li>
+<li><a class="reference internal" href="#new-module-alautonomousmoves">New module: <strong>ALAutonomousMoves</strong></a></li>
+<li><a class="reference internal" href="#new-module-altabletservice">New module: <strong>ALTabletService</strong></a></li>
+<li><a class="reference internal" href="#new-module-alusersession">New module: <strong>ALUserSession</strong></a></li>
+<li><a class="reference internal" href="#new-module-alworldrepresentation">New module: <strong>ALWorldRepresentation</strong></a></li>
+<li><a class="reference internal" href="#new-module-alsystem">New module: <strong>ALSystem</strong></a></li>
+<li><a class="reference internal" href="#new-module-packagemanager">New module: <strong>PackageManager</strong></a></li>
+<li><a class="reference internal" href="#new-module-alpreferencemanager">New module: <strong>ALPreferenceManager</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-improvements">Core - Improvements</a><ul>
+<li><a class="reference internal" href="#deprecated-alpreferences">Deprecated: <strong>ALPreferences</strong></a></li>
+<li><a class="reference internal" href="#alconnectionmanager-new-methods-and-event"><strong>ALConnectionManager</strong>: new methods and event</a></li>
+<li><a class="reference internal" href="#alextractor-new-methods"><strong>ALExtractor</strong>: new methods</a></li>
+<li><a class="reference internal" href="#albehaviormanager-new-methods"><strong>ALBehaviorManager</strong>: new methods</a></li>
+<li><a class="reference internal" href="#albehaviormanager-partially-deprecated"><strong>ALBehaviorManager</strong> partially deprecated</a></li>
+<li><a class="reference internal" href="#allauncher-removal-of-deprecated-methods"><strong>ALLauncher</strong>: removal of deprecated methods</a></li>
+<li><a class="reference internal" href="#alresourcemanager-removal-of-deprecated-methods"><strong>ALResourceManager</strong>: removal of deprecated methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#motion-improvements">Motion - Improvements</a><ul>
+<li><a class="reference internal" href="#new-reflex-diagnosis-effect">New reflex: <strong>Diagnosis effect</strong></a></li>
+<li><a class="reference internal" href="#new-reflex-external-collision-avoidance">New reflex: <strong>External-collision avoidance</strong></a></li>
+<li><a class="reference internal" href="#almotion-new-event"><strong>ALMotion</strong>: new event</a></li>
+<li><a class="reference internal" href="#new-animation-breath">New animation: <strong>Breath</strong></a></li>
+<li><a class="reference internal" href="#robon-kinematics-models-updated"><em>NAO</em> Kinematics models updated</a></li>
+<li><a class="reference internal" href="#almotion-new-methods"><strong>ALMotion</strong>: new methods</a></li>
+<li><a class="reference internal" href="#alrobotposture-new-method"><strong>ALRobotPosture</strong>: new method</a></li>
+<li><a class="reference internal" href="#alrobotposture-new-events"><strong>ALRobotPosture</strong>: new events</a></li>
+<li><a class="reference internal" href="#alrobotposture-new-predefined-posture"><strong>ALRobotPosture</strong>: new predefined posture</a></li>
+<li><a class="reference internal" href="#stiffness-control-new-method-and-events"><strong>Stiffness Control</strong>: new method and events</a></li>
+<li><a class="reference internal" href="#almotion-deprecated-methods"><strong>ALMotion</strong>: deprecated methods</a></li>
+<li><a class="reference internal" href="#alnavigation-deprecated-methods-and-events"><strong>ALNavigation</strong>: deprecated methods and events</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#audio-new-module">Audio - new module</a><ul>
+<li><a class="reference internal" href="#new-module-alvoiceemotionanalysis">New module: <strong>ALVoiceEmotionAnalysis</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#audio-improvements">Audio - Improvements</a><ul>
+<li><a class="reference internal" href="#alaudioplayer-on-a-virtual-robot"><strong>ALAudioPlayer</strong> on a virtual robot</a></li>
+<li><a class="reference internal" href="#alaudioplayer-new-methods"><strong>ALAudioPlayer</strong>: new methods</a></li>
+<li><a class="reference internal" href="#alspeechrecognition-new-methods-and-event"><strong>ALSpeechRecognition</strong>: new methods and event</a></li>
+<li><a class="reference internal" href="#alspeechrecognition-event-updated"><strong>ALSpeechRecognition</strong>: event updated</a></li>
+<li><a class="reference internal" href="#alspeechrecognition-new-parameter"><strong>ALSpeechRecognition</strong>: new parameter</a></li>
+<li><a class="reference internal" href="#altexttospeech-new-methods"><strong>ALTextToSpeech</strong>: new methods</a></li>
+<li><a class="reference internal" href="#altexttospeech-new-event"><strong>ALTextToSpeech</strong>: new event</a></li>
+<li><a class="reference internal" href="#altexttospeech-deprecated-method"><strong>ALTextToSpeech</strong>: deprecated method</a></li>
+<li><a class="reference internal" href="#alaudiosourcelocalization-changed-name-to-alsoundlocalization"><strong>ALAudioSourceLocalization</strong> changed name to <strong>ALSoundLocalization</strong></a></li>
+<li><a class="reference internal" href="#alsoundlocalization-and-alsounddetection-parameter-change"><strong>ALSoundLocalization</strong> and <strong>ALSoundDetection</strong>: parameter change</a></li>
+<li><a class="reference internal" href="#alaudiodevice-methods"><strong>ALAudioDevice</strong>: methods</a></li>
+<li><a class="reference internal" href="#alaudiodevice-removal-of-deprecated-methods"><strong>ALAudioDevice</strong> removal of deprecated methods</a></li>
+<li><a class="reference internal" href="#alaudiodevice-deprecated-parameter"><strong>ALAudioDevice</strong>: deprecated parameter</a></li>
+<li><a class="reference internal" href="#alsounddetection-removal-of-deprecated-methods"><strong>ALSoundDetection</strong> removal of deprecated methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vision-new-modules">Vision  - new modules</a><ul>
+<li><a class="reference internal" href="#new-module-albarcodereader">New module: <strong>ALBarcodeReader</strong></a></li>
+<li><a class="reference internal" href="#new-module-alcloseobjectdetection">New module: <strong>ALCloseObjectDetection</strong></a></li>
+<li><a class="reference internal" href="#new-module-alcolorblobdetection">New module: <strong>ALColorBlobDetection</strong></a></li>
+<li><a class="reference internal" href="#new-module-allocalization">New module: <strong>ALLocalization</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vision-improvements">Vision  - Improvements</a><ul>
+<li><a class="reference internal" href="#almovementdetection-fully-reshaped"><strong>ALMovementDetection</strong>: fully reshaped</a></li>
+<li><a class="reference internal" href="#alphotocapture-new-methods"><strong>ALPhotoCapture</strong>: new methods</a></li>
+<li><a class="reference internal" href="#alvideodevice-re-factored"><strong>ALVideoDevice</strong> re-factored</a></li>
+<li><a class="reference internal" href="#alvisualcompass-new-method-and-event"><strong>ALVisualCompass</strong>: new method and event</a></li>
+<li><a class="reference internal" href="#alvisualcompass-removal-of-deprecated-methods"><strong>ALVisualCompass</strong>: removal of deprecated methods</a></li>
+<li><a class="reference internal" href="#alvisionrecognition-new-method"><strong>ALVisionRecognition</strong>: new method</a></li>
+<li><a class="reference internal" href="#alvisionrecognition-deprecated-method"><strong>ALVisionRecognition</strong>: deprecated method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#people-perception-improvements">People Perception - Improvements</a><ul>
+<li><a class="reference internal" href="#alfacedetection-new-methods"><strong>ALFaceDetection</strong>: new methods</a></li>
+<li><a class="reference internal" href="#alfacedetection-deprecated-methods"><strong>ALFaceDetection</strong>: deprecated methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sensors-new-modules">Sensors  - New modules</a><ul>
+<li><a class="reference internal" href="#new-module-altouch">New module: <strong>ALTouch</strong></a></li>
+<li><a class="reference internal" href="#new-module-alchestbutton">New module: <strong>ALChestButton</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sensors-improvements">Sensors  - Improvements</a><ul>
+<li><a class="reference internal" href="#albodytemperature-actuators-monitored"><strong>ALBodyTemperature</strong>: <strong>Actuators</strong> monitored</a></li>
+<li><a class="reference internal" href="#albodytemperature-new-and-deprecated-events"><strong>ALBodyTemperature</strong>: new and deprecated events</a></li>
+<li><a class="reference internal" href="#albattery-new-methods"><strong>ALBattery</strong>: new methods</a></li>
+<li><a class="reference internal" href="#alleds-new-method"><strong>ALLeds</strong>: new method</a></li>
+<li><a class="reference internal" href="#alleds-method-improved"><strong>ALLeds</strong>: method improved</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#diagnosis-new-module">Diagnosis - New module</a><ul>
+<li><a class="reference internal" href="#new-module-aldiagnosis">New module: <strong>ALDiagnosis</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sdks-bindings">SDKs, Bindings</a><ul>
+<li><a class="reference internal" href="#control-nao-from-your-web-browser-qimessaging-javascript">Control NAO from your web browser - QiMessaging JavaScript</a></li>
+<li><a class="reference internal" href="#python-sdk-python2-7-only">Python SDK: Python2.7 only</a></li>
+<li><a class="reference internal" href="#c-sdk-end-of-vs2008-support">C++ SDK: end of VS2008 support</a></li>
+<li><a class="reference internal" href="#c-sdk-end-of-ubuntu-10-04-lts-lucid-support">C++ SDK: end of Ubuntu 10.04 LTS (Lucid) support</a></li>
+<li><a class="reference internal" href="#c-sdk-change-in-qibuild-numbering">C++ SDK: change in qiBuild numbering</a></li>
+<li><a class="reference internal" href="#c-sdk-breaking-changes">C++ SDK: breaking changes</a></li>
+<li><a class="reference internal" href="#simulator-sdk-multiple-robot-models">Simulator SDK: multiple robot Models</a></li>
+<li><a class="reference internal" href="#simulator-sdk-naoqi-automatic-launch">Simulator SDK: NAOqi automatic Launch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="naoqi_api_rn2.1.2.html" title="&lt;strong&gt;NAOqi API&lt;/strong&gt; &amp;amp; &lt;strong&gt;SDks&lt;/strong&gt; 2.1.2">previous</a>
+     |
+    <a href="../index.html" title="What’s new" accesskey="U">up</a>
+   |
+    <a href="naoqi_os_rn2.0.html" title="&lt;strong&gt;NAOqi OS&lt;/strong&gt; 2.1">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

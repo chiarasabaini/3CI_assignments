@@ -1,0 +1,13 @@
+.. include:: /bulk/common.rst
+
+.. _romeo_contact-sensors:
+
+|roboR| -  Contact and tactile sensors
+=======================================
+
+.. seealso::
+    :ref:`romeo`
+
+-----------
+
+**TBD**

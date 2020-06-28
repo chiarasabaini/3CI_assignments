@@ -1,0 +1,942 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALDialog API &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="ALDialog" href="aldialog.html" />
+    <link rel="next" title="QiChat - Table of Content" href="aldialog_syntax_toc.html" />
+    <link rel="prev" title="ALDialog" href="aldialog.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="aldialog.html" title="ALDialog">previous</a>
+     |
+    <a href="aldialog.html" title="ALDialog" accesskey="U">up</a>
+   |
+    <a href="aldialog_syntax_toc.html" title="QiChat - Table of Content">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-audio-dialog-aldialog-api">
+            
+  <div class="section" id="aldialog-api">
+<span id="id1"></span><h1>ALDialog API<a class="headerlink" href="#aldialog-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../index.html#naoqi-audio"><em>NAOqi Audio</em></a> - <a class="reference internal" href="aldialog.html#aldialog"><em>Overview</em></a> | API |
+<a class="reference internal" href="aldialog_syntax_toc.html#dialog-toc"><em>QiChat</em></a> | <a class="reference internal" href="aldialog_tuto.html#aldialog-tuto"><em>Tutorials</em></a></p>
+<hr class="docutils" />
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/aldialogproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<p>As any module, this module inherits methods from <a class="reference internal" href="../../core/almodule-api.html#almodule-api"><em>ALModule API</em></a>.
+It also has the following specific methods:</p>
+<dl class="class">
+<dt id="ALDialogProxy">
+<em class="property">class </em><tt class="descname">ALDialogProxy</tt><a class="headerlink" href="#ALDialogProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><a class="reference internal" href="#ALDialogProxy::loadTopic__ssCR" title="ALDialogProxy::loadTopic"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::loadTopic()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::unloadTopic__ssCR" title="ALDialogProxy::unloadTopic"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::unloadTopic()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::activateTopic__ssCR" title="ALDialogProxy::activateTopic"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::activateTopic()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::deactivateTopic__ssCR" title="ALDialogProxy::deactivateTopic"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::deactivateTopic()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::setLanguage__ssCR" title="ALDialogProxy::setLanguage"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setLanguage()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::setFocus__ssCR" title="ALDialogProxy::setFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setFocus()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::activateTag__ssCR.ssCR" title="ALDialogProxy::activateTag"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::activateTag()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::deactivateTag__ssCR.ssCR" title="ALDialogProxy::deactivateTag"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::deactivateTag()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::gotoTopic__ssCR" title="ALDialogProxy::gotoTopic"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::gotoTopic()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::setConcept__ssCR.ssCR.std::vector:ss:CR" title="ALDialogProxy::setConcept"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setConcept()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::setAnimatedSpeechConfiguration__ALValueCR" title="ALDialogProxy::setAnimatedSpeechConfiguration"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setAnimatedSpeechConfiguration()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::setASRConfidenceThreshold__floatCR" title="ALDialogProxy::setASRConfidenceThreshold"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setASRConfidenceThreshold()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::getASRConfidenceThreshold" title="ALDialogProxy::getASRConfidenceThreshold"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::getASRConfidenceThreshold()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::forceOutput" title="ALDialogProxy::forceOutput"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::forceOutput()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::forceInput__ssCR" title="ALDialogProxy::forceInput"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::forceInput()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::getLoadedTopics__ssCR" title="ALDialogProxy::getLoadedTopics"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::getLoadedTopics()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::getActivatedTopics" title="ALDialogProxy::getActivatedTopics"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::getActivatedTopics()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::setVariablePath__ssCR.ssCR.ssCR" title="ALDialogProxy::setVariablePath"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setVariablePath()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::getUserList" title="ALDialogProxy::getUserList"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::getUserList()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::openSession__i" title="ALDialogProxy::openSession"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::openSession()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::closeSession" title="ALDialogProxy::closeSession"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::closeSession()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::insertUserData__ssCR.ssCR.iCR" title="ALDialogProxy::insertUserData"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::insertUserData()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::getUserData__ssCR.iCR" title="ALDialogProxy::getUserData"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::getUserData()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::getUserDataList__iCR" title="ALDialogProxy::getUserDataList"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::getUserDataList()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::compileAll" title="ALDialogProxy::compileAll"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::compileAll()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::startPush" title="ALDialogProxy::startPush"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::startPush()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::stopPush" title="ALDialogProxy::stopPush"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::stopPush()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::startApp__ssCR.AL::ALValueCR.ssCR" title="ALDialogProxy::startApp"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::startApp()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::resetAll" title="ALDialogProxy::resetAll"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::resetAll()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::startUpdate__ssCR.AL::ALValueCR.ssCR" title="ALDialogProxy::startUpdate"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::startUpdate()</span></tt></a></li>
+<li><a class="reference internal" href="#ALDialogProxy::generateSentences__ssCR.ssCR.ssCR" title="ALDialogProxy::generateSentences"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::generateSentences()</span></tt></a></li>
+</ul>
+<p><em>Deprecated Methods</em></p>
+<ul class="simple">
+<li><a class="reference internal" href="#ALDialogProxy::connectionChanged" title="ALDialogProxy::connectionChanged"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::connectionChanged()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::endOfUtteranceCallback" title="ALDialogProxy::endOfUtteranceCallback"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::endOfUtteranceCallback()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::eventReceived" title="ALDialogProxy::eventReceived"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::eventReceived()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::packageInstalled" title="ALDialogProxy::packageInstalled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::packageInstalled()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::setPushMode" title="ALDialogProxy::setPushMode"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::setPushMode()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::statusChanged" title="ALDialogProxy::statusChanged"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::statusChanged()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::tell__ssCR" title="ALDialogProxy::tell"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::tell()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::wordRecognized" title="ALDialogProxy::wordRecognized"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::wordRecognized()</span></tt></a> (deprecated)</li>
+<li><a class="reference internal" href="#ALDialogProxy::wordsRecognizedCallback" title="ALDialogProxy::wordsRecognizedCallback"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::wordsRecognizedCallback()</span></tt></a> (deprecated)</li>
+</ul>
+</div>
+<div class="section" id="event-list">
+<span id="dialog-event-list"></span><h2>Event list<a class="headerlink" href="#event-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#Dialog/Answered" title="Dialog/Answered"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/Answered()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/Failure" title="Dialog/Failure"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/Failure()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/Fallback" title="Dialog/Fallback"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/Fallback()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/IsStarted" title="Dialog/IsStarted"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/IsStarted()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/LastInput" title="Dialog/LastInput"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/LastInput()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotSpeaking5" title="Dialog/NotSpeaking5"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotSpeaking5()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotSpeaking10" title="Dialog/NotSpeaking10"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotSpeaking10()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotSpeaking15" title="Dialog/NotSpeaking15"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotSpeaking15()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotSpeaking20" title="Dialog/NotSpeaking20"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotSpeaking20()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotUnderstood" title="Dialog/NotUnderstood"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotUnderstood()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotUnderstood2" title="Dialog/NotUnderstood2"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotUnderstood2()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/NotUnderstood3" title="Dialog/NotUnderstood3"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/NotUnderstood3()</span></tt></a></li>
+<li><a class="reference internal" href="#Dialog/SameRule" title="Dialog/SameRule"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Dialog/SameRule()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ALDialogProxy::loadTopic__ssCR">
+<a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">loadTopic</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicPath</em><big>)</big><a class="headerlink" href="#ALDialogProxy::loadTopic__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the topic, exports and compiles the corresponding context files ready to be used in ASR.
+The name of the topic found in the specified file is given as an output of the function call.</p>
+<p>Note that loading a topic file can be both CPU and time consuming.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>topicFilePath</strong> &#8211; full path of the file to load.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Name of the topic loaded. Syntax error are thrown as exceptions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::unloadTopic__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">unloadTopic</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::unloadTopic__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unloads the specified topic and frees the associated memory load.
+Any further call to loadTopic of an unloaded topic will require a new export and compilation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topicName</strong> &#8211; Topic name as given by loadTopic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::activateTopic__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">activateTopic</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::activateTopic__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the specified topic to the list of the topics that are currently used by the dialog engine to parse inputs.
+Several topics can be active at the same time but only one will be used to generate proposals
+(this specific topic is said to have the focus).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topicName</strong> &#8211; Topic name as given by loadTopic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::deactivateTopic__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">deactivateTopic</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::deactivateTopic__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the specified topic from list of the topics that are currently used by the dialog engine to parse inputs.
+Several topics can be active at the same time but only one will be used to generate proposals.
+(this specific topic is said to have the focus).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topicName</strong> &#8211; Topic name as given by loadTopic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setLanguage__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setLanguage</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>language</em><big>)</big><a class="headerlink" href="#ALDialogProxy::setLanguage__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the language of the dialog engine.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>language</strong> &#8211; <p>English name of the language to set.</p>
+<p>Example: &#8216;French&#8217;.</p>
+<p>For the complete list of supported languages, see:
+<a class="reference internal" href="../../../family/robots/languages.html#dialog-supported-languages"><em>Dialog - List of supported Languages</em></a>.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setFocus__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setFocus</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::setFocus__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>If multiple topics can be active at the same time, only one of them is used to generate proposals.
+This topic is said to have the focus. A call to this function forces the focus to the specified topic.
+After this call, proposals will be generated from this topic and inputs will be first parsed through this topic.
+However, if a &#8220;User Rule&#8221; of a different active topic is matched, the focus will change automatically to that topic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topicName</strong> &#8211; Topic name as given by loadTopic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::activateTag__ssCR.ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">activateTag</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>tagName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::activateTag__ssCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activates the tag in the specified topic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tagName</strong> &#8211; Name of the tag to activate.</li>
+<li><strong>topicName</strong> &#8211; Name of the topic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::deactivateTag__ssCR.ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">deactivateTag</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>tagName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::deactivateTag__ssCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deactivates the tag in the specified topic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tagName</strong> &#8211; Name of the tag to deactivate.</li>
+<li><strong>topicName</strong> &#8211; Name of the topic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::gotoTopic__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">gotoTopic</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em><big>)</big><a class="headerlink" href="#ALDialogProxy::gotoTopic__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the focus to the topic then says the first activated proposal of the topic (if any).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topicName</strong> &#8211; Name of the topic that will get the focus.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setConcept__ssCR.ssCR.std::vector:ss:CR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setConcept</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>conceptName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>language</em>, <a class="reference internal" href="../../stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">const std::vector&lt;std::string&gt;&amp;</a> <em>content</em><big>)</big><a class="headerlink" href="#ALDialogProxy::setConcept__ssCR.ssCR.std::vector:ss:CR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets dynamically the specified concept of the specified language with the given word list. The speech recognition must run to call setConcept (else speech recognition won&#8217;t be updated with concept content)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>conceptName</strong> &#8211; Name of the concept to set.</li>
+<li><strong>language</strong> &#8211; Language that contain the concept (jpj, frf, enu...)</li>
+<li><strong>content</strong> &#8211; Word or sentence list (vector of std::string in C++).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setAnimatedSpeechConfiguration__ALValueCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setAnimatedSpeechConfiguration</tt><big>(</big>const ALValue&amp; <em>animatedSpeechConfiguration</em><big>)</big><a class="headerlink" href="#ALDialogProxy::setAnimatedSpeechConfiguration__ALValueCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the ALAnimatedSpeech&#8217;s configuration used by the dialog.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>animatedSpeechConfiguration</strong> &#8211; The ALAnimatedSpeech&#8217;s configuration used by the dialog. It follows the same format than the one used by <a class="reference internal" href="../alanimatedspeech-api.html#ALAnimatedSpeechProxy::say__ssCR" title="ALAnimatedSpeechProxy::say"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAnimatedSpeechProxy::say()</span></tt></a> with local configuration.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setASRConfidenceThreshold__floatCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setASRConfidenceThreshold</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#float" title="float">const float&amp;</a> <em>threshold</em><big>)</big><a class="headerlink" href="#ALDialogProxy::setASRConfidenceThreshold__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the minimum confidence threshold used validate the output of the Automatic Speech Recognition (ASR) engine.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>threshold</strong> &#8211; Threshold (from 0.0 to 1.0). 0.5 by default.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::getASRConfidenceThreshold">
+<a class="reference internal" href="../../stdtypes.html#float" title="float">float</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">getASRConfidenceThreshold</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::getASRConfidenceThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the minimum confidence threshold currently used to validate the output of the Automatic Speech Recognition (ASR) engine.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Threshold (from 0.0 to 1.0). 0.5 by default.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::forceOutput">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">forceOutput</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::forceOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forces the robot to say a proposal, if any is available.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::forceInput__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">forceInput</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>input</em><big>)</big><a class="headerlink" href="#ALDialogProxy::forceInput__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs are normally provided by the Speech Recognition engine and the event system of the robot.
+A call to this function will stimulate the dialog engine with the given input as if this input had been given by the ASR engine.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>input</strong> &#8211; Input to match</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::getLoadedTopics__ssCR">
+<a class="reference internal" href="../../stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">std::vector&lt;std::string&gt;</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">getLoadedTopics</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>language</em><big>)</big><a class="headerlink" href="#ALDialogProxy::getLoadedTopics__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the list of loaded topics in the given language.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>language</strong> &#8211; Language of the topics</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::getActivatedTopics">
+<a class="reference internal" href="../../stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">std::vector&lt;std::string&gt;</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">getActivatedTopics</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::getActivatedTopics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the list of activated topics in the current language.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setVariablePath__ssCR.ssCR.ssCR">
+<a class="reference internal" href="../../stdtypes.html#std::vector:ss:" title="std::vector&lt;std::string&gt;">std::vector&lt;std::string&gt;</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setVariablePath</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topicName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>path</em><big>)</big><a class="headerlink" href="#ALDialogProxy::setVariablePath__ssCR.ssCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to change event name at runTime.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topicName</strong> &#8211; Topic that contain event.</li>
+<li><strong>eventName</strong> &#8211; Original event name.</li>
+<li><strong>path</strong> &#8211; New event name.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::getUserList">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">getUserList</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::getUserList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the list of user IDs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of user IDs (int).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::openSession__i">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">openSession</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#i" title="int">int</a> <em>id</em><big>)</big><a class="headerlink" href="#ALDialogProxy::openSession__i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a new dialog session. A call to this function restores the dialog user variables to ALMemory from the dialog database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> &#8211; ID of the user.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::closeSession">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">closeSession</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::closeSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes the current dialog session and stores all the related ALMemory variables in the database dedicated to ALDialog.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::insertUserData__ssCR.ssCR.iCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">insertUserData</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>variableName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>variableValue</em>, <a class="reference internal" href="../../stdtypes.html#i" title="int">const int&amp;</a> <em>userID</em><big>)</big><a class="headerlink" href="#ALDialogProxy::insertUserData__ssCR.ssCR.iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert directly a variable in user dialog database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>variableName</strong> &#8211; Variable name.</li>
+<li><strong>variableValue</strong> &#8211; Variable value.</li>
+<li><strong>userID</strong> &#8211; User ID.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::getUserData__ssCR.iCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">getUserData</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>variableName</em>, <a class="reference internal" href="../../stdtypes.html#i" title="int">const int&amp;</a> <em>userID</em><big>)</big><a class="headerlink" href="#ALDialogProxy::getUserData__ssCR.iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a variable value from user dialog database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>variableName</strong> &#8211; Variable name.</li>
+<li><strong>userID</strong> &#8211; User ID.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Variable value (string).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::getUserDataList__iCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">getUserDataList</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#i" title="int">const int&amp;</a> <em>userID</em><big>)</big><a class="headerlink" href="#ALDialogProxy::getUserDataList__iCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all variable list of a user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>userID</strong> &#8211; User ID.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Variable name list.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::compileAll">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">compileAll</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::compileAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can be optionally called after a series of loadTopic in order to build dialog
+model and speech recognition model. If not called the compilation occurs once
+at runtime.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::startPush">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">startPush</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::startPush" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Dialog engine starts making automatically proposal.
+After an answer, the dialog engine will automatically say a proposal from the
+available topics. Dialog engine will first try to say a proposal from the topic
+having the current focus, then from other topics.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::stopPush">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">stopPush</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::stopPush" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Dialog engine stops making automatically proposal.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::startApp__ssCR.AL::ALValueCR.ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">startApp</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>UNUSED_name</em>, <a class="reference internal" href="../../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>val</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>UNUSED_message</em><big>)</big><a class="headerlink" href="#ALDialogProxy::startApp__ssCR.AL::ALValueCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asks the Dialog engine to stop and start an application.</p>
+<p><strong>Note</strong>: if autonomous Life is running, use
+<a class="reference internal" href="../../core/autonomouslife-api.html#ALAutonomousLifeProxy::switchFocus" title="ALAutonomousLifeProxy::switchFocus"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAutonomousLifeProxy::switchFocus()</span></tt></a> instead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>variableName</strong> &#8211; Unused.</li>
+<li><strong>ApplicationName</strong> &#8211; Application to start.</li>
+<li><strong>message</strong> &#8211; Unused.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::resetAll">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">resetAll</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::resetAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the status of all topics: all proposals are able to be used again.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::startUpdate__ssCR.AL::ALValueCR.ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">startUpdate</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>UNUSED_name</em>, <a class="reference internal" href="../../stdtypes.html#AL::ALValue" title="AL::ALValue">const AL::ALValue&amp;</a> <em>val</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>UNUSED_message</em><big>)</big><a class="headerlink" href="#ALDialogProxy::startUpdate__ssCR.AL::ALValueCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to update the Dialog model and the speech recognition model at runtime
+(experimental). Parameter are unused but fit to ALMemory API.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::generateSentences__ssCR.ssCR.ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">generateSentences</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>destination</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>topic</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>language</em><big>)</big><a class="headerlink" href="#ALDialogProxy::generateSentences__ssCR.ssCR.ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates all possible input sentences in a text file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>destination</strong> &#8211; destination path file.</li>
+<li><strong>topic</strong> &#8211; Source topic.</li>
+<li><strong>language</strong> &#8211; Source topic language.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::tell__ssCR">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">tell</tt><big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">const std::string&amp;</a> <em>input</em><big>)</big><a class="headerlink" href="#ALDialogProxy::tell__ssCR" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.18: </span>use <a class="reference internal" href="#ALDialogProxy::forceInput__ssCR" title="ALDialogProxy::forceInput"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALDialogProxy::forceInput()</span></tt></a> instead.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::connectionChanged">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">connectionChanged</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::connectionChanged" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::endOfUtteranceCallback">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">endOfUtteranceCallback</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::endOfUtteranceCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::eventReceived">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">eventReceived</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::eventReceived" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::packageInstalled">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">packageInstalled</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::packageInstalled" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::setPushMode">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">setPushMode</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::setPushMode" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::statusChanged">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">statusChanged</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::statusChanged" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::wordRecognized">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">wordRecognized</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::wordRecognized" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALDialogProxy::wordsRecognizedCallback">
+<a class="reference internal" href="../../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALDialogProxy::</tt><tt class="descname">wordsRecognizedCallback</tt><big>(</big><big>)</big><a class="headerlink" href="#ALDialogProxy::wordsRecognizedCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p class="deprecated">
+<span class="versionmodified">Deprecated since version 1.22: </span>unstable and inconclusive trial. Do not use.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<dl class="event">
+<dt id="Dialog/Answered">
+<div class="line">Event: <tt class="descname">&quot;Dialog/Answered&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/Answered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised each time the robot says an output.</p>
+<p>Contains the last robot output.</p>
+<p>Subscribing to this event starts <strong>ALDialog</strong>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>u:(what did you say before) I said $Dialog/Answered</pre>
+</div>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/Failure">
+<div class="line">Event: <tt class="descname">&quot;Dialog/Failure&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/Failure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when 3 Dialog/Fallback or 3 Dialog/NotUnderstood have been
+consecutively raised.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/Fallback">
+<div class="line">Event: <tt class="descname">&quot;Dialog/Fallback&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/Fallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when fallback matches.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/IsStarted">
+<div class="line">Event: <tt class="descname">&quot;Dialog/IsStarted&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/IsStarted" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if ALDialog is started.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/LastInput">
+<div class="line">Event: <tt class="descname">&quot;Dialog/LastInput&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/LastInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised each time the robot catches a human input.</p>
+<p>Contains the last human input.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>u:(hello) $Dialog/LastInput</pre>
+</div>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotSpeaking5">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotSpeaking5&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotSpeaking5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human hasn&#8217;t talked for 5 seconds.</p>
+<p>Dialog/NotSpeaking5, Dialog/NotSpeaking10, Dialog/NotSpeaking15, Dialog/NotSpeaking20
+are raised when the human didn&#8217;t talk for, respectively 5, 10, 15 and 20 seconds.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>u:(e:Dialog/NotSpeaking10) are you still there?</pre>
+</div>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotSpeaking10">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotSpeaking10&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotSpeaking10" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human hasn&#8217;t talked for 10 seconds.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotSpeaking15">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotSpeaking15&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotSpeaking15" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human hasn&#8217;t talked for 15 seconds.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotSpeaking20">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotSpeaking20&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotSpeaking20" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human hasn&#8217;t talked for 20 seconds.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotUnderstood">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotUnderstood&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotUnderstood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the robot heard some human input but no rule has matched.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-ini"><pre>u:(e:Dialog/NotUnderstood) sorry, I didn't understand.</pre>
+</div>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotUnderstood2">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotUnderstood2&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotUnderstood2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the robot didn&#8217;t understand 2 chains in a row.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/NotUnderstood3">
+<div class="line">Event: <tt class="descname">&quot;Dialog/NotUnderstood3&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/NotUnderstood3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when the robot didn&#8217;t understand 3 chains in a row.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Dialog/SameRule">
+<div class="line">Event: <tt class="descname">&quot;Dialog/SameRule&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> value</em>, <a class="reference internal" href="../../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Dialog/SameRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when a rule is triggered twice in a row. Allows you to avoid a repetition.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="aldialog.html" title="ALDialog">ALDialog</a>
+     |
+    <a href="aldialog.html" title="ALDialog" accesskey="U">ALDialog</a>
+   |
+    <a href="aldialog_syntax_toc.html" title="QiChat - Table of Content">QiChat - Table of Content</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">NAOqi Audio</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../alanimatedspeech.html">ALAnimatedSpeech</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudiodevice.html">ALAudioDevice</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudioplayer.html">ALAudioPlayer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudiorecorder.html">ALAudioRecorder</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alsoundlocalization.html">ALSoundLocalization</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="aldialog.html">ALDialog</a><ul class="current">
+<li class="toctree-l6 current"><a class="current reference internal" href="">ALDialog API</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="aldialog_syntax_toc.html">QiChat - Table of Content</a></li>
+<li class="toctree-l6"><a class="reference internal" href="aldialog_tuto.html">ALDialog Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../alsounddetection.html">ALSoundDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alspeechrecognition.html">ALSpeechRecognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../altexttospeech.html">ALTextToSpeech</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alvoiceemotionanalysis.html">ALVoiceEmotionAnalysis</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../alaudiosourcelocalization.html">ALAudioSourceLocalization</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALDialog API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a></li>
+<li><a class="reference internal" href="#event-list">Event list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#events">Events</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="aldialog.html" title="ALDialog">previous</a>
+     |
+    <a href="aldialog.html" title="ALDialog" accesskey="U">up</a>
+   |
+    <a href="aldialog_syntax_toc.html" title="QiChat - Table of Content">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+.. _alextractor-api:
+
+ALExtractor API
+===============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   almodule-api
+
+
+:ref:`naoqi-core` - :ref:`Overview<extractors>` | **ALExtractor API** | :ref:`alvisionextractor-api`
+
+------------
+
+
+Method list
+------------
+
+Any ALExtractor inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+**Parameters update**
+  * :cpp:func:`ALExtractor::subscribe`
+  * :cpp:func:`ALExtractor::unsubscribe`
+  * :cpp:func:`ALExtractor::updatePeriod`
+  * :cpp:func:`ALExtractor::updatePrecision`
+
+**Introspection**
+  * :cpp:func:`ALExtractor::getCurrentPeriod`
+  * :cpp:func:`ALExtractor::getCurrentPrecision`
+  * :cpp:func:`ALExtractor::getEventList`
+  * :cpp:func:`ALExtractor::getMemoryKeyList`
+  * :cpp:func:`ALExtractor::getMyPeriod`
+  * :cpp:func:`ALExtractor::getMyPrecision`
+  * :cpp:func:`ALExtractor::getOutputNames`
+  * :cpp:func:`ALExtractor::getSubscribersInfo`
+
+.. _ALExtractor::subscribe1:
+
+.. cpp:function:: void ALExtractor::subscribe(const std::string &subscribedName, const int &period, const float &precision)
+
+  There are two overloads of this function:
+
+  - :ref:`ALExtractor::subscribe <ALExtractor::subscribe1>`
+  - :ref:`ALExtractor::subscribe <ALExtractor::subscribe2>` with default values.
+
+  Subscribes to the extractor with given period and precision values.
+  If not yet started by another subscriber, starts processing data periodically
+  and publishes data in ALMemory (either as memory keys or events).
+
+  :param subscribedName: Name of the subscriber.
+
+  :param period: Period of the extractor in milliseconds.
+
+  :param precision: Precision of the extractor.
+
+.. _ALExtractor::subscribe2:
+
+.. cpp:function:: void ALExtractor::subscribe(const std::string &subscribedName)
+
+  Subscribes to the extractor with default period (30) and precision (1).
+
+  :param subscribedName: Name of the subscriber.
+
+.. cpp:function:: void ALExtractor::unsubscribe(const std::string &subscribedName)
+
+  Unsubscribes a given subscriber from the extractor.
+
+  :param subscribedName: Name of the subscriber.
+
+.. cpp:function:: void ALExtractor::updatePeriod(const std::string &subscribedName, const int &period)
+
+  Updates the extractor period for a given subscriber if relevant.
+
+  :param subscribedName: Name of the subscriber.
+
+  :param period: New period in milliseconds.
+
+.. cpp:function:: void ALExtractor::updatePrecision(const std::string &subscribedName, const float &precision)
+
+  Updates the extractor precision for a given subscriber if relevant.
+
+  :param subscribedName: Name of the subscriber.
+
+  :param precision: New precision.
+
+.. cpp:function:: int ALExtractor::getCurrentPeriod()
+
+  Gets the current period of the extractor.
+
+  :return: Smallest period required by all the subscribers.
+
+.. cpp:function:: float ALExtractor::getCurrentPrecision()
+
+  Gets the current precision of the extractor.
+
+  :return: Highest precision required by all the subscribers.
+
+.. cpp:function:: std::vector<std::string> ALExtractor::getEventList()
+
+  Gets the list of events raised by the extractor.
+
+  :return: vector of names [ event_1, event_2 ... ].
+
+.. cpp:function:: std::vector<std::string> ALExtractor::getMemoryKeyList()
+
+  Gets the list of ALMemory keys modifies by the extractor.
+
+  :return: vector of names [ memoryKey_1, memoryKey_2 ... ].
+
+.. cpp:function:: int ALExtractor::getMyPeriod(const std::string &subscribedName)
+
+  Gets the current period of a given extractor.
+
+  :param subscribedName: Name of the subscriber.
+
+  :return: Current period.
+
+.. cpp:function:: float ALExtractor::getMyPrecision(const std::string &subscribedName)
+
+  Gets the current precision of a given extractor.
+
+  :param subscribedName: Name of the subscriber.
+
+  :return: Current precision.
+
+.. cpp:function:: std::vector<std::string> ALExtractor::getOutputNames(void)
+
+  Gets the list of ALMemory keys and events modified by the extractor.
+
+  :return: vector of names [ event_1, event_2, ... , memoryKey_1, memoryKey_2 ... ].
+
+.. cpp:function:: AL::ALValue ALExtractor::getSubscribersInfo()
+
+  Gets the list of parameters for all the current subscribers (name, period and precision).
+
+  :return: Array of the form [ [name_1, period_1, precision_1], [name_2, period_2, precision_2] ... ].
+

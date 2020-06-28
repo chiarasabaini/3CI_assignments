@@ -1,0 +1,13 @@
+.. _t2_links:
+
+T2 - Links
+============
+
+.. seealso:: :ref:`nao-t2` | :ref:`robot_links`
+
+--------------------
+
+
+.. include:: ../bulk/links_whole_t.rst
+
+.. include:: ../bulk/links_head.rst

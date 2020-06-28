@@ -1,0 +1,73 @@
+.. include:: ../../bulk/common.rst
+
+.. _push_recovery-api:
+
+Push Recovery API
+=================
+
+
+:ref:`almotion` - :ref:`Overview <push_recovery>` | API
+
+--------------------
+
+|juju| |roboJ| only
+
+.. warning::
+
+   This is a WIP, API and documentation are not definitive.
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alnotificationmanagerproxy.h>
+
+
+Method list
+------------
+
+.. include:: bulk/push_recovery_toc.rst
+
+
+.. _pushrecovery-event-list:
+
+Event list
+----------
+
+* :naoqi:event:`ALMotion/Safety/PushRecovery`
+* :naoqi:event:`ALMotion/Safety/RobotPushed`
+
+Methods
+-------
+
+.. cpp:function:: void ALMotionProxy::setPushRecoveryEnabled(const bool& enable)
+
+  Enable/disable the push-recovery reflex of the robot, but only if allowed by the owner.
+  If not allowed, an exception is thrown.
+
+  For further details, see: :ref:`reflex-deactivation`.
+
+  :param enable: Activate or deactivate the push recovery.
+
+.. cpp:function:: bool ALMotionProxy::getPushRecoveryEnabled(void)
+
+  Allow to know if the push recovery protection is activated.
+
+  :return: Return true if the push recovery protection is activated.
+
+
+
+Events
+------
+
+.. naoqi:event:: ALMotion/Safety/PushRecovery(AL::ALValue val)
+
+  Raised when push recovery is activated and the robot try to compensate the tilt.
+
+  :param val: [angle] angle in radian of perturbation direction in :term:`FRAME_ROBOT`.
+
+.. naoqi:event:: ALMotion/Safety/RobotPushed(AL::ALValue val)
+
+  Raised when robot is pushed.
+
+  :param val: [angle] angle in radian of perturbation direction in :term:`FRAME_ROBOT`.

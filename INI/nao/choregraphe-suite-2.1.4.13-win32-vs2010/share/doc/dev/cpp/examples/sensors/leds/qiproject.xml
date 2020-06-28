@@ -1,0 +1,3 @@
+<project name="leds">
+  <depends buildtime="true" runtime="true" names="libnaoqi" />
+</project>

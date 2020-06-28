@@ -1,0 +1,181 @@
+.. _almodule-api:
+
+ALModule API
+============
+
+:ref:`naoqi-core` - :ref:`Overview <almodule>` | API
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alcommon/almodule.h>
+
+Bound Method list
+-----------------
+
+**Task Management**
+
+* :cpp:func:`ALModule::isRunning`
+* :cpp:func:`ALModule::wait`
+* :cpp:func:`ALModule::stop`
+* :cpp:func:`ALModule::exit`
+
+**Introspection**
+
+* :cpp:func:`ALModule::getBrokerName`
+* :cpp:func:`ALModule::getMethodList`
+* :cpp:func:`ALModule::getMethodHelp`
+* :cpp:func:`ALModule::getModuleHelp`
+* :cpp:func:`ALModule::getUsage`
+* :cpp:func:`ALModule::ping`
+* :cpp:func:`ALModule::version`
+
+Event list
+-----------
+
+* :naoqi:event:`ClientConnected`
+* :naoqi:event:`ClientDisconnected`
+
+
+
+Bound Methods - Task Management
+-------------------------------
+
+.. cpp:function:: bool ALModule::isRunning(const int &id)
+
+  Determines if the method created with a 'post' is still running.
+
+  :param id: The id of the method that was returned by 'post'
+
+  :return: true if the method is still running, false otherwise
+
+
+.. cpp:function:: bool ALModule::wait(const int &id, const int &timeout)
+
+  Waits until the end of a long running method using the ID that was returned from a method started with 'post'
+
+  :param id: The id of the method that was returned by 'post'
+
+  :param timeout: The wait timeout period in ms. If 0 wait indefinitely.
+
+  :return: true if the timeout period expired, false otherwise
+
+
+.. cpp:function:: void ALModule::stop(const int &id)
+
+  Stops a module's method using the ID given returned by a 'post' call. Module authors are encouraged to implement this if they have long running methods that they wish to allow users to interrupt.
+
+  :param id: The id of the method that was returned by 'post'
+
+
+.. cpp:function:: void ALModule::exit()
+
+  Unregisters the module from the parent broker. Once this is called the method of your module will no longer be available. Module authors who override this method are expected to perform a clean shutdown.
+  
+  .. warning:: 
+     
+     It is not advised to call exit on Core modules such as **ALMemory** or **ALMotion** while other module or code are accessing them.
+
+
+
+
+
+Bound Methods - Introspection
+-----------------------------
+
+.. cpp:function:: std::string ALModule::getBrokerName()
+
+  Gets the name of the parent broker
+
+  :return: The name of the parent broker
+
+
+.. cpp:function:: std::vector<std::string> ALModule::getMethodList()
+
+  Retrieves the module's method list
+
+  :return: A vector of method names
+
+
+.. cpp:function:: AL::ALValue ALModule::getMethodHelp(const std::string &methodName)
+
+  Retrieves a method's description
+
+  :param methodName: The name of the method
+
+  :return: A structure containing the method's description
+
+  .. code-block:: cpp
+
+    [
+      std::string methodName,
+      [ parameter, ...],
+      std::string returnName,
+      std::string returnDescription
+    ]
+
+    Where parameter is
+
+    [
+      std::string parameterName,
+      std::string parameterDescription
+    ]
+
+.. cpp:function:: AL::ALValue ALModule::getModuleHelp()
+
+  Retrieves a structure containing the module's description:
+
+  :return: A structure describing the module
+
+  .. code-block:: cpp
+
+    [
+      std::string moduleDescription,
+      [ moduleExample, ...]
+    ]
+
+    Where moduleExample is
+
+    [
+      std::string language,
+      std::string example
+    ]
+
+
+
+.. cpp:function:: std::string ALModule::getUsage(const std::string &methodName)
+
+  Gets the method usage string. This summarizes how to use the method.
+
+  :param methodName: The name of the method
+
+  :return: A string that summarizes the usage of the method
+
+
+.. cpp:function:: bool ALModule::ping()
+
+  Just a ping to test connectivity. Always returns true
+
+  :return: returns true
+
+
+.. cpp:function:: std::string ALModule::version()
+
+  Returns the version of the module
+
+  :return: The version as a string
+
+  
+Events
+------
+
+.. naoqi:event:: ClientConnected(const std::string &brokerName)
+
+  The broker *brokerName* is connected.
+
+.. naoqi:event:: ClientDisconnected(const std::string &brokerName)
+
+  The broker *brokerName* has been disconnect.

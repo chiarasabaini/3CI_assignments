@@ -1,0 +1,215 @@
+Java SDK
+=========
+
+.. warning:: The API presented here is still under development and may change
+             in the future.
+
+Introduction
+-------------
+
+The **Java SDK** provides Java bindings to:
+
+*  call remote services,
+*  create new services
+*  and react to events.
+
+This SDK is based on `libqi-java <https://github.com/aldebaran/libqi-java>`_,
+which in turn uses the **qi framewok**, and contains additional wrapper Java-dedicated
+classes that can be found in `this Javadoc  <http://doc.aldebaran.com/java/2-1/index.html>`_.
+
+Requirements
+++++++++++++
+
+* Java 1.6 or higher.
+
+Available on
++++++++++++++
+
+=========================== ====================================================
+ OS                          Comment
+=========================== ====================================================
+Windows 32 bits              No 64 bits support.
+
+Linux 32 and 64 bits         Tested with Ubuntu 12.04 LTS, but should work
+                             fine on any recent distribution.
+Mac OS X 64 bits
+
+NAOqi OS 2.1 and higher      Running on NAO V4 and V5.
+
+Android 4.0                  For ARM.
+=========================== ====================================================
+
+How to use
+-------------
+
+There is one ``.jar`` per ``NAOqi`` version and platform.
+
+This ``.jar`` will allow you to use the **Aldebaran**'s C++ API or to create your own services, and run them from a remote machine or directly in the robot.
+
+First, download the ``java-naoqi-sdk-<version>-<platform>.jar`` from the `Community <https://community.aldebaran.com/en/resources/software>`_ website. Then, use it as you would do for any 3rd party Java library:
+
+In eclipse
++++++++++++
+
+Add the ``java-naoqi-sdk-<version>-<platform>.jar`` as an external jar in the properties of your project.
+
+.. _java-compile-command-line:
+
+From the command line
++++++++++++++++++++++
+
+.. code-block:: sh
+
+  # Compile your application
+  javac -cp /path/to/java-naoqi-sdk-<version>-<platform>.jar YourClass.java
+
+  # Run your application
+  java -cp /path/to/java-naoqi-sdk-<version>-<platform>.jar:. YourClass
+
+Directly in the **Aldebaran** robot
++++++++++++++++++++++++++++++++++++
+
+.. Warning::
+
+       Java is not currently present in the system image.
+
+       However, you may install and configure Java on your robot if you wish to run your services directly in the robot.
+
+=====  =================================================================================
+Step       Action
+=====  =================================================================================
+1.      Download the JRE 32bits from the `Oracle <http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html>`_ website.
+
+2.      Upload then extract it somewhere on the robot.
+
+        .. code-block:: sh
+
+            scp jre-7u60-linux-i586.tar.gz nao@nao.local:
+            ssh nao@nao.local
+            tar xvfz jre-7u60-linux-i586.tar.gz
+            mkdir /home/nao/java
+            mv jre1.7.0_60 /home/nao/java
+
+3.      Copy the ``java-naoqi-sdk-<version>-atom`` jar on the robot.
+
+        For instance, in: ``/home/nao/java/``
+
+        .. code-block:: sh
+
+            scp java-naoqi-sdk-<version>-atom.jar nao@nao.local:/home/nao/java/
+
+4.      Create a ``sourceme`` file looking like:
+
+        .. code-block:: sh
+
+          nano /home/nao/java/sourceme
+
+          export JAVA_HOME=/home/nao/java/jre
+          export PATH=$PATH:/home/nao/java/jre/bin
+          export CLASSPATH=/home/nao/java/java-naoqi-sdk-<version>-atom.jar
+
+5.      Compile your code and upload the ``.class`` files to the robot.
+        (see previous section
+        :ref:`From the command line <java-compile-command-line>`)
+
+6.      Run ``source sourceme`` and use the command line to run your Java application.
+=====  =================================================================================
+
+Java SDK specificities
+----------------------
+
+There are two important concepts to know that will allow you to communicate with your robot: ``Application`` and ``Session``.
+
+An ``Application`` is responsible of initializing the framework and connecting it to a session. A ``Session`` is what allows you to connect services together locally or over the network.
+
+By default, the session URL is set to tcp://127.0.0.1:9559. If you wish to change this, you can pass it as a command line argument (using *--qi-url*):
+
+.. code-block:: sh
+
+  java -cp /path/to/java-naoqi-sdk-<version>-<platform>.jar:. YourClass --qi-url=nao.local
+
+.. code-block:: java
+
+    public static void main(String[] args) {
+
+        Application application = new Application(args);
+        try{
+            // Start the application and create a session.
+            application.start();
+            // A session has been created. It can be retrieved this way:
+            // application.session();
+        }
+        catch(Exception e){
+            // The application could not be started.
+            e.printStackTrace();
+        }
+    }
+
+or in the ``Application`` constructor:
+
+.. code-block:: java
+
+    public static void main(String[] args) {
+        // The robotUrl is specified here
+        String robotUrl = "tcp://nao.local:9559";
+        Application application = new Application(args, robotUrl);
+        try{
+            // Start the application and create a session.
+            application.start();
+            // A session has been created. It can be retrieved this way:
+            // application.session();
+        }
+        catch(Exception e){
+            // The application could not be started.
+            e.printStackTrace();
+        }
+    }
+
+.. warning::
+
+  The ``Application`` constructor *must* be called exactly once
+  in the main Java process for the type system and the event loop to work.
+
+Getting Started
+----------------
+
+Calling a remote service
+++++++++++++++++++++++++++
+
+In **Java SDK**, there are dedicated classes for each service. This means that you must create an instance of the desired service to be able to call its methods.
+
+The example below shows how to make the robot say "Hello World" by using ``ALTextToSpeech``.
+
+.. literalinclude:: /samples/java/SayHello.java
+   :language: java
+
+
+Reacting to events
+++++++++++++++++++
+
+It is possible to subscribe to ``ALMemory`` events by using the ``ALMemory.subscribeToEvent`` method but with a slight different signature: an ``EventCallback`` with the expected type is needed, and a subscription ID is given in return.
+
+The example below shows how to make the robot react every time its front tactile head sensor is touched, and to stop reacting (unsubscribe from ``FrontTactilTouched`` event) when its rear tactile head sensor has been touched.
+
+.. literalinclude:: /samples/java/ReactToEvents.java
+   :language: java
+
+
+
+Creating a new service
+++++++++++++++++++++++++
+
+It is also possible to create and register your own service.
+
+First, create your own ``QiService``. For example:
+
+.. literalinclude:: /samples/java/HelloService.java
+   :language: java
+
+Then, register your service and run your application:
+
+.. literalinclude:: /samples/java/MyApplication.java
+   :language: java
+
+As long as your application is running, you can call the advertised methods of your ``MyHelloService``
+service as you would do for any other ``NAOqi`` service.

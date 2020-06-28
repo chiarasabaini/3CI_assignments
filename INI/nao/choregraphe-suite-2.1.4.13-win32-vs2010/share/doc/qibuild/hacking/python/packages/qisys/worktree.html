@@ -1,0 +1,314 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qisys.worktree - Registering project paths &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qisys modules" href="index.html" />
+    <link rel="next" title="qisrc modules" href="../qisrc/index.html" />
+    <link rel="prev" title="qisys.version – Managing packages versions" href="version.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="version.html" title="qisys.version &amp;#8211; Managing packages versions">previous</a>
+     |
+    <a href="index.html" title="qisys modules" accesskey="U">up</a>
+   |
+    <a href="../qisrc/index.html" title="qisrc modules">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-python-packages-qisys-worktree">
+            
+  <div class="section" id="module-qisys.worktree">
+<span id="qisys-worktree-registering-project-paths"></span><h1>qisys.worktree - Registering project paths<a class="headerlink" href="#module-qisys.worktree" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="qisys-worktree-worktree">
+<h2>qisys.worktree.WorkTree<a class="headerlink" href="#qisys-worktree-worktree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qisys.worktree.WorkTree">
+<em class="property">class </em><tt class="descclassname">qisys.worktree.</tt><tt class="descname">WorkTree</tt><big>(</big><em>root</em>, <em>sanity_check=True</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represent a <a class="reference internal" href="../../../design/python/index.html#term-worktree"><em class="xref std std-term">worktree</em></a>.</p>
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.register_self">
+<tt class="descname">register_self</tt><big>(</big><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.register_self" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register to the global list of all worktrees  in
+~/.config/qi/qibuild.xml</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.register">
+<tt class="descname">register</tt><big>(</big><em>observer</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when an observer wants to be notified
+about project changes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.load_cache">
+<tt class="descname">load_cache</tt><big>(</big><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.load_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the worktree.xml file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.check">
+<tt class="descname">check</tt><big>(</big><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a few sanity checks</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qisys.worktree.WorkTree.dot_qi">
+<tt class="descname">dot_qi</tt><a class="headerlink" href="#qisys.worktree.WorkTree.dot_qi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dot_qi directory.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qisys.worktree.WorkTree.worktree_xml">
+<tt class="descname">worktree_xml</tt><a class="headerlink" href="#qisys.worktree.WorkTree.worktree_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the path to .qi/worktree.xml</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.load_projects">
+<tt class="descname">load_projects</tt><big>(</big><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.load_projects" title="Permalink to this definition">¶</a></dt>
+<dd><p>For every project in cache, re-read the subprojects and
+and them to the list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.get_project">
+<tt class="descname">get_project</tt><big>(</big><em>src</em>, <em>raises=False</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.get_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a project</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>src</strong> &#8211; a absolute path, or a path relative to the worktree</li>
+<li><strong>raises</strong> &#8211; Raises if project is not found</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a <a class="reference internal" href="project.html#qisys.project.WorkTreeProject" title="qisys.project.WorkTreeProject"><tt class="xref py py-class docutils literal"><span class="pre">WorkTreeProject</span></tt></a> instance or None if raises is
+False and project is not found</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.add_project">
+<tt class="descname">add_project</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.add_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a project to a worktree</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> &#8211; path to the project, can be absolute,
+or relative to the worktree root</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.remove_project">
+<tt class="descname">remove_project</tt><big>(</big><em>path</em>, <em>from_disk=False</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.remove_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a project from a worktree</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> &#8211; path to the project, can be absolute,
+or relative to the worktree root</li>
+<li><strong>from_disk</strong> &#8211; also erase project files from disk</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.move_project">
+<tt class="descname">move_project</tt><big>(</big><em>path</em>, <em>new_path</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.move_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a project from a worktree</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qisys.worktree.WorkTree.normalize_path">
+<tt class="descname">normalize_path</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#qisys.worktree.WorkTree.normalize_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure the path is a POSIX path, relative to
+the worktree root</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="version.html" title="qisys.version &amp;#8211; Managing packages versions">qisys.version &#8211; Managing packages versions</a>
+     |
+    <a href="index.html" title="qisys modules" accesskey="U">qisys modules</a>
+   |
+    <a href="../qisrc/index.html" title="qisrc modules">qisrc modules</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/python/index.html">qiBuild Python framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/index.html">qiBuild design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">qiBuild Python documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">qiBuild Python packages documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">qisys modules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="archive.html">qisys.archive &#8211; Manage .tar.gz and .zip files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="command.html">qisys.command - Launch processes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="envsetter.html">qisys.envsetter &#8211; controlling environment variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="interact.html">qisys.interact &#8211; Interacting with the user</a></li>
+<li class="toctree-l5"><a class="reference internal" href="parsers.html">qisys.parsers &#8211; Generic command line parsing tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="project.html">qisys.project - Base project</a></li>
+<li class="toctree-l5"><a class="reference internal" href="qixml.html">qixml module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="remote.html">qisys.remote &#8211; Network operations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="script.html">qisys.script &#8211; Tools for qibuild scripts</a></li>
+<li class="toctree-l5"><a class="reference internal" href="sh.html">qisys.sh &#8211; Common filesystem operations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ui.html">qisys.ui &#8211; Tools for the command line user interface</a></li>
+<li class="toctree-l5"><a class="reference internal" href="version.html">qisys.version &#8211; Managing packages versions</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">qisys.worktree - Registering project paths</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../qisrc/index.html">qisrc modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qibuild/index.html">qibuild modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitest/index.html">qitest modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitoolchain/index.html">qitoolchain modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qidoc/index.html">qidoc modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qilinguist/index.html">qilinguist modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipy/index.html">qipy modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipkg/index.html">qipkg modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qisys.worktree - Registering project paths</a><ul>
+<li><a class="reference internal" href="#qisys-worktree-worktree">qisys.worktree.WorkTree</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="version.html" title="qisys.version &amp;#8211; Managing packages versions">previous</a>
+     |
+    <a href="index.html" title="qisys modules" accesskey="U">up</a>
+   |
+    <a href="../qisrc/index.html" title="qisrc modules">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

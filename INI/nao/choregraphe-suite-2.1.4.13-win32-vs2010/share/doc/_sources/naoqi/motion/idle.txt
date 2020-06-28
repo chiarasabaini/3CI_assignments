@@ -1,0 +1,99 @@
+.. _breath:
+.. _idle:
+
+Idle
+====
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   idle-api
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <idle-api>`
+
+------------
+
+
+
+What it does
+------------
+
+| These API are dedicated to define ALMotion behavior when the robot is idle, that is, when no user command is sent.
+
+
+How it works
+------------
+
+
+Idle control modes
+~~~~~~~~~~~~~~~~~~
+
+There are three **idle control modes:**
+
+- **No idle control**: in this mode, when no user command is sent to the robot, it does not move.
+
+- **Idle posture control:** in this mode, the robot automatically comes back to a
+  reference posture, then stays at that posture until a user command is sent.
+
+- **Breathing control:** in this mode, the robot plays a breathing animation in loop.
+
+Body chain idle control
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The idle behavior of the robot is defined body chain per body chain.
+
+The idle control of any body chain can be activated or deactivated at any moment, with
+:cpp:func:`ALMotionProxy::setIdlePostureEnabled` and
+:cpp:func:`ALMotionProxy::setBreathEnabled`. The last call to either of these functions
+defines a body chain idle control mode.
+
+
+**Any other user command overrides an idle task.**
+
+Transitions to and from idle task are automatic and smooth.
+
+
+Breath configuration
+--------------------
+
+Breathing animation can be activated on the following chains:
+"Body", "Legs", "Arms", "LArm", "RArm" and "Head".
+The animation only works when the robot is standing.
+
+
+The breath task can be configured by setting two parameters:
+
+- 'Bpm': The breathing frequency, in beats per minute, between 5 and 30.
+- 'Amplitude': The animation amplitude, unit free value between 0 and 1.
+  0 corresponds to a minimal animation, where all joints move of at most 5
+  degrees.
+
+The default breathing configuration is: ``[['Bpm', 12], ['Amplitude', 0.5]]``
+
+.. warning::
+
+  To avoid unstable animations, not all combinations of 'Bpm' and 'Amplitude'
+  are allowed on the robot. At minimum frequency, all amplitudes are allowed,
+  and at maximum frequency, only minimum amplitude is possible.
+  In-between, a linear interpolation is used to
+  compute the maximum amplitude. If needed, user input amplitude is clipped to
+  satisfy the constraints.
+
+  .. image:: /medias/dev/modules/motion/motion_breath_maxAmplitude.png
+     :width: 500 px
+     :height: 375 px
+
+
+
+Getting started
+---------------
+
+This example shows how to start an idle task on a robot, in breathing mode, and how to change
+the parameters of the breathing dynamically.
+
+:download:`almotion_breath.py </examples/python/motion/almotion_breath.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_breath.py
+   :language: py

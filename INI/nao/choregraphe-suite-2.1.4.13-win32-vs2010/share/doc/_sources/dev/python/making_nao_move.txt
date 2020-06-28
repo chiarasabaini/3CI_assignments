@@ -1,0 +1,81 @@
+Parallel Tasks - Making NAO move and speak
+==========================================
+
+
+Setting NAO stiffness
+---------------------
+
+The robot will not move unless you set the stiffness of the joints
+to something that is not 0.
+
+To do this, simply call the :cpp:func:`ALMotionProxy::setStiffnesses` method
+
+.. code-block:: python
+
+   from naoqi import ALProxy
+   motion = ALProxy("ALMotion", "nao.local", 9559)
+   motion.setStiffnesses("Body", 1.0)
+
+
+You may notice that the API uses the world 'ALValue'.
+From the Python world, it does not matter that much, simply use a mere list
+when the ALValue is supposed to be an array.
+
+The conversion to the other simple types (float, int, string, etc.) is automatic.
+
+
+Making NAO move
+---------------
+
+To make NAO walk, you should use :cpp:func:`ALMotionProxy::moveInit` (to put the robot in
+a correct position), and then :cpp:func:`ALMotionProxy::moveTo`
+
+
+.. code-block:: python
+
+   from naoqi import ALProxy
+   motion = ALProxy("ALMotion", "nao.local", 9559)
+   motion.moveInit()
+   motion.moveTo(0.5, 0, 0)
+
+
+
+Making NAO move and speak at the same time
+------------------------------------------
+
+
+Every proxy you create has an attribute named 'post' that you can use to
+call long methods in the background.
+
+This will let you make the robot do several things at the same time.
+
+.. code-block:: python
+
+
+   from naoqi import ALProxy
+   motion = ALProxy("ALMotion", "nao.local", 9559)
+   tts    = ALProxy("ALTextToSpeech", "nao.local", 9559)
+   motion.moveInit()
+   motion.post.moveTo(0.5, 0, 0)
+   tts.say("I'm walking")
+
+
+If you need to wait until a given task is finished, you can use the
+wait method of ALProxy, using the ID of the tasked returned by the post
+usage.
+
+
+.. code-block:: python
+
+   from naoqi import ALProxy
+   motion = ALProxy("ALMotion", "nao.local", 9559)
+   motion.moveInit()
+   id = motion.post.moveTo(0.5, 0, 0)
+   motion.wait(id, 0)
+
+
+.. seealso::
+
+   - :ref:`naoqi-overview`
+   - :ref:`naoqi-blocking-non-blocking`
+

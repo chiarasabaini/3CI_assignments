@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="1" localization="-1" tooltip="Represent a counter.&#x0A;&#x0A;Each time the onStart input is stimulated, the counter value is sent on the&#x0A;currentValue output and incremented (or decremented) by Step value, from&#x0A;its Initial value to its Final value set in the parameters. Once the counter value is&#x0A;higher than its Final value, the onReinitialized output is stimulated and&#x0A;the counter is reinitialized to the Initial value.&#x0A;&#x0A;Note: You can also reinitialize the counter by stimulating the onInit&#x0A;input." x="756" y="118">
+        <bitmap>media/images/box/loop.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.initializeParameters()
+        if( self.getParameter("Final value") - self.getParameter("Initial value") >= 0 ):
+            self.stepSign = +1
+        else:
+            self.stepSign = -1
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onNext(self):
+        bParamChanged = ( self.nLast != self.getParameter("Final value") or self.nFirst != self.getParameter("Initial value") )
+        bEnd = ( self.stepSign * self.nCounter > self.stepSign * self.nLast )
+        if( bEnd or bParamChanged ):
+            self.onInput_onInit()
+        if( not bEnd or bParamChanged ):
+            currentCounter = self.nCounter
+            self.nCounter = self.nCounter + self.stepSign * self.getParameter("Step value")
+            self.currentValue( currentCounter )
+
+    def initializeParameters(self):
+        self.nFirst = self.getParameter("Initial value")
+        self.nCounter = self.nFirst
+        self.nLast = self.getParameter("Final value")
+
+    def onInput_onInit(self):
+        self.initializeParameters()
+        self.onReinitialized()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+        <Input name="onNext" type="1" type_size="1" nature="1" inner="0" tooltip="The counter next value is sent on the currentValue output when a signal is&#x0A;received on this input, unless it reached its Final value, then the onReinitialized&#x0A;output is stimulated." id="2" />
+        <Input name="onInit" type="1" type_size="1" nature="1" inner="0" tooltip="When a signal is received on this input, the counter is reinitialized to its Initial&#x0A;value." id="3" />
+        <Output name="currentValue" type="2" type_size="1" nature="2" inner="0" tooltip="Stimulated for each interaction with the counter current value." id="4" />
+        <Output name="onReinitialized" type="1" type_size="1" nature="2" inner="0" tooltip="Stimulated when the loop is over or if the counter has been reinitialized." id="5" />
+        <Parameter name="Initial value" inherits_from_parent="0" content_type="1" value="0" default_value="0" min="0" max="500" tooltip="The initial value of the counter (for the first iteration)." id="6" />
+        <Parameter name="Step value" inherits_from_parent="0" content_type="1" value="1" default_value="1" min="1" max="500" tooltip="The counter value will be incremented or decremented with this value." id="7" />
+        <Parameter name="Final value" inherits_from_parent="0" content_type="1" value="5" default_value="5" min="0" max="500" tooltip="It is the maximum (if increasing) or the minimum (if decreasing) value of the&#x0A;counter (thus for the last iteration).&#x0A;&#x0A;After this value, if the onStart input is called, the onReinitialized output will be&#x0A;stimulated and the counter will be reinitialized to its Initial value." id="8" />
+    </Box>
+</ChoregrapheBox>

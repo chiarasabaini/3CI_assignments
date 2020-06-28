@@ -1,0 +1,43 @@
+.. _aldialog_tuto:
+
+ALDialog Tutorials
+==================
+
+
+:ref:`naoqi-audio` - :ref:`Overview <aldialog>` | :ref:`API <aldialog-api>`
+| :ref:`QiChat<dialog_toc>` | Tutorials
+
+------------
+
+Getting started
+---------------
+
+Start with **Choregraphe**
+++++++++++++++++++++++++++
+
+**Choregraphe** offers a full environment enabling you to quickly create and test
+dialog boxes.
+
+Follow step by step the tutorials: :ref:`aldialog-tuto`.
+
+
+Go deeper with the full syntax
++++++++++++++++++++++++++++++++
+
+Once familiar with the main functions, you can add more complex rules.
+
+For further details, see: :ref:`dialog_rules`.
+
+Other option: Python
+---------------------
+
+Here is an example in Python that shows how to **load** and **unload** a dialog topic.
+
+:download:`aldialog_example.py </samples/python/aldialog/aldialog_example.py>`
+
+.. literalinclude:: /samples/python/aldialog/aldialog_example.py
+   :language: py
+
+
+
+

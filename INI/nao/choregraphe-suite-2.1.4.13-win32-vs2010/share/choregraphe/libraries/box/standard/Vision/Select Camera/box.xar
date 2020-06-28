@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Change the currently used camera." x="164" y="300">
+        <bitmap>media/images/box/interaction/look.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.kCameraSelectID = 18
+        self.cameraModule = ALProxy( "ALVideoDevice" )
+
+    def onLoad(self):
+        pass
+
+    def onUnload(self):
+        pass
+
+    def onInput_onUseTopCamera(self):
+        self.cameraModule.setParam( self.kCameraSelectID, 0 )
+        self.onReady()
+
+    def onInput_onUseBottomCamera(self):
+        self.cameraModule.setParam( self.kCameraSelectID, 1 )
+        self.onReady()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onUseTopCamera" type="1" type_size="1" nature="1" inner="0" tooltip="Use the camera at the top of the head (forehead)." id="2" />
+        <Input name="onUseBottomCamera" type="1" type_size="1" nature="1" inner="0" tooltip="Use the camera at the bottom of the head (mouth)." id="3" />
+        <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="The camera change is done." id="4" />
+        <Resource name="Camera setting" type="Lock" timeout="0" />
+    </Box>
+</ChoregrapheBox>

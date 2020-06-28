@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-28 04:01:52 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjg7IjAzOjU2OjE3ICI7MzI5Nw=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjg7IjA0OjAxOjUyICI7MTszMzk1"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n0" type="Integer" array="False" size=""/>
+            <declare name="n1" type="Integer" array="False" size=""/>
+            <declare name="p" type="Integer" array="False" size=""/>
+            <assign variable="p" expression="0"/>
+            <output expression="&quot;inserisci il moltiplicando:&quot;" newline="True"/>
+            <input variable="n0"/>
+            <output expression="&quot;inserisci il moltiplicatore:&quot;" newline="True"/>
+            <input variable="n1"/>
+            <for variable="n1" start="n1" end="1" direction="dec" step="1">
+                <assign variable="p" expression="p+n0"/>
+                <output expression="p" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

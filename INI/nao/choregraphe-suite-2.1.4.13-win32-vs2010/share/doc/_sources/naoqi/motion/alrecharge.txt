@@ -1,0 +1,89 @@
+.. include:: ../../bulk/common.rst
+
+.. _alrecharge:
+
+ALRecharge
+================
+
+.. toctree::
+      :hidden:
+      :maxdepth: 1
+
+      alrecharge-api
+
+Overview | :ref:`API <alrecharge-api>`
+
+-----------------
+
+|juju| |roboJ| only
+
+What it does
+--------------
+
+**ALRecharge** module provides API to manage the robot behavior about its charging station.
+
+It allows the user to make |roboJ| look for its charging station, dock onto it
+to automatically recharge, and leave it safely.
+
+While |roboJ| is docked on the charging station, all motion moves are disabled.
+They are automatically re-enabled when |roboJ| leaves the charging station.
+
+During all these operations, the module provides a way for developers to follow
+the progress and the current status.
+
+.. image:: /medias/naoqi/Rendering_Pod_2.JPG
+  :width: 230 px
+  :height: 160 px
+
+How it works
+--------------
+
+Upon calling of :cpp:func:`ALRechargeProxy::goToStation`, |roboJ| starts to
+look for its charging station around him. Once it has localized it using
+the bottom camera, he goes in front of it using **ALTracker**, stopping at 0.6m.
+
+After charging station localization confirmation, |roboJ| performs a U-turn and docks on
+its charging station in a backward motion at a reduced speed.
+
+Upon success, it disables motion move API. In case of a failure, |roboJ|
+moves away from the charging station in order not to collide with it and an event is raised.
+
+This behavior can be cut down into smaller steps by calling :cpp:func:`ALRechargeProxy::lookForStation`,
+:cpp:func:`ALRechargeProxy::moveInFrontOfStation` and :cpp:func:`ALRechargeProxy::dockOnStation`
+
+The function :cpp:func:`ALRechargeProxy::leaveStation` makes |roboJ| leave the
+charging station. Upon success it enables motion move API.
+
+Performances and limitations
+----------------------------
+
+- The total behavior to move |roboJ| onto its charging station should take less
+  than a minute in normal cases.
+
+- The battery charging time is the same as with the manual charger.
+
+- The current behavior stops when an obstacle is detected or if the tracker stops
+  for whatever reason. The recharge behavior has to be managed from an higher level application to retry docking in case of a failure.
+
+- This module is using vision extractor. The detection and localization of the charging station thus uses 2D cameras.
+
+- The electrical operation depends on hardware equipped robots. Those evolutions are to be implemented in PVT2.
+
+- If |roboJ| is not equipped with the right hardware, the charging station will
+  not supply power to the robot even though it has reached the correct position.
+  In this case, |roboJ| will safely exit the charging station and remain in front.
+
+- For now, the module uses **ALTracker** 'move' mode for servoing. This means
+  that |roboJ| is not able to avoid obstacle nor move in front of the station if
+  it turns its back to it (see following figure). This will be a feature implemented later.
+
+.. image:: /medias/naoqi/charging_station_acceptable_range.png
+  :width: 550 px
+
+Example use
+------------
+
+:download:`sample_alrecharge.py <sample_alrecharge.py>`
+
+.. literalinclude:: sample_alrecharge.py
+  :language: python

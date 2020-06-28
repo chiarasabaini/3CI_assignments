@@ -1,0 +1,13 @@
+.. _python-example-vision-recognition:
+
+Vision recognition
+==================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This example shows how to learn images using :ref:`ALVisionRecognition`.
+
+:download:`vision_recognition.py </examples/python/vision/vision_recognition.py>`
+
+.. literalinclude:: /examples/python/vision/vision_recognition.py
+   :language: py

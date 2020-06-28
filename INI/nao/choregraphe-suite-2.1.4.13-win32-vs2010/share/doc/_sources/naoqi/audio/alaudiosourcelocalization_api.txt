@@ -1,0 +1,81 @@
+.. _alaudiosourcelocalization-api:
+
+ALAudioSourceLocalization API
+================================
+
+:ref:`naoqi-audio` - :ref:`Overview <alaudiosourcelocalization>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alaudiosourcelocalizationproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALAudioSourceLocalizationProxy
+
+* :cpp:func:`ALAudioSourceLocalizationProxy::setParameter`
+* :cpp:func:`ALAudioSourceLocalizationProxy::subscribe`
+* :cpp:func:`ALAudioSourceLocalizationProxy::unsubscribe`
+
+
+Event list
+----------
+
+* :naoqi:event:`ALAudioSourceLocalization/SoundLocated`
+
+Methods
+-------
+
+.. cpp:function:: void ALAudioSourceLocalizationProxy::setParameter(const std::string& parameter, const AL::ALValue& value)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALSoundLocalizationProxy::setParameter` instead.
+
+  Sets parameters.
+
+  :param parameter: Name of the parameter
+  :param value: Value of the parameter
+
+
+.. cpp:function:: void ALAudioSourceLocalizationProxy::subscribe(const std::string& name)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALSoundLocalizationProxy::subscribe` instead.
+
+  Subscribes to *ALAudioSourceLocalization*.
+
+  :param name: Name used to identify the subscriber
+
+
+.. cpp:function:: void ALAudioSourceLocalizationProxy::unsubscribe(const std::string& name)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALSoundLocalizationProxy::unsubscribe` instead.
+
+  Unsubscribes to *ALAudioSourceLocalization*.
+
+
+  :param name: Name with which :cpp:func:`ALAudioSourceLocalizationProxy::subscribe` was called.
+
+
+Events
+------
+
+.. naoqi:event:: ALAudioSourceLocalization/SoundLocated(AL::ALValue value)
+
+  .. deprecated:: 1.22
+    use :naoqi:event:`ALSoundLocalization/SoundLocated` instead.
+
+  Raised when a sound source has been localized.
+
+  :param value: Array containing information about the localized sounds.
+                Please refer to :ref:`ALAudioSourceLocalization` for details.

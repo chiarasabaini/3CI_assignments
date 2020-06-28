@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Returns the name of the robot posture each time its value changes." x="338" y="298">
+        <bitmap>media/images/box/sensors/inertial_unit.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.postureProxy = ALProxy("ALRobotPosture")
+        self.lastPosture = None
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bMustStop = True
+
+    def onInput_onStart(self):
+        if( self.bIsRunning ):
+            return
+        self.bIsRunning = True
+        self.bMustStop = False
+        while( not self.bMustStop ):
+            currentPosture = self.postureProxy.getPostureFamily()
+            if( self.lastPosture != currentPosture ):
+                self.lastPosture = currentPosture
+                self.posture(self.lastPosture)
+            time.sleep( self.getParameter("Frequency of updates (s)") )
+        self.bIsRunning = False
+        self.onStopped()
+        
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="4" />
+        <Output name="posture" type="3" type_size="1" nature="2" inner="0" tooltip="The current posture family of the robot.&#x0A;It might be:&#x0A;- Standing&#x0A;- Sitting&#x0A;- LyingBack&#x0A;- LyingBelly&#x0A;- LyingLeft&#x0A;- LyingRignt&#x0A;- Back&#x0A;- Belly&#x0A;- Left&#x0A;- Right&#x0A;- UpSideDown&#x0A;- Lifted&#x0A;- Unknown" id="5" />
+        <Parameter name="Frequency of updates (s)" inherits_from_parent="0" content_type="2" value="1" default_value="1" min="0.1" max="60" tooltip="This value in seconds is the time ellapsed between two updates of posture&#x0A;values." id="6" />
+    </Box>
+</ChoregrapheBox>

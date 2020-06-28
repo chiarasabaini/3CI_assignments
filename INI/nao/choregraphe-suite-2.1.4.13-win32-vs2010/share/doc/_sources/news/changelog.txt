@@ -1,0 +1,654 @@
+ChangeLog
+=========
+
+*The main changes are described in the Release Note, here are only listed the main
+known issues solved by this release.*
+
+2.1.4
+-----
+
+**Choregraphe**
+
+.. hotfix-503 - 2.1.4.10
+
+* Fix #31726 Replace old wait box containing threading.Timer from delivered boxes.
+* Fix #27200 Windows 8 - Installer - previous setup replacement option:
+  Autolt error during previous Choregraphe uninstall.
+
+.. cannot find the hotfix, but it is done!
+
+* Fix #27416 MoveAlong box has to show clearly Pepper-only compatibility.
+
+.. hotfix#509 - 2.1.4.12
+
+* Fix #31785 Internal choice box doesn't support Norwegian and greek.
+
+.. hotfix#372 - 2.1.2.18 2.1.3.1 (2/3)
+
+* Fix #25597 Moving folders in Choregraphe.
+* Fix #25598 Drag'n'dropping a behavior at the root of a project may be buggy.
+* Fix #24215 Choregraphe can lose data after some files manipulation.
+* Fix #26994 Choregraphe freezes while clicking on the Choose button whithout folder selected in Open box library pop up.
+* Fix #26996 Advanced timeline's play-shaped buttons for stiffness are broken.
+* Fix #22267 Record mode in Timeline Editor is dead.
+* Fix #25624 AnimationMode: Conflict between Autonomous Life and Animation mode.
+
+.. hotfix-502 - 2.1.4.9 (2/2)
+
+* Fix #26520 standard box library - record video box throws errors.
+
+**Audio**
+
+.. hotfix#506 - 2.1.4.11
+
+* Fix #31723 change locale for the Norwegian: Norwegian language is tagged as no_No instead of nn_NO.
+
+.. April 9 2015 - hold on changes - previously done for 2.1.3 _ postponed to 2.1.4
+
+* Fix #25810 crash in libaudiodevicemanager when installing language packages
+  during life and asr on.
+
+* Fix #26657 Deadlock when change language.
+
+.. hotfix#488 - 2.1.4.4 (1/2)
+
+* Fix #25973 Audio recorder correct internal pulse buffer size.
+
+* Fix #25192 ALAudioDevice: Subscribe and then unsubscribe twice crashes naoqi.
+
+* Fix #26707 Can not set TTS language to English anymore after having switched acapela -> nuance.
+
+* Fix #31298 Change speed parameter while 'Say' TTS method is running results in a locked call and an unusable TTS service.
+
+.. hotfix-499 - 2.1.4.8 (2/2)
+
+* Fix TTS: #31561 complete voice model for new languages.
+
+.. hotfix#489 - 2.1.4.5
+
+* Fix #31469 New languages added with choregraphe 2.1.4.3 do not work properly.
+
+.. hotfix-502 - 2.1.4.9 (1/2)
+
+* Fix #31702 Erroneous or missing translations of notifications in Polish.
+
+.. hotfix#493 - 2.1.4.7 (1/4)
+
+* Fix #31571 Language dependent pronunciation problems with the IP address because of dots.
+
+.. hotfix#491 - 2.1.4.6 (2/3)
+
+* Fix #31507 NAO - pronounces the the last dot of IP address notification (number per number)
+  for all Acapela languages.
+
+  **ALAnimatedSpeech**
+
+.. hotfix-499 - 2.1.4.8 (1/2)
+
+* Fix animations: #31389 fix hand collision when BodyTalk_15 then BodyTalk_18
+
+.. hotfix#496 - 2.1.4.7
+
+* Fix #31594 Backport correct translations from 2.5 to 2.1.
+
+**ALDialog - Qichat**
+
+.. hotfix#372 - 2.1.2.18 2.1.3.1 (1/3)
+
+* Fix #26816 Uppercase in dynamic concept make a nuance compilation error.
+* Fix #24315 Random crash in dialog engine.
+* Fix #27389 Review supported languages list - add getDialogLanguage, add getIsoLanguage functions.
+
+**ALAutonomousLife**
+
+.. hotfix#372 - 2.1.2.18 2.1.3.1 (3/3)
+
+* Fix #27266 ALAutonomousLife takes 50 seconds to load (registers 1500 modules).
+
+.. hotfix#392
+
+* Fix #27267 Double-click on torso button may remove robot stiffness even if it was in Autonomous Life.
+* Fix #21300 Stopping Autonomous life should always behave the same way: 1. via chest btn, 2. via Choregraphe btn.
+
+**ALVisionRecognition**
+
+.. hotfix#374 - 2.1.2.18 2.1.3.1
+
+* Fix #26739 Database is not created correctly on Windows.
+* Fix #26032 Database is reloaded each time you subscribe to PictureDetected.
+* Fix #26622 Compatibility with 1.14 DB broken.
+* Fix #26623 Crash when calling changeDatabase while the module is processing.
+* Fix #21346 Vision recognition very slow in 2.0.2
+
+**ALFaceDetection**
+
+.. hotfix#488 - 2.1.4.4 (2/2)
+
+Fix #30040 Face Detection - Face Label is remanent.
+
+**ALTouch**
+
+.. hotfix#493 - 2.1.4.7 (2/4)
+
+* Fix #29080 LeftBumperPressed event returns an Integer instead of a Float.
+
+**Motion**
+
+.. hotfix#493 - 2.1.4.7 (3/4)
+
+* Fix #28484 The hands of the robots are not closed during shutdown (When autonomous life is OFF).
+* Fix #26350 ALMotion.wakeUp: NAO should go to the Stand posture instead of StandInit
+* Fix #31221 Robot falls while trying to stand-up from 'Crouch' posture if only it was previously boot in 'Sit' posture
+
+**ALBattery**
+
+.. hotfix#493 - 2.1.4.7 (4/4)
+
+* Fix #29702 #27309 "My battery is now fully charged" notification needs a more robust trigger condition.
+
+**ALLeds**
+
+.. hotfix#491 - 2.1.4.6 (1/3)
+
+* Fix #31214 Nao - Inversion of color in ALLeds.fadeRGB().
+
+**SDK**
+
+.. hotfix#491 - 2.1.4.6 (3/3)
+
+* Fix #30208 Specialized proxies are out of date.
+
+2.1.3
+-----
+
+* Fix #29013: Flood of Diagnosis notifications
+
+2.1.2
+-----
+
+**Choregraphe**
+
+* Fix #23948 License management: error message "the provided license is not valid".
+
+* Fix #23938 Recording mode: impossible to stiffen the limbs on and off.
+
+* Fix #23892 [OSX] Licence key is asked twice during Choregraphe Installation.
+
+* Fix #23590 Long connection times / timeouts - improved, not fully fixed.
+
+**C++ SDK - Windows**
+
+* Fix #24255 SDK examples - min/max issue on Visual Studio.
+
+**ALAutonomousLife**
+
+* Fix #25771 Life: default tracking mode of BA should be Head on NAO.
+
+* Fix #25078 Dialog is started a second time after the person has left.
+
+**ALAutonomousMoves**
+
+* Fix #25203 Missing the API to control the background posture.
+
+**ALBasicAwareness**
+
+* Fix #25370 ALPeopleDetection: distances for detected people are incorrect on NAO.
+
+**ALDialog**
+
+* Fix #23572 [The dialog] [Dialog Applauncher] Impossible to launch applications in German.
+
+* Fix #23553 event in recover section doesn't match.
+
+* Fix #23383 and #23431 [The dialog] [Dialog Applauncher] Impossible to launch
+  some applications with applauncher.
+
+* Fix #22941 ^enumerate with empty value.
+
+**ALMotion**
+
+* Fix #23397 NAO V5: minimum distance of sonar is wrong.
+
+* Fix #23263 NAO: unable to deactivate safety reflexes without user consent.
+
+* Fix #23074 :cpp:func:`ALMotionProxy::getSummary` deadlock.
+
+* Fix #22475 Jerky motion when arm is Stiffness off.
+
+* Fix #21767 All external collision protections cannot be enabled on **NAO**.
+
+  **User consent** not required except for the Fall manager reflex.
+
+* Fix #19129 NAO: Secure moveTo (Stop if obstacle) and Security Distance in Move
+  To box are missing.
+
+* Fix #15978 and #19644 Fix Idle task when **NAO** is not stand.
+
+  * Allow idle posture when robot is not stand (idle animation is still forbidden).
+  * Allow any idle activity in slave mode.
+
+* Fix #9271 Walking in theta with a **NAO** can activate its own bumper.
+
+  Adapts to bounding box as Position2D instead of Pose2D.
+
+**ALNavigation**
+
+* Fix #22953 Faster update :cpp:func:`ALNavigationProxy::findFreeZone`.
+
+**ALRobotPosture**
+
+* Fix #22536 Finger issue during stand-up/rest go to posture
+
+**ALTextToSpeech**
+
+#25244 ACAPELA vs Nuance technology not well documented.
+
+**ALVisualCompass**
+
+* Fix #22692 Do not create multiple threads. Handle exception in Future.cancel().
+
+2.0.1
+-----
+
+* Fix #7290 The two parameters *Voice Shaping* and *Speed* of the **Say**
+  box have no effect for Korean.
+
+* Fix #6622 and #8502 Hand touch sometimes activated by motor usage (NAO V5)
+
+1.22.2
+++++++++
+
+* Fix #16735 TTS is blocked after reading a notification in Japanese.
+
+* Fix #15312 Japanese TTS: pronunciation of markers if sentence greater 500 characters.
+
+
+1.22.1
+++++++++
+
+* Fix #15494 Event robotIsWakeUp raises twice after a rest()
+
+* Fix #15544 Entering a value in the Motion window sometimes creates an unwanted keyframe
+
+* Fix #4232 MP3 files start slower than WAV files: use new OGG format instead of WAV.
+
+1.22
+++++++++
+
+* Fix #15643 HeadYaw velocity is limited.
+
+* Fix #13165 [MAC] Plugin boxes not well displayed if started from a click of the
+  project.
+
+* Fix #11371 [MAC] Send behavior to robot randomly fails ("Could not read request
+  result for file behavior.xar" error).
+
+* Fix #13549 Posture Manager: Lying Back to Lying belly does not work.
+
+1.20
+++++++++
+
+* Fix #11333 The red playing cursor doesn't appear in the Timeline editor
+
+* Fix #11272 Motion widget mirroring is inverted on some joints
+
+* Fix #6924 Child Broker webpage problem.
+
+1.18
+++++++++
+
+* Fix #10289 ALTextToSpeech is aborting naoqi at startup when language behaviors
+  are corrupted.
+
+* Fix #7856 sometimes MT9M114 HD camera (Atom - NAO V4) doesn't handle well
+  **Auto Exposition**: dark images seem even darker than expected.
+
+* Fix #11199 The following line in a Choregraphe box will not throw error anymore,
+  even when running Choregraphe on Windows while not connected to a robot::
+
+    import socket
+
+* Fix #3257 no limitation with Japanese language anymore.
+
+  :ref:`alanimatedspeech` usage was limited when using the new **Japanese TTS engine**.
+
+  Automatic body language works well, but instructions (**^start**, **^wait** and
+  **^stop**) was ignored.
+
+1.16
+++++++++
+
+* Fix #11112 [1.14.1 languages] In Choregraphe, the characters like "Ä›" or "Ã­"
+  are not displayed in the debug window nor in the Robot view.
+
+
+1.14.5
+-------
+
+* Fix #14097 Random segfaults when restarting naoqi.
+
+1.14.4
+-------
+
+* **NAO's global behavior**
+
+
+  * Fix #11001 [RANDOM] Nao displays glitches in its movements, especially in Nao's life
+
+  * Fix #12887 FSR give weird reading for Center of Pressure
+
+  * Fix #13716 MODEL: nao ankle limits are wrong
+
+* **Choregraphe**
+
+  * Fix #11365 Trying to connect two choregraphe sessions to a single robot,
+    all connections are lost.
+
+  * Fix #10072 and #9875 Choregraphe can' t be used out of the box **Mountain Lion**
+
+  * Fix  #13079 deadlock on repeated behavior execution
+
+
+1.14.3
+------
+* **Choregraphe**
+
+  * Fix #6251 Link possible to a wrench even when there's no compatible parameter
+
+  * Fix #12995 Creating a Timeline box by a right-click should have by default an
+    opened behavior layer (same as the Timeline template in the Box Libraries)
+
+  * Fix #12644 Saving as "something_v1.2" changes the name in the title bar to
+    "something_v1"
+
+  * Fix #10850: on Mac OS X, fixed a random error while sending heavy behaviors to a real robot
+
+  * Fix #13070 solved a crash when making screen shots of the 3D view through the pose editor
+
+
+1.14.2
+------
+
+* **OpenNAO**
+
+  * Fix #12615 Integrate gst-python and pygobject packages
+    (only missing on Geode image).
+
+  * Fix #8216 [Chrome] Nao webpage isn't displayed properly,
+    especially *Network* page.
+
+  * Fix #9940 *Unlearn Face* and *Unlearn All Faces* boxes have no effect.
+
+1.14.1
+------
+
+* **Choregraphe**
+
+  * Fix #10900 GotoAndPlay box jumps to random frame.
+
+  * Fix #9943 Some Libraries prevent 1.14 Choregraphe to start on OSX Mountain Lion.
+
+  * Fix #8752 Timeline display shifted left - controls unusable.
+
+* **NAOqi**
+
+  * Fix #11072 Tracker: head tracking of face do not work on sit posture on naoqi 1.14.
+
+  * Fix #10917 The anti collision enables himself again after a short time.
+
+  * Fix #10490 Activation / deactivation of the Fall manager made more robust.
+
+  * Fix #10015 A call to the setLanguage function of tts increases the list of available languages.
+
+  * Fix Specialized proxy for module ALSonar (ALSonarProxy).
+
+  * Fix #7758 Segfault in libplugin_almemory.so!AlMemoryPlugin::run.
+
+* **OpenNAO**
+
+  * Fix #10831 Unable to flash from 1.14 to 1.12: unknown preferences are considered as errors.
+
+  * Fix #10734 ntp-client service: fix/update sntp options.
+
+  * Fix #9558 After a normal reboot, all my personal data are lost.
+    Checkpart: do not format the user data partition if not explicitly required via factory-reset.
+
+  * Fix #8104 and #7732 Nao Web Page: *Language* and *Time zone* combo boxes are not
+    correctly set with Internet Explorer.
+
+  * Fix #11101: OpenNAO-vm: Avoid spurious and annoying "Name already in use"
+    popping in the standard video output.
+
+1.14
+-----
+
+* Fix #7151 Resource Manager does not handle multimodel. Tai Chi Chuan box cannot run on a T14 robot.
+
+* Fix #7909 Wireless network not being refreshed
+
+* Fix #7908 Static IP address invalid after a reboot
+
+* Fix #6338 Wifi with hidden SSID and no security are not reconnected at startup
+
+* Fix #6135 audio driver: locked in mute (atom)
+
+* Feature #3796 Voice shaping does not work for Japanese language
+
+-------------------
+
+
+1.12.5
+-------
+
+* **NAOqi**
+
+  * ALTelepathe: fixed segfaults for associated robots (#6647, #7207, #7209)
+  * Fix #5915 ALInfrared: remove IR remote learning
+  * Fix #6951 ALAudioPlayer does not work on RoboCup config
+  * Fix #7236 erratic result of brightness setting in NAO V4 camera
+
+
+* **Choregraphe**
+
+  * **Record Sound** box. The default value of the **Microphone used** parameter has changed.
+
+-------------------
+
+1.12.3
+-------
+
+
+* **NAOqi**
+
+  * Fix #6985 Ultrasonic sensors sometimes needs NAOqi restart
+  * Fix #5592 Strange behavior of angleInterpolation with AnklePitch/Roll joint
+  * Fix #6578 Remove inversion of active camera
+  * Fix #6123 Modify path where pictures are recorded: ``recordings/cameras``
+  * Fix #6573 Audio player doesn't play web streams anymore
+  * Fix #6341 Stopping a box stops also another one when both use Standing resource.
+  * Fix #6306 takePictureRegularly does not work with some param
+  * Fix #6244 Segfault in audioplayer when playing corrupted .wav files
+  * Fix #2065/FS#3764 Nao now speaks in Portuguese or Korean when pressing the chest button
+  * Fix #5472 I can't find my body is now always said in English
+  * Fix #6038 Naopathe: "Error: cannot found the ALAudioDevice module" when
+    setting volume
+
+* **OpenNAO**
+
+  * Fix #6599 Roaming improved
+  * Fix #6604 wireless connection freeze - Update to wireless stack of Linux 3.2
+  * Fix #6288 Ensure that we can always login on NAO.
+  * Fix #6190 ATOM: problem while initializing SD-card
+  * Fix #6286 Update NAO v4 temperature/fan speed settings
+
+* **libnaoqi**
+
+  * Fix #3849: Choregraphe should clean Temporary files at shutdown
+
+
+* **HAL**
+
+  * Fix #6161 Change current limit 1.15/1.5 for roll/pitch for maxon and 1.26/1.75 for portescape
+
+* **Choregraphe**
+
+  * Fix #6616: Boxes are removed from box library when drag-n-dropped to the diagram
+    (mac64 only)
+  * Fix #6606 'Stand up' box is not symmetric.
+  * Fix #6583 Sounds are now recorded in ``/home/nao/recordings/microphones``
+    instead of ``/home/nao/recordedSounds``
+  * Fix #6496 Endless walk stand up
+  * Fix #6265 WalkTo and WalkForward boxes do not use stopWalk function
+  * Fix #6115 Choregraphe crashes with the webpage "Test" button in Japanese
+  * Fix #6200 license key can now be registered by machine
+  * Fix FS#6127: Choregraphe no longer works on Mac after 'sudo port select
+    python python26'
+  * Fix #5992 Choregraphe menu bar: no shortcut for Connection, Box library or View
+
+
+-------------------
+
+1.12
+----
+
+
+1.12.0.63  -- Public release
+++++++++++++++++++++++++++++++++
+
+* **NAOqi**
+
+  * Fix #5795 NAO 4: heat on shoulder pitch
+  * Fix #5879 Inertial unit send more 'nacks' than before, causing false
+    positives for fall manager
+
+* **Monitor**
+
+  * Fix #5905 Camera Monitor: notify users that fps are limited
+
+* **OpenNAO**
+
+  * Fix #5906 Persistent data: passwd does not move shadow file,
+    ensure that passwords are kept after software update.
+
+* **Hal**
+
+  * Fix #5881 HipYaw pitch overheating
+
+* **Choregraphe**
+
+  * Fix #3520 The hand slider is not precise enough
+  * Fix #5774 Crash Choregraphe when attached file is too big
+  * Fix #5235 Default IP changed from "localhost" to "127.0.0.1"
+  * Fix #4939 When setting a default behavior from a Choregraphe 1.12 on a
+    NAOqi 1.10, it is not played on start-up
+  * Fix #4664 Prevent from zooming in the motion timeline outside the timeline editor
+
+
+1.12.0.49 - RC1
++++++++++++++++++
+
+* **NAOqi**
+
+  * Fix #5476 Sentinel: Emergency stiffness removal does not work when system
+    menu is activated
+  * Fix #2065 Missing Portuguese and Korean Chest button translations
+  * Fix #5158 interaction problem between animation-mode and fallmanager
+
+* **NAOqi - Core**
+
+  * Fix #5225 Launch python modules and executables from autoload.ini
+
+
+* **NAOqi - Motion**
+
+  * Fix #5300 Instabilities when walking backwards
+
+* **Choregraphe**
+
+  * Fix #5562 videoMonitor is at 5fps
+  * Fix #5188 After a few PLAY / STOP in the video monitor of choregraphe, the video can not retrieved anymore.
+  * Fix #5156 ALBehaviorManager - runBehavior doesn't work on a sub behavior anymore
+
+* **OpenNAO**
+
+  * Fix #4978 on V4 /media/internal is not persistent
+  * Fix #143, #4022 DFU v2
+  * Fix #4428 infrared remote discovery not terminating on the webpage
+
+1.12.0.42 - Beta2
+++++++++++++++++++
+
+* **NAOqi - Audio**
+
+  * Fix #5179 xRemoveBrackets segfaults
+
+* **NAOqi - Core**
+
+  * Fix #4474, #4825, #4359, #4940 : deadlock or crashes when connecting/deconnecting  brokers
+
+* **Choregraphe**
+
+  * Fix #4696, #3788, #4969, #4234: cleaning of e-mail boxes
+  * Fix #4836 Video acquisition continued even if video monitor widget is closed
+  * Fix #5074 Crash in ALBehaviorManager
+  * Fix #4836 fix the pause/resume video process at initialisation
+
+* **Choregraphe - Boxes**
+
+  * Fix #4973 MP3 files: late and incomplete playing => modify the tooltip
+  * Fix #4392 IR Send Key box: cannot enter custom remote control config. name
+
+* **.Net SDK**
+
+  * New #4766 Suppoprt using TTS in Japanese
+
+
+1.12.0.30 - Beta1
+++++++++++++++++++
+
+* **Motion/DCM**
+
+  * Fix #3957 - FS#5841 Motion and DCM can be used at the
+    same time on different joints, but when changing from using DCM on a joint to
+    using motion, the user is required to set stiffness to zero during the transition.
+  * Fix #3313 - FS#5158 RHipYawPitch does not respond. Workaround: RHipYawPitch
+    and LHipYawPitch are the 2 names of the same joint, use LHipYawPitch to control the hips.
+
+* **Audio**
+
+  * Fix #3952 - FS#5836 Synchronous call to say or playFile from a remote python script
+    are regularly not returning.
+
+* **Network**
+
+  * Fix #3853 - FS#5728 The connection is not stable with Wifi roaming (related bug FS#5379).
+
+* **Choregraphe**
+
+  * Fix #3744 - FS#5609 Choice box does not work in Chinese, German, Italian,
+    Japanese, Korean and Portuguese.
+
+* **NAOqi**
+
+  * Fix #2720 - FS#4471  Instability issues (related bugs: FS#4384, FS#3896, FS#117).
+
+  * Fix #1158 - FS#1824 When compiling modules in debug mode for C++ projects, many warnings occur.
+
+* **NAOqi - Audio**
+
+  * Fix #2505 - FS#4245 Synchronization issue between music and move.
+
+* **NAO**
+
+  * Fix #2065 - FS#3764 if NAO is not set in English or French, when pressing his chest
+    button, he cannot pronounce properly the sentence.
+
+* **NAOqi - ALMemory**
+
+  * Fix #1720  - FS#3213 Choregraphe may consider that a behavior is still
+    running although it is finished.
+
+* **Languages compatibility**
+
+  * Fix #1276 - FS#2235 Python scripts: The float values are
+    truncated on French Linux OS.

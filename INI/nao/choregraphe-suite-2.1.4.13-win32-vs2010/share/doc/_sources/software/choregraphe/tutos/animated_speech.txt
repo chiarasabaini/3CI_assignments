@@ -1,0 +1,153 @@
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+.. |play-button| image:: /medias/desktop/beginning_play_button.png
+   :class: img-inline
+
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. _animated_speech_tuto:
+
+Testing the Body language
+=========================
+
+Testing the Animated say box
+-----------------------------
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Connect **Choregraphe** to a real robot.
+
+2.      Drag and drop the **Audio** > **Voice** > **Animated Say** box onto the
+        **Flow Diagram** panel.
+
+3.      Connect its input to the main input of the behavior.
+
+4.      Click the |play-button| **Play** button to test the result.
+=====  ==========================================================================
+
+
+Customizing the text
+++++++++++++++++++++++
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Double-click the box and enter your own text in the **Localized text** box.
+
+2.      Click the |play-button| **Play** button to test the result.
+=====  ==========================================================================
+
+
+Testing the body language option
+++++++++++++++++++++++++++++++++++
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Click the |parameter-button| **Parameter** button of the
+        **Animated Say** box and choose the **Body language mode**.
+
+        For further details, see: :ref:`body_language`.
+
+2.      Click the |play-button| **Play** button to test the result.
+=====  ==========================================================================
+
+
+Adding instructions
+++++++++++++++++++++
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Choose one or several body language behavior(s) among those installed
+        on the robot.
+
+        You can choose for example Hey_1, Hey_6 or Please_1.
+
+2.      Compose a text including instructions using this behavior.
+
+        For example:
+
+
+        .. code-block:: python
+
+            ^start(animations/Stand/Gestures/Hey_1) My friend, the weather
+            is really hot today!^stop(animations/Stand/Gestures/Hey_1)
+
+            ^start(animations/Stand/Gestures/Please_1) Do me a favor,
+            turn on the fan!^wait(animations/Stand/Gestures/Please_1)
+
+        For further details, see: :ref:`animated_speech_instruction`.
+
+4.      Paste this text in the **Localized text** box located inside the
+        **Animated Say** box.
+
+5.      Click the |play-button| **Play** button to test the result.
+=====  ==========================================================================
+
+To go further
+--------------
+
+.. _alanimatedspeech_createyourownbehavior:
+
+Creating a Behavior for annotated text
+++++++++++++++++++++++++++++++++++++++
+
+This tutorial explains how to create a Behavior and then use it in an annotated text.
+
+=====  ========================================================================
+Step       Action
+=====  ========================================================================
+1.      Create a :ref:`choregraphe-reference-box-type-timeline` containing
+        a short animation.
+
+        For example, you can use the **Motions** > **Animations** >
+        **Wipe Forehead** box.
+
+2.      Connect the box to the **onStart** input and **onStopped** output.
+
+3.      Right click the box and choose **Edit resources**.
+
+4.      Make sure the resources used by the box are selected and
+        set the parameters as following:
+
+        * **At box startup**: Wait 1 second,
+        * **During box execution**: Lock
+
+        .. image:: /medias/naoqi/alanimatedspeech_tuto.png
+            :width: 251 px
+            :height: 437 px
+
+        The way the resources has been set guaranties that before starting
+        its execution, the Behavior will give enough time to the current
+        animation to stop and release the requested resources.
+
+5.      Display the :ref:`chore_robot_applications_panel` and
+        **Install** the current project on the robot.
+
+        If you haven't saved the behavior yet, you will be prompted to
+        give a name to the behavior.
+
+        Example: ``my_amination_wipe``.
+
+6.      You can now use the name of this Behavior in an annotated text.
+
+        Example:
+
+
+        .. code-block:: python
+
+           My name is John Doe, I'm a robot, I would be glad to talk to you.
+           ^start(my_amination_wipe) But, look, it's a very hot day!
+           ^wait(my_amination_wipe) ^start(animations/Stand/Gestures/You_1)
+           Could you turn on the fan, please?
+           ^stop( animations/Stand/Gestures/You_1)
+
+=====  ========================================================================
+
+

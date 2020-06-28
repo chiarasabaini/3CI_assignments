@@ -1,0 +1,238 @@
+.. include:: ../bulk/common.rst
+
+.. _opennao-connectivity:
+
+|roboN| - Connectivity
+==========================
+
+.. _opennao-wireless:
+
+WiFi standard configuration
+---------------------------
+
+=====  ==============================================================================================================
+Step    Action
+=====  ==============================================================================================================
+1.      Access and login the |roboN| **Web page**.
+
+        For further details, see: :ref:`opennao-access-web-page`.
+
+2.      Choose the **Network** page.
+
+        The following window is displayed.
+
+        .. image:: /medias/opennao/webpage-network.png
+           :width: 526 px
+           :height: 452 px
+
+3.      Select one of the **Available networks**, having one of the :ref:`opennao-supported-personal-security`.
+
+        The chosen network is displayed.
+
+        .. image:: /medias/opennao/gs_webpage_connection.png
+           :width: 521 px
+           :height: 446 px
+
+4.      Keep parameters as they are and click the **Connect** button.
+
+5.      If prompted, enter the network password.
+
+        |roboN| is now wireless connected and will always try to connect to this network.
+
+6.      Optionally, if you want to avoid automatic reconnecting to this network, click on **Forget** button.
+=====  ==============================================================================================================
+
+.. _opennao-supported-personal-security:
+
+Supported personal securities
++++++++++++++++++++++++++++++
+
+|roboN| supports **WEP**, **WPA** & **WPA 2** personal securities.
+
+.. note::
+  For WEP only the passphrase of 5 characters for WEP40 and 12 characters for WEP104
+  are supported, always prefer the hexadecimal representation which is the only standard.
+
+.. _tethering:
+
+|roboN| as a mobile WiFi Access Point
+----------------------------------------
+
+|roboN| can be turned into a WiFi Access Point, this could be very useful when there is no other network available.
+
+Tethering refers to connecting one device to one other, in the case of WiFi we use the access point mode to do this.
+
+To enable this mode:
+
+=====  ==============================================================================================================
+Step    Action
+=====  ==============================================================================================================
+1.      Click the **Tethering** button on the network page.
+
+        .. image:: /medias/opennao/webpage-network.png
+           :width: 526 px
+           :height: 452 px
+
+        A dialog box is open with the WiFi access point properties.
+
+        .. image:: /medias/opennao/gs_webpage_tethering_wifi.png
+           :width: 428 px
+           :height: 269 px
+
+2.      Provide the information for the Access Point
+
+        **Name**: The name of the created WiFi network as it will appear in other devices WiFi services list.
+
+        **Passphrase**: The WPA2 passphrase to connect to the created network.
+
+3.      Click the **Enable** button.
+
+        The access point is now enabled, other WiFi devices can join the created WiFi network.
+
+        .. warning::
+           When the WiFi hotspot is enabled on |roboN|, it shares its network connectivity with other devices.
+           If |roboN| is connected to a corporate network on Ethernet, make sure this mode is compatible with
+           the network security policy.
+
+        The created network will be available until the next reboot or until you disable it by clicking again on
+        the tethering button.
+
+        .. image:: /medias/opennao/gs_webpage_tethering_wifi_enabled.png
+           :width: 523 px
+           :height: 374 px
+
+        .. note::
+           Due to hardware radio limitations, when the Access Point mode is enabled it's not possible to list other
+           WiFi networks or to join one of them.
+=====  ==============================================================================================================
+
+
+Other configuration options
+---------------------------
+
+.. _opennao-local-link:
+
+Local-Link an alternative to DHCP
++++++++++++++++++++++++++++++++++
+
+In case of network without **DHCP**, it is possible to use link-local addressing.
+Link-Local is a standardized alternative to settings static IP address.
+With this feature you can obtain an address automatically, and establish a
+local network communication between your |roboN| and your computer.
+
+If your |roboN| say that he got an address in the range of 169.254.X.X, the reason
+is haven't discover any DHCP server and |roboN| has fall back to Local-Link.
+
+Since 1.12 version you can just plug a network wire between your |roboN| and your PC,
+and obtain a communication without setting a static IP address.
+For MAC and Windows computer you have nothing to do to make it work, with Linux
+PC please verify if your network manager is set for using link-local.
+
+How to Ubuntu and Local Link
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+=====  ==============================================================================================================
+Step    Action
+=====  ==============================================================================================================
+1.      On the nm-applet click on "Edit Connections...".
+
+        .. image:: /medias/opennao/ubuntu-ll/edit.png
+           :width: 358 px
+           :height: 328 px
+
+2.      Add a new profile to connect to |roboN| directly.
+
+        .. image:: /medias/opennao/ubuntu-ll/network_connections.png
+           :width: 487 px
+           :height: 335 px
+
+        Click on **Add**.
+
+3.      Choose a nice name for your configuration here "PC2NAO".
+
+        Select the tab **IPv4-Settings**, and change the Method to **Link-Local Only**.
+
+        .. image:: /medias/opennao/ubuntu-ll/ll_only.png
+           :width: 456 px
+           :height: 543 px
+
+        Click on **Save**, and close the menu.
+
+4.      Disconnect from the previous profile.
+
+        .. image:: /medias/opennao/ubuntu-ll/disconnect_eth0.png
+           :width: 359 px
+           :height: 291 px
+
+5.      Activate the new profile here "PC2NAO".
+
+        .. image:: /medias/opennao/ubuntu-ll/Select_PC2NAO.png
+           :width: 330 px
+           :height: 262 px
+
+        Now you can plug an Ethernet wire directly between tour computer and your |roboN|.
+=====  ==============================================================================================================
+
+
+.. _opennao-static-ip:
+
+Static IP address
+++++++++++++++++++
+
+If you don't have a **DHCP** server and you don't want to use the Local-Link method, you can set
+manually an IP address.
+
+WiFi
+^^^^
+
+To set an IP address to a WiFi service, follow the
+:ref:`Wireless configuration<opennao-wireless>` section, and before clicking to connect at
+step 4, click on **"Configuration"** button.
+
+Now you can enter your static parameters.
+
+.. image:: /medias/opennao/gs_webpage_static_ip.png
+   :width: 521 px
+   :height: 512 px
+
+Click on send, now you can do the last steps of Wireless configuration.
+
+To get back to DHCP method, click again on the **"Configuration"** button and
+choose DHCP method in the list.
+
+Ethernet
+^^^^^^^^
+
+.. warning::
+
+  **Aldebaran-Robotics** doesn't recommend to set an IP address on Ethernet, use the
+  :ref:`Local-Link method<opennao-local-link>` instead.
+
+  In case of wrong parameters you won't be able to communicate with your |roboN|
+  anymore and you will have to use the process :ref:`naoflasher_upgrade` with
+  the :term:`Factory reset` option.
+
+
+To set an IP address to an Ethernet service, access through ssh to your |roboN|.
+
+.. code-block:: console
+
+    nao [0] ~ $ su
+    root@nao [0] nao $ connman services
+    * Wired                      { ethernet_001395052c58_cable }
+    * ALDEBARAN-NAO              { wifi_000c4321384a_414c4445424152414e2d4e414f_managed_psk }
+      ALDEBARAN                  { wifi_000c4321384a_414c4445424152414e_managed_psk }
+    root@nao [0] nao $ /usr/lib/connman/test/set-ipv4-method ethernet_001395052c58_cable manual \
+    192.168.1.100 255.255.255.0 192.168.1.1
+
+This command set the address 192.168.1.1 with netmask 255.255.255.0 and gateway 192.168.1.1
+for the Ethernet service.
+
+
+To get back to DHCP method:
+
+.. code-block:: console
+
+    nao [0] ~ $ su
+    root@nao [0] nao $ /usr/lib/connman/test/set-ipv4-method ethernet_001395052c58_cable dhcp
+

@@ -1,0 +1,27 @@
+.. _child_progress:
+
+Progress
+=========
+
+For most of the educational **Activities**, performance is recorded.
+
+The **Progress** page allows **Teachers** and **Parents** to display these
+performance data on charts.
+
+.. image:: /medias/asknao/progress_page.png
+   :width: 487 px
+   :height: 384 px
+
+The progress will get updated after each session, each time an **Activity**
+provides data.
+
+Selecting an Activity
+---------------------
+
+To display the progress made on a specific **Activity**:
+
+* Click the **Activity** icon.
+
+.. image:: /medias/asknao/progress_select_act.png
+   :width: 366 px
+   :height: 241 px

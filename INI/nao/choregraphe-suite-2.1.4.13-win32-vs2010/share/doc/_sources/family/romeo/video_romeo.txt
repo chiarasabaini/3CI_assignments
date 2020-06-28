@@ -1,0 +1,49 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_video:
+
+|roboR| - 2D Cameras
+======================
+
+.. seealso::
+    :ref:`romeo`
+
+-----------
+
+The robot head is composed of three cameras:
+
+* four :ref:`2D_camera_romeo`, and optionally
+* one :ref:`3D_camera_romeo`.
+
+The camera indexes are:
+
++-------------------+----------+-----------------------+
+| Parameter ID Name | ID Value | Description           |
++===================+==========+=======================+
+| AL::kTopCamera    | 0        | camera on the top.    |
++-------------------+----------+-----------------------+
+| AL::kBottomCamera | 1        | camera on the bottom. |
++-------------------+----------+-----------------------+
+| AL::kDepthCamera  | 2        | 3D camera in the eyes.|
++-------------------+----------+-----------------------+
+
+..  _2D_camera_romeo:
+
+2D Cameras
+**********
+
+Location
+---------
+
++----------------+--------+---------+--------+
+| Sensor name    | X (m)  | Y (m)   | Z (m)  |
++================+========+=========+========+
+| CameraLeftEye  | 0.1111 |  0.0325 | 0.0515 |
++----------------+--------+---------+--------+
+| CameraRightEye | 0.1111 | -0.0325 | 0.0515 |
++----------------+--------+---------+--------+
+| CameraLeft     | 0.1090 |  0.0550 | 0.0848 |
++----------------+--------+---------+--------+
+| CameraRight    | 0.1090 | -0.0550 | 0.0848 |
++----------------+--------+---------+--------+
+

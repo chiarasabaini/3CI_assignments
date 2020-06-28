@@ -1,0 +1,165 @@
+.. _naoqi-man:
+
+NAOqi man page
+--------------
+
+Name
+++++
+
+naoqi - Start ``NAOqi``
+
+Description
++++++++++++
+
+**Logging options:**
+
+``-h, --help``
+  Produces help message
+
+``--version``
+  Output NAOqi version
+
+``--pid arg``
+  Filename to write PID.
+
+``--port-file arg``
+  Filename to write port.
+
+``-n [ --broker-name ] arg (=NAOqi)``
+  Name of the broker, default is NAOqi.
+
+``-b [ --broker-ip ] arg (=0.0.0.0)``
+  IP of the server, default is 0.0.0.0
+
+``-p [ --broker-port ] arg (=9559)``
+  Port of the server, default is 9559
+
+``--pip arg``
+  IP of the parent broker, default is no parent (empty string)
+
+``--pport arg (=0)``
+  Port of the parent broker, default is no parent (0).
+
+``-l [ --load ] arg``
+  Library to load
+
+``--stack-size arg (=0.5)``
+  Thread stack size (MB)
+
+``--autoload-file arg``
+  Launch this specific autoload file
+
+``--max-try arg (=1)``
+  Number of tries for connect to the main broker (0 for infinity).
+
+``--elapse-between-try arg (=1)``
+  Number of second to wait during tries.
+
+``--naoqi-name arg``
+  If given, launcher will be named ALLauncher_{naoqi-name}.
+
+``--crash-recovery``
+  Recover from crash
+
+``-v [ --verbose ]``
+  Enable verbose mode
+
+``-d [ --debug ]``
+  Enable debug mode
+
+``--disable-life``
+  Deactivate autonomous life launch at startup
+
+**Logging options:**
+
+``--qi-log-level arg``
+  Change the log minimum level: [0-6] (default:4)
+
+  0. silent  : No log show one console (equivalent to -q option)
+  1. fatal   : Show fatal logs error
+  2. error   : Show error logs
+  3. warning : Show warning logs
+  4. info    : Show information logs (default value)
+  5. verbose : Show verbose (-v) logs
+  6. debug   : Show debug (-d) logs. Debug logs are not compile on release mode (only shown on debug compilation)
+
+  Can be set with env var QI_LOG_LEVEL
+
+``--qi-log-filters arg``
+  Set log filtering options. Colon separated list of rules.  Each rule can be:
+
+  * +CAT: enable category CAT
+  * -CAT: disable category CAT
+  * CAT=level: set category CAT to level
+
+  Each category can include a '*' for globbing. Can be set with env var QI_LOG_FILTERS.
+
+  Example: 'qi.*=debug:-qi.foo:+qi.foo.bar' (all qi.*logs in info, remove all qi.foo logs except qi.foo.bar)
+
+``--qi-log-quiet``
+  Do not show any log on console.
+
+``--qi-log-verbose``
+  Shows verbose (level 5 and lower) logs.
+
+``--qi-log-debug``
+  Shows debug (level 6 and lower) logs.
+
+  Debug logs is not compile on release mode (only shown on debug compilation)
+
+``--qi-log-context=CONTEXT``
+  Shows context logs, it's a bit field(add the values below):
+
+  | 1.   Verbosity
+  | 2.   ShortVerbosity
+  | 4.   Date
+  | 8.   ThreadID
+  | 16.  Category
+  | 32.  File
+  | 64.  Function
+  | 128. *End of line*
+  |
+  | Some useful values for context are:
+  |
+  | 26.  (verb+threadId+cat)
+  | 30.  (verb+threadId+date+cat)
+  | 126. (verb+threadId+date+cat+file+fun)
+  | 254. (verb+threadId+date+cat+file+fun+eol)
+
+  Can be set with env var QI_LOG_CONTEXT
+
+``--qi-log-synchronous``
+  Activates synchronous logs.
+
+``--daemon``
+  run NAOqi as a daemon
+
+``--pid=FILE``
+  filename to write the process' PID into
+
+``-n NAME, --broker-name=NAME``
+  name of the main broker (default is NAOqi)
+
+``-b IP, --broker-ip=IP``
+  IP which the broker will listen on, default is 0.0.0.0 for all interface
+
+``-p PORT, --broker-port=PORT``
+  port which the broker will listen on, default is 9559
+
+``--pip=IP``
+  connect this broker to another one. IP is the address of the parent broker,
+  default is no parent.
+
+``--pport=PORT``
+  Port of the parent broker, default is no parent
+
+``-l LIBRARY, --load=LIBRARY``
+  library to load
+
+``--stack-size=SIZE``
+  thread stack size (Mo). Default is 0.5
+
+``--log-forwarder=IP[:PORT]``
+  do not use an inprocess log forwarder. Must specify the input ZMQ address of
+  the wanted forwarder. This can be use to launch multiple forwarder when you
+  start some naoqi on the same computer. Default is ``tcp://*:50998``

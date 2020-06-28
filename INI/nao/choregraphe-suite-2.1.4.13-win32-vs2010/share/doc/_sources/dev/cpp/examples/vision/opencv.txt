@@ -1,0 +1,315 @@
+.. _cpp-tutos-opencv:
+
+Using OpenCV
+============
+
+:ref:`\<\< return to C++ examples<cpp-examples>`
+
+OpenCV (Open Computer Vision) is a C++ library containing various state-of-the-art
+vision algorithms, from object recognition to video analysis, image processing
+etc.
+
+OpenCV 2.3.1
+------------
+
+Since version 1.14, **NAOqi SDK** supports OpenCV 2.3.1 for both compilation and
+cross-compilation. This latest version contains various fixes and optimizations
+compared to the previously supported 2.1 versions, also with an important
+restructuring of the library's architecture.
+
+OpenCV 2.3 is practically entirely backward compatible with OpenCV 2.1. So
+everything working on 2.1 should work on 2.3.
+
+However, there has been a complete refactoring of the structure:
+
+- separating the C API from the C++ one
+- separating the distribution into logical modules
+
+Modules
++++++++
+
+The main modules are
+
+- **core**: it contains the basic structures and functionalities
+- **highgui**: anything to do with display, opening or saving images
+- **imgproc**: color conversion, filters...
+- **video**: optical flow, background substraction...
+- **calib3d**: homography, fundamental matrices... anything to do with camera
+  calibration and stereovision
+- **features2d**: feature detection, descriptors (FAST, SURF), matching
+- **ml**: machine learning (neural networks, SVM, boosting, KNN etc)
+- **flann**: efficient clustering and search in databases
+- **objectdetection**: object detection with Cascade or Haar classifiers
+
+Each module has its associated include file(s). For example ::
+
+  #include <opencv2/core/core.hpp>
+
+API
++++
+
+The API has been cleaned: C and C++ API are now clearly distinguished.
+For example **CvMat** is C API, and has its equivalent in C++ **cv::Mat**.
+Unless you are doing C, use C++ API! No need to mix both. If you really need to
+use the C API, use the right include ::
+
+  #include <opencv2/core/core_c.h>
+
+but again, do not mix the includes.
+
+IplImage and cv::Mat
+^^^^^^^^^^^^^^^^^^^^
+
+IplImage* has been replaced by cv::Mat. This is basically the same structure,
+but more generic. So all methods that had IplImage* arguments now use cv::Mat.
+
+cv::Mat is a smart pointer, which means that you do not have to release it by
+hand (though there is a release method). It behaves like a pointer, which means
+that if you do the following code:
+
+.. code-block:: cpp
+
+  cv::Mat oldMat;
+  // Do some processing.
+  cv::Mat newMat = oldMat;
+
+**no data will be copied**. Which means that if oldMat is released, then newMat
+is emptied. If you want to copy some data, use the **copyTo** or **clone**
+methods.
+
+ROI are handled that way: you create a new matrix pointing to the desired area,
+without any data copy, and then copy what you want to that new matrix.
+
+Here is a non-exhaustive list of some interesting fields of IplImage, and what
+they have become in cv::Mat.
+
++------------------+--------------------------------+
+| OpenCV 2.1       | OpenCV 2.3                     |
++==================+================================+
+| width            | cols                           |
++------------------+--------------------------------+
+| height           | rows                           |
++------------------+--------------------------------+
+| imageData        | data                           |
++------------------+--------------------------------+
+| nChannels        | channels()                     |
++------------------+--------------------------------+
+
+
+CvSeq* and std::vector
+^^^^^^^^^^^^^^^^^^^^^^
+
+You might have dabbled a bit with the storage structures of OpenCV, CvSeq and
+CvMemStorage. If you did, you might have noticed that they are rather
+counter-intuitive and nearly impossible to create yourself. Fortunately, if
+you use the C++ API, all CvSeq have disappeared and have been replaced by
+std::vector, that is infinitely easier to handle!
+
+
+From C to C++
+^^^^^^^^^^^^^
+
+Even if you code in C++, you might be used to the C API, which has this typical
+format: cvSomeOpenCVMethod(...). To use the C++ equivalent try replacing CvSeq
+by std::vector and IplImage by cv::Mat.
+
+
+CMake dependencies
+++++++++++++++++++
+
+OpenCV 2.3 is now packaged according to the modules. So when you want to use
+OpenCV, instead of using ::
+
+  qi_use_lib(mylib OPENCV)
+
+specify the modules that you want to use. For example, if you are using core
+and highgui ::
+
+  qi_use_lib(mylib OPENCV2_CORE OPENCV2_HIGHGUI)
+
+All modules use the following format: OPENCV2_MODULENAME.
+
+What's new in OpenCV 2.3
++++++++++++++++++++++++++
+
+OpenCV 2.3 is not only a code clean-up and refactoring. It also offers a lot
+of new wrapper classes which make life much easier, especially in terms of
+keypoint extraction and so on.
+
+There are new implementations of various keypoints / descriptors: Star (also
+called Censure), MSER, Upgraded SURF, BRIEF, Ferns...
+
+
+.. _cpp-tutos-opencv-toolchain:
+
+Toolchain OpenCV versus system OpenCV
+-------------------------------------
+
+C++ **NAOqi SDK** provides some OpenCV libraries.
+
+However, **on Ubuntu, these libraries
+have been built without GTK support for portability reasons** (GTK has a lot of
+dependencies, and will be useless on the robot since it has no display). This
+means that you will not be able to use any of the graphical interface methods
+of OpenCV (such as cv::imshow). This seems natural if you are working on the
+robot, but you will probably want to have some visual debug. You will also
+have the same problem if you try to execute this example:
+:ref:`cpp-tutos-get-image`.
+
+You might also want to work with your specific OpenCV (for example, using
+special compilation flags or optimization libraries).
+
+The solution is to replace Aldebaran robotics' version of OpenCV by your system one. To
+do so, follow these steps:
+
+Getting OpenCV latest version on your system
+++++++++++++++++++++++++++++++++++++++++++++
+
+Cleaning old versions
+^^^^^^^^^^^^^^^^^^^^^
+
+If you do not have any previous OpenCV installation on your machine, you may
+skip this section and go directly to :ref:`cpp-tutos-opencv-install`.
+
+
+**If you installed your version from the sources**
+
+- go to the build folder where you built the sources.
+- execute the following command (possibly with sudo on Ubuntu): ::
+
+    make uninstall
+
+- If you installed it from the sources but cannot find the build directory, you
+  can either remove OpenCV libraries by hand or:
+
+  * download the source of your current OpenCV version
+  * build the sources (as in :ref:`cpp-tutos-opencv-install` but with an older version)
+  * execute the following (possibly with sudo on Ubuntu): ::
+
+      make
+      make install
+      make uninstall
+
+**If you used an installer or a package**
+
+Uninstall it using the provided uninstaller (from Synaptic Package Manager for
+Ubuntu, for example).
+
+
+.. _cpp-tutos-opencv-install:
+
+Installing the latest version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The best solution is to build OpenCV from the sources and install it.
+
+- Get the latest OpenCV version from
+  `http://sourceforge.net/projects/opencvlibrary/ <http://sourceforge.net/projects/opencvlibrary/>`_.
+
+- Uncompress it somewhere on your machine (it is better to keep it afterwards)
+
+- Inside the extracted folder, create a build directory and open it ::
+
+    mkdir build
+    cd build
+
+- Configure your project using CMake ::
+
+    cmake ..
+
+  This command will output a large log which will show what prerequisites have
+  been found. Some are optional, some are more important. For example, you have
+  to check that GTK support is enabled, but you do not need IPP support or CUDA.
+
+  To have an idea of the prerequisites, refer to:
+  `http://opencv.willowgarage.com/wiki/InstallGuide <http://opencv.willowgarage.com/wiki/InstallGuide>`_.
+
+  .. note::
+
+     On Ubuntu, you might need amongst other the package
+     libgstreamermm-0.10-dev for gstreamer missing libraries.
+
+  .. warning::
+
+     If you are using Ubuntu 11.10, you will probably get some issues with
+     ffmpgeg/avcodec.h. If you don't need ffmpeg (which you probably don't, or
+     else you would know it), then remove ffmpeg support. Do do so, uncheck
+     WITH_FFMPEG key in CMake GUI, configure and generate, then proceed as
+     usual. If you are convinced that you need ffmpeg, you might want to follow
+     the instructions from this
+     `link <http://thebitbangtheory.wordpress.com/2011/10/23/how-to-install-opencv-2-3-1-in-ubuntu-11-10-oneiric-ocelot-with-python-support/>`_.
+
+- Build the distribution ::
+
+    make
+
+- Install it ::
+
+    make install
+
+You now have OpenCV installed on your machine!
+
+
+Removing OpenCV from the NAOqi SDK
+++++++++++++++++++++++++++++++++++++++
+
+Once you have OpenCV installed for your system, you have to remove it from the
+SDK. Do not remove the CMake configuration files.
+
+
+- Remove all OpenCV libraries from the lib/ directory of the SDK. They will
+  have the following format: libopencv_modulename.so, libcv.so, libhighui.so
+  and libml.so
+- Remove the opencv folder from the include folder
+
+
+Now clean your project, then run again ::
+
+  qibuild configure [-c mytoolchain]
+  qibuild make [-c mytoolchain]
+
+
+
+Cross compilation of OpenCV code
+--------------------------------
+
+The cross toolchain contains OpenCV libraries. To ensure that your code will
+run on NAO, simply make sure that you are not using any graphical interface
+methods (such as windows, trackbars etc).
+
+Troubleshooting
+---------------
+
+CMake configuration
++++++++++++++++++++
+
+If you get some issues while configuring the project saying that some OpenCV
+packages are not found, there might be several explanations:
+
+- you have removed opencv from the toolchain, but do not have it installed on
+  your system
+- you used a wrong name in your CMakeLists.txt: check that the format is
+  OPENCV2_MODULENAME (ex: OPENCV2_CORE).
+
+Build and linking
++++++++++++++++++
+
+If you get a compilation error, first check you OpenCV version.
+
+If you get some "undefined reference to" errors, check that you have added the
+right module include and put it in the CMakeLists.txt file.
+
+On Linux 64 bits, if you get an error about pointers it
+might be that you are using a C API include. To fix it, add
+#include <cstddef.h> before your opencv includes, if you really need to use
+these includes.
+
+Runtime
++++++++
+
+On Ubuntu, if you run your program and get an error like "xxx function is not
+implemented" and a reference to some libraries on **NAOqi OS**, it probably means
+that you are trying to use some method requiring GTK but are using the toolchain
+OpenCV and not your system OpenCV. Such methods include for example
+cv::namedWindow() or cv::imshow() (refer to :ref:`cpp-tutos-opencv-toolchain`).
+

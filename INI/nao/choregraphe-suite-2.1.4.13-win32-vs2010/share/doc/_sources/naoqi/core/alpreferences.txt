@@ -1,0 +1,23 @@
+.. _alpreferences:
+
+ALPreferences
+==============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alpreferences-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <alpreferences-api>`
+
+------------
+
+What it does
+------------
+
+ALPreferences allows access to xml preference files and provides convertion to and from ALValues.
+
+.. warning::
+
+   This module is deprecated since 1.20. Use :ref:`alpreferencemanager` instead.

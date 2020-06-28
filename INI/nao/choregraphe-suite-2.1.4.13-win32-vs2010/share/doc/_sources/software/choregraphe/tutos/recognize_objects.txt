@@ -1,0 +1,127 @@
+.. include:: ../bulk/common.rst
+
+.. |learn-button| image:: /medias/desktop/choregraphe/video_monitor_learn.png
+   :class: img-inline
+
+.. |send-database-button| image:: /medias/desktop/choregraphe/video_monitor_send.png
+   :class: img-inline
+
+.. |export-database-button| image:: /medias/desktop/choregraphe/video_monitor_export.png
+   :class: img-inline
+
+Recognizing objects
+===================
+
+|no-virtual| *Cannot be tested on a simulated robot, unless in a virtual world*.
+
+----------------------
+
+
+.. seealso::
+
+   - :ref:`video-monitor-panel`
+   - :ref:`alvisionrecognition`
+
+----------------------
+
+.. _choregraphe-tuto-learn-object:
+
+Teaching |roboN| to recognize objects
+-------------------------------------
+
+Using the **Video monitor** panel, |roboN| can learn images, objects and rooms to recognize.
+
+=====  ==============================================================================================
+Step       Action
+=====  ==============================================================================================
+1.      Make sure you are connected to a real robot or to a simulated robot
+        evolving in a virtual world.
+
+2.      Choose  **View** > **Video monitor**.
+
+        The **Video monitor** panel appears and displays what the active camera is seeing.
+
+3.      Click the **Learn** |learn-button| button.
+
+        A 4 seconds countdown starts, it gives you time to place correctly the object
+        you want to learn.
+
+        .. image:: /medias/dev/tutos/choregraphe/capturing-vision.png
+           :width: 396 px
+           :height: 380 px
+
+        At 0, the image switch to QVGA resolution and is captured.
+
+4.      Click to draw, segment by segment, the contour of the object you want to learn.
+
+        .. image:: /medias/dev/tutos/choregraphe/contour-vision.png
+           :width: 396 px
+           :height: 380 px
+
+        .. note::
+
+            For a room, take the contour of the full image.
+
+        As soon as you click again the first point to close the shape, a pop-up opens.
+
+5.      Enter the information about the object, book or room:
+
+        .. image:: /medias/dev/tutos/choregraphe/object-tag.png
+           :width: 274 px
+           :height: 257 px
+
+6.      Click **OK**.
+
+        A feed-back message confirms if the learning is successful or not
+        (due to bad quality of the input).
+
+7.      If you want to learn other objects:
+
+        * Click the **Play** |play-button| button and
+        * return to step 2.
+
+8.      When you are done with learning objects, you can:
+
+        * Click the **Send current vision recognition database to NAO** |send-database-button|
+          button, in order to use immediately the database on the robot, or
+        * Click the **Export Vision Recognition Database** |export-database-button| button,
+          in order to save the database on your computer for later use.
+
+        .. note::
+
+           The database is not stored with the behavior but in a specific directory. To create several
+           databases with different object lists or share it on other computers, you can clear, export
+           and import the database using the dedicated buttons in the video monitor.
+           For further details, see :ref:`choregraphe-detailed-interface-video-monitor`.
+=====  ==============================================================================================
+
+
+Recognizing objects
+--------------------
+
+Once a vision recognition database is created and launched on the robot, NAO can recognize the objects
+defined in the database.
+
+=====  ==============================================================================================
+Step       Action
+=====  ==============================================================================================
+1.      Make sure you are connected to a real robot or to a simulated robot
+        evolving in a virtual world.
+
+2.      Make sure you have launched a vision recognition database on the robot.
+
+        If not:
+
+        * Create a vision recognition database -or import a previously stored one- and
+        * Click the **Send current vision recognition database to NAO** |send-database-button|
+          button.
+
+3.      Create a behavior using the **Vision Reco** box.
+
+4.      Launch it so NAO can detect the newly learned objects.
+=====  ==============================================================================================
+
+You can also create a Python script: :ref:`alvisionrecognition-tuto`.
+
+
+

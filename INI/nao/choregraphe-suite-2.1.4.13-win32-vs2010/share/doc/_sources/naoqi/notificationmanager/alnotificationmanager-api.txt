@@ -1,0 +1,93 @@
+.. _alnotificationmanager-api:
+
+ALNotificationManager API
+=========================
+
+:ref:`naoqi-core` - :ref:`Overview <alnotificationmanager>` | API | :ref:`notificationInfo`
+
+-------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alnotificationmanagerproxy.h>
+
+Method Group list
+-----------------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALNotificationManagerProxy
+
+* :cpp:func:`ALNotificationManagerProxy::add`
+* :cpp:func:`ALNotificationManagerProxy::remove`
+* :cpp:func:`ALNotificationManagerProxy::notification`
+* :cpp:func:`ALNotificationManagerProxy::notifications`
+
+Event list
+----------
+
+* :naoqi:event:`notificationAdded`
+* :naoqi:event:`notificationRemoved`
+
+.. Global API
+
+.. cpp:function:: int ALNotificationManagerProxy::add(const AL::ALValue &notification)
+
+  Adds a new Notification. As soon as it is added, the event :naoqi:event:`notificationAdded` is raised.
+
+  :param notification: The notification contained in an ALValue (see :ref:`notificationInfo`).
+  :return: The notification identifier.
+
+  :download:`add-notif.py </examples/python/notificationmanager/add-notif.py>`
+
+  .. literalinclude:: /examples/python/notificationmanager/add-notif.py
+
+
+.. cpp:function:: void ALNotificationManagerProxy::remove(const int &notificationId)
+
+  Removes a Notification. As soon as it is removed, the event :naoqi:event:`notificationRemoved` is raised.
+
+  :param notificationId: Identifier of the notification to remove.
+
+  :download:`remove-notif.py </examples/python/notificationmanager/remove-notif.py>`
+
+  .. literalinclude:: /examples/python/notificationmanager/remove-notif.py
+
+
+.. cpp:function:: AL::ALValue ALNotificationManagerProxy::notification(const int &notificationId)
+
+  Returns the NotificationInfo corresponding to the given notification identifier. The notification is represented as an ALValue (see :ref:`notificationInfo`).
+
+  :param notificationId: Identifier of the notification.
+  :return: The notificationInfo of the given notification identifier.
+  :throw: An ALError, if the identifier doesn't exist.
+
+.. cpp:function:: AL::ALValue ALNotificationManagerProxy::notifications()
+
+  Returns the list of pending NotificationInfos.
+
+  :return: An array of NotificationInfos contained in an ALValue (see :ref:`notificationInfo`).
+
+  :download:`print-notif.py </examples/python/notificationmanager/print-notif.py>`
+
+  .. literalinclude:: /examples/python/notificationmanager/print-notif.py
+
+
+ALNotificationManagerProxy Events
+---------------------------------
+
+.. naoqi:event:: notificationAdded(int notificationId)
+
+  Raised when a new notification has been added.
+
+  :param notificationId: The identifier of the added notification.
+
+.. naoqi:event:: notificationRemoved(int notificationId)
+
+  Raised when a notification has been removed. It can be discarded either if it is read or not valid anymore.
+
+  :param notificationId: The identifier of the removed notification.
+

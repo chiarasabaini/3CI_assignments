@@ -1,0 +1,85 @@
+.. _python-example-motion-walk:
+
+Move and Walk
+===============
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section contains several python example on walk, both for standard walk and
+for customized walk.
+
+Simple walk
+-----------
+
+These examples show how to use Aldebaran normal walk.
+
+Walk
+++++
+
+Make NAO walk backwards, forwards, and turn.
+
+:download:`almotion_move.py </examples/python/motion/almotion_move.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_move.py
+   :language: py
+
+Move to
++++++++
+
+Make NAO walk to an objective.
+
+:download:`almotion_moveTo.py </examples/python/motion/almotion_moveTo.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_moveTo.py
+   :language: py
+
+Walk faster
++++++++++++
+
+Make NAO walk with greater step length.
+
+:download:`almotion_moveFaster.py </examples/python/motion/almotion_moveFaster.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_moveFaster.py
+   :language: py
+
+Customized walk
+---------------
+
+Walk customization
+++++++++++++++++++
+
+Make NAO do a custom walk: NAO is limping and then walking correctly, just like Keyser Sose in *The Usual Suspects*.
+
+:download:`almotion_moveCustomization.py </examples/python/motion/almotion_moveCustomization.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_moveCustomization.py
+   :language: py
+
+Walk to customization
++++++++++++++++++++++
+
+Make NAO walk to an objective with custom feet gait config.
+
+:download:`almotion_moveToCustomization.py </examples/python/motion/almotion_moveToCustomization.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_moveToCustomization.py
+   :language: py
+
+Dubins curve
+++++++++++++
+
+Make NAO walk along a dubins curve.
+
+:download:`almotion_moveToDubinsCurve.py </examples/python/motion/almotion_moveToDubinsCurve.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_moveToDubinsCurve.py
+   :language: py
+
+Move head while walking
++++++++++++++++++++++++
+
+:download:`almotion_moveWithJerkyHead.py </examples/python/motion/almotion_moveWithJerkyHead.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_moveWithJerkyHead.py
+   :language: py

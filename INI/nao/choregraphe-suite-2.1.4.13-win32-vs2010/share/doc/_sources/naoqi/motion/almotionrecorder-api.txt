@@ -1,0 +1,75 @@
+.. _almotionrecorder-api:
+
+ALMotionRecorder API
+====================
+
+:ref:`Overview <almotionrecorder>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/almotionrecorderproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALMotionRecorderProxy
+
+* :cpp:func:`ALMotionRecorder::startInteractiveRecording`
+* :cpp:func:`ALMotionRecorder::startPeriodicRecording`
+* :cpp:func:`ALMotionRecorder::stopAndGetRecording`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALMotionRecorder::startInteractiveRecording( const std::vector<std::string>& jointsToRecord, const int& nbPoses, const bool& extensionAllowed, const int& mode )
+
+  .. deprecated:: 1.14
+    use the :ref:`animation_mode` instead.
+
+  Start recording the motion in an interactive mode
+
+  :param jointsToRecord: Names of joints that must be recorded
+
+  :param nbPoses: Default number of poses to record
+
+  :param extensionAllowed: Set to true to ignore nbPoses and keep recording new poses as long as record is not manually stopped
+
+  :param mode: Indicates which interactive mode must be used. 1 : Use right bumper to enslave and left bumper to store the pose 2 : Use chest button to store the pose
+
+.. cpp:function:: void ALMotionRecorder::startPeriodicRecording( const std::vector<std::string>& jointsToRecord, const int& nbPoses, const bool& extensionAllowed, const float& timeStep, const std::vector<std::string>& jointsToReplay, const AL::ALValue& replayData )
+
+  .. deprecated:: 1.14
+    use the :ref:`animation_mode` instead.
+
+  Start recording the motion in a periodic mode
+
+  :param jointsToRecord: Names of joints that must be recorded
+
+  :param nbPoses: Default number of poses to record
+
+  :param extensionAllowed: set to true to ignore nbPoses and keep recording new poses as long as record is not manually stopped
+
+  :param timeStep: Time in seconds to wait between two poses
+
+  :param jointsToReplay: Names of joints that must be replayed
+
+  :param replayData: An ALValue holding data for replayed joints. It holds two ALValues. The first one is an ALValue where each line corresponds to a joint, and column elements are times of control points The second one is also an ALValue where each line corresponds to a joint, but column elements are arrays containing [float angle, Handle1, Handle2] elements, where Handle is [int InterpolationType, float dAngle, float dTime] describing the handle offsets relative to the angle and time of the point. The first Bezier param describes the handle that controls the curve preceding the point, the second describes the curve following the point.
+
+.. cpp:function:: AL::ALValue ALMotionRecorder::stopAndGetRecording()
+
+  .. deprecated:: 1.14
+    use the :ref:`animation_mode` instead.
+
+  Stop recording the motion and return data
+
+  :return: Returns the recorded data as an ALValue
+

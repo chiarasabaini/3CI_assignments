@@ -1,0 +1,52 @@
+.. include:: ../bulk/common.rst
+
+.. _nao_store_channel:
+
+Subscribing to a Channel
+=========================
+
+A **Channel** is a way to update dynamically applications on your robot.
+
+Subscribing to a **Channel**, ensures the applications you need are automatically
+added, updated, and removed, when necessary.
+
+To subscribe to a **Channel**:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure you are the owner of the |robot|.
+
+2.      On the |store|, choose **Channels**.
+
+        .. image:: /medias/store/channel.png
+            :width: 592 px
+            :height: 217 px
+
+        For further details, see: :ref:`cloud_access`.
+
+3.      Click the **Channel** you want to subscribe to.
+
+        A green check mark appears.
+
+        .. image:: /medias/store/channel_selected.png
+            :width: 364 px
+            :height: 117 px
+
+        As soon as your |roboN| is turned on and connected, the **Channel**
+        will automatically update the last release of the applications and
+        resources included in the Channel.
+
+        The application will be installed at the next robot update.
+
+        For further details, see: :ref:`upgrading applications`.
+=====  =========================================================================
+
+Basic Channel
+--------------
+
+For further details about the content of **Basic Channel**,
+see:
+
+* :ref:`basic_channel`, and
+* :ref:`bchannel_text`.

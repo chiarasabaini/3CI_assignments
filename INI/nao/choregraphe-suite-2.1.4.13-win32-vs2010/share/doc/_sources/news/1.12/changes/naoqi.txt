@@ -1,0 +1,111 @@
+.. _naoqi:
+
+NAOqi Changes
+=============
+
+
+autolaunch.py is no longer used
+---------------------------------
+
+The functionnality (running autodiagnostic, switching leds on during boot up),
+is now implemented in C++ in naoqi-bin executable.
+
+
+.. _naoqi-moduleloading:
+
+Loading modules
+---------------
+
+To have your module loaded at ``naoqi`` startup, the syntax
+of the ``autoload.ini`` has changed.
+
+The file is still located in ``~/naoqi/preferences/autoload.ini``
+
+.. note:: The systen 'autoload.ini' is now in ``/etc/naoqi/autoload.ini``, but
+   your are strongly advised to **NOT** changed it.
+
+
+.. highlight:: ini
+
+*old*::
+
+  [core]
+  ....
+
+  [extra]
+  ....
+
+  mymodule
+
+*new*::
+
+  [user]
+  /full/path/to/libmymodule.so
+
+
+This way you can put your module where you want, and you do not
+have to copy/paste the ``autoload.ini`` from the system anymore.
+
+You can also start programs (or remote's modules) using the *[program]* tag:
+
+.. code-block:: ini
+
+  [program]
+  /full/path/to/mymodule
+  # or
+  /full/path/to/myfolder/whatever/mymodule
+
+
+You have the same process to work with python script using *[python]* tag:
+
+.. code-block:: ini
+
+  [python]
+  /full/path/to/mypythonscript.py
+  # or
+  /full/path/to/myfolder/whatever/mypythonscript.py
+
+
+
+Note for C++ developpers: on linux, the module libraries used to be loaded
+with `RTLD_LAZY`, now the modules are loaded with `RTLD_NOW`.
+
+Thus, if on 1.10 you had unresolved symbols in your module you could crash naoqi,
+and on 1.12 your module will simply not load, giving an error message looking like::
+
+  [ERROR] Could not load library: /home/nao/naoqi/lib/naoqi/libmymodule.so
+  [ERROR] Error was:      Launcher::loadLibrary
+         Could not load library: "/home/nao/naoqi/lib/naoqi/libmymodule.so"
+  Error was:  /home/nao/naoqi/lib/naoqi/libmymodule.so: undefined symbol:
+    ...
+
+If you don't know what this means, don't worry, most of the time you will not
+be impacted by this change.
+
+
+
+.. _naoqi-pythonusage:
+
+Using custom Python libraries in your behaviors
+--------------------------------------------------
+
+
+Please put your modules in:
+
+``~/.local/lib/python2.6``
+
+This way there is **no need** to tweak ``PYTHONPATH`` or messing up
+with ``sys/.path`` anymore.
+
+
+ALPreferences module
+--------------------
+
+Previously, we had a *very* confusing situation:
+
+* ``writePrefFile("foo")`` would write in ``.config/naoqi/foo.xml``, but
+* ``writePrefFile("foo.xml")`` would write in ``/full/path/to/foo.xnml``
+
+Now:
+
+* ``writePrefFile("foo")`` will create a file in ``~/.config/naoqi/foo.xml``

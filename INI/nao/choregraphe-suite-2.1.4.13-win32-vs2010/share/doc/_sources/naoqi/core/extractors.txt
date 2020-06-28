@@ -1,0 +1,54 @@
+.. _extractors:
+
+Extractors
+===========
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alextractor-api
+   alvisionextractor-api
+
+
+
+:ref:`naoqi-core` - Overview | :ref:`alextractor-api` | :ref:`alvisionextractor-api`
+
+------------
+
+
+What it does
+------------
+
+Extractor modules are used as a base class for vision and perception modules.
+
+
+List of modules inheriting from **ALExtractor**
+------------------------------------------------
+
+* :ref:`alcloseobjectdetection`
+* :ref:`ALEngagementZones`
+* :ref:`ALFaceDetection`
+* :ref:`ALGazeAnalysis`
+* :ref:`ALLandmarkDetection`
+* :ref:`ALPeoplePerception`
+* :ref:`ALRedballDetection`
+* :ref:`alsittingpeopledetection`
+* :ref:`ALSonar`
+* :ref:`ALVisualSpaceHistory`
+* :ref:`ALWavingDetection`
+* :ref:`ALVisionRecognition`
+
+
+
+List of modules inheriting from **ALExtractor** and **ALVisionExtractor**
+--------------------------------------------------------------------------
+
+* :ref:`ALBackLightingDetection`
+* :ref:`ALBarCodeReader`
+* :ref:`ALDarknessDetection`
+* :ref:`ALMovementDetection`
+* :ref:`ALSegmentation3D`
+* :ref:`ALVisualCompass`
+
+

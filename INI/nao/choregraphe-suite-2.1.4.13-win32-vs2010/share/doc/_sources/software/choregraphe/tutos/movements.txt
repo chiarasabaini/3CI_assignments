@@ -1,0 +1,281 @@
+
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+
+.. _movements-tuto:
+
+Moving my limbs
+===============
+
+
+.. _choregraphe-tuto-animation-mode:
+
+Creating a movement using Animation mode
+----------------------------------------
+
+.. seealso::
+
+   - :ref:`choregraphe-howto-use-animation-mode`
+
+
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+----------------------
+
+
+.. |wakeup-button| image:: /medias/desktop/choregraphe/chore_wakeup_button.png
+   :class: img-inline
+
+.. |animation-mode-green| image:: /medias/desktop/choregraphe/animation_mode_button_green.png
+   :class: img-inline
+
+.. |animation-mode-red| image:: /medias/desktop/choregraphe/animation_mode_button_red.png
+   :class: img-inline
+
+
+This tutorial will show you how to create a movement using the **Animation mode**.
+
+*Create the following behavior*: starting from the **Init** pose of the pose library,
+animate your robot in order to put it in the position of the famous sculpture called **The thinker** by Rodin.
+
+Start **Animation Mode** and store the first position:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Make sure you are connected to a real robot.
+
+2.      Awake your robot by clicking the |wakeup-button| **Wake Up** button. If the button is
+        disabled, it means that your robot is already awake.
+
+3.      Your robot should now be in the **StandInit** posture. If it isn't, you can
+        do it by using the **Pose library**.
+
+        Your robot in the **Init** pose should look like that:
+
+        .. image:: /medias/desktop/choregraphe/animation_mode_mov1.png
+            :width: 200 px
+            :height: 389 px
+
+4.      Create a new **Timeline box**.
+
+5.      Double click the box in order to display the **Timeline**.
+
+6.      Click the |animation-mode-green| **Animation mode** button.
+
+        The button turns red: |animation-mode-red|, meaning the **Animation Mode** is on.
+
+7.      *Store the first position:*
+
+        Tap the head tactile sensors with your hand.
+=====  ======================================================================================
+
+To define the second position, we will decompose the movement:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Hold your robot by the waist/torso to prevent it to fall down.
+
+2.      Push the two foot bumpers to set off the **Stiffness** of the legs.
+
+3.      Lower the torso in order to flex legs, your robot should look like that:
+
+        .. image:: /medias/desktop/choregraphe/animation_mode_mov2.png
+            :width: 200 px
+            :height: 323 px
+
+4.      Move the right foot forward and turn it a little on the right like in the following
+        picture:
+
+        .. image:: /medias/desktop/choregraphe/animation_mode_mov3.png
+            :width: 200 px
+            :height: 319 px
+
+5.      Push the two foot bumpers in order to set on the **Stiffness** of the legs.
+
+6.      *Store the second position:*
+
+        Tap the head tactile sensors with your hand.
+=====  ======================================================================================
+
+The next part of the movement will involve the arms and the head of the robot.
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Touch the middle head tactile sensor in order to set off the **Stiffness** 
+        of the head.
+
+2.      Lower the head until it is no longer possible.
+
+3.      Touch the middle head tactile sensor in order to set on the **Stiffness**
+        of the head.
+
+4.      Tilt the torso forward.
+
+5.      Raise the right hand to the head.
+
+6.      Make sure the position is stable.
+
+7.      If it is, store the position.
+
+        If not, tilt the torso backward until the position remains stable and
+        store the position.
+
+        Your robot should look like that:
+
+        .. image:: /medias/desktop/choregraphe/animation_mode_mov4.png
+            :width: 200 px
+            :height: 273 px
+
+8.      Click the |animation-mode-red| **Animation mode** button again to stop it, or
+        touch all the **Head tactile sensors**.
+
+        The button turns green: |animation-mode-green|.
+=====  ======================================================================================
+
+Test your behavior:
+
+
+.. |timeline-play-button| image:: /medias/desktop/choregraphe/timeline_play.png
+   :class: img-inline
+
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      In the :ref:`choregraphe-interface-timeline-panel`,
+        click the |timeline-play-button| **Play motion** button.
+=====  ======================================================================================
+
+:download:`tutorial_animation_mode.crg </examples/choregraphe/tutorial_animation_mode.crg>`
+
+
+
+.. _choregraphe-tuto-movement-from-scratch:
+
+Creating a movement from scratch
+--------------------------------
+
+In **Choregraphe**, it is very easy to create simple movements in no time.
+
+=====  =================================================================================    =====================================================================
+Step       Action                                                                           Further help
+=====  =================================================================================    =====================================================================
+1.      Drag and drop the **Template** > **Animation** box onto the
+        :ref:`chore_flow_diagram_panel`.
+
+2.      Double-click the box to enter it.
+
+        An empty :ref:`Timeline<choregraphe-reference-box-timeline>` is displayed.
+
+3.      Set the robot in a starting position.                                               To quickly set the robot in a position, you can click on a predefined
+                                                                                            position in :ref:`chore_pose_library_panel`.
+
+4.      Right-click on the :ref:`Frame <choregraphe-reference-box-frame>` 5 of the          Having a keyframe at index 1 is not advised: it would mean that the
+        the :ref:`Motion layer <choregraphe-reference-box-motion-layer>`.                   robot, from an unknown position when entering the box, should go to
+                                                                                            this position in no time and the keyframe would probably be ignored.
+
+5.      Click on one of the robot limbs to display the
+        :ref:`choregraphe-detailed-interface-motion-widget`.
+
+        .. note::
+
+           Whenever there is a current frame cursor (the blue line) on the
+           Timeline, the motion editing is on.
+
+6.      In the :ref:`choregraphe-detailed-interface-motion-widget`,
+        you can add some joint values of the selected limb
+        in the current keyframe, moving a limb will automatically add the joint
+        value to the selected keyframe.
+=====  =================================================================================    =====================================================================
+
+.. _choregraphe-tuto-movement-real-nao:
+
+Creating a movement with a real NAO robot to define the joints values
+---------------------------------------------------------------------
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+------------------------
+
+.. warning::
+
+    The **Stiffness** of Head motors have to be set off.
+
+This tutorial explains how to use a real robot to create a movement.
+
+We will see how to define joints values by moving the real robot.
+
+Saving the head joints values using the **Robot view**
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When you change the real NAO position, you can see that the virtual 3D NAO changes position too. Try to raise NAO's arm for example.
+
+.. image:: /medias/dev/tutos/choregraphe/chore_position_reflected.jpg
+
+Wouldn't it be nice to use this feature to create position keyframes on a motion Timeline?
+
+Now, let’s say we want NAO to move its head up in the first keyframe and to keep its arms down:
+
+#. Click on the first keyframe
+
+#. Click on the head of the virtual 3D NAO to open the :ref:`choregraphe-detailed-interface-motion-widget`.
+
+#. Move the real NAO robot head to the position you want.
+
+#. Click on the two record buttons of the :ref:`choregraphe-detailed-interface-motion-widget`
+   as in the following picture:
+
+   .. image:: /medias/dev/tutos/choregraphe/chore_clicking_record.png
+
+   The head joints values have been saved in the first keyframe.
+
+Saving the arm joints values using the "Store joints in keyframe" options
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#. Move the real NAO robot arms to put them down.
+
+#. Click on **Stiffen chain on/off** in the :ref:`choregraphe-detailed-interface-motion-widget`.
+
+   The robot doesn't move.
+
+#. Right-click on the first keyframe and select the **Store joints in keyframe** option.
+
+   .. note::
+
+      This feature allows you to save the joints values of NAO: the joints of the whole body, the head, the arms or the legs.
+
+#. As we want to save the joints values of the arms, click on **Arms**.
+
+   .. image:: /medias/dev/tutos/choregraphe/chore_store_joints.png
+
+   The joints values of the arms have been saved in the first keyframe.
+
+Raising the arms in a second keyframe
++++++++++++++++++++++++++++++++++++++
+
+#. Left click the motion Timeline to change the current edition frame (the blue line).
+
+   A second keyframe is displayed on the motion Timeline.
+
+#. Move the real NAO robot arms to the position you want.
+
+#. Click on **Stiffen chain on/off** in the :ref:`choregraphe-detailed-interface-motion-widget`.
+
+   The robot doesn't move.
+
+#. Right click on the second keyframe and select **Store joints in keyframe > Arms**.
+
+   The joints values of the arms have been saved in the second keyframe.
+
+Thanks to the **Store joints in keyframe** option, we were able to save the values of 8 joints (4 joints per arm) in a keyframe in only a single click.
+
+.. note::
+
+   When you right-click on a keyframe, the **Remove joints from keyframe** option allows you to easily remove the joints values that have been saved in a keyframe.
+   You can choose to remove the joints values of the whole body, or only the values of the head, arms, legs or forearms.
+

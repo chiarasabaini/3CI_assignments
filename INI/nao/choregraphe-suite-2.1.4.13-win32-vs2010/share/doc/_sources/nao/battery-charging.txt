@@ -1,0 +1,44 @@
+.. include:: ../bulk/common.rst
+
+.. _charging-battery_nao:
+
+Charging the battery
+====================
+
+.. seealso:: :ref:`replacing-battery` | :ref:`Battery Hardware <robot-battery>`
+
+-----------------------
+
+To charge the battery:
+
+=====  ============================================================================================================
+Step       Action
+=====  ============================================================================================================
+1.      Gently set |roboN| in a crouching position to ensure stability.
+
+        .. image:: /medias/wizard/battery_step1.png
+            :width: 115 px
+            :height: 187 px
+
+2.      Plug the charger to the mains, and
+        plug the charger cable into |roboN|'s back.
+
+        .. image:: /medias/wizard/wiz_step2.png
+            :width: 215 px
+            :height: 213 px
+
+        Check the charger's LED to have an indication about charge status.
+
+        For further details about the meaning of LED colors, see the paper documentation delivered with the
+        charger, or the summary printed on the charger.
+
+3.      When the battery is charged enough, disconnect the charger cable from |roboN|'s back, then
+        disconnect the charger from the mains.
+=====  ============================================================================================================
+
+How do I know it is time to charge the battery again
+-----------------------------------------------------
+
+**Notifications** warn you that the battery needs to be recharged.
+
+For further details, see: :ref:`battery_notif_nao`.

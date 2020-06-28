@@ -1,0 +1,32 @@
+.. _robot_motors_v33:
+
+Motors - V3.3
+===============================
+
+.. seealso::
+
+    :ref:`all_robots`
+
+    :ref:`V5 <robot_motors>` | :ref:`V4 <robot_motors_v4>`  | **V3.3** |  :ref:`V3.2 <robot_motors_v32>`
+
+    :ref:`h25_motors` | :ref:`h21_motors` | :ref:`t14_motors` | :ref:`t2_motors`
+
+--------------------
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_h25.png
+   :width: 320 px
+   :height: 413 px
+
+.. include:: ../bulk/motors_v33.rst
+
+.. include:: ../bulk/motors_v33_head.rst
+
+.. include:: ../bulk/motors_v33_arms.rst
+
+.. include:: ../bulk/motors_v33_hands.rst
+
+.. include:: ../bulk/motors_v33_legs.rst
+

@@ -1,0 +1,262 @@
+.. _glossary:
+
+Glossary
+========
+
+.. glossary::
+
+   Actuator
+
+       Electronic device able to receive commands.
+
+       In ALMemory, actuator values contain the last command sent to the actuator.
+
+       For further details, see:
+       :ref:`actuator_sensor_list_nao`.
+
+       .. * :ref:`actuator_sensor_list_nao`,
+       .. * :ref:`actuator_sensor_list_juliette`.
+
+   Blocking Method
+
+       Like normal method calls, simple calls are blocking - The next
+       instruction will be executed after the end of the previous call. All calls can
+       raise an exception and should be encapsulated in a try-catch block. Calls can
+       have return values.
+
+       Further details: :ref:`naoqi-blocking-non-blocking`.
+
+   Body
+       In ALMotion, Body is the group gathering all joints of the robot.
+
+       Further details: :ref:`body-chain-def`. See also: :term:`Whole Body Motion`.
+
+
+   Broker
+
+       A broker is an executable and a server that can listen to remote commands
+       on IP and port.
+
+       Further details: :ref:`naoqi-broker`.
+
+   Chain
+       In ALMotion, a chain is a group of joints.
+
+       Further details: :ref:`body-chain-def`.
+
+   COM
+       Center Of Mass.
+
+   DOF
+   Degrees of freedom
+
+       Degrees of freedom (DOF) are the set of independent displacements and/or
+       rotations that specify completely the displaced or deformed position and
+       orientation of the body or system.
+
+       See also: :term:`joint`.
+
+   DCM
+   Device Communication Manager
+
+       The **DCM** is a software module, part of **NAOqi**, in charge of the
+       communication with almost every electronic device in robots (boards, sensors,
+       actuators ...), excepting sound (in or out) and cameras.
+
+       Further details: :ref:`dcm`.
+
+
+   Device
+
+        Device is the common name for :term:`Actuator` and :term:`Sensor`.
+
+        For further details, see:
+        :ref:`actuator_sensor_list_nao`.
+
+        .. * :ref:`actuator_sensor_list_nao`,
+        .. * :ref:`actuator_sensor_list_juliette`.
+
+   Effector
+
+       Effectors are points allowing to control position by Cartesian methods.
+       There are 6 effectors: "Head" , "LArm", "LLeg", "RLeg", "RArm", "Torso".
+
+       Further details: :ref:`control-cartesian`.
+
+
+   FRAME_ROBOT
+
+       One of the 3 spatial references used by ALMotion.
+       This is average of the two feet positions projected around a vertical z axis.
+       This space is useful, because the x axis is always forwards, so provides
+       a natural ego-centric reference.
+
+       Further details: :ref:`motion-effectors-space`.
+
+   FRAME_TORSO
+
+       One of the 3 spatial references used by ALMotion.
+       This is attached to NAO's torso reference, so moves with NAO as he walks
+       and changes orientation as he leans. This space is useful when you have
+       very local tasks, that make sense in the orientation of the torso frame.
+
+       Further details: :ref:`motion-effectors-space`.
+
+   FRAME_WORLD
+
+       One of the 3 spatial references used by ALMotion.
+       This is a fixed origin that is never altered. It is left behind when NAO walks,
+       and will be different in z rotation after NAO has turned. This space is useful
+       for calculations which require an external, absolute frame of reference.
+
+       Further details: :ref:`motion-effectors-space`.
+
+   Hardness
+
+       Hardness (named as stiffness in the Motion module) of the joint. The
+       value is from 0.0 to 1.0, 0 means 0% and 1 means 100% (full power).
+       In the motorboard, this percentage is directly applied to the max
+       current. Setting the hardness to 0.5 means that the electric current
+       limitation is reduced to 50%.
+
+       Further details: :term:`Stiffness (%)`. See also: :term:`Stiffness`.
+
+   Initial Pose
+   NAO Initial position
+   Pose Init
+   StandInit posture
+
+       Specific stable :term:`posture` with: kneeAngle = 40.0 deg and torsoAngle = wideAngle = 0.0 deg.
+
+       A good starting point for most of the motion animations.
+
+       Available in Choregraphe :ref:`chore_pose_library_panel`.
+       Can also be reached using :ref:`alrobotposture`
+       or using directly **ALMotion** joint control (see :ref:`control-joint-tuto`).
+
+   Irrecord
+
+       The LIRC program used by the :ref:`ALInfrared` module to record IR
+       (Infra Red) remote controls.
+
+       See also: :term:`LIRC`.
+
+   Joint
+
+       Point of articulation, connection that allow motion.
+       In ALMotion, all Degrees Of Freedom except hands are called joints.
+
+       Further details: :ref:`body-chain-def`. See also: :term:`DOF`.
+
+
+   LIRC
+
+       LIRC (Linux Infrared Remote Control).
+
+       Further details: http://www.lirc.org/
+
+   Non-blocking Method
+
+       By using the *post* object of a proxy, a task is created
+       in a parallel thread. This enables you to do other work at the same time (e.g.
+       walking while talking). Each *post* call generates a *task id*.  You can
+       use this *task id* to check if a task is running, or wait until the task is finished.
+
+       See also: :term:`blocking method`.
+
+       Further details: :ref:`naoqi-blocking-non-blocking`.
+
+   Pose
+
+       Combination of position and orientation of a body in a coordinate system.
+       For example, position and orientation of the robot related to
+       :term:`FRAME_WORLD`.
+
+       **Caution**: not to be confused with :term:`posture`.
+
+
+   Position6D
+
+       A Position6D is a vector of 6 dimensions composed of 3 translations
+       (in meters) and 3 rotation (in radians).
+
+       See also: :term:`Transform`.
+
+       Further details: `libalmath Overview <ref/libalmath/overview.html>`_.
+
+
+   Posture
+
+       A configuration of the robot body, generally involving all joints.
+
+       Useful postures are available in Choregraphe
+       :ref:`chore_pose_library_panel`.
+       or can be reached using :ref:`alrobotposture` or using directly
+       **ALMotion** joint control (see :ref:`control-joint-tuto`).
+
+       See Also: :term:`Predefined postures`.
+
+
+   SE3 Interpolation
+
+       SE3 Interpolation is used for all interpolations that are defined in Cartesian Space.
+
+       Further details: :ref:`motion-se3-interpolation`
+
+
+   Sensor
+
+       Electronic device able to return values.
+
+       For further details, see:
+       :ref:`actuator_sensor_list_nao`.
+
+       .. * :ref:`actuator_sensor_list_nao`,
+       .. * :ref:`actuator_sensor_list_juliette`.
+
+   Singularity
+
+       A position in the robot's workspace where one or more joints no longer
+       represent independent controlling variables.
+
+       Mathematically, a Jacobian mathematical matrix formulation can be used to relate
+       the motion in joint space to the motion in Cartesian space.
+       The singularity occurs when the inverse Jacobian becomes singular (determinant = 0).
+
+   Spaces
+
+       ALMotion uses 3 different spatial references: :term:`FRAME_TORSO`,
+       :term:`FRAME_WORLD` and :term:`FRAME_ROBOT`.
+
+       Further details: :ref:`motion-effectors-space`.
+
+
+   Stiffness
+
+       The stiffness of the joint is equivalent to a torque limitation into
+       the motors. If the joint stiffness is set to 0.0, the joint controller
+       do nothing and the joint is free. Else with a value at 1.0 the joint is
+       allowed to use full torque power to reach a given position.
+
+       Further details: :ref:`Stiffness control <control-stiffness>`. See also: :term:`Hardness`.
+
+   Support polygon
+
+       For a rigid object in contact with a fixed environment and acted upon by gravity in
+       the vertical direction, its support polygon is a horizontal region over which the center
+       of mass must lie to achieve static stability.
+       For example, for an object resting on a horizontal surface (e.g. a table),
+       the support polygon is the convex hull of its "footprint" on the table.
+
+   Transform
+
+       Way to describe a solid in space. It is composed of a rotation matrix and a translation.
+
+       See also: :term:`Position6D`.
+
+       Further details: `libalmath Overview <ref/libalmath/overview.html>`_.
+
+   Whole Body Motion
+
+       Whole Body Motion is a Generalized Inverse Kinematics which deals with
+       Cartesian and joint control, balance, redundancy and task priority.

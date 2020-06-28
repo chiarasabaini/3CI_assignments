@@ -1,0 +1,385 @@
+.. _alanimatedspeech:
+
+ALAnimatedSpeech
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alanimatedspeech-api
+   alanimatedspeech_advanced
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alanimatedspeech-api>` |
+:ref:`Advanced <alanimatedspeech-advanced>`
+
+------------
+
+
+What it does
+------------
+
+The **ALAnimatedSpeech** module allows you to make the robot talk in an expressive way.
+
+
+By default, when you make the robot say something through this module,
+he livens the speech up with body language.
+
+**Options**
+
+* You can complete this body language or create more complex speech by annotating
+  the text yourself with some instructions.
+
+* You can also disable the body language so that the robot only executes your
+  instructions and does not move outside of them.
+
+
+How it works
+------------
+
+**A** - The **ALAnimatedSpeech** module receives a text that can be
+:ref:`annotated <annotated_text>` with instructions.
+
+**B** - It splits the text into little chunks.
+
+**C** - It analyzes the text and annotates the things he
+recognizes to choose contextual moves.
+
+**D** - Any part of the text which is not annotated with animations
+are filled with :ref:`body_language`.
+
+**E** - The module prepares the robot to execute each instruction so that it can be
+executed as soon as it is needed. This enables speech and instructions to be
+well synchronized.
+
+**F** - The **ALAnimatedSpeech** module makes the robot say the text and keeps
+an eye on the speech to launch instructions at the right time.
+
+.. _annotated_text:
+
+Annotated text
+++++++++++++++
+
+The annotated text is a string combining text to be said and
+:ref:`animated_speech_instruction` managing behaviors.
+
+For example, you could send:
+
+
+.. code-block:: python
+
+    "Hello! ^start(animations/Stand/Gestures/Hey_1) Nice to meet you!"
+
+In this case:
+
+* The robot says "Hello!".
+
+* Then, simultaneously, the robot:
+
+  * starts the execution of the ``animations/Stand/Gestures/Hey_1`` animation and,
+  * says "Nice to meet you!".
+
+* Once the text is said, the robot stops abruptly the execution of the
+  ``animations/Stand/Gestures/Hey_1`` animation.
+
+If you want it to keep running, you can add a **^wait** instruction at the end:
+
+.. code-block:: python
+
+    "Hello! ^start(animations/Stand/Gestures/Hey_1) Nice to meet you ^wait(animations/Stand/Gestures/Hey_1)"
+
+
+.. _animated_speech_instruction:
+
+Instructions
+++++++++++++
+
+The following instructions allow you to do some actions during the course of a speech.
+
+
+Body language mode
+^^^^^^^^^^^^^^^^^^^
+
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| Use ...                                             | To ...                                                                   |
++=====================================================+==========================================================================+
+| **^mode(** *body_language_mode* **)**               | Change the body language mode for the current text.                      |
+|                                                     |                                                                          |
+|                                                     | *body_language_mode* can be "disabled", "random" or "contextual"         |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+
+**Example**
+
+.. code-block:: python
+
+    "Hello. Look I can stop moving ^mode(disabled) and after I can resume moving ^mode(contextual), you see ?"
+
+For further details, see: :ref:`body_language`.
+
+Animations
+^^^^^^^^^^
+
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| Use ...                                             | To ...                                                                   |
++=====================================================+==========================================================================+
+| **^run(** *animation_full_name* **)**               | Suspend the speech, run an animation and resume the speech.              |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^start(** *animation_full_name* **)**             | Start an animation.                                                      |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^stop(** *animation_full_name* **)**              | Stop an animation.                                                       |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^wait(** *animation_full_name* **)**              | Suspend the speech, wait for the end of the animation and resume the     |
+|                                                     | speech.                                                                  |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+
+**Examples**
+
+.. code-block:: python
+
+    "^start(animations/Stand/Gestures/Enthusiastic_4) Look what I can do while speaking!"
+
+    "^start(animations/Stand/Gestures/Enthusiastic_4) Look what I can do while speaking! ^stop(animations/Stand/Gestures/Enthusiastic_4) Now I use my body language"
+
+    "^start(animations/Stand/Gestures/Hey_1)Hi, guys! ^wait(animations/Stand/Gestures/Hey_1)"
+
+For further details, see: :ref:`behavior_prerequisites`.
+
+Tagged animations
+^^^^^^^^^^^^^^^^^^^
+
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| Use ...                                             | To ...                                                                   |
++=====================================================+==========================================================================+
+| **^runTag(** *tag_name* **)**                       | Suspend the speech, run an animation which has the mentioned tag and     |
+|                                                     | resume the speech.                                                       |
+|                                                     |                                                                          |
+|                                                     | Chooses randomly the animation which will be started among all           |
+|                                                     | the animations which have the mentioned tag.                             |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^startTag(** *tag_name* **)**                     | Start an animation which has the mentioned tag.                          |
+|                                                     |                                                                          |
+|                                                     | Chooses randomly the animation which will be started among all           |
+|                                                     | the animations which have the mentioned tag.                             |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^stopTag(** *tag_name* **)**                      | Stop an animation which has the mentioned tag.                           |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^waitTag(** *tag_name* **)**                      | Suspend the speech, wait for the end of the animation which has the      |
+|                                                     | mentioned tag and resume the speech.                                     |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+
+**Examples**
+
+.. code-block:: python
+
+    "^startTag(me) My name is Nao."
+
+    "^startTag(hello) Hello. ^waitTag(hello)"
+
+    "^startTag(hello) Hello Paul, nice to meet you. ^stopTag(hello) My name is Nao."
+
+For further details, see : :ref:`tags`.
+
+Sounds
+^^^^^^^
+
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| Use ...                                             | To ...                                                                   |
++=====================================================+==========================================================================+
+| **^runSound(** *soundSet/soundFile* **)**           | Suspend the speech, play a sound and resume the speech.                  |
+|                                                     |                                                                          |
+| **^runSound(** *soundSet/soundFile*,                | *soundVolume* is an integer between 0 and 100. (by default it's 100)     |
+| *soundVolume* **)**                                 |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^startSound(** *soundSet/soundFile* **)**         | Play a sound in background.                                              |
+|                                                     |                                                                          |
+| **^startSound(** *soundSet/soundFile*,              | The volume is an integer between 0 and 100. (by default it's 100)        |
+| *soundVolume* **)**                                 |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^stopSound(** *soundSet/soundFile* **)**          | Stop a sound.                                                            |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **^waitSound(** *soundSet/soundFile* **)**          | Suspend the speech, wait for the end of the sound and resume the speech. |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+
+**Examples**
+
+.. code-block:: python
+
+    "^startSound(my_sound_set/my_sound) That's cool."
+
+    "^startSound(my_sound_set/my_sound, 50) That's cool. ^waitSound(my_sound_set/my_sound)"
+
+    "That's cool. ^runSound(my_sound_set/my_sound) "
+
+For further details, see: :ref:`sound_set`.
+
+
+NAOqi API
+^^^^^^^^^
+
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| Use ...                                             | To ...                                                                   |
++=====================================================+==========================================================================+
+| **^pCall(** *ALModule.method(args)* **)**           | Call asynchronously any NAOqi method.                                    |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+| **$** *my_event* **=** *my_value*                   | Raise an **ALMemory** event.                                             |
+|                                                     |                                                                          |
++-----------------------------------------------------+--------------------------------------------------------------------------+
+
+**Examples**
+
+.. code-block:: python
+
+    "^pCall(ALMotion.wakeUp()) Ok, I wake up."
+
+    "While, I am speaking, $my_event=my_value I can raise an event."
+
+
+For further details, see: :ref:`naoqi_api`.
+
+
+.. _body_language:
+
+Body language modes
++++++++++++++++++++
+
+There is 3 modes available for the body language:
+
+**disabled** - The body language never launches any animation.
+
+**random** - The body language launches randomly some short animations which are executed
+one after another.
+
+| **contextual** - The body language launches some specific animations each time
+  a keyword like 'I', 'you' or 'all' is detected in an appropriate grammatical context
+  (for example, he will point at him if he talks about himself).
+| Each time no contextual animations has been found, it launches randomly a new animation.
+
+You can add new associations between words and tagged animations using:
+:cpp:func:`ALAnimatedSpeechProxy::addTagsToWords`
+
+The body language takes all motor resources if they are available.
+And it stops as soon as they are asked by another animation.
+
+.. _behavior_prerequisites:
+
+Animations
+++++++++++
+
+In an annotated text, you can use any supplied animation.
+
+For further details, see:
+
+* :ref:`animated_speech_list_behaviors_nao`,
+* :ref:`animated_speech_list_behaviors_juliette`.
+
+You can also use your own behaviors provided that you follow these requirements:
+
+* Limit the content of the behavior to an animation (no speech, no complex behaviors),
+  in order to guaranty a good compatibility with the Text-to-Speech.
+
+* Lock the resources as follow: Wait 1 second at box startup, and lock resources during box execution
+  - in order to secure a full compatibility with the automatic body language process.
+
+For further details, see : :ref:`alanimatedspeech_createyourownbehavior`.
+
+.. _tags:
+
+Tags
++++++
+
+In an annotated text, you can use any tag supplied by default.
+
+For further details, see:
+
+* :ref:`animated_speech_tags_nao`,
+* :ref:`animated_speech_tags_juliette`.
+
+Additionally, you can declare new tagged animations using:
+:cpp:func:`ALAnimatedSpeechProxy::declareAnimationsPackage`
+
+You can also declare new tags for some specific animations (without modifying the animations) using:
+:cpp:func:`ALAnimatedSpeechProxy::declareTagForAnimations`
+
+.. note::
+    The tags used by Animated Speech are nothing more than the generic tags you can associate to any behavior.
+    But for Animated Speech, we trust the developers to use only tags that cover animations.
+
+
+.. _sound_set:
+
+Sounds
+++++++
+
+In an annotated text, you can use any sound file contained in a sound set,
+using the following syntax:
+
+``soundSet/soundFile``
+
+For further details, see: :ref:`soundset`.
+
+.. _naoqi_api:
+
+NAOqi API
++++++++++
+
+You can call any **NAOqi** method or set any event value, at any time of your speech.
+
+Here is the syntax:
+
+``ALModule.method(args)``
+
+``$event=value``
+
+.. note::
+    ``$my_event=my_value`` is equivalent to
+    ``^pCall(ALMemory.raiseEvent("my_event", "my_value"))``.
+
+
+Features inherited from other modules
+-------------------------------------
+
+Add your own behaviors
+++++++++++++++++++++++
+
+You can install your own behaviors through the
+:ref:`Application Manager panel <chore_robot_applications_panel>`
+and uses them in your text.
+
+.. warning::
+
+    As you can call your own behaviors in an annotated text, you could call
+    a behavior which is not an animation.
+    But we advise you to only annotate text with animations.
+    Also we strongly recommend you to set the resources of your behaviors before
+    you start using them in an annotated text.
+
+    For further details, see: :ref:`alanimatedspeech_createyourownbehavior`.
+
+
+Voice customization
++++++++++++++++++++
+
+As **ALAnimatedSpeech** uses **ALTextToSpeech** module to say the text, you
+can customize the voice of the robot.
+
+For further details, see: :ref:`ALTextToSpeech <altexttospeech>`.
+
+Sound managing
+++++++++++++++
+
+**ALAnimatedSpeech** uses **ALAudioPlayer** module to play the sounds.
+
+For further details, see: :ref:`ALAudioPlayer <alaudioplayer>`.
+
+Getting started
+---------------
+
+To discover the basic functions of the animated speech using **Choregraphe**,
+see the tutorial: :ref:`animated_speech_tuto`.

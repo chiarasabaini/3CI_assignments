@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="yes">
+    <Node name="Animated Say" />
+    <Node name="Choice" />
+    <Node name="Dialog" />
+    <Node name="Say" />
+    <Node name="Set Language" />
+    <Node name="Speech Reco." />
+</Folder>

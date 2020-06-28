@@ -1,0 +1,13 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_postures:
+
+|roboR| - Predefined postures
+==============================
+
+.. seealso::
+    :ref:`romeo`
+
+-----------
+
+**TBD**

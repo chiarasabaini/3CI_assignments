@@ -1,0 +1,445 @@
+.. _alaudiodevice-api:
+
+ALAudioDevice API
+=================
+
+:ref:`naoqi-audio` - :ref:`Overview <alaudiodevice>` | API
+
+------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/alaudiodeviceproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALAudioDeviceProxy
+
+* :cpp:func:`ALAudioDeviceProxy::disableEnergyComputation`
+* :cpp:func:`ALAudioDeviceProxy::enableEnergyComputation`
+* :cpp:func:`ALAudioDeviceProxy::flushAudioOutputs`
+* :cpp:func:`ALAudioDeviceProxy::getFrontMicEnergy`
+* :cpp:func:`ALAudioDeviceProxy::getLeftMicEnergy`
+* :cpp:func:`ALAudioDeviceProxy::getOutputVolume`
+* :cpp:func:`ALAudioDeviceProxy::getParameter`
+* :cpp:func:`ALAudioDeviceProxy::getRearMicEnergy`
+* :cpp:func:`ALAudioDeviceProxy::getRightMicEnergy`
+* :cpp:func:`ALAudioDeviceProxy::isAudioOutMuted`
+* :cpp:func:`ALAudioDeviceProxy::muteAudioOut`
+* :cpp:func:`ALAudioDeviceProxy::playSine`
+* :cpp:func:`ALAudioDeviceProxy::sendLocalBufferToOutput`
+* :cpp:func:`ALAudioDeviceProxy::sendRemoteBufferToOutput`
+* :cpp:func:`ALAudioDeviceProxy::setClientPreferences`
+* :cpp:func:`ALAudioDeviceProxy::setFileAsInput`
+* :cpp:func:`ALAudioDeviceProxy::setOutputVolume`
+* :cpp:func:`ALAudioDeviceProxy::setParameter`
+* :cpp:func:`ALAudioDeviceProxy::startMicrophonesRecording`
+* :cpp:func:`ALAudioDeviceProxy::stopMicrophonesRecording`
+* :cpp:func:`ALAudioDeviceProxy::subscribe`
+* :cpp:func:`ALAudioDeviceProxy::unsubscribe`
+
+*Deprecated Parameter*
+
+* inputBufferSize: has no effect since version 1.22.
+
+*Deprecated Methods*
+
+* :cpp:func:`ALAudioDeviceProxy::closeAudioInputs` (deprecated)
+* :cpp:func:`ALAudioDeviceProxy::closeAudioOutputs` (deprecated)
+* :cpp:func:`ALAudioDeviceProxy::openAudioInputs` (deprecated)
+* :cpp:func:`ALAudioDeviceProxy::openAudioOutputs` (deprecated)
+* :cpp:func:`ALAudioDeviceProxy::isInputClosed` (deprecated)
+* :cpp:func:`ALAudioDeviceProxy::isOutputClosed` (deprecated)
+
+*Experimental methods*
+
+* :cpp:func:`ALAudioDeviceProxy::defaultInput` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::defaultOutput` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::input` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::listInputs` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::listOutputs` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::output` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::setDefaultInput` (do not use)
+* :cpp:func:`ALAudioDeviceProxy::setDefaultOutput` (do not use)
+
+Signal list
+-----------
+
+* :cpp:member:`ALAudioDeviceProxy::speakersPlaying`
+
+Methods
+-------
+
+
+.. cpp:function:: void ALAudioDeviceProxy::disableEnergyComputation()
+
+  Disables the computation of the energy on each input channel.
+
+
+.. cpp:function:: void ALAudioDeviceProxy::enableEnergyComputation()
+
+  Enables the computation of the energy on each input channel (this computation is off by default).
+  The result of this computation can be collected by calling:
+
+  - :cpp:func:`ALAudioDeviceProxy::getFrontMicEnergy`
+  - :cpp:func:`ALAudioDeviceProxy::getRearMicEnergy`
+  - :cpp:func:`ALAudioDeviceProxy::getLeftMicEnergy`
+  - :cpp:func:`ALAudioDeviceProxy::getRightMicEnergy`
+
+
+.. cpp:function:: void ALAudioDeviceProxy::flushAudioOutputs()
+
+  This methods clears all the samples that may remain to be sent to the loudspeaker.
+
+
+.. cpp:function:: float ALAudioDeviceProxy::getFrontMicEnergy()
+
+  Returns the signal energy on the front microphone averaged on a 170ms buffer.
+  The computation of the energy must first be enabled with :cpp:func:`ALAudioDeviceProxy::enableEnergyComputation`.
+
+  :return: energy [0,32768]
+
+
+
+.. cpp:function:: float ALAudioDeviceProxy::getLeftMicEnergy()
+
+  Returns the signal energy on the left microphone averaged on a 170ms buffer.
+  The computation of the energy must first be enabled with :cpp:func:`ALAudioDeviceProxy::enableEnergyComputation`.
+
+  :return: energy [0,32768]
+
+
+.. cpp:function:: int ALAudioDeviceProxy::getOutputVolume()
+
+  Gets the overall output volume of the system. This volume can be set with :cpp:func:`ALAudioDeviceProxy::setOutputVolume`.
+
+  :return: volume [0,100]
+
+
+.. cpp:function:: int ALAudioDeviceProxy::getParameter(const std::string& parameter)
+
+  .. deprecated:: 1.22
+    parameter 'inputBufferSize' has no effect now.
+
+  This method returns the internal parameter ('outputSampleRate').
+  The value -1 is returned if the specified parameter is not valid.
+
+  :param parameter: Name of the parameter
+  :return: value
+
+
+.. cpp:function:: float ALAudioDeviceProxy::getRearMicEnergy()
+
+  Returns the signal energy on the rear microphone averaged on a 170ms buffer.
+  The computation of the energy must first be enabled with :cpp:func:`ALAudioDeviceProxy::enableEnergyComputation`.
+
+  :return: energy [0,32768]
+
+
+.. cpp:function:: float ALAudioDeviceProxy::getRightMicEnergy()
+
+  Returns the signal energy on the right microphone averaged on a 170ms buffer.
+  The computation of the energy must first be enabled with :cpp:func:`ALAudioDeviceProxy::enableEnergyComputation`.
+
+  :return: energy [0,32768]
+
+
+.. cpp:function:: bool ALAudioDeviceProxy::isAudioOutMuted()
+
+  Tells if the audio output device has been muted by a call to
+  :cpp:func:`ALAudioDeviceProxy::muteAudioOut`.
+
+  :return: True if the output device has been muted, False otherwise.
+
+
+.. cpp:function:: void ALAudioDeviceProxy::muteAudioOut(const bool &mute)
+
+  Mutes the output device.
+
+  :param mute: True to mute, False to unmute.
+
+
+.. cpp:function:: void ALAudioDeviceProxy::openAudioInputs()
+
+  .. deprecated:: 1.22
+    due to technical improvements, closing the audio is not necessary anymore.
+
+  Opens the audio device used for capture by **ALAudioDevice**. This device is open by default.
+  This method is however useful if you used :cpp:func:`ALAudioDeviceProxy::closeAudioInputs` before.
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::openAudioOutputs()
+
+  .. deprecated:: 1.22
+    due to technical improvements, closing the audio is not necessary anymore.
+
+  Opens the audio device used for playback by **ALAudioDevice**. This device is open by default.
+  This method is however useful if you used :cpp:func:`ALAudioDeviceProxy::closeAudioOutputs` before.
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::playSine(const int& frequence, const int& gain, const int& pan, const float& duration)
+
+  Play a sine wave which the specified characteristics.
+
+  :param frequence: Frequence in Hertz
+  :param gain: Volume between 0 and 100
+  :param pan: Stereo Pan set to either {-1,0,+1}
+  :param duration: Duration of the sine wave in seconds
+
+
+
+.. cpp:function:: bool ALAudioDeviceProxy::sendLocalBufferToOutput(const int& nbOfFrames, const int& buffer)
+
+  By using this method a local module (a module running on the robot) can send a signal to the robot's loudspeakers.
+  This signal should be formated as a 16 bits stereo interleaved buffer. The size of this buffer should also not exceed 16384.
+
+  :param nbOfFrames: Number of stereo frames contained in the buffer
+  :param buffer: Memory address of the buffer to send.
+  :return: True if the operation is successful - False otherwise
+
+  .. warning::
+    This interface **can crash** the robot if not use correctly!
+    Be very careful with the second parameter.
+
+  .. code-block:: c++
+
+      // Example: Play a 1kHz sine wav on the robot's loudspeakers during 2s
+
+      int sineTableSize = 1024;
+      int outputBufferSize = 16384;
+      float sine[sineTableSize];
+      int left_phase = 0;
+      int right_phase = 0;
+      int nbOfOutputChannels=2;
+      int sampleRate = 48000;
+      int freq =1000;
+      float duration = 2.0;
+      boost::shared_ptr<ALProxy> audiodeviceProxy = getParentBroker()->getProxy("ALAudioDevice");
+
+      signed short fOutputBuffer[nbOfOutputChannels*outputBufferSize];
+      for ( int i=0; i<sineTableSize; i++ )
+      {
+        sine[i] = float(32767) * sin((double(i)/double(sineTableSize))*M_PI*2.0);
+      }
+
+      float ratio= 1.0 /( 1.0 / float(freq) * float(sampleRate) / float(sineTableSize));
+      double inc= std::ceil(ratio);
+      int nbOfBuffersToSend = std::ceil(duration*sampleRate/outputBufferSize);
+
+      for (int d=0;d<nbOfBuffersToSend;d++)
+      {
+        for (int i=0;i<nbOfOutputChannels*outputBufferSize;i+=nbOfOutputChannels)
+        {
+          // left channel
+          fOutputBuffer[i] = (signed short)(float(sine[left_phase]));
+          // right channel
+          fOutputBuffer[i+1] = (signed short)(float(sine[right_phase]));
+          left_phase += inc;
+          if ( left_phase >= sineTableSize ) left_phase -= sineTableSize;
+          right_phase += inc;
+          if ( right_phase >= sineTableSize ) right_phase -= sineTableSize;
+        }
+        audiodeviceProxy->callVoid("sendLocalBufferToOutput",
+                                   outputBufferSize,
+                                   (int) &fOutputBuffer);
+      }
+
+  .. code-block:: python
+
+    def onInput_onStart(self):
+        self.isRunning = True
+        self.ad = ALProxy("ALAudioDevice")
+        self.addedPaths = [self.behaviorAbsolutePath()]
+        for addedPath in self.addedPaths:
+            sys.path.append(addedPath)
+        from pydub import AudioSegment
+        songPath = os.path.join(self.behaviorAbsolutePath(), "audio_file.wav")
+        self.song = AudioSegment.from_wav(songPath)
+        try:
+            # here is important to note that the second parameter is contigus memory audio data!
+            self.ad.sendLocalBufferToOutput(int(self.song.frame_count()), id(self.song._data))
+        except Exception as e:
+            self.log("error for buffer: " + str(e) + str(id(self.song.data)))
+        self.onUnload()
+        pass
+
+
+.. cpp:function:: bool ALAudioDeviceProxy::sendRemoteBufferToOutput( const int& nbOfFrames, const AL::ALValue& buffer )
+
+  By using this method a remote module (a module running outside the robot) can send a signal to the robot's loudspeakers.
+  This signal should be formated as a 16 bits stereo interleaved buffer. The size of this buffer should also not exceed 16384.
+
+  :param nbOfFrames: Number of stereo frames contained in the buffer
+  :param buffer: Buffer to send
+  :return: True if the operation is successful - False otherwise
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::setClientPreferences(const std::string & name, const int & sampleRate, const int & channels, const int & deinterleaved)
+
+  By using this method a module can specify the format of the signal that will be sent after subscribing to **ALAudioDevice**.
+  If no call to this method is made, the default format sent to this module is 4 channels interleaved at 48000Hz.
+  Note that for now, only the following combinations are available:
+
+  - four channels interleaved, 48000Hz, (default setting)
+  - four channels deinterleaved, 48000Hz
+  - one channels (either front, rear, left or right), 16000Hz
+
+  This call must be made before the call to :cpp:func:`ALAudioDeviceProxy::subscribe` or *startDetection()* to be taken into account.
+
+  .. code-block:: c++
+
+    // This shows how setClientPreferences can be used
+    boost::shared_ptr<ALProxy> proxyAudioDevice = getParentBroker()->getProxy("ALAudioDevice");
+    proxyAudioDevice->callVoid("setClientPreferences",
+                               getName(),                //Name of this module
+                               48000,                    //48000 Hz requested
+                               (int)ALLCHANNELS,         //4 Channels requested
+                               1                         //Deinterleaving requested
+                               );
+
+  :param name: Name of the module. This name must be the same that the one used in *subscribe(const std::string& module)*.
+  :param sampleRate: Sample rate requested can either be 16000Hz or 48000Hz.
+  :param channels: Channel configuration requested can be either AL::ALLCHANNELS, AL::FRONTCHANNEL, AL::LEFTCHANNEL, AL::RIGHTCHANNEL or AL::REARCHANNEL.
+  :param deinterleaved: Only relevant if AL::ALLCHANNEL is requested.
+
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::setFileAsInput(const std::string& fileName)
+
+  This method notifies **ALAudioDevice** that audio inputs should be read in the specified file instead.
+  The specified sound file must be a .wav file containing 48000Hz, 16bits, 4 channels interleaved signals.
+
+  :param fileName: Absolute path of the file.
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::setOutputVolume(const int& volume)
+
+  Sets the overall output volume of the system. This volume can be collected with :cpp:func:`ALAudioDeviceProxy::getOutputVolume`.
+
+  :param volume: Volume [0-100]
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::setParameter(const std::string& parameter, const int& value)
+
+  .. deprecated:: 1.22
+    parameter 'inputBufferSize' has no effect now.
+
+  This method sets the internal parameter ('outputSampleRate').
+
+  :param parameter: 'outputSampleRate' can be set to either 16000Hz, 22050Hz, 44100Hz or 48000Hz.
+  :param value: The value to which the specified parameter should be set.
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::startMicrophonesRecording(const std::string& fileName)
+
+  This method records the signal collected on the microphones directly into the specified file.
+
+  If the extension of the specified file is 'wav', data will be recored as a 16 bits, 48000Hz, 4 channels wav file.
+
+  If the extension of the specified file is 'ogg', data will be recored as a 16 bits, 16000Hz, 1 channels ogg file.
+
+  :param fileName: Absolute path of the file
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::stopMicrophonesRecording()
+
+  This method stops the recording started by the call to :cpp:func:`ALAudioDeviceProxy::startMicrophonesRecording`.
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::subscribe(const std::string& module)
+
+  This function allows a module which inherits from the ALSoundExtractor class to subscribe to the ALAudioDevice module.
+  Once the module is subscribed, the function 'process' of the module (the module needs to contain one) will be automatically
+  and regularly called with raw data from microphones as inputs.
+  The call to this method can be replaced by a call to *startDetection()*
+  within a NAOqi module that inherits from ALSoundExtractor.
+
+  The callback function must be declared as follows:
+
+  .. code-block:: c++
+
+    process(const int & nbOfChannels, const int & nbrOfSamplesByChannel, const AL_SOUND_FORMAT * buffer, const ALValue & timeStamp)
+
+  :param module: This module must inherits from ALSoundExtractor
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::unsubscribe(const std::string& module)
+
+   This function allows a module which inherits from the ALSoundExtractor class to unsubscribe from the ALAudioDevice module.
+   This stops the regular calls to the module callback "process".
+   The call to this method can be replaced by a call to *stopDetection()*
+   within a NAOqi module that inherits from ALSoundExtractor.
+
+   :param module: This module must inherits from ALSoundExtractor
+
+
+.. cpp:function:: void ALAudioDeviceProxy::closeAudioInputs()
+
+  .. deprecated:: 1.22
+    due to technical improvements, closing the audio is not necessary anymore.
+
+  Closes the audio device used for capture by **ALAudioDevice**.
+  This method is useful to allow an external program (e.g. **arecord**) to access the input device of the robot.
+  Note however that a call to this method will prevent every functionality that uses
+  microphones to work correctly (e.g. **ALSpeechRecognition**, **ALAudioSourceLocalization**, etc...).
+
+
+
+.. cpp:function:: void ALAudioDeviceProxy::closeAudioOutputs()
+
+  .. deprecated:: 1.22
+    due to technical improvements, closing the audio is not necessary anymore.
+
+
+  Closes the audio device used for playback by **ALAudioDevice**.
+  This method is useful to allow an external program (e.g. **aplay**) to access the output device of the robot.
+  Note however that a call to this method will prevent every functionality that uses
+  microphones to work correctly (e.g. **ALTextToSpeech**).
+
+
+
+.. cpp:function:: bool ALAudioDeviceProxy::isInputClosed()
+
+  .. deprecated:: 1.22
+    due to technical improvements, closing the audio is not necessary anymore.
+
+  Tells if the audio input device has been closed by a call to
+  :cpp:func:`ALAudioDeviceProxy::closeAudioInputs`.
+
+  :return: True if the input device has been closed, False otherwise.
+
+
+.. cpp:function:: bool ALAudioDeviceProxy::isOutputClosed()
+
+  .. deprecated:: 1.22
+    due to technical improvements, closing the audio is not necessary anymore.
+
+  Tells if the audio output device has been closed by a call to
+  :cpp:func:`ALAudioDeviceProxy::closeAudioOutputs`.
+
+  :return: True if the output device has been closed, False otherwise.
+
+Signals
+-------
+
+.. cpp:member:: qi::Signal<bool> ALAudioDeviceProxy::speakersPlaying
+
+  Signal emitted every 130 ms while the robot is playing sound.
+

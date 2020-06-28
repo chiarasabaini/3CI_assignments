@@ -1,0 +1,35 @@
+.. _alaudiosourcelocalization:
+
+ALAudioSourceLocalization
+==========================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alaudiosourcelocalization_api
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alaudiosourcelocalization-api>`
+
+------------
+
+
+What it does
+-------------
+
+
+**ALAudioSourceLocalization** identifies the direction of any loud enough sound
+heard by the robot.
+
+.. warning::
+
+   .. deprecated:: 1.22
+     this module has been re-factored and has changed name, so use the new
+     :ref:`alsoundlocalization` module, which has the same API.
+
+     For backward compatibility, the module **ALAudioSourceLocalization**
+     is still supported. Please refer to the :ref:`alsoundlocalization-api`
+     documentation, the only difference being the name of the event:
+
+     - ALSoundLocalization/SoundLocated for **ALSoundLocalization**
+     - ALAudioSourceLocalization/SoundLocated for **ALAudioSourceLocalization**

@@ -1,0 +1,131 @@
+.. include:: bulk/common.rst
+
+.. _debug_behavior:
+
+Debugging a Behavior
+=======================
+
+You have created a **Behavior**. It is not yet operational.
+
+Here is how you can fix the bugs.
+
+
+To test a **Behavior**:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure the **Autonomous Life** is off.
+
+        If not, click the |life-button| **Turn autonomous life off** button.
+
+2.      Click the |play-button| **Play** button.
+=====  =========================================================================
+
+If your **Behavior** runs well, see: :ref:`debug_activity`.
+
+
+Otherwise, try the following tips and tricks:
+
+Flow diagrams
+-------------
+
+Testing the boxes one by one
+++++++++++++++++++++++++++++
+
+To control a **Behavior**:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the |play-button| **Play** button to load it on the robot.
+
+2.      Double-click on an input or output to stimulate it.
+=====  =========================================================================
+
+Following the flow execution
+++++++++++++++++++++++++++++
+
+Each time a link between 2 boxes is simulated, the color of the link changes.
+It is a good way to check the execution.
+
+Checking the output value
++++++++++++++++++++++++++
+
+When a box has a value as output, the last value displays in the Tooltip.
+
+.. COMMENT: add picture It is easy to check the good execution.
+
+Understand why a box becomes red
++++++++++++++++++++++++++++++++++++
+
+* It becomes red during the execution:
+
+  An exception raised. It can be because a module cannot be loaded
+  (virtual robot), does not exist, etc.
+
+* It becomes red before the execution (just after clicking the **Play** button):
+
+  The box code contains an error. It can be a typing problem in a Python script.
+
+Timeline
+---------
+
+Muting a layer
++++++++++++++++
+
+The small eye next to each layer allows you to "mute" a layer:
+it will be ignored when the **Behavior** is played.
+
+This can be useful when you want to debug your **Behavior**.
+
+Python scripts
+----------------
+
+Using self.logger
+++++++++++++++++++
+
+self.logger is standard Python logger created with the Python module Logging.
+
+The log information can be categorized by level of severity
+(each level has its associated font color in the debug window):
+
+* debug (grey)
+
+* info (black)
+
+* warning (orange)
+
+* error (red)
+
+* critical (purple)
+
+In your Python script, we recommend you to add warning, error and critical logs
+to inform when you **Behavior** dangerous or erroneous state.
+
+You can also use info and debug to trace execution flow of your **Behavior**.
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.     Open the script of a box.
+
+2.      Add the self.logger line in a function as below:
+
+        .. code-block:: guess
+
+            def onLoad(self):
+            self.logger.debug("Loaded box %s", self.getName())
+
+3.      In the Debug window, select the minimum level of information you want,
+        Debug in our case.
+
+4.      Execute the box.
+
+5.      All debug message display in the debug window to let you understand what
+        is going on. The potential debug, info, warning, error and critical
+        messages of other functions also display as the minimum level asked
+        is debug.
+
+        If you choose error, you see only error and critical messages.
+=====  =========================================================================

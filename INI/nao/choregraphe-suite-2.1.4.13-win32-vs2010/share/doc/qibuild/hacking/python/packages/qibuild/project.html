@@ -1,0 +1,333 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qibuild.project – Managing projects &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qibuild modules" href="index.html" />
+    <link rel="next" title="qibuild.test_runner – Running tests from a C++ project" href="test_runner.html" />
+    <link rel="prev" title="qibuild.profile – Managing build profiles" href="profile.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="profile.html" title="qibuild.profile &amp;#8211; Managing build profiles">previous</a>
+     |
+    <a href="index.html" title="qibuild modules" accesskey="U">up</a>
+   |
+    <a href="test_runner.html" title="qibuild.test_runner &amp;#8211; Running tests from a C++ project">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-python-packages-qibuild-project">
+            
+  <div class="section" id="module-qibuild.project">
+<span id="qibuild-project-managing-projects"></span><h1>qibuild.project &#8211; Managing <a class="reference internal" href="../../../design/python/index.html#term-project"><em class="xref std std-term">projects</em></a><a class="headerlink" href="#module-qibuild.project" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="qibuild-project-buildproject">
+<h2>qibuild.project.BuildProject<a class="headerlink" href="#qibuild-project-buildproject" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qibuild.project.BuildProject">
+<em class="property">class </em><tt class="descclassname">qibuild.project.</tt><tt class="descname">BuildProject</tt><big>(</big><em>build_worktree</em>, <em>worktree_project</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="qibuild.project.BuildProject.qiproject_xml">
+<tt class="descname">qiproject_xml</tt><a class="headerlink" href="#qibuild.project.BuildProject.qiproject_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to qiproject.xml</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.project.BuildProject.build_directory">
+<tt class="descname">build_directory</tt><a class="headerlink" href="#qibuild.project.BuildProject.build_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a suitable build directory, depending on the
+build setting of the worktree: the build config, and
+whether or not a build prefix is set</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.project.BuildProject.cmake_args">
+<tt class="descname">cmake_args</tt><a class="headerlink" href="#qibuild.project.BuildProject.cmake_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of CMake arguments to use when configuring the
+project.
+Delegates to build_config.cmake_args</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.project.BuildProject.build_env">
+<tt class="descname">build_env</tt><a class="headerlink" href="#qibuild.project.BuildProject.build_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>The environment to use when calling cmake or build commands</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.project.BuildProject.sdk_directory">
+<tt class="descname">sdk_directory</tt><a class="headerlink" href="#qibuild.project.BuildProject.sdk_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sdk directory in the build directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.write_dependencies_cmake">
+<tt class="descname">write_dependencies_cmake</tt><big>(</big><em>sdk_dirs</em>, <em>host_dirs=None</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.write_dependencies_cmake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the dependencies.cmake file. This will be read by
+qibuild-config.cmake to set CMAKE_PREFIX_PATH and
+qibuild_DIR, so that just running <cite>cmake ..</cite> works</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.configure">
+<tt class="descname">configure</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegate to <a class="reference internal" href="cmake.html#qibuild.cmake.cmake" title="qibuild.cmake.cmake"><tt class="xref py py-func docutils literal"><span class="pre">qibuild.cmake.cmake()</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.generate_qitest_json">
+<tt class="descname">generate_qitest_json</tt><big>(</big><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.generate_qitest_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>The qitest.cmake is written from CMake</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.build">
+<tt class="descname">build</tt><big>(</big><em>num_jobs=None</em>, <em>rebuild=False</em>, <em>target=None</em>, <em>coverity=False</em>, <em>env=None</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.parse_num_jobs">
+<tt class="descname">parse_num_jobs</tt><big>(</big><em>num_jobs</em>, <em>cmake_generator=None</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.parse_num_jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a number of jobs to a list of cmake args</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.install">
+<tt class="descname">install</tt><big>(</big><em>destdir</em>, <em>prefix='/'</em>, <em>components=None</em>, <em>num_jobs=1</em>, <em>split_debug=False</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.install" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install the project</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>project</strong> &#8211; project name.</li>
+<li><strong>destdir</strong> &#8211; destination. Note that when using <cite>qibuild install</cite>,
+we will first call <cite>cmake</cite> to make sure <cite>CMAKE_INSTALL_PREFIX</cite> is
+<tt class="docutils literal"><span class="pre">/</span></tt>. But this function simply calls <tt class="docutils literal"><span class="pre">cmake</span> <span class="pre">--target</span> <span class="pre">install</span></tt>
+in the simple case.</li>
+<li><strong>runtime</strong> &#8211; Whether to install the project as a runtime
+package or not.
+(see <a class="reference internal" href="../../../../advanced/guide/cmake/install.html#cmake-install"><em>Using qi_install functions</em></a> section for the details)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Package split_debug:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">split the debug symbols out of the binaries
+useful for <cite>qibuild deploy</cite></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.fix_shared_libs">
+<tt class="descname">fix_shared_libs</tt><big>(</big><em>paths</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.fix_shared_libs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do some magic so that shared libraries from other projects and
+packages from toolchains are found</p>
+<p>Called by CMakeBuilder before building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>paths</strong> &#8211; a list of paths from which to look for dependencies</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.split_debug">
+<tt class="descname">split_debug</tt><big>(</big><em>destdir</em>, <em>file_list</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.split_debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split debug symbols after install</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.project.BuildProject.get_build_dirs">
+<tt class="descname">get_build_dirs</tt><big>(</big><em>all_configs=False</em><big>)</big><a class="headerlink" href="#qibuild.project.BuildProject.get_build_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary containing the build directory list
+for the known and the unknown configurations:</p>
+<div class="highlight-python"><pre>build_directories = {
+    'known_configs' = [],
+    'unknown_configs' = [],
+}</pre>
+</div>
+<p>Note: if all_configs if False, then the list of the unknown
+configuration remains empty.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="profile.html" title="qibuild.profile &amp;#8211; Managing build profiles">qibuild.profile &#8211; Managing build profiles</a>
+     |
+    <a href="index.html" title="qibuild modules" accesskey="U">qibuild modules</a>
+   |
+    <a href="test_runner.html" title="qibuild.test_runner &amp;#8211; Running tests from a C++ project">qibuild.test_runner &#8211; Running tests from a C++ project</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/python/index.html">qiBuild Python framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/index.html">qiBuild design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">qiBuild Python documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">qiBuild Python packages documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../qisys/index.html">qisys modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qisrc/index.html">qisrc modules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">qibuild modules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="build.html">qibuild.build - Build tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="build_config.html">qibuild.build_config</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cmake.html">qibuild.cmake - CMake tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cmake_builder.html">qibuild.cmake_builder - Building CMake projects</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cmake_modules.html">qibuild.cmake.modules - CMake module generation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="config.html">qibuild.config &#8211; Managing qiBuild config files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="deps.html">qibuild.deps &#8211; Resolving dependencies</a></li>
+<li class="toctree-l5"><a class="reference internal" href="deploy.html">qibuild.deploy - Deploying code to remote targets</a></li>
+<li class="toctree-l5"><a class="reference internal" href="find.html">qibuild.find - Finding build products</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdb.html">qibuild.gdb - Tools for gdb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="parsers.html">qibuild.parsers &#8211; Parsers for qibuild actions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="profile.html">qibuild.profile &#8211; Managing build profiles</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">qibuild.project &#8211; Managing <tt class="docutils literal"><span class="pre">projects</span></tt></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="test_runner.html">qibuild.test_runner &#8211; Running tests from a C++ project</a></li>
+<li class="toctree-l5"><a class="reference internal" href="wizard.html">qibuild.wizard &#8211; Configuration wizards</a></li>
+<li class="toctree-l5"><a class="reference internal" href="worktree.html">qibuild.worktree- The BuildWorkTree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../qitest/index.html">qitest modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitoolchain/index.html">qitoolchain modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qidoc/index.html">qidoc modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qilinguist/index.html">qilinguist modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipy/index.html">qipy modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipkg/index.html">qipkg modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qibuild.project &#8211; Managing <tt class="docutils literal"><span class="pre">projects</span></tt></a><ul>
+<li><a class="reference internal" href="#qibuild-project-buildproject">qibuild.project.BuildProject</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="profile.html" title="qibuild.profile &amp;#8211; Managing build profiles">previous</a>
+     |
+    <a href="index.html" title="qibuild modules" accesskey="U">up</a>
+   |
+    <a href="test_runner.html" title="qibuild.test_runner &amp;#8211; Running tests from a C++ project">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

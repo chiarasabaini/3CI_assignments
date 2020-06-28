@@ -1,0 +1,295 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Playlist tab &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../index.html" />
+    <link rel="up" title="ASK NAO Interface - V2 - User Guide" href="index_asknao.html" />
+    <link rel="next" title="Play tab" href="play_tab.html" />
+    <link rel="prev" title="Teacher home" href="teacher_asknao.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../search.html">Search</a>
+         |
+        <a title="Index" href="../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="teacher_asknao.html" title="Teacher home">previous</a>
+     |
+    <a href="index_asknao.html" title="ASK NAO Interface - V2 - User Guide" accesskey="U">up</a>
+   |
+    <a href="play_tab.html" title="Play tab">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="asknao-play_list">
+            
+  <div class="section" id="playlist-tab">
+<span id="id1"></span><h1>Playlist tab<a class="headerlink" href="#playlist-tab" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>Playlist</strong> tab allows the <strong>Teacher</strong> to create and manage <a class="reference internal" href="#playlist"><em>Playlists</em></a>.</p>
+<img alt="../_images/playlist_tab.png" src="../_images/playlist_tab.png" style="width: 486px; height: 289px;" />
+<div class="section" id="playlists">
+<span id="playlist"></span><h2>Playlists<a class="headerlink" href="#playlists" title="Permalink to this headline">¶</a></h2>
+<p><strong>Playlists</strong> allows the <strong>Teacher</strong> to create an educational sequence,
+linking up one or several <a class="reference internal" href="#activity-asknao"><em>Activities</em></a>.</p>
+<div class="section" id="creating-a-playlist">
+<h3>Creating a Playlist<a class="headerlink" href="#creating-a-playlist" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <strong>Create a New Playlist</strong> button.</p>
+<img alt="../_images/playlist_new02.png" class="last" src="../_images/playlist_new02.png" style="width: 251px; height: 146px;" />
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Type a <strong>Name</strong> and a <strong>Description</strong> and click the <strong>Create</strong> button.</p>
+<p>The <strong>Playlist Content</strong> is displayed.</p>
+<img alt="../_images/playlist_new.png" class="last" src="../_images/playlist_new.png" style="width: 488px; height: 208px;" />
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Choose and drag at least one <strong>Activity</strong> on the playlist line.</p>
+<img alt="../_images/playlist_new_01add_apps.png" src="../_images/playlist_new_01add_apps.png" style="width: 487px; height: 448px;" />
+<p class="last"><strong>Tip</strong>: to make your choice, click the <img alt="info" class="img-inline" src="../_images/info_btn.png" /> <strong>Information</strong> button to
+see more information.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">For each <strong>Activity</strong>, check the <a class="reference internal" href="#parameters-activity"><em>Parameters</em></a>
+and the <a class="reference internal" href="#extra-material"><em>Extra material</em></a>.</p>
+<img alt="../_images/paylist_compo.png" class="last" src="../_images/paylist_compo.png" style="width: 394px; height: 125px;" />
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td>Optionally, drag one of the <strong>Activities</strong> to reorder or remove it.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="6">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <strong>Save</strong> button.</p>
+<p class="last">Note: if you do not save the <strong>Playlist</strong> the changes you have made
+will be lost.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="duplicating-a-playlist">
+<h3>Duplicating a Playlist<a class="headerlink" href="#duplicating-a-playlist" title="Permalink to this headline">¶</a></h3>
+<p>Clicking the <strong>Save As</strong> button will prompt you to save the <strong>Playlist</strong> under
+another <strong>Name</strong> and <strong>Description</strong>.</p>
+</div>
+<div class="section" id="editing-a-playlist">
+<h3>Editing a Playlist<a class="headerlink" href="#editing-a-playlist" title="Permalink to this headline">¶</a></h3>
+<p>At any moment, you can edit the content of a <strong>Playlist</strong>.</p>
+<p>To edit its <strong>Name</strong> and <strong>Description</strong>, click the <img alt="edit_playlist" class="img-inline" src="../_images/edit_playlist_def.png" /> <strong>Edit</strong> button.</p>
+</div>
+</div>
+<div class="section" id="activities">
+<span id="activity-asknao"></span><h2>Activities<a class="headerlink" href="#activities" title="Permalink to this headline">¶</a></h2>
+<p>A typical <strong>Playlist</strong> mixes adequately the 2 types of <strong>Activities</strong>:</p>
+<ul class="simple">
+<li><strong>Tasks</strong> and</li>
+<li><strong>Rewards</strong>.</li>
+</ul>
+<div class="section" id="parameters">
+<span id="parameters-activity"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>Parameters are the rules or boundaries that control what the <strong>Activity</strong> is or
+how it will be performed.</p>
+<p>Click the <img alt="param" class="img-inline" src="../_images/parameters_btn.png" /> <strong>Parameter</strong> button to display the parameters specific to an
+activity.</p>
+<p>Select the features which best suit the class or child you are creating the
+lesson for and click the <strong>Save</strong> button in the bottom right corner.</p>
+<p>Scroll your mouse cursor above each parameter to get a description of its
+purpose and ability.</p>
+</div>
+<div class="section" id="extra-material">
+<span id="id2"></span><h3>Extra material<a class="headerlink" href="#extra-material" title="Permalink to this headline">¶</a></h3>
+<p>Click the <img alt="extra_mat" class="img-inline" src="../_images/extra_mat_btn.png" /> <strong>Parameter</strong> button to display the Extra material required by the <strong>Activity</strong>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="teacher_asknao.html" title="Teacher home">Teacher home</a>
+     |
+    <a href="index_asknao.html" title="ASK NAO Interface - V2 - User Guide" accesskey="U">ASK NAO Interface - V2 - User Guide</a>
+   |
+    <a href="play_tab.html" title="Play tab">Play tab</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../home_nao.html"><em>NAO</em> Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../nao/index.html"><em>NAO</em> - User Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../family/index.html"><em>NAO</em> - Technical Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_asknao.html">ASK NAO Interface - V2 - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="acess_asknao.html">How to access to the ASK NAO Interface - V2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parent_asknao.html">Parent home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="child_tab.html">Child tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="passport.html">Passport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="progress.html">Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teacher_asknao.html">Teacher home</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Playlist tab</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="play_tab.html">Play tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connecting_nao.html">Connecting a NAO to ASK NAO for the first time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_tab.html">Create tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin_home.html">Administrator home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin_ins.html">Admin Menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog_asknao.html">ASK NAO Interface - V2 - Changelog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi Developer guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Playlist tab</a><ul>
+<li><a class="reference internal" href="#playlists">Playlists</a><ul>
+<li><a class="reference internal" href="#creating-a-playlist">Creating a Playlist</a></li>
+<li><a class="reference internal" href="#duplicating-a-playlist">Duplicating a Playlist</a></li>
+<li><a class="reference internal" href="#editing-a-playlist">Editing a Playlist</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#activities">Activities</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#extra-material">Extra material</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="teacher_asknao.html" title="Teacher home">previous</a>
+     |
+    <a href="index_asknao.html" title="ASK NAO Interface - V2 - User Guide" accesskey="U">up</a>
+   |
+    <a href="play_tab.html" title="Play tab">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

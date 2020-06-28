@@ -1,0 +1,24 @@
+.. _albonjour-api:
+
+ALBonjour API
+=============
+
+:ref:`naoqi-core` - :ref:`Overview <albonjour>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/albonjourproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It has no public methods.
+
+.. cpp:class:: ALBonjourProxy
+

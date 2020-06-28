@@ -1,0 +1,29 @@
+.. include:: ../../bulk/common.rst
+
+.. _robot_dimensions:
+
+|roboN| - Construction
+======================
+
+.. seealso::
+
+   :ref:`all_robots`
+
+   :ref:`h25_dimensions` | :ref:`h21_dimensions` | :ref:`t14_dimensions` | :ref:`t2_dimensions`
+
+--------------------
+
+NAO V5
+-------
+
+.. include:: ../bulk/dimensions_h_v5.rst
+
+V4 and V3.3
+------------
+
+.. include:: ../bulk/dimensions_h_v4_v33.rst
+
+NAO V3.2
+------------
+
+.. include:: ../bulk/dimensions_h_v32.rst

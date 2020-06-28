@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-10 11:44:49 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMTA7IjExOjM5OjQ5ICI7MzI5NA=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMTA7IjExOjQ0OjQ5ICI7MTszMzk4"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <output expression="&quot;programma che calcola la somma di tutti i moltipli di 3 e 5 compresi tra 0 e 1000&quot;" newline="True"/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="1"/>
+            <for variable="i" start="i" end="1000" direction="inc" step="1">
+                <if expression="i%3=0 || i%5=0">
+                    <then>
+                        <assign variable="sum" expression="sum+i"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;la somma di tutti i multipli di 3 e 5 compresi tra 0 e 1000 &#232; &quot;&amp;sum" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

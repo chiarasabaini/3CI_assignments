@@ -1,0 +1,76 @@
+.. _alvisualspacehistory-api:
+
+ALVisualSpaceHistory API
+========================
+
+:ref:`naoqi-vision` - :ref:`Overview <alvisualspacehistory>` | API
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alvisualspacehistoryproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALVisualSpaceHistoryProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALVisualSpaceHistoryProxy::getGridPrecision`
+  * :cpp:func:`ALVisualSpaceHistoryProxy::resetGrid`
+  * :cpp:func:`ALVisualSpaceHistoryProxy::setGridPrecision`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`VisualSpaceHistory/VisualGrid/Data`
+
+
+Methods
+-------
+
+.. cpp:function:: float ALVisualSpaceHistoryProxy::getGridPrecision()
+
+  Returns the current visual grid resolution.
+
+
+.. cpp:function:: ALVisualSpaceHistoryProxy::resetGrid()
+
+  Fills the visual grid with the current timestamp. This may be useful if the robot moves its torso since it makes the grid data irrelevant.
+
+
+.. cpp:function:: void ALVisualSpaceHistoryProxy::setGridPrecision(const float& resolution)
+
+  :param resolution: New grid precision chosen between 1.0 and 10.0. Default value is 2.0.
+
+.. note::
+
+  When the grid precision is changed the method :cpp:func:`ALVisualSpaceHistoryProxy::resetGrid` is
+  automatically called to reset the grid data.
+
+
+.. _memory-keys_visual_space:
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue VisualSpaceHistory/VisualGrid/Data
+
+  This memory key contains all the :term:`visual grid data`
+  formated as follows:
+
+  data = [zone_t1, zone_t2, ... ]
+
+  where zone_t1 = [[headYawAngle, headPitchAngle], timestamp] is the data corresponding to the zone_t1.
+
+  All zones are sorted by increasing timestamp, so t1 < t2 < ... .
+  As a result, the first zone is the most outdated one and the last zone is the most recently updated one.

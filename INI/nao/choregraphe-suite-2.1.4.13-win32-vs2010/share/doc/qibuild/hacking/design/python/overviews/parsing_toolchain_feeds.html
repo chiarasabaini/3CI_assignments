@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Parsing toolchain feeds &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qibuild internal overviews" href="index.html" />
+    <link rel="next" title="qiBuild Python documentation" href="../../../python/index.html" />
+    <link rel="prev" title="Parsing manifests" href="parsing_manifests.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="parsing_manifests.html" title="Parsing manifests">previous</a>
+     |
+    <a href="index.html" title="qibuild internal overviews" accesskey="U">up</a>
+   |
+    <a href="../../../python/index.html" title="qiBuild Python documentation">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-design-python-overviews-parsing_toolchain_feeds">
+            
+  <div class="section" id="parsing-toolchain-feeds">
+<span id="id1"></span><h1>Parsing toolchain feeds<a class="headerlink" href="#parsing-toolchain-feeds" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s assume you have a cross-toolchain updated to
+<a class="reference external" href="http://example.com/packages/foo-ctc.tar.gz">http://example.com/packages/foo-ctc.tar.gz</a>, a binary package in
+<a class="reference external" href="http://example.com/packages/bar.tar.gz">http://example.com/packages/bar.tar.gz</a>, and an XML feed
+looking like:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;toolchain&gt;</span>
+  <span class="nt">&lt;package</span>
+    <span class="na">name=</span><span class="s">&quot;foo-ctc&quot;</span>
+    <span class="na">url=</span><span class="s">&quot;http://example.com/packages/foo-ctc.tar.gz&quot;</span>
+    <span class="na">toolchain_file=</span><span class="s">&quot;cross-config.cmake&quot;</span>
+  <span class="nt">/&gt;</span>
+  <span class="nt">&lt;package</span>
+    <span class="na">name=</span><span class="s">&quot;bar&quot;</span>
+    <span class="na">url=</span><span class="s">&quot;http://example.com/packages/bar.tar.gz&quot;</span>
+  <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>accessible in <tt class="docutils literal"><span class="pre">http://example.com/feeds/cross.xml</span></tt></p>
+<p>And you run</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qitoolchain create cross-foo http://example.com/feeds/cross.xml
+</pre></div>
+</div>
+<p>See <tt class="docutils literal"><span class="pre">qitoolchain.feed</span></tt> for how XML parsing is done.</p>
+<p>After every package has been parsed and added to the toolchain,
+it is just a matter of <tt class="docutils literal"><span class="pre">toolchain.update_toolchain</span></tt> so
+that the toolchain file is regenerated.</p>
+<p>The toolchain file will then look like:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c"># Autogenerted file</span>
+<span class="nb">include</span><span class="p">(</span><span class="s2">&quot;/path/to/a/ctc/cross-config.cmake&quot;</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">INSERT</span> <span class="s">CMAKE_FIND_ROOT_PATH</span> <span class="s">0</span> <span class="s2">&quot;/path/to/a/ctc&quot;</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">INSERT</span> <span class="s">CMAKE_FIND_ROOT_PATH</span> <span class="s">0</span> <span class="s2">&quot;/path/to/a/package&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and <tt class="docutils literal"><span class="pre">cross-foo</span></tt> will be added to the name of the known toolchains.</p>
+<p>Then, when using</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> qibuild configure -c cross-foo my_project
+</pre></div>
+</div>
+<p>A <tt class="docutils literal"><span class="pre">qibuild.toc.Toc</span></tt> object will be created, containing a <tt class="docutils literal"><span class="pre">qitoolchain.toolchain.Toolchain</span></tt> because
+<tt class="docutils literal"><span class="pre">cross-foo</span></tt> is a known name.</p>
+<p>Then, a build directory name <tt class="docutils literal"><span class="pre">build-cross-foo</span></tt> will be created, and cmake will
+be called, as if you had type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> ~/src/my_project/
+<span class="gp">$</span> mkdir build-cross-foo
+<span class="gp">$</span> cmake -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>~/.cache/qi/toolchains/cross-foo.cmake ..
+</pre></div>
+</div>
+<p>And everything will just work:</p>
+<p>You will go through the <tt class="docutils literal"><span class="pre">cross-config.cmake</span></tt>, so the compiler to use will be
+properly set, and you will have a entry in <tt class="docutils literal"><span class="pre">CMAKE_FIND_ROOT_PATH</span></tt> to where the <tt class="docutils literal"><span class="pre">bar</span></tt> package
+has been extracted, so finding <tt class="docutils literal"><span class="pre">bar</span></tt> libraries from the <tt class="docutils literal"><span class="pre">bar</span></tt> package will also work.</p>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="parsing_manifests.html" title="Parsing manifests">Parsing manifests</a>
+     |
+    <a href="index.html" title="qibuild internal overviews" accesskey="U">qibuild internal overviews</a>
+   |
+    <a href="../../../python/index.html" title="qiBuild Python documentation">qiBuild Python documentation</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">qiBuild Python framework design</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">qibuild internal overviews</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="worktree_and_projects.html">Worktree and projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parsing_cmdline.html">Parsing command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="building_cmake_projects.html">Building CMake projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parsing_manifests.html">Parsing manifests</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Parsing toolchain feeds</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html">qiBuild design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/index.html">qiBuild Python documentation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="parsing_manifests.html" title="Parsing manifests">previous</a>
+     |
+    <a href="index.html" title="qibuild internal overviews" accesskey="U">up</a>
+   |
+    <a href="../../../python/index.html" title="qiBuild Python documentation">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="3" localization="8" tooltip="Enable or disable the self collision protection on some specific part of the robot&apos;s body.&#x0A;&#x0A;For example if the protection is enabled on his left arm he will move his arm all the&#x0A;same than when it is not but avoiding his other body parts." x="147" y="98">
+        <bitmap>media/images/box/sensors/anti_collision.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.motion = ALProxy( "ALMotion" )
+
+    def onUnload(self):
+        pass
+
+    def onInput_onSet(self):
+        # is it enable or disable asked?
+        enable = (self.getParameter("Action") == "Enable")
+        # enable/disable collision protection
+        result = self.motion.setCollisionProtectionEnabled( self.getParameter("Body part"), enable )
+        if( result ):
+            self.success()
+        else:
+            self.logger.warning( "Disabling collision protection failed. Deactivation succeeds only if the current state of the chain is not in collision. If you want to deactivate collision of both arms, they need to be off collision." )
+            self.failure()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The anti-collision feature is enabled or disabled when this input is stimulated." id="2" />
+        <Output name="success" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the collision protection has been successfully enabled or disabled.&#x0A;&#x0A;Note: The only case where there is a failure is when you try to disable the&#x0A;anti-collision while it is currently in collision with some part of his body." id="3" />
+        <Output name="failure" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the collision protection has failed to be enabled or disabled.&#x0A;&#x0A;Note: The only case where there is a failure is when you try to disable the&#x0A;anti-collision while it is currently in collision with some part of his body." id="4" />
+        <Parameter name="Body part" inherits_from_parent="0" content_type="3" value="Arms" default_value="Arms" custom_choice="0" tooltip="Body part which avoids the collision." id="5">
+            <Choice value="Arms" />
+            <Choice value="LArm" />
+            <Choice value="RArm" />
+        </Parameter>
+        <Parameter name="Action" inherits_from_parent="0" content_type="3" value="Enable" default_value="Enable" custom_choice="0" tooltip="Enable or disable the collision protection." id="6">
+            <Choice value="Disable" />
+            <Choice value="Enable" />
+        </Parameter>
+    </Box>
+</ChoregrapheBox>

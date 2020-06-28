@@ -1,0 +1,182 @@
+v3.8
+====
+
+misc
+----
+
+* Add ``urxvt-unicode-256color`` as a possible value for ``$TERM`` when
+  trying to figure out whether color output should be enabled
+* Setting terminal title now works on Mac and Windows
+* Add ``XDG`` base directory support
+* Add option ``--home`` to every command to choose the path to global config
+  files.
+* Add a package for the Nix package manager in ``contrib/``. This enables
+  testing qibuild in an isolated environment with or without its dependencies.
+
+qibuild
+-------
+
+* Unify build configs: now a build config has a name, a toolchain and a list
+  of profiles. A build dir matches exactly one build config. Build directories
+  are the same when building in release or in debug.
+
+  To do the transition, you should create at least one config per toolchain,
+  for instance:
+
+  .. code-block:: console
+
+     qibuild add-config nao --toolchain atom --profile nao
+
+  Then use
+
+  .. code-block:: console
+
+     qibuild configure -c nao
+
+  As a consequence, the ``-p, --profile`` option is gone, and
+  ``--release`` can only be used for ``qibuild configure``
+
+* Add ``qibuild add-config``, ``qibuild list-configs``, ``qibuild rm-config``
+
+* ``qibuild clean``: fix when using remote profiles
+* ``qibuild init``: honor ``-w, --worktree`` option
+* Re-implement setting a custom build prefix. (The feature was gone since qibuild 3.0)
+
+  To use this feature, write something like:
+
+  .. code-block:: xml
+
+    <qibuild>
+      <build prefix="my-build" />
+    </qibuild>
+
+  in ``/path/to/worktree/.qi/qibuild.xml``
+
+  You can also use ``--build-prefix`` in your calls to ``qibuild configure``,
+  ``qibuild make`` and so on.
+
+  Note that the old syntax, using ``<build build_dir="my-build>`` is no longer
+  supported.
+
+  Also note that the build directories that will be created will be like
+  ``<prefix>/<project>/<build-dir>`` instead of ``<prefix>/<build-dir>/project``
+
+* Changes in handling dependencies to packages in the toolchain:
+
+  * ``CMAKE_PREFIX_PATH`` is set in the ``dependencies.cmake`` file,
+    no longer in the generated toolchain file
+
+  * Optionally use ``qiproject.xml`` information instead of adding every path
+    of every package in ``CMAKE_PREFIX_PATH``
+
+    (This behavior is triggered by setting the
+    ``QIBUILD_STRICT_DEPS_RESOLUTION`` environment variable for now, but will
+    be the default in the next release)
+
+
+* ``qibuild find``: fix return code when no CMake module is found
+* Fix using ``-j`` with ``Visual Studio`` generators.
+* Include toolchain paths in path.conf
+* ``qibuild``: generate ``qitest.json`` file also after building
+* Store default config for worktree in the global config file
+  (``~/.config/qi/qibuild.xml``)
+* ``qibuild deploy``: make specifying user and port optional
+  (this allows to specify them in ~/.ssh/config)
+* Put staged directories with ``qi_stage_dir`` first in ``path.conf``
+
+qidoc
+------
+
+* Implement ``qidoc build --spellcheck``, using
+  `sphinxcontrib-spelling <http://sphinxcontrib-spelling.readthedocs.org/>`_
+* Fix parsing of ``+=`` assignments in ``Doxyfile.in``
+
+qilinguist
+-----------
+
+* Fail when non-translated messages are found
+  (``qilinguist release`` learned ``--allow-untranslated-messages`` to get back
+  the old behavior)
+* ``qilinguist release`` can also work with ``.pml`` files.
+* ``qilinguist list``: sort by project name
+
+qipkg
+-----
+
+* ``qipkg deploy-package``: Remove previous instance before installing
+* Add ``qipkg bump-version``
+* ``qipkg make-package /path/to/pml``: also works when not in a worktree
+* ``qipkg make-package``: handle translations files from ``.pml``
+* Make it possible to use ``qipkg`` without a worktree
+* Stop generating ``.mpkg`` files when using ``.mpml`` files. Instead
+  generate several ``.pkg``
+* ``qipkg install PML_PATH DEST``: add ``--pkg`` to generate and install
+  ``.pkg`` files to the given destination
+* ``qipkg install``: also install the manifest
+
+qipy
+----
+
+* Raise when empty projects are found
+
+qisrc
+------
+
+* ``qisrc rebase``: several fixes
+
+  * Only work on forked projects
+  * Fix computation of git status before trying the rebase
+  * Prettier output
+
+* ``qisrc create``: add ``-i,--template-path`` argument. This
+  allows users to create their own templates
+
+* ``qisrc create``: better handling of ``"/"`` in argument
+* ``qisrc grep``: fix using git grep options such as
+  ``qisrc grep -- -i foo``
+* ``qisrc sync``: fix return code when some projects are skipped
+* Implements ``qisrc sync --reset``
+* ``qisrc init``, ``qisrc sync``: fix return code when cloning new repositories fails
+* ``qisrc init``: re-implement ``--no-review``, which was gone since ``3.0``
+* Fix using ``qisrc checkout --force`` when not on a branch
+* Fix using ``qisrc init --worktree``
+* ``qisrc checkout --force``: fix when not on any branch
+
+
+qitest
+------
+
+* Implement ``qitest run --break-on-failure``
+* Fix error messages in some corner cases
+* Fix several race conditions when using ``-j``
+* Implement ``qitest run --root-output-dir`` to store generated XML files
+  outside the sdk directory
+* Allow using ``--all`` or ``--use-deps``
+
+qitoolchain
+-----------
+
+* No longer writes files in ``~/.cache/qi/toolchains``
+* Also remove package files when a package is removed from the feed
+* ``qitoolchain add-package``: support legacy format
+* Allow including or excluding files with masks when installing packages
+* Add ``qitoolchain make-package``, ``qitoolchain extract-package``
+* Packages can now have a ``target`` and ``host`` attributes
+
+cmake
+------
+
+* ``swig/python.cmake``: workaround some CMake bug
+* modules:
+
+  * ``ogre``: search in the right ``PATH_SUFFIX``
+  * Add ``v4l``
+  * Add ``Qt5X11Extras``
+  * Add  ``Qt5OpenGL``
+  * Add ``gmp``, ``mpfr``, ``raptor``, ``rasqual``, ``redland``, ``gpg-error``,
+    ``gcrypt``, ``libtool``, ``libdb``, ``libxslt``, ``c-ares``, ``cgos``
+  * Support ``opencv`` 2.4.10
+
+* ``qi_swig_wrap_python``: handle lower case DEPENDS arguments
+* ``qi_install_python``: fix default destination on Windows
+* ``qt-tools``: add ``qi_set_qt_plugin_properties``

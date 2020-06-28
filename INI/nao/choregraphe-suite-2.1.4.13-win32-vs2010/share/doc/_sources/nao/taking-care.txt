@@ -1,0 +1,46 @@
+.. _taking-care:
+
+.. |safety_nao_en_fr| image:: /medias/pdf/nao_safety_small_en_fr.png
+   :class: img-inline
+   :target: ../_downloads/nao_safetyguide_2014_en_fr_sp_pt_gr_it_nl.pdf
+
+.. |safety_nao_ja_zh| image:: /medias/pdf/nao_safety_small_ja_zh.png
+   :class: img-inline
+   :target: ../_downloads/nao_safetyguide_2014_ja_zh_ko_ru_hi_tr_ar.pdf
+
+Taking care of NAO
+====================
+
+Essential tasks of maintenance:
+
++----------------------------------+
+|.. toctree::                      |
+|   :maxdepth: 1                   |
+|                                  |
+|   replacing-battery              |
+|   removing-head                  |
++----------------------------------+
+
++----------------------------------+
+|.. toctree::                      |
+|   :maxdepth: 1                   |
+|                                  |
+|   contacting_support             |
++----------------------------------+
+
++----------------------------------+
+|.. toctree::                      |
+|   :maxdepth: 1                   |
+|                                  |
+|   practices                      |
++----------------------------------+
+
++------------------------------------+-----------------------------+---------------------------+
+| *Read also the related downloadable documentation:*                                          |
+|                                                                                              |
+| |safety_nao_en_fr|                                                                           |
+| |safety_nao_ja_zh|                                                                           |
+|                                                                                              |
+| :download:`Safety Guide - A </medias/pdf/nao_safetyguide_2014_en_fr_sp_pt_gr_it_nl.pdf>` -   |
+| :download:`Safety Guide - B </medias/pdf/nao_safetyguide_2014_ja_zh_ko_ru_hi_tr_ar.pdf>`     |
++------------------------------------------------------------------+---------------------------+

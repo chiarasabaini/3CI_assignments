@@ -1,0 +1,75 @@
+.. _robot_joints_v32:
+
+Joints - V3.2
+===========================
+
+.. seealso::
+
+   :ref:`all_robots`
+
+   :ref:`V5 & V4<robot_joints>` | :ref:`V3.3 <robot_joints_v33>` | **V3.2**
+
+   :ref:`h25_joints` | :ref:`h21_joints` | :ref:`t14_joints` | :ref:`t2_joints`
+
+--------------------
+
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+
+
+.. _robot_joints_v32::head-joints:
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v32.rst
+
+
+
+.. _robot_joints_v32::left-Arm-joints:
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_left_v32.rst
+
+
+
+.. _robot_joints_v32::right-Arm-joints:
+
+Right Arm joints
+------------------
+
+.. include:: ../bulk/joints_arms_right_v32.rst
+
+
+
+.. _robot_joints_v32::pelvis-joints:
+
+Pelvis joints
+--------------
+
+.. include:: ../bulk/joints_pelvis_v32.rst
+
+
+
+.. _robot_joints_v32::left-leg-joints:
+
+Left Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_left_v32.rst
+
+
+
+.. _robot_joints_v32::right-leg-joints:
+
+Right Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_right_v32.rst
+

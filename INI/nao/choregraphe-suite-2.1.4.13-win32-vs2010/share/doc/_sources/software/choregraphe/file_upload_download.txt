@@ -1,0 +1,72 @@
+
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+
+.. _choregraphe-howto-file-transfer:
+
+Downloading and uploading file on NAO
+=======================================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+------------------------
+
+File Transfer
+-------------
+
+To display the robot shared folder:
+
+=====  ========================================================================
+Step       Action
+=====  ========================================================================
+1.      Choose **Connection** > **Advanced** > **File Transfer**.
+
+2.      If required, enter Login and Password.
+
+        The following window appears:
+
+        .. image:: /medias/desktop/choregraphe/chore_file_transfer.png
+            :width: 413 px
+            :height: 273 px
+
+        The file browser displays the directory tree on the robot.
+=====  ========================================================================
+
+Downloading a file
+--------------------
+
+To download a file from the robot to your computer:
+
+=====  ===========================================================================
+Step       Action
+=====  ===========================================================================
+1.      Select a file in the browser.
+
+2.      Click the **Download** button.
+
+3.      Specify where the file has to be downloaded.
+
+        The file is copied and sent to specified place on the computer hard disk.
+
+4.      Click the **Quit** button.
+=====  ===========================================================================
+
+Uploading a file
+-----------------
+
+To upload a file from your computer to the robot:
+
+=====  ========================================================================
+Step       Action
+=====  ========================================================================
+1.      Browse and display the directory where you want to upload the file.
+
+2.      Click the **Upload** button.
+
+3.      Select the file to upload.
+
+        The file is copied and sent to specified directory on the robot.
+
+4.      Click the **Quit** button.
+=====  ========================================================================

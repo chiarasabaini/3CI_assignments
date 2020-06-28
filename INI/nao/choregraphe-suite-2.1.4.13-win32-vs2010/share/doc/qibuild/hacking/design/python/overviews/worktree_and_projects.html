@@ -1,0 +1,255 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Worktree and projects &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qibuild internal overviews" href="index.html" />
+    <link rel="next" title="Parsing command line arguments" href="parsing_cmdline.html" />
+    <link rel="prev" title="qibuild internal overviews" href="index.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="index.html" title="qibuild internal overviews">previous</a>
+     |
+    <a href="index.html" title="qibuild internal overviews" accesskey="U">up</a>
+   |
+    <a href="parsing_cmdline.html" title="Parsing command line arguments">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-design-python-overviews-worktree_and_projects">
+            
+  <div class="section" id="worktree-and-projects">
+<span id="id1"></span><h1>Worktree and projects<a class="headerlink" href="#worktree-and-projects" title="Permalink to this headline">¶</a></h1>
+<p>Every tool is using a worktree.</p>
+<p>The WorkTree class contains just a list of paths, which
+are simple Project objects. Those do not have a name,
+and are identified by there relative path to the worktree.
+They are stored in a <tt class="docutils literal"><span class="pre">worktree</span> <span class="pre">cache</span></tt>, in
+<tt class="docutils literal"><span class="pre">&lt;worktree</span> <span class="pre">root&gt;/.qi/worktree.xml</span></tt></p>
+<div class="highlight-python"><pre>&lt;worktree&gt;
+|__ .qi
+    |__ worktree.xml
+|__ foo
+|__ bar
+    |__ baz</pre>
+</div>
+<p>Here for instance you could have two projects: one in <tt class="docutils literal"><span class="pre">foo</span></tt>, and
+the other in <tt class="docutils literal"><span class="pre">bar</span></tt></p>
+<p>Projects are added to the worktree with <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">add</span></tt>, <tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">remove</span></tt>,
+but the `</p>
+<p>Projects can also contain sub-projects, providing they have
+a <tt class="docutils literal"><span class="pre">qiproject.xml</span></tt> at their root:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in bar/qiproject.xml --&gt;</span>
+<span class="nt">&lt;project&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">src=</span><span class="s">&quot;baz&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<p>Here, if the <tt class="docutils literal"><span class="pre">bar</span></tt> path is registered to the worktree and
+<tt class="docutils literal"><span class="pre">bar/baz</span></tt> exists, then a project in <tt class="docutils literal"><span class="pre">bar/baz</span></tt> will be created too</p>
+<div class="section" id="using-the-worktree-with-a-qibuild-tool">
+<h2>Using the worktree with a qiBuild tool<a class="headerlink" href="#using-the-worktree-with-a-qibuild-tool" title="Permalink to this headline">¶</a></h2>
+<p>Then, other classes creates their own kind of projects using
+the registered paths in the worktree.</p>
+<p>For instance, to have a buildable project, you must have</p>
+<ul class="simple">
+<li>a <tt class="docutils literal"><span class="pre">&lt;qibuild&gt;</span></tt> tag in <tt class="docutils literal"><span class="pre">qiproject.xml</span></tt></li>
+<li>a <tt class="docutils literal"><span class="pre">CMakeLists.txt</span></tt> file next to the <tt class="docutils literal"><span class="pre">qiproject.xml</span></tt></li>
+</ul>
+<p>So the list of buildable paths (from where you can run CMake)
+is always a sublist of all the projects in the worktree.</p>
+<p>Buildable projects are then identified by their <em>names</em>,
+which must be unique in the worktree.</p>
+<p>This makes it possible to express dependencies between
+buildable projects using just the names, and not caring
+where the build projects are actually located on the filesystem</p>
+<p>It also means you can nest qibuild and qidoc projects anyway you want.</p>
+<p>For instance:</p>
+<ul class="simple">
+<li>a build project at the root in <tt class="docutils literal"><span class="pre">&lt;worktree&gt;/foo</span></tt>, with the doc in
+<tt class="docutils literal"><span class="pre">&lt;worktree&gt;/foo/doc</span></tt></li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in foo/qiproject.xml --&gt;</span>
+<span class="nt">&lt;project&gt;</span>
+  <span class="nt">&lt;qibuild</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">src=</span><span class="s">&quot;doc&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+
+<span class="c">&lt;!-- in foo/doc/qiproject.xml --&gt;</span>
+
+<span class="nt">&lt;project&gt;</span>
+  <span class="nt">&lt;qidoc</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">type=</span><span class="s">&quot;shinx&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Two build projects in the same git project:</li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- in worktree/top/qiproject.xml --&gt;</span>
+<span class="nt">&lt;project&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">src=</span><span class="s">&quot;hello&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">src=</span><span class="s">&quot;world&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;project&gt;</span>
+
+<span class="c">&lt;!-- in worktree/top/hello/qiproject.xml --&gt;</span>
+<span class="nt">&lt;project&gt;</span>
+  <span class="nt">&lt;qibuild</span> <span class="na">name=</span><span class="s">&quot;hello&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+
+<span class="c">&lt;!-- in worktree/top/world/qiproject.xml --&gt;</span>
+<span class="nt">&lt;project&gt;</span>
+  <span class="nt">&lt;qibuild</span> <span class="na">name=</span><span class="s">&quot;world&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="index.html" title="qibuild internal overviews">qibuild internal overviews</a>
+     |
+    <a href="index.html" title="qibuild internal overviews" accesskey="U">qibuild internal overviews</a>
+   |
+    <a href="parsing_cmdline.html" title="Parsing command line arguments">Parsing command line arguments</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">qiBuild Python framework design</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">qibuild internal overviews</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="">Worktree and projects</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="parsing_cmdline.html">Parsing command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="building_cmake_projects.html">Building CMake projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parsing_manifests.html">Parsing manifests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parsing_toolchain_feeds.html">Parsing toolchain feeds</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html">qiBuild design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/index.html">qiBuild Python documentation</a></li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Worktree and projects</a><ul>
+<li><a class="reference internal" href="#using-the-worktree-with-a-qibuild-tool">Using the worktree with a qiBuild tool</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="index.html" title="qibuild internal overviews">previous</a>
+     |
+    <a href="index.html" title="qibuild internal overviews" accesskey="U">up</a>
+   |
+    <a href="parsing_cmdline.html" title="Parsing command line arguments">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

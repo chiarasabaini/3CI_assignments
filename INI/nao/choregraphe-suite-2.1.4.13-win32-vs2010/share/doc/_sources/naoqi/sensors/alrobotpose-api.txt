@@ -1,0 +1,107 @@
+.. _alrobotpose-api:
+
+ALRobotPose API
+===============
+
+:ref:`naoqi-sensors` - :ref:`Overview <alrobotpose>` | API
+
+------------
+
+.. warning::
+
+   This module is deprecated.
+
+   This module is deprecated and most of its functionalities were moved to
+   new module: :ref:`ALRobotPosture <alrobotposture>`.
+
+   Use these new module since ALRobotPose will not be maintained in the future.
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alrobotposeproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALRobotPoseProxy
+
+* :cpp:func:`ALRobotPoseProxy::getActualPoseAndTime`
+* :cpp:func:`ALRobotPoseProxy::getPoseNames`
+
+
+Event list
+----------
+
+* :naoqi:event:`robotPoseChanged`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`robotPose`
+* :naoqi:memkey:`robotPoseSince`
+
+
+
+Methods
+-------
+
+.. cpp:function:: AL::ALValue ALRobotPoseProxy::getActualPoseAndTime()
+
+  .. deprecated:: 1.14
+    use module :ref:`ALRobotPosture <alrobotposture>` instead.
+
+  Get the actual robot posture and the time since it was detected.
+
+  :return: ALValue array of size 2.
+           The first element is a string whose value is the posture name.
+           The second element is a float corresponding to the time in seconds elapsed
+           since the posture was detected.
+
+.. cpp:function:: AL::ALValue ALRobotPoseProxy::getPoseNames()
+
+  .. deprecated:: 1.14
+    use module :ref:`ALRobotPosture <alrobotposture>` instead.
+
+  Get the list of all postures names possibly returned by this module.
+
+  :return: ALValue array of strings containing all the possible postures names.
+
+
+Events
+------
+
+.. naoqi:event:: robotPoseChanged(std::string postureName)
+
+  .. deprecated:: 1.14
+    use module :ref:`ALRobotPosture <alrobotposture>` instead.
+
+  Raised when the posture changes and the new posture has been
+  constant for 500 ms. The corresponding ALMemory Key is `robotPoseChanged`,
+  which is a string whose value is the current posture name.
+
+  :param postureName: current posture name
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: float robotPose
+
+  .. deprecated:: 1.14
+    use module :ref:`ALRobotPosture <alrobotposture>` instead.
+
+  A float (integer cast) coding the current posture (use :cpp:func:`ALRobotPoseProxy::getPoseNames`
+  to match to the posture name)
+
+.. naoqi:memkey:: float robotPoseSince
+
+  .. deprecated:: 1.14
+    use module :ref:`ALRobotPosture <alrobotposture>` instead.
+
+  A float corresponding to the time in seconds elapsed since the current posture was detected.

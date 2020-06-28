@@ -1,0 +1,54 @@
+.. _albacklightingdetection-api:
+
+ALBacklightingDetection API
+===========================
+
+:ref:`naoqi-vision` - :ref:`Overview <albacklightingdetection>` | API
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/albacklightingdetectionproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALBacklightingDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api` and :ref:`alvisionextractor-api`.
+
+Events lists
+------------
+
+* :naoqi:event:`BacklightingDetection/BacklightingDetected`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`BacklightingDetection/BacklightingValue`
+
+
+Events
+------
+
+.. naoqi:event:: BacklightingDetection/BacklightingDetected()
+
+  Raised when a backlighting situation was just detected (the backlighting value just
+  turned to 2). This event is raised only once for each backlighting situation : as
+  long as the backlighting value equals 2, the event is not raised another time.
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: int BacklightingDetection/BacklightingValue
+
+  Value of the backlighting measured for each frame (0, 1 or 2, see the explanation in
+  the :ref:`overview <albacklightingdetection>`).

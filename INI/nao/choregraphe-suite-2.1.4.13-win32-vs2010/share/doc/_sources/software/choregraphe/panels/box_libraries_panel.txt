@@ -1,0 +1,265 @@
+.. include:: ../../../bulk/common.rst
+
+.. |new_box_library_btn| image:: /medias/desktop/choregraphe/new_box_library_btn.png
+   :class: img-inline
+
+.. |open_box_library_btn| image:: /medias/desktop/choregraphe/open_box_library_btn.png
+   :class: img-inline
+
+.. |save_box_library_btn| image:: /medias/desktop/choregraphe/save_box_library_btn.png
+   :class: img-inline
+
+.. |save_as_box_library_btn| image:: /medias/desktop/choregraphe/save_as_box_library_btn.png
+   :class: img-inline
+
+.. |save_all_box_library_btn| image:: /medias/desktop/choregraphe/save_all_box_library_btn.png
+   :class: img-inline
+
+
+Box libraries panel
+====================
+
+.. _chore_box_libary_panel:
+
+Box libraries panel
+-------------------
+
+The **Box libraries** panel displays the currently opened
+:ref:`Box libraries <choregraphe-reference-box-library>`:
+
+.. image:: /medias/desktop/choregraphe/chore-box-library-panel.png
+   :width: 346 px
+   :height: 505 px
+
+The table below describes the main parts of the **Box libraries panel**:
+
+=====  ===================   ================================================================================
+Part    Name                  Description
+=====  ===================   ================================================================================
+**A**   Tabs                  Displays all opened :ref:`Box libraries <choregraphe-reference-box-library>`.
+
+                              Click on a tab to display all the boxes included in the selected **Box Library**.
+
+                              For further details, see: :ref:`available_libraries`.
+
+**B**   Selected **Box**      Each :ref:`choregraphe-reference-box` is represented with
+                              its name and its image.
+
+                              For further details, see: :ref:`use-box-libary-panel`.
+
+**C**   Description           Displays the description of the selected box.
+
+**D**   Toolbar               Allows managing :ref:`Box libraries <choregraphe-reference-box-library>`.
+
+                              For further details, see: :ref:`library_box_toolbar`.
+
+**E**   **Search**            Allows you to search a specific box among all the opened box libraries.
+=====  ===================   ================================================================================
+
+.. _use-box-libary-panel:
+
+How to use a Box library panel
++++++++++++++++++++++++++++++++
+
+You can drag and drop any of the boxes contained in a **Box library** onto the
+:ref:`chore_flow_diagram_panel` to enrich
+a :ref:`Behavior<choregraphe-reference-behavior>` or a :ref:`choregraphe-reference-box`.
+
+.. image:: /medias/desktop/choregraphe/use_box_library.png
+   :width: 586 px
+   :height: 410 px
+
+.. _library_box_toolbar:
+
+Toolbar
++++++++
+
+============================   ============================================================================
+Button                          Click on this button to ...
+============================   ============================================================================
+|new_box_library_btn|           Create a new Box library.
+
+                                For further details, see: :ref:`customizing_box_library`.
+
+|open_box_library_btn|          Open an existing Box library.
+
+                                For further details, see: :ref:`open_box_library`.
+
+|save_box_library_btn|          Save the current Box library.
+
+|save_as_box_library_btn|       Save the current Box library using a new name, path and/or format.
+
+|save_all_box_library_btn|      Save all the Box libraries currently opened.
+============================   ============================================================================
+
+.. _choregraphe-reference-box-library:
+
+What is a Box library
+---------------------
+
+.. image:: /medias/desktop/choregraphe/boxlibrary_icon.png
+   :width: 24 px
+   :height: 24 px
+
+A box library consists of a list of :ref:`Boxes <choregraphe-reference-box>`.
+
+This list can be organized with **directories**.
+
+Each box may have **attached files** (music, image, etc) also included in the box library.
+
+A box library is particularly useful when you **often use** the same boxes.
+You can store it in a box library and use and reuse it later.
+
+
+.. _available_libraries:
+
+Default Box libraries
+++++++++++++++++++++++++
+
+Opened by default, and read-only box libraries:
+
+* **standard**: contains all the elementary boxes you need to create
+  your first behaviors.
+
+* **advanced**: offers advanced alternative to standard boxes in order to go
+  further in mastering behaviors.
+
+* **tablet**: contains boxes specific to |roboS| with a tablet such as |roboJ|.
+
+Also available:
+
+* **deprecated**: lets you know which boxes has been deprecated since the
+  last release.
+
+
+.. _box_library_formats:
+
+Box library available formats
++++++++++++++++++++++++++++++
+
+You can save / open a **Box library** as:
+
+* a single compressed file with a **CBL** extension (ex: MyLibrary.cbl).
+  The box library **CBL** format is an easy way to archive a box library and / or release it
+  to someone else.
+
+* a **directory**.
+  The box library **directory** format is a very useful way for collaborative /
+  versioned project whose can be modified and extended by many people.
+
+.. note::
+   For further details about saving a project as a CRG file or as a directory,
+   see :ref:`save-boxlibrary-as-cbl`
+   and :ref:`save-boxlibrary-as-directory`.
+
+   In versions **older than 1.10**, box library files were not compressed (the extension was **XAL**).
+
+
+.. _open_box_library:
+
+Opening a Box library
+----------------------
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Click the |open_box_library_btn| **Open box library** button.
+
+           .. image:: /medias/desktop/choregraphe/open_boxlibrary.png
+              :width: 531 px
+              :height: 383 px
+
+2.         Select the relevant file type:
+
+           * Directory for the Box libraries delivered in release 1.14,
+           * .clb for the former Box Libraries.
+
+           For further details, see: :ref:`box_library_formats`.
+
+3.         Select the Box library to open.
+
+4.         Click **Choose** to validate your choice.
+========  =========================================================================
+
+.. _customizing_box_library:
+
+Creating a customized Box library
+----------------------------------
+
+You can create your own :ref:`Box library <choregraphe-reference-box-library>`
+using the |new_box_library_btn| **New box library** button.
+
+It is then possible for you to customize it:
+
+* To add boxes:
+
+  +-------------------------+--------------------------------------------------+
+  | From ...                | Do ...                                           |
+  +=========================+==================================================+
+  | the **Flow diagram**    | Select the box and choose **Add to library**     |
+  |                         | in the contextual menu.                          |
+  +-------------------------+--------------------------------------------------+
+  | a **box library**       | Copy/paste the box using the contextual menu.    |
+  +-------------------------+--------------------------------------------------+
+
+* Use the contextual menu to Create a new folder, rename it, or to Copy, Paste,
+  Delete or Edit boxes.
+
+  .. image:: /medias/desktop/choregraphe/box_library_menu.png
+     :width: 144 px
+     :height: 134 px
+
+* To automatically open your own box libraries at **Choregraphe** startup:
+
+  1. Choose **Edit** > **Preferences**.
+
+  2. Choose the box libraries you want to be opened in the field **User's box libraries**.
+
+     For further details, see :ref:`choregraphe-detailed-interface-preferences`.
+
+
+.. _save-boxlibrary-as-cbl:
+
+Saving a box library as a .cbl file
+------------------------------------
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Click the |save_as_box_library_btn| **Save box library as...** button.
+
+           the "Save box library as..." windows appears:
+
+           .. image:: /medias/desktop/choregraphe/save_boxlibrary_cbl.png
+              :width: 509 px
+              :height: 393 px
+
+2.         Make sure the file type is **Choregraphe box library (*.cbl)**.
+
+3.         Browse the destination path and complete the "File name" field.
+
+4.         Click **Save** to validate your choice.
+========  =========================================================================
+
+.. _save-boxlibrary-as-directory:
+
+Saving a box library as a directory
+------------------------------------
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Click the |save_as_box_library_btn| **Save box library as...** button.
+
+           the "Save box library as..." windows appears:
+
+           .. image:: /medias/desktop/choregraphe/save_boxlibrary_directory.png
+              :width: 532 px
+              :height: 379 px
+
+2.         Make sure the file type is **Box library directory (Directories)**.
+
+3.         Make sure you have an empty folder and select it.
+
+4.         Click **Choose** to validate your choice.
+========  =========================================================================

@@ -1,0 +1,65 @@
+.. include:: ../../bulk/common.rst
+
+.. _push_recovery:
+
+Push Recovery
+=============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   push_recovery-api
+
+
+:ref:`almotion` - Overview | :ref:`API <push_recovery-api>`
+
+------------
+
+|juju| |roboJ| only
+
+.. warning::
+
+   This is a WIP, API and documentation are not definitive.
+
+
+What it does
+------------
+
+The **Push recovery** is a reflex dedicated to prevent the fall of the robot,
+using information provided by its :ref:`gyrometers <juliette-inertial>`
+and wheel velocities.
+
+The principle is to compensate the tilt of the robot when anything or anyone
+pushes the robot. If it can be stabilized by itself, it will use its joints and
+the acceleration of its wheels to prevent the fall.
+
+If it can't be stabilized by itself (the tilt angle is too high or the angular
+velocity reaches a defined limit), the fall manager will be triggered.
+Even if the fall manager is deactivated, the **push recovery**
+will stop if the same condition occurs.
+
+
+How it works
+------------
+
+The **Push recovery** reflex is enabled by default when **NAOqi** is running.
+
+It can be triggered  any time, even during the execution of a movement or of a
+**Timeline**, except when:
+
+* the :term:`power hatch` is opened, or
+* the robot is in a resting posture.
+
+It is possible to deactivate manually the **push recovery** using the procedure
+described here: :ref:`reflex-deactivation`.
+
+**Related events**:
+
+* :naoqi:event:`ALMotion/Safety/RobotPushed` is sent when the robot has detected
+  a push.
+
+* :naoqi:event:`ALMotion/Safety/PushRecovery` is sent when the robot needs to
+  move in order to recover from disturbance.
+
+

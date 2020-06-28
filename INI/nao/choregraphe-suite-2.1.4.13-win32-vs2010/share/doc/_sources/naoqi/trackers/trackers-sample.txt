@@ -1,0 +1,58 @@
+.. _trackers-sample:
+
+Tutorial or samples
+=====================
+
+:ref:`naoqi-trackers` - :ref:`Overview<altracker>` | :ref:`API<altracker-api>` | Tutorial or samples
+
+----------------
+
+.. _trackers-sample-redball:
+
+Red Ball Tracker Sample
+-----------------------
+
+**Python example**
+
+:download:`alredballtracker_start.py </samples/python/altracker/alredballtracker_start.py>`
+
+.. literalinclude:: /samples/python/altracker/alredballtracker_start.py
+   :language: py
+
+
+.. _trackers-sample-face:
+
+Face Tracker Sample
+-------------------
+
+**Python example**
+
+:download:`alfacetracker_start.py </samples/python/altracker/alfacetracker_start.py>`
+
+.. literalinclude:: /samples/python/altracker/alfacetracker_start.py
+   :language: py
+
+.. _trackers-sample-larm:
+
+LArm Tracker Sample
+-----------------------
+
+**Python example**
+
+:download:`allarmtracker_start.py </samples/python/altracker/allarmtracker_start.py>`
+
+.. literalinclude:: /samples/python/altracker/allarmtracker_start.py
+   :language: py
+
+.. _trackers-sample-blob:
+
+Generic event Tracker Sample
+----------------------------
+
+**Python example**
+
+:download:`aleventtracker_start.py </samples/python/altracker/aleventtracker_start.py>`
+
+.. literalinclude:: /samples/python/altracker/aleventtracker_start.py
+   :language: py
+

@@ -1,0 +1,13 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_mre:
+
+|roboR| - Joint position sensors
+=================================
+
+.. seealso::
+    :ref:`romeo`
+
+-----------
+
+**TBD**

@@ -1,0 +1,49 @@
+.. _qichat_script:
+
+QiChat script
+==============
+
+QiChat
+------
+
+**qiChat** is the language used to write **Dialog Topic** boxes.
+
+For further details see: :ref:`QiChat<dialog_toc>`.
+
+Default script
+---------------
+
+By default, when you create a box its script looks as follows:
+
+.. image:: /medias/desktop/choregraphe/dialog_script.png
+   :width: 335 px
+   :height: 389 px
+
+The topic name is created using the name you gave to the box, and the language
+is the one you have selected during box creation.
+
+Adding rules
+------------
+
+To add rules, see the syntax here: :ref:`dialog_rules`.
+
+You can also pick chunk of code using the auto-completion tool:
+use **Ctrl-Space** to display it.
+
+.. image:: /medias/desktop/choregraphe/auto_completion.png
+   :width: 298 px
+   :height: 254 px
+
+Note that when a long name is splitted by slashes **/**
+(like ``$Device/SubDeviceList/Battery/Current/Sensor/Value``),
+the auto-completion tool allows you select it chunk by chunk.
+
+
+.. image:: /medias/desktop/choregraphe/auto_completion2.png
+   :width: 301 px
+   :height: 250 px
+
+Getting started
+----------------
+
+Follow step by step the tutorials: :ref:`aldialog-tuto`.

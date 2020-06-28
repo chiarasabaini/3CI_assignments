@@ -1,0 +1,48 @@
+.. include:: ../bulk/common.rst
+
+.. _nao_store:
+
+Retrieving applications
+=======================
+
+.. _selecting_appli_store:
+
+Selecting applications to install
+---------------------------------
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      On the |store|, choose **Applications**.
+
+        .. image:: /medias/store/application_store.png
+            :width: 600 px
+            :height: 466 px
+
+        For further details, see: :ref:`cloud_access`.
+
+2.      Chose a **Category**.
+
+3.      Optionally, use the **Release** and **Models** filters.
+
+4.      Click an Application to install.
+
+5.      Click the **Install** or **Test** button.
+
+6.      Choose the release to install.
+
+        By default, the automatic update of the last release is selected.
+        You can also choose the last beta.
+
+7.      Click the **Install** button.
+
+        The application will be installed at the next robot update.
+
+        For further details, see: :ref:`upgrading applications`.
+=====  =========================================================================
+
+**Troubleshooting**
+
+* The message "You have no robot registered to your account, please register
+  your robot to allow application installation" appears, see:
+  :ref:`registering_robot`.

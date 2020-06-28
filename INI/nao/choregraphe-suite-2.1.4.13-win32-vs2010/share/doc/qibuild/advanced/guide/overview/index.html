@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qiBuild overview &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="qibuild Programming guide" href="../index.html" />
+    <link rel="next" title="Creating a new project" href="creating_a_project.html" />
+    <link rel="prev" title="qibuild Programming guide" href="../index.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="../index.html" title="qibuild Programming guide">previous</a>
+     |
+    <a href="../index.html" title="qibuild Programming guide" accesskey="U">up</a>
+   |
+    <a href="creating_a_project.html" title="Creating a new project">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="advanced-guide-overview-index">
+            
+  <div class="section" id="qibuild-overview">
+<h1>qiBuild overview<a class="headerlink" href="#qibuild-overview" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="creating_a_project.html">Creating a new project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring_a_project.html">Configuring a project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuring_a_project.html#building-in-release">Building in release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_a_project.html#passing-cmake-flags">Passing CMake flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring_a_project.html#using-aldebaran-packages">Using Aldebaran packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="building_a_project.html">Building a project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building_a_project.html#simple-build">Simple build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_a_project.html#using-an-ide">Using an IDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_a_project.html#using-aldebaran-packages">Using Aldebaran packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing_a_project.html">Testing a project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing_a_project.html#note-for-ctest-users">Note for CTest users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing_a_project.html#qibuild-test-features">qibuild test features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="packaging_a_project.html">Packaging a project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="packaging_a_project.html#runtime-package">Runtime package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging_a_project.html#development-package">Development package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="managing_deps.html">Managing dependencies between projects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="managing_deps.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_deps.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_deps.html#qibuild-in-action">qiBuild in action</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remote_debugging.html">Remote debugging on NAO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remote_debugging.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote_debugging.html#running-qibuild-deploy">Running qibuild deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote_debugging.html#using-qtcreator">Using QtCreator</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="../index.html" title="qibuild Programming guide">qibuild Programming guide</a>
+     |
+    <a href="../index.html" title="qibuild Programming guide" accesskey="U">qibuild Programming guide</a>
+   |
+    <a href="creating_a_project.html" title="Creating a new project">Creating a new project</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Advanced qibuild usage</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">qibuild Programming guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">qiBuild overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="creating_a_project.html">Creating a new project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuring_a_project.html">Configuring a project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="building_a_project.html">Building a project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing_a_project.html">Testing a project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="packaging_a_project.html">Packaging a project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="managing_deps.html">Managing dependencies between projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remote_debugging.html">Remote debugging on NAO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cmake/index.html">Using qiBuild CMake API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting_to_qibuild.html">Porting a CMake project to qiBuild</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using_toolchains.html">Using toolchains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_configs.html">Managing build configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how_to_write_a_library.html">How to write a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending_qibuild_actions.html">Extending qiBuild actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tips_and_tricks.html">qiBuild tips and tricks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmake/api.html">qiBuild CMake API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cfg/index.html">Configuration files syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="../index.html" title="qibuild Programming guide">previous</a>
+     |
+    <a href="../index.html" title="qibuild Programming guide" accesskey="U">up</a>
+   |
+    <a href="creating_a_project.html" title="Creating a new project">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

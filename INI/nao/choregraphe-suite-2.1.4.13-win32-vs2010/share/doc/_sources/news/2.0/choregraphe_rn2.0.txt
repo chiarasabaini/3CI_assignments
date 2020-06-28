@@ -1,0 +1,244 @@
+.. include:: ../../bulk/common.rst
+
+.. _whats-new_choregraphe_2.0:
+
+**Choregraphe** 2.1
+====================
+
+New features
+------------
+
+Build **Applications** from **Projects**!
+++++++++++++++++++++++++++++++++++++++++++
+
+* **Choregraphe** can now produce **application Packages (.pkg)** out of Projects,
+  and directly install them on your |robot|.
+
+* Former "Store application metadata" can be edited through **Project properties**.
+
+  It is stored in the Project as manifest.xml and can be edited in several languages.
+
+* Installed Behaviors cannot anymore be opened directly from **Choregraphe**,
+  thus preventing users to access easily the sources of your application.
+
+  For further details, see: :ref:`chore_project_content`.
+
+
+Edit **Project** content externally
++++++++++++++++++++++++++++++++++++
+
+You can modify the the content of the Project using your favorite file
+management tools.
+
+For further details, see: :ref:`external_management`.
+
+New buttons: **Wake up**, **Rest** and **Life** buttons
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Instead of the former **Stiffness** management, you can now ask your |robot|
+to wake up, become alive or go to rest, using the 3 new buttons available in
+**Choregraphe** :ref:`chor_toolbar`.
+
+But if you miss the former **Stiffness** button too much, a preference allows you
+to get it back.
+For further details, see: :ref:`choregraphe-detailed-interface-preferences`.
+
+New box type: **Dialog box**
+++++++++++++++++++++++++++++
+
+New :ref:`choregraphe-reference-box-type-dialog` allow you to add a
+:ref:`dialog_topic` inside a Behavior.
+
+New project content: **QiChat script**
++++++++++++++++++++++++++++++++++++++++
+
+The **Script Editor** allows you to create **Dialog** script,
+an easy way to use **ALDialog** module.
+
+For further details, see: :ref:`qichat_script`.
+
+New project content: **Planar Move**
++++++++++++++++++++++++++++++++++++++
+
+A **Planar move** is a file describing movements of the robot in a plane space.
+
+This file, created using the :ref:`planar-move-editor` can be used in a **Behavior**
+as a **Move along** box.
+
+For further details, see: :ref:`choregraphe-planar-move`.
+
+Improved tools
+---------------
+
+**Robot view**: display perceptions
++++++++++++++++++++++++++++++++++++++
+
+* The :ref:`3d-nao-panel` shows the stored objects and data of 3 new modules:
+  :ref:`alworldrepresentation`, :ref:`alengagementzones`, and :ref:`alpeopleperception`.
+
+* You can also enable or disable the tracking of:
+
+  * the actuator values
+  * the robot position in the world.
+
+* :ref:`rotation_handles` allow manipulating directly the joints of the selected limb.
+
+  For further details, see: :ref:`3d-nao-panel`.
+
+**Behavior Manager**: redesigned
++++++++++++++++++++++++++++++++++
+
+Former **Behavior Manager** is replaced by **Robot Application**,
+and shows the whole Application structures and the Behaviors they contain.
+
+Note that it is not any more possible to open in Choregraphe a **Behavior**
+installed on your |robot|, application are now packaged in a distribution format.
+
+For further details, see: :ref:`chore_robot_applications_panel`.
+
+**Animation Mode**: has evolved
++++++++++++++++++++++++++++++++
+
+**Animation Mode** command to store position changed!
+
+The command is now to tap the head tactile sensors instead of having to press
+the **Chest** button.
+
+**Memory Watcher**: Hierarchical view
+++++++++++++++++++++++++++++++++++++++++
+
+**Select memory events** panel now display a hierarchical view of the events,
+allowing an easier browsing.
+
+**Timeline**: improved
+++++++++++++++++++++++
+
+* The **Timeline panel** has new functions: **Zoom in/out**, **Play**, **Stop**,
+  **Step by step**, **Move backward**.
+
+  For further details, see:  :ref:`choregraphe-interface-timeline-panel`.
+
+
+* New **Flip** and **Mirror** commands.
+
+  For further details, see:  :ref:`chore_mirroring` and  :ref:`chore_flip`.
+
+**Debug window** becomes **Log viewer**
+++++++++++++++++++++++++++++++++++++++++++
+
+For further details, see: :ref:`chore_debug_panel`.
+
+Save and load your favorite **layout**
++++++++++++++++++++++++++++++++++++++++
+
+You can now save and reload several customized layouts according to the way you
+use **Choregraphe**.
+
+For further details, see: :ref:`save_layouts`.
+
+.. _rn_improved_boxes:
+
+Improved boxes
+--------------
+
+Here is the list of boxes you should cut/replace:
+
+**Sit Down** & **Stand Up**
+++++++++++++++++++++++++++++
+
+Now these boxes call an **ALMotion** method, so they will be updated
+automatically by new releases.
+
+**Wait**, **Timer**, **Twinkle**  & **Fall Detector**
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Make sure you use the new release of these boxes, in order to avoid
+multi-threading issues.
+
+**WakeUp** & **Rest** instead of **Motor on/off**
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Use these new boxes to manage simply the **Stiffness** and the posture of your
+|robot|.
+
+**Set language** & **Speech Reco**
++++++++++++++++++++++++++++++++++++
+
+Make sure you use the new release of these boxes, in order to be compatible with
+**Qichat** and **animated speech** boxes.
+
+**Sound Tracker**, **Movement Tracker** & **Robot Posture**
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Make sure you use the new release of these boxes, in order to use the improved API.
+
+**Choice**
++++++++++++
+
+German part has been fixed.
+
+Other boxes to upgrade to support virtual robots
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* **Get Body ID**
+* **Get Parameter**
+* **Get Temperature**
+* **IR Get Key**
+* **IR Send Key**
+* **IR Side**
+* **Is Backlit**
+* **Is In Darkness**
+* **Learn Face**
+* **Record sound**
+* **Record Video**
+* **Set Speaker Vol.**
+* **Sound Loc.**
+* **Sound Peak**
+* **Sound Tracker**
+* **Speech Reco.**
+* **Take Picture**
+* **Unlearn All Faces**
+* **Unlearn Face**
+
+
+
+Technical
+---------
+
+Supported OS: Ubuntu 12.04 LTS (Precise) and later
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Ubuntu 10.04 LTS (Lucid) is not anymore supported.
+
+This release only supports Ubuntu 12.04 LTS (Precise) and later.
+
+For further details, see: :ref:`desktop-index`.
+
+Behavior's loading time improved
++++++++++++++++++++++++++++++++++
+
+Behavior's loading time was divided by at least 3.
+
+Separate Virtual Robot execution
++++++++++++++++++++++++++++++++++
+
+Choregraphe now instantiates a virtual robot in a separate process,
+thus improving stability.
+
+Connection management
+++++++++++++++++++++++
+
+* The user can cancel connection trials.
+* **Choregraphe** waits for the robot to be fully started before validating connection.
+* **Choregraphe** does not get kicked when other Choregraphe instance asks for connection
+  on the same robot. Other Choregraphe connections are refused instead.
+
+For further details, see:   :ref:`chore_connection_management`.
+
+Boxes: simpler types
++++++++++++++++++++++
+
+* :ref:`choregraphe-reference-box-type-flow-diagram` and
+  :ref:`choregraphe-reference-box-type-timeline` could previously embed a script,
+  but this feature is now deprecated and will be removed soon.
+* **Script box** has been renamed: :ref:`choregraphe-reference-box-type-python`.

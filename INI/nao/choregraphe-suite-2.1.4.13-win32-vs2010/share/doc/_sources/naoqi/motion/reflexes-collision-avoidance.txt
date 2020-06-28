@@ -1,0 +1,231 @@
+.. _reflexes-collision-avoidance:
+
+Self-collision avoidance
+========================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   reflexes-collision-avoidance-api
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <reflexes-collision-avoidance-api>`
+
+------------
+
+
+What it does
+------------
+
+The goal of this function is enabling the robot to become aware of his body.
+You can program motion without worrying about taking in account his anatomy.
+The robot always knows where are his head, torso, legs and arms, so he avoids
+limbs collision during motion.
+
+How it works
+------------
+
+This section presents how collisions are modelled, detected and avoided.
+
+Modelling of collision on the robot's body
+++++++++++++++++++++++++++++++++++++++++++++
+
+For reason of CPU consumption, we simplify the robot's geometry, approximating
+it with simple 3D shapes: spheres (in green in the image below) and capsules
+(in red). Typically, spheres are used for the head,
+hips and torso, and capsules for the arms and legs.
+
+.. image:: /medias/dev/modules/motion/motion_collision_shape.png
+   :height: 633 px
+   :width: 600 px
+
+A sphere is simply characterized by its center and radius: it is the
+set of all points which are at the radius distance of the sphere
+center.
+
+A capsule is a cylinder, capped by two half spheres, one at each
+extremity, with the same radius as the cylinder. The capsule is
+characterized by its center, its length of the cylinder (L), and its
+radius (R), which is the same for the capping spheres and the cylinder.
+
+
+
+Collision detection
++++++++++++++++++++
+
+Collision detection between spheres
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To detect if two spheres collide, we measure the distance D between the two
+sphere centers. If D - (r1 + r2) > 0, where r1 is the radius of the first
+sphere and r2 is the radius of the second one, then the spheres are not
+colliding. Else, they are colliding.
+
+.. image:: /medias/dev/modules/motion/motion_collision_sphere_2.png
+   :height: 154 px
+   :width: 350 px
+
+Collision detection between a capsule and a sphere
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To detect collision between a capsule and a sphere, we project the
+sphere center on the axis of the capsule. Again, there are two cases:
+
+- case 1: the projection of the sphere center is inside the capsule cylinder.
+  Here, we consider the distance D between the sphere center and its projection
+  on the capsule axis.
+
+- case 2: the projection of the center is outside the capsule cylinder. Here,
+  we consider the distance D between the sphere center and the closest capsule
+  cylinder extremity.
+
+In both cases, if D - (rC + rS) > 0, where rC is the radius of the
+capsule and rS the radius of the sphere, there is no collision.
+
+.. image:: /medias/dev/modules/motion/motion_collision_capsule_sphere.png
+   :height: 273 px
+   :width: 600 px
+
+Collision detection between capsules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To detect collision between two capsules, the capsules are reduced to
+two axes. Two cases are then possible:
+
+- case 1: the intersection of the axes is inside the first capsule.
+  Here, the distance between the closest points is D, indicated on the drawing:
+  if it is greater than r1 + r2, then there is no collision.
+
+- case 2: the intersection of the axes is outside the capsules.
+  Here, the closest points are the extremities of the capsules.
+  If the distance D between them is greater than r1 + r2, then there is no collision.
+
+.. image:: /medias/dev/modules/motion/motion_collision_capsule_capsule.png
+   :height: 200 px
+   :width: 600 px
+
+Collision avoidance
++++++++++++++++++++
+
+Introduction
+~~~~~~~~~~~~
+
+This section presents how the algorithm avoids collision between the
+protected chains and the rest of the robot's body. The aim of the algorithm is
+to prevent collisions from happening, but also finding an alternate way
+of satisfying the command, if possible.
+
+To try to satisfy the command, we must minimize the distance between the
+current state and the desired one. We also have a given constraint: no
+collision must take place. To solve this, we can formalize the problem as
+a minimization problem under a linear inequality constraint.
+
+We are going to illustrate this problem with a arm / torso collision, but
+the following equations are general. The following illustration shows the
+left arm chain near the torso.
+
+.. image:: /medias/dev/modules/motion/motion_collision_avoidance_best.png
+   :height: 211 px
+   :width: 600 px
+
+
+Optimization
+~~~~~~~~~~~~
+
+In the case of a command affecting the arm, what we want to minimize is the
+difference between the desired state and the final one, which gives the
+following equation:
+
+.. math:: \text{min} \frac{1}{2} \|\dot{q} - \dot{q}_{\text{desired}} \|^2  \text{~~~with~~~}  q = \left[\begin{array}{ccccc}
+    q_{\text{LShoulderPitch}} &
+    q_{\text{LShoulderRoll}} &
+    q_{\text{LElbowYaw}} &
+    q_{\text{LElbowRoll}} &
+    q_{\text{LWristYaw}}
+    \end{array}\right]^T
+
+.. note::
+
+   This equation is valid for a T14 (Academics model) robot.
+   In the case of a H21 robot model (Robocup model), the last angle
+   is not present since the robot does not have this degree of freedom.
+   However, the equations are unchanged.
+
+Constraint
+~~~~~~~~~~
+
+We now have to express the fact that we do not want the arm to collide
+with the rest of the body. We will consider here only the torso for
+simplicity, but the reasoning is strictly the same for any other body
+part.
+
+We consider the speed of the extremity of the arm. Since the interpolation
+is discretized, to ensure that there will be no collision, we have to ensure
+that at the next movement step, the distance covered will be less than
+the distance separating the arm and the torso. The distance is computed
+using the models described in the previous section.
+
+To predict the distance covered, we first compute the Cartesian speed vector
+along the contact normal. The Cartesian speed vector can be obtained
+with the following formula (Jchain is the Jacobian of the nearest point to the torso):
+
+.. math:: v_{\text{chain}} = J_{\text{chain}} \: \dot{q} \text{~~~with~~~} v_{\text{chain}} = \left[\begin{array}{ccc} \dot{x} & \dot{y} & \dot{z} \end{array} \right]^T
+
+If we project this Cartesian speed along the contact normal n, and multiply
+this by the time step, the non collision can be expressed as follows:
+
+.. math:: \Delta t * \left(\vec{n} \: J_{\text{chain}}\right) \ \dot{q} < D
+
+.. note::
+
+   The time step is at least equal to the threading time of motion.
+
+We can then rewrite the above expression to obtain a classical
+inequality constraint:
+
+.. math:: -\left(\vec{n} \: J_{\text{chain}}\right) \: \dot{q} + \frac{D}{\Delta t} > 0
+
+Conclusion
+~~~~~~~~~~
+
+We have then formalized the problem as a minimization with an inequality
+constraint. This problem is now a classical optimization problem with the linear inequality constraint:
+
+.. math:: \text{min} \frac{1}{2} \|\dot{q} - \dot{q}_{\text{desired}} \|^2 \text{~~~with~~~} -\left(\vec{n} \: J_{\text{chain}}\right) \: \dot{q} + \frac{D}{\Delta t} > 0
+
+With this algorithm, the robot can avoid collisions with itself. When the desired
+position is unreachable, it tries to find the nearest solution, while still
+guaranteeing the absence of collision.
+
+
+Getting started
+---------------
+
+Collision detection and avoidance can be activated on the following
+chains: "Arms", "LArm" or "RArm". It detects and avoids collisions
+between these chains and the rest of the body.
+
+In the case where the protected chain has no stiffness, the algorithm
+will try to move the parts of the robot's body which are stiff. If the
+chain is stiff, the algorithm will modify its movement.
+
+.. warning::
+
+   Collision detection and avoidance only works for
+   :ref:`Joint <control-joint>` methods but not for
+   :ref:`Cartesian <control-cartesian>` and :ref:`Whole body <control-wholebody>`
+   methods. It also works when making the robot move from Choregraphe
+   using the Timeline, or the sliders (when clicking on a body part of
+   the robot).
+
+Use case
+--------
+
+Example showing the effect of collision detection: the robot bumps his chest
+with his left arm with collision detection enabled or disabled.
+
+:download:`almotion_reflexesCollisionAvoidance.py </samples/python/almotion/almotion_reflexesCollisionAvoidance.py>`
+
+.. literalinclude:: /samples/python/almotion/almotion_reflexesCollisionAvoidance.py
+   :language: py

@@ -1,0 +1,453 @@
+.. _altexttospeech-api:
+
+ALTextToSpeech API
+==================
+
+:ref:`naoqi-audio` - :ref:`Overview <altexttospeech>` | API | :ref:`Tutorial <altexttospeech-tuto>`
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/altexttospeechproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+
+.. cpp:class:: ALTextToSpeechProxy
+
+* :cpp:func:`ALTextToSpeechProxy::getAvailableLanguages`
+* :cpp:func:`ALTextToSpeechProxy::getAvailableVoices`
+* :cpp:func:`ALTextToSpeechProxy::getLanguage`
+* :cpp:func:`ALTextToSpeechProxy::getParameter`
+* :cpp:func:`ALTextToSpeechProxy::getSupportedLanguages`
+* :cpp:func:`ALTextToSpeechProxy::getVoice`
+* :cpp:func:`ALTextToSpeechProxy::getVolume`
+* :cpp:func:`ALTextToSpeechProxy::loadVoicePreference`
+* :cpp:func:`ALTextToSpeechProxy::locale`
+* :cpp:func:`ALTextToSpeechProxy::say`
+* :cpp:func:`ALTextToSpeechProxy::sayToFile`
+* :cpp:func:`ALTextToSpeechProxy::setLanguage`
+* :cpp:func:`ALTextToSpeechProxy::setLanguageDefaultVoice`
+* :cpp:func:`ALTextToSpeechProxy::setParameter`
+* :cpp:func:`ALTextToSpeechProxy::setVoice`
+* :cpp:func:`ALTextToSpeechProxy::setVolume`
+* :cpp:func:`ALTextToSpeechProxy::stopAll`
+
+**Deprecated methods**
+
+* :cpp:func:`ALTextToSpeechProxy::disableNotifications`
+* :cpp:func:`ALTextToSpeechProxy::enableNotifications`
+* :cpp:func:`ALTextToSpeechProxy::getLanguageEncoding`
+* :cpp:func:`ALTextToSpeechProxy::sayToFileAndPlay`
+
+Event list
+----------
+
+* :naoqi:event:`ALTextToSpeech/CurrentBookMark`
+* :naoqi:event:`ALTextToSpeech/CurrentSentence`
+* :naoqi:event:`ALTextToSpeech/CurrentWord`
+* :naoqi:event:`ALTextToSpeech/PositionOfCurrentWord`
+* :naoqi:event:`ALTextToSpeech/Status`
+* :naoqi:event:`ALTextToSpeech/TextStarted`
+* :naoqi:event:`ALTextToSpeech/TextDone`
+* :naoqi:event:`ALTextToSpeech/TextInterrupted`
+
+Signal list
+-----------
+
+* :cpp:member:`ALTextToSpeech::synchroTTS`
+
+
+
+Methods
+-------
+
+.. cpp:function:: void ALTextToSpeechProxy::disableNotifications()
+
+  .. deprecated:: 2.0
+    This method cannot be used anymore. Notifications are now always enabled as they are required.
+
+  Disables notifications publishing in *ALMemory* during the synthesis (disabled by default).
+  Please refer to :cpp:func:`ALTextToSpeechProxy::enableNotifications` for further informations.
+
+
+.. cpp:function:: void ALTextToSpeechProxy::enableNotifications()
+
+  .. deprecated:: 2.0
+    This method cannot be used anymore. Notifications are now always enabled as they are required.
+
+  Enables notifications publishing in *ALMemory* during the synthesis (disabled by default).
+  Once enabled, the following notifications are generated:
+
+  - *ALTextToSpeech/CurrentBookMark*: indicates the occurrence of the bookmarks that are placed (using "\mrk=number" number being an integer [0 - 65535]) in the string that needs to be synthesized, see :download:`Acapela Mobility Text TAGS </medias/dev/modules/audio/audio_system_acapelamobilitytexttags.pdf>` for further information.
+  - *ALTextToSpeech/CurrentSentence*: indicates the sentence that is currently synthesized.
+  - *ALTextToSpeech/CurrentWord*: indicates the word that is currently synthesized.
+  - *ALTextToSpeech/PositionOfCurrentWord*: indicates the word that is currently synthesized.
+  - *ALTextToSpeech/TextStarted*: indicates if a sentence is currently synthesized.
+  - *ALTextToSpeech/TextDone*: indicates when the current sentence synthesis is done.
+
+.. cpp:function:: std::vector<std::string> ALTextToSpeechProxy::getAvailableLanguages()
+
+  Returns the list of the languages currently installed on the system.
+
+  Example: ['French', 'Chinese', 'English', 'German', 'Italian', 'Japanese', 'Korean', 'Portuguese', 'Spanish']
+
+  :return: List of installed languages (language names are given in English)
+
+  :download:`altexttospeech_getavailablelanguages.py </samples/python/altexttospeech/altexttospeech_getavailablelanguages.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_getavailablelanguages.py
+    :language: py
+
+
+.. cpp:function:: std::vector<std::string> ALTextToSpeechProxy::getAvailableVoices()
+
+  Returns the list of the voices currently installed on the system. Each voice is given in English.
+
+  :return: Voices Installed
+
+
+.. cpp:function:: std::string ALTextToSpeechProxy::getLanguage()
+
+  Returns the language currently used by the text to speech engine.
+
+  Example: 'French'
+
+  Could be one of the available languages.
+
+  For further details, see: :cpp:func:`ALTextToSpeechProxy::getAvailableLanguages`.
+
+  :return: Current language used by the text to speech engine
+
+
+
+.. cpp:function:: float ALTextToSpeechProxy::getParameter(const std::string& parameter)
+
+  Returns the value of one of the text to speech engine parameters.
+  The available parameters are: "pitchShift", "doubleVoice","doubleVoiceLevel" and "doubleVoiceTimeShift".
+  Please refers to :cpp:func:`ALTextToSpeechProxy::setParameter` for details about this parameters.
+
+  :param parameter: Name of the parameter
+  :return: Value of the specified parameter
+
+
+.. cpp:function:: std::vector<std::string> ALTextToSpeechProxy::getSupportedLanguages()
+
+  Returns the list of all supported languages.
+
+  Example: ['French', 'Chinese', 'English', 'German', 'Italian', 'Japanese', 'Korean', 'Portuguese', 'Spanish']
+
+  :return: List of supported languages (language names are given in English)
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_getsupportedlanguages.py
+    :language: py
+
+
+.. cpp:function:: std::string ALTextToSpeechProxy::getVoice()
+
+  Returns the voice currently used by the text to speech engine.
+
+  :return: Name of the current voice
+
+
+.. cpp:function:: float ALTextToSpeechProxy::getVolume()
+
+  Gets the current gain applied to the signal synthesized by the text to speech engine. The default value is 1.0.
+
+  :return: Volume [0 - 1]
+
+
+
+.. cpp:function:: void ALTextToSpeechProxy::loadVoicePreference(const std::string& preferencesFileSuffix)
+
+  Loads a voice and the related set of voice parameters defined in a XML file contained in the preferences folder.
+  The name of the XML file must be of the form `ALTextToSpeech_Voice_preferencesFileSuffix`.
+  The official voice in each language is defined in this way. Please refers to :ref:`Tutorial <altexttospeech-tuto>` for further details.
+
+  :param preferencesFileSuffix: Name of the voice preference file
+
+  :download:`altexttospeech_loadvoicepreference.py </samples/python/altexttospeech/altexttospeech_loadvoicepreference.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_loadvoicepreference.py
+    :language: py
+
+.. cpp:function:: std::string ALTextToSpeechProxy::locale()
+
+  Returns the locale associated to the current language set on the robot. The format is xx_XX (examples: en_US, fr_FR, ja_JP, de_DE, ...)
+
+  :return: The current locale associated to the current language.
+
+.. _ALTextToSpeechProxy::say1:
+
+.. cpp:function:: void ALTextToSpeechProxy::say(const std::string& stringToSay)
+
+  - :ref:`ALTextToSpeechProxy::say <ALTextToSpeechProxy::say1>`
+  - :ref:`ALTextToSpeechProxy::say <ALTextToSpeechProxy::say2>` with language setting
+
+  Says the specified string of characters.
+
+  Uses the language defined using :cpp:func:`ALTextToSpeechProxy::setLanguage`
+  if any, or the default language defined in the robot's web page.
+
+  :param stringToSay: Text to say, encoded in UTF-8.
+
+  :download:`altexttospeech_say.py </samples/python/altexttospeech/altexttospeech_say.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_say.py
+    :language: py
+
+.. _ALTextToSpeechProxy::say2:
+
+.. cpp:function:: void ALTextToSpeechProxy::say(const std::string& stringToSay, const std::string& language)
+
+  Says the specified string of characters in the specified language.
+
+  :param stringToSay: Text to say, encoded in UTF-8.
+  :param language:  Language (English name).
+
+  :download:`altexttospeech_altexttospeech_say2.py </samples/python/altexttospeech/altexttospeech_altexttospeech_say2.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_altexttospeech_say2.py
+    :language: py
+
+
+.. cpp:function:: void ALTextToSpeechProxy::sayToFile( const std::string& stringToSay, const std::string& fileName)
+
+  Works similarly to :cpp:func:`ALTextToSpeechProxy::say` but the synthesized
+  signal is recorded into the specified file instead of being sent to the robot's loudspeakers.
+  The signal is encoded with a sample rate of 22050Hz (European languages) and 16000Hz (Asian languages), format S16_LE, 1 channel.
+
+  :param stringToSay: Text to be synthesized, encoded in UTF-8.
+  :param fileName: file where the synthesized signal should be recorded (can be either a .raw file or a .wav file).
+
+  :download:`altexttospeech_saytofile.py </samples/python/altexttospeech/altexttospeech_saytofile.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_saytofile.py
+    :language: py
+
+
+.. cpp:function:: int ALTextToSpeechProxy::sayToFileAndPlay(const std::string& stringToSay)
+
+  .. deprecated:: 1.22
+
+  due to technical improvements, there is no point to generate a file and playing it after.
+  If you nevertheless need to do so you can use :cpp:func:`ALTextToSpeechProxy::sayToFile`
+  and then :cpp:func:`ALAudioPlayerProxy::playFile`.
+
+
+  Works similarly to :cpp:func:`ALTextToSpeechProxy::sayToFile` but sends also the
+  synthesized signal to the robot's loudspeakers.
+
+  :param stringToSay: Text to say, encoded in UTF-8.
+  :return: Id of the task. Can be used to interrupt it.
+
+
+.. cpp:function:: void ALTextToSpeechProxy::setLanguage(const std::string& language)
+
+  Sets the language currently used by the text to speech system.
+  Each NAOqi restart will however reset that setting to the default language that
+  can be set on the robot's web page.
+
+  :param language: English name of one of the available languages. See: :cpp:func:`ALSpeechRecognitionProxy::getAvailableLanguages`.
+
+                   Example: 'French'
+
+.. cpp:function:: void ALTextToSpeechProxy::setLanguageDefaultVoice(const std::string& language, const std::string& voice)
+
+  Sets the voice to be used by default with a specified language.
+
+  :param language: the language among those available on your robot
+  :param voice: the voice among those available for this language on your robot
+
+
+.. cpp:function:: void ALTextToSpeechProxy::setParameter( const std::string& parameter, const float& value)
+
+  Sets parameters of the text to speech engine.
+
+  :param parameter: Name of the parameter
+  :param value: Value of the parameter
+
+  The available parameters are specific to the speech engine:
+
+  --- All languages ---
+
+  +---------------------------+----------------------------------------------------------+
+  | Parameters                | Description                                              |
+  +===========================+==========================================================+
+  | **pitchShift**            | applies a pitch shift to the voice. The value indicates  |
+  |                           | the ratio between the new fundamental frequencies and    |
+  |                           | the original one (examples: 2.0: an octave above, 1.5:   |
+  |                           | a quint above).                                          |
+  |                           |                                                          |
+  |                           | Acceptable range is [1.0 - 4]. 0 disables the effect.    |
+  +---------------------------+----------------------------------------------------------+
+  | **doubleVoice**           | adds a second voice to the first one. The value          |
+  |                           | indicates the ratio between the second voice fundamental |
+  |                           | frequency and the first one.                             |
+  |                           |                                                          |
+  |                           | Acceptable range is [1.0 - 4]. 0 disables the effect.    |
+  +---------------------------+----------------------------------------------------------+
+  | **doubleVoiceLevel**      | sets the gain of the additional voice compared to the    |
+  |                           | original one.                                            |
+  |                           |                                                          |
+  |                           | Acceptable range is [0 - 4]. 0 disables the effect.      |
+  +---------------------------+----------------------------------------------------------+
+  | **doubleVoiceTimeShift**  | sets the delay (seconds) between the doubled voice and   |
+  |                           | the original one.                                        |
+  |                           |                                                          |
+  |                           | Acceptable range is [0 - 0.5].                           |
+  +---------------------------+----------------------------------------------------------+
+
+  --- Japanese only ---
+
+  +----------------------+----------------------------+
+  | Parameters           | Acceptable range           |
+  +======================+============================+
+  | **volume**           | [0.00001 - 2.0]            |
+  +----------------------+----------------------------+
+  | **speed**            |  [0.5 - 4.0]               |
+  +----------------------+----------------------------+
+  | **pitch**            | [0.5 - 2.0]                |
+  +----------------------+----------------------------+
+  | **emph**             | [0.0 - 2.0]                |
+  +----------------------+----------------------------+
+  | **pauseMiddle**      | [80.0 and 300.0]           |
+  +----------------------+----------------------------+
+  | **pauseLong**        | [300.0 - 2000.0]           |
+  +----------------------+----------------------------+
+  | **pauseSentence**    | [80.0 and 10000.0]         |
+  +----------------------+----------------------------+
+
+  :download:`altexttospeech_setparameter.py </samples/python/altexttospeech/altexttospeech_setparameter.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_setparameter.py
+    :language: py
+
+
+.. cpp:function:: void ALTextToSpeechProxy::setVoice(const std::string& voiceID)
+
+  Changes the voice used by the text-to-speech engine.
+  The voice identifier must belong to the installed voices, that can be listed using the :cpp:func:`ALTextToSpeechProxy::getAvailableVoices` method.
+
+  :param voiceID: Name of the voice
+
+  :download:`altexttospeech_setvoice.py </samples/python/altexttospeech/altexttospeech_setvoice.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_setvoice.py
+    :language: py
+
+
+.. cpp:function:: void ALTextToSpeechProxy::setVolume(const float& volume)
+
+  Sets the current gain applied to the signal synthesized by the text to speech engine. The default value is 1.0.
+
+  :param volume: Gain
+
+
+  :download:`altexttospeech_setvolume.py </samples/python/altexttospeech/altexttospeech_setvolume.py>`
+
+  .. literalinclude:: /samples/python/altexttospeech/altexttospeech_setvolume.py
+    :language: py
+
+
+.. cpp:function:: void ALTextToSpeechProxy::stopAll()
+
+  This method stops the current and all the pending tasks immediately.
+
+
+.. cpp:function:: std::string ALTextToSpeechProxy::getLanguageEncoding(const std::string &languageName)
+
+  .. deprecated:: 1.22
+    due to technical improvements, this method is not useful anymore. Do not use.
+
+
+
+Events
+------
+
+.. naoqi:event:: ALTextToSpeech/CurrentBookMark(int value)
+
+  Indicates the occurrence of the bookmarks that are placed
+  (using "\mrk=number" number being an integer [0 - 65535]) in the string that
+  needs to be synthesized.
+
+  For further information, see :download:`Acapela Mobility Text TAGS </medias/dev/modules/audio/audio_system_acapelamobilitytexttags.pdf>`.
+
+  :param value: Current bookmark.
+
+
+.. naoqi:event:: ALTextToSpeech/CurrentSentence(std::string value)
+
+  Indicates the sentence that is currently synthesized.
+
+  :param value: Current sentence.
+
+
+.. naoqi:event:: ALTextToSpeech/CurrentWord(std::string value)
+
+  Indicates the word that is currently synthesized.
+
+  .. warning:: Not available for Japanese engine.
+
+  :param value: Current word.
+
+
+.. naoqi:event:: ALTextToSpeech/PositionOfCurrentWord(int value)
+
+  Indicates the word that is currently synthesized by its index in the current sentence.
+  Index 0 refers to the first word of the sentence.
+
+  .. warning:: Not available for Japanese engine.
+
+  :param value: Current word position.
+
+
+.. naoqi:event:: ALTextToSpeech/Status(AL::ALValue value)
+
+  Raised when the status of a task changes.
+
+  :param value: [idOfConcernedTask, status]
+
+                Where:
+
+                * **idOfConcernedTask** is the ID of the task concerned by the event.
+                * **status** can be "enqueued", "started", "thrown", "stopped" or "done".
+
+
+.. naoqi:event:: ALTextToSpeech/TextStarted(bool value)
+
+  Raised when the current sentence synthesis starts.
+
+  :param value: True if the current speaking task is in progress.
+
+
+.. naoqi:event:: ALTextToSpeech/TextDone(bool value)
+
+  Raised when the current sentence synthesis is done.
+
+  :param value: True if the current speaking task is done.
+
+
+.. naoqi:event:: ALTextToSpeech/TextInterrupted(bool value)
+
+  Raised when the current sentence synthesis is interrupted, for example by :cpp:func:`ALTextToSpeechProxy::stopAll`.
+
+  :param value: True if the current speaking task is interrupted.
+
+
+Signals
+-------
+
+.. cpp:member:: qi::Signal<qi::os::timeval> ALTextToSpeech::synchroTTS
+
+  During a dialog session, the robot switches between speaking phase and listening phase. This signal is raised
+  only at the end of the last sentence of the speaking phase to indicate the beginning of the listening phase.
+  Time value contains the remaining sound to be played before the actual end of the speech.

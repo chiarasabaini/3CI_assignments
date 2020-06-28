@@ -1,0 +1,16 @@
+﻿.. include:: ../bulk/common.rst
+
+.. _store_nao:
+
+|store|
+===========================
+
++----------------------------------+
+| .. toctree::                     |
+|    :maxdepth: 1                  |
+|                                  |
+|    nao_store_access              |
+|    nao_store                     |
+|    nao_store_channel             |
+|    nao_store_sysupdate           |
++----------------------------------+

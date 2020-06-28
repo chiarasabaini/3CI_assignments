@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-10 11:35:47 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMTA7IjExOjIwOjE4ICI7MzI4MA=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMTA7IjExOjM1OjQ3ICI7MTszMzk2"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a" type="Integer" array="False" size=""/>
+            <declare name="b" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci i numeri di cui vuoi trovare il mcm:&quot;" newline="True"/>
+            <input variable="a"/>
+            <input variable="b"/>
+            <declare name="max" type="Integer" array="False" size=""/>
+            <declare name="min" type="Integer" array="False" size=""/>
+            <if expression="a&gt;b">
+                <then>
+                    <assign variable="max" expression="a"/>
+                    <assign variable="min" expression="b"/>
+                </then>
+                <else>
+                    <assign variable="max" expression="b"/>
+                    <assign variable="min" expression="a"/>
+                </else>
+            </if>
+            <declare name="mcm" type="Integer" array="False" size=""/>
+            <assign variable="mcm" expression="max"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="1"/>
+            <while expression="mcm%min!=0">
+                <assign variable="i" expression="i+1"/>
+                <assign variable="mcm" expression="max*i"/>
+            </while>
+            <output expression="&quot;il mcm tra &quot;&amp;a&amp;&quot; e &quot;&amp;b&amp;&quot; &#232; &quot;&amp;mcm" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

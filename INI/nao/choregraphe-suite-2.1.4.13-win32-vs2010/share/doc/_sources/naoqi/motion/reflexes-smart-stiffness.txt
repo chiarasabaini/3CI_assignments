@@ -1,0 +1,93 @@
+.. _reflexes-smart-stiffness:
+
+Smart Stiffness
+===============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   reflexes-smart-stiffness-api
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <reflexes-smart-stiffness-api>`
+
+------------
+
+
+What it does
+------------
+
+**Smart Stiffness** is a unique feature that allows you to adapt automatic engine
+power to the posture of the robot.
+This results to an optimized resources drive, energy savings for battery: the robot is less tiring.
+
+How it works
+------------
+
+The smart Stiffness is a management of joint maximum torque.
+
+Reflex activation
+++++++++++++++++++++
+
+The Smart Stiffness reflex is activated in any static posture of the robot
+(stand, sit, lifted, lying down...).
+
+If at least one joint moves, the user Stiffness command is applied on all joints.
+
+User command priority
+++++++++++++++++++++++
+
+The user command has the priority over the Smart Stiffness.
+
+For example, if you ask a Stiffness of 0.2 on the **HeadYaw** joint and the Smart
+Stiffness computation gives 0.38, then the Stiffness in the **HeadYaw** joint will be 0.2.
+
+
+Calculation principles
++++++++++++++++++++++++
+
+The main idea is to limit the torque of the robot joints, so the robot becomes
+more compliant and saves energy.
+
+As the :ref:`stiffness <control-stiffness>` is a torque limitation, the result of the smart
+stiffness is a stiffness command for every joint at every **ALMotion** cycle.
+
+To determine the good torque to apply for each joint, we use the inverse dynamics equation:
+
+.. math:: \tilde{M}(q)(\ddot{q} - G) + N(q,\dot{q}) = \tau+J^T(q)W
+
+where:
+  - :math:`(q, \dot{q}, \ddot{q})` position, velocity and acceleration of all joints
+  - :math:`\tilde{M}(q)` the inertial matrix of each body
+  - :math:`G` the gravity vector
+  - :math:`N(q,\dot{q})` the matrix associated with the Coriolis and centrifuge force
+  - :math:`\tau` the joint torque is the value that we want compute
+  - :math:`J(q)` the Jacobian matrix of all joints
+  - :math:`W` the forces applied on each body (joint friction, contact and external force)
+
+
+For reason of CPU consumption, we have decided to only compute static torque (so :math:`\ddot{q}`
+and :math:`N(q,\dot{q})` are null) and to ignore external force (no sensor for external force).
+
+So, we only have to compute torque due to:
+  - inertial matrix and gravity,
+  - contact force.
+
+.. math:: \tilde{M}(q) \: G + \tau + J^T(q) \: W_{\text{contact}} = 0
+
+
+Getting started
+---------------
+
+By default, the Smart Stiffness is active on the robot.
+
+
+How to disable this reflex
++++++++++++++++++++++++++++
+
+You can simply disable the Smart Stiffness reflex by calling the **ALMotion** API.
+
+.. code-block:: python
+
+  motionProxy.setSmartStiffnessEnabled(False)

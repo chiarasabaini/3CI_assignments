@@ -1,0 +1,236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Resource viewer panel &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="Advanced panels" href="../advanced_panels.html" />
+    <link rel="next" title="Memory watcher panel" href="memory_watcher_panel.html" />
+    <link rel="prev" title="Robot applications panel" href="robot_applications.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="robot_applications.html" title="Robot applications panel">previous</a>
+     |
+    <a href="../advanced_panels.html" title="Advanced panels" accesskey="U">up</a>
+   |
+    <a href="memory_watcher_panel.html" title="Memory watcher panel">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-panels-resource_viewer_panel">
+            
+  <div class="section" id="resource-viewer-panel">
+<span id="chore-resource-viewer-panel"></span><h1>Resource viewer panel<a class="headerlink" href="#resource-viewer-panel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-resource-viewer-panel">
+<h2>What is the Resource viewer panel<a class="headerlink" href="#what-is-the-resource-viewer-panel" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Resource viewer</strong> panel basically enables you to see which resources are
+locked by which box, also known as modules, when using the
+<a class="reference internal" href="../tutos/resource_manager.html#choregraphe-tuto-resources-manager"><em>Resource Manager.</em></a></p>
+<img alt="../../../_images/resource_viewer.png" src="../../../_images/resource_viewer.png" style="width: 582px; height: 392px;" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Column</th>
+<th class="head">Contains</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Resources</td>
+<td>List of all resources available on the robot.</td>
+</tr>
+<tr class="row-odd"><td>Owner</td>
+<td><ul class="first last simple">
+<li>Black: Owner of the resource.</li>
+<li>Gray: Potential owner, waiting for the resource to be
+released.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="setting-the-refresh-period">
+<h2>Setting the refresh period<a class="headerlink" href="#setting-the-refresh-period" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Resource viewer</strong> panel is getting periodically information directly
+from the robot, by request.</p>
+<p>Setting the refresh period allows the user to set the time to wait between two
+requests.</p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="robot_applications.html" title="Robot applications panel">Robot applications panel</a>
+     |
+    <a href="../advanced_panels.html" title="Advanced panels" accesskey="U">Advanced panels</a>
+   |
+    <a href="memory_watcher_panel.html" title="Memory watcher panel">Memory watcher panel</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutos/index.html">Choregraphe Tutorials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="video_monitor_panel.html">Video monitor panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog_panel.html">Dialog panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="scritp_editor_panel.html">Script editor panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="robot_applications.html">Robot applications panel</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Resource viewer panel</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="memory_watcher_panel.html">Memory watcher panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="debug_window.html">Log viewer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="undo_stack_panel.html">Undo stack panel</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Resource viewer panel</a><ul>
+<li><a class="reference internal" href="#what-is-the-resource-viewer-panel">What is the Resource viewer panel</a></li>
+<li><a class="reference internal" href="#setting-the-refresh-period">Setting the refresh period</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="robot_applications.html" title="Robot applications panel">previous</a>
+     |
+    <a href="../advanced_panels.html" title="Advanced panels" accesskey="U">up</a>
+   |
+    <a href="memory_watcher_panel.html" title="Memory watcher panel">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

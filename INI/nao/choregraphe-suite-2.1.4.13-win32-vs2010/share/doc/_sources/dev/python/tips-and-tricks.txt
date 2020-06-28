@@ -1,0 +1,136 @@
+.. _python-sdk-tip-and-tricks:
+
+Python SDK tips and tricks
+==========================
+
+.. seealso::
+
+   :ref:`python-introduction` | :ref:`python-tutorials` |
+   :ref:`python-examples` | *Python SDK tips and tricks*
+
+---------------
+
+
+
+.. _python-sdk-troubleshooting:
+
+Troubleshooting
+---------------
+
+Here are a few error message you could get, and a possible solution.
+
+
+Import error
+++++++++++++
+
+
+::
+
+  ImportError: No module named naoqi
+
+
+You must have something wrong with your ``PYTHONPATH`` environnement variable.
+You can check this by typing:
+
+.. code-block:: python
+
+   import sys
+   print "\n".join(sys.path)
+
+
+You should see `/path/to/python-sdk` at the beginning of the list.
+
+::
+
+  ImportError: ./_inaoqi.so: wrong ELF class: ELFCLASS32
+
+You are using a 64 bits version of python.
+
+
+::
+
+  ImportError: libpython2.6.so.1.0: cannot open shared object file: No such file or directory
+
+You are using a Python2.7 with the python2.6 version of the Python SDK.
+
+
+Version mismatch
+++++++++++++++++
+
+
+::
+
+  Version mismatch
+
+
+Your version of Python does not match the one with which the Python SDK was made.
+
+On **Mac**, make sure ``VERSIONER_PYTHON_PREFER_32_BITS`` is **not** set.
+(While 1.10 needed this parameter ON, release 1.12 needs this parameter to be OFF)
+
+Fatal Python error: PyThreadState_Get: no current thread
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+You are using a version of Python that is not binary compatible
+with the one used to compile the Python bindings.
+
+If this happens on Mac, you should download the latest Python from Python.org
+(At the time of writing: http://www.python.org/ftp/python/2.7.5/python-2.7.5-macosx10.6.dmg )
+
+If you want to be able to use ``python`` from the command line, follow what the
+``README`` in the installer says, and double-click on the
+``Update Shell Profile`` command to add the "bin" directory inside the
+framework to your shell's search path.
+
+
+
+Errors with ALProxy
+++++++++++++++++++++
+
+
+.. code-block:: pytb
+
+  RuntimeError: 	ALBrokerProxy::getBrokerInfo
+      can not get broker info. Endpoint : http://nao.local:9559
+
+
+Make sure NAOqi is running and the IP you used in :py:class:`ALProxy` constructor is correct
+
+
+.. code-block:: pytb
+
+  RuntimeError: 	ALNetwork::getModuleByName
+      failed to get module MyModule http://nao.local:9559
+
+
+Make sure you spelt the name of the module correctly.
+
+
+.. code-block:: pytb
+
+  File "naoqi.py", line 246, in method_missing
+      raise e
+  RuntimeError: 	ALTextToSpeech::sa
+          ALBroker::methodCall: method: sa, params: ["hello"]
+          ALTextToSpeech::sa
+  Function sa does not exist in module ALTextToSpeech
+
+Make sure you spelt the name of the function correctly.
+
+To check the complete list of modules and method names,
+see section :ref:`naoqi-api`
+
+Weird float errors
+++++++++++++++++++
+
+
+If you notice that floats are trucated when they are the result of
+the call of a bound methods, make sure that your locale is in english.
+
+You can set LC_NUMERIC='C' for this
+
+.. code-block:: python
+
+   import locale
+   locale.setlocale(locale.LC_NUMERIC, 'C')
+

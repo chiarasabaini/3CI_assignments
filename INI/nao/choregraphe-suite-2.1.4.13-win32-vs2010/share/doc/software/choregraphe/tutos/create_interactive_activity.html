@@ -1,0 +1,467 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating an Interactive activity &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="Choregraphe Tutorials" href="index.html" />
+    <link rel="next" title="Resources manager" href="resource_manager.html" />
+    <link rel="prev" title="Creating a Solitary activity" href="create_solitary_activity.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="create_solitary_activity.html" title="Creating a Solitary activity">previous</a>
+     |
+    <a href="index.html" title="Choregraphe Tutorials" accesskey="U">up</a>
+   |
+    <a href="resource_manager.html" title="Resources manager">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-tutos-create_interactive_activity">
+            
+  <div class="section" id="creating-an-interactive-activity">
+<span id="create-interactive-activity-tuto"></span><h1>Creating an Interactive activity<a class="headerlink" href="#creating-an-interactive-activity" title="Permalink to this headline">¶</a></h1>
+<p><img alt="no-virtual" class="img-inline" src="../../../_images/no_virtual.png" /> <em>Cannot be tested on a simulated robot</em>.</p>
+<hr class="docutils" />
+<p>This tutorial will show you how to create an <strong>Interactive Activity</strong> launched thanks
+to <strong>Trigger conditions</strong> or <strong>Trigger sentences</strong></p>
+<p><em>Create the following interactive activity</em>: when somebody&#8217;s in zone 2 or when saying
+<em>Great Success</em>, the robot congratulates the user on the successful launch of the activity.</p>
+<div class="section" id="step-1-create-a-behavior">
+<h2>Step 1: Create a Behavior<a class="headerlink" href="#step-1-create-a-behavior" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Create a new Project and save it as &#8220;my_first_interactive&#8221;.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Right click and rename &#8220;behavior_1&#8221; folder into &#8220;congrats&#8221;.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Drag and drop <strong>Audio</strong> &gt; <strong>Voice</strong> &gt; <strong>Animated Say</strong> box onto the <strong>Flow Diagram</strong> panel.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td>Connect its input to the main input of the Behavior and its output to the main output
+of the Behavior.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Double-click the <strong>Animated Say</strong> box and edit the <strong>Localized Text</strong> box content with:</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">Hello, congratulations on your first interactive application!</span>
+<span class="go">Let&#39;s hope you will do a lot of them so we can do more and more things together.</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Test the Behavior</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="life-button" class="img-inline" src="../../../_images/chore_life_button_on.png" /> <strong>Turn autonomous life off</strong> button.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="play-button" class="img-inline" src="../../../_images/beginning_play_button.png" /> <strong>Play</strong> button.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result</strong></p>
+<p>Your <strong>Aldebaran</strong> robot says the sentence.</p>
+</div>
+<div class="section" id="step-2-transform-it-into-an-interactive-activity">
+<h2>Step 2: Transform it into an Interactive Activity<a class="headerlink" href="#step-2-transform-it-into-an-interactive-activity" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Edit the <a class="reference internal" href="../panels/project_content_panel.html#choregraphe-reference-project-properties"><em>Project Properties</em></a>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Set the <strong>Application description</strong>.</p>
+<p>For example, you could write:</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="go">This application contains the following interactive activity: when</span>
+<span class="go">somebody&#39;s in zone 2, or when the interacting user says &quot;Great Success&quot;,</span>
+<span class="go">it congratulate the user on its first interactive activity.</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Copy the auto-generated <strong>Application ID</strong>,
+you will need it to write the <strong>Trigger conditions</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td>In the <strong>Package content</strong>, select the Behavior &#8220;congrats&#8221; in order to display its properties.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Set:</p>
+<ul>
+<li><p class="first">the <strong>Name</strong> with &#8220;Congratulations&#8221;,</p>
+</li>
+<li><p class="first">the <strong>Nature</strong> with &#8220;Interactive&#8221;,</p>
+</li>
+<li><p class="first">the <strong>Trigger sentences</strong> with  &#8220;Great Success&#8221; (panel on the right),</p>
+</li>
+<li><p class="first">the <strong>Loading responses</strong> with &#8220;Let me check&#8221; (panel on the right) and</p>
+</li>
+<li><p class="first">the <strong>Launch trigger condition</strong> with</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">((&#39;Launchpad/NumPeopleZone2&#39; &gt; 0) ~ 5)</span>
+<span class="go">&amp;&amp; (&#39;Launchpad/PreviousActivity&#39; !=&quot;&lt;my_application_id&gt;/congrats&quot;)</span>
+</pre></div>
+</div>
+<p>Where &lt;my_application_id&gt; is the <strong>Application ID</strong> you have previously copied.</p>
+</li>
+</ul>
+<img alt="../../../_images/tuto_interactive.png" class="last" src="../../../_images/tuto_interactive.png" style="width: 577px; height: 480px;" />
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Test the interactive Activity</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Save the <strong>Project</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td>In the <strong>Robot Applications</strong> panel, click the <img alt="install_apps-button" class="img-inline" src="../../../_images/application_manager_add_current.png" /> <strong>Package and install
+the current project to the robot</strong> button.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="life_off-button" class="img-inline" src="../../../_images/chore_life_button.png" /> <strong>Turn autonomous life on</strong> button.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td>Remain at 2~3 meters in front of your robot.</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="5">
+<li></li>
+</ol>
+</td>
+<td>Go close until dialog/speech recognition triggers, say &#8220;Great Success&#8221;.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result</strong></p>
+<p>Your <strong>Aldebaran</strong> robot says the congratulation sentence only once, and will not repeat it
+until another Activity take place, or you say &#8220;Great success&#8221; again.</p>
+</div>
+<div class="section" id="understanding-the-trigger-conditions">
+<h2>Understanding the Trigger conditions<a class="headerlink" href="#understanding-the-trigger-conditions" title="Permalink to this headline">¶</a></h2>
+<p>We want our interactive activity to be autonomously started when there is someone
+detected at some distance for 5 seconds. Thus we are using the event <strong>Launchpad/NumPeopleZone2</strong>
+and the trigger condition looks like this:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">(&#39;Launchpad/NumPeopleZone2&#39; &gt; 0) ~ 5</span>
+</pre></div>
+</div>
+<p>However as we do not want our application to be started continuously if there is none around
+the robot, we added another condition:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">(&#39;Launchpad/PreviousActivity&#39; != &quot;&lt;my_application_id&gt;/congrats&quot;)</span>
+</pre></div>
+</div>
+<p>This Condition makes sure that the activity will be started only once in a row.
+The activity will be able to be focused again if another activity has been focused
+in the meantime.</p>
+<p>Thus the final launch trigger condition of our activity becomes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Expression part ...</th>
+<th class="head">Means ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>(&#8216;Launchpad/NumPeopleZone2&#8217; &gt; 0) ~ 5</td>
+<td>At least one person seen in Zone 2 during
+5 seconds.</td>
+</tr>
+<tr class="row-odd"><td>&amp;&amp;</td>
+<td>and</td>
+</tr>
+<tr class="row-even"><td>(&#8216;Launchpad/PreviousActivity&#8217;
+!=&#8221;&lt;my_application_id&gt;/congrats &#8221;)</td>
+<td>the last activity was not &#8220;congrats&#8221;,
+i.e. another <strong>Activity</strong> took place
+since the last loneliness complain.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="to-go-further">
+<h3>To go further<a class="headerlink" href="#to-go-further" title="Permalink to this headline">¶</a></h3>
+<p>To discover all events and expressions you may use as <strong>Launch trigger condition</strong>,
+see:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../naoqi/core/triggerconditions.html#launchtriggerconditions"><em>Launch trigger conditions</em></a>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="create_solitary_activity.html" title="Creating a Solitary activity">Creating a Solitary activity</a>
+     |
+    <a href="index.html" title="Choregraphe Tutorials" accesskey="U">Choregraphe Tutorials</a>
+   |
+    <a href="resource_manager.html" title="Resources manager">Resources manager</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Choregraphe Tutorials</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../choregraphe_first_steps.html">Your first steps in Choregraphe</a></li>
+<li class="toctree-l5"><a class="reference internal" href="basic.html">Playing music</a></li>
+<li class="toctree-l5"><a class="reference internal" href="movements.html">Moving my limbs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="animated_speech.html">Testing the Body language</a></li>
+<li class="toctree-l5"><a class="reference internal" href="speech_recognition.html">Testing the speech recognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="life.html">Testing Autonomous Life</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flow_control.html">Using Flow Control boxes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="attached_files.html">Using attached files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog_topic.html">Creating Dialog boxes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="boxes.html">Creating Python boxes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="create_solitary_activity.html">Creating a Solitary activity</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Creating an Interactive activity</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="resource_manager.html">Resources manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="recognize_objects.html">Recognizing objects</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Creating an Interactive activity</a><ul>
+<li><a class="reference internal" href="#step-1-create-a-behavior">Step 1: Create a Behavior</a></li>
+<li><a class="reference internal" href="#step-2-transform-it-into-an-interactive-activity">Step 2: Transform it into an Interactive Activity</a></li>
+<li><a class="reference internal" href="#understanding-the-trigger-conditions">Understanding the Trigger conditions</a><ul>
+<li><a class="reference internal" href="#to-go-further">To go further</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="create_solitary_activity.html" title="Creating a Solitary activity">previous</a>
+     |
+    <a href="index.html" title="Choregraphe Tutorials" accesskey="U">up</a>
+   |
+    <a href="resource_manager.html" title="Resources manager">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

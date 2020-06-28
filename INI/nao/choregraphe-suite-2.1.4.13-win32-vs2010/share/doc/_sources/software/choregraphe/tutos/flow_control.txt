@@ -1,0 +1,84 @@
+.. include:: ../bulk/common.rst
+
+.. _logical-boxes-tuto:
+
+Using Flow Control boxes
+========================
+
+| Here is an example of the use of 2 **Flow Control** boxes: **For** and **Wait For Signals**.
+| **Flow Control** boxes are very useful when you want to create more complex behaviors.
+
+*Create the following behavior*: while introducing himself, |roboN| nods two times,
+then when both are done, |roboN| starts to wave.
+
+=====  =================================================================================
+Step       Action
+=====  =================================================================================
+1.     Drag and drop a **Audio**> **Voice** > **Say** box.
+
+       Write |roboN|'s introduction sentence (*e.g.* "Hello I am |roboN| the little
+       robot and I am ready to serve you, master!")
+
+       Connect its input to the main input of the behavior.
+
+       For further details, see:
+       :ref:`choregraphe-howto-make-nao-say-something`.
+
+2.     Create a new **Timeline** box, call it "Nod".
+
+       Create a simple nodding movement behavior with its
+       Motion Timeline.
+
+       Connect its input to the main input of the behavior.
+
+       For further details, see:
+       :ref:`choregraphe-howto-create-timeline-box` and
+       :ref:`Tutorial about movements<movements-tuto>`.
+
+Test   If you use a real robot, you have to stiffen
+       your robot first.
+
+       For further details, see:
+       :ref:`choregraphe-howto-enslave`.
+
+       Click the |play-button| **Play** button: |roboN| nods once
+       and introduces himself.
+
+3.     Add a **Flow Control** > **For** box to your behavior.
+
+       Set its **Final value** parameter to 2.
+
+       Connect it to your "Nod" box as below (outputs with inputs):
+
+       .. image:: /medias/dev/tutos/choregraphe/chore_tuto_loop.png
+          :width: 359 px
+          :height: 414 px
+
+Test   |roboN| nods two times and talk.
+
+       It’s not bad but we also want NAO to start waving after he has finished nodding
+       and talking. This is quite simple: a **Wait For Signals** box should be used.
+
+4.     Add a **Flow Control** > **Wait For Signals** box.
+
+       Connect the **onStopped** output of **Say** box to its **Signal 1** input
+       and the **onStopped** output of **For** to its **Signal 2** input.
+
+       The **Wait For Signals** box stimulates its output once the two inputs are
+       stimulated.
+
+5.     Add a **Motions** > **Animations** > **Hello** box.
+
+       .. image:: /medias/dev/tutos/choregraphe/chore_tuto_motionloopwaitwalk.png
+          :width: 505 px
+          :height: 406 px
+
+Test   |roboN| starts waving after he has finished nodding and talking!
+
+6.     As a final exercise, you could create a single box that perform all these
+       actions.
+
+       For further details, see:
+       :ref:`choregraphe-howto-convert-boxes-to-one-box`.
+=====  =================================================================================
+

@@ -1,0 +1,498 @@
+.. _alaudioplayer-api:
+
+ALAudioPlayer API
+=================
+
+:ref:`naoqi-audio` - :ref:`Overview <alaudioplayer>` | API
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alaudioplayerproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALAudioPlayerProxy
+
+* :cpp:func:`ALAudioPlayerProxy::getCurrentPosition`
+* :cpp:func:`ALAudioPlayerProxy::getFileLength`
+* :cpp:func:`ALAudioPlayerProxy::getInstalledSoundSetsList`
+* :cpp:func:`ALAudioPlayerProxy::getLoadedFilesIds`
+* :cpp:func:`ALAudioPlayerProxy::getLoadedFilesNames`
+* :cpp:func:`ALAudioPlayerProxy::getLoadedSoundSetsList`
+* :cpp:func:`ALAudioPlayerProxy::getMasterVolume`
+* :cpp:func:`ALAudioPlayerProxy::getSoundSetFileNames`
+* :cpp:func:`ALAudioPlayerProxy::getVolume`
+* :cpp:func:`ALAudioPlayerProxy::goTo`
+* :cpp:func:`ALAudioPlayerProxy::isSoundSetFileInstalled`
+* :cpp:func:`ALAudioPlayerProxy::isSoundSetInstalled`
+* :cpp:func:`ALAudioPlayerProxy::isSoundSetLoaded`
+* :cpp:func:`ALAudioPlayerProxy::loadFile`
+* :cpp:func:`ALAudioPlayerProxy::loadSoundSet`
+* :cpp:func:`ALAudioPlayerProxy::pause`
+* :cpp:func:`ALAudioPlayerProxy::play`
+* :cpp:func:`ALAudioPlayerProxy::playFile`
+* :cpp:func:`ALAudioPlayerProxy::playFileFromPosition`
+* :cpp:func:`ALAudioPlayerProxy::playFileInLoop`
+* :cpp:func:`ALAudioPlayerProxy::playInLoop`
+* :cpp:func:`ALAudioPlayerProxy::playSine`
+* :cpp:func:`ALAudioPlayerProxy::playSoundSetFile`
+* :cpp:func:`ALAudioPlayerProxy::playWebStream`
+* :cpp:func:`ALAudioPlayerProxy::setMasterVolume`
+* :cpp:func:`ALAudioPlayerProxy::setPanorama`
+* :cpp:func:`ALAudioPlayerProxy::setVolume`
+* :cpp:func:`ALAudioPlayerProxy::stopAll`
+* :cpp:func:`ALAudioPlayerProxy::unloadAllFiles`
+* :cpp:func:`ALAudioPlayerProxy::unloadFile`
+* :cpp:func:`ALAudioPlayerProxy::unloadSoundSet`
+
+
+Methods
+-------
+
+.. cpp:function:: float ALAudioPlayerProxy::getCurrentPosition(const int& taskId)
+
+  Returns the position in seconds in the file currently played.
+  The Id of the playing task will be returned when calling a play method
+  (eg. :cpp:func:`ALAudioPlayerProxy::play`)
+  in a non-blocking manner. See below for an example in Python.
+
+  :download:`alaudioplayer_getcurrentposition.py </samples/python/alaudioplayer/alaudioplayer_getcurrentposition.py>`
+
+  .. literalinclude:: /samples/python/alaudioplayer/alaudioplayer_getcurrentposition.py
+    :language: py
+
+  :param taskId: Id of the task handling the currently playing of the file
+  :return: Current position in seconds
+
+
+
+.. cpp:function:: float ALAudioPlayerProxy::getFileLength(const int& taskId)
+
+  Returns the length in second of the file that is currently played.
+
+  :param taskId: Id of the task handling the playing of the file
+  :return: Length of the file in seconds
+
+
+
+.. cpp:function:: std::vector<std::string> ALAudioPlayerProxy::getInstalledSoundSetsList()
+
+  Returns the list of the installed soundsets.
+
+
+
+.. cpp:function:: std::vector<std::string> ALAudioPlayerProxy::getLoadedFilesIds()
+
+  Returns an array containing the task Ids corresponding to the currently loaded files.
+  File can be loaded using :cpp:func:`ALAudioPlayerProxy::loadFile`.
+
+  :return: Array of task Ids
+
+
+
+.. cpp:function:: std::vector<std::string> ALAudioPlayerProxy::getLoadedFilesNames()
+
+  Returns an array containing the filenames (absolute paths) of the currently loaded files.
+  File can be loaded using :cpp:func:`ALAudioPlayerProxy::loadFile`.
+
+  :return: Array of filenames
+
+
+
+.. cpp:function:: std::vector<std::string> ALAudioPlayerProxy::getLoadedSoundSetsList()
+
+  Returns an array containing the currently loaded soundsets.
+
+  :return: Array of loaded soundsets
+
+
+
+.. cpp:function:: std::vector<std::string> ALAudioPlayerProxy::getSoundSetFileNames(const std::string setName)
+
+  Returns an array containing the filenames of the corresponding soundset.
+
+  :param setName: name of the soundset to examine
+  :return: Array of filenames
+
+* :cpp:func:`ALAudioPlayerProxy::getSoundSetFileNames`
+
+
+.. cpp:function:: float ALAudioPlayerProxy::getMasterVolume()
+
+  Returns the master volume used by *ALAudioPlayer* for playback. This volume
+  can be set by using :cpp:func:`ALAudioPlayerProxy::setMasterVolume`. This volume
+  is independent of the system volume that can be set through *ALAudioDevice*.
+
+  :return: Volume [0.0 - 1.0]
+
+
+
+.. cpp:function:: float ALAudioPlayerProxy::getVolume(const int& taskId)
+
+  Returns the volume level at which the specified task should be played. This
+  volume is independent of the master volume set with :cpp:func:`ALAudioPlayerProxy::setMasterVolume`.
+  This task dependent volume can be set by using :cpp:func:`ALAudioPlayerProxy::setVolume`.
+
+  :param taskId: Id of the task handling the playing of the file
+  :return: Volume - [0.0 - 1.0]
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::goTo(const int& taskId, const float& position)
+
+  Jumps to a given position in second in the specified file.
+
+  :param taskId: Id of the task handling the playing of the file
+  :param position: Position in the file (in second)
+
+
+  :download:`alaudioplayer_goto.py </samples/python/alaudioplayer/alaudioplayer_goto.py>`
+
+  .. literalinclude:: /samples/python/alaudioplayer/alaudioplayer_goto.py
+    :language: py
+
+
+.. cpp:function:: bool ALAudioPlayerProxy::isSoundSetFileInstalled(const std::string& soundSet,const std::string& soundSetFile)
+
+  Tells if a sound is present in a given soundset.
+
+
+
+.. cpp:function:: bool ALAudioPlayerProxy::isSoundSetInstalled(const std::string& soundSet)
+
+  Tells if a soundset is installed.
+
+
+
+.. cpp:function:: bool ALAudioPlayerProxy::isSoundSetLoaded(const std::string& soundSet)
+
+  Tells if a given soundset is already loaded.
+
+
+
+.. cpp:function:: int ALAudioPlayerProxy::loadFile(const std::string& fileName)
+
+  Preloads a file but does not play it yet. Preloading a file is a way to reduce
+  the time necessary to actually start the playback when a "play" function is called.
+  The playback of a loaded file can be started by calling :cpp:func:`ALAudioPlayerProxy::play`.
+
+  :param fileName: Absolute path of the file to load
+  :return: Id of the task handling the playing of the file
+
+
+.. cpp:function:: void ALAudioPlayerProxy::loadSoundSet(const std::string &setName)
+
+  Loads a soundset.
+
+  :param setName: Name of the soundset.
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::pause(const int& taskId)
+
+  Pause the playback of the specified task. The pause can be resume by calling
+  :cpp:func:`ALAudioPlayerProxy::play`.
+
+  :param taskId: Id of the task handling the playing of the file
+
+
+
+.. _ALAudioPlayerProxy::play1:
+
+.. cpp:function:: void ALAudioPlayerProxy::play(const int& taskId)
+
+  There are two overloads of this function:
+
+  - :ref:`ALAudioPlayerProxy::play <ALAudioPlayerProxy::play1>`
+  - :ref:`ALAudioPlayerProxy::play <ALAudioPlayerProxy::play2>` with volume and pan parameters
+
+  Starts the playback of the specified task.
+
+  :param taskId: Id of the task handling the playing of the file
+
+
+  :download:`alaudioplayer_play.py </samples/python/alaudioplayer/alaudioplayer_play.py>`
+
+  .. literalinclude:: /samples/python/alaudioplayer/alaudioplayer_play.py
+     :language: py
+
+
+
+.. _ALAudioPlayerProxy::play2:
+
+.. cpp:function:: void ALAudioPlayerProxy::play( const int& taskId, const float& volume, const float& pan )
+
+  Starts the playback of the specified task, with a specific volume
+  and stereo panorama. This task has for example been created using :cpp:func:`ALAudioPlayerProxy::loadFile`.
+
+  :param taskId: Id of the task handling the playing of the file
+  :param volume: Volume of the sound file [0.0 - 1.0]
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right)
+
+  :download:`alaudioplayer_play.py </samples/python/alaudioplayer/alaudioplayer_play.py>`
+
+  .. literalinclude:: /samples/python/alaudioplayer/alaudioplayer_play.py
+    :language: py
+
+
+
+.. _ALAudioPlayerProxy::playFile1:
+
+.. cpp:function:: void ALAudioPlayerProxy::playFile(const std::string& fileName)
+
+  There are two overloads of this function:
+
+  - :ref:`ALAudioPlayerProxy::playFile <ALAudioPlayerProxy::playFile1>`
+  - :ref:`ALAudioPlayerProxy::playFile <ALAudioPlayerProxy::playFile2>` with volume and pan parameters
+
+  Starts the playback of the specified file. This call is equivalent to calling
+  successively :cpp:func:`ALAudioPlayerProxy::loadFile` and :cpp:func:`ALAudioPlayerProxy::play`.
+
+  :param fileName: Absolute path of the file
+
+  :download:`alaudioplayer_playfile.py </samples/python/alaudioplayer/alaudioplayer_playfile.py>`
+
+  .. literalinclude:: /samples/python/alaudioplayer/alaudioplayer_playfile.py
+    :language: py
+
+
+
+.. _ALAudioPlayerProxy::playFile2:
+
+.. cpp:function:: void ALAudioPlayerProxy::playFile(const std::string& fileName, const float& volume, const float& pan )
+
+  Starts the playback of the specified file. This call is equivalent to calling
+  successively :cpp:func:`ALAudioPlayerProxy::loadFile` and :cpp:func:`ALAudioPlayerProxy::play`
+  with specific volume and pan.
+
+  :param fileName: Absolute path of the file
+  :param volume: Volume of the sound file [0.0 - 1.0]
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)
+
+  :download:`alaudioplayer_playfile.py </samples/python/alaudioplayer/alaudioplayer_playfile.py>`
+
+  .. literalinclude:: /samples/python/alaudioplayer/alaudioplayer_playfile.py
+    :language: py
+
+
+
+.. _ALAudioPlayerProxy::playFileFromPosition1:
+
+.. cpp:function:: void ALAudioPlayerProxy::playFileFromPosition( const std::string& fileName, const float& position )
+
+  There are two overloads of this function:
+
+  - :ref:`ALAudioPlayerProxy::playFileFromPosition <ALAudioPlayerProxy::playFileFromPosition1>`
+  - :ref:`ALAudioPlayerProxy::playFileFromPosition <ALAudioPlayerProxy::playFileFromPosition2>` with volume and pan parameters
+
+  Starts the playback of the specified file from a given position in second.
+
+  :param fileName: Absolute path of the file
+  :param position: Position in second where the playing should begin
+
+
+
+.. _ALAudioPlayerProxy::playFileFromPosition2:
+
+.. cpp:function:: void ALAudioPlayerProxy::playFileFromPosition( const std::string& fileName, const float& position, const float& volume, const float& pan )
+
+  Starts the playback of the specified file from a given position in second with a given volume and pan.
+
+  :param fileName: Absolute path of the file
+  :param position: Position in second where the playing should begin
+  :param volume: Volume requested [0.0 - 1.0]
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)
+
+
+
+.. _ALAudioPlayerProxy::playFileInLoop1:
+
+.. cpp:function:: void ALAudioPlayerProxy::playFileInLoop(const std::string& fileName)
+
+  There are two overloads of this function:
+
+  - :ref:`ALAudioPlayerProxy::playFileInLoop <ALAudioPlayerProxy::playFileInLoop1>`
+  - :ref:`ALAudioPlayerProxy::playFileInLoop <ALAudioPlayerProxy::playFileInLoop2>` with volume and pan parameters
+
+  Starts the playback of the specified file and loop. The playback can then be stopped by calling *stop(const int & taskId)*.
+
+  :param fileName: Absolute path of the file
+
+
+
+.. _ALAudioPlayerProxy::playFileInLoop2:
+
+.. cpp:function:: void ALAudioPlayerProxy::playFileInLoop(const std::string& fileName, const float& volume, const float& pan )
+
+  Starts the playback of the specified file and loop, with specific volume and pan.
+  The playback can then be stopped by calling *stop(const int & taskId)*.
+
+  :param fileName: Absolute path of the file
+  :param volume: Volume requested [0.0 - 1.0]
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)
+
+
+
+.. _ALAudioPlayerProxy::playInLoop1:
+
+.. cpp:function:: void ALAudioPlayerProxy::playInLoop(const int& taskId)
+
+  There are two overloads of this function:
+
+  - :ref:`ALAudioPlayerProxy::playInLoop <ALAudioPlayerProxy::playInLoop1>`
+  - :ref:`ALAudioPlayerProxy::playInLoop <ALAudioPlayerProxy::playInLoop2>` with volume and pan parameters
+
+  Starts the playback of the specified task and loop.
+
+  :param taskId: Id of the task handling the playing of the file
+
+
+
+.. _ALAudioPlayerProxy::playInLoop2:
+
+.. cpp:function:: void ALAudioPlayerProxy::playInLoop( const int& taskId, const float& volume, const float& pan )
+
+  Plays a wav, ogg or mp3 file in loop, with specific volume and audio balance
+
+  :param taskId: Id of the task handling the playing of the file
+  :param volume: Volume requested [0.0 - 1.0]
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)
+
+.. cpp:function:: void ALAudioPlayerProxy::playSine( const int& frequence, const int& gain, const int& pan, const float& duration )
+
+  Play a sine wave which the specified characteristics.
+
+  :param frequence: Frequence in Hertz
+  :param gain: Volume between [0 - 100]
+  :param pan: Stereo Pan set to either {-1,0,+1}
+  :param duration: Duration of the sine wave in seconds
+
+
+
+.. _ALAudioPlayerProxy::playSoundSetFile1:
+
+.. cpp:function:: void ALAudioPlayerProxy::playSoundSetFile(const std::string &fileName)
+
+  There are 3 overloads of this function:
+
+  - :ref:`ALAudioPlayerProxy::playSoundSetFile <ALAudioPlayerProxy::playSoundSetFile1>` in one of the loaded soundsets.
+  - :ref:`ALAudioPlayerProxy::playSoundSetFile <ALAudioPlayerProxy::playSoundSetFile2>` in the specified soundset.
+  - :ref:`ALAudioPlayerProxy::playSoundSetFile <ALAudioPlayerProxy::playSoundSetFile3>` in the specified soundset and with specified parameters.
+
+  Plays a sound contained in one of the loaded soundsets.
+
+  If the same sound is present in different soundsets, it takes the sound of the
+  first soundset loaded which contains this sound.
+
+  :param fileName: Name of the sound file.
+
+
+
+
+.. _ALAudioPlayerProxy::playSoundSetFile2:
+
+.. cpp:function:: void ALAudioPlayerProxy::playSoundSetFile(const std::string &soundSetName,const std::string &fileName)
+
+  Plays a sound contained in a in a specified soundset with the default parameters.
+
+  :param soundSetName: Name of the soundset.
+
+  :param fileName: Name of the sound file.
+
+
+
+
+.. _ALAudioPlayerProxy::playSoundSetFile3:
+
+.. cpp:function:: void ALAudioPlayerProxy::playSoundSetFile(const std::string &soundSetName, const std::string &fileName, const float & position, const float &volume, const float &pan, const bool &loop)
+
+  Plays a sound contained in a specified soundset and with specified parameters.
+
+  :param soundSetName: Name of the soundset.
+
+  :param fileName: Name of the sound file.
+
+  :param position:  position in second in the specified file.
+
+  :param volume: Volume.
+
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right).
+
+  :param loop: play in loop yes/no.
+
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::playWebStream( const std::string& streamName, const float& volume, const float& pan)
+
+  Starts the playback of a web audio stream.
+
+  :param streamName: Path of the web audio stream
+  :param volume: Volume requested [0.0 - 1.0]
+  :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::setMasterVolume(const float& volume)
+
+   Sets the master volume used by *ALAudioPlayer* for playback. This volume
+   is independent of the system volume that can be set through *ALAudioDevice*.
+
+   :param volume: Volume [0.0 - 1.0]
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::setPanorama(const float& pan)
+
+   Sets the stereo panorama for all the playback tasks handled by *ALAudioPlayer*.
+
+   :param pan: Stereo panorama requested (-1.0 : left / 1.0 : right / 0.0 : center)
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::setVolume( const int& taskId, const float& volume )
+
+  Sets the volume level at which the specified task should be played. This
+  volume is independent of the master volume set with :cpp:func:`ALAudioPlayerProxy::setMasterVolume`.
+
+  :param taskId: Id of the task handling the playing of the file
+  :param volume: Volume - [0.0 - 1.0]
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::stopAll()
+
+  Stops all the files that are currently being played.
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::unloadAllFiles()
+
+  Unloads all the files already loaded.
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::unloadFile(const int& taskId)
+
+  Unloads a file previously loaded with :cpp:func:`ALAudioPlayerProxy::loadFile`.
+
+  :param taskId: Id of the task handling the playing of the file
+
+
+
+
+.. cpp:function:: void ALAudioPlayerProxy::unloadSoundSet(const std::string &setName)
+
+  Unloads a soundset.
+
+  :param setName: Name of the soundset.
+

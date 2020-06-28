@@ -1,0 +1,49 @@
+.. _create_tab:
+
+Create tab
+==========
+
+The **Create** tab allows the **Teacher** to create **Quizzes**.
+
+The quizzes are used byt the **Quiz me!** **Activity**.
+
+.. image:: /medias/asknao/create_tab.png
+   :width: 483 px
+   :height: 270 px
+
+Creating a Quiz
+------------------
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Quiz me!** button.
+
+        the **Quizz creation** panel is displayed.
+
+        .. image:: /medias/asknao/quizz_creation.png
+            :width: 483 px
+            :height: 535 px
+
+2.      Fill all the mandatory fields.
+
+3.      Click the **Add question** button.
+
+        .. image:: /medias/asknao/add_question.png
+            :width: 436 px
+            :height: 236 px
+
+4.      Enter at least one question and one valid answer.
+
+5.      Optionally, click the **Add correct answer** or the
+        **Add wrong answer**.
+
+6.      Click the **OK** button.
+
+        The first question appears.
+
+7.      Repeat steps *3* to *6* as long as you want to add questions.
+
+8.      Click the **Save Quizz** button.
+=====  =========================================================================
+

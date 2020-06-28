@@ -1,0 +1,43 @@
+.. _monitor-plugin-log-viewer:
+
+Log viewer
+==========
+
+The **Log viewer** allows you to visualize the logs sent by a robot and filter
+them, based on their:
+
+* level
+* category
+* message content
+
+To load the **Log viewer** plugin in **Monitor**, see :ref:`monitor-start`.
+
+Once loaded, the following panel is displayed:
+
+.. image:: /medias/desktop/monitor/monitor_log_viewer.png
+    :width: 492 px
+    :height: 294 px
+
+
++-----------------------+------------------------------------------------------+
+| Name                  | Description                                          |
++=======================+======================================================+
+| **Categories** and    | Through these, you can filter logs displayed         |
+| **Levels** filters    | in the log view. Only logs matching the              |
+|                       | selected filters and categories will be              |
+|                       | shown.                                               |
++-----------------------+------------------------------------------------------+
+| **Logs**              | The logs emitted by the robot since the              |
+|                       | plugin was loaded. Only the logs satisfying          |
+|                       | the current filters settings are displayed.          |
++-----------------------+------------------------------------------------------+
+| **Settings** menu     | You can customize the various log view               |
+|                       | options with this button.                            |
++-----------------------+------------------------------------------------------+
+| **Filter**            | The text entered here is used to filter the          |
+|                       | logs based on their message content.                 |
++-----------------------+------------------------------------------------------+
+| **Detailed view**     | When selecting one or several logs in the log        |
+|                       | view, they appear here in a textual detailed         |
+|                       | way, allowing you to copy and paste them.            |
++-----------------------+------------------------------------------------------+

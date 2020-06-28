@@ -1,0 +1,64 @@
+
+.. include:: /bulk/common.rst
+
+.. _all_robots:
+
+|roboN| - Technical overview
+=============================
+
++-----------------------------------------------------+
+| Technical specifications                            |
++=========================+===========================+
+| **Construction**        | **CPU**                   |
+|                         |                           |
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|    dimensions_robot     |    motherboard_robot      |
++-------------------------+---------------------------+
+| **Energy**              | **Connectivity**          |
+|                         |                           |
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|    battery_robot        |    connectivity_nao       |
+|                         |                           |
++-------------------------+---------------------------+
+| **Interaction**         | **Sensors**               |
+|                         |                           |
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|    loudspeaker_robot    |    fsr_robot              |
+|    microphone_robot     |    inertial_robot         |
+|    video_robot          |    sonar_robot            |
+|    infrared_robot       |    mre_robot              |
+|    leds_robot           |    contact-sensors_robot  |
+|                         |                           |
++-------------------------+---------------------------+
+
+**Optional devices**
+
+.. toctree::
+   :maxdepth: 1
+
+   languages
+   laser
+
+.. _nao_kinamtics:
+
+Kinematics data
+----------------
+
++-----------------------------------------------------+
+| Kinematics data                                     |
++=========================+===========================+
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|                         |    bodyparts              |
+|    links_robot          |                           |
+|    joints_robot         |    postures_robot         |
+|    masses_robot         |                           |
+|    motors_robot         |                           |
++-------------------------+---------------------------+

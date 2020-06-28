@@ -1,0 +1,249 @@
+
+.. |play-button| image:: /medias/desktop/beginning_play_button.png
+   :class: img-inline
+
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+
+
+.. _how_to_create_a_dialog:
+.. _aldialog-tuto:
+
+Creating Dialog boxes
+======================
+
+**See also**: :ref:`QiChat<dialog_toc>`
+
+------------
+
+This tutorial starts like the :ref:`helloworld_choregraphe_dialog` tutorial, then
+goes deeper in mastering **Dialog boxes** and **QiChat** scripting.
+
+1 - Hello World
+---------------
+
+=====  ===============================================================================================
+Step       Action
+=====  ===============================================================================================
+1.      Start **Choregraphe**.
+
+2.      Drag the **Audio** > **Voice** > **Set Language** box on the grey area.
+
+        Click the |parameter-button| **parameter** button and set
+        the language as **English**.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_00.png
+           :width: 484 px
+           :height: 350 px
+
+3.      Right click the grey area and choose, in the contextual menu,
+        **Create a new Box** > **Dialog...**.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_01.png
+           :width: 562 px
+           :height: 405 px
+
+4.      Click the **Add a new topic** button, then type a name without spaces,
+        for example: *HelloWorld*.
+
+        Click the **Add** button, then the **OK** button.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_02.png
+           :width: 442 px
+           :height: 498 px
+
+5.      Create links as below.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_05.png
+           :width: 538 px
+           :height: 386 px
+
+6.      In the **Project content**, double click the HelloWorld_enu.top file.
+
+        The **Script editor** appears.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_06.png
+           :width: 581 px
+           :height: 459 px
+
+7.      Type those rules:
+
+        .. code-block:: ini
+
+           u:(Hello) Hello, young Padawan
+
+           u:(Good morning) Let's start a wonderful day
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_07.png
+           :width: 359 px
+           :height: 325 px
+=====  ===============================================================================================
+
+Testing on a simulated robot
++++++++++++++++++++++++++++++++
+
+=====  ===============================================================================
+Step       Action
+=====  ===============================================================================
+1.      Make sure you are connected on a virtual robot.
+
+        For further details, see: :ref:`choregraphe-howto-connect-to-simulated-nao`.
+
+2.      Click the |play-button| **Play** button.
+
+3.      In the :ref:`dialog_panel`, enter "Hello" and press **Enter**.
+
+        You can see the result both in **Dialog** panel and in the **Robot view**.
+
+        .. image:: /medias/desktop/choregraphe/dialog_tuto2.png
+           :width: 533 px
+           :height: 383 px
+=====  ===============================================================================
+
+Testing on a real robot
++++++++++++++++++++++++++
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Make sure you are connected on a real robot.
+
+        For further details, see: :ref:`chore_howto_connect`.
+
+2.      Click the |play-button| **Play** button.
+
+3.      Wait for the signal indicating that the robot is listening:
+
+        * A "bip" sound  is played and
+        * Eye LEDs become **Blue** and turn.
+
+4.      Say "Hello".
+
+        The robot says "hello young padavan".
+
+        You can also see the result both in **Dialog** panel
+        and in the **Robot view**.
+=====  ==========================================================================
+
+
+2 - "Hi", "Hello"... in one rule
+--------------------------------
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      To make your first rule a little bit more complex, enrich your script:
+
+        .. code-block:: ini
+
+           u:([hi hello wassup]) hello young padawan
+           u:(["tell me" "give me"] your name) of course, my name is NAO
+
+        .. image:: /medias/desktop/choregraphe/dialog_tuto3.png
+           :width: 470 px
+           :height: 202 px
+=====  ==========================================================================
+
+To go further, see: :ref:`delimiter_rule`.
+
+3 - Connecting QiChat script and animations
+--------------------------------------------
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Add these new rules:
+
+        .. code-block:: ini
+
+           u:(["can you" please] sit down {now}) ok i sit down $sit=1
+           u:(["can you" please] stand up {now}) ok i stand up $standup=1
+
+2.      Add two :ref:`outputs <choregraphe-reference-box-output>` to the
+        **Hello world** box.
+
+        * one called "sit",
+        * one called "standup".
+
+        .. image:: /medias/desktop/choregraphe/dialog_tuto4.png
+           :width: 326 px
+           :height: 333 px
+
+        For further details, see:
+        :ref:`choregraphe-howto-add-remove-box-in-out-param`.
+
+3.      Add two **Flow Control** > **Time** > **Wait** boxes and
+        connect them to the outputs you have created.
+
+4.      Add and connect a **Motion** > **Sit Down** and a **Motion** >
+        **Stand Up** boxes.
+
+        .. image:: /medias/desktop/choregraphe/dialog_tuto5.png
+           :width: 448 px
+           :height: 372 px
+
+=====  ==========================================================================
+
+To go further, see: :ref:`dialog_doc_variables`.
+
+4 - Jumping from one topic to another
+--------------------------------------
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      In a new **Project**, add an **Audio** > **Voice** > **Set Language**
+        box.
+
+2.      Create two different **Dialog topic** boxes, called **Food** and
+        **Sport** with the following content:
+
+        .. code-block:: ini
+
+           topic: ~Food()
+           language: enu
+
+           u:(let's talk about food) OK, guess what I like
+
+           u:^private(do you like fish) yes and sea food too
+           u:^private(do you like meat) no, I don't
+
+        .. code-block:: ini
+
+           topic: ~Sport()
+           language: enu
+
+           u:(let's talk about sport) OK, guess what sport I like
+
+           u:^private(do you like tennis) no, I can't play tennis
+           u:^private(do you like yoga) yes, would you like to do yoga with me?
+
+3.      Link the tree boxes as follows:
+
+        .. image:: /medias/desktop/choregraphe/dialog_tuto6.png
+           :width: 397 px
+           :height: 337 px
+
+4.      Test it.
+
+        To jump from a topic to another and give it the focus,
+        use the one of their user rules:
+
+        In our example :
+        "Let's talk about food" or "Let's talk about sport".
+
+        Once a topic (food or sport) has the focus:
+
+        * all its **private user rules** are activated,
+        * while the **private user rules** of the other topic are not.
+=====  ==========================================================================
+
+To go further, see: :ref:`activation`.
+
+To go further
+--------------
+
+You can enrich the dialog with other, more complex rules.
+
+To go further see: :ref:`dialog_rules`.

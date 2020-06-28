@@ -1,0 +1,375 @@
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. |search-previous| image:: /medias/desktop/choregraphe/search_previous.png
+   :class: img-inline
+
+.. |connect-button| image:: /medias/desktop/connect-to_button.png
+   :class: img-inline
+
+.. |con_star_black| image:: /medias/desktop/choregraphe/con_star_black.png
+   :class: img-inline
+
+.. _chore_connection_management:
+
+Connection Management
+======================
+
+Connecting Choregraphe to a robot
+----------------------------------
+
+To connect **Choregraphe** to:
+
+* a real robot, see :ref:`chore_howto_connect`,
+* a simulated robot, see :ref:`choregraphe-howto-connect-to-simulated-nao`.
+
+
+Disconnecting Choregraphe
+--------------------------
+
+To end the connection between **Choregraphe** and a robot:
+
+* Choose **Connection** > **Disconnect** or
+
+* Choose **Connection** > **Connect to virtual robot**
+  in order to reconnect **Choregraphe** to the virtual robot launched by default.
+
+
+Managing Connection troubles
+-----------------------------
+
+In case of connection troubles, a tooltip offers guidance to fix the problem.
+
+.. image:: /medias/desktop/choregraphe/connection_management_message.png
+   :width: 526 px
+   :height: 271 px
+
+See also the :ref:`chore_connection_troubleshooting`.
+
+
+------------------
+
+
+.. _choregraphe-howto-connect-to-simulated-nao:
+
+How to connect Choregraphe to a simulated robot
+---------------------------------------------------
+
+There are several ways to get to a simulated robot. These ways are
+described in: :ref:`choregraphe-reference-simulated-robot`.
+
+To connect **Choregraphe** to:
+
+* the simulated robot included in **Choregraphe**:
+
+  In Choregraphe, choose **Connection** > **Connect to virtual robot** menu.
+
+  To change the model and the body type of the simulated robot, see :ref:`naoqi-settings`
+  in :ref:`choregraphe-detailed-interface-preferences`.
+
+* an external simulated robot:
+
+  =====  ==============================================================================================
+  Step    Action
+  =====  ==============================================================================================
+  1.      Launch **NAOqi** by double clicking on **naoqi/naoqi-bin** in your installation folder.
+
+  2.      In Choregraphe, choose **Connection** > **Connect to...** in the menu bar
+
+          or click on the |connect-button| **Connect to** button in the tool bar.
+
+  3.      In the Connection widget:
+
+          * if the simulated robot appears in the list, double click it,
+          * if not, set the IP address to **127.0.0.1** and port to **9559**
+            and click the **Connect to** button.
+  =====  ==============================================================================================
+
+* a simulated robot evolving in a virtual world:
+
+  See **Webots** documentation about :ref:`webots_launching` and :ref:`webots_connecting`.
+
+----------------------
+
+.. _chore_howto_connect:
+
+How to connect Choregraphe to a robot
+--------------------------------------
+
+To connect **Choregraphe** to a robot:
+
+=====  ==============================================================
+Step       Action
+=====  ==============================================================
+1.      Choose the **Connection** > **Connect to** menu or
+
+        Click the |connect-button| **Connect to**  button.
+
+        The :ref:`connection-widget` is displayed.
+
+        .. image:: /medias/desktop/choregraphe/chore_connect_to.png
+            :width: 598 px
+            :height: 394 px
+
+2.      Select a robot.
+
+3.      Click the **Connect to** button.
+
+        * The title bar displays the name of the connected robot.
+        * The :ref:`Robot view panel <3d-nao-panel>` displays the 3D
+          representation of the connected robot.
+=====  ==============================================================
+
+
+.. _connection-widget:
+
+Connection widget
+------------------
+
+What is the Connection widget
+++++++++++++++++++++++++++++++
+
+The **Connection** widget displays the list of robots **Choregraphe** can connect to,
+whether they are real or virtual.
+
+It allows you to select a robot and:
+
+* Connect **Choregraphe** to it,
+* Display its :ref:`Web page <opennao-web-page>`, or
+* Test its LEDs.
+
+How to display the Connection widget
++++++++++++++++++++++++++++++++++++++
+
+To display the **Connection** widget:
+
+* Choose  **Connection** > **Connect to** or
+* Click the |connect-button| **Connect to**  button.
+
+.. image:: /medias/desktop/choregraphe/chore_connect_to.png
+    :width: 598 px
+    :height: 394 px
+
+List of robots
++++++++++++++++
+
+The table below describes the columns of the list of robots.
+
+==================    ========================================================   =========================================================
+ Name                 Description                                                  For further details, see ...
+==================    ========================================================   =========================================================
+ |con_star_black|      Enables you to add a robot to **Favorites**.               :ref:`connection-widget-favorite`
+
+ **Status**            Displays the **type** and **state** of the robot.          :ref:`connection-widget-type`
+
+ **Name**              The robot's **name**.                                      :ref:`NAO Web Page Settings<opennao-web-page-settings>`
+
+ **Port**              The **port** used to connect to the robot.
+
+ **IP**                The IP address used to connect to the robot.
+==================    ========================================================   =========================================================
+
+.. _connection-widget-favorite:
+
+Favorite
+^^^^^^^^^^
+
+To add/remove a robot to **Favorites**, click the star.
+
+.. list-table::
+   :widths: 10 100
+   :header-rows: 1
+
+   * - Icon
+     - Means ...
+   * - .. image:: /medias/desktop/choregraphe/connection_star_blue.png
+     - The robot is a **Favorite** robot.
+
+       The next time you open **Connection widget**, the favorite robots will
+       appear at the top of the list.
+   * - .. image:: /medias/desktop/choregraphe/connection_star_grey.png
+     - The robot is **not** a favorite robot.
+
+.. _connection-widget-type:
+
+Type and state
+^^^^^^^^^^^^^^
+
+.. list-table::
+   :widths: 25 40 80
+   :header-rows: 1
+
+   * - Icon
+     - Type/State
+     - Description
+   * - .. image:: /medias/desktop/choregraphe/chore_robot_off.png
+     - A real robot.
+
+       **NAOqi is not running**.
+
+     - The robot is in a state in which it should be **impossible to establish a connection**.
+       NAOqi has been shutdown or is in a state that doesn't allow the connection.
+
+       .. note::
+          You can force the connection to this robot by enabling the option
+          **Use fixed port** and then click on **Connect to**.
+          It will try to solve the connection using this port (9559 by default).
+   * - .. image:: /medias/desktop/choregraphe/chore_robot_on.png
+
+       or :ref:`your custom buddy icon<opennao-web-page-settings>`.
+     - A real robot.
+
+       **NAOqi is running**.
+
+     - You can connect Choregraphe to this robot.
+
+       The contextual menu offers also the following options:
+
+       * **View web page**: Displays the webpage of the robot, where you can configure it (WiFi, name, NAOqi, ...).
+         For further details about the webpage, see the section: :ref:`NAO web page <opennao-web-page>`.
+       * **Test LEDs**: Starts a little animation on the eyes of the robot.
+         This enables you to confirm that this robot is yours.
+   * - .. image:: /medias/desktop/choregraphe/chore_computer.png
+     - A :ref:`simulated robot <choregraphe-reference-simulated-robot>`:
+
+       **NAOqi is running on a computer**.
+
+     - You can connect to this kind of robot.
+
+       But you cannot view its webpage nor test its LEDs.
+
+       .. note::
+
+          The connection to Choregraphe's local NAOqi
+          is automatically done when you execute Choregraphe. This local NAOqi
+          does not appear in the robot list, as the connection is not a network
+          connection. However, a reconnection to this NAOqi can be done through the
+          menu **Connection** > **Connect to virtual robot**.
+
+
+.. _chore_connection_troubleshooting:
+
+Troubleshooting
+----------------
+
+My robot doesn't appear in the list
+++++++++++++++++++++++++++++++++++++++
+
+Make sure your robot is:
+
+* Turned on.
+
+  For further details, see: :ref:`nao-turn-on`.
+
+* Connected to your network.
+
+  For further details, see: :ref:`nao-connecting`.
+
+I cannot connect Choregraphe to my robot
++++++++++++++++++++++++++++++++++++++++++
+
+If you cannot manage to connect to your robot using the list,
+you can connect directly to its IP address and its port:
+
+1. Select the checkbox **Use fixed port**, then fill in the field with its port
+   (9559 by default).
+
+2. Select the checkbox **Use fixed IP/hostname**, then fill in the field  with the IP
+   Address (that you can get by pressing once on the **Chest button** of your robot).
+
+3. Click the **Connect to** button.
+
+I got a synchronization error while sending my behavior to my robot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If your robot had rebooted while Choregraphe automatically reconnected to it,
+a failure can occur when sending the current behavior. As a consequence, the
+robot is disconnected and the behavior is not sent.
+
+Simply reconnect the robot manually and you will be able to send your behavior
+again.
+
+.. _chore-troubleshooting-connection:
+
+Connection troubles
+++++++++++++++++++++++
+In case of connection troubles on Windows, Mac or Linux, try the following in order to find out the reason:
+
+=====  ==============================================================================================================================
+Step       Action
+=====  ==============================================================================================================================
+1.      Launch Choregraphe with the option --no-naoqi
+
+        If it solves the problem, you should keep using the option --no-naoqi.
+
+        It seems that the NAOqi embedded in Choregraphe is corrupted. Nevertheless you can connect Choregraphe to NAO.
+        You can also simulate your behavior by launching manually naoqi from choregraphe_install_dir/bin/naoqi.
+
+2.      Test without your firewall.
+
+        If it solves the problem, you should review your firewall configuration for Choregraphe application:
+
+        2.1 Open the firewall configuration (on Windows Configuration Panel > system and security > Firewall > Authorized programs)
+
+        2.2 Remove all the choregraphe-bin references
+
+        2.3. Relaunch Choregraphe
+
+3.      **Linux or Mac only**: configure the 'ssh known hosts'.
+
+        If you can't connect to your NAO with ssh (``ssh nao@IP``), you may have troubles in your known hosts config.
+
+        You should remove the line referring to your robot in the file  ``~/.ssh/known_hosts``
+        or use the command:
+
+        .. code-block:: console
+
+            ssh-keygen -R {IP or name of the robot}
+
+4.      Reinstall Choregraphe.
+
+5.      Try with a local NAOqi:
+
+        5.1 Launch Choregraphe with the option --no-naoqi -vd
+
+        5.2 Launch naoqi on the same computer (from choregraphe_install_dir/bin/naoqi)
+
+        5.3 Connect Choregraphe to this naoqi (IP 127.0.0.1 PORT 9559)
+
+        If it fixes the problem, you certainly have some troubles on your own network configuration.
+
+6.      Ensure that NAO can connect to Choregraphe:
+
+        6.1 Connect to your NAO (with ssh or putty).
+
+        6.2 Try to ping your desktop computer IP from NAO.
+
+        6.3 Open a python shell on your NAO and create a proxy to a naoqi running on your desktop. For instance:
+
+        .. code-block:: python
+
+          from naoqi import ALProxy
+
+          log = ALProxy("ALLogger", DESKTOP_IP, NAOQI_DESKTOP_PORT)
+
+          log.info("python", "Hello from NAO")
+
+        If one of those two points fails, you certainly have some troubles on your own network configuration.
+
+7.      Open the required ports in your network configuration:
+
+        Choregraphe - NAOqi : 54010, 54011, 54012, ... ( as many as you have Choregraphe/Monitor instances running on the same computer).
+
+        Choregraphe - ftp : 20, 21
+
+        Choregraphe - http : 80
+
+        Choregraphe - log : 50998, 50999
+
+        Choregraphe - bonjour: 5353
+
+        NAOqi: 9559
+
+        NAO - webservices : 5222, 5223
+
+=====  ==============================================================================================================================

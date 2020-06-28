@@ -1,0 +1,41 @@
+.. _references:
+
+NAOqi Framework
+================
+
+.. toctree::
+  :hidden:
+
+  ../../dev/naoqi/index
+  NAOqi API <../naoqi/index>
+  > All C++ Classes <../cpp-classindex>
+  > All C++ Functions <../cpp-funcindex>
+  > All NAOqi Events <../naoqi-eventindex>
+  > All NAOqi Memory Keys <../naoqi-memoryindex>
+  C++ API <cpp-api>
+  Python API <python-api>
+
+
++---------------------------------------+------------------------------------------------+
+| API references                        | Related topics                                 |
++=======================================+================================================+
+| * :ref:`naoqi-api`                    |                                                |
+|                                       | *Thematic indexes:*                            |
+|                                       |                                                |
+|                                       | * :doc:`C++ Classes</cpp-classindex>`          |
+|                                       |                                                |
+|                                       | * :doc:`C++ Functions</cpp-funcindex>`         |
+|                                       |                                                |
+|                                       | * :doc:`NAOqi Events</naoqi-eventindex>`       |
+|                                       |                                                |
+|                                       | * :doc:`NAOqi Memory Keys</naoqi-memoryindex>` |
+|                                       |                                                |
+|                                       | *See also:*                                    |
+|                                       |                                                |
+|                                       | * The introduction to                          |
+|                                       |   :ref:`naoqi-framework-overview`.             |
++---------------------------------------+------------------------------------------------+
+| * :ref:`naoqi-cpp-api`                |                                                |
++---------------------------------------+------------------------------------------------+
+| * :ref:`naoqi-python-api`             |                                                |
++---------------------------------------+------------------------------------------------+

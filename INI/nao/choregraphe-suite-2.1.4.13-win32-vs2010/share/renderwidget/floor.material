@@ -1,0 +1,16 @@
+material BasePlane
+{
+  technique
+  {
+    pass
+    {
+      scene_blend alpha_blend
+      lighting off
+      texture_unit
+      {
+        texture floor.png
+      }
+    }
+  }
+}
+

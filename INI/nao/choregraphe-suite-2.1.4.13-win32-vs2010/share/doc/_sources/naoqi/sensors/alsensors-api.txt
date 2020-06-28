@@ -1,0 +1,141 @@
+.. _alsensors-api:
+
+ALSensors API
+=============
+
+:ref:`naoqi-sensors` - :ref:`Overview <alsensors>` | API
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alsensorsproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALSensorsProxy
+
+* :cpp:func:`ALSensorsProxy::getCurrentPeriod`
+* :cpp:func:`ALSensorsProxy::getCurrentPrecision`
+* :cpp:func:`ALSensorsProxy::getMyPeriod`
+* :cpp:func:`ALSensorsProxy::getMyPrecision`
+* :cpp:func:`ALSensorsProxy::getOutputNames`
+* :cpp:func:`ALSensorsProxy::getSubscribersInfo`
+* :cpp:func:`ALSensorsProxy::run`
+* :cpp:func:`ALSensorsProxy::subscribe`
+* :cpp:func:`ALSensorsProxy::unsubscribe`
+* :cpp:func:`ALSensorsProxy::updatePeriod`
+* :cpp:func:`ALSensorsProxy::updatePrecision`
+
+
+.. _alsensors-events:
+
+Event list
+----------
+
+* :naoqi:event:`BodyStiffnessChanged`
+
+
+Methods
+-------
+
+
+.. cpp:function:: int ALSensorsProxy::getCurrentPeriod()
+
+  Gets the current period.
+
+  :return: Refresh period (in milliseconds).
+
+.. cpp:function:: float ALSensorsProxy::getCurrentPrecision()
+
+  Gets the current precision.
+
+  :return: Precision of the extractor.
+
+.. cpp:function:: int ALSensorsProxy::getMyPeriod(const std::string& name)
+
+  Gets the period for a specific subscription.
+
+  :param name: Name of the module which has subscribed.
+
+  :return: Refresh period (in milliseconds).
+
+.. cpp:function:: float ALSensorsProxy::getMyPrecision(const std::string& name)
+
+  Gets the precision for a specific subscription.
+
+  :param name: name of the module which has subscribed
+
+  :return: precision of the extractor
+
+.. cpp:function:: std::vector<std::string> ALSensorsProxy::getOutputNames()
+
+  Get the list of values updated in ALMemory.
+
+  :return: Array of values updated by this extractor in ALMemory
+
+.. cpp:function:: AL::ALValue ALSensorsProxy::getSubscribersInfo()
+
+  Gets the parameters given by the module.
+
+  :return: Array of names and parameters of all subscribers.
+
+.. cpp:function:: void ALSensorsProxy::run()
+
+  Monitors sensors.
+
+.. cpp:function:: void ALSensorsProxy::subscribe( const std::string& name, const int& period, const float& precision )
+
+  Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
+
+  :param name: Name of the module which subscribes.
+
+  :param period: Refresh period (in milliseconds) if relevant.
+
+  :param precision: Precision of the extractor if relevant.
+
+.. cpp:function:: void ALSensorsProxy::subscribe(const std::string& name)
+
+  Subscribes to the extractor. This causes the extractor to start writing information to memory using the keys described by getOutputNames(). These can be accessed in memory using ALMemory.getData("keyName"). In many cases you can avoid calling subscribe on the extractor by just calling ALMemory.subscribeToEvent() supplying a callback method. This will automatically subscribe to the extractor for you.
+
+  :param name: Name of the module which subscribes.
+
+.. cpp:function:: void ALSensorsProxy::unsubscribe(const std::string& name)
+
+  Unsubscribes from the extractor.
+
+  :param name: Name of the module which had subscribed.
+
+.. cpp:function:: void ALSensorsProxy::updatePeriod( const std::string& name, const int& period )
+
+  Updates the period if relevant.
+
+  :param name: Name of the module which has subscribed.
+
+  :param period: Refresh period (in milliseconds).
+
+.. cpp:function:: void ALSensorsProxy::updatePrecision( const std::string& name, const float& precision )
+
+  Updates the precision if relevant.
+
+  :param name: Name of the module which has subscribed.
+
+  :param precision: Precision of the extractor.
+
+
+Events
+------
+
+.. naoqi:event:: BodyStiffnessChanged(int val)
+
+  Raised when the body stiffness (average of all joints) have significantly changed.
+
+  :param val: | 0 means that average of stiffness is less than 0.05
+              | 1 means that average of stiffness is betwwen 0.05 and 0.95
+              | 2 means that average of stiffness is greater 0.95

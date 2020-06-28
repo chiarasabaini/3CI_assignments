@@ -1,0 +1,28 @@
+.. _python-example-vision-facedetection:
+
+Face detection and tracking
+===========================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section illustrates the possibilites of :ref:`ALFaceDetection`.
+
+Detection
+---------
+
+Detect faces and print information about them.
+
+:download:`vision_faceDetection.py </examples/python/vision/vision_faceDetection.py>`
+
+.. literalinclude:: /examples/python/vision/vision_faceDetection.py
+   :language: py
+
+Tracking
+--------
+
+Detect and track faces with NAO's head.
+
+:download:`vision_setfacetracking.py </examples/python/vision/vision_setfacetracking.py>`
+
+.. literalinclude:: /examples/python/vision/vision_setfacetracking.py
+   :language: py

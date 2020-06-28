@@ -1,0 +1,83 @@
+.. include:: ../../bulk/common.rst
+
+.. _alvoiceemotionanalysis-api:
+
+ALVoiceEmotionAnalysis API
+==========================
+
+:ref:`naoqi-audio` - :ref:`Overview <alvoiceemotionanalysis>` | API
+
+-----------------
+
+|juju| |roboJ| only
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alvoiceemotionanalysisproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALVoiceEmotionAnalysisProxy
+
+* :cpp:func:`ALVoiceEmotionAnalysisProxy::setParameter`
+* :cpp:func:`ALVoiceEmotionAnalysisProxy::subscribe`
+* :cpp:func:`ALVoiceEmotionAnalysisProxy::unsubscribe`
+
+
+Event list
+----------
+
+* :naoqi:event:`ALVoiceEmotionAnalysis/SoundLocated`
+
+Methods
+-------
+
+.. cpp:function:: void ALVoiceEmotionAnalysisProxy::setParameter(const std::string& parameter, const AL::ALValue& value)
+
+  Sets parameters.
+
+  :param parameter: Name of the parameter
+  :param value: Value of the parameter
+
+  Available parameters:
+
+  - "MinSignalLength": Minimum length (in seconds, positive) required for the analysis of a voice
+    signal (nonnegative integer, default: 2)
+
+
+
+.. cpp:function:: void ALVoiceEmotionAnalysisProxy::subscribe(const std::string& name)
+
+  Subscribes to *ALVoiceEmotionAnalysis*.
+  This causes the module to start raising the *"ALVoiceEmotionAnalysis/EmotionRecognized"*
+  *ALMemory* event which you can subscribe to by using :cpp:func:`ALMemoryProxy::subscribeToMicroEvent`.
+
+  :param name: Name used to identify the subscriber
+
+
+
+.. cpp:function:: void ALVoiceEmotionAnalysisProxy::unsubscribe(const std::string& name)
+
+  Unsubscribes to *ALVoiceEmotionAnalysis*.
+  This causes the module to stop raising the *"ALVoiceEmotionAnalysis/EmotionRecognized"*
+  *ALMemory* event.
+
+  :param name: Name with which :cpp:func:`ALVoiceEmotionAnalysisProxy::subscribe` was called.
+
+
+Events
+------
+
+.. naoqi:event:: ALVoiceEmotionAnalysis/EmotionRecognized(AL::ALValue value)
+
+  Raised when an utterance has been analyzed.
+
+  :param value: Array containing information about the emotion levels.
+                See :ref:`emotionrecognized-event` for details about the event's structure.

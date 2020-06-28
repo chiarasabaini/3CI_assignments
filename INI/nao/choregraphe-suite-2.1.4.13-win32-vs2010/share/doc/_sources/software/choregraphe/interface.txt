@@ -1,0 +1,207 @@
+.. include:: bulk/common.rst
+
+.. _choregraphe-interface:
+
+Menus, Panels and Toolbar in a glance
+======================================
+
+Main window
+-------------
+
+At startup, the following interface is displayed.
+
+.. image:: /medias/desktop/choregraphe/chore_main.png
+   :width: 587 px
+   :height: 411 px
+
+This interface contains a :ref:`chore_menubar`,
+a :ref:`chor_toolbar` and several :ref:`choregraphe-panels`.
+
+
+.. _choregraphe-panels:
+
+Panels
+-------
+
+By default, the following panels are displayed:
+
+.. image:: /medias/desktop/choregraphe/chore_interface.png
+   :width: 586 px
+   :height: 411 px
+
++------+---------------------------------------+-------+-------------------------------------------+
+|Part  | Name                                  | Part  | Name                                      |
++======+=======================================+=======+===========================================+
+|**A** | :ref:`chore_project_content`          | **D** | | :ref:`chore_pose_library_panel` and     |
+|      |                                       |       | | :ref:`video-monitor-panel`              |
++------+---------------------------------------+-------+-------------------------------------------+
+|**B** | :ref:`chore_box_libary_panel`         | **E** | | :ref:`3d-nao-panel` and                 |
++------+---------------------------------------+       + | :ref:`chore_robot_applications_panel`   +
+|**C** | :ref:`chore_flow_diagram_panel`       |       |                                           |
++------+---------------------------------------+-------+-------------------------------------------+
+
+
+You can find more advanced panels in the **View** menu:
+
+.. image:: /medias/desktop/choregraphe/chore_interface_advanced.png
+   :width: 581 px
+   :height: 411 px
+
++-------+---------------------------------------+--------+--------------------------------+
+| Part  |  Name                                 | Part   | Name                           |
++=======+=======================================+========+================================+
+| **A** |  :ref:`chore_script_editor_panel`     | **C**  | :ref:`dialog_panel`            |
++-------+---------------------------------------+--------+--------------------------------+
+| **B** | | :ref:`chore_resource_viewer_panel`, | **D**  | :ref:`chore_undo_stack_panel`  |
+|       | | :ref:`chore_memory_watcher_panel`   |        |                                |
+|       | | and :ref:`chore_debug_panel`        |        |                                |
++-------+---------------------------------------+--------+--------------------------------+
+
+To create and save your own layout, see: :ref:`customizing_layout`.
+
+
+.. _chore_menubar:
+
+Menu Bar
+--------
+
+**File** menu
+   This menu enables you to **create**, **open** and **save** a :ref:`choregraphe-reference-project`;
+   add new content to the current :ref:`choregraphe-reference-project`,
+   modify its :ref:`choregraphe-reference-project-properties`; **export** the current
+   :ref:`choregraphe-reference-project` as a **CRG** file or **build**
+   it to an :ref:`application`.
+   Finally, you can **exit the application** through this menu.
+
+
+**Edit** menu
+   This menu enables you to **undo** and **redo** last actions made in the diagram.
+   You can also access to the **preferences** of the application through this menu.
+   For further details, see the :ref:`choregraphe-detailed-interface-preferences`.
+
+**Connection** menu
+   This menu enables you to **connect** to and **disconnect** from your |robot|.
+   For further details, see the :ref:`connection-widget`.
+
+   Once you are connected to your |robot|, you can also:
+
+   * **play** and **stop** the opened behavior.
+   * **display or hide** the :ref:`chore_debug_panel` when an error occurs in the behavior.
+   * **transfer files** between your computer and your |robot|. For further details, see the :ref:`choregraphe-howto-file-transfer`.
+   * **update NAO's system** (in Connection > Advanced) with a new version of its software.
+     For further details, see the :ref:`choregraphe-howto-update-nao-system`.
+
+**View** menu
+   This menu enables you to **manage the displayed panels**.
+   You can select the ones you want to hide or display, you can then **save**
+   and **load** named workspace **Layouts**
+   or **reset** your workspace layout to default.
+   For further details, see the :ref:`customizing_layout`.
+
+**Help** menu
+   This menu enables you to see the **statistics** of the current behavior
+   (number of boxes, number of lines, etc) and to access to the
+   **general documentation**, the **documentation about Choregraphe** and the
+   **API reference**. You can also get some information about the
+   **version of Choregraphe** you are currently using through this menu.
+
+
+.. _chor_toolbar:
+
+Toolbar
+--------
+
+.. image:: /medias/desktop/choregraphe/chore_full_toolbar.png
+   :width: 596 px
+   :height: 60 px
+
+
+These buttons are shortcuts to actions you will often need while creating behaviors.
+Note that keyboard shortcuts are also available.
+
+.. list-table::
+   :widths: 5 100
+   :header-rows: 1
+
+   * - Button(s)
+     - Function
+   * - .. image:: /medias/desktop/choregraphe/chore_bluebuttons.png
+     - Create a **New project**, **Open** or **Save** a :ref:`choregraphe-reference-project`.
+   * - .. image:: /medias/desktop/choregraphe/undo_redo_buttons.png
+     - **Undo** and **Redo** last actions made in the diagram.
+   * - .. image:: /medias/desktop/choregraphe/chore_connect_buttons.png
+
+       .. image:: /medias/desktop/choregraphe/connect-to_button_try.png
+     - **Connect**, **Disconnect** or **Try to reconnect** your |robot|.
+
+       For more information about the connection, see :ref:`chore_connection_management`.
+   * - .. image:: /medias/desktop/choregraphe/chore_greenbuttons.png
+     - **Play** or **Stop** the opened Behavior.
+   * - .. image:: /medias/desktop/choregraphe/chore_yellowbutton.png
+     - **See the warnings and the errors** that can occurs during the execution of your behavior.
+   * - .. image:: /medias/desktop/choregraphe/chore_blue_indicator.png
+
+       .. image:: /medias/desktop/choregraphe/loading_indicator_grey.png
+
+       .. image:: /medias/desktop/choregraphe/loading_indicator_blue.png
+     - Progress bar that indicates the **behavior loading** when you click on Play.
+
+       This indicator can be:
+
+       * Mainly grey: the behavior is not loaded.
+       * Moving up and down: the behavior is loading.
+       * Blue: the behavior is loaded.
+   * - .. image:: /medias/desktop/choregraphe/volume_button.png
+     - Enables you to set the **volume** of NAO's speakers.
+   * - .. image:: /medias/desktop/choregraphe/animation_mode_button_green.png
+
+       .. image:: /medias/desktop/choregraphe/animation_mode_button_orange.png
+
+       .. image:: /medias/desktop/choregraphe/animation_mode_button_red.png
+     - Activate / deactivate the **Animation Mode** which enables you to
+       easily manipulate your |robot| and store its position.
+
+       For more information, see :ref:`choregraphe-howto-use-animation-mode`.
+
+       This button can be:
+
+       * Green: the **Animation Mode** is deactivated.
+       * Orange: intermediate state where the animation mode is either loading or unloading.
+       * Red: the animation mode is activated.
+
+   * - .. image:: /medias/desktop/choregraphe/chore_life_button.png
+       .. image:: /medias/desktop/choregraphe/chore_life_button_on.png
+     - Turns on and off the **Autonomous Life** on the robot.
+       For further details, see: :ref:`autonomouslife`.
+
+       If you play a **Behavior** while the **Autonomous Life** is turned on,
+       **Choregraphe** plays it using
+       :cpp:func:`ALAutonomousLifeProxy::switchFocus`.
+
+   * - .. image:: /medias/desktop/choregraphe/chore_rest_button.png
+     - **Rest** button. Sets the **Stiffness** off.
+
+       If your |robot| is standing, before setting the **Stiffness** off,
+       he goes to the **Crouch** posture.
+
+   * - .. image:: /medias/desktop/choregraphe/chore_wakeup_button.png
+     - **Wake Up** button. Sets the **Stiffness** on.
+
+       Additionally, if your |robot| is crouched, he also goes to the **StandInit** posture.
+
+       .. warning:: Do not touch your |robot| during a wake up; or
+                    the **Active diagnosis** may return false positive results.
+
+   * - .. image:: /medias/desktop/choregraphe/battery_level_green.png
+
+       .. image:: /medias/desktop/choregraphe/battery_level_orange.png
+
+       .. image:: /medias/desktop/choregraphe/battery_level_red.png
+     - Indicate the level of NAO's **battery**.
+
+       This indicator can be:
+
+       * Green: the level of the battery is almost at its maximum.
+       * Orange: the level of the battery is medium.
+       * Red: the level of the battery is very low and your |robot| is going to shutdown in a few minutes if you do not plug it in.
+

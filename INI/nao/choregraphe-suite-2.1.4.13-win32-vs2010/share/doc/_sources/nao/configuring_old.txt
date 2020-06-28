@@ -1,0 +1,23 @@
+.. include:: ../bulk/common.rst
+
+.. _old_configuring-nao:
+
+Former Configuration tools
+============================
+
+This chapter gathers information about |roboN| advanced configuration.
+
+Most of configuration tasks are easily accessible on :ref:`webpage_nao`.
+
+
+Use the former configuration tools only if the standard tool does not provide
+what you need.
+
+.. toctree::
+   :maxdepth: 1
+
+   nao-webpage
+   remote-control
+   connectivity
+
+

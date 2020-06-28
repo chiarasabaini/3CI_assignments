@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip='Receive a value between 0 and 255 that was sent using the IR Send 1 Byte box&#x0A;from another robot. The output is stimulated for every &quot;1 Byte&quot; that is&#x0A;received.&#x0A;&#x0A;V1.1.0&#x0A;' x="287" y="99">
+        <bitmap>media/images/box/interaction/IR_receive.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        try :
+            self.hw = ALProxy("ALInfrared")
+        except Exception as e:
+            self.hw = None
+            self.logger.error(e)
+        #self.hw.subscribetomicroevent
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+        if self.hw:
+            self.hw.initReception(-1)
+        #~ self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload() #~ it is recommanded to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+            self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="InfraRedOneByteReceived" type="0" type_size="1" nature="4" stm_value_name="InfraRedOneByteReceived" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="4" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="5" />
+        <Output name="uInt8" type="2" type_size="1" nature="2" inner="0" tooltip="Number received between 0 and 255." id="6" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Link inputowner="0" indexofinput="6" outputowner="0" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheBox>

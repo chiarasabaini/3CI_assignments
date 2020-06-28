@@ -1,0 +1,41 @@
+.. _robot_masses_v4:
+
+Masses - V4
+===================
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  masses_robot_v33
+  masses_robot_v32
+
+
+.. seealso::
+
+   :ref:`all_robots`
+
+   :ref:`V5 <robot_masses>`  | **V4** | :ref:`V3.3 <robot_masses_v33>`
+   | :ref:`V3.2 <robot_masses_v32>`
+
+   :ref:`H25<h25_masses>` | :ref:`H21<h21_masses>` | :ref:`T14<t14_masses>` | :ref:`T2<t2_masses>`
+
+--------------------
+
+.. include:: ../bulk/masses_whole.rst
+
+
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 5.195350051
+
+.. include:: ../bulk/masses_head_torso_v4.rst
+
+.. include:: ../bulk/masses_arms_v4.rst
+
+.. include:: ../bulk/masses_hands_motorized_v4.rst
+
+.. include:: ../bulk/masses_legs_v4.rst

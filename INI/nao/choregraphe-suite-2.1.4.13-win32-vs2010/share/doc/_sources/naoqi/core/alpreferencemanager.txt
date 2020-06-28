@@ -1,0 +1,139 @@
+.. include:: ../../bulk/common.rst
+
+.. _alpreferencemanager:
+
+ALPreferenceManager
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alpreferencemanager-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <alpreferencemanager-api>`
+
+------------
+
+What it does
+------------
+
+**ALPreferenceManager** allows managing the robot preferences.
+
+Robot preferences are used to store, among other, all the settings for the
+applications running on the robot.
+
+How it works
+------------
+
+Storage
++++++++
+
+Robot preferences are stored in a database, both on the robot and on the |cloud|;
+**ALPreferenceManager** ensures the consistency between the different copies.
+
+Format
++++++++
+
+A preference is defined by its:
+
+- Domain: it can be the name of the application using the preference setting.
+- Name: it is the name of the setting.
+- Value. Only string value are currently supported.
+
+For instance, if you are developing a chess application, you could have the following preferences:
+
+- Domain: "com.aldebaran.apps.chess"
+- Name: "/game/level/default"
+- Value: "medium"
+
+
+Performances and limitations
+-----------------------------
+
+Storage
+++++++++
+
+* On the robot the preferences are stored in an **SQLite** database under path:
+
+  /home/nao/.local/share/PreferenceManager/prefs.db
+
+  .. warning::
+
+      Do not to modify this file directly, it must be consistent
+      with the copy of the preferences stored in the Cloud.
+
+
+* The preferences are synchronized and saved in the |cloud| only if the robot
+  is associated to an **Aldebaran** user account.
+  If not, preferences are only be stored locally.
+
+  For further details, see: :ref:`registering_robot`.
+
+Forbidden characters
++++++++++++++++++++++
+
+To define values:
+
+* Use alphanumeric characters only,
+* Do not use '\\'.
+
+
+
+Example of use
+--------------
+
+.. code-block:: python
+
+    import sys
+    import time
+    from naoqi *
+
+    NAO_IP = "nao.local"
+
+    Dummy = None
+    memory = None
+
+    # Create a dummy module, just to subscribe to events emitted by PreferenceManager
+    class DummyModule(ALModule):
+        """ Dummy module """
+        def __init__(self, name):
+            ALModule.__init__(self, name)
+            global memory
+            memory = ALProxy("ALMemory")
+            memory.subscribeToMicroEvent("preferenceAdded", "Dummy", "", "onPreferenceAdded")
+            memory.subscribeToMicroEvent("preferenceChanged", "Dummy", "", "onPreferenceChanged")
+            memory.subscribeToMicroEvent("preferenceRemoved", "Dummy", "", "onPreferenceRemoved")
+            memory.subscribeToMicroEvent("preferenceDomainRemoved", "Dummy", "", "onPreferenceDomainRemoved")
+        def onPreferenceAdded(self, event, value, message):
+            print "Preference added: " + str(value)
+        def onPreferenceChanged(self, event, value, message):
+            print "Preference changed: " + str(value)
+        def onPreferenceRemoved(self, event, value, message):
+            print "Preference removed: " + str(value)
+        def onPreferenceDomainRemoved(self, event, value, message):
+            print "Preference domain removed: " + str(value)
+
+    def main():
+        myBroker = ALBroker("myBroker", "0.0.0.0", 0, NAO_IP, 9559)
+
+        global Dummy
+        Dummy = DummyModule("Dummy")
+
+        # Play with preference manager
+        pm = ALProxy("ALPreferenceManager")
+        pm.setValue("com.apps.chess", "level", "hard")
+        pm.setValue("com.apps.chess", "treedepth", "10")
+        pm.setValue("foo.bar", "foo", "bar")
+        pm.setValue("com.apps.chess", "level", "easy")
+        print "com.apps.chess - level: " + pm.getValue("com.apps.chess", "level")
+        pm.removeValue("foo.bar", "foo")
+        pm.removeDomainValues("com.apps.chess")
+        print "com.apps.chess - level: " + str(pm.getValue("com.apps.chess", "level"))
+
+        time.sleep(1)
+        myBroker.shutdown()
+        sys.exit(0)
+
+    if __name__ == "__main__":
+        main()

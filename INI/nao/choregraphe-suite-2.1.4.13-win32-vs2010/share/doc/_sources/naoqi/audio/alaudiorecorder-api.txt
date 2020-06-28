@@ -1,0 +1,60 @@
+.. _alaudiorecorder-api:
+
+ALAudioRecorder API
+===================
+
+:ref:`naoqi-audio` - :ref:`Overview <alaudiorecorder>` | API
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alaudiorecorderproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALAudioRecorderProxy
+
+* :cpp:func:`ALAudioRecorderProxy::startMicrophonesRecording`
+* :cpp:func:`ALAudioRecorderProxy::stopMicrophonesRecording`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALAudioRecorderProxy::startMicrophonesRecording(const std::string& filename, const std::string& type, const int& samplerate, const AL::ALValue& channels)
+
+  This method launches the recording of the audio signal measured by the microphones formated as specified. The resulting recording is written in the specified file.
+
+  Note that these recording capabilities are currently limited to the following formats:
+
+  - four channels 48000Hz in OGG.
+  - four channels 48000Hz in WAV uncompressed.
+  - one channels (front, rear, left or right), 16000Hz, in OGG.
+  - one channels (front, rear, left or right), 16000Hz, in WAV.
+
+  :param filename: Absolute Path of the file
+
+  :param type: "wav" or "ogg"
+
+  :param samplerate: Requested sample rate
+
+  :param channels: Requested channels
+
+
+  .. literalinclude:: /samples/cpp/alaudiorecorder/alaudiorecorder_startrecording.cpp
+     :language: cpp
+
+
+
+.. cpp:function:: void ALAudioRecorderProxy::stopMicrophonesRecording()
+
+  This method stops the recording of the signal collected by the microphones started
+  with :cpp:func:`ALAudioRecorderProxy::startMicrophonesRecording`.

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="yes">
+    <Node name="Sit Down" />
+    <Node name="Stand Up" />
+    <Node name="Walk To" />
+    <Node name="Endless Walk" />
+</Folder>

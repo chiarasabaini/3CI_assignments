@@ -1,0 +1,25 @@
+.. _albonjour:
+
+ALBonjour
+==========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    albonjour-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <albonjour-api>`
+
+------------
+
+What it does
+------------
+
+Advertises the NAOqi service on the local network using the bonjour protocol.
+
+.. warning::
+
+   This module is deprecated.
+
+   Users do not need to call any methods of this module.

@@ -1,0 +1,91 @@
+.. _alusersession:
+
+ALUserSession
+=============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alusersession-api
+   alusersession-gettingstarted1-activity
+   alusersession-gettingstarted2-provider
+
+:ref:`naoqi-core` -
+Overview |
+:ref:`API <alusersession-api>`
+
+:ref:`Getting Started 1 - Activity Developer <alusersession-gettingstarted1-activity>` |
+:ref:`Getting Started 2 - User Data Provider Developer <alusersession-gettingstarted2-provider>`
+
+------------
+
+.. warning::
+
+   This is a WIP, API and documentation is not definitive.
+
+   For further details, see: :ref:`alusersession_comingsoon`.
+
+
+What it does
+------------
+
+**ALUserSession** manages the state of active users, and the bindings to their data.
+
+* It is a state machine of present users with **open sessions**,
+  and the one **focused user** who the robot is currently tracking.
+
+* **ALUserSession** provides centralized access to **user data** across multiple providers.
+  This data is for **user identification**, **user information**, and **user authentication**.
+
+* The data can optionally be permanent on the robot or not.
+
+  Each data providers decides it's own policy for what to upload to the cloud.
+
+How it works
+------------
+
+.. image:: /medias/dev/modules/usersession/us_block_diag.png
+   :scale: 77%
+   :height: 331px
+   :width: 897px
+
+When a human is present, **ALAutonomousLife**'s mind detects them via **ALBasicAwareness**.
+Then it attempts to autonomously map this perceived human to an existing user
+via built in rolling facial detection.
+If this human cannot be identified as an existing user, a new user is created in
+**ALUserSession**.
+If the human could not be identified because the robot could not see the face
+well enough, then a special *anonymous user* is used, and the robot will try to
+identify the face again 3 seconds later.
+
+**ALUserSession** sends events to inform the Activity and other modules that a user
+focus change has occurred so they can adapt themselves as necessary.
+
+For example, the **ALDialog** module loads the Focused user’s previous set of
+conversational variables and state into the current context, to ensure a smooth
+and coherent conversation that evolves individually with each user.
+
+One could develop an Activity that considers all of the present users with open
+sessions, and find something in common with them, and make an interesting comment
+to impress them.
+
+.. _alusersession_comingsoon:
+
+Coming soon
+------------
+
+* Only the user info get API is available now.  Set will be in the next release.
+  Until then, to set data, see the domain specific source module.
+
+  Developers will also be able to get/set data on the fly bound to their own
+  domain of choice (e.g. "com.mycompany.mygreatgame") using the built in source DB.
+
+* The **ALPeoplePerception** data source is not queryable for info.  But the binding
+  to the ALPeoplePerception ID is available, so you can query that to browse the
+  ALPeoplePerception/People/<ID> ALMemory tree.
+
+* The API's to make a user become (un)permanent (meaning persistent between **NAOqi**
+  bootups) will be made public.  Until then, all new users will be forgotten by
+  the robot if they haven't been seen for 10 minutes.  If you would like to
+  experiment with this functionality before 1.22.4, please contact support.

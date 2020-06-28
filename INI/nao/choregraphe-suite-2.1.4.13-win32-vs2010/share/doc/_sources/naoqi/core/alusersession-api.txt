@@ -1,0 +1,281 @@
+.. _alusersession-api:
+
+ALUserSession API
+====================
+
+:ref:`naoqi-core` -
+:ref:`Overview <alusersession>` |
+API
+
+:ref:`Getting Started 1 - Activity Developer <alusersession-gettingstarted1-activity>` |
+:ref:`Getting Started 2 - User Data Provider Developer <alusersession-gettingstarted2-provider>`
+
+
+------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alusersessionproxy.h>
+
+Method list
+-----------
+
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALUserSessionProxy
+
+* :cpp:func:`ALUserSessionProxy::doUsersExist`
+* :cpp:func:`ALUserSessionProxy::getUserList`
+* :cpp:func:`ALUserSessionProxy::getNumUsers`
+* :cpp:func:`ALUserSessionProxy::getFocusedUser`
+* :cpp:func:`ALUserSessionProxy::getOpenUserSessions`
+* :cpp:func:`ALUserSessionProxy::areUserSessionsOpen`
+* :cpp:func:`ALUserSessionProxy::getBindingSources`
+* :cpp:func:`ALUserSessionProxy::doesBindingSourceExist`
+* :cpp:func:`ALUserSessionProxy::getUserBindings`
+* :cpp:func:`ALUserSessionProxy::getUserBinding`
+* :cpp:func:`ALUserSessionProxy::findUsersWithBinding`
+* :cpp:func:`ALUserSessionProxy::doesUserDataSourceExist`
+* :cpp:func:`ALUserSessionProxy::getUserDataSources`
+* :cpp:func:`ALUserSessionProxy::getUserData`
+* :cpp:func:`ALUserSessionProxy::getUserData`
+
+
+Events lists
+------------
+
+* :naoqi:event:`UserSession/CreatedUsers`
+* :naoqi:event:`UserSession/DeletedUsers`
+* :naoqi:event:`UserSession/SessionsOpened`
+* :naoqi:event:`UserSession/SessionsClosed`
+* :naoqi:event:`UserSession/NoOpenSessions`
+* :naoqi:event:`UserSession/FocusedUser`
+* :naoqi:event:`UserSession/ShouldExitInteractiveActivity`
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`UserSession/OpenSessions`
+
+
+Methods
+-------
+
+
+.. cpp:function:: bool ALUserSessionProxy::doUsersExist(const std::list<int> userIDs) const
+
+    Checks if UserSession IDs exist in database.
+
+    :param userIDs: the UserSession IDs to check.
+
+    :return: true if all users exist, else false.
+
+
+
+.. cpp:function:: std::list<int> ALUserSessionProxy::getUserList() const
+
+    Gets all UserSession IDs in the database.
+
+    :return: a list of the integer UserSession IDs.
+
+
+
+.. cpp:function:: int ALUserSessionProxy::getNumUsers() const
+
+    Gets the number of users in the database.
+
+    :return: the number of users.
+
+
+
+.. cpp:function:: int ALUserSessionProxy::getFocusedUser() const
+
+    Gets which user has the robot focus.
+
+    :return: The UserSession ID of the focused user if there is one, or -1 if no user is focused.
+
+
+
+.. cpp:function:: std::list<int> ALUserSessionProxy::getOpenUserSessions() const
+
+    Gets which users have an open session.
+
+    :return: the UserSession IDs of the users with an open session.
+
+
+
+.. cpp:function:: bool ALUserSessionProxy::areUserSessionsOpen(const std::list<int> userIDs) const
+
+    Checks if UserSession IDs have an open session.
+
+    :param userIDs: A list of int UserSession IDs of each user to check.
+
+    :return: true if all users have open sessions, else false.
+
+
+
+.. cpp:function:: std::list<std::string>  ALUserSessionProxy::getBindingSources() const
+
+    Gets the list of binding sources that have been applied to UserSession.
+
+    :return: the names of the binding sources.
+
+
+
+.. cpp:function:: bool ALUserSessionProxy::doesBindingSourceExist(const std::string bindingName) const
+
+    Queries if a particular binding source has been applied to UserSession.
+
+    :param bindingName: name of the binding source.
+
+    :return: true if a binding source exists, else false.
+
+
+
+.. cpp:function:: std::map<std::string, std::string> ALUserSessionProxy::getUserBindings(const int userID) const
+
+    Gets the sources a UserSession ID is bound to.
+
+    :param userID: UserSession ID of the user.
+
+    :return: A map of binding sources names and their bound ID.
+
+
+
+.. cpp:function:: std::string ALUserSessionProxy::getUserBinding(const int userID, const std::string bindingName) const
+
+    Gets the specific source a UserSession ID is bound to.
+
+    :param userID: UserSession ID of the user.
+
+    :param bindingName: The name of the binding source.
+
+    :return: Bound ID for the specified user ID and binding source.
+
+
+
+.. cpp:function:: std::list<int> ALUserSessionProxy::findUsersWithBinding(const std::string bindingName, const std::string bindingValue) const
+
+    Gets the sources a User Session ID is bound to.
+
+    :param bindingName: The name of the binding source.
+
+    :param bindingValue: The string bound ID of the user at the binding source.
+
+    :return: The int UserSession IDs of the users with the passed bindingValue.
+
+
+
+.. cpp:function:: bool ALUserSessionProxy::doesUserDataSourceExist(const std::string sourceName) const
+
+    Checks if a data source has been registered.
+
+    :param sourceName: Name of the data source.
+
+    :return: True if the source has been registered, else false.
+
+
+
+.. cpp:function:: std::list<std::string> ALUserSessionProxy::getUserDataSources() const
+
+    Gets all registered data sources.
+
+    :return: Names of the registered data sources.
+
+
+
+.. cpp:function:: AL::ALValue ALUserSessionProxy::getUserData(const int userID, const std::string dataName, const std::string sourceName)
+
+    Gets a specific data about a UserSession ID, for a specific source. Will throw if the specified data type does not exist.
+
+    :param userID: UserSession ID of the user whose data to get.
+
+    :param dataName: key of the data to get.
+
+    :param sourceName: name of the data source.
+
+    :return: User data for the specified data and source names.
+
+
+
+.. cpp:function:: std::map<std::string, AL::ALValue> ALUserSessionProxy::getUserData(const int userID, const std::string dataName)
+
+    Gets a specific data about a user, for all sources. Will throw if the specified data type does not exist.
+
+    :param userID: User Session ID of the user whose data to get.
+
+    :param dataName: key of the data to get.
+
+    :return: A map which is keyed by the data source name, with the value as the user data.
+
+
+Events
+------
+
+.. naoqi:event:: UserSession/CreatedUsers(AL::ALValue userSessionIDs)
+
+    :param userSessionIDs: A list of the UserSession IDs of all the deleted user sessions.
+
+    This event is raised when Users are created in the UserSession database.
+    This could be raised if Autonomous Life thinks the robot just met someone it hasn't seen before.
+
+
+.. naoqi:event:: UserSession/DeletedUsers(AL::ALValue userSessionIDs)
+
+    :param userSessionIDs: A list of the UserSession IDs of all the deleted user sessions.
+
+    This event is raised when Users are deleted from the UserSession database.
+    This could be raised if Autonomous Life is pruning users.
+
+
+.. naoqi:event:: UserSession/SessionsOpened(AL::ALValue userSessionIDs)
+
+    :param userSessionIDs: A list of the UserSession IDs of all newly opened user sessions.
+
+    This event is raised when user sessions are opened.  It is possible to open multiple sessions simultaneously.
+
+    Sessions are opened when a UserSession ID is tracked by Basic Awareness.
+
+
+.. naoqi:event:: UserSession/SessionsClosed(AL::ALValue userSessionIDs)
+
+    :param userSessionIDs: A list of the UserSession IDs of all newly closed user sessions.
+
+    This event is raised when user sessions are closed.  It is possible to close multiple sessions simultaneously.
+
+    A session is closed when the corresponding person is no longer perceived by people perception.
+
+
+.. naoqi:event:: UserSession/NoOpenSessions()
+
+    :param open: True when no user sessions are open, false if any user sessions are open.
+
+    This event is raised when the number of open user sessions transitions from zero to any or any to zero.
+
+
+.. naoqi:event:: UserSession/FocusedUser(int userID)
+
+    :param userSessionID: UserSession ID of the focused user, or -1 if no user is focused.
+
+    This event is raised when the focused user changes.
+
+
+.. naoqi:event:: UserSession/ShouldExitInteractiveActivity(bool shouldExit)
+
+    :param shouldExit: Always raised as true.  The only meaning is in the timing of the event its self.
+
+    This event is raised when **ALAutonomousLife** thinks that there is nobody to interact with, and recommends
+    that the current Interactive Activity exits.
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue UserSession/OpenSessions
+
+    A list of the UserSession IDs of all currently open user sessions.

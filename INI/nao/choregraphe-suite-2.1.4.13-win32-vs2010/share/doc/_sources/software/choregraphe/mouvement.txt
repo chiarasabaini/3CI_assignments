@@ -1,0 +1,13 @@
+
+Mastering movements
+============================
+
+   
+**Create animation and movements**
+   
+.. toctree::
+   :maxdepth: 2
+
+   panels/timeline_panel.rst
+   animation_mode.rst
+   panels/timeline_editor.rst

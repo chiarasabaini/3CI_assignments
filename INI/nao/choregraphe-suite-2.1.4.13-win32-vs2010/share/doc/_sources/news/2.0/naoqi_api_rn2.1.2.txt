@@ -1,0 +1,48 @@
+.. include:: ../../bulk/common.rst
+
+.. _whats-new_api_2.1.2:
+
+**NAOqi API** & **SDks** 2.1.2
+===============================
+
+**ALAutonomousMoves**: New methods
+------------------------------------
+
+New methods to define a background strategy when the |robot| is not busy with
+motion instructions:
+
+* :cpp:func:`ALAutonomousMovesProxy::setBackgroundStrategy`
+* :cpp:func:`ALAutonomousMovesProxy::getBackgroundStrategy`
+
+For further details, see: :ref:`background_strategy`.
+
+**ALRobotPosture**: algorithm improved
+---------------------------------------
+
+The algorithm trying to go from lying to rising posture has slightly evolved.
+This fixes several issues, in particular when |roboN| is lying on his side.
+
+For further details see: :ref:`alrobotposture` and :ref:`nao_has_fallen`.
+
+**ALTextToSpeech**: tts technology has changed
+-----------------------------------------------
+
+**ALTextToSpeech** is based on speech synthesizers - or speech engines.
+
+According to the selected language, a specific engine is used.
+
+The following language package, formerly using **ACAPELA**, are now based on
+**Nuance** TTS Technology:
+
+‘Chinese’, ‘English’, ‘French’
+
+For further details see: :ref:`altexttospeech`.
+
+**PackageManager**: New methods and signals
+--------------------------------------------
+
+* :cpp:func:`PackageManager::packages2`
+* :cpp:func:`PackageManager::package2`
+
+* :cpp:member:`PackageManager::onPackageInstalled2`
+* :cpp:member:`PackageManager::onPackageRemoved2`

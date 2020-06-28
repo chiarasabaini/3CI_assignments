@@ -1,0 +1,84 @@
+.. _python-example-motion-cartesian:
+
+Cartesian commands
+==================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section contains examples showing cartesian commands on NAO's body.
+
+Arms
+----
+
+Arm trajectories examples.
+
+Trajectory 1
+++++++++++++
+
+:download:`almotion_cartesianArm1.py </examples/python/motion/almotion_cartesianArm1.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianArm1.py
+   :language: py
+
+Trajectory 2
+++++++++++++
+
+:download:`almotion_cartesianArm2.py </examples/python/motion/almotion_cartesianArm2.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianArm2.py
+   :language: py
+
+Feet
+----
+
+Control NAO's left foot.
+
+:download:`almotion_cartesianFoot.py </examples/python/motion/almotion_cartesianFoot.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianFoot.py
+   :language: py
+
+Torso
+-----
+
+Make NAO's torso take different positions.
+
+Trajectory
+++++++++++
+
+:download:`almotion_cartesianTorso.py </examples/python/motion/almotion_cartesianTorso.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianTorso.py
+   :language: py
+
+Hula Hoop
+++++++++++++
+
+:download:`almotion_hulaHoop.py </examples/python/motion/almotion_hulaHoop.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_hulaHoop.py
+   :language: py
+
+
+Arms and torso
+--------------
+
+Control multiple effectors with cartesian commands.
+
+Trajectory 1
+++++++++++++
+
+:download:`almotion_cartesianTorsoArm1.py </examples/python/motion/almotion_cartesianTorsoArm1.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianTorsoArm1.py
+   :language: py
+
+Trajectory 2
+++++++++++++
+
+:download:`almotion_cartesianTorsoArm2.py </examples/python/motion/almotion_cartesianTorsoArm2.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_cartesianTorsoArm2.py
+   :language: py
+
+

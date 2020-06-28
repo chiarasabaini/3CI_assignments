@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="150" y="112">
+        <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onSet(self):
+        try:
+            self.audiodevice = ALProxy("ALAudioDevice")
+            self.audiodevice.setOutputVolume(self.getParameter("Volume (%)"))
+        except Exception as e:
+            self.logger.error(e)
+
+        self.onReady() # activate output of the box]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+        <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
+        <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
+        <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="50" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+    </Box>
+</ChoregrapheBox>

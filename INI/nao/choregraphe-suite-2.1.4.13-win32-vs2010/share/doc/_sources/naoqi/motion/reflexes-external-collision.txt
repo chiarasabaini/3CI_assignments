@@ -1,0 +1,203 @@
+.. include:: ../../bulk/common.rst
+
+.. _reflexes-external-collision:
+
+External-collision avoidance
+============================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   reflexes-external-collision-api
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <reflexes-external-collision-api>`
+
+------------
+
+What it does
+------------
+
+The aim is to avoid damaging the robot, its environment, and first of all avoid hurting people.
+
+Arms anticollision, and move anticollision aim to avoid bumping into something or someone.
+
+This implies checking the environment with the metrical sensors of the robot in order to see if
+an arm or the base is not going to hit something or someone:
+
+- **Arm velocity clipping:** The articular max velocity of one arm may be clipped
+  if something is too close to this arm. If the person or the object is really too
+  close to the arm, the authorized velocity is nearly zero. A memory event called
+  :naoqi:event:`ALMotion/Safety/ChainVelocityClipped` is raised when max velocity
+  is clipped.
+
+- **Secure Move API:** If you try to launch a move with a motion API, in case
+  there is a blocking obstacle in the direction of the move, this move will not
+  be launched or will be stopped as soon as an obstacle enters its security zone
+  and you will get a warning. A memory event called
+  :naoqi:event:`ALMotion/MoveFailed` is raised when a move is stopped or
+  not launched.
+
+
+How it works
+------------
+
+.. warning::
+
+   This reflexes need :ref:`ALNavigation` module to run.
+   So this features are only available if :ref:`ALNavigation` module is running.
+
+:ref:`ALNavigation` module provides obstacle descriptions and **ALMotion** module
+defines if an obstacle is too close, in which case it activates the corresponding
+reflex.
+
+While moving, the robot tries to detect obstacles, using all its sensors.
+As soon as an obstacle enters its security area, the robot stops.
+
+|nao| |roboN|
+++++++++++++++++++++
+
+Security distances
+^^^^^^^^^^^^^^^^^^
+
+.. image:: /medias/naoqi/alnavigation.png
+   :width: 371 px
+   :height: 310 px
+
+Tangential (or low speed)
+**************************
+
+The :cpp:func:`ALMotionProxy::setTangentialSecurityDistance` sets the
+minimum distance between the robot and any obstacle during a move.
+
+For example if you set a **Tangential security distance** of 0.5m, the robot cannot
+move closer than 0.5m to an obstacle.
+
+| **Default value**: 0.10m.
+| The **Tangential security distance** must be positive, if you try to set a negative distance
+  it will be set to 0.0m.
+
+Orthogonal (and full speed)
+*****************************
+
+The :cpp:func:`ALMotionProxy::setOrthogonalSecurityDistance` sets the
+minimum distance the robot can approach an obstacle while moving at full speed.
+
+For example, if you have set an **Orthogonal security distance** of 1m and the robot is
+moving directly toward an obstacle at full speed, the robot will stop at 1m in
+front of the obstacle.
+
+| **Default value**: 0.40m.
+| The **Orthogonal security distance** must be greater than the  **Tangential security distance**,
+  if you try to set a smaller distance, it will be set to the tangential security distance.
+
+|juju| |roboJ|
++++++++++++++++
+
+.. _move_security_distances:
+
+Move security distances
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ALMotion **tangential security distance** is the minimum distance between any
+point of the robot and any obstacle during a move. Its default value is 0.1m
+on |roboJ|.
+
+ALMotion **orthogonal security distance** is the frontal distance at which the
+robot will stop when moving directly towards an obstacle at full speed. Its
+default value is 0.4m on |roboJ|.
+
+At any time, the frontal distance at which the robot will stop when moving
+directly towards an obstacle is proportional to the robot
+stopping distance. It lies between the **tangential security distance** and the
+**orthogonal security distance**. The following table shows the frontal security
+distance at different speeds on |roboJ|, with default security distance
+parameters.
+
+.. table:: Frontal security distance
+
+    ================ ==============================
+    Speed (m/s)      Frontal security distance (m)
+    ================ ==============================
+    0.1  (min)       0.12
+    0.2              0.17
+    0.3              0.25
+    0.35 (default)   0.30
+    0.4              0.35
+    0.5              0.40
+    0.55 (max)       0.40
+    ================ ==============================
+
+.. _blind_zones:
+
+Blind zones
+^^^^^^^^^^^^
+
+The sensor equipment of the robot does not allow to perceive the environment
+360° round. Between the different sensors, there are some "blind" zones.
+
+There are four main "blind zones" in which the robot cannot detect anything without
+moving its base or its head. Note that bumper can detect obstacles in contact with the robot.
+They are presented in the following figure.
+
+.. image:: /medias/naoqi/blind_zone_def.png
+   :width: 500 px
+
+In order to avoid dangerous movements in the blind zones, the arm speed is reduced
+when moving inside an unknown zone. The robot can then collide with an obstacle
+but it is not dangerous as the speed is low.
+
+.. image:: /medias/naoqi/arm_velocity_clipping.png
+   :width: 300 px
+
+.. TODO: Add touch reflex explanation.
+.. If the robot's arm collides with an undetected obstacle (for example a person),
+.. the **Touch** reflex will take over safety behavior
+.. to stop the dangerous motion immediatly.
+
+An unknown zone is an area in which there is no information about to presence of obstacles.
+
+They are defined between the fields of view of the lasers in front and betwen
+the lasers and the sonar in the back.
+
+All the blind zones are updated by ALNavigation when safety is enabled.
+If no obstacle is detected inside the zone **and** if some unknown space remain
+inside the zone, **then** the zone is unknown.
+
+Every known space is slowly becoming unknown in a specified time (5s by default)
+when it is out of every sensors field of view. This means that if the robot does not move,
+the blind zones will become unknown in 5s maximum.
+
+The update of those blind zones consist in moving them closer or further away
+from the robot.
+By default, an unknown zone starts **0.2m** away from the robot, and a known one starts
+**1.0m** away from the robot.
+
+The following picture shows in red the regions in which the arm speed is reduced.
+The top-left and bottom-right zones are unknown, hence closer to the robot to ensure
+that the arms won't collide with any undetected obstacle.
+The top-right and bottom-left zones are known, because of a recent movement with
+the base (laser sensor) or with the head (3D sensor). The zones are hence
+further away from the robot so the arms are not being slowered when moving through it.
+
+.. image:: /medias/naoqi/blind_zones_detection.png
+   :width: 300 px
+
+Performances and limitations
+-----------------------------
+
+Surroundings map
+++++++++++++++++
+
+The robot may lose sight of an obstacle, if a sensor is obstructed or if the
+obstacle gets out of its field of view.
+
+However, a surroundings map, limited in space and time, allows the robot to keep
+in mind that, potentially, an obstacle is still there.
+
+Use case
+--------
+
+- Avoid collision with environment pending a move.
+- Avoid arms collision with environment.

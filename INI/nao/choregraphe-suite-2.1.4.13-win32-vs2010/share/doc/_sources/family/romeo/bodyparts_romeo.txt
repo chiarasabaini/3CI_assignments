@@ -1,0 +1,77 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_effector_chain:
+
+|roboR| -  Chain & Effector definitions
+========================================
+
+.. seealso::
+    :ref:`romeo`
+
+--------------------
+
+Chains
+-------
+
+
+A **Chain** may contain:
+
+* the Joints of a limb (**Trunk**, **Head**, **LLeg**, **RLeg**) or
+* the Joints + the Actuators of a limb (**LArm**, **RArm**).
+
+The table below lists the chains and all the **Joints** and **Actuators**
+included in each:
+
++-----------------+--------------------------------------------------------------+
+| **Body** is ... | **Trunk + Head + LEye + REye + LArm + LLeg + RLeg + RArm**   |
++-----------------+--------------------------------------------------------------+
+
++---------------+-----------+-----------+-----------+-----------+
+| The chain ... | Trunk     | Head      | LEye      | REye      |
++===============+===========+===========+===========+===========+
+|               | TrunkYaw  | NeckYaw   | LEyeYaw   | REyeYaw   |
+| involves  ... +-----------+-----------+-----------+-----------+
+|               |           | NeckPitch | LEyePitch | REyePitch |
+|               +-----------+-----------+-----------+-----------+
+|               |           | HeadPitch |           |           |
+|               +-----------+-----------+-----------+-----------+
+|               |           | HeadRoll  |           |           |
++---------------+-----------+-----------+-----------+-----------+
+
+
++---------------+-----------------+-------------+-------------+------------------+
+| The chain ... | LArm            | LLeg        | RLeg        | RArm             |
++===============+=================+=============+=============+==================+
+|               | LShoulderPitch  | LHipYaw     | RHipYaw     | RShoulderPitch   |
+| involves  ... +-----------------+-------------+-------------+------------------+
+|               | LShoulderYaw    | LHipRoll    | RHipRoll    | RShoulderYaw     |
+|               +-----------------+-------------+-------------+------------------+
+|               | LElbowRoll      | LHipPitch   | RHipPitch   | RElbowRoll       |
+|               +-----------------+-------------+-------------+------------------+
+|               | LElbowYaw       | LKneePitch  | RKneePitch  | RElbowYaw        |
+|               +-----------------+-------------+-------------+------------------+
+|               | LWristRoll      | LAnklePitch | RAnklePitch | RWristRoll       |
+|               +-----------------+-------------+-------------+------------------+
+|               | LWristYaw       | LAnkleRoll  | RAnkleRoll  | RWristYaw        |
+|               +-----------------+-------------+-------------+------------------+
+|               | LWristPitch     |             |             | RWristPitch      |
+|               +-----------------+-------------+-------------+------------------+
+|               | LHand           |             |             | RHand            |
++---------------+-----------------+-------------+-------------+------------------+
+
+
+
+.. comment:
+
+  Other joins
+  ++++++++++++
+
+  **TBD**
+
+  LLeg: LToePitch. RLeg: RToePitch.
+
+  Effectors
+  ----------
+
+  **TBD**
+

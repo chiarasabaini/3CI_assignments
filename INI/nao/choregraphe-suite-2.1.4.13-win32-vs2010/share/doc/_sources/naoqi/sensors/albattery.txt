@@ -1,0 +1,53 @@
+.. include:: ../../bulk/common.rst
+
+.. _albattery:
+
+ALBattery
+=========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    albattery-api
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <albattery-api>`
+
+--------
+
+.. seealso::
+
+   |nao| :ref:`Battery Hardware <robot-battery>`.
+
+.. or |juju| :ref:`Battery Hardware <juliette-battery>`
+
+
+What it does
+------------
+
+**ALBattery** is responsible for raising events related to the robot battery hardware.
+
+For further details, see section: :ref:`ALBattery list of events <albattery-event-list>`.
+
+How it works
+------------
+
+ALBattery retrieves battery data from ALMemory, processes it and raises
+events according to the situation.
+
+Performance and Limitations
+---------------------------
+
+Remaining time
+++++++++++++++
+
+When a ``BatteryLow`` event is raised, the remaining time depends on the use that is
+made of the robot:
+
+- when sitting, a few minutes of battery might remain,
+- when walking battery could be empty within 30 seconds.
+
+Use Cases
+---------
+
+Detect that the battery is low so as to warn the user.

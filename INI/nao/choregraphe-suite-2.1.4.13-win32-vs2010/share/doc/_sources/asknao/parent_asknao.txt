@@ -1,0 +1,10 @@
+.. _parent_home:
+
+Parent home
+============
+
+The **Parent** home displays the: :ref:`child_tab`.
+
+.. image:: /medias/asknao/parent_home.png
+   :width: 521 px
+   :height: 377 px

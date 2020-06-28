@@ -1,0 +1,24 @@
+.. _h21_links_v32:
+
+H21 - Links - V3.2
+=======================
+
+.. seealso::
+    :ref:`V4 <h21_links>` | :ref:`V3.2 <h21_links_v32>` | **V3.2**
+
+    :ref:`nao-h21` | :ref:`robot_links`
+
+--------------------
+
+
+
+.. include:: ../bulk/links_image_length_v32.rst
+
+.. include:: ../bulk/links_whole_h.rst
+
+.. include:: ../bulk/links_head.rst
+
+.. include:: ../bulk/links_arms_v32.rst
+
+.. include:: ../bulk/links_legs_v32.rst
+

@@ -1,0 +1,7 @@
+"Linux_2" {d40ccfa7-2ed1-4fac-9ad9-c3962c2e72b0}
+"ROS2" {7eea1517-7a2f-4871-bfd4-23b49585dadc}
+"Ubuntu_Server_Kepler" {c93bc93d-7af9-4f80-89b4-740fec3b580f}
+"Lubuntu_Chiara" {0b0de7ff-e343-4d72-8610-77a7c1dfae1e}
+"win10scuola" {d8951c13-89b7-43ea-b3ee-92976d074c8e}
+"Ramascuola" {bfcbe3ea-d89d-43c3-b799-45eff3dad18e}
+"Debrianscuola" {f8ce1452-9b61-4bd8-8851-b1520e776581}

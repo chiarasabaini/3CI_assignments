@@ -1,0 +1,181 @@
+.. _naoqi-api:
+
+NAOqi APIs
+============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  core/index
+  motion/index
+  audio/index
+  vision/index
+  peopleperception/index
+  sensors/index
+  trackers/index
+  diagnosis/aldiagnosis
+  sensors/dcm
+  stdtypes
+
+Core
+-----
+
+Read also the :ref:`naoqi-core` introduction.
+
++----------------------------------------------------------------------------------------------------------+
+| - ALAutonomousLife - :ref:`API <autonomouslife-api>` | :ref:`overview <autonomouslife>`                  |
+| - ALBehaviorManager :ref:`API <albehaviormanager-api>` | :ref:`overview <albehaviormanager>`             |
+| - ALConnectionManager :ref:`API <alconnectionmanager-api>` | :ref:`overview <alconnectionmanager>`       |
+| - ALExtractor | :ref:`API <alextractor-api>` | :ref:`overview <extractors>`                              |
+| - ALMemory :ref:`API <almemory-api>` | :ref:`overview <almemory>`                                        |
+| - ALModule :ref:`API <almodule-api>` | :ref:`overview <almodule>`                                        |
+| - ALNotificationManager :ref:`API <alnotificationmanager-api>` | :ref:`overview <alnotificationmanager>` |
+| - ALPreferenceManager :ref:`API <alpreferencemanager-api>` | :ref:`overview <alpreferencemanager>`       |
+| - ALResourceManager :ref:`API <alresourcemanager-api>` | :ref:`overview <alresourcemanager>`             |
+| - ALStore :ref:`API <alstore-api>` | :ref:`overview <alstore>`                                           |
+| - ALSystem :ref:`API <alsystem-api>` | :ref:`overview <alsystem>`                                        |
+| - ALVisionExtractors | :ref:`API <alvisionextractor-api>` | :ref:`overview <extractors>`                 |
+| - ALTabletService - :ref:`API <altabletservice-api>` | :ref:`overview <altabletservice>`                 |
+| - ALUserSession - :ref:`API <alusersession-api>` | :ref:`overview <alusersession>`                       |
+| - ALWorldRepresentation :ref:`API <alworldrepresentation-api>` | :ref:`overview <alworldrepresentation>` |
+| - PackageManager :ref:`API <packagemanager-api>` | :ref:`overview <packagemanager>`                      |
++----------------------------------------------------------------------------------------------------------+
+
+Motion
+------
+
+Read also the :ref:`naoqi-motion` introduction.
+
++---------------------------------------------------------------------------------------------------------+
+| - ALAutonomousMoves - :ref:`API <autonomousmoves-api>` | :ref:`overview <autonomousmoves>`              |
+| - ALMotion :ref:`API <almotion-api>` | :ref:`overview <almotion>`                                       |
+| - ALNavigation :ref:`API <alnavigation-api>` | :ref:`overview <alnavigation>`                           |
+| - ALRecharge - :ref:`API <alrecharge-api>` | :ref:`overview <alrecharge>`                               |
+| - ALRobotPosture :ref:`API<alrobotposture-api>` | :ref:`overview <alrobotposture>`                      |
++---------------------------------------------------------------------------------------------------------+
+
+
+Audio
+-----
+
+Read also the :ref:`naoqi-audio` introduction.
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+| - ALAnimatedSpeech :ref:`API <alanimatedspeech-api>` | :ref:`overview <alanimatedspeech>`                                           |
+| - ALAudioDevice :ref:`API <alaudiodevice-api>` | :ref:`overview<alaudiodevice>`                                                     |
+| - ALAudioPlayer :ref:`API <alaudioplayer-api>` | :ref:`overview<alaudioplayer>`                                                     |
+| - ALAudioRecorder :ref:`API <alaudiorecorder-api>` | :ref:`overview<alaudiorecorder>`                                               |
+| - ALDialog :ref:`API <aldialog-api>`  | :ref:`overview <aldialog>`                                                                  |
+| - ALSoundDetection :ref:`API <alsounddetection-api>`  |      :ref:`overview <alsounddetection>`                                     |
+| - ALSoundLocalization :ref:`API <alsoundlocalization-api>`  |      :ref:`overview <alsoundlocalization>`                            |
+| - ALSpeechRecognition :ref:`API <alspeechrecognition-api>` | :ref:`overview <alspeechrecognition>`                                  |
+| - ALTextToSpeech :ref:`API <altexttospeech-api>` | :ref:`overview <altexttospeech>`                                                 |
+| - ALVoiceEmotionAnalysis :ref:`API <alvoiceemotionanalysis-api>`  | :ref:`overview <alvoiceemotionanalysis>`                        |
++-------------------------------------------------------------------------------------------------------------------------------------+
+
+
+Vision
+------
+
+Read also the :ref:`naoqi-vision` introduction.
+
++----------------------------------------------------------------------------------------------------------------+
+| - ALBacklightingDetection :ref:`API <albacklightingdetection-api>` | :ref:`overview<albacklightingdetection>`  |
+| - ALBarcodeReader :ref:`API <albarcodereader-api>` | :ref:`overview<albarcodereader>`                          |
+| - ALCloseObjectDetection :ref:`API <alcloseobjectdetection-api>` | :ref:`overview<alcloseobjectdetection>`     |
+| - ALColorBlobDetection :ref:`API <alcolorblobdetection-api>`       | :ref:`overview<alcolorblobdetection>`     |
+| - ALDarknessDetection :ref:`API <aldarknessdetection-api>` | :ref:`overview<aldarknessdetection>`              |
+| - ALLandmarkDetection :ref:`API <allandmarkdetection-api>` | :ref:`overview<allandmarkdetection>`              |
+| - ALLocalization - :ref:`API <allocalization-api>` | :ref:`overview <allocalization>`                          |
+| - ALMovementDetection :ref:`API <almovementdetection-api>` | :ref:`overview <almovementdetection>`             |
+| - ALPhotoCapture :ref:`API <alphotocapture-api>` | :ref:`overview <alphotocapture>`                            |
+| - ALRedBallDetection :ref:`API <alredballdetection-api>` | :ref:`overview <alredballdetection>`                |
+| - ALSegmentation3D :ref:`API <alsegmentation3D-api>` | :ref:`overview <alsegmentation3D>`                      |
+| - ALVideoDevice :ref:`API <alvideodevice-api>` | :ref:`overview<alvideodevice>`                                |
+| - ALVideoRecorder :ref:`API <alvideorecorder-api>` | :ref:`overview <alvideorecorder>`                         |
+| - ALVisionRecognition :ref:`API <alvisionrecognition-api>` | :ref:`overview <alvisionrecognition>`             |
+| - ALVisualCompass :ref:`API <alvisualcompass-api>` | :ref:`overview<alvisualcompass>`                          |
+| - ALVisualSpaceHistory :ref:`API <alvisualspacehistory-api>` | :ref:`overview<alvisualspacehistory>`           |
++----------------------------------------------------------------------------------------------------------------+
+
+
+People Perception
+-----------------
+
+Read also the :ref:`naoqi-peopleperception` introduction.
+
++-------------------------------------------------------------------------------------------------------------------+
+| - ALBasicAwareness :ref:`API <albasicawareness-api>` | :ref:`overview <albasicawareness>`                         |
+| - ALEngagementZones :ref:`API <alengagementzones-api>` | :ref:`overview <alengagementzones>`                      |
+| - ALFaceCharacteristics :ref:`API <alfacecharacteristics-api>` | :ref:`overview <alfacecharacteristics>`          |
+| - ALFaceDetection :ref:`API <alfacedetection-api>` | :ref:`overview <alfacedetection>`                            |
+| - ALGazeAnalysis :ref:`API <algazeanalysis-api>` | :ref:`overview <algazeanalysis>`                               |
+| - ALPeoplePerception :ref:`API <alpeopleperception-api>` | :ref:`overview <alpeopleperception>`                   |
+| - ALSittingPeopleDetection :ref:`API <alsittingpeopledetection-api>` | :ref:`overview <alsittingpeopledetection>` |
+| - ALWavingDetection :ref:`API <alwavingdetection-api>` | :ref:`overview <alwavingdetection>`                      |
++-------------------------------------------------------------------------------------------------------------------+
+
+
+Sensors
+-------
+
+Read also the :ref:`naoqi-sensors` introduction.
+
++--------------------------------------------------------------------------------------------------------+
+| - ALBattery   :ref:`API <albattery-api>` |   :ref:`overview <albattery>`                               |
+| - ALBodyTemperature   :ref:`API <albodytemperature-api>` |   :ref:`overview <albodytemperature>`       |
+| - ALChestButton :ref:`API <alchestbutton-api>` |       :ref:`overview <alchestbutton>`                 |
+| - ALFsr       :ref:`API <alfsr-api>` |       :ref:`overview <alfsr>`                                   |
+| - ALInfrared  :ref:`API <alinfrared-api>` |  :ref:`overview <alinfrared>`                              |
+| - ALLaser     :ref:`API <allaser-api>` |     :ref:`overview <allaser>`                                 |
+| - ALLeds      :ref:`API <alleds-api>` |      :ref:`overview <alleds>`                                  |
+| - ALSensors   :ref:`API <alsensors-api>` |   :ref:`overview <alsensors>`                               |
+| - ALSonar     :ref:`API <alsonar-api>` |     :ref:`overview <alsonar>`                                 |
+| - ALTouch     :ref:`API <altouch-api>` |   :ref:`overview <altouch>`                                   |
++--------------------------------------------------------------------------------------------------------+
+
+
+Trackers
+--------
+
+Read also the :ref:`naoqi-trackers` introduction.
+
++-----------------------------------------------------------------------------------------+
+| - ALTracker :ref:`API <altracker-api>` | :ref:`overview <altracker>`                    |
++-----------------------------------------------------------------------------------------+
+
+
+Diagnosis
+---------
+
+Read also the :ref:`ALDiagnosis <aldiagnosis>` introduction.
+
++-----------------------------------------------------------------------------------------+
+| - ALDiagnosis :ref:`API <aldiagnosis-api>` | :ref:`overview <aldiagnosis>`              |
++-----------------------------------------------------------------------------------------+
+
+DCM
+-------
+
+Read also the :ref:`DCM <dcm>` introduction.
+
++---------------------------------------------------------------------+
+| - DCM :ref:`API <dcm-api>` | :ref:`overview <dcm>`                  |
++---------------------------------------------------------------------+
+
+
+Deprecated
+------------
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+| - *ALAudioSourceLocalization - deprecated* :ref:`API <alaudiosourcelocalization-api>`  | :ref:`overview<alaudiosourcelocalization>` |
+| - *ALBonjour - deprecated* :ref:`API <albonjour-api>` | :ref:`overview <albonjour>`                                                 |
+| - *ALFaceTracker - deprecated* :ref:`API <alfacetracker-api>`                                                                       |
+| - *ALLogger - deprecated* :ref:`API <allogger-api>`  |  :ref:`overview <allogger>`                                                  |
+| - *ALLauncher - deprecated* :ref:`API <allauncher-api>` | :ref:`overview <allauncher>`                                              |
+| - *ALMotionRecorder - deprecated* :ref:`API<almotionrecorder-api>` | :ref:`overview<almotionrecorder>`                              |
+| - *ALPreferences - deprecated* :ref:`API <alpreferences-api>` | :ref:`overview <alpreferences>`                                     |
+| - *ALRedBallTracker - deprecated* :ref:`API <alredballtracker-api>`                                                                 |
+| - *ALRobotPose - deprecated* :ref:`API <alrobotpose-api>` | :ref:`overview <alrobotpose>`                                           |
++-------------------------------------------------------------------------------------------------------------------------------------+

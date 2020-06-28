@@ -1,0 +1,76 @@
+.. _cpp-examples:
+
+C++ Examples
+============
+
+.. toctree::
+  :hidden:
+
+  examples/core/events/events
+  examples/core/sayhelloworld/sayhelloworld
+  examples/core/helloworld/index
+  examples/core/helloworld/example
+  examples/core/custommain/custom_main
+  examples/motion/movehead/movehead
+  examples/sensors/bumper/index
+  examples/sensors/bumper/example
+  examples/sensors/bumper/principle
+  examples/sensors/leds/leds
+  examples/audiovideocapture/audiovideocapture
+  examples/vision/opencv
+  examples/vision/optimizedimage/optimizedimage
+  examples/vision/getimage/getimage
+  examples/vision/genericvideomodule/genericvideomodule
+  examples/vision/onfacedetection/onfacedetection
+  examples/vision/alvisualcompass/alvisualcompass
+  examples/audio/soundplayback/soundplayback
+  examples/audio/speechbasedreaction/speechbasedreaction
+  examples/audio/soundbasedreaction/soundbasedreaction
+  examples/audio/soundbasedreaction/onloudnoise
+  examples/audio/soundprocessing/soundprocessing
+
+
+.. seealso::
+
+   :ref:`cpp-introduction` | :ref:`cpp-tutos-examples` |
+   *C++ Examples* | :ref:`tips_and_tricks` | :ref:`gdb`
+
+------------
+
+Core:
+
++-------------------------------------------------------------------+
+| - :ref:`helloword<cpp-examples-helloworld>`                       |
+| - :ref:`cpp-tutos-say-helloworld`                                 |
+| - :ref:`cpp-tutos-create-events`                                  |
++-------------------------------------------------------------------+
+
+Vision:
+
++-------------------------------------------------------------------+
+| - :ref:`cpp-tutos-opencv`                                         |
+| - :ref:`cpp-examples-generic-video-module`                        |
+| - :ref:`cpp-examples-audiovideocapture`                           |
+| - :ref:`cpp-tutos-get-image`                                      |
+| - :ref:`cpp-tutos-optimized-access-images`                        |
+| - :ref:`cpp-examples-face-detected`                               |
+| - :ref:`cpp-examples-alvisualcompass`                             |
++-------------------------------------------------------------------+
+
+Sound:
+
++-------------------------------------------------------------------+
+| - :ref:`cpp-examples-sound-playback`                              |
+| - :ref:`cpp-examples-sound-processing`                            |
+| - :ref:`cpp-examples-sound-based-reaction`                        |
+| - :ref:`cpp-examples-speech-based-reaction`                       |
++-------------------------------------------------------------------+
+
+Others:
+
++-------------------------------------------------------------------+
+| - :ref:`cpp-examples-react-bumper`                                |
+| - :ref:`cpp-examples-loud-noise`                                  |
+| - :ref:`cpp-tutos-move-head`                                      |
+| - :ref:`cpp-tutos-leds`                                           |
++-------------------------------------------------------------------+

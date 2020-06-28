@@ -1,0 +1,344 @@
+.. _allocalization-api:
+
+ALLocalization API
+=====================
+
+:ref:`naoqi-vision` - :ref:`Overview <allocalization>` | API |
+:ref:`Tutorial <allocalization-tuto>` | :ref:`Advanced <allocalization_adv>`
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/allocalizationproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALLocalizationProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also has the following specific methods:
+
+**Import/Export**
+
+* :cpp:func:`ALLocalizationProxy::clear`
+* :cpp:func:`ALLocalizationProxy::load`
+* :cpp:func:`ALLocalizationProxy::save`
+
+**Localization**
+
+* :cpp:func:`ALLocalizationProxy::learnHome`
+* :cpp:func:`ALLocalizationProxy::getRobotPosition`
+* :cpp:func:`ALLocalizationProxy::goToHome`
+* :cpp:func:`ALLocalizationProxy::stopAll`
+* :cpp:func:`ALLocalizationProxy::isRelocalizationRequired`
+* :cpp:func:`ALLocalizationProxy::isDataAvailable`
+* :cpp:func:`ALLocalizationProxy::getMessageFromErrorCode`
+* :cpp:func:`ALLocalizationProxy::goToPosition`
+* :cpp:func:`ALLocalizationProxy::getRobotOrientation`
+
+
+Events List
+-----------
+
+* :naoqi:event:`ALLocalization/GoToBegin`
+* :naoqi:event:`ALLocalization/GoToNextMove`
+* :naoqi:event:`ALLocalization/GoToSuccess`
+* :naoqi:event:`ALLocalization/GoToFailed`
+* :naoqi:event:`ALLocalization/GoToLost`
+* :naoqi:event:`ALLocalization/LocalizeBegin`
+* :naoqi:event:`ALLocalization/LocalizeSuccess`
+* :naoqi:event:`ALLocalization/LocalizeLost`
+
+**Advanced**
+
+* :naoqi:event:`ALLocalization/OdometryBegin`
+* :naoqi:event:`ALLocalization/OdometryInsufficient`
+* :naoqi:event:`ALLocalization/HalfScanBegin`
+* :naoqi:event:`ALLocalization/HalfScanInsufficient`
+* :naoqi:event:`ALLocalization/HalfScanSuccess`
+* :naoqi:event:`ALLocalization/FullScanBegin`
+* :naoqi:event:`ALLocalization/UTurnEnd`
+* :naoqi:event:`ALLocalization/FullScanInsufficient`
+* :naoqi:event:`ALLocalization/FullScanSuccess`
+* :naoqi:event:`ALLocalization/LocalizeDirectionBegin`
+* :naoqi:event:`ALLocalization/LocalizeDirectionLost`
+* :naoqi:event:`ALLocalization/LocalizeDirectionSuccess`
+* :naoqi:event:`ALLocalization/StartingComputation`
+* :naoqi:event:`ALLocalization/StoppingComputation`
+
+
+Methods
+-------
+
+Import/Export
++++++++++++++
+
+.. cpp:function:: int ALLocalizationProxy::clear(const std::string& pDirectory)
+
+   Deletes the data of the nodes saved in a directory.
+   If the directory is the default directory, the nodes are also unloaded.
+
+   :param pDirectory: Path of the directory, relatively to the base path. The directory must be under the base path.
+
+   :return: 0 if no error occurred. Otherwise please refer to :ref:`allocalization-returncodes`.
+
+
+.. cpp:function:: int ALLocalizationProxy::load(const std::string& pDirectory)
+
+   Replaces the data of nodes in the default directory by those in a given directory,
+   unloads the previous nodes and loads the new ones. By default, since the location of the robot
+   is unknown, the current node is supposed to be the node with the lowest id.
+
+   :param pDirectory: Path of the directory, relatively to the base path. The directory must be under the base path.
+
+   :return: 0 if no error occurred. Otherwise please refer to :ref:`allocalization-returncodes`.
+
+
+.. cpp:function:: int ALLocalizationProxy::save(const std::string& pDirectory)
+
+   Saves the data in the default directory into a given directory. If the directory already exists,
+   it is first emptied. If it does not, it is created.
+
+   The saving function takes only one parameter, which is the name of the directory
+   in which you wish to save the data (this is a relative path under the base directory).
+   If the directory does not exist, it will be created. If it already exists, the data will
+   be overwritten.
+
+   :param pDirectory: Path of the directory, relatively to the base path. The directory must be under the base path.
+
+   :return: 0 if no error occurred. Otherwise please refer to :ref:`allocalization-returncodes`.
+
+Localization
+++++++++++++
+
+.. cpp:function:: int ALLocalizationProxy::learnHome()
+
+   Learns the home node of the robot.
+
+   :return: 0 if no error occurred. Otherwise please refer to :ref:`allocalization-returncodes`.
+
+
+.. cpp:function:: std::vector<float> ALLocalizationProxy::getRobotPosition(bool active)
+
+   :param active: False by default. Define the relocalization process in case of non reliable odometry:
+
+                  * if True, the robot will shoot a scan to relocalize,
+                  * if False, the robot will not move.
+
+   :return: the coordinates x, y, theta of the pose2D of the robot, computed by the localization.
+
+.. cpp:function:: int ALLocalizationProxy::goToHome()
+
+   Localizes if needed and moves the robot back to the place where was performed :cpp:func:`ALLocalizationProxy::learnHome`.
+   Accuracy depends on the environment.
+
+   :return: 0 if no error occurred. Otherwise please refer to :ref:`allocalization-returncodes`.
+
+
+.. cpp:function:: void ALLocalizationProxy::stopAll()
+
+   The robot immediately drops all localization tasks and stops moving.
+
+
+.. cpp:function:: bool ALLocalizationProxy::isRelocalizationRequired()
+
+  :return: true if the robot will need to perform a scan to localize. Else it means that goToHome will be performed using odometry (so the robot is confident in its current location).
+
+
+.. cpp:function:: bool ALLocalizationProxy::isDataAvailable()
+
+  :return: true if there is a panorama loaded.
+
+
+.. cpp:function:: std::string ALLocalizationProxy::getMessageFromErrorCode(const int& pCode)
+
+  :return: the :ref:`ALLocalization-returncodes` message corresponding to the given error code int.
+
+
+.. cpp:function:: int ALLocalizationProxy::goToPosition(const float& theta)
+
+   Go to the given position trying to perform a visual close loop with the image
+   contained in current panorama at theta.
+
+   :param theta: The target angle in the panorama referential.
+
+   :return: 0 if the robot finish the movement at the good position. Else refer to
+            :ref:`ALLocalization-returncodes` .
+
+.. cpp:function:: AL::ALValue ALLocalizationProxy::getRobotOrientation(bool active)
+
+   Returns the estimated position in the current panorama.
+
+   :param active: False by default. Define the relocalization process in case of non reliable odometry:
+
+                  * if True, the robot will shoot a scan to relocalize,
+                  * if False, the robot will not move.
+
+   :return: [EstimatedPosition, SuccessFlag, Confidence, OdometryOnly] where
+
+            * **panoramaOriginToRobotAngleEstimation** is the estimated angular position (in radians) between -Pi and Pi.
+            * **SuccessFlag** is set to false if a critical error occurred (for
+              example if no image could be retrieved)
+            * **Confidence** is a measurement of the confidence of the position
+              estimation
+            * **OdometryOnly** is set to true if the confidence is too low and the
+              estimation relies on odometry only
+
+
+Events
+------
+
+
+.. naoqi:event:: ALLocalization/GoToBegin(bool isRaised)
+
+   Raised at the beginning of a move by ALLocalizationProxy.
+
+.. naoqi:event:: ALLocalization/GoToNextMove(std::vector<float> nextMove)
+
+   Contains the [x, y, theta] value of the relative move the robot will do
+   to reach its destination.
+
+.. naoqi:event:: ALLocalization/GoToSuccess(bool isRaised)
+
+   Raised when the robot has successfully reached its destination.
+
+.. naoqi:event:: ALLocalization/GoToFailed(bool isRaised)
+
+   Raised when the robot could not reach its destination, either because
+   it was lost or because it was interrupted by an obstacle.
+
+.. naoqi:event:: ALLocalization/GoToLost(bool isRaised)
+
+   Raised when the robot gets lost while trying to go to its destination.
+
+.. naoqi:event:: ALLocalization/LocalizeBegin(bool isRaised)
+
+   Raised whenever the robot begins a localization process.
+
+.. naoqi:event:: ALLocalization/LocalizeSuccess(bool isRaised)
+
+   Raised when the localization is successful.
+
+.. naoqi:event:: ALLocalization/LocalizeLost(bool isRaised)
+
+   Raised when the localization fails and the robot is lost.
+
+.. naoqi:event:: ALLocalization/OdometryBegin(bool isRaised)
+
+   Raised when the robot starts localizing using the odometry.
+
+.. naoqi:event:: ALLocalization/OdometryInsufficient(bool isRaised)
+
+   Raised when the odometry information is not sufficient for the current
+   localization configuration, and the robot needs to perform more
+   localization steps.
+
+.. naoqi:event:: ALLocalization/HalfScanBegin(bool isRaised)
+
+   Raised when the robot starts doing a half-turn scan with its head.
+
+.. naoqi:event:: ALLocalization/HalfScanInsufficient(bool isRaised)
+
+   Raised when the half-scan information is not sufficient for the current
+   localization configuration (either the localization is in full mode, or
+   the score is not enough), and the robot needs to perform more localization
+   steps.
+
+.. naoqi:event:: ALLocalization/HalfScanSuccess(bool isRaised)
+
+   Raised when the half-scan information is enough to perform the localization.
+
+.. naoqi:event:: ALLocalization/FullScanBegin(bool isRaised)
+
+   Raised when the robot starts a complete scan (including a half turn of
+   its base).
+
+.. naoqi:event:: ALLocalization/UTurnEnd(bool isRaised)
+
+   Raised when the robot finishes the U turn of its base to achieve a full scan.
+
+.. naoqi:event:: ALLocalization/FullScanInsufficient(bool isRaised)
+
+   Raised when the full scan information is not sufficient. This means that
+   the robot is lost.
+
+.. naoqi:event:: ALLocalization/FullScanSuccess(bool isRaised)
+
+   Raised when the full scan information is enough to perform the localization.
+
+.. naoqi:event:: ALLocalization/LocalizeDirectionBegin(bool isRaised)
+
+   Raised when getRobotOrientation is called.
+
+.. naoqi:event:: ALLocalization/LocalizeDirectionLost(bool isRaised)
+
+   Raised when the orientation of the robot has NOT been successfully retrieved.
+
+.. naoqi:event:: ALLocalization/LocalizeDirectionSuccess(bool isRaised)
+
+   Raised when the orientation of the robot has been successfully retrieved.
+
+.. naoqi:event:: ALLocalization/StartingComputation(bool isRaised)
+
+   Raised when the localization of the robot starts to be computed based on the data gathered from the sensors.
+
+.. naoqi:event:: ALLocalization/StoppingComputation(bool isRaised)
+
+   Raised when the localization of the robot has been computed.
+
+.. _allocalization-localizationmodes:
+
+Localization modes
+------------------
+
+* **0 - USE_NOHINT**: the robot stops, moves its head, makes a half-turn and moves its head again, taking a full
+  panorama to locate itself accurately without using a hint. It can be quite slow.
+* **1 - USE_SIMPLE**: the robot stops and moves its head, taking a half-panorama to locate itself accurately.
+* **2 - USE_FULL**: the robot stops, moves its head, makes a half-turn and moves its head again, taking a full
+  panorama to locate itself accurately. It leads to higher confidence than with a half-panorama.
+* **3 - USE_GRADATION**: the robot takes a half-panorama to locate itself accurately. If the confidence is too
+  low, it makes a half-turn and completes this half-panorama into a full panorama.
+
+
+.. _allocalization-returncodes:
+
+Return codes
+------------
+
+* **0**: OK, the method was called successfully.
+* **1**: Robot not woken up.
+* **2**: The robot is not in the current panorama.
+* **3**: The panorama have not been set.
+* **4**: Impossible to write the panorama on disk.
+* **5**: Impossible to find the current position.
+* **6**: Impossible to perform a visual close loop.
+* **8**: Impossible to load the panorama.
+* **9**: The robot has been interrupted by a stop.
+* **10**: Invalid working directory name.
+* **11**: Call to a function from another proxy failed.
+* **12**: The robot is already performing an exclusive action (moving or modifying data)
+* **13**: The panorama is incomplete, because the half turn was interrupted by
+  an obstacle. However the robot managed to go back to its initial position.
+* **14**: The panorama is complete, but the robot did not manage to go back to
+  its initial position because it was blocked by an obstacle.
+* **15**: The panorama is incomplete because its half turn was interrupted,
+  and it did not manage to get back to its initial position.
+* **101**: The confidence is too low to continue moving.
+* **102**: The name corresponds to a file, not a directory.
+* **103**: Unable to create the directory.
+* **104**: Filesystem exception caught.
+* **105**: Directory not found.
+* **106**: Failed to open the file.
+* **107**: No node to load.
+* **108**: No node close to the estimate position.
+* **109**: Estimate position too close to another node for acquisition.
+* **110**: Wrong node id.
+* **111**: The robot is not supposed to go here (out of the known zone).
+* **112**: Unknown localization mode.
+* **113**: No data has been loaded or acquired.
+* **other**: non zero return codes from :ref:`ALLocalization` are forwarded. If the return code you got is not listed here, you may find it in the :ref:`ALLocalization-api`.

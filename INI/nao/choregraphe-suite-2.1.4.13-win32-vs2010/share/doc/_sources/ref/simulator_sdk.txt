@@ -1,0 +1,193 @@
+.. Warning: if you change the location of this file, you
+   have to fix the links!
+   Better would be to use a custom template for this page using pathto
+
+.. include:: /bulk/common.rst
+
+
+.. _simulator_sdk:
+
+Simulator SDK package
+==========================
+
+Requirements
+-------------
+
+- naoqi-sdk of the same version than the simulator-sdk.
+- gcc > 4.4 or Visual Studio > 9 (2008)
+- cmake 2.8 (2.8.3 minimum on windows)
+
+Introduction
+--------------
+
+The simulator-sdk is aimed at roboticists who want to simulate Aldebaran Robotics robots in their own 3D simulator.
+
+It provides libraries, data, assets and examples.
+
+Libraries
++++++++++++
+
+==============================   ==========================================================================================
+ lib/ALRobotModel                 a C++ lib which describes all the Aldebaran-Robotics models
+                                  (initial geometry, kinematics & dynamics data, sensors and actuators initial positions).
+
+ lib/ALNAOsim                     a C++ lib which enables to link the sensors / actuators to NAOqi
+                                  (via the Hardware Abstraction Layer).
+
+ lib/ALSimUtils                   a C++ lib which launches automatically one naoqi per robot.
+
+==============================   ==========================================================================================
+
+For further information, see: `Simulator-SDK reference <./simulator-sdk/index.html>`_
+
+Data and examples
++++++++++++++++++++
+
+==============================   ======================================================================================
+ share/alrobotmodel/meshes        OGRE 3D format meshes.
+
+ share/alrobotmodel/meshes-src    Blender format meshes.
+
+ share/alrobotmodel/models        xml files defining robots. They should be provided to the ALRobotModel lib.
+
+ examples/dummysim                a small example which shows how to use those lib.
+
+ examples/robot_description       a tool which generates the description of all the Aldebaran-Robotics models in text
+                                  or URDF format.
+==============================   ======================================================================================
+
+How it works
+-------------
+
+To use the simulator-sdk for your own simulator, you have to write a plugin that uses the libs of the simulator-sdk.
+
+* First, you have to instanciate a model by providing the xml file you want amongst those found under libalrobotmodel/models to the ALRobotModel lib.
+* Then, you should use your simulator API to get the physical values of the simulated world. These values should be transmitted into the sensors of the simulated robot. Use HALInterface::sendSensorValues functions for this.
+* Also, you should use the HALInterface to get the command values send by NAOqi to the actuators. Use HALInterface::fetchActuatorValues function for this. Finally use your simulator API to set these values to the actuators of the simulated robot.
+
+The following figure summarizes this, and explains in further details how the simulator-sdk works.
+
+.. image:: /medias/desktop/sim-sdk/simulator_sdk_functioning.png
+   :width: 600 px
+   :height: 450 px
+
+.. _how_to_build_dummysim:
+
+How to build dummysim
+----------------------
+
+======   ============================================================================================================
+Step      Action
+======   ============================================================================================================
+ 1.       From the root of simulator-sdk, move to examples/dummysim/
+
+          .. code-block:: ini
+
+             cd examples/dummysim/
+
+ 2.       Create a build directory, and move into it
+
+          .. code-block:: ini
+
+             mkdir build && cd build
+
+3.        Configure the build with cmake
+
+          .. code-block:: ini
+
+             cmake -DCMAKE_TOOLCHAIN_FILE=../../../toolchain-pc.cmake ..
+
+4.        Compile
+
+          .. code-block:: ini
+
+             make
+
+5.       Execution of dummysim.
+
+         Do not forget to uncomment the dcm_hal in the file etc/naoqi/autoload.ini
+         in the naoqi-sdk.
+         Next, at the root of simulator-sdk:
+
+         **on Linux**:
+
+         .. code-block:: ini
+
+            bin/dummysim share/alrobotmodel/models/ROMEO.xml <naoqi_port> <naoqi_sdk>
+
+         **on Mac**:
+
+         .. code-block:: ini
+
+            DYLD_LIBRARY_PATH=lib bin/dummysim share/alrobotmodel/models/ROMEOH32.xml <naoqi_port> <naoqi_sdk>
+
+         **on Windows**:
+
+         .. code-block:: ini
+
+            launch bin/dummysim share/alrobotmodel/models/ROMEO.xml <naoqi_port> <naoqi_sdk>
+
+         Where:
+
+         *<naoqi_port>* is the port on which NAOqi will be launched and
+
+         *<naoqi_sdk>* is the sdk from which NAOqi will be launched.
+
+6.       Check that everything works fine:
+
+         * Connect Choregraphe to 127.0.0.1:<naoqi_port>
+
+           The Robot View shows a |roboR| robot
+
+         * Click on the green button: **Stiffen all joints on/off** in **Choregraphe**.
+
+           If you move one joint, the robot shall move with a small delay. (the dummysim period is 1 sec!)
+======   ============================================================================================================
+
+Various remarks
+----------------
+
+Multi-robot
+++++++++++++++
+
+You can instantiate several robots on the same computer by defining a port for each.
+
+Units
++++++++
+
+Everything is in the Standard International.
+
+Video
+++++++
+
+In its current implementation, the video does not work without NAOqi running.
+
+
+How to generate URDF model and visualize it in rviz
+------------------------------------------------------
+
+Use robot_description to generate urdf:
+
+======   ============================================================================================================
+Step      Action
+======   ============================================================================================================
+1.        Install ros and rviz (see http://www.ros.org/wiki/)
+
+2.        Build robot_description (see :ref:`how_to_build_dummysim`)
+
+3.        Use robot_description to generate the urdf file of the model you need. At the root of the simulator-sdk:
+
+          .. code-block:: ini
+
+             bin/robot_description --urdf --mesh-path=share/alrobotmodel/meshes --model-file=share/alrobotmodel/models/<model_name>.xml > <model_name>.urdf
+
+4.        Copy :download:`display_aldebaran.launch <display_aldebaran.launch>` in the current directory
+
+5.        Visualize it with rviz (for more information, see http://www.ros.org/wiki/rviz):
+
+          .. code-block:: ini
+
+             rosrun urdf check_urdf <model_name>.urdf
+
+             roslaunch display_aldebaran.launch model:=<model_name>.urdf
+======   ============================================================================================================

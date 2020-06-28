@@ -1,0 +1,31 @@
+.. _h25_links:
+
+H25 - Links
+============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  links_h25_v33
+  links_h25_v32
+
+
+.. seealso::
+    **V5 & V4** | :ref:`V3.3 <h25_links_v33>` | :ref:`V3.2 <h25_links_v32>`
+
+    :ref:`nao-h25` | :ref:`robot_links`
+
+--------------------
+
+.. include:: ../bulk/links_image_length_v4_v33.rst
+
+.. include:: ../bulk/links_whole_h.rst
+
+.. include:: ../bulk/links_head.rst
+
+.. include:: ../bulk/links_arms_v4_v33.rst
+
+.. include:: ../bulk/links_fingers.rst
+
+.. include:: ../bulk/links_legs_v4_v33.rst

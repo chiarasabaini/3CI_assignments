@@ -1,0 +1,132 @@
+.. _alvisionrecognition:
+
+ALVisionRecognition
+====================
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alvisionrecognition-api
+    alvisionrecognition-tuto
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alvisionrecognition-api>` | :ref:`Tutorial<alvisionrecognition-tuto>`
+
+------------
+
+.. seealso:: :ref:`choregraphe-tuto-learn-object`
+
+What it does
+------------
+
+**ALVisionRecognition** is a vision module in which the robot tries to
+recognize different pictures, objects sides or even locations learned previously.
+
+How it works
+------------
+
+This module is based on the recognition of visual key points and is only
+intended to recognize specific objects that have been learned previously.
+
+The learning process is described in the Choregraphe Video monitor documentation:
+:ref:`choregraphe-tuto-learn-object`.
+With few minutes experience, the robot should be able to learn any new thing in less than 30s.
+
+Like for all other extractor modules, recognition results are placed in the **ALMemory**. You
+can open the web page of your robot with your favorite browser, go to
+**Advanced** > **Memory** and look for `PictureDetected` in the search field.
+
+When something is recognized, you see an ALValue (a series of fields in
+brackets) organized as explained here:
+
+
+The **"PictureDetected"** key is organized as follows:
+
+.. code-block:: guess
+
+   [
+     TimeStamp,
+     PictureInfo[N]
+   ]
+
+with as many PictureInfo tags as things currently recognized.
+
+**TimeStamp**
+
+This field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+  TimeStamp =
+  [
+    TimeStamp_Seconds,
+    Timestamp_Microseconds
+  ]
+
+**PictureInfo**
+
+For each detected picture, we have one PictureInfo field:
+
+.. code-block:: guess
+
+   PictureInfo =
+   [
+     Label[N],
+     MatchedKeypoints,
+     Ratio,
+     BoundaryPoint[N]
+   ]
+
+- **Label**: organized names given to the picture (e.g. ["cover", "my book"],
+  or ["fridge corner", "kitchen", "my flat"]).
+
+- **MatchedKeypoints** is the number of keypoints retrieved in the current frame
+  for the object.
+
+- **Ratio** is the number of keypoints retrieved in the current frame for the
+  object divided by the number of keypoints found during the learning stage of the object.
+
+- **BoundaryPoint** is a list of points coordinates in angle values (radian)
+  representing the reprojection in the current image of the boundaries selected
+  during the learning stage.
+
+.. code-block:: guess
+
+   BoundaryPoint =
+   [
+     x,
+     y
+   ]
+
+Performances and Limitations
+----------------------------
+
+**Performances**
+
+The recognition process is partially robust to distance (down to half and up to
+twice the distance used for learning), angles (up to 50° inclination for something
+learned facing the camera), light conditions and rotation. In addition, learned
+objects can be partially hidden for the recognition stage.
+
+For a better performance on the robot, the database sent on the robot contains
+only essential information for the detection and not all additional data stored
+in the computer database.
+
+**Limitations**
+
+- This module is based on the recognition of key points and not of the external
+  shape of the objects, so it can't recognize untextured objects.
+- Currently it is not designed for recognizing objects classes (e.g. a cookie box)
+  but objects instances (that cookie box).
+- Currently every detected keypoint in the current image is matched with only one learned keypoint in the database.
+  If scores for choosing between two objects are too close, the keypoint will not
+  be associated to any of them. As currently the algorithm doesn't vote for several
+  objects, learning twice the same area of an object will reduce its detection rate.
+
+
+Getting Started
+---------------
+
+The easiest way to get started with **ALVisionRecognition** is to use Choregraphe.
+Learning an object can be done through the :ref:`choregraphe-tuto-learn-object` section.
+Then, learned object can be recognized by using the Choregraphe **Vision Reco.** box.

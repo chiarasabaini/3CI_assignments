@@ -1,0 +1,158 @@
+.. _altouch-api:
+
+ALTouch API
+===========
+
+:ref:`naoqi-sensors` - :ref:`Overview <altouch>` | API
+
+------------
+
+.. seealso::
+
+   - :ref:`Contact Sensors Hardware <robot-contact-sensors>`
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/altouchproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALTouchProxy
+
+* :cpp:func:`ALTouchProxy::getSensorList`
+
+* :cpp:func:`ALTouchProxy::getStatus`
+
+.. _altouch-events:
+
+Event list
+----------
+
+* :naoqi:event:`TouchChanged`
+
+* :naoqi:event:`RightBumperPressed`
+* :naoqi:event:`LeftBumperPressed`
+
+* :naoqi:event:`FrontTactilTouched`
+* :naoqi:event:`MiddleTactilTouched`
+* :naoqi:event:`RearTactilTouched`
+
+* :naoqi:event:`HandRightBackTouched`
+* :naoqi:event:`HandRightLeftTouched`
+* :naoqi:event:`HandRightRightTouched`
+* :naoqi:event:`HandLeftBackTouched`
+* :naoqi:event:`HandLeftLeftTouched`
+* :naoqi:event:`HandLeftRightTouched`
+
+Methods
+-------
+
+.. cpp:function:: std::vector<std::string> ALTouchProxy::getSensorList()
+
+  Return the list of sensors managed by touch module, i.e. capable of
+  generating a :naoqi:event:`TouchChanged` event.
+
+  :return: Return a vector<std::string> of sensor names.
+
+.. cpp:function:: ALValue ALTouchProxy::getStatus()
+
+  Return the current Touch status of all managed body parts. The format
+  is equivalent to that of :naoqi:event:`TouchChanged` event.
+
+  :return: Return a vector of pairs [name, bool] indicating if
+           body part named `name` is currently touched.
+
+
+Events
+------
+
+.. naoqi:event:: TouchChanged(AL::ALValue TouchInfo)
+
+  Raised when the robot touch status changed.
+
+  :param val: a list of ALValue with a name and a boolean for the touch status.
+
+
+.. naoqi:event:: RightBumperPressed(float val)
+
+  Raised when the right bumper is pressed.
+
+  :param val: 1.0 if right bumper is pressed.
+
+
+.. naoqi:event:: LeftBumperPressed(float val)
+
+  Raised when the left bumper is pressed.
+
+  :param val: 1.0 if left bumper is pressed.
+
+
+.. naoqi:event:: FrontTactilTouched(float val)
+
+  Raised when the front head tactile sensor is touched (by human).
+
+  :param val: 1.0 if front head tactile sensor is touched.
+
+
+.. naoqi:event:: MiddleTactilTouched(float val)
+
+  Raised when the middle head tactile sensor is touched (by human).
+
+  :param val: 1.0 if middle head tactile sensor is touched.
+
+
+.. naoqi:event:: RearTactilTouched(float val)
+
+  Raised when the rear head tactile sensor is touched (by human).
+
+  :param val: 1.0 if rear head tactile sensor is touched.
+
+
+.. naoqi:event:: HandRightBackTouched(float val)
+
+  Raised when the right hand back tactile sensor is touched (by human).
+
+  :param val: 1.0 if right hand back tactile sensor is touched.
+
+
+.. naoqi:event:: HandRightLeftTouched(float val)
+
+  Raised when the right hand left tactile sensor is touched (by human).
+
+  :param val: 1.0 if right hand left tactile sensor is touched.
+
+
+.. naoqi:event:: HandRightRightTouched(float val)
+
+  Raised when the right hand right tactile sensor is touched (by human).
+
+  :param val: 1.0 if right hand right tactile sensor is touched.
+
+
+.. naoqi:event:: HandLeftBackTouched(float val)
+
+  Raised when the left hand back tactile sensor is touched (by human).
+
+  :param val: 1.0 if left hand back tactile sensor is touched.
+
+
+.. naoqi:event:: HandLeftLeftTouched(float val)
+
+  Raised when the left hand left tactile sensor is touched (by human).
+
+  :param val: 1.0 if left hand left tactile sensor is touched.
+
+
+.. naoqi:event:: HandLeftRightTouched(float val)
+
+  Raised when the left hand right tactile sensor is touched (by human).
+
+  :param val: 1.0 if left hand right tactile sensor is touched.

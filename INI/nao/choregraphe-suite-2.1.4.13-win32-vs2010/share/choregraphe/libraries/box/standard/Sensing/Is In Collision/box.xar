@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Check if the selected body part is in collision with an other part of his body." x="181" y="61">
+        <bitmap>media/images/box/sensors/anti_collision.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.motion = ALProxy( "ALMotion" )
+
+    def onUnload(self):
+        pass
+
+    def onInput_onAsk(self):
+        result = self.motion.isCollision(self.getParameter("Body part"))
+        if( result == "none" ):
+            self.none()
+        elif(result == "near" ):
+            self.near()
+        else:
+            self.collision()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onAsk" type="1" type_size="1" nature="1" inner="0" tooltip="When this input is stimulated the box check if the selected part of the body&#x0A;is in collision with an other part of his body." id="2" />
+        <Output name="none" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the body part is not in collision with the rest of his body." id="3" />
+        <Output name="near" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the body part is almost in collision with the rest of his body." id="4" />
+        <Output name="collision" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the body part is in collision with the rest of his body." id="5" />
+        <Parameter name="Body part" inherits_from_parent="0" content_type="3" value="Arms" default_value="Arms" custom_choice="0" tooltip="Body part which the collision is checked with the rest of the body." id="6">
+            <Choice value="Arms" />
+            <Choice value="LArm" />
+            <Choice value="RArm" />
+        </Parameter>
+    </Box>
+</ChoregrapheBox>

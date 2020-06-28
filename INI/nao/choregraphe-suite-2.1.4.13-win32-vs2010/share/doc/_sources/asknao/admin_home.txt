@@ -1,0 +1,49 @@
+.. _admin_home:
+
+Administrator home
+===================
+
+When the **Administrator** has also **Teacher** and/or **Parent** privileges,
+the **Admin** home displays the the **Teacher** and/or **Parent** tabs.
+
+.. image:: /medias/asknao/admin_home_00.png
+   :width: 570 px
+   :height: 396 px
+
+The role of the Administrator
+-------------------------------
+
+The **Administrator** of an institution is responsible for creating
+the accounts for its staff, the parents, as well as linking child passports
+to the appropriate teachers and parents.
+
+Administrator can:
+
+* Create/edit **Teacher** and **Parents** accounts,
+* Create **Children** passports, and associate them to **Teachers** and **Parents** accounts.
+
+Creating a School Network
+-------------------------
+
+To start creating your **ASK NAO** school network:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Click the **Admin** button.
+
+        The administration panel is displayed.
+
+        For further details, see: :ref:`admin_ins`.
+
+2.      For each classroom:
+
+        * Create a user account for each teacher and each parent.
+
+          For further details, :ref:`add_user`.
+
+        * Create a child account for each child and link
+          it to its related adults.
+
+          For further details, see: :ref:`add_child`.
+=====  =========================================================================

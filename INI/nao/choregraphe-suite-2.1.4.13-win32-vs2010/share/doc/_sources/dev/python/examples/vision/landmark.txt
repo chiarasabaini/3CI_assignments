@@ -1,0 +1,38 @@
+.. _python-example-vision-landmark:
+
+Landmark detection
+==================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+These examples use :ref:`ALLandMarkDetection`.
+
+Detect landmarks
+----------------
+
+Detected landmarks and print some information about them.
+
+:download:`vision_landMarkDetection.py </examples/python/vision/vision_landMarkDetection.py>`
+
+.. literalinclude:: /examples/python/vision/vision_landMarkDetection.py
+   :language: py
+
+Callback on landmark detection
+------------------------------
+
+React to a landmark detection by subscribing to the right event in ALMemory.
+
+:download:`vision_onMarkDataChange.py </examples/python/vision/vision_onMarkDataChange.py>`
+
+.. literalinclude:: /examples/python/vision/vision_onMarkDataChange.py
+   :language: py
+
+Landmark localization
+------------------------------
+
+Localize in robot space the detected landmark using transforms.
+
+:download:`vision_localization.py </examples/python/vision/vision_localization.py>`
+
+.. literalinclude:: /examples/python/vision/vision_localization.py
+   :language: py

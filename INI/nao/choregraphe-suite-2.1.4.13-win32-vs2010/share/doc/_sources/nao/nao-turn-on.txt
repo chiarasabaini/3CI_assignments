@@ -1,0 +1,55 @@
+.. include:: ../bulk/common.rst
+
+.. _nao-turn-on:
+
+Turning |roboN| on
+=========================
+
+To turn |roboN| on:
+
+=====  ==============================================================
+Step       Action
+=====  ==============================================================
+1.      Press the :ref:`Chest Button <chest_btn_nao>` once.
+
+        *Result*:
+
+        * The :ref:`LEDs <leds_nao>`, blinking and fading,
+          inform you about the progress of the startup.
+
+        * The boot process is completed when |roboN| says
+          "**OGNAK GNOUK**".
+
+        For further details, see: :ref:`boot_process_nao`.
+=====  ==============================================================
+
+.. _chest_btn_nao:
+
+**Chest Button** - |roboN|
+
+.. image:: /medias/wizard/chest_button.png
+    :width: 109 px
+    :height: 176 px
+
+**What happens after the startup**
+
+|roboN| may behave very differently according to the settings chosen by his owner.
+For further details, see: :ref:`nao_life`.
+
+**Troubleshooting**
+
++-------------------+----------------------------------------------------------+
+| If ...            | Action                                                   |
++===================+==========================================================+
+| nothing happens   | Make sure the battery is charged.                        |
+|                   |                                                          |
+|                   | For further details, see: :ref:`charging-battery_nao`.   |
++-------------------+----------------------------------------------------------+
+| |roboN| stays     | Make sure the **Autonomous life** is on.                 |
+| still             |                                                          |
+|                   | For further details, see: :ref:`alife`.                  |
++-------------------+----------------------------------------------------------+
+| |roboN| does not  | Make sure the **Basic Channel** is on.                   |
+| listen nor talk   |                                                          |
+|                   | For further details, see: :ref:`basic_channel`.          |
++-------------------+----------------------------------------------------------+

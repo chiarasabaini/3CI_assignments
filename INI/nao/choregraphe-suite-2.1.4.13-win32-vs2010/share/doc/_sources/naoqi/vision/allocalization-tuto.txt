@@ -1,0 +1,322 @@
+.. _allocalization-tuto:
+
+Allocalization Tutorial
+=======================
+
+:ref:`naoqi-vision` - :ref:`Overview<allocalization>` | :ref:`API <allocalization-api>`
+| Tutorial | :ref:`Advanced <allocalization_adv>`
+
+------------
+
+.. code-block:: python
+
+  motionProxy  = ALProxy("ALMotion", robotIP, PORT)
+  localizationProxy = ALProxy("ALLocalization", robotIP, PORT)
+
+  # Learning home.
+  ret = localizationProxy.learnHome()
+  # Check that no problem occurred.
+  if ret == 0:
+    print "Learning OK"
+  else:
+    print "Error during learning " + str(ret)
+
+  # Make some moves.
+  motionProxy.moveTo(0.5, 0.0, 0.2)
+
+  # Go back home.
+  ret = localizationProxy.goToHome()
+  # Check that no problem occurred.
+  if ret == 0:
+    print "go to home OK"
+  else:
+    print "error during go to home " + str(ret)
+
+  # Save the data for later use.
+  ret = localizationProxy.save("example")
+  # Check that no problem occurred.
+  if ret == 0:
+    print "saving OK"
+  else:
+    print "error during saving" + str(ret)
+
+
+
+.. Hidden
+  Introduction
+  ------------
+  This tutorial explains how to use ALLocalization to acquire nodes, get the location of your robot and
+  save your nodes for later use.
+
+
+  .. note::
+
+     The tutorial is written in Python.
+
+  Download
+  --------
+
+  You can download the whole ALLocalization example here:
+  :download:`allocalization_example.py </examples/python/navigation/allocalization_example.py>`
+
+  For any troubleshooting linked to python, see :ref:`python-install-guide` section.
+
+
+  Code review
+  -----------
+
+  In this section we describe each important piece of code of the example.
+
+  Before we start
+  +++++++++++++++
+
+  First, you need to create proxies to **ALMotion** and **ALLocalization** to be able use their API.
+
+  .. code-block:: python
+
+    from naoqi import ALProxy
+
+          def main(robotIP, PORT=9559):
+              '''
+                  Example of node acquisition and moves between node
+              '''
+
+              motionProxy  = ALProxy("ALMotion", robotIP, PORT)
+              localizationProxy = ALProxy("ALLocalization", robotIP, PORT)
+
+  Before using **ALLocalization**, you also need to do two things:
+
+  * Wake the robot up (to be able to move)
+  * Define a theshold (minimum confidence on localization results)
+
+  .. code-block:: python
+
+              # Wake up robot
+              motionProxy.wakeUp()
+
+              # Define a confidence threshold for localizations
+              thres = 0.45
+
+  It is then generally a good idea to clean the default directory.
+  This directory, which contains the current working data, is cleared
+  on module startup. Manually clearing this directory garantees you to
+  be able to work from scratch even if someone used this module right before.
+
+  .. code-block:: python
+
+              # Make sure that no data is loaded
+              ret = localizationProxy.clear("default")
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+  You are now ready to use the module.
+
+  First node
+  ++++++++++
+
+  The first thing to do is to acquire a first node,
+  which will also define the referential for world coordinates.
+  The acquisition function returns the id of the acquired node
+  (-1 if an error occured) and a return code. We can use this code to
+  check that the node was successfully acquired.
+
+  .. code-block:: python
+
+              # Launch the acquisition of a first node
+              ret = localizationProxy.learnNode()
+
+              # Check that the acquisition was successful
+              if ret[1] != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+  Expanding the known zone
+  ++++++++++++++++++++++++
+
+  At this point, we have defined a small **known zone** within which
+  we can freely travel. For instance, the function call below will make the
+  robot move to the point of world coordinates (1.5, 0, 3.14).
+  The two other parameters define the way the robot go to this location:
+  the first one selects the localization mode (in this case, the robot will move its
+  head to determine its location, and make a half turn if it is not enough),
+  while the second one may allow the robot to finish its move earlier.
+
+  Here, the last parameter is quite low, so it is very unlikely to come into play.
+  However, a higher value will allow the robot some leniency. For example,
+  setting the last parameter to 2 will allow the robot to finish its move
+  as soon as it is within two meters of its destination. This may prove useful in
+  big environments.
+
+
+  .. code-block:: python
+
+              # Go to a given location in the known zone
+              ret = localizationProxy.goToLocationInWorld(1.5, 0, 3.14, 3, 0.1)
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+
+  Since the known zone is still quite small, you will want to acquire new
+  nodes to make it bigger. This is done in the same way as for the first node.
+  If needed, you can then confirm the location of the new node by using its id.
+
+  .. code-block:: python
+
+              # Acquire a new node
+              ret = localizationProxy.learnNode()
+
+              # Check that the acquisition was successful
+              if ret[1] != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+              # Confirm the location of the new node
+              print localizationProxy.getNodeLocationInWorld(1)
+
+
+  While expanding the known zone, you may want to express a location
+  in the coordinates of a node. This is not difficult task: to each function
+  using world coordinates corresponds a function doing the same thing using relative
+  coordinates. The name of the world-coordinate function will end by "In World",
+  whereas the name of the other will end by "InNode".
+  The node-coordinate function will take as parameter the id of the reference node,
+  followed by the same parameters as the world-coordinate one.
+
+  For example, the function call below will make the robot move to the location
+  of coordinates (1, 1, 0.7) in the coordinates system of node 1.
+
+  .. code-block:: python
+
+              # Go to a given location in the known zone:
+              ret = localizationProxy.goToLocationInNode(1, 1, 0.7, 1.5, 3, 0.1)
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+
+  When the time comes to use the saved data, the loading function must be called
+  with the name of the directory in which the data is saved.
+
+  Right after loading, the robot has not enough information to determine its current
+  location. It needs to at least have a reference node for its first localization.
+
+  By default, this node will be the one with the lowest id. It is however possible
+  to manually set the current node.
+
+  .. code-block:: python
+
+              # Load data (the same data in this example)
+              ret = localizationProxy.load("example")
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+              # Set the current node
+              ret = localizationProxy.setCurrentNode(0)
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+
+  Obtaining the robot location
+  ++++++++++++++++++++++++++++
+
+  In the known zone, it is easy to retrieve the robot location.
+  The function call below returns the location of the robot, in world
+  coordinates.
+
+  The function takes as parameter the localization mode. The time needed to
+  determine the location of the robot will depend on the mode.
+  Please keep in mind that obtaining the robot location right after loading
+  a node (or setting the current node) is a difficult operation, which
+  requires the robot to take a full panorama. Localization modes which do
+  not allow for full panoramas will then be unable to determine the robot
+  location (and will return [0, 0, 0, 0] to signal an error).
+
+  .. code-block:: python
+
+              # Determine the location of the robot
+              loc = localizationProxy.findCurrentLocationInWorld(3)
+              print loc
+
+              # Check that the result is usable
+              if(loc[3] < thres):
+                  motionProxy.rest()
+                  return
+
+
+  Going back to a node
+  ++++++++++++++++++++
+
+  Sometimes, you will want to go back not to a location known by coordinates,
+  but to a specific node. The function below makes the robot return to the node
+  whose id is given as first parameter (node 1). The other parameters are the same
+  as other moving functions: the localization mode (odometry here), and the leniency.
+
+  .. code-block:: python
+
+              # Return to the second node using odometry
+              ret = localizationProxy.goToNode(1, 0, 0.1)
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+
+  Erasing a node
+  ++++++++++++++
+
+  At some point you may want to erase a node you have previously acquired.
+  This can be done simply, as shown below. Please note that you cannot
+  erase the current node, but that ALLocalization features a function allowing
+  to relearn the current node.
+
+  .. code-block:: python
+
+              # Erase the first node
+              ret = localizationProxy.eraseNode(0)
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return
+
+
+  Deleting data
+  +++++++++++++
+
+  Saving the data is good, but after some time it may outlive its usefulness.
+  If that happens, you can delete the directory containing the data as shown below.
+
+  .. code-block:: python
+
+              # Delete the previously saved data
+              ret = localizationProxy.clear("example")
+
+              # Check that no problem occured
+              if ret != 0:
+                  print ret
+                  motionProxy.rest()
+                  return

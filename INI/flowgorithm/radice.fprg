@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="18762"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-24 10:22:58 "/>
+        <attribute name="created" value="MTg3NjI7VzEwU1RBVC03LTE1ODsyMDE5LTExLTE4OyIxMDoxNzozNyAiOzIyNjQ="/>
+        <attribute name="edited" value="MTg3NjI7VzEwU1RBVC03LTE1ODsyMDE5LTExLTE4OyIxMDoyNTo1OSAiOzM7MjM3Nw=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMjQ7IjEwOjIyOjU4ICI7MTszMzk4"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="r" type="Integer" array="False" size=""/>
+            <assign variable="r" expression="0"/>
+            <declare name="rad" type="Integer" array="False" size=""/>
+            <assign variable="rad" expression="1"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="1"/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <assign variable="j" expression="0"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci un numero:&quot;" newline="True"/>
+            <input variable="n"/>
+            <if expression="n=0">
+                <then/>
+                <else>
+                    <if expression="n&gt;0">
+                        <then>
+                            <output expression="&quot;inserisci radice:&quot;" newline="True"/>
+                            <input variable="r"/>
+                            <while expression="rad &lt;= n">
+                                <for variable="j" start="r" end="0" direction="dec" step="1">
+                                    <assign variable="rad" expression="rad*i"/>
+                                </for>
+                                <assign variable="i" expression="i+1"/>
+                            </while>
+                        </then>
+                        <else>
+                            <output expression="&quot;ERRORE: il numero inserito non &#232; valido.&quot;" newline="True"/>
+                            <call expression="Main"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <output expression="i-1" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

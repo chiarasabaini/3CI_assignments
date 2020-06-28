@@ -1,0 +1,169 @@
+.. _autonomouslife_advanced:
+
+ALAutonomousLife - Advanced
+============================
+
+:ref:`naoqi-core` - :ref:`Overview <autonomouslife>` | :ref:`API <autonomouslife-api>` |
+:ref:`launchtriggerconditions` | Advanced
+
+------------
+
+.. _autonomouslife_states:
+
+Autonomous Life states
+----------------------
+
+**ALAutonomousLife** states exist for prioritization and automation of starting
+activities and other services.
+
+
+List of Autonomous Life states
++++++++++++++++++++++++++++++++
+
+============================== ====================================
+ State name                     For further details, see ...
+============================== ====================================
+ "solitary"                     :ref:`autonomouslife_solitary`
+ "interactive"                  :ref:`autonomouslife_interactive`
+ "disabled"                     :ref:`autonomouslife_disabled`
+ "safeguard"                    :ref:`autonomouslife_safeguard`
+============================== ====================================
+
+.. _autonomouslife_solitary:
+
+Solitary state
+++++++++++++++
+
+.. image:: /medias/dev/modules/autonomouslife/state_solitary_interactive.png
+
+**Solitary state is entered from any state**:
+
+================== ==============================================
+ From ...            Solitary state is entered ...
+================== ==============================================
+ **disabled**        programmatically.
+ **interactive**     when interactive Activity stack finished.
+ **safeguard**       when safeguard successfully processed.
+ **solitary**        when a solitary Activity finished.
+================== ==============================================
+
+**When this state is entered**:
+
+* Basic Awareness and Breathing services are started and parameters reset.
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` is started.
+* Only plugins for "solitary" group are enabled by default.
+
+**During this state**:
+
+* Any activity can be started via :cpp:func:`ALAutonomousLifeProxy::switchFocus`.
+* Starting interactive Activity will switch to **interactive** state.
+* The **safeguard** and **disabled** states may be entered.
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` can not be stopped,
+  and its suggested activities will be automatically focused, potentially
+  interrupting running Activity.
+
+**Launchpad Activity prioritization**:
+
+* If a solitary and interactive both have true conditions at the same time,
+  interactive will get priority.
+* When multiple activities have true conditions at the same time,
+  the one that was focused least recently will get priority.
+* During a solitary Activity, an interactive Activity may interrupt it to take the focus.
+* A solitary Activity will not be interrupted another solitary Activity (this behavior could change in the future)
+
+.. _autonomouslife_interactive:
+
+Interactive state
++++++++++++++++++
+
+**Interactive state is only entered**:
+
+* when an Interactive Activity is focused.
+
+**When this state is entered**:
+
+* Basic Awareness and Breathing services will be started and parameters reset.
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` will be stopped.
+
+**During this state**:
+
+* Interactive activities can be started via
+  :cpp:func:`ALAutonomousLifeProxy::switchFocus`
+
+  * Focusing a new interactive Activity will re-enter the interactive state.
+  * Solitary activities may not be started, this would cause the solitary state
+    to enforce its rules and create a bad life cycle with the user. (This could
+    change in the future)
+
+* The **safeguard** and **disabled** state may be entered.
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` can be started,
+  it will not enforce focusing its suggestions. It will not interrupt the running Activity.
+* When an entire stack of interactive activities has exited, solitary state
+  will be entered.
+* When all humans have been lost, the interactive Activity will be forcibly exited.
+  (This is not yet implemented)
+
+.. _autonomouslife_disabled:
+
+Disabled state
+++++++++++++++
+
+.. image:: /medias/dev/modules/autonomouslife/state_disabled.png
+
+**When this state is entered**:
+
+* Focused Activity will be stopped and stack cleared.
+* Basic Awareness and Breathing services will be stopped if they are running.
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>`. will be stopped.
+
+**During this state**:
+
+* No Activity can be started via :cpp:func:`ALAutonomousLifeProxy::switchFocus`
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` can not be started.
+* The **safeguard** or **interactive** state may not be entered.
+
+**To exit this state**:
+
+* the developer may call :cpp:func:`ALAutonomousLifeProxy::setState`
+
+* This action will be provided in a default startup behavior where desired.
+
+
+.. _autonomouslife_safeguard:
+
+Safeguard state
++++++++++++++++
+
+**Safeguard state is entered when**:
+
+* A critical reflex raised.
+
+* The developer should not enter this state. Entering this state is reserved for
+  critical Aldebaran code.
+
+* A critical reflex is raised when :ref:`albodytemperature` sees that a critical joint
+  is too hot to function, or if :ref:`aldiagnosis` sees that critical hardware is not
+  functioning properly, as defined in :term:`Level of failure severity`.
+
+**When this state is entered**:
+
+* Focused Activity is stopped and stack cleared.
+* Basic Awareness and Breathing services are stopped if they are running.
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` is stopped.
+
+* The reflex is then processed.
+* Based on the outcome of the reflex, the **solitary** state may be re-entered.
+
+  * For damaged hardware, the robot does not exit **safeguard** state.
+  * For overheating, the robot exits the **safeguard** state after cooling down
+    sufficiently.
+
+**During this state**:
+
+* No Activity can be started via :cpp:func:`ALAutonomousLifeProxy::switchFocus`
+* :ref:`Autonomous Launchpad <autonomouslaunchpad_overview>` can not be started.
+* The **safeguard** state may be re-entered for a higher priority reflex.
+
+.. image:: /medias/dev/modules/autonomouslife/state_safeguard.png
+   :width: 545 px
+   :height: 251 px

@@ -1,0 +1,53 @@
+
+.. _albacklightingdetection:
+
+ALBacklightingDetection
+=======================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   albacklightingdetection-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <albacklightingdetection-api>`
+
+-------------------
+
+What it does
+------------
+
+**ALBacklightingDetection** extractor checks if the images returned by the
+camera are backlit or not. Backlighting occurs when there is high contrast
+between a light source (e.g. a window) and the observed scene.
+
+The following backlighting value is computed for each frame:
+
+* 0: no backlight
+* 1: possible backlight
+* 2: backlight identified
+
+This value is stored in the **ALMemory**. When a backlighting situation is
+detected for the first time (i.e the backlighting value just turned to 2)
+an event is raised.
+
+How it works
+------------
+
+In order to compute the backlighting value, the extractor:
+
+#. analyses in the current frame if more than 2% of pixels are clipped
+   (a phenomenon that occurs when a pixel sensor receives more light that it can "store",
+   resulting in a '255' value after digital conversion for that pixel).
+
+#. checks if more than 60% of pixels present a luminance below '70'.
+
+The final result is a weighted combination of both the percentage
+of pixels at '255' and the percentage of pixels below '70'.
+
+
+Performances and Limitations
+----------------------------
+
+The camera AutoExposition parameter (and the AutoGain parameter, if it exists)
+of the camera must be activated for this module to work properly.

@@ -1,0 +1,75 @@
+.. _python-reacting-to-events:
+
+Making a Python module - Reacting to events
+===========================================
+
+
+
+Here we want the robot say 'Hello, you' every time it detects a human face.
+
+To do this, we need to subscribe to the 'FaceDetected' event, raised by the
+ALFacedetection module.
+
+If you read the documentation of :cpp:func:`ALMemoryProxy::subscribeToEvent`, you will see
+you need a module name and the name of a callback.
+
+So we need to write a NAOqi module in Python.
+
+To create a module in Python, we also need a broker.
+
+The example can be found below.
+
+
+.. seealso::
+
+   - :ref:`naoqi-overview`
+
+
+:download:`reacting_to_events.py </examples/python/reacting_to_events.py>`
+
+.. literalinclude:: /examples/python/reacting_to_events.py
+   :language: py
+
+
+Few notes:
+
+* Make sure to use a global variable for the module instance.
+
+* Make sure the name you pass to the constructor of ALModule matches
+  the name of your variable.
+
+* The method of your class are automatically transform into bound
+  methods, **providing that you wrote a doc string** for this method,
+  and it **does not start with an underscore**.
+
+
+.. code-block:: python
+
+  class MyModule:
+
+    # This method will be bound:
+    def myMethod(self):
+      """ does this and that """
+      pass
+
+    # This will NOT be bound:
+    def myMethod(self):
+      if foo:
+        pass
+
+    # This will also NOT be bound
+    def _myMethod(self):
+      pass
+
+
+
+* Once you have built a ALBroker object, you need to keep the object alive
+  for the subscribing to work, hence the ``while(True)`` loop.
+  You also need the broker object to be alive in order to create proxies
+  without specifying an IP or a port.
+
+* The script must be run with ``--pip`` and ``--pport`` options to work.
+
+
+Run the script, and put your face in front of the robot : you should hear
+'Hello, you'.

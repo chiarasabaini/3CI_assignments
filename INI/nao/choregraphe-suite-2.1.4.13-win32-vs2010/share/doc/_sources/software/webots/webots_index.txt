@@ -1,0 +1,288 @@
+.. include:: ../../bulk/common.rst
+
+.. |play-button| image:: /medias/desktop/beginning_play_button.png
+   :class: img-inline
+
+.. |connect-button| image:: /medias/desktop/connect-to_button.png
+   :class: img-inline
+
+.. |stiffen-button| image:: /medias/desktop/choregraphe/chore_wakeup_button.png
+   :class: img-inline
+
+.. |add-object| image:: /medias/desktop/webots/add_object_btn.png
+   :class: img-inline
+
+
+.. _webots:
+
+Webots
+=======
+
+What is Webots
+---------------
+
+| **Webots** allows you to launch a simulated **NAO** moving in a virtual world.
+| It offers a safe place to test behaviors before playing them on a real robot.
+|
+
+.. image:: /medias/desktop/webots/webots.png
+   :width: 464 px
+   :height: 332 px
+
+Since **Webots 8**, a module named **nao_qi** is available for the owners of
+a **Webots for NAO** license. It provides predefined **NAO** simulations and
+with their ready-to-use controllers.
+
+.. warning::
+
+   **Webots for NAO** license owners only have access to a subset of **Webots**
+   features. They cannot use other robots nor create new robot controllers.
+
+Installing Webots
+------------------
+
+To install **Webots**:
+
+=====  ========================================================================================
+Step    Action
+=====  ========================================================================================
+1.      Retrieve the installer **Webots 8** for your operating system:
+
+        * **Windows**: ``webots-8.x.x_setup.exe``,
+        * **Mac**: ``webots-8.x.x.dmg``,
+        * **Linux 32 bits**: ``webots-8.x.x-i386.tar.bz2``,
+        * **Linux 64 bits**: ``webots-8.x.x-x86-64.tar.bz2``.
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+2.      Uninstall completely any old version of **Webots**.
+
+3.      Launch the installer then follow the step-by-step instructions.
+
+        For further details or in case of trouble, see the **Chapter 1: Installing Webots**
+        in **Webots** online user guide here: http://www.cyberbotics.com/guide/
+=====  ========================================================================================
+
+Getting started
+---------------
+
+.. _webots_launching:
+
+Launching a simulated robot
++++++++++++++++++++++++++++++
+
+=====  ========================================================================================
+Step    Action
+=====  ========================================================================================
+1.      Launch **Webots**.
+
+2.      Choose **File** > **Open Sample World...**
+
+        and select the entry ``robots/aldebaran/nao.wbt``
+
+        .. image:: /medias/desktop/webots/webots.png
+           :width: 483 px
+           :height: 342 px
+=====  ========================================================================================
+
+
+.. _webots_connecting:
+
+Connecting Choregraphe to the simulated robot
+++++++++++++++++++++++++++++++++++++++++++++++
+
+=====  ========================================================================================
+Step    Action
+=====  ========================================================================================
+1.      Launch **Choregraphe**.
+
+2.      Choose **Connection** > **Connect to** or click the |connect-button| **Connect to**
+        button.
+
+3.      Select your simulated robot (the name should include the name of your computer).
+
+        Its icon should be:
+
+        .. image:: /medias/desktop/beginning_nao_bleu.png
+            :height: 66 px
+            :width: 66 px
+
+        In Choregraphe, you can now:
+
+        * control the virtual robot with the **Robot view** panel and
+        * check what the virtual robot is seeing in the **Video monitor** panel.
+
+        .. image:: /medias/desktop/webots/webots_in_choregraphe.png
+           :width: 463 px
+           :height: 334 px
+
+=====  ========================================================================================
+
+
+Testing a behavior in Webots
++++++++++++++++++++++++++++++++++++++
+
+=====  ==============================================================================================
+Step    Action
+=====  ==============================================================================================
+1.      Make sure you have launched a simulated robot and have connected **Choregraphe** to it.
+
+        For further details see:
+
+        * :ref:`webots_launching` and
+        * :ref:`webots_connecting`.
+
+2.      In **Choregraphe**, create a behavior.
+
+        For example, test the **Tai Chi Chuan** box.
+
+3.      Make sure the **Stiffness** is on or click the |stiffen-button| **Wake Up** button.
+
+4.      Click the |play-button| **Play** button and follow the behavior both in **Choregraphe**
+        and in **Webots**.
+
+        .. image:: /medias/desktop/webots/webots_in_cho_running.png
+           :width: 463 px
+           :height: 335 px
+
+        .. image:: /medias/desktop/webots/webots_in_cho_running2.png
+           :width: 462 px
+           :height: 334 px
+
+5.      Try to modify your point of view.
+
+        For further details, see: **How do I navigate in 3D world?** in the **Help** menu.
+
+=====  ==============================================================================================
+
+
+Monitoring the simulated NAO
+++++++++++++++++++++++++++++++
+
+=====  ==============================================================================================
+Step    Action
+=====  ==============================================================================================
+1.      In **Webots**, double-click the robot.
+
+        The panel below appears.
+
+        .. image:: /medias/desktop/webots/webots_robot_view.png
+           :width: 496 px
+           :height: 230 px
+
+2.      Choose one of the tabs and select the data you want to monitor.
+=====  ==============================================================================================
+
+Customizing NAO's worlds
+-----------------------------------
+
+Adding an object
++++++++++++++++++
+
+Let's add a table, for example:
+
+=====  ==============================================================================================
+Step    Action
+=====  ==============================================================================================
+1.      Make sure the simulation is stopped.
+
+        Otherwise, choose, **Simulation** > **Stop** then **File** > **Revert World**.
+
+2.      In the **Scene Tree**, select the last node.
+
+        .. image:: /medias/desktop/webots/add_object1.png
+           :width: 397 px
+           :height: 286 px
+
+3.      Click the |add-object| **Add a new object** button and select this object:
+
+        ``PROTO`` > ``objects`` > ``indoor`` > ``tables``  > ``Desk (Solid)``
+
+        .. image:: /medias/desktop/webots/add_object2.png
+           :width: 398 px
+           :height: 288 px
+
+4.      Click the **Add** button.
+
+        .. image:: /medias/desktop/webots/add_object3.png
+           :width: 398 px
+           :height: 294 px
+=====  ==============================================================================================
+
+Moving objects
+++++++++++++++
+
+Let's play with objects in order to learn how to move them.
+
+=====  ==============================================================================================
+Step    Action
+=====  ==============================================================================================
+1.      Make sure the simulation is stopped.
+
+        Otherwise, choose, **Simulation** > **Stop**.
+
+2.      In the **Scene Tree**, select the last node.
+
+3.      Click the |add-object| **Add a new object** button and select this object:
+
+        ``PROTO`` > ``objects`` > ``indoor`` > ``fruits``  > ``FruitBowl (Solid)``
+
+4.      Click the **Add** button.
+
+        .. image:: /medias/desktop/webots/add_object4.png
+           :width: 400 px
+           :height: 293 px
+
+5.      Try to put the fruit bowl on the table.
+
+        For further details, see: **How do I move an object?** in the **Help** menu.
+
+        .. image:: /medias/desktop/webots/add_object5.png
+           :width: 398 px
+           :height: 291 px
+
+=====  ==============================================================================================
+
+Next steps
+-----------
+
+NAO and Webots
++++++++++++++++
+
+Read the Section **8.2 Using the NAO robot** of the **Webots** user guide
+to learn more about managing one or several **NAOs** using **Webots**.
+
+Tips
+--------
+
+I can't see my simulated robot in the Choregraphe **Browse robots** panel.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Make sure the simulation is not stopped in **Webots**.
+
+
+Navigating I lost sight of NAO.
+++++++++++++++++++++++++++++++++
+
+Choose **View** > **Restore Viewpoint** or press **F6** key.
+The view is reset to the origin point.
+
+Troubleshootings
+------------------
+
+If the simulation is slow, you will have a warning displayed in the console of Webots:
+
+.. image:: /medias/desktop/webots/webots_warning.png
+           :width: 548
+           :height: 44
+
+A possible approach to improve the simulation is to reduce the number of frames
+sent to NAOs cameras by changing the "FPS" field of the "WorldInfo" node in the
+Scene Tree:
+
+.. image:: /medias/desktop/webots/webots_fix_fps.png
+           :width: 414
+           :height: 514
+
+Try some low values (e.g. 1, 5 or 10) to speed up the simulation.

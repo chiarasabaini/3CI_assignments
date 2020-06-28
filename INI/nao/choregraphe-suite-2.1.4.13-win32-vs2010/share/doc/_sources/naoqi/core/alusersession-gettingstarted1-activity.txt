@@ -1,0 +1,149 @@
+.. _alusersession-gettingstarted1-activity:
+
+ALUserSession Getting Started 1 - Activity Developer
+====================================================
+
+:ref:`naoqi-core` -
+:ref:`Overview <alusersession>` |
+:ref:`API <alusersession-api>`
+
+Getting Started 1 - Activity Developer |
+:ref:`Getting Started 2 - User Data Provider Developer <alusersession-gettingstarted2-provider>`
+
+------------
+
+If you are developing an Activity that wants to take advantage of persistent
+user data, this is for you.
+
+Events to watch and what you can do
+-----------------------------------
+
+UserSession/ShouldExitInteractiveActivity
++++++++++++++++++++++++++++++++++++++++++
+
+If your activity offers no functionality when there is nobody to talk to, it should
+exit when this event comes in.  Please see the API section for details.
+
+
+UserSession/FocusedUser
++++++++++++++++++++++++
+
+This is how you know which UserSession ID the robot is trying to look at.  It is
+who the robot is likely to be having a conversation with.
+
+The engagePerson() API of BasicAwareness could be used to force a focused user
+if they are present.  They are present if they have an open session.
+
+UserSession/SessionsOpened and UserSession/SessionsClosed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+These events are raised with the changes in open sessions.  This might be a good
+time to check the values in UserSession/OpenSessions if you need.
+
+The goal is to create group interactions based on the presence of multiple known users.
+
+Getting/Setting user data
+-------------------------
+
+Imagine a game that needed to collect players and game-character names.
+
+::
+
+   # lets register player's characters for our game
+   myGame = yourImagination()
+   us = ALProxy("ALUserSession")
+
+   register_another = True
+   players = list()
+   while register_another:
+     focused_user = us.getFocusedUser()
+     if focused_user == -1:
+       if !myGame.attractPlayer():
+         break
+     while focused_user == 0 and myGame.askToSeeFaceOrGiveUp(): # can't identify them
+       focused_user = us.getFocusedUser()
+
+     players.append(focused_user)
+
+     character_name = myGame.askCharacterName()
+     us.setUserData(focused_user, "CharacterName", "com.myCompany.myGame", character_name)
+
+     human_name = us.getUserData(focused_user, "user/name", "Dialog")
+     if not human_name or human_name == "":
+       myGame.askTheirName()
+
+     register_another = myGame.askToAddAnotherPlayer()
+
+Getting a user binding
+----------------------
+
+**ALPeoplePerception** perceives many more people than UserSession handles.  So
+**ALPeoplePerception** has it's own IDs.  A user is not the same thing as a perceived person.
+
+You may need to know the perceived ID of a user. For example to use with **ALPeoplePerception**
+or **ALBasicAwareness** API.  For example the following python snippet could force the robot to look
+at a specific user as it executes rounds of a game:
+
+::
+
+   # lets cycle the turns of a game
+   myGame = yourImagination()
+   us = ALProxy("ALUserSession")
+   ba = ALProxy("ALBasicAwareness")
+
+   while !myGame.over():
+     current_player = myGame.getCurrentPlayerUserID()
+     open_sessions = us.getOpenUserSessions()
+     focused_user = us.getFocusedUser()
+
+     if !(current_player in open_sessions):
+       if !myGame.calloutForCurrentPlayerToCome():
+         myGame.skipCurrentPlayerTurn()
+         continue
+
+     if current_player != focused_user:
+       # get the people perception ID of the player
+       pp_id = us.getUserBinding(current_player, "PeoplePerception")
+       if !ba.engagePerson(int(pp_id)):
+         if !myGame.calloutForCurrentPlayerToCome():
+           myGame.skipCurrentPlayerTurn()
+           continue
+
+     myGame.exectuteCurrentPlayerTurn()
+
+The following snippet would get you their shirt color:
+
+::
+
+   mem = ALProxy("ALMemory")
+   pp_id = us.getUserBinding(current_player, "PeoplePerception")
+   mem_key = "PeoplePerception/Person/" + pp_id + "/ShirtColor"
+   their_color = mem.getData(mem_key)
+
+Note that in the next version (1.22.4) you will simply be able to do calls like this,
+without needing to know the bindings or consult the PeoplePerception ALMemory:
+
+::
+
+   their_color = us.getUserData(current_player, "ShirtColor", "PeoplePerception")
+
+
+Handling the anonymous user
+---------------------------
+
+If the focused user is 0, they are the anonymous user, meaning **ALAutonomousLife**
+failed to identify them.  Usually this is because a good facial image could not
+be acquired.  **ALAutonomousLife** will try every 3 seconds to identify, or create an
+identification for this user.  After that succeeds, the real user will be focused.
+
+If your activity is in a state where it requires verifying accurately who the
+focused user is, you should ask the user to take a good look at the robot.
+
+It is not good to save any data for the anonymous user, because next time an
+anonymous user is focused they may not be the same person as before.  So whenever
+an anonymous user is focused, you should clear out the previous anonymous user's
+data.  This can be accomplished by subscribing to the UserSession/FocusedUser
+event and seeing if the value is 0.
+
+The **ALDialog** module automatically flushes it's data for the anonymous user as can
+be noted in the log.

@@ -1,0 +1,62 @@
+Start time: 2020-05-20 18:01:48.496237
+OS: Unix-like
+Printing on screen the given directory name: /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin
+Analizing directory /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin
+Present files: ['oswalk.py']
+Analizing file /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin/oswalk.py
+Properties of /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin/oswalk.py:
+Dimension in byte: 3304 byte
+Last modify: Wed May 20 18:01:45 2020
+Last access: Wed May 20 18:01:45 2020
+Created: Wed May 20 18:01:45 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Octal value of ST_MODE: 777
+Analizing directory /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin/flussi
+Present files: ['osstat_w.csv']
+Analizing file /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin/flussi/osstat_w.csv
+Properties of /mnt/c/Users/proprietario/Desktop/scuola/3CI/SRI/sabaini_chiara_oswalk_02_01/bin/flussi/osstat_w.csv:
+Dimension in byte: 669 byte
+Last modify: Wed May 20 17:07:07 2020
+Last access: Wed May 20 17:07:07 2020
+Created: Wed May 20 17:07:18 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Octal value of ST_MODE: 777
+Done
+End time: 2020-05-20 18:01:50.197643
+Execution time: 1.7038636207580566s
+
+Start time: 2020-05-20 18:02:07.280636
+OS: Windows
+Printing on screen the given directory name: C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin
+Present files: ['oswalk.py']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin/oswalk.py
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin/oswalk.py:
+Dimension in byte: 3304 byte
+Last modify: Wed May 20 18:01:45 2020
+Last access: Wed May 20 18:01:45 2020
+Created: Wed May 20 16:36:52 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Octal value of ST_MODE: 666
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin\flussi
+Present files: ['osstat_w.csv']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin\flussi/osstat_w.csv
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_oswalk_02_01\bin\flussi/osstat_w.csv:
+Dimension in byte: 669 byte
+Last modify: Wed May 20 17:07:07 2020
+Last access: Wed May 20 17:07:07 2020
+Created: Wed May 20 17:06:58 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Octal value of ST_MODE: 666
+Done
+End time: 2020-05-20 18:02:08.643260
+Execution time: 1.3646225929260254s
+

@@ -1,0 +1,77 @@
+.. _aldarknessdetection-api:
+
+ALDarknessDetection API
+========================
+
+:ref:`naoqi-vision` - :ref:`Overview <aldarknessdetection>` | API
+
+-------------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/aldarknessdetectionproxy.h>
+
+Method list
+-----------
+
+.. cpp:class:: ALDarknessDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api` and :ref:`alvisionextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALDarknessDetectionProxy::getDarknessThreshold`
+  * :cpp:func:`ALDarknessDetectionProxy::setDarknessThreshold`
+
+
+Events lists
+------------
+
+* :naoqi:event:`DarknessDetection/DarknessDetected`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`DarknessDetection/DarknessValue`
+
+
+Methods
+-------
+
+.. cpp:function:: int ALDarknessDetectionProxy::getDarknessThreshold()
+
+  :return: Current value of the darkness threshold used for raising the event :naoqi:event:`DarknessDetection/DarknessDetected`.
+
+
+.. cpp:function:: void ALDarknessDetectionProxy::setDarknessThreshold(const int& threshold)
+
+  Enables to change the value of the darkness threshold for raising the event :naoqi:event:`DarknessDetection/DarknessDetected`.
+
+  This value must be between 0 and 100:
+
+  * if the given value is lower than 0, darkness threshold is set to 0
+  * if the given value is greater than 100, darkness threshold is set to 100
+
+
+Events
+------
+
+.. naoqi:event:: DarknessDetection/DarknessDetected(int value)
+
+  Raised when the darkness value just became greater than the darkness threshold.
+  As long as the darkness value stays over the threshold, the event is not raised another time.
+
+  :param value: the darkness value measured
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: int DarknessDetection/DarknessValue
+
+  Value of the darkness measured for each frame.

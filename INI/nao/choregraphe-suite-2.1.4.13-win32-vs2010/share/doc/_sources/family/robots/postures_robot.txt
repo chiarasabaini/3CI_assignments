@@ -1,0 +1,54 @@
+.. |posture_standzero| image:: /medias/naoqi/posture_standzero.png
+   :class: img-inline
+
+.. |posture_standinit| image:: /medias/naoqi/posture_standinit.png
+   :class: img-inline
+
+.. |posture_stand| image:: /medias/naoqi/posture_stand.png
+   :class: img-inline
+
+.. |posture_lyingbelly| image:: /medias/naoqi/posture_lyingbelly.png
+   :class: img-inline
+
+.. |posture_lyingback| image:: /medias/naoqi/posture_lyingback.png
+   :class: img-inline
+
+.. |posture_sit| image:: /medias/naoqi/posture_sit.png
+   :class: img-inline
+
+.. |posture_sitrelax| image:: /medias/naoqi/posture_sitrelax.png
+   :class: img-inline
+
+.. |posture_crouch| image:: /medias/naoqi/posture_crouch.png
+   :class: img-inline
+
+.. _robot_postures:
+
+Predefined postures
+====================
+
+.. seealso::
+
+    :ref:`alrobotposture`
+
+    :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21`
+
+-----------
+
+=====================   ======================   =====================
+ Stand                   StandInit               StandZero
+=====================   ======================   =====================
+ |posture_stand|         |posture_standinit|     |posture_standzero|
+=====================   ======================   =====================
+
+======================   ======================   ======================
+ Crouch                   Sit                      SitRelax
+======================   ======================   ======================
+ |posture_crouch|         |posture_sit|           |posture_sitrelax|
+======================   ======================   ======================
+
+======================   ======================
+ LyingBelly               LyingBack
+======================   ======================
+ |posture_lyingbelly|     |posture_lyingback|
+======================   ======================

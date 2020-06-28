@@ -1,0 +1,219 @@
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. _box:
+.. _choregraphe-reference-box:
+
+Box
+====
+
+What is a box
+-------------
+
+A **Box** is the basic element of the  :ref:`Behaviors<behavior>`.
+
+
+.. image:: /medias/desktop/choregraphe/box.png
+   :width: 127 px
+   :height: 127 px
+
+
+A **Box** may contain a simple elementary action (**Say** box for example),
+as well as a very complex application (room exploration for example).
+
+
+**To go further**:
+
+* Ready-to-use boxes are available in the :ref:`chore_box_libary_panel`.
+* To create your own box, see: :ref:`choregraphe-create-box`.
+* See more details about the box :ref:`identity<box_identity>`, :ref:`content<box_content>`,
+  and :ref:`connectors and parameters<box_connectors>`.
+
+
+.. _box_identity:
+
+Box identity
+--------------
+
+.. image:: /medias/desktop/choregraphe/box_identity.png
+   :width: 257 px
+   :height: 265 px
+
+The table below describes the properties allowing you to identify a **Box**.
+
+=====  =================   ================================================================================
+Part    Name                Description
+=====  =================   ================================================================================
+**A**   **Name**            Name of the box.
+
+**B**   **Image**           A specific image helps to understand the box type or content.
+
+**C**   **Description**     Displays the description of the box and some tips.
+
+                            Appears when holding the pointer over the box and also at the bottom of the
+                            :ref:`chore_box_libary_panel`.
+=====  =================   ================================================================================
+
+.. _box_content:
+
+Box content
+------------
+
+The content of a box depend on its **type**:
+
+* a :ref:`choregraphe-reference-box-type-python` contains a :ref:`Python script <python_script>`,
+* a :ref:`choregraphe-reference-box-type-flow-diagram` contains a
+  :ref:`Flow diagram <choregraphe-reference-box-flow-diagram>`,
+* a :ref:`choregraphe-reference-box-type-timeline` contains a
+  :ref:`Timeline <choregraphe-reference-box-timeline>`.
+* a :ref:`Dialog box <choregraphe-reference-box-type-dialog>` refers to a
+  :ref:`Dialog topic <dialog_topic>`
+
+
+How to display the content of a box
++++++++++++++++++++++++++++++++++++
+
+To display the content of a box, **double click** the box.
+
+.. note:: A **Dialog box** acts as a shortcut to the **Dialog topic** it refers to. If you
+          double-click the box, you will :ref:`edit the dialog topic
+          <choregraphe-reference-edit-dialog-topic>`. Other boxes referring to
+          that topic will be impacted.
+
+
+
+.. _box_connectors:
+
+Box connectors and parameters
+-------------------------------
+
+| In order to communicate with other boxes and to be started or stopped, a box has some connectors.
+| The connectors of the boxes are connected through **links** on an event based communication logic.
+|
+
+.. image:: /medias/desktop/choregraphe/box_in_out_param.png
+   :width: 217 px
+   :height: 175 px
+
+The table below describes the main connectors of a **Box**:
+
+=====  ========================================================= =================================================================================================================
+Part    Name                                                      Description
+=====  ========================================================= =================================================================================================================
+**A**   :ref:`Inputs <choregraphe-reference-box-input>`           Receive events in order to start or stop the box.
+
+**B**   :ref:`Outputs <choregraphe-reference-box-output>`         Send events and/or data during box execution or when the box execution is stopped.
+
+**C**   :ref:`Parameters <choregraphe-reference-box-parameter>`   Receive data used by the box.
+=====  ========================================================= =================================================================================================================
+
+
+
+.. _choregraphe-create-box:
+
+How to create a new box
+------------------------
+
+To create a box:
+
+=====  ==========================================================================
+Step    Action
+=====  ==========================================================================
+1.      Right click on the **Flow diagram** wherever you want to create the
+        box.
+
+2.      In the contextual menu, under the **Create a new box** section, choose
+        the type of the box you want to create.
+
+        .. image:: /medias/desktop/choregraphe/box_creation.png
+           :width: 314 px
+           :height: 527 px
+
+3.      **Optional** If you choosed to create a
+        :ref:`Dialog box<choregraphe-reference-box-type-dialog>`, you must
+        choose the dialog topic used by the box.
+
+        .. note:: The box name is automatically generated from the chosen topic,
+                  unless you modify it by hand.
+
+        .. note:: You can also :ref:`create a new dialog topic
+                  <choregraphe-reference-create-dialog-topic>` directly from here.
+
+4.      Define a **Name** and a **Description** for your box.
+
+5.      **Optional**: set the picture to recognize it among other boxes.
+
+6.      **Optional**: set **Parameters**, **Inputs** and **Outputs**.
+
+        For further details about parameters, see: :ref:`How to add/remove inputs,
+        outputs, parameters in a box
+        <choregraphe-howto-add-remove-box-in-out-param>`.
+
+7.      Click the **OK** button.
+
+        The created box is displayed on the diagram.
+=====  ==========================================================================
+
+.. _choregraphe-detailed-interface-box-edition:
+
+Edit Box widget
+-------------------
+
+When you **edit** or **create** a :ref:`Box <choregraphe-reference-box>`,
+the following widget is displayed:
+
+.. image:: /medias/desktop/choregraphe/edit_box_letters.png
+   :width: 369 px
+   :height: 460 px
+
+The table below describes the **Edit Box** widget:
+
+=====  =================   ================================================================================
+Part    Name                Allows you to ...
+=====  =================   ================================================================================
+**A**   **Box               Show some box properties:
+        properties**
+                            * the **Box type** (flow diagram, timeline, Python,
+                              Dialog)
+                            * If the box is of **Dialog** type, the box topic is
+                              shown and can be modified here.
+
+**B**   **General           Define the :ref:`box_identity`:
+        description**
+                            * the **Name** of the box.
+                            * the **Description** (a brief description of what the box does and how
+                              to use it).
+
+                              Appears when holding the pointer over the box and also at the bottom of the
+                              :ref:`chore_box_libary_panel`.
+
+**C**   **Image**           Specify an image.
+
+                            Click the **Edit** button and select one or several image(s).
+
+                            .. note::
+                               You can choose several images to have a complete graphical description of
+                               what it does. But you should know that only the first image is displayed
+                               beside the box name in a box library.
+
+**D**   **Connectors and    Define the :ref:`box_connectors`.
+        Parameters**
+                            .. list-table::
+                               :widths: 25 100
+                               :header-rows: 1
+
+                               * - The button ...
+                                 - Allows you to ...
+                               * - .. image:: /medias/desktop/choregraphe/del.png
+                                 - **Remove** the selected item.
+                               * - .. image:: /medias/desktop/choregraphe/edit.png
+                                 - **Edit** the selected item.
+                               * - .. image:: /medias/desktop/choregraphe/add.png
+                                 - **Add** a new item.
+
+**E**   **Advanced**        Add a :ref:`Plugin <choregraphe-reference-box-plugin>` to the box.
+
+                            It is an advanced feature allowing you to add a control
+                            the frontage of the box.
+=====  =================   ================================================================================
+

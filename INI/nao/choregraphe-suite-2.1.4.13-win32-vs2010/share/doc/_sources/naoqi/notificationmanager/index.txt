@@ -1,0 +1,67 @@
+.. _naoqi-notificationmanager:
+.. include:: ../../bulk/common.rst
+
+.. _alnotificationmanager:
+
+ALNotificationManager
+=====================
+
+.. toctree::
+    :hidden:
+
+    alnotificationmanager-api
+    notificationinfo
+
+:ref:`naoqi-core` - Overview |  :ref:`API <alnotificationmanager-api>` | :ref:`notificationInfo`
+
+--------------------
+
+What it does
+--------------
+
+| The **ALNotificationManager** module provides methods to manage notifications on the robot.
+
+What is a notification
++++++++++++++++++++++++
+
+| A notification is a short message sent to the end-user by the robot system or by an application.
+| For further details, see: :ref:`notification-alvalue`.
+
+How it works
+-------------
+
+When an application sends a notification:
+
+* It is appended to the list of pending notifications.
+
+* The End user is informed that there is a pending notification and
+  can ask the robot to read it.
+  For further details, see:
+  :ref:`notifications_nao`.
+
+..  * |nao| :ref:`notifications_nao` or
+..  * |juju| :ref:`notifications_juliette`.
+
+The notification is removed from the list of pending notifications either when:
+
+- it is read or
+- it is removed by the application, for example if it is not valid anymore.
+
+For further details about the objects supporting **ALNotificationManager**, see: :ref:`notificationInfo`.
+
+
+Getting Started
+---------------
+
+**Add a notification**
+
+
+:download:`add-notif.py </examples/python/notificationmanager/add-notif.py>`
+
+.. literalinclude:: /examples/python/notificationmanager/add-notif.py
+
+**Print all NotificationInfos**
+
+:download:`print-notif.py </examples/python/notificationmanager/print-notif.py>`
+
+.. literalinclude:: /examples/python/notificationmanager/print-notif.py

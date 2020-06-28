@@ -1,0 +1,203 @@
+.. include:: ../../bulk/common.rst
+
+.. _alrecharge-api:
+
+ALRecharge API
+==================
+
+:ref:`Overview <alrecharge>` | API
+
+-----------------
+
+|juju| |roboJ| only
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alnotificationmanagerproxy.h>
+
+
+Method list
+-----------
+
+- :cpp:func:`ALRechargeProxy::lookForStation`
+- :cpp:func:`ALRechargeProxy::moveInFrontOfStation`
+- :cpp:func:`ALRechargeProxy::dockOnStation`
+- :cpp:func:`ALRechargeProxy::goToStation`
+- :cpp:func:`ALRechargeProxy::leaveStation`
+- :cpp:func:`ALRechargeProxy::getStatus`
+- :cpp:func:`ALRechargeProxy::getStationPosition`
+- :cpp:func:`ALRechargeProxy::stopAll`
+
+Event list
+----------
+
+* :naoqi:event:`ALRecharge/StatusChanged`
+* :naoqi:event:`ALRecharge/StationDetected`
+* :naoqi:event:`ALRecharge/StationNotFound`
+* :naoqi:event:`ALRecharge/ConnectedToChargingStation`
+* :naoqi:event:`ALRecharge/DockingSuccess`
+* :naoqi:event:`ALRecharge/DockingFailed`
+* :naoqi:event:`ALRecharge/LeaveSuccess`
+* :naoqi:event:`ALRecharge/LeaveFailed`
+* :naoqi:event:`ALRecharge/SearchStopped`
+* :naoqi:event:`ALRecharge/MoveFailed`
+
+
+Methods
+-------
+
+.. cpp:function:: AL::ALValue ALRechargeProxy::lookForStation( )
+
+  Tries to locate the charging station. This is a blocking call.
+
+  The robot looks for its charging station all around him and localizes it.
+
+  360 ° search process: the robot scans 180° in front of him, then 2 times, the
+  robot rotates on itself through 120° and scans.
+
+  The :ref:`status` is set to *Idle* right before this method returns.
+
+  :return: [bool isFound, [float x, float y, float theta]] where isFound is True
+           if the charging station has been successfully localized. Its position
+           is then given in :term:`FRAME_WORLD` in the second array (x,y,theta).
+
+.. cpp:function:: bool ALRechargeProxy::moveInFrontOfStation( )
+
+  Makes the robot go in front of its charging station. This is a blocking call.
+
+  The robot goes 0.6m in front of its charging station to prepare docking using
+  **ALTracker**.
+
+  If the charging station has not been found already, this method will return
+  false.
+  The :ref:`status` is set to *Idle* right before this method returns.
+
+  :return: True if the robot successfully went at the desired position in front
+           of its charging station.
+
+.. cpp:function:: bool ALRechargeProxy::dockOnStation( )
+
+  Makes the robot dock onto its charging station. This is a blocking call.
+
+  The robot performs a U-turn and enters its charging station in a backward
+  motion.
+
+  If the charging station has not been found already, or if the charging station
+  is not close to its desired position in front of the robot (0.6m), this method
+  will return False.
+
+  Upon success, this method forbids all motion moves while the robot is on the
+  charging station.
+  The :ref:`status` is set to *Idle* right before this method returns.
+
+  :return: True if the robot successfully docked on its charging station..
+
+.. cpp:function:: void ALRechargeProxy::goToStation( )
+
+  Makes the robot go onto its charging station.
+
+  This method calls successfully :cpp:func:`ALRechargeProxy::lookForStation`,
+  :cpp:func:`ALRechargeProxy::moveInFrontOfStation` and
+  :cpp:func:`ALRechargeProxy::dockOnStation` without interruption. This is a non
+  blocking call.
+
+  This behavior can be monitored using :cpp:func:`ALRechargeProxy::getStatus`.
+
+  Upon success, this method forbids all motion moves while the robot is on the
+  charging station.
+
+.. cpp:function:: void ALRechargeProxy::leaveStation( )
+
+  If the robot is on the charging station, this method makes the robot go just
+  in front of it (0.6m).
+  Upon success, this function allows all motion moves.
+  The :ref:`status` is set to *Idle* right before this method returns.
+
+.. cpp:function:: int ALRechargeProxy::getStatus( )
+
+  Get the current Status of the recharge manager module.
+
+  :return: Int representing the status according to the following table.
+
+
+.. cpp:function:: std::vector<float> ALRechargeProxy::getStationPosition( )
+
+  Get the current charging pose2D used by the recharge module.
+
+  :return: Pose2D (x, y, theta) of the charging station in :term:`FRAME_WORLD`
+
+.. cpp:function:: void ALRechargeProxy::stopAll( )
+
+  Request to stop the current behavior. This will stop the Tracker and all
+  ongoing moves.
+  This resets the :ref:`status` to *Idle*.
+
+Events
+------
+
+.. naoqi:event:: ALRecharge/StatusChanged(int status)
+
+  Raised when the ALRecharge :ref:`status` changes.
+
+  :param status: new :ref:`status`.
+
+.. naoqi:event:: ALRecharge/StationDetected(AL::ALValue plugged)
+
+  Raised when the robot detects its charging station with a confidence index
+  higher than 0.5.
+
+  :param plugged: data needed by *ALTracker* for charging station tracking.
+
+.. naoqi:event:: ALRecharge/StationNotFound()
+
+  Raised when the robot has not found the charging station. It then stops the
+  search.
+
+.. naoqi:event:: ALRecharge/ConnectedToChargingStation()
+
+  Raised when the robot is correctly docked onto the charging station.
+
+.. naoqi:event:: ALRecharge/DockingSuccess()
+
+  Raised when the robot has successfully docked onto the charging station.
+
+.. naoqi:event:: ALRecharge/DockingFailed()
+
+  Raised when the robot failed to dock onto the charging station during the
+  final step.
+
+.. naoqi:event:: ALRecharge/LeaveSuccess()
+
+  Raised when the robot correctly left its pod.
+
+.. naoqi:event:: ALRecharge/LeaveFailed()
+
+  Raised when the robot failed to leave its pod due to an obstacle in the way.
+
+.. naoqi:event:: ALRecharge/SearchStopped()
+
+  Raised when the robot stops the search and goes back to idle status.
+
+.. naoqi:event:: ALRecharge/MoveFailed()
+
+  Raised when the robot interrupts its operation because a safety rule prevents
+  the usage of :ref:`almotion` module.
+
+-----
+
+.. _status:
+
+Status
+--------
+
+=======  ==================================================================
+ Value    Meaning
+=======  ==================================================================
+   0      Idle
+   1      Looking for its charging station
+   2      Going in front of its charging station
+   3      Docking onto its charging station
+   4      Currently docked on its charging station
+=======  ==================================================================

@@ -1,0 +1,19 @@
+
+.. _h21-mre:
+
+H21 - Joint position sensors
+==========================================
+
+.. seealso::
+      
+   :ref:`robot-mre` 
+
+
+--------------------
+
+32 x MRE (Magnetic Rotary Encoders) using Hall-effect sensor technology.
+
+
+.. include:: ../bulk/mre.rst
+
+

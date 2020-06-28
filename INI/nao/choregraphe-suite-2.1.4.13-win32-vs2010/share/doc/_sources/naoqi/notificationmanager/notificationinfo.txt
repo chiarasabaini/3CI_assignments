@@ -1,0 +1,87 @@
+.. _notificationInfo:
+
+NotificationInfo
+================
+
+:ref:`naoqi-core` - :ref:`Overview <alnotificationmanager>` | :ref:`API <alnotificationmanager-api>` | NotificationInfo
+
+--------------------
+
+.. code-block:: cpp
+
+  #include <alproxies/notificationinfo.h>
+
+Expose all information required for a notification.
+
+* :ref:`notificationInfo`
+
+  * :cpp:func:`NotificationInfo::NotificationInfo`
+
+  * :cpp:func:`NotificationInfo::id`
+  * :cpp:func:`NotificationInfo::message`
+  * :cpp:func:`NotificationInfo::severity`
+  * :cpp:func:`NotificationInfo::removeOnRead`
+  * :cpp:func:`NotificationInfo::toALValue`
+
+
+.. cpp:function:: NotificationInfo::NotificationInfo(const std::string &message, const std::string &severity, bool removeOnRead)
+
+  Constructor using a set of values to create a NotificationInfo.
+
+.. cpp:function:: NotificationInfo::NotificationInfo(const AL::ALValue &notification)
+
+  Constructor using an ALValue to create the NotificationInfo (see :ref:`notification-alvalue`).
+
+.. cpp:function:: int NotificationInfo::id()
+
+  :return: The unique identifier of the notification.
+
+.. cpp:function:: std::string NotificationInfo::message()
+
+  :return: The message of the notification.
+
+.. cpp:function:: std::string NotificationInfo::severity()
+
+  The severity. 3 levels of severity:
+
+  - "info"
+  - "warning"
+  - "error"
+
+  :return: The severity of the notification.
+
+.. cpp:function:: bool NotificationInfo::removeOnRead()
+
+  If the value is true, once read, the notification is removed from the list of pending notifications.
+
+  :return: True if, once read, the notification must be removed from the list of pending notifications, false otherwise.
+
+.. cpp:function:: AL::ALValue NotificationInfo::toALValue()
+
+  Converts the NotificationInfo object as an ALValue. :ref:`notification-alvalue`
+
+  :return: The ALValue representation of the NotificationInfo object.
+
+.. _notification-alvalue:
+
+ALValue NotificationInfo
+------------------------
+
+The ALValue NotificationInfo is an array of n-pair (key, value).
+
+In order to exchange this object with other modules,
+the Notification object can be represented as ALValue with the following structure:
+
++------------------------+---------------+---------------------+
+|    key                 |   value type  |    default value    |
++========================+===============+=====================+
+|    "id"                |      int      |       -1            |
++------------------------+---------------+---------------------+
+|    "message"           |     string    |       ""            |
++------------------------+---------------+---------------------+
+|    "severity"          |     string    |       "info"        |
++------------------------+---------------+---------------------+
+|    "removeOnRead"      |     bool      |       true          |
++------------------------+---------------+---------------------+
+
+Empty values will take default value.

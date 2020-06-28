@@ -1,0 +1,133 @@
+.. _algazeanalysis-api:
+
+ALGazeAnalysis API
+=====================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <algazeanalysis>` | API
+
+-------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/algazeanalysisproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALGazeAnalysisProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALGazeAnalysisProxy::getTolerance`
+  * :cpp:func:`ALGazeAnalysisProxy::setTolerance`
+  * :cpp:func:`ALGazeAnalysisProxy::isFaceAnalysisEnabled` (deprecated)
+  * :cpp:func:`ALGazeAnalysisProxy::setFaceAnalysisEnabled` (deprecated)
+
+
+
+Event list
+----------
+
+* :naoqi:event:`GazeAnalysis/PersonStartsLookingAtRobot`
+* :naoqi:event:`GazeAnalysis/PersonStopsLookingAtRobot`
+* :naoqi:event:`GazeAnalysis/PeopleLookingAtRobot`
+
+
+ALMemory Key list
+-----------------
+
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/EyeOpeningDegree`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/GazeDirection`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/HeadAngles`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsLookingAtRobot`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/LookingAtRobotScore`
+
+
+
+Methods
+-------
+
+.. cpp:function:: float ALGazeAnalysisProxy::getTolerance()
+
+   See :ref:`algazeanalysis` for details about the Tolerance value.
+
+   :return: Current value of the Tolerance for gaze analysis.
+
+.. cpp:function:: void ALGazeAnalysisProxy::setTolerance(const float& tolerance)
+
+   Sets the value of the Tolerance for gaze analysis.
+   See :ref:`algazeanalysis` for details about the Tolerance value.
+
+   :param tolerance: New Tolerance value (between 0 and 1).
+
+.. cpp:function:: bool ALGazeAnalysisProxy::isFaceAnalysisEnabled()
+
+   .. deprecated:: 1.22 This module has only one mode of operation.
+
+   :return: false.
+
+.. cpp:function:: void ALGazeAnalysisProxy::setFaceAnalysisEnabled(const bool& status)
+
+   .. deprecated:: 1.22 This module has only one mode of operation.
+
+
+Events
+------
+
+.. naoqi:event:: GazeAnalysis/PersonStartsLookingAtRobot(int id)
+
+  Raised when someone turns his head towards the robot.
+
+  :param id: ID of the person
+
+.. naoqi:event:: GazeAnalysis/PersonStopsLookingAtRobot(int id)
+
+  Raised when someone turns his head away from the robot.
+
+  :param id: ID of the person
+
+.. naoqi:event:: GazeAnalysis/PeopleLookingAtRobot(AL::ALValue idList)
+
+  Raised each time the list of people looking at the robot changes.
+
+  :param idList: list of the IDs of the people looking at the robot.
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/EyeOpeningDegree
+
+  Opening degree of each eye in the form [leftEye, rightEye] where each value
+  is between 0 and 1 (0 means that the eye is open, 1 means that it is closed).
+  Left and right are taken from the person's point of view, which means that the
+  left eye is seen on the right in the camera image and conversely.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/GazeDirection
+
+  Gaze direction in the form [yaw, pitch] in radians. The gaze direction is computed
+  *relative to the plane of the face*.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: AL::ALValue PeoplePerception/Person/<ID>/HeadAngles
+
+  Head orientation of the person along the three axis (yaw, pitch, roll) in radian.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsLookingAtRobot
+
+  Says whether the person is looking or not at the robot.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: float PeoplePerception/Person/<ID>/LookingAtRobotScore
+
+  Stores the confidence (between 0 and 1) in the fact that the person is looking at the robot.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).

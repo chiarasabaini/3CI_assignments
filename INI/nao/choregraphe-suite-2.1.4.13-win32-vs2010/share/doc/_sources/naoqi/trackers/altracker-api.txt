@@ -1,0 +1,501 @@
+.. _altracker-api:
+
+ALTracker API
+=================
+
+:ref:`naoqi-trackers` - :ref:`Overview<altracker>` | API | :ref:`trackers-sample`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/altrackerproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALTrackerProxy
+
+* :cpp:func:`ALTrackerProxy::getActiveTarget`
+* :cpp:func:`ALTrackerProxy::getAvailableModes`
+* :cpp:func:`ALTrackerProxy::getEffector`
+* :cpp:func:`ALTrackerProxy::getExtractorPeriod`
+* :cpp:func:`ALTrackerProxy::getMaximumDistanceDetection`
+* :cpp:func:`ALTrackerProxy::getMode`
+* :cpp:func:`ALTrackerProxy::getMoveConfig`
+* :cpp:func:`ALTrackerProxy::getRegisteredTargets`
+* :cpp:func:`ALTrackerProxy::getRelativePosition`
+* :cpp:func:`ALTrackerProxy::getRobotPosition`
+* :cpp:func:`ALTrackerProxy::getSupportedTargets`
+* :cpp:func:`ALTrackerProxy::getTargetCoordinates`
+* :cpp:func:`ALTrackerProxy::getTargetPosition`
+* :cpp:func:`ALTrackerProxy::getTimeOut`
+* :cpp:func:`ALTrackerProxy::isActive`
+* :cpp:func:`ALTrackerProxy::isNewTargetDetected`
+* :cpp:func:`ALTrackerProxy::isSearchEnabled`
+* :cpp:func:`ALTrackerProxy::isTargetLost`
+* :cpp:func:`ALTrackerProxy::lookAt`
+* :cpp:func:`ALTrackerProxy::pointAt`
+* :cpp:func:`ALTrackerProxy::registerTarget`
+* :cpp:func:`ALTrackerProxy::setEffector`
+* :cpp:func:`ALTrackerProxy::setExtractorPeriod`
+* :cpp:func:`ALTrackerProxy::setMaximumDistanceDetection`
+* :cpp:func:`ALTrackerProxy::setMode`
+* :cpp:func:`ALTrackerProxy::setMoveConfig`
+* :cpp:func:`ALTrackerProxy::setRelativePosition`
+* :cpp:func:`ALTrackerProxy::setTargetCoordinates`
+* :cpp:func:`ALTrackerProxy::setTimeOut`
+* :cpp:func:`ALTrackerProxy::stopTracker`
+* :cpp:func:`ALTrackerProxy::track`
+* :cpp:func:`ALTrackerProxy::trackEvent`
+* :cpp:func:`ALTrackerProxy::toggleSearch`
+* :cpp:func:`ALTrackerProxy::unregisterAllTargets`
+* :cpp:func:`ALTrackerProxy::unregisterTarget`
+* :cpp:func:`ALTrackerProxy::unregisterTargets`
+
+*Deprecated Methods*
+
+* :cpp:func:`ALTrackerProxy::addEffector` (deprecated, use setEffector instead)
+* :cpp:func:`ALTrackerProxy::addTarget` (deprecated, use registerTarget instead)
+* :cpp:func:`ALTrackerProxy::getManagedTargets` (deprecated, use getRegisteredTargets instead)
+* :cpp:func:`ALTrackerProxy::getTargetNames` (deprecated, use getSupportedTargets instead)
+* :cpp:func:`ALTrackerProxy::removeAllTargets` (deprecated, use unregisterAllTargets instead)
+* :cpp:func:`ALTrackerProxy::removeEffector` (deprecated, use setEffector("None") instead)
+* :cpp:func:`ALTrackerProxy::removeTarget` (deprecated, use unregisterTarget instead)
+* :cpp:func:`ALTrackerProxy::removeTargets` (deprecated, use unregisterTargets instead)
+
+Methods
+-------
+
+.. cpp:function:: void ALTrackerProxy::addEffector(const std::string &Effector)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::setEffector` instead.
+
+  Add an end-effector to move for tracking. Tracker always use the Head.
+
+  :param Effector: Name of the effector. Could be: "Arms", "LArm" or "RArm".
+
+.. cpp:function:: void ALTrackerProxy::addTarget(const std::string &TargetName, const AL::ALValue &Param)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::registerTarget` instead.
+
+  Add the predefined target with parameters (*RedBall*: diameter of ball). Subscribe to corresponding extractor
+  and stock the last position if tracker is running. If the target is already added, only parameters are updated.
+
+  :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+  :param Param: target parameters.
+
+.. cpp:function:: std::string ALTrackerProxy::getActiveTarget()
+
+  Return active target name set with :cpp:func:`ALTrackerProxy::track`. See: :ref:`tracking_targets`.
+  Or event name set with :cpp:func:`ALTrackerProxy::trackEvent`.
+
+  :return: Tracked target name.
+
+.. cpp:function:: std::vector<std::string> ALTrackerProxy::getAvailableModes()
+
+  Return a list of available modes. See: :ref:`tracking_modes`.
+
+  :return: Available mode names.
+
+.. cpp:function:: std::string ALTrackerProxy::getEffector()
+
+  Return the current effector name. Could be: "Arms", "LArm", "RArm" or "None".
+  Use :cpp:func:`ALTrackerProxy::setEffector` to set this value.
+
+  :return: Active effector name.
+
+.. cpp:function:: int ALTrackerProxy::getExtractorPeriod(const std::string &TargetName)
+
+  Get the current period of the extractor corresponding to the given target name. See: :ref:`targets_extractors`.
+  Only works if the corresponding target name is tracked (call :cpp:func:`ALTrackerProxy::track` before).
+  Use :cpp:func:`ALTrackerProxy::setExtractorPeriod` to set this value.
+
+  :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+  :return: Current period in milliseconds of the extractor corresponding to the given target name.
+
+.. cpp:function:: std::vector<std::string> ALTrackerProxy::getManagedTargets()
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::getRegisteredTargets` instead.
+
+  Return a list of managed targets names. See: :ref:`tracking_targets`.
+
+  :return: Managed targets names. See: :ref:`tracking_targets`.
+
+.. cpp:function:: float ALTrackerProxy::getMaximumDistanceDetection()
+
+  Return target maximum distance detection in meter.
+  If the distance to the target is greater than the distance presented here, the target is considered lost.
+  By default, this parameter is set to a very high value, so no target will be considered lost with this setting.
+  Use :cpp:func:`ALTrackerProxy::setMaximumDistanceDetection` to set this value.
+
+  :return: The maximum distance in meter for target detection.
+
+.. cpp:function:: std::string ALTrackerProxy::getMode()
+
+  Return the current mode defined with :cpp:func:`ALTrackerProxy::setMode`.
+
+  :return: The current tracker predefined mode. See: :ref:`tracking_modes`.
+
+.. cpp:function:: AL::ALValue ALTrackerProxy::getMoveConfig()
+
+  Return the move config set with :cpp:func:`ALTrackerProxy::setMoveConfig`.
+  For further details, see: :ref:`move_config`.
+
+  :return: The move config used when **Move** is activated.
+
+.. cpp:function:: std::string ALTrackerProxy::getRegisteredTargets()
+
+  Return a list of registered targets names. Use :cpp:func:`ALTrackerProxy::registerTarget`
+  to register a target.
+
+  :return: Registered targets names. See: :ref:`tracking_targets`.
+
+.. cpp:function:: AL::ALValue ALTrackerProxy::getRelativePosition()
+
+  Get the robot position relative to target in **Move** mode.
+  Use :cpp:func:`ALTrackerProxy::setRelativePosition` to set this value.
+
+  :return: Final goal of the tracking: [coordX, coordY, coordWz, thresholdX, thresholdY, thresholdWz].
+
+.. cpp:function:: std::vector<float> ALTrackerProxy::getRobotPosition()
+
+  Only available with **LandMarks** target name.
+  Returns the [x, y, z, wx, wy, wz] position of the robot in coordinate system set with
+  :cpp:func:`ALTrackerProxy::setTargetCoordinates`.
+  This is done assuming an average target size, so it might not be very accurate.
+
+  :return: Vector of 6 floats corresponding to the robot position 6D.
+
+.. cpp:function:: std::vector<std::string> ALTrackerProxy::getSupportedTargets()
+
+  Return a list of supported target names.
+
+  :return: Array of supported target names. See: :ref:`tracking_targets`.
+
+.. cpp:function:: std::vector<std::string> ALTrackerProxy::getTargetNames()
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::getSupportedTargets` instead.
+
+  Return a list of valid target names. See: :ref:`tracking_targets`.
+
+  :return: Array of valid target names
+
+.. cpp:function:: AL::ALValue ALTrackerProxy::getTargetCoordinates()
+
+  Only work with **LandMarks** target name. Get objects coordinates set with
+  :cpp:func:`ALTrackerProxy::setTargetCoordinates`.
+
+  :return: | Objects coordinates.
+           | Could be:
+           | [[first object coordinate], [second object coordinate]]
+           | [[x1, y1, z1], [x2, y2, z2]].
+
+.. _ALTrackerProxy::getTargetPosition1:
+
+.. cpp:function:: std::vector<float> ALTrackerProxy::getTargetPosition(const int &Frame)
+
+  Returns the [x, y, z] position of active target in desired frame. This is done assuming
+  an average target size, so it might not be very accurate.
+
+  :param Frame: position :ref:`frame <motion-effectors-space>` {:term:`FRAME_TORSO` = 0, :term:`FRAME_WORLD` = 1, :term:`FRAME_ROBOT` = 2}.
+  :return: Vector of 3 floats corresponding to the target position 3D.
+
+.. _ALTrackerProxy::getTargetPosition2:
+
+.. cpp:function:: std::vector<float> ALTrackerProxy::getTargetPosition()
+
+  .. deprecated:: 1.22
+    use :ref:`ALTrackerProxy::getTargetPosition <ALTrackerProxy::getTargetPosition1>` with frame in parameters instead.
+
+  Returns the [x, y, z] position of active target in :term:`FRAME_TORSO`. This is done assuming
+  an average target size, so it might not be very accurate.
+
+  :return: Vector of 3 floats corresponding to the target position 3D.
+
+.. cpp:function:: int ALTrackerProxy::getTimeOut()
+
+  Return current target lost timeout value in milliseconds.
+
+  :return: The current target lost timeout value in milliseconds.
+
+.. cpp:function:: bool ALTrackerProxy::isActive()
+
+  Return true if Tracker is running.
+
+  :return: True if tracker is running.
+
+.. cpp:function:: bool ALTrackerProxy::isNewTargetDetected()
+
+  Return true if a new target was detected since the last :cpp:func:`ALTrackerProxy::getTargetPosition`.
+
+  :return: True if a new target was detected.
+
+.. cpp:function:: bool ALTrackerProxy::isSearchEnabled()
+
+  Return true if the target search process is enabled.
+  Use :cpp:func:`ALTrackerProxy::toggleSearch` to set this value.
+
+  :return: True if the target search process is enabled.
+
+.. cpp:function:: bool ALTrackerProxy::isTargetLost()
+
+  Return true if the target is lost.
+
+  :return: True if the target was lost.
+
+.. _ALTrackerProxy::lookAt1:
+
+.. cpp:function:: void ALTrackerProxy::lookAt(const std::vector<float>& Position, const int &Frame, const float &FractionMaxSpeed, const bool UseWholeBody)
+
+  Look at the target position with head in desired frame. If tracker is active, it's stopped and restarted at the last location of active target after lookAt.
+  This is a blocking call.
+
+  :param Position: position 3D [x, y, z].
+  :param Frame: position :ref:`frame <motion-effectors-space>` {:term:`FRAME_TORSO` = 0, :term:`FRAME_WORLD` = 1, :term:`FRAME_ROBOT` = 2}..
+  :param FractionMaxSpeed: a fraction.
+  :param UseWholeBody: if true, use whole body constraints.
+
+.. _ALTrackerProxy::lookAt2:
+
+.. cpp:function:: void ALTrackerProxy::lookAt(const std::vector<float>& Position, const float &FractionMaxSpeed, const bool UseWholeBody)
+
+  .. deprecated:: 1.22
+    use :ref:`ALTrackerProxy::lookAt <ALTrackerProxy::lookAt1>` with frame in parameters instead.
+
+  Look at the target position with head. If tracker is active, it's stopped and restarted at the last location of active target after lookAt.
+  This is a blocking call.
+
+  :param Position: position 3D [x, y, z] in :term:`FRAME_TORSO`.
+  :param FractionMaxSpeed: a fraction.
+  :param UseWholeBody: if true, use whole body constraints.
+
+.. _ALTrackerProxy::pointAt1:
+
+.. cpp:function:: void ALTrackerProxy::pointAt(const std::string &Effector, const std::vector<float> &Position,  const int &Frame, const float &FractionMaxSpeed)
+
+  Point at the target position with arms in desired frame. If tracker is active, it's stopped and restarted at the last location of active target after pointAt.
+  This is a blocking call.
+
+  :param Effector: effector name. Could be "Arms", "LArm", "RArm".
+  :param Position: position 3D [x, y, z].
+  :param Frame: position :ref:`frame <motion-effectors-space>` {:term:`FRAME_TORSO` = 0, :term:`FRAME_WORLD` = 1, :term:`FRAME_ROBOT` = 2}.
+  :param FractionMaxSpeed: a fraction.
+
+.. _ALTrackerProxy::pointAt2:
+
+.. cpp:function:: void ALTrackerProxy::pointAt(const std::string &Effector, const std::vector<float> &Position,  const float &FractionMaxSpeed)
+
+  .. deprecated:: 1.22
+    use :ref:`ALTrackerProxy::pointAt <ALTrackerProxy::pointAt1>` with frame in parameters instead.
+
+  Point at the target position with arms. If tracker is active, it's stopped and restarted at the last location of active target after pointAt.
+  This is a blocking call.
+
+  :param Effector: effector name. Could be "Arms", "LArm", "RArm".
+  :param Position: position 3D [x, y, z] in :term:`FRAME_TORSO`.
+  :param FractionMaxSpeed: a fraction.
+
+.. cpp:function:: void ALTrackerProxy::registerTarget(const std::string &TargetName, const AL::ALValue &Param)
+
+    Register the predefined target with parameters (*RedBall*: diameter of ball). Subscribe to corresponding extractor
+    and stock the last position if tracker is running. If the target is already registered, only parameters are updated.
+
+    :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+    :param Param: target parameters.
+
+.. cpp:function:: void ALTrackerProxy::removeAllTargets()
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::unregisterAllTargets` instead.
+
+  Remove all registered targets and unsubscribe from all extractors.
+
+.. cpp:function:: void ALTrackerProxy::removeEffector(const std::string &Effector)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::setEffector` instead.
+
+  Remove an end-effector from tracking.
+
+  :param Effector: Name of the effector. Could be: "Arms", "LArm" or "RArm".
+
+.. cpp:function:: void ALTrackerProxy::removeTarget(const std::string &TargetName)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::unregisterTarget` instead.
+
+  Remove a predefined target and unsubscribe from corresponding extractor.
+
+  :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+
+.. cpp:function:: void ALTrackerProxy::removeTargets(const std::vector<std::string> &TargetNames)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALTrackerProxy::unregisterTargets` instead.
+
+  Remove predefined targets and unsubscribe from corresponding extractors.
+
+  :param TargetNames: array of predefined target names. See: :ref:`tracking_targets`.
+
+.. cpp:function:: void ALTrackerProxy::setEffector(const std::string &Effector)
+
+  Set an end-effector to move for tracking. Tracker always used the **Head**.
+  Use :cpp:func:`ALTrackerProxy::getEffector` to get this value.
+
+  :param Effector: Name of the effector. Could be: "Arms", "LArm", "RArm" or "None"..
+
+.. cpp:function:: void ALTrackerProxy::setExtractorPeriod(const std::string &TargetName, const int& Period)
+
+  Set the period of the extractor corresponding to the given target name. See: :ref:`targets_extractors`.
+  Only works if the corresponding target name is tracked (call :cpp:func:`ALTrackerProxy::track` before).
+  Use :cpp:func:`ALTrackerProxy::getExtractorPeriod` to get this value.
+
+  :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+  :param Period: a period in milliseconds.
+
+.. cpp:function:: void ALTrackerProxy::setMaximumDistanceDetection(const float &MaxDistance)
+
+  Set the strictly positive maximum distance in meter for target detection.
+  If the distance to the target is greater than the distance presented here, the target is considered lost.
+
+  :param MaxDistance: The Max Distance for target detection in meter.
+
+.. cpp:function:: void ALTrackerProxy::setMode(const std::string &Mode)
+
+  Set the tracker in the predefined mode. Use :cpp:func:`ALTrackerProxy::getMode` to get this value.
+
+  :param Mode: a predefined :ref:`tracking_modes`.
+
+.. cpp:function:: void ALTrackerProxy::setMoveConfig(const AL::ALValue &Config)
+
+  Set a move config to be used when the **Move** mode is activated.
+  Use :cpp:func:`ALTrackerProxy::getMoveConfig` to get this value.
+
+  :param Config: An ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+.. cpp:function:: void ALTrackerProxy::setRelativePosition(const AL::ALValue &Target)
+
+  Set the robot position relative to target in **Move** mode.
+  Use :cpp:func:`ALTrackerProxy::getRelativePosition` to get this value.
+
+  :param Target: Final goal of the tracking: [coordX, coordY, coordWz, thresholdX, thresholdY, thresholdWz].
+
+.. cpp:function:: void ALTrackerProxy::setTargetCoordinates(const AL::ALValue &Coord)
+
+  Only work with **LandMarks** target name. Set objects coordinates.
+  Use :cpp:func:`ALTrackerProxy::getTargetCoordinates` to get this value.
+
+  :param Coord: | Objects coordinates.
+                | Could be:
+                | [[first object coordinate], [second object coordinate]]
+                | [[x1, y1, z1], [x2, y2, z2]].
+
+.. cpp:function:: void ALTrackerProxy::setTimeOut(const int &TimeMs)
+
+  Set target lost timeout in milliseconds.
+
+  :param TimeMs: Time in milliseconds.
+
+.. cpp:function:: void ALTrackerProxy::stopTracker()
+
+  Stop the tracker.
+
+.. cpp:function:: void ALTrackerProxy::track(const std::string &TargetName)
+
+  Set the predefined target to track and start tracking process.
+  Target name need to be registered before with :cpp:func:`ALTrackerProxy::registerTarget`.
+
+  :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+
+.. cpp:function:: void ALTrackerProxy::trackEvent(const std::string &EventName)
+
+  Track an event from ALMemory. The value from **EventName** should have a predefined structure.
+
+  :param EventName: ALMemory event name.
+
+EventName Value Structure
+-------------------------
+
+The output ALValue from **EventName** should be organized as follows:
+
+.. code-block:: guess
+
+  EventNameInfo {
+    TargetPositionInFrameTorso,
+    TargetPositionInFrameRobot,
+    TimeStamp,
+    EffectorId,
+    HeadThreshold (optional)
+  }
+
+TargetPositionInFrameTorso
+++++++++++++++++++++++++++
+
+:term:`Position6D` of target to track in :term:`FRAME_TORSO`.
+
+TargetPositionInFrameRobot
+++++++++++++++++++++++++++
+
+:term:`Position6D` of target to track in :term:`FRAME_ROBOT`.
+
+TimeStamp
++++++++++
+
+This field is the time stamp of detection.
+
+.. code-block:: guess
+
+   TimeStamp {
+     TimeStamp_Seconds,
+     Timestamp_Microseconds
+   }
+
+EffectorId
+++++++++++
+
+This field corresponds to the ID of the effector used for tracking the target:
+
+  - 0 to track with middle of eyes
+  - 1 to track with camera top
+  - 2 to track with camera bottom
+  - 3 no effector, the head does not move
+
+HeadThreshold
++++++++++++++
+
+This is an optional field to avoid oscillation, this corresponds to an angle in radians.
+
+
+.. cpp:function:: void ALTrackerProxy::toggleSearch(const bool &SearchOn)
+
+  Enables/disables the target search process. Target search process occurs only when the target is lost.
+  Use :cpp:func:`ALTrackerProxy::isSearchEnabled` to get this value.
+
+  :param pSearch: | If True and if the target is lost, the robot moves the head in order to find the target.
+                  | If False and if the target is lost the robot does not move.
+
+.. cpp:function:: void ALTrackerProxy::unregisterAllTargets()
+
+  Unregister all targets and unsubscribe from all extractors.
+
+.. cpp:function:: void ALTrackerProxy::unregisterTarget(const std::string &TargetName)
+
+  Unregister a predefined target and unsubscribe from corresponding extractor.
+
+  :param TargetName: a predefined target name. See: :ref:`tracking_targets`.
+
+.. cpp:function:: void ALTrackerProxy::unregisterTargets(const std::vector<std::string> &TargetNames)
+
+  Unregister predefined targets and unsubscribe from corresponding extractors.
+
+  :param TargetNames: array of predefined target names. See: :ref:`tracking_targets`.

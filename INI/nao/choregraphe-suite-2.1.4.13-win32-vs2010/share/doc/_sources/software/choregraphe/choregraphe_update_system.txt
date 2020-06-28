@@ -1,0 +1,56 @@
+.. include:: ../../bulk/common.rst
+
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+.. _choregraphe-howto-update-nao-system:
+
+Updating |roboN| system
+=======================
+
+Before starting
+----------------
+
+Make sure your robot is ready, check: :ref:`prepare_upgrade`.
+
+.. _simple-update:
+
+Easy update via Choregraphe
+----------------------------
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+====  ==============================================================================
+Step  Action
+====  ==============================================================================
+1.    Retrieve the |roboN| system image:
+
+      ``opennao-atom-system-image-x.x.opn``
+
+      You can download the latest release from |community|.
+      For further details, see: :ref:`retrieving_software`.
+
+2.    In **Choregraphe**, choose **Connection** > **Advanced** >
+      **Update NAO system**.
+
+3.    Select the system image to upload.
+
+      The image will then be uploaded through FTP on the robot.
+
+      .. warning::
+
+        Do not switch the robot off while the flashing process is running.
+
+      .. note::
+
+          If something goes wrong during the system update process, and
+          **Choregraphe** ends it prematurely, an *error code* is given in the
+          pop-up.
+
+          For further details, see:
+          :ref:`choregraphe-troubleshooting-errorcode`.
+
+4.    Once the upload finished, restart your robot, and follow the flashing process.
+
+      For further details, see: :ref:`launching_upgrade`.
+====  ==============================================================================

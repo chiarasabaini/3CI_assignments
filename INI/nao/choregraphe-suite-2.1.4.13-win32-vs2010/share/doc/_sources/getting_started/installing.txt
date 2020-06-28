@@ -1,0 +1,131 @@
+.. include:: ../bulk/common.rst
+
+.. _desktop-installation:
+
+Choregraphe suite installation
+===============================
+
+.. _desktop-index:
+
+Choregraphe requirements
+-------------------------
+
+.. _desktop-minimum:
+
+Hardware
++++++++++
+
+A computer connected to a WiFi access point, with:
+
+- 1.5 GHz CPU
+
+- 512 MB RAM
+
+- a certified OpenGL graphics card
+
+Supported Operating Systems
+++++++++++++++++++++++++++++
+
+=========  ===================================================================
+OS          Version
+=========  ===================================================================
+Linux       Ubuntu 12.04 LTS (Precise) and later
+
+Windows     Microsoft Windows XP Service Pack 3,
+
+            Microsoft Windows 7 and 8
+
+Mac         Mac OS X version 10.7.1 Lion
+
+            Mac OS X version 10.8.3 Mountain Lion
+=========  ===================================================================
+
+
+.. _desktop-installation-cho-installing:
+
+Installing Choregraphe suite
+-----------------------------
+
+=====  ================================================================================
+Step    Action
+=====  ================================================================================
+1.      Make sure you have logged on:
+
+        * as Administrator or
+        *   as a user with Administrator privileges (using sudo on Linux).
+
+2.      Retrieve the **Choregraphe** installer according to the Operating System
+        of your computer:
+
+        * ``choregraphe-suite-x.x-linux32-setup.run``
+        * ``choregraphe-suite-x.x-linux64-setup.run``
+        * ``choregraphe-suite-x.x-mac64-setup.dmg``
+        * ``choregraphe-suite-x.x-win32-setup.exe``
+
+        You can download the latest release from |community|.
+        For further details, see: :ref:`retrieving_software`.
+
+3.      Double-click the file to start the installation.
+
+        **Linux only**
+
+        Check you have execution permissions first, or run:
+
+        .. code-block:: console
+
+          'sudo choregraphe-suite-x.x-linux{32,64}-setup.run'
+
+4.      Accept the license agreement and follow the wizard steps.
+=====  ================================================================================
+
+.. Note::
+
+  **Windows only**
+
+  If not yet installed on your computer, the wizard installs also **Bonjour**,
+  a tool conceived by Apple.
+  For further details about **Bonjour**, see: :ref:`access_bonjour_nao`.
+
+  .. or :ref:`access_bonjour_juliette`.
+
+  **Linux only**
+
+  You may experience problems with graphical acceleration if you
+  do not have appropriate drivers.
+
+  In this case, use:
+
+  ``./choregraphe --no-ogre``
+
+
+.. _desktop-installation-cho-license:
+
+Activating Choregraphe license
+--------------------------------
+
+The first time you start **Choregraphe**, you will be prompted to enter a valid license key.
+
+
+Deploying Choregraphe
+---------------------
+
+To deploy **Choregraphe** on several computers, use the installer in command line
+with the following parameters:
+
+**Linux**
+
+.. code-block:: console
+
+    $ sudo choregraphe-suite-x.x-linux{32,64}-setup.run --mode unattended --installdir <destination_directory> --licenseKeyMode licenseKey --licenseKey <your_choregraphe_license_key>
+
+**Windows**
+
+.. code-block:: console
+
+    $ choregraphe-suite-x.x-win32-setup.exe --mode unattended --installdir "<destination_directory>" --licenseKeyMode licenseKey --licenseKey <your_choregraphe_license_key>
+
+**Mac**
+
+.. code-block:: console
+
+    $ sudo open choregraphe-suite-x.x-mac64-setup.app --args --mode unattended --installdir <destination_directory> --licenseKeyMode licenseKey --licenseKey <your_choregraphe_license_key>

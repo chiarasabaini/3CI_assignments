@@ -1,0 +1,70 @@
+.. _tips_and_tricks:
+
+C++ Tips and tricks
+===================
+
+.. seealso::
+
+   :ref:`cpp-introduction` | :ref:`cpp-tutos-examples` |
+   :ref:`cpp-examples` | *C++ Tips and tricks* | :ref:`gdb`
+
+------------
+
+
+bind: Forbidden methods names
+-----------------------------
+
+You cannot bind method with name already bound by ALModule.
+
+Look at :ref:`almodule-api` for a list of ALModule bound methods.
+
+
+Synchronization and real-time
+-----------------------------
+
+NAOqi provides two local synchronization methods. Synchronization is not
+compatible with remote modules.
+
+Synchronization
++++++++++++++++
+
+Callback synchronization
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+All modules have onPreProcess and onPostProcess methods. Modules are free to
+call it and users are free to define it. Refer to modules documentation to know
+if callback are used. In v1.2.0 only device communication manager use callbacks.
+
+Callbacks are blocking for Aldebaran modules. Be careful to module cycle time.
+If callback execution is too long, robot can fall for example.
+
+
+Synchronization with condition
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Synchronization with condition is asynchronous. User thread waits on a condition,
+Aldebaran module sends a signal to condition.
+
+Conditions can also help to synchronize C++ and Python.
+
+
+Thread
+++++++
+
+NAOqi and NAOqi modules are thread safe. All modules created with module
+generator are not thread safe. User functions, such as callback functions on an
+event can be called in parallel but they have to be thread safe.
+
+Aldebaran provides tools to protect functions. You can use critical section to
+protect your functions. A critical section prevents a function to be run
+simultaneously in separate threads. For example, this can avoid a first thread
+to modify a variable while a second thread is trying to read it, which could
+cause at best aberrations.
+
+Such protection can also be obtained using boost or pthread for example.
+Only DCM has a real-time thread in NAOqi. ::
+
+    scheduling policy: SCHED_FIFO
+    scheduling priority: 90
+
+All others thread from threadpool give priority to DCM.

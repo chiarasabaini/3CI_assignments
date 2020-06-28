@@ -1,0 +1,169 @@
+
+.. |play-button| image:: /medias/desktop/beginning_play_button.png
+   :class: img-inline
+
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+
+
+.. _helloworld_choregraphe_dialog:
+
+Hello World 3 - using Dialog topic in Choregraphe
+=================================================
+
+Audience
+----------
+
++-------+-------------------------------------+----------------+-------------------+
+| Level |**All beginners**                    | Time           | **5 min**         |
++-------+-------------------------------------+----------------+-------------------+
+| OS    |**Linux** - **Windows** - **Mac**    | Preparation    | **15 min**        |
++-------+-------------------------------------+----------------+-------------------+
+
+*Preparation time is given for the case you have to install tools prior the tutorial.*
+
+Before starting
+----------------
+
+* Make sure you have a robot ready to use.
+  Otherwise, read :ref:`out_of_the_box_nao`.
+
+..  or :ref:`out_of_the_box_juliette`.
+
+* | Make sure **Choregraphe** is installed on your computer.
+  | If it is not the case, see :ref:`desktop-installation-cho-installing`.
+
+Let's do it
+------------
+
+=====  ===============================================================================================
+Step       Action
+=====  ===============================================================================================
+1.      Start **Choregraphe**.
+
+2.      Click the **Connect to** button and connect **Choregraphe** to your robot.
+
+        .. image:: /medias/getting_started/helloworld_cho_00.png
+           :width: 533 px
+           :height: 390 px
+
+        For further details, see :ref:`choregraphe-howto-connect`.
+
+        Your robot appears in the **Robot view**.
+
+3.      Drag the **Audio** > **Voice** > **Set Language** box on the grey area.
+
+        Click the |parameter-button| **parameter** button and set
+        the language as **English**.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_00.png
+           :width: 484 px
+           :height: 350 px
+
+4.      Right click the grey area and choose, in the contextual menu,
+        **Create a new Box** > **Dialog...**.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_01.png
+           :width: 562 px
+           :height: 405 px
+
+5.      Click the **Add a new topic** button, then type a name without spaces,
+        for example: *HelloWorld*.
+
+        Click the **Add** button, then the **OK** button.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_02.png
+           :width: 442 px
+           :height: 498 px
+
+6.      Create links as below.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_05.png
+           :width: 538 px
+           :height: 386 px
+
+7.      In the **Project content**, double click the HelloWorld_enu.top file.
+
+        The **Script editor** appears.
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_06.png
+           :width: 581 px
+           :height: 459 px
+
+8.      Type those rules:
+
+        .. code-block:: ini
+
+           u:(Hello) Hello, young Padawan
+
+           u:(Good morning) Let's start a wonderful day
+
+        .. image:: /medias/getting_started/helloworld_cho_dlg_07.png
+           :width: 359 px
+           :height: 325 px
+
+9.       Click the |play-button| **Play** button.
+=====  ===============================================================================================
+
+
+Result
+---------
+
+Your robot prompts you to speak with a sound and an eye LEDs animation.
+
+* Say "Good morning" right in front of his face, or enter "Good morning" in the :ref:`dialog_panel` and press enter.
+
+  Your robot replies "Let's start a wonderful day".
+
+* Say "Hello" right in front of his face, or enter "Hello" in the :ref:`dialog_panel` and press enter.
+
+  Your robot replies "Hello, young Padawan".
+
+How it works
+---------------
+
+* The **Set Language** box defines the language the robot will use to speak
+  and also to listen to you.
+
+* The **Dialog box** uses the **Topic** file, with *.top* extension, stored in
+  the current **Project**.
+
+* The **Topic** file contains **Rules** associating **Human inputs** to
+  **Robot outputs**.
+
+Let's explain the 2 lines you wrote:
+
+.. code-block:: ini
+
+   u:(Hello) Hello, young Padawan
+
+   u:(Good morning) Let's start a wonderful day
+
+This line is a **Rule**:
+
+* **u:** is the key word for user rule,
+
+* **(hello)** and **(Good morning)** are Human inputs, i.e. what you can say
+  to the robot,
+
+* **Hello, young Padawan** and **Let's start a wonderful day** are Robot outputs,
+  i.e. what the robot will answer.
+
+What you have learned
+----------------------
+
+To make the robot listen and answer an appropriate answer, you can create a set
+of rules associating **Human inputs** to **Robot outputs**.
+
+To go further
+-------------
+
+Learn more about **Dialog boxes**, see the tutorial: :ref:`aldialog-tuto`.
+
+Next step
+------------
+
+| Writing **Python** script inside or outside **Choregraphe** is not exactly the same.
+| Try to create a **Python** script: :ref:`helloworld_python`.
+

@@ -1,0 +1,427 @@
+.. _altexttospeech-tuto:
+
+ALTextToSpeech Tutorial
+=======================
+
+:ref:`naoqi-audio` - :ref:`Overview <altexttospeech>` | :ref:`API <altexttospeech-api>` | Tutorial
+
+------------
+
+This tutorial explains how to say a sentence, change the voice effects, or
+change the language and the voice of the synthesis engine.
+
+.. note::
+
+   All the examples provided are written in Python.
+
+Creating a proxy on the module
+------------------------------
+
+Before using the TTS commands, you need to create a proxy on the TTS
+module.
+
+.. code-block:: guess
+
+  # Creates a proxy on the text-to-speech module
+  from naoqi import ALProxy
+
+  IP = "<IP ADDRESS>"
+  tts = ALProxy("ALTextToSpeech", IP, 9559)
+
+Saying a text string
+--------------------
+
+You can say a sentence using the say function.
+
+.. code-block:: guess
+
+  # Example: Sends a string to the text-to-speech module
+  tts.say("Hello World!")
+
+Modifying speed
+---------------
+
+The API allows some modifications of the voice's speed. Example:
+
+.. code-block:: guess
+
+  tts.setParameter("speed", 200)
+
+For further details, see :cpp:func:`ALTextToSpeechProxy::setParameter`.
+To go back to the default speed value:
+
+.. code-block:: guess
+
+  tts.setParameter("speed", 200)
+  tts.resetSpeed()
+
+To change that default value:
+
+.. code-block:: guess
+
+  tts.setParameter("defaultVoiceSpeed", 200)
+
+Changing the value of the default speed also resets the current value of
+the speed.
+
+Changing the default speed value is a non-persistent modification. If you switch
+to another language and then come back, the default speed value will be back to
+100. To keep a specific value, modify the
+voiceSettings.xml file stored in the language package by adding:
+
+.. code-block:: xml
+
+  <Setting name="defaultVoiceSpeed" description="Voice speed" value="150.0"/>
+
+This value will then be loaded everytime the language is used.
+
+
+
+Modifying pitch
+---------------
+
+The API allows some modifications of the voice's pitch. Example:
+
+.. code-block:: guess
+
+  tts.setParameter("pitchShift", 1.1)
+
+This command raises the pitch of the main voice. 1.1 is the ratio between the
+fundamental frequency of the transformed voice and the original one.
+
+Modifying double voice parameters
+---------------------------------
+
+The double voice rendering can be modified using 3 parameters:
+
+- doubleVoice: the ratio between the fundamental frequency of the
+  transformed voice and the original one.
+
+- doubleVoiceLevel: the ratio between the volume of the second voice and the
+  first one.
+
+- doubleVoiceTimeShift: the time shift between the second voice and the
+  first one.
+
+For example, a "robotic sounding" voice can be generated using these commands:
+
+.. code-block:: python
+
+  tts.setParameter("doubleVoice", 1)
+  tts.setParameter("doubleVoiceLevel", 0.5)
+  tts.setParameter("doubleVoiceTimeShift", 0.1)
+  tts.setParameter("pitchShift", 1.1)
+
+Changing the language of the synthesis engine
+---------------------------------------------
+
+The language of the synthesis engine can be changed using the setLanguage function.
+The list of the available languages can be obtained with the getAvailableLanguages function.
+
+.. code-block:: python
+
+  # Example: set the language of the synthesis engine to English:
+  tts.setLanguage("English")
+
+Changing the voice of the synthesis engine
+------------------------------------------
+
+You can also change the voice of the synthesis engine with the setVoice function.
+The list of the available voices can be obtained with the getAvailableVoices function.
+When you change the voice, the current language is automatically changed by the language
+corresponding to this voice.
+
+.. code-block:: python
+
+  # Example: use the voice of Kenny:
+  tts.setVoice("Kenny22Enhanced")
+
+
+Saving and loading voice preferences
+------------------------------------
+
+The voice preferences are the set of synthesis and FX parameters that allows to
+customize voices. If you want to keep a set of synthesis and FX parameters, you can save it in a ".xml"
+preference file in the "/home/nao/naoqi/preferences" folder and load it with the
+loadVoicePreference method.
+
+The preference file must be formatted as described below:
+
+.. code-block:: xml
+
+  <ModulePreference schemaLocation="ModulePreference.xsd" name="aldebaran-robotics.com@ALTextToSpeech_Voice_defaultEnglish">
+    <Preference value="Kenny22Enhanced" type="string" name="sourceVoice" description="Synthesis source voice"/>
+    <Preference value="0.0" type="float" name="doubleVoice" description="Ratio of pitch shifting applied to the doubling voice"/>
+    <Preference value="0.0" type="float" name="doubleVoiceLevel" description="Level of the doubling voice"/>
+    <Preference value="0.0" type="float" name="pitchShift" description="Ratio of the pitch shifting applied to the main voice"/>
+    <Preference value="0.125" type="float" name="doubleVoiceTimeShift" description="Delay (ms) between the double voice and the main voice"/>
+  </ModulePreference>
+
+The name of the ".xml" file must begin by **ALTextToSpeech_Voice_** and finish by
+the name of the voice you want to load with the loadVoicePreference method.
+
+For example, the following piece of code loads the set of voices parameters
+contained in the "ALTextToSpeech_Voice_NaoOfficialVoiceEnglish.xml" file of the
+preference folder.
+
+.. code-block:: python
+
+  tts.loadVoicePreference("NaoOfficialVoiceEnglish")
+
+
+.. _tag-tutorial:
+
+Using tags for voice tuning
+---------------------------
+
+Available for all engines
++++++++++++++++++++++++++++
+
+Different tags are available to change the pronunciation regarding to the context of your application. According to the engine of the language package tags available can be different.
+
+Changing the **pitch**
+````````````````````````
+
+*Available for all engines.*
+
+Insert **\\\\vct=value\\\\** in the text. The value is between 50 and 200 in %. Default value is 100.
+
+.. code-block:: python
+
+  # Say the sentence with a pitch of +50%
+  tts.say("\\vct=150\\Hello my friends")
+
+Changing the **speaking rate**
+``````````````````````````````````````
+
+*Available for all engines.*
+
+Insert **\\\\rspd=value\\\\** in the text. The value between 50 and 400 in %. Default value is 100.
+
+.. code-block:: python
+
+  # Say the sentence 50% slower than normal speed
+  tts.say("\\rspd=50\\hello my friends")
+
+Inserting a **pause**
+```````````````````````````
+
+*Available for all engines.*
+
+Insert **\\\\pau=value\\\\** in the text. The value is a duration in msec.
+
+.. code-block:: python
+
+  # Insert a pause of 1s
+  tts.say("Hello my friends \\pau=1000\\ how are you ?")
+
+Changing the **volume**
+```````````````````````````
+
+*Available for all engines.*
+
+Insert **\\\\vol=value\\\\** in the text. The value is between 0 and 100 in %. Default value is 80. Values > 80 can introduce clipping in the audio signal.
+
+.. code-block:: python
+
+  # Say the sentence with a volume of 50%
+  tts.say("\\vol=50\\Hello my friends")
+
+Inserting a **bookmark**
+``````````````````````````
+
+*Available for all engines.*
+
+This tag is very useful if you want to synchronize the speech and a specific action of the robot.
+
+Insert **\\\\mrk=value\\\\** in the text.  The value is between 0 to 64535.
+
+The value will be raised in the “ALTextToSpeech/CurrentBookMark” event of ALMemory.
+
+.. code-block:: python
+
+  tts.say(“\\mrk=0\\ I say a sentence.\\mrk=1\\ And a second one.”)
+
+Resetting control sequences to the default
+````````````````````````````````````````````
+
+*Available for all engines.*
+
+Insert **\\\\rst\\\\** in the text.
+
+.. code-block:: python
+
+  tts.say(“\\vct=150\\\\rspd=50\\Hello my friends.\\rst\\ How are you ?”)
+
+Nuance only
++++++++++++
+
+Setting the type of **prosodic boundary**
+```````````````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\bound=value\\\\** in the text. The possible values are:
+
+* W: Weak phrase boundary
+* S: Strong phrase boundary
+* N: No boundary
+
+.. code-block:: python
+
+  # Say the sentence with a weak phrase boundary (no silence in speech)
+  tts.say(“\\bound=W\\ Hello my friends”)
+  # Say the sentence with a strong phrase boundary (silence in speech)
+  tts.say(“\\bound=S\\ Hello my friends”)
+
+Setting the word **prominence level**
+`````````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\emph=value\\\\** in the text. The possible values are:
+
+* 0: Reduced
+* 1: Stressed
+* 2: Accented
+
+.. code-block:: python
+
+  tts.say(“Hello my \\emph=0\\ friends”) # reduced
+  tts.say(“Hello my \\emph=1\\ friends”) # stressed
+  tts.say(“Hello my \\emph=2\\ friends”) # accented
+
+Controlling **end-of-sentence** detection
+```````````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\eos=value\\\\** in the text. The possible values are:
+
+* 0: suppress a sentence break
+* 1: force a sentence break
+
+.. warning::
+
+  must appear immediately after the symbols that triggers the break
+
+.. code-block:: python
+
+  tts.say(“Hello my friends.\\eos=0\\How are you ?”) # no break
+  tts.say(“Hello my friends.\\eos=1\\How are you ?”) # break
+
+Controlling the **read mode**
+`````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\readmode=value\\\\** in the text.  The possible values are:
+
+* sent: Sentence mode (default value)
+* char: Character mode (similar to spelling)
+* word: Word-by-word mode
+
+.. code-block:: python
+
+  tts.say(“\\readmode=sent\\ Hello my friends”)
+  tts.say(“\\readmode=char\\ Hello my friends”)
+  tts.say(“\\readmode=word\\ Hello my friends”)
+
+Guiding **text normalization**
+``````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\tn=value\\\\** in the text.  The possible values are:
+
+* spell: start spelling out the following input text.
+* address: expand the following text as an address.
+* sms: expand the following text as an SMS message.
+* normal: reset to the regular text normalization.
+
+.. code-block:: python
+
+  tts.say(“\\tn=address\ 244 Perryn Rd Ithaca, NY \\tn=normal\\ That’s spelled \\tn=spell\\ Ithaca \\tn=normal\\.”)
+  tts.say(“\\tn=sms\\ Carlo, can u give me a lift 2 Helena's house 2nite? David \\tn=normal\\”)
+
+Setting the **spelling pause** duration
+`````````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\spell=value\\\\** in the text.  The value is inter-character pause in msec.
+
+.. code-block:: python
+
+  tts.say(“\\tn=spell\\hello”)
+  tts.say(“\\tn=spell\\\\spell=2000\\hello”)
+
+Setting the **end of sentence pause** duration
+``````````````````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\wait=value\\\\** in the text.  The value is between 0 and 9, where the pause will be 200 msec multiplied by that number.
+
+.. code-block:: python
+
+  tts.say(“\\wait=2\\ There will be a short wait period after this sentence. \\wait=9\\ This sentence will be followed by a long wait period. Did you notice the difference?”)
+
+Inserting a digital audio recording
+`````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+
+Insert **\\\\audio=path\\\\** in the text  The path is the path to the audio file **on** the robot.
+
+.. warning::
+
+  The audio file must be a WAV file that contains linear 16-bit PCM samples at 22050Hz
+
+.. code-block:: python
+
+  tts.say(“\\audio=”/usr/share/naoqi/wav/0.wav”\\”)
+
+Inserting phonetic text
+``````````````````````````
+
+*Available only for Nuance packages.*
+
+By default Nuance engine considers the input as orthographic text, but it also supports other phonetic text.
+The tag \\toi=value\\ marks the type of the input starting after the control sequence:
+
+* lhp: Phonetic text in the phonetic alphabet L&H+ (Nuance specific alphabet).
+* orth: Orthographic text (default)
+
+Note: if you want to reset the type of input don't forget to insert \\toi=orth\\ after the word
+
+.. code-block:: python
+
+  tts.setLanguage("English")
+  tts.say("\\toi=lhp\\‘zi.R+o&U \\toi=orth\\")
+  # Same as
+  tts.say("zero")
+
+
+AiTalk only
++++++++++++
+
+Setting the word **prominence level**
+`````````````````````````````````````````
+
+*Available only for Nuance packages.*
+
+Insert **\\\\emph=value\\\\** in the text. The value is between 0 and 200 in %. Default value is 100.
+
+.. code-block:: python
+
+  tts.say("こんにちは\\emph=200\\マスター。\\emph=100\\")
+
+
+Acapela only
+++++++++++++
+
+For specific tags for Aceapela please refer here:
+
+:download:`Acapela Mobility Text TAGS Documentation</medias/dev/modules/audio/audio_system_acapelamobilitytexttags.pdf>`

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="8" localization="-1" tooltip="This box makes the robot track a two landmarks pattern. &#x0A;&#x0A;Use firstLandMarkId and secondLandMarkId input to set the land marks to track.&#x0A;&#x0A;Set land marks coordinates in box script with ALTracker.setTargetCoordinates function.&#x0A;&#x0A;Use parameters to set the desired robot position." x="258" y="277">
+        <bitmap>media/images/box/tracker/tracker.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.tracker = ALProxy( "ALTracker" )
+        self.memory = ALProxy("ALMemory")
+
+        self.targetName = "LandMarks"
+
+        self.coordX = 0.0
+        self.coordY = 0.0
+        self.coordWz = 0.0
+
+        self.thresholdX = 0.0
+        self.thresholdY = 0.0
+        self.thresholdWz = 0.0
+
+        self.sizeMark = 0.0
+        self.firstMarkIds = [85, 84, 68, 204, 145, 76, 115, 153, 117, 119, 114]
+        self.secondMarkIds = [112, 11, 135, 127, 79, 123, 113, 121]
+        self.effector = "None"
+        self.subscribeDone = False
+        self.isRunning = False
+
+    def onLoad(self):
+        self.BIND_PYTHON(self.getName(), "setParameter")
+        self.BIND_PYTHON(self.getName(), "onTargetLost")
+        self.BIND_PYTHON(self.getName(), "onTargetReached")
+        self.BIND_PYTHON(self.getName(), "onTargetChanged")
+        self.memory.subscribeToEvent("ALTracker/ActiveTargetChanged", self.getName(), "onTargetChanged")
+
+    def onUnload(self):
+        if self.subscribeDone:
+            self.memory.unsubscribeToEvent("ALTracker/TargetLost", self.getName())
+            self.memory.unsubscribeToEvent("ALTracker/TargetReached", self.getName())
+            self.subscribeDone = False
+
+        if self.isRunning:
+            self.tracker.setEffector("None")
+            self.tracker.stopTracker()
+            self.tracker.unregisterTarget(self.targetName)
+            self.isRunning = False
+
+    def onInput_onStart(self):
+        self.memory.subscribeToEvent("ALTracker/TargetLost", self.getName(), "onTargetLost")
+        self.memory.subscribeToEvent("ALTracker/TargetReached", self.getName(), "onTargetReached")
+        self.subscribeDone = True
+
+        mode = self.getParameter("Mode")
+
+        self.coordX = self.getParameter("Coordinate X (m)")
+        self.coordY = self.getParameter("Coordinate Y (m)")
+        self.coordWz = self.getParameter("Theta (rad)")
+
+        self.thresholdX = self.getParameter("Threshold X (m)")
+        self.thresholdY = self.getParameter("Threshold Y (m)")
+        self.thresholdWz = self.getParameter("Threshold Theta (rad)")
+
+        self.effector = self.getParameter("Effector")
+        self.sizeMark = self.getParameter("Size (m)")
+
+        self.tracker.setTargetCoordinates([[0.0, -0.09, 0.0], [0.0, 0.09, 0.0]])
+
+        self.tracker.setEffector(self.effector)
+
+        self.tracker.registerTarget(self.targetName, [ [self.sizeMark, self.firstMarkIds],
+                                                       [self.sizeMark, self.secondMarkIds] ])
+
+        self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                          self.thresholdX, self.thresholdY, self.thresholdWz])
+        self.tracker.setMode(mode)
+
+        self.tracker.track(self.targetName) #Start tracker
+        self.isRunning = True
+
+    def onInput_onStop(self):
+        self.onStopped()
+        self.onUnload()
+
+    def onInput_firstLandMarkId(self, p):
+        if(p is None):
+            return
+
+        self.firstMarkIds = p
+        self.tracker.registerTarget(self.targetName, [ [self.sizeMark, self.firstMarkIds],
+                                                       [self.sizeMark, self.secondMarkIds] ])
+
+    def onInput_secondLandMarkId(self, p):
+        if(p is None):
+            return
+
+        self.secondMarkIds = p
+        self.tracker.registerTarget(self.targetName, [ [self.sizeMark, self.firstMarkIds],
+                                                       [self.sizeMark, self.secondMarkIds] ])
+
+    def setParameter(self, parameterName, newValue):
+        GeneratedClass.setParameter(self, parameterName, newValue)
+        if (parameterName == 'Mode'):
+            self.tracker.setMode(newValue)
+            return
+
+        if (parameterName == "Size (m)"):
+            self.sizeMark = newValue
+            self.tracker.registerTarget(self.targetName, [ [self.sizeMark, self.firstMarkIds],
+                                                           [self.sizeMark, self.secondMarkIds] ])
+            return
+
+        if (parameterName == "Coordinate X (m)"):
+            self.coordX = newValue
+            self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                              self.thresholdX, self.thresholdY, self.thresholdWz])
+            return
+
+        if (parameterName == "Coordinate Y (m)"):
+            self.coordY = newValue
+            self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                              self.thresholdX, self.thresholdY, self.thresholdWz])
+            return
+
+        if (parameterName == "Theta (rad)"):
+            self.coordWz = newValue
+            self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                              self.thresholdX, self.thresholdY, self.thresholdWz])
+            return
+
+        if (parameterName == "Threshold X (m)"):
+            self.thresholdX = newValue
+            self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                              self.thresholdX, self.thresholdY, self.thresholdWz])
+            return
+
+        if (parameterName == "Threshold Y (m)"):
+            self.thresholdY = newValue
+            self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                              self.thresholdX, self.thresholdY, self.thresholdWz])
+            return
+
+        if (parameterName == "Threshold Theta (rad)"):
+            self.thresholdWz = newValue
+            self.tracker.setRelativePosition([self.coordX, self.coordY, self.coordWz,
+                                              self.thresholdX, self.thresholdY, self.thresholdWz])
+            return
+
+        if(parameterName == "Effector"):
+            self.tracker.setEffector(newValue)
+            self.effector = newValue
+            return
+
+    def onTargetLost(self, key, value, message):
+        self.targetLost()
+
+    def onTargetReached(self, key, value, message):
+        self.targetReached()
+
+    def onTargetChanged(self, key, value, message):
+        if value == self.targetName and not self.subscribeDone:
+            self.memory.subscribeToEvent("ALTracker/TargetLost", self.getName(), "onTargetLost")
+            self.memory.subscribeToEvent("ALTracker/TargetReached", self.getName(), "onTargetReached")
+            self.subscribeDone = True
+        elif value != self.targetName and self.subscribeDone:
+            self.memory.unsubscribeToEvent("ALTracker/TargetLost", self.getName())
+            self.memory.unsubscribeToEvent("ALTracker/TargetReached", self.getName())
+            self.subscribeDone = False]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="firstLandMarkId" type="0" type_size="1" nature="1" inner="0" tooltip="Set the list of id to track for first land mark" id="4" />
+        <Input name="secondLandMarkId" type="0" type_size="1" nature="1" inner="0" tooltip="Set the list of id to track for second land mark" id="5" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="6" />
+        <Output name="targetLost" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the target is lost." id="7" />
+        <Output name="targetReached" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the target is reached." id="8" />
+        <Parameter name="Mode" inherits_from_parent="0" content_type="3" value="Move" default_value="Move" custom_choice="0" tooltip="Set tracker mode" id="9">
+            <Choice value="Head" />
+            <Choice value="WholeBody" />
+            <Choice value="Move" />
+        </Parameter>
+        <Parameter name="Effector" inherits_from_parent="0" content_type="3" value="None" default_value="None" custom_choice="0" tooltip="Set effector to use for tracking. Head is always used." id="10">
+            <Choice value="None" />
+            <Choice value="Arms" />
+            <Choice value="LArm" />
+            <Choice value="RArm" />
+        </Parameter>
+        <Parameter name="Size (m)" inherits_from_parent="0" content_type="2" value="0.06" default_value="0.06" min="0.01" max="0.5" tooltip="LandMark size in meters" id="11" />
+        <Parameter name="Coordinate X (m)" inherits_from_parent="0" content_type="2" value="-0.2" default_value="-0.2" min="-5" max="5" tooltip="X coordinate of the vector robot-target the robot will try to maintain in move modes." id="12" />
+        <Parameter name="Coordinate Y (m)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-5" max="5" tooltip="Y coordinate of the vector robot-target the robot will try to maintain in move modes." id="13" />
+        <Parameter name="Theta (rad)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-3.14" max="3.14" tooltip="Wz coordinate of the vector robot-target the robot will try to maintain in move modes." id="14" />
+        <Parameter name="Threshold X (m)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0.01" max="1" tooltip="Threshold of the X coordinate of the vector robot-target above which the robot will move to track its target in move modes." id="15" />
+        <Parameter name="Threshold Y (m)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0.01" max="1" tooltip="Threshold of the Y coordinate of the vector robot-target above which the robot will move to track its target in move modes." id="16" />
+        <Parameter name="Threshold Theta (rad)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0.01" max="3.14" tooltip="Threshold of the angle of the vector robot-target above which the robot will move to track its target in move modes." id="17" />
+    </Box>
+</ChoregrapheBox>

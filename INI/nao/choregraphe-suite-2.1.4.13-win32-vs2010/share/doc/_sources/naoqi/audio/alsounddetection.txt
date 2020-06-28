@@ -1,0 +1,58 @@
+.. _alsounddetection:
+
+ALSoundDetection
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alsounddetection-api
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alsounddetection-api>`
+
+------------
+
+What it does
+------------
+
+The **ALSoundDetection** module detects significative sounds in incoming audio
+buffers.
+This detection is based on the audio signal level and as such behaves
+similarly on any type of sound (provided it is loud enough).
+
+How it works
+------------
+
+The processing is made on the front microphone signal. The raw signal is first
+smoothed by calculating the signal mean on a moving window.
+
+A peak based detection is then applied on this averaged signal to provide the
+user (through **ALMemory** in ``SoundDetected``) with the index of the detected sound start.
+
+The end of that sound is eventually detected when the level of the averaged
+signal comes back to its original value (before the peak detection).
+
+The ``SoundDetected`` key shows from 1 to **n** sounds detected in the last audio buffer:
+
+.. code-block:: guess
+
+     [[index_1, type_1, confidence_1, time_1],
+      ...,
+     [index_n, type_n, confidence_n, time_n]]
+
+**Where**:
+
+- **index** is the indexes of starting and ending points of a detected sound.
+- **type** contains 1 for starting point and 0 for ending point.
+- **confidence** gives an estimate of the probability \[0;1] that the sound
+  detected by the module corresponds to a real sound.
+- **time** is the detection time in micro seconds.
+
+
+Getting started
+---------------
+
+Using Choregraphe, the ``SoundDetected`` key can be retrieved and used (like any others)
+as a stimulating input to any other box by right clicking on diagrams left border: **Add input from ALMemory**.
+

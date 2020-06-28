@@ -1,0 +1,19 @@
+
+.. _t2-mre:
+
+T2 - Joint position sensors
+=======================================
+
+.. seealso::
+      
+   :ref:`robot-mre` 
+
+
+--------------------
+
+2 x MRE (Magnetic Rotary Encoders) using Hall-effect sensor technology.
+
+
+.. include:: ../bulk/mre.rst
+
+

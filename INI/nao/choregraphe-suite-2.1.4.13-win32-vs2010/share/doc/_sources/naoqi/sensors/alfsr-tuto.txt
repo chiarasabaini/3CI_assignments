@@ -1,0 +1,38 @@
+.. _alfsr-tuto:
+
+ALFsr Tutorial
+==============
+
+:ref:`naoqi-sensors` - :ref:`Overview <alfsr>` | :ref:`API <alfsr-api>` | Tutorial
+
+---------------
+
+.. seealso::
+
+   - :ref:`Hardware Force Sensitive Resistors (FSRs) <robot-fsr>`
+
+
+Using the values in ALMemory
+----------------------------
+
+This Python example shows how to retrieve the values in ALMemory. It gives
+the values of the total weight on both feet until foot contact is lost.
+
+:download:`sensors_fsr.py </examples/python/sensors/sensors_fsr.py>`
+
+.. literalinclude:: /examples/python/sensors/sensors_fsr.py
+   :language: py
+
+Another possible application is to implement a module with a callback on the
+event "footContactChanged" (see :ref:`cpp-tutos-intermediate-events` for information
+on how to do so).
+
+
+Direct access
+-------------
+
+It is also possible to access sensors values directly, such as in the following
+example: :download:`sensors_getFsrValues.py </examples/python/sensors/sensors_getFsrValues.py>`.
+
+.. literalinclude:: /examples/python/sensors/sensors_getFsrValues.py
+   :language: py

@@ -1,0 +1,18 @@
+.. _python-example-vision-videorecord:
+
+Video recording
+===============
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section contains examples recording video from NAO in different formats.
+
+Recording in avi
+----------------
+
+Record the video taken by NAO's camera on the robot in *.avi* format.
+
+:download:`vision_videorecord.py </examples/python/vision/vision_videorecord.py>`
+
+.. literalinclude:: /examples/python/vision/vision_videorecord.py
+   :language: py

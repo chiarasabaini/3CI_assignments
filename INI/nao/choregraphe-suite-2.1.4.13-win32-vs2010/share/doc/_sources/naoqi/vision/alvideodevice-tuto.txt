@@ -1,0 +1,198 @@
+.. _alvideodevice-tuto:
+
+ALVideoDevice Tutorial
+======================
+
+:ref:`naoqi-vision` - :ref:`Overview <alvideodevice>` | :ref:`API <alvideodevice-api>` | Tutorial | :ref:`API-advanced`
+
+---------------
+
+
+Creating a proxy on ALVideoDevice
+---------------------------------
+
+#. Choose your video source by editing the
+   path/to/sdk/preferences/VideoInput.xml file and commenting/uncommenting the
+   video devices.
+
+#. Before using the camera commands, you must create a proxy on ALVideoDevice.
+   For better efficiency we are going to use a specific proxy by writing:
+
+   .. code-block:: guess
+
+      boost::shared_ptr<ALVideoDeviceProxy> cameraProxy = boost::shared_ptr<ALVideoDeviceProxy>(new ALVideoDeviceProxy(getParentBroker()));
+
+Subscribing a Vision Module to ALVideoDevice
+--------------------------------------------
+
+Before you can get a video buffer, you have to subscribe to ALVideoDevice,
+providing the image format your process is going to require.
+
+.. code-block:: guess
+
+  // First you have to choose a name for your Vision Module
+  string nameId = "tutorial_VM";
+
+  // Then specify the resolution among : kQQVGA (160x120), kQVGA (320x240),
+  // kVGA (640x480) or k4VGA (1280x960, only with the HD camera).
+  // (Definitions are available in alvisiondefinitions.h)
+  int resolution = kVGA;
+
+  // Then specify the color space desired among : kYuvColorSpace, kYUVColorSpace,
+  // kYUV422ColorSpace, kRGBColorSpace, etc.
+  // (Definitions are available in alvisiondefinitions.h)
+  int colorSpace = kRGBColorSpace;
+
+  // Finally, select the minimal number of frames per second (fps) that your
+  // vision module requires up to 30fps.
+  int fps = 15;
+
+  // You only have to call the "subscribe" function with those parameters and
+  // ALVideoDevice will be in charge of driver initialization and buffer's management.
+  nameId = cameraProxy->subscribe(nameId, resolution, colorSpace, fps);
+
+.. note::
+   ALVideoDevice can manage up to 8 instances of the same module. For the first instance
+   the nameId returned when subscribing will be the same than the provided nameId. Second
+   one will be followed by _2 (here we'll get tutorial_VM_2), and so on.
+
+Getting a video buffer and information
+--------------------------------------
+
+Once your vision module is subscribed to ALVideoDevice, you can get a video
+buffer. Regardless of the kind of buffer requested (raw buffer or
+converted one), there are 2 possibilities: either your module works on
+the local system (the robot or a NAOqi on your desktop) or on a remote machine.
+
+My module is local (a dynamic library)
+++++++++++++++++++++++++++++++++++++++
+
+If your module works locally, the memory addresses are shared. So a fast
+method to get the video buffer is to use the getImageLocal method (or
+:cpp:func:`ALVideoDeviceProxy::getDirectRawImageLocal` for advanced users).
+
+.. code-block:: guess
+
+  // First you have to declare an ALImage pointer to get the video buffer.
+  ALImage* image;
+
+  // Now you can get the pointer to the video structure.
+  image = ( ALImage* ) cameraProxy->getImageLocal(nameId);
+
+Now, you have an access to the image data.
+
+.. code-block:: guess
+
+  // You can get some information about the image.
+  int width = image.getWidth();
+  int height = image.getHeight();
+  int nbLayers = image.getNbLayers();
+  int colorSpace = image.getColorSpace();
+  long long timeStamp = image.getTimeStamp();
+
+  // You can get the pointer to the image data. uInt8
+  unsigned char* dataPointer = image.getData();
+
+Now, you can implement some processing.
+
+My module is remote (an executable file)
+++++++++++++++++++++++++++++++++++++++++
+
+If your module is remote, the memory addresses are not shared. So it's useless
+to get the pointer to the video buffer. Your module needs the data contained in
+the video buffer. Therefore, you have to use the getImageRemote method (or
+:cpp:func:`ALVideoDeviceProxy::getDirectRawImageRemote` for advanced users).
+
+.. code-block:: guess
+
+  // First you have to declare an ALValue to get the video buffer.
+  ALValue image;
+  // Then declare the size
+  image.arraySetSize(12);
+  // Now you can get the data.
+  image = cameraProxy->getImageRemote(nameId);
+
+Now you have an array containing image data.
+
+.. code-block:: guess
+
+  // You can get some informations about the image.
+  int width = (int) image[0];
+  int height = (int) image[1];
+  int nbLayers = (int) image[2];
+  int colorSpace = (int) image[3];
+  // image[4] is the number of seconds, image[5] the number of microseconds
+  long long timeStamp = ((long long)image[4])*1000000LL + (long long)image[5];
+  // You can get the pointer to the image data and its size
+  const char* dataPointer =  static_cast<const char*>(image[6].GetBinary());
+  int size = image[6].getSize();
+
+.. note::
+   Here is the fields list for the ALImage ALValue:
+     - image[0] : [int] with of the image
+     - image[1] : [int] height of the image
+     - image[2] : [int] number of layers of the image
+     - image[3] : [int] colorspace of the image
+     - image[4] : [int] time stamp in second
+     - image[5] : [int] time stamp in microsecond (and under second)
+     - image[6] : [int] data of the image
+     - image[7] : [int] camera ID
+     - image[8] : [float] camera FOV left angle   (radian)
+     - image[9] : [float] camera FOV top angle    (radian)
+     - image[10]: [float] camera FOV right angle  (radian)
+     - image[11]: [float] camera FOV bottom angle (radian)
+
+Releasing a video buffer
+------------------------
+
+Once you don't need the image anymore, you have to release it (See the
+:ref:`ALVideoDevice::howALVideoDeviceManagesVisionModuleNeeds` section
+for a better understanding of the reasons).
+
+.. code-block:: guess
+
+  // Release image
+  cameraProxy->releaseImage(nameId);
+
+
+.. _ALVideoDevice::cameraParameters:
+
+Modifying camera parameters
+---------------------------
+
+The camera has a list of parameters which can be modified.
+
+There are methods to get and to change those parameters.
+Here is an example:
+
+.. code-block:: guess
+
+  // First, get a proxy on the video input module if you haven't already done it.
+  boost::shared_ptr<ALVideoDeviceProxy> cameraProxy = boost::shared_ptr<ALVideoDeviceProxy>( new ALVideoDeviceProxy(getParentBroker()));
+
+  // Now you are able to get the value of any parameter.
+  int BrightnessValue = ( cameraProxy.getParam(kCameraBrightnessID ) );
+
+  //You can change any parameter's value with the following method.
+  cameraProxy.setParam(kGainID, 120);
+
+Generic Camera Parameters
++++++++++++++++++++++++++
+
++------------+-----------+-----------+---------+--------------------+-------+
+| Parameter  | Min value | Max value | Default | Camera ID name     | ID    |
+|            |           |           | value   |                    | value |
++============+===========+===========+=========+====================+=======+
+| Keep Alive | 0         | 1         | 0       | kCameraKeepAliveID | 35    |
++------------+-----------+-----------+---------+--------------------+-------+
+
+Unsubscribing a Vision Module
+-----------------------------
+
+Once you're done with the task associated with your module, you should unsubscribe
+it from ALVideoDevice.
+
+.. code-block:: guess
+
+  //unsubscribe your vision module.
+  cameraProxy->unsubscribe(nameId);

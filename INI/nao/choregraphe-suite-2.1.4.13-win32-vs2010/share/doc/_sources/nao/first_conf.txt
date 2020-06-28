@@ -1,0 +1,149 @@
+.. include:: ../bulk/common.rst
+
+.. _first_conf:
+
+Configuring |roboN| for the first time
+=======================================
+
+.. |next-button| image:: /medias/wizard/next_btn.png
+   :class: img-inline
+
+When connecting for the first time **NAO** to a network, a step by step
+**Getting started** wizard guides you through key settings:
+
+.. _getting_started:
+
+|roboN| - Getting started wizard
+-----------------------------------
+
+.. _wizard_start:
+
+Getting started language and software agreement
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+ 1.     Choose the language to use in the current wizard.
+
+        .. image:: /medias/wizard/conf_step1.png
+            :width: 401 px
+            :height: 228 px
+
+        Click the |next-button| next button.
+
+ 2.     Check and validate the 2 conditions of the
+        End-user Software License Agreement.
+
+        .. image:: /medias/wizard/conf_step2.png
+            :width: 400 px
+            :height: 231 px
+
+        Click the |next-button| next button.
+=====  =========================================================================
+
+.. _setting_wifi:
+
+Setting WiFi connection
+++++++++++++++++++++++++
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+ 3.     Select one of the available WiFi networks.
+
+        **Note**: choose a Wifi network having one of the
+        :ref:`supported_personal_security_nao`.
+
+        .. image:: /medias/wizard/conf_step3.png
+            :width: 418 px
+            :height: 294 px
+
+        For further details, see: :ref:`why_wifi_nao`.
+
+ 4.     Complete the required parameters, and click the **Connect** button.
+
+        .. image:: /medias/wizard/conf_stepB3bis.png
+            :width: 400 px
+            :height: 230 px
+
+        **Tips**: Do not remove the cable yet: the wizard requires
+        the Ethernet connection.
+
+        Click the |next-button| next button.
+=====  =========================================================================
+
+.. _custom_robot:
+
+Customizing your robot
++++++++++++++++++++++++
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+ 5.     Customize the name of your robot.
+
+        .. image:: /medias/wizard/conf_stepB1.png
+            :width: 400 px
+            :height: 229 px
+
+        This is useful if you have more than one **NAO**.
+
+        Click the |next-button| next button.
+
+ 6.     Change the password securing the access to the robot.
+
+        .. image:: /medias/wizard/conf_stepB2.png
+            :width: 403 px
+            :height: 230 px
+
+        .. warning::
+          Keep the password!
+
+          Robot's password is mandatory to connect to the robot and
+          to its Web page.
+
+        Click the |next-button| next button.
+
+ 7.     Complete the login and password you used to access to the |cloud|.
+
+        .. image:: /medias/wizard/conf_stepB3.png
+            :width: 402 px
+            :height: 231 px
+
+        Click the |next-button| next button.
+
+ 8.     Two cases:
+
+        * *You have customized the name of the robot.*
+
+          .. image:: /medias/wizard/conf_stepB5.png
+              :width: 401 px
+              :height: 230 px
+
+          Make sure the robot is fully charged, or better, plug the charger,
+          and click the **Reboot now** button.
+
+        * *You have not customized the name of the robot.*
+
+          .. image:: /medias/wizard/conf_stepB5bis.png
+              :width: 407 px
+              :height: 261 px
+
+          Click the **Finish** button to access to the :ref:`webpage_nao`.
+=====  =========================================================================
+
+.. _switch_wifi:
+
+Switching to WiFi connection
+----------------------------
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Remove the Ethernet cable and put back the :term:`hatch behind
+        the head of the robot`.
+
+2.      Follow :ref:`access_webpage_nao` to discover more settings such as
+        **Language**, **Volume** and **Time zone**.
+=====  =========================================================================

@@ -1,0 +1,47 @@
+.. include:: ../bulk/common.rst
+
+.. _replacing-battery:
+
+Replacing the battery
+============================
+
+.. seealso::
+
+   :ref:`charging-battery_nao` | :ref:`Battery Hardware <robot-battery>`
+
+------------------
+
+If your battery needs to be replaced:
+
+=====  ==============================================================================================
+Step       Action
+=====  ==============================================================================================
+1.      Make sure you have a Phillips 0 screwdriver.
+
+2.      Read the :ref:`Safety<nao-safety>` guidelines.
+
+3.      Disconnect the power cable from the plug located on |roboN|'s back.
+
+        .. image:: /medias/nao/disconnect.png
+            :width: 158 px
+            :height: 160 px
+
+4.      Remove the screws of the battery cover with the Phillips 0 screwdriver
+        (2 screws on NAO V4, 4 screws on NAO V3.x).
+
+        .. image:: /medias/nao/vis_dos_v3_v4.png
+            :width: 316 px
+            :height: 140 px
+
+5.      Remove the used battery and replace it with a new one.
+
+        .. image:: /medias/nao/hardware/hardware_battery.jpg
+            :width: 250 px
+            :height: 250 px
+
+6.      Once it fits snuggly in its slot, place the cover back into position and tighten all screws.
+
+7.      Charge your new battery.
+
+        For further details, see  :ref:`charging-battery_nao`.
+=====  ==============================================================================================

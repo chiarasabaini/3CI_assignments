@@ -1,0 +1,18 @@
+.. include:: ../bulk/common.rst
+
+.. _understanding:
+
+More details about |roboN|
+===============================
+
++----------------------------------+
+| .. toctree::                     |
+|    :maxdepth: 1                  |
+|                                  |
+|    chest_button_usages           |
+|    voice_notifications           |
+|    boot_process_nao              |
+|    shutdown_process_nao          |
+|    nao_life                      |
+|    basic_channel_conversation    |
++----------------------------------+

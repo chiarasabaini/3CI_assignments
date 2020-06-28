@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Running qiBuild test suite &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="Contributing to qiBuild" href="index.html" />
+    <link rel="next" title="Writing new tests" href="writing_new_tests.html" />
+    <link rel="prev" title="qibuild: using test driven development" href="test_driven_development.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="test_driven_development.html" title="qibuild: using test driven development">previous</a>
+     |
+    <a href="index.html" title="Contributing to qiBuild" accesskey="U">up</a>
+   |
+    <a href="writing_new_tests.html" title="Writing new tests">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-contrib-running_test_suite">
+            
+  <div class="section" id="running-qibuild-test-suite">
+<span id="qibuild-test-suite"></span><h1>Running qiBuild test suite<a class="headerlink" href="#running-qibuild-test-suite" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="all-in-one-step">
+<h2>All in one step<a class="headerlink" href="#all-in-one-step" title="Permalink to this headline">¶</a></h2>
+<p>Create a virtualenv to run your tests:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">virtualenv venv</span>
+<span class="go">source venv/bin/activate</span>
+</pre></div>
+</div>
+<p>Install qibuild with the &#8220;&#8211;editable&#8221; option, so that your
+changes are reflected without the need to call <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span></tt> again</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd /path/to/qibuild</span>
+<span class="go">pip install --editable .</span>
+</pre></div>
+</div>
+<p>Install all the test dependencies:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd /path/to/qibuild</span>
+<span class="go">pip install -r requirements.txt</span>
+</pre></div>
+</div>
+<p>Finally, run <tt class="docutils literal"><span class="pre">make</span></tt>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd /path/to/qibuild/python</span>
+<span class="go">make</span>
+</pre></div>
+</div>
+<p>This will use <tt class="docutils literal"><span class="pre">pylint</span></tt> to check for obvious errors, then run the full test suite.</p>
+<p>Sometimes <tt class="docutils literal"><span class="pre">pylint</span></tt> is mistaken, you can fix this by adding a small comment
+to disable the check, using the <tt class="docutils literal"><span class="pre">pylint</span></tt> error code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># pylint: disable-msg=E1101</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-test-suite">
+<h2>Running the test suite<a class="headerlink" href="#running-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p>This is on a build farm but only for linux and python2.7, so it is possible
+that some tests will fail.</p>
+<p>If you do find a failing test, please open a bug.</p>
+<p>If you find a bug, a nice way to make it easier to fix it is to write a
+failing test and mark it as &#8216;skipped&#8217;</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@pytest.skip</span><span class="p">(</span><span class="s">&quot;See bug # ....&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_subtle_bug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="n">res</span> <span class="o">=</span> <span class="n">do_something_complicated</span><span class="p">()</span>
+   <span class="c"># Should be 42 but for some reason is 41 ...</span>
+   <span class="k">assert</span> <span class="n">res</span> <span class="o">==</span> <span class="mi">42</span>
+</pre></div>
+</div>
+<p>This way when the bug is fixed we just have to remove the <tt class="docutils literal"><span class="pre">&#64;pytest.skip</span></tt>
+and we are sure the bug never occurs again.</p>
+<div class="section" id="running-only-some-tests">
+<h3>Running only some tests<a class="headerlink" href="#running-only-some-tests" title="Permalink to this headline">¶</a></h3>
+<p>You can use <tt class="docutils literal"><span class="pre">py.test</span></tt> like this:</p>
+<ul class="simple">
+<li>Just for a given python package:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd python</span>
+<span class="go">py.test qisrc</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Just for a given test file:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">py.test qisrc/test/test_git.py</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Just for a given test name:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">py.test qisrc/test/test_git.py -k set_tracking_branch</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="note-about-debuggers">
+<h3>Note about debuggers<a class="headerlink" href="#note-about-debuggers" title="Permalink to this headline">¶</a></h3>
+<p>If you are using <tt class="docutils literal"><span class="pre">ipdb</span></tt> or <tt class="docutils literal"><span class="pre">pdb</span></tt> to insert break points in the code like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># in foo.py</span>
+<span class="k">def</span> <span class="nf">test_my_complicated_function</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">IPython.core.debugger</span> <span class="kn">import</span> <span class="n">Tracer</span><span class="p">;</span> <span class="n">debug_here</span><span class="o">=</span><span class="n">Tracer</span><span class="p">()</span>
+    <span class="n">debug_here</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will get an error message when you run <tt class="docutils literal"><span class="pre">py.test</span></tt></p>
+<p>The solution is to use the <tt class="docutils literal"><span class="pre">-s</span></tt> option of <tt class="docutils literal"><span class="pre">py.test</span></tt>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> py.test foo.py -s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="exiting-the-virtualenv-when-you-are-done">
+<h2>Exiting the virtualenv when you are done<a class="headerlink" href="#exiting-the-virtualenv-when-you-are-done" title="Permalink to this headline">¶</a></h2>
+<p>Simply type</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> deactivate
+</pre></div>
+</div>
+<p>Feel free to remove the virtualenv folder</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> rm -fr venv
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="test_driven_development.html" title="qibuild: using test driven development">qibuild: using test driven development</a>
+     |
+    <a href="index.html" title="Contributing to qiBuild" accesskey="U">Contributing to qiBuild</a>
+   |
+    <a href="writing_new_tests.html" title="Writing new tests">Writing new tests</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Contributing to qiBuild</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="reporting_bugs.html">Reporting qiBuild issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="todo.html">qibuild TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="specs/index.html">Specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmake/coding_guide.html">CMake coding guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/coding_guide.html">Python coding guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_driven_development.html">qibuild: using test driven development</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Running qiBuild test suite</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="writing_new_tests.html">Writing new tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing_documentation.html">Writing qiBuild documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../design/cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design/cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design/cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design/cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design/python/index.html">qiBuild Python framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design/index.html">qiBuild design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/index.html">qiBuild Python documentation</a></li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Running qiBuild test suite</a><ul>
+<li><a class="reference internal" href="#all-in-one-step">All in one step</a></li>
+<li><a class="reference internal" href="#running-the-test-suite">Running the test suite</a><ul>
+<li><a class="reference internal" href="#running-only-some-tests">Running only some tests</a></li>
+<li><a class="reference internal" href="#note-about-debuggers">Note about debuggers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exiting-the-virtualenv-when-you-are-done">Exiting the virtualenv when you are done</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="test_driven_development.html" title="qibuild: using test driven development">previous</a>
+     |
+    <a href="index.html" title="Contributing to qiBuild" accesskey="U">up</a>
+   |
+    <a href="writing_new_tests.html" title="Writing new tests">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+
+.. _t2-contact-sensors:
+
+T2 - Contact and tactile sensors
+=======================================
+
+
+.. seealso:: :ref:`nao-t2` | :ref:`robot-contact-sensors`
+
+--------------------
+
+
+.. image:: /medias/robots/nao_t2_tactile.png
+   :width: 168 px
+   :height: 219 px
+
+
+===== ============================== 
+Part  Location                       
+===== ============================== 
+**A** Head tactile sensor            
+
+**B** Chest button                          
+===== ============================== 
+
+
+.. include:: ../bulk/contact-sensors_head.rst
+
+.. include:: ../bulk/contact-sensors_chest-button.rst

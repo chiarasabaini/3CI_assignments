@@ -1,0 +1,164 @@
+.. include:: ../bulk/common.rst
+
+.. _create_solitary_activity_tuto:
+
+Creating a Solitary activity
+============================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+-------------
+
+This tutorial will show you how to create a **Solitary Activity** launched thanks
+to **Trigger conditions**.
+
+*Create the following solitary activity*: when the robot does not detect anyone
+for 10 seconds, he says "Is anybody there? I feel lonely, hope someone will come soon!".
+
+Step 1: Create a Behavior
+--------------------------
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Create a new Project and save it as "my_first_solitary".
+
+2.      Right click and rename "behavior_1" folder into "iamlonely".
+
+3.      Drag and drop **Audio** > **Voice** > **Animated Say** box onto the **Flow Diagram** panel.
+
+4.      Connect its input to the main input of the Behavior and its output to the main output
+        of the Behavior.
+
+5.      Double-click the **Animated Say** box and edit the **Localized Text** box content with:
+
+        .. code-block:: console
+
+          "Is anybody there? I feel lonely, hope someone will come soon!".
+=====  ================================================================================================
+
+**Test the Behavior**
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Click the |life-button| **Turn autonomous life off** button.
+
+2.      Click the |play-button| **Play** button.
+=====  ================================================================================================
+
+**Result**
+
+Your |robot| says the sentence.
+
+Step 2: Transform it into a Solitary Activity
+-----------------------------------------------
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Edit the :ref:`choregraphe-reference-project-properties`.
+
+2.      Set the **Application description**.
+
+        For example, you could write:
+
+        .. code-block:: console
+
+           This application contains the following solitary activity: when the robot
+           does not detect anyone for 10 seconds, he says
+           "Is anybody there? I feel lonely, hope someone will come soon!".
+
+3.      Copy the auto-generated **Application ID**,
+        you will need it to write the **Trigger conditions**.
+
+4.      In the **Package content**, select the Behavior "iamlonely" in order to display its properties.
+
+5.      Set:
+
+        * the **Name** with "I am lonely",
+
+        * the **Nature** with "Solitary" and
+
+        * the **Launch trigger condition** with
+
+          .. code-block:: console
+
+              (('Launchpad/PeopleNotSeen' == 1) ~ 10) && ('Launchpad/PreviousActivity' !=
+              "<my_application_id>/iamlonely")
+
+          Where <my_application_id> is the **Application ID** you have previously copied.
+
+        .. image:: /medias/desktop/choregraphe/tuto_solitary.png
+          :width: 480 px
+          :height: 402 px
+=====  ================================================================================================
+
+**Test the solitary Activity**
+
+.. |install_apps-button| image:: /medias/desktop/choregraphe/application_manager_add_current.png
+   :class: img-inline
+
+=====  ================================================================================================
+Step       Action
+=====  ================================================================================================
+1.      Save the **Project**.
+
+2.      In the **Robot Applications** panel, click the |install_apps-button| **Package and install
+        the current project to the robot** button.
+
+3.      Click the |life_off-button| **Turn autonomous life on** button.
+
+4.      Remain out of reach of your |robot| for 10 seconds.
+=====  ================================================================================================
+
+**Result**
+
+Your |robot| says the sentence only once, and will not repeat it until another Activity
+take place.
+
+
+Understanding the Trigger conditions
+-------------------------------------
+
+We want our solitary activity to be autonomously started when no person has been
+detected for 10 seconds. Thus we are using the event **Launchpad/PeopleNotSeen**
+and the trigger condition looks like this:
+
+.. code-block:: console
+
+  ('Launchpad/PeopleNotSeen' == 1) ~ 10)
+
+
+However as we do not want our application to be started continuously if there is none around
+the robot, we added another condition:
+
+.. code-block:: console
+
+  ('Launchpad/PreviousActivity' != "solitaryactivitysample/iamlonely")
+
+This Condition makes sure that the activity will be started only once in a row.
+The activity will be able to be focused again if another activity has been focused
+in the meantime.
+
+Thus the final launch trigger condition of our activity becomes:
+
++----------------------------------------+--------------------------------------------+
+| Expression part ...                    | Means ...                                  |
++========================================+============================================+
+| ('Launchpad/PeopleNotSeen' == 1) ~ 10) | no people is seen during 10 seconds,       |
++----------------------------------------+--------------------------------------------+
+| &&                                     | and                                        |
++----------------------------------------+--------------------------------------------+
+| ('Launchpad/PreviousActivity'          | the last activity was not "iamlonely",     |
+| !="<my_application_id>/iamlonely")     | i.e. another **Activity** took place       |
+|                                        | since the last loneliness complain.        |
++----------------------------------------+--------------------------------------------+
+
+To go further
+-------------
+
+To discover all events and expressions you may use as **Launch trigger condition**,
+see:
+
+* :ref:`launchtriggerconditions`.

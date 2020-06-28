@@ -1,0 +1,487 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-cartesian-api:
+
+Cartesian control API
++++++++++++++++++++++
+
+
+:ref:`naoqi-motion` - :ref:`Overview <control-cartesian>` | API |
+:ref:`Tutorial <control-cartesian-tuto>`
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/control-cartesian_toc.rst
+
+
+
+Methods
+--------
+
+
+.. _ALMotionProxy::positionInterpolation:
+
+.. cpp:function:: void ALMotionProxy::positionInterpolation(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const AL::ALValue& path,\
+      const int& axisMask,\
+      const AL::ALValue& durations,\
+      const bool& isAbsolute)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::positionInterpolations` instead.
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation over time. This is a blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param path: Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :param durations: Vector of times in seconds corresponding to the path points
+
+  :param isAbsolute: If true, the movement is absolute else relative
+
+
+
+
+.. _ALMotionProxy::positionInterpolations1:
+
+.. cpp:function:: void ALMotionProxy::positionInterpolations(\
+      const AL::ALValue& effectorNames,\
+      const AL::ALValue& frames,\
+      const AL::ALValue& paths,\
+      const AL::ALValue& axisMasks,\
+      const AL::ALValue& relativeTimes)
+
+  |nao| |roboN| only
+
+  There are two overloads of this function:
+
+  - :ref:`ALMotionProxy::positionInterpolations <ALMotionProxy::positionInterpolations1>`
+  - :ref:`ALMotionProxy::positionInterpolations <ALMotionProxy::positionInterpolations2>` with isAbsolute parameter (deprecated)
+
+  Moves end-effectors to the given positions and orientations over time. This is a blocking call.
+
+  :param effectorNames: Vector of effector names. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frames: Vector of Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param paths: Absolute Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians
+
+  :param axisMasks: Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :param relativeTimes: Vector of times in seconds corresponding to the path points
+
+  :download:`almotion_positionInterpolations.py </samples/python/almotion/almotion_positionInterpolations.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_positionInterpolations.py
+     :language: py
+
+
+
+
+
+.. _ALMotionProxy::positionInterpolations2:
+
+.. cpp:function:: void ALMotionProxy::positionInterpolations(\
+      const std::vector<std::string>& effectorNames,\
+      const int& frame,\
+      const AL::ALValue& paths,\
+      const AL::ALValue& axisMasks,\
+      const AL::ALValue& relativeTimes,\
+      const bool& isAbsolute)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::positionInterpolations` instead.
+
+  |nao| |roboN| only
+
+  Moves end-effectors to the given positions and orientations over time. This is a blocking call.
+
+  :param effectorNames: Vector of effector names. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param paths: Vector of 6D position arrays (x,y,z,wx,wy,wz) in meters and radians
+
+  :param axisMasks: Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :param relativeTimes: Vector of times in seconds corresponding to the path points
+
+  :param isAbsolute: If true, the movement is absolute else relative
+
+
+
+
+
+.. _ALMotionProxy::setPositions:
+
+.. cpp:function:: void ALMotionProxy::setPositions(\
+      const AL::ALValue& effectorNames,\
+      const AL::ALValue& frame,\
+      const AL::ALValue& position,\
+      const float& fractionMaxSpeed,\
+      const AL::ALValue& axisMask)
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation. This is a non-blocking call.
+
+  :param effectorNames: Name or names of effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: The Task frame or task frame list {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param position: Position6D array (x,y,z,wx,wy,wz) in meters and radians
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :param axisMask: The Axis Mask or Axis Mask list. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :download:`almotion_setpositions.cpp </samples/cpp/almotion/almotion_setpositions.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_setpositions.cpp
+     :language: cpp
+
+
+  :download:`almotion_setPositions.py </samples/python/almotion/almotion_setPositions.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setPositions.py
+     :language: py
+
+
+
+
+
+.. _ALMotionProxy::setPosition:
+
+.. cpp:function:: void ALMotionProxy::setPosition(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const std::vector<float>& position,\
+      const float& fractionMaxSpeed,\
+      const int& axisMask)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::setPositions` instead.
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation. This is a non-blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param position: 6D position array (x,y,z,wx,wy,wz) in meters and radians
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+
+
+
+
+.. _ALMotionProxy::changePosition:
+
+.. cpp:function:: void ALMotionProxy::changePosition(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const std::vector<float>& positionChange,\
+      const float& fractionMaxSpeed,\
+      const int& axisMask)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::setPositions` instead.
+
+  |nao| |roboN| only
+
+  Creates a move of an end effector in Cartesian frame. This is a non-blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param positionChange: 6D position change array (xd, yd, zd, wxd, wyd, wzd) in meters and radians
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+
+
+
+
+.. _ALMotionProxy::getPosition:
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getPosition(\
+      const std::string& name,\
+      const int& frame,\
+      const bool& useSensorValues)
+
+  Gets a Position relative to the FRAME. Axis definition: the x axis is positive
+  toward the robot's front, the y from right to left and the z is vertical.
+  The angle convention of Position6D is Rot_z(wz).Rot_y(wy).Rot_x(wx).
+
+  :param name: Name of the item. Could be: any joint or chain or sensor (Use :cpp:func:`ALMotionProxy::getSensorNames` for the list of sensors supported on your robot)
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param useSensorValues: If true, the sensor values will be used to determine the position.
+
+  :return: Vector containing the Position6D using meters and radians (x, y, z, wx, wy, wz)
+
+  :download:`almotion_getposition.cpp </samples/cpp/almotion/almotion_getposition.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getposition.cpp
+     :language: cpp
+
+
+  :download:`almotion_getPosition.py </samples/python/almotion/almotion_getPosition.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getPosition.py
+     :language: py
+
+
+
+
+
+.. _ALMotionProxy::transformInterpolation:
+
+.. cpp:function:: void ALMotionProxy::transformInterpolation(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const AL::ALValue& path,\
+      const int& axisMask,\
+      const AL::ALValue& duration,\
+      const bool& isAbsolute)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::transformInterpolations` instead.
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation over time using homogeneous transforms to describe the positions or changes. This is a blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param path: Vector of Transform arrays
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :param duration: Vector of times in seconds corresponding to the path points
+
+  :param isAbsolute: If true, the movement is absolute else relative
+
+
+
+
+.. _ALMotionProxy::transformInterpolations1:
+
+.. cpp:function:: void ALMotionProxy::transformInterpolations(\
+      const AL::ALValue& effectorNames,\
+      const AL::ALValue& frames,\
+      const AL::ALValue& paths,\
+      const AL::ALValue& axisMasks,\
+      const AL::ALValue& relativeTimes)
+
+  |nao| |roboN| only
+
+  There are two overloads of this function:
+
+  - :ref:`ALMotionProxy::transformInterpolations <ALMotionProxy::transformInterpolations1>`
+  - :ref:`ALMotionProxy::transformInterpolations <ALMotionProxy::transformInterpolations2>` with isAbsolute parameter (deprecated)
+
+  Moves end-effector to the given transforms over time. This is a blocking call.
+
+  :param effectorNames: Vector of effector names. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frames: Vector of Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param paths: Absolute vector of transforms arrays.
+
+  :param axisMasks: Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :param relativeTimes: Vector of times in seconds corresponding to the path points
+
+
+  :download:`almotion_transformInterpolations.py </samples/python/almotion/almotion_transformInterpolations.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_transformInterpolations.py
+     :language: py
+
+
+
+.. _ALMotionProxy::transformInterpolations2:
+
+.. cpp:function:: void ALMotionProxy::transformInterpolations(\
+      const std::vector<std::string>& effectorNames,\
+      const int& frame,\
+      const AL::ALValue& paths,\
+      const AL::ALValue& axisMasks,\
+      const AL::ALValue& relativeTimes,\
+      const bool& isAbsolute)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::transformInterpolations` instead.
+
+  |nao| |roboN| only
+
+  Moves end-effector to the given transforms over time. This is a blocking call.
+
+  :param effectorNames: Vector of effector names. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param paths: Vector of transforms arrays.
+
+  :param axisMasks: Vector of Axis Masks. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :param relativeTimes: Vector of times in seconds corresponding to the path points
+
+  :param isAbsolute: If true, the movement is absolute else relative
+
+
+
+
+
+
+.. _ALMotionProxy::setTransforms:
+
+.. cpp:function:: void ALMotionProxy::setTransforms(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const std::vector<float>& transform,\
+      const float& fractionMaxSpeed,\
+      const int& axisMask)
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation transform. This is a non-blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param transform: Transform arrays
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+  :download:`almotion_settransforms.cpp </samples/cpp/almotion/almotion_settransforms.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_settransforms.cpp
+     :language: cpp
+
+
+  :download:`almotion_setTransforms.py </samples/python/almotion/almotion_setTransforms.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setTransforms.py
+     :language: py
+
+
+
+
+.. _ALMotionProxy::setTransform:
+
+.. cpp:function:: void ALMotionProxy::setTransform(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const std::vector<float>& transform,\
+      const float& fractionMaxSpeed,\
+      const int& axisMask)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::setTransforms` instead.
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation transform. This is a non-blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param transform: Transform arrays
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+
+
+
+.. _ALMotionProxy::changeTransform:
+
+.. cpp:function:: void ALMotionProxy::changeTransform(\
+      const std::string& effectorName,\
+      const int& frame,\
+      const std::vector<float>& transform,\
+      const float& fractionMaxSpeed,\
+      const int& axisMask)
+
+  .. deprecated:: 1.16
+    use :cpp:func:`ALMotionProxy::setTransforms` instead.
+
+  |nao| |roboN| only
+
+  Moves an end-effector to the given position and orientation transform. This is a non-blocking call.
+
+  :param effectorName: Name of the effector. Could be: "Torso" or chain name. Use :cpp:func:`ALMotionProxy::getBodyNames` for the list of chain supported on your robot.
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param transform: Transform arrays
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :param axisMask: Axis mask. True for axes that you wish to control. e.g. 7 for position only, 56 for rotation only and 63 for both
+
+
+
+
+
+.. _ALMotionProxy::getTransform:
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getTransform(\
+      const std::string& name,\
+      const int& frame,\
+      const bool& useSensorValues)
+
+  Gets an Homogeneous Transform relative to the FRAME. Axis definition:
+  the x axis is positive toward the robot's front, the y from right to left and the z is vertical.
+
+  :param name: Name of the item. Could be: any joint or chain or sensor (Use :cpp:func:`ALMotionProxy::getSensorNames` for the list of sensors supported on your robot).
+
+  :param frame: Task frame {FRAME_TORSO = 0, FRAME_WORLD = 1, FRAME_ROBOT = 2}.
+
+  :param useSensorValues: If true, the sensor values will be used to determine the position.
+
+  :return: Vector of 16 floats corresponding to the values of the matrix, line by line.
+
+  :download:`almotion_gettransform.cpp </samples/cpp/almotion/almotion_gettransform.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_gettransform.cpp
+     :language: cpp
+
+
+  :download:`almotion_getTransform.py </samples/python/almotion/almotion_getTransform.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getTransform.py
+     :language: py

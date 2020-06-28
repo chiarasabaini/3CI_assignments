@@ -1,0 +1,85 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo:
+
+|roboR|
+========
+
+.. comment:
+
+  **Energy**
+
+  .. toctree::
+     :maxdepth: 1
+
+     battery_romeo
+     power_entry_romeo
+
+  **Sensors**
+
+  .. toctree::
+     :maxdepth: 1
+
+     fsr_romeo
+     inertial_romeo
+
+     mre_romeo
+     contact-sensors_romeo
+
+
++-----------------------------------------------------+
+| Technical specifications                            |
++=========================+===========================+
+| **Construction**        | **CPU**                   |
+|                         |                           |
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|    dimensions_romeo     |    motherboard_romeo      |
+|                         |                           |
+|                         |                           |
++-------------------------+---------------------------+
+| **Interaction**         | **Connectivity**          |
+|                         |                           |
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|    loudspeaker_romeo    |    connectivity_romeo     |
+|    microphone_romeo     |                           |
+|    video_romeo          |                           |
+|    video_3D_romeo       |                           |
+|    leds_romeo           |                           |
+|                         |                           |
+|                         |                           |
++-------------------------+---------------------------+
+
+.. comment:
+
+  **Optional devices**
+
+  .. toctree::
+     :maxdepth: 1
+
+     languages
+
+
++-----------------------------------------------------+
+| Kinematics data                                     |
++=========================+===========================+
+| .. toctree::            | .. toctree::              |
+|    :maxdepth: 1         |    :maxdepth: 1           |
+|                         |                           |
+|                         |    bodyparts_romeo        |
+|    links_romeo          |                           |
+|    joints_romeo         |                           |
+|    masses_romeo         |                           |
+|    motors_romeo         |                           |
+|                         |                           |
++-------------------------+---------------------------+
+
+.. comment:
+
+  wake_rest_romeo
+  postures_romeo
+
+

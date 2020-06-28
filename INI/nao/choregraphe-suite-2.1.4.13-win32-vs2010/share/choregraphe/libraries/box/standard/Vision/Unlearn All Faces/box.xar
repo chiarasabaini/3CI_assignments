@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Remove all faces from the face database.&#x0A;&#x0A;V1.1.0&#x0A;" x="187" y="440">
+        <bitmap>media/images/box/interaction/unlearn_all_faces.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        try :
+            self.faceDetectionModule = ALProxy( "ALFaceDetection" )
+        except Exception as e:
+            self.faceDetectionModule = None
+            self.logger.error(e)
+
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onClearDB(self):
+        if( self.bIsRunning ):
+            return
+        self.bIsRunning = True
+        if self.faceDetectionModule:
+            if( self.faceDetectionModule.clearDatabase() ):
+                self.onSuccess()
+            else:
+                self.onFailure()
+        self.bIsRunning = False]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onClearDB" type="1" type_size="1" nature="2" inner="0" tooltip="Remove all faces from the database.&#x0A;&#x0A;!!Warning!! If the operation success, the robot will not be able to recognize the faces you&#x0A;have already taught him." id="2" />
+        <Output name="onSuccess" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent if the clearing succeeded." id="3" />
+        <Output name="onFailure" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent if the clearing failed." id="4" />
+    </Box>
+</ChoregrapheBox>

@@ -1,0 +1,62 @@
+.. _altouch:
+
+ALTouch
+=========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    altouch-api
+
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <altouch-api>`
+
+------------
+
+.. seealso::
+
+   - :ref:`Contact Sensors Hardware <robot-contact-sensors>`
+
+
+What it does
+------------
+
+The **ALTouch** module generates the event :naoqi:event:`TouchChanged` whenever
+the robot is touched.
+
+The event :naoqi:event:`TouchChanged` gives you a list of AL::ALValue with a body part
+and a boolean for the touch status.
+
+For example:
+
+- [["Head/Touch/Middle", ``True``], ["ChestBoard/Button", ``True``]]
+- [["Head/Touch/Middle", ``False``]]
+- [["LArm", ``True``], ["RHand", ``False``]]
+
+How it works
+------------
+
+The aim of these sensors is to determine whether the robot is touched.
+It's a bistable behavior, an event is raised when for example the head is touched with the value
+``True`` then an other one when the head is not touch anymore with the value ``False``.
+
+For the button [tactile, bumper, chest ...], the value is read in the ALMemory and if the status
+changed, an event is raised. For body parts that do not have capacitive sensors, touch is detected
+by a difference between joint angle commands and sensor.
+
+.. image:: /medias/naoqi/touched.png
+   :width: 464 px
+   :height: 310 px
+
+
+Making a Python module - Reacting to Touch
+==========================================
+
+The example below is a NAOqi Python module that reacts to touch events.
+
+:download:`sensors_touch.py </examples/python/sensors/sensors_touch.py>`
+
+.. literalinclude:: /examples/python/sensors/sensors_touch.py
+   :language: py
+

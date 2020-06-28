@@ -1,0 +1,63 @@
+.. _nao-t14:
+
+NAO T14
+============
+
++-----------------------------------------------------------+
+| Technical specifications                                  |
++============================+==============================+
+| **Construction**           | **CPU**                      |
+|                            |                              |
+| .. toctree::               | * :ref:`robot-motherboard`   |
+|    :maxdepth: 1            |                              |
+|                            |                              |
+|    dimensions_t14          |                              |
++----------------------------+------------------------------+
+| **Energy**                 | **Connectivity**             |
+|                            |                              |
+| * :ref:`robot-battery`     | * :ref:`connectivity-nao`    |
+|                            |                              |
++----------------------------+------------------------------+
+| **CPU**                    | **Energy**                   |
+|                            |                              |
+| * :ref:`robot-motherboard` | * :ref:`robot-battery`       |
+|                            |                              |
++----------------------------+------------------------------+
+| **Interaction**            | **Sensors**                  |
+|                            |                              |
+| * :ref:`robot-loudspeaker` |                              |
+| * :ref:`robot-microphone`  |                              |
+| * :ref:`robot_video`       | * :ref:`robot-inertial`      |
+| * :ref:`robot-infrared`    | * :ref:`robot-sonar`         |
+|                            |                              |
+| .. toctree::               | .. toctree::                 |
+|    :maxdepth: 1            |    :maxdepth: 1              |
+|                            |                              |
+|                            |    mre_t14                   |
+|    leds_t14                |    contact-sensors_t14       |
+|                            |                              |
++----------------------------+------------------------------+
+
+**Optional devices**
+
+* :ref:`language_codes`
+
+
++-----------------------------------------------------+
+| Kinematics data                                     |
++=========================+===========================+
+| .. toctree::            |                           |
+|    :maxdepth: 1         |                           |
+|                         |                           |
+|                         | * :ref:`effector_chain`   |
+|    links_t14            |                           |
+|    joints_t14           |                           |
+|    masses_t14           |                           |
+|    motors_t14           |                           |
+|                         |                           |
++-------------------------+---------------------------+
+
+
+.. include:: ../bulk/overview_nao_t14.rst
+
+

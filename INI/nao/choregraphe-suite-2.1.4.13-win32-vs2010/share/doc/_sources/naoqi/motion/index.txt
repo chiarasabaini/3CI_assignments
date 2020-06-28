@@ -1,0 +1,88 @@
+.. include:: ../../bulk/common.rst
+
+.. _naoqi-motion:
+
+NAOqi Motion
+============
+
+.. toctree::
+    :hidden:
+
+    autonomousmoves
+    alrobotposture
+    alnavigation
+    alrecharge
+    almotion
+    almotionrecorder
+
+------------
+
+.. seealso:: |nao| :ref:`nao_kinamtics`.
+
+.. and |juju| :ref:`juju_kinamtics`.
+
+
+
+Autonomous Movements
+--------------------
+
++----------------------------------+----------------------------------------------------------------+
+| Use ...                          | To ...                                                         |
++==================================+================================================================+
+| :ref:`autonomousmoves`           | Manage the autonomous movements.                               |
++----------------------------------+----------------------------------------------------------------+
+
+
+Getting a body posture
+----------------------
+
++----------------------------------+----------------------------------------------------------------+
+| Use ...                          | To ...                                                         |
++==================================+================================================================+
+| :ref:`alrobotposture`            | Make the robot go to a predefined posture.                     |
++----------------------------------+----------------------------------------------------------------+
+
+Moving around
+--------------
+
++----------------------------------+----------------------------------------------------------------+
+| Use ...                          | To ...                                                         |
++==================================+================================================================+
+| :ref:`alnavigation`              | Make the robot move safely, stopping if any obstacle is        |
+|                                  | detected.                                                      |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`alrecharge`                | Make the robot move to its charging station.                   |
++----------------------------------+----------------------------------------------------------------+
+
+Customizing motion
+-------------------
+
+:ref:`almotion` is the main tool allowing the robot to move.
+Advanced developers and animators may take advantage of its numerous methods in order to
+develop their own motion code.
+
+For a best understanding, its documentation has been split in several relevant topics:
+
++------------+---------------------------------------------------------------------------+
+| Control    | :ref:`Stiffness <control-stiffness>`, :ref:`Joint <control-joint>`,       |
+|            | :ref:`Locomotion <control-walk>`, :ref:`Cartesian <control-cartesian>`,   |
+|            | :ref:`Whole body <control-wholebody>`.                                    |
++------------+---------------------------------------------------------------------------+
+| Reflexes   | :ref:`reflexes-collision-avoidance`, :ref:`reflexes-external-collision`,  |
+|            | :ref:`reflexes-fall-manager`, :ref:`reflexes-smart-stiffness`,            |
+|            | :ref:`reflexes-diagnosis`, :ref:`push_recovery`.                          |
++------------+---------------------------------------------------------------------------+
+| Idle       | :ref:`idle`.                                                              |
++------------+---------------------------------------------------------------------------+
+| Tools      | :ref:`tools-general`, :ref:`tools-motion-task`.                           |
++------------+---------------------------------------------------------------------------+
+
+
+Deprecated modules
+-------------------
+
++----------------------------------------------------------------------------------------+
+| Deprecated modules                                                                     |
++================================+=======================================================+
+| :ref:`almotionrecorder`        | Use the :ref:`animation_mode` instead.                |
++--------------------------------+-------------------------------------------------------+

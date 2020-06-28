@@ -1,0 +1,89 @@
+.. _alsounddetection-api:
+
+ALSoundDetection API
+====================
+
+:ref:`naoqi-audio` - :ref:`Overview <alsounddetection>` | API
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alsounddetectionproxy.h>
+
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALSoundDetectionProxy
+
+* :cpp:func:`ALSoundDetection::setParameter`
+* :cpp:func:`ALSoundDetection::subscribe`
+* :cpp:func:`ALSoundDetection::unsubscribe`
+
+
+Event list
+----------
+
+* :naoqi:event:`SoundDetected`
+
+
+Methods
+-------
+
+
+.. cpp:function:: void ALSoundDetection::setParameter(const std::string& parameter, const float& value)
+
+  Use it to set the sensitivity of the detection.
+
+
+  :param parameter: Name of the parameter
+  :param value: Value of the parameter
+
+  Available parameters:
+
+  - "Sensibility": DEPRECATED, use "Sensitivity" instead.
+
+  - "Sensitivity" between 0 and 1 to adjust the detection threshold. At 0, the
+    robot does not detect any sound. At 1, it reacts to the slightest sound.
+
+  So the sensitivity of the detection can be set by calling this function as
+  follows:
+
+  .. literalinclude:: /samples/python/alsounddetection/alsounddetection_setparameter.py
+    :language: py
+
+
+
+.. cpp:function:: void ALSoundDetection::subscribe(const std::string& name)
+
+  Subscribes to *ALSoundDetection*.
+  This causes the module to start writing information to *ALMemory* in *"SoundDetected"*.
+  This can be accessed in *ALMemory* using :cpp:func:`ALMemoryProxy::getData`.
+
+  :param name: Name to identify the subscriber
+
+
+
+.. cpp:function:: void ALSoundDetection::unsubscribe(const std::string& name)
+
+  Unsubscribes to *ALSoundDetection*.
+  This causes the module to stop writing information to *ALMemory* in *"SoundDetected"*.
+
+  :param name: Name to identify the subscriber (as used in :cpp:func:`ALSoundDetection::subscribe`).
+
+
+Events
+------
+
+.. naoqi:event:: SoundDetected(AL::ALValue value)
+
+  Raised when a significant sound has been detected.
+
+  :param value: Detected sound informations. Please refer to :ref:`alsounddetection` for details.

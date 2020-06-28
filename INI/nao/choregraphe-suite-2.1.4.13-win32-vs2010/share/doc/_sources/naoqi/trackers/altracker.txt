@@ -1,0 +1,209 @@
+.. include:: ../../bulk/common.rst
+
+.. _altracker:
+
+ALTracker
+=========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    altracker-api
+    trackers-sample
+
+:ref:`naoqi-trackers` - Overview | :ref:`API <altracker-api>` |  :ref:`trackers-sample`
+
+--------
+
+
+What it does
+------------
+
+**ALTracker** module allows the robot to track different targets (red ball,
+face, landmark, etc) using different means (head only, whole body, move, etc).
+
+The main goal of this module is to establish a bridge between target detection
+and motion in order to make the robot keep in view the target in the middle of the camera.
+
+
+How it works
+------------
+
+.. _tracking_modes:
+
+Tracking modes
+++++++++++++++
+
+**ALTracker** can track target with the following modes:
+
+
+|nao| |roboN| & |juju| |roboJ|
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++----------------+----------------------------------+------------------------------------------------+
+| Mode           | The robot will track ...         | Comment                                        |
++================+==================================+================================================+
+| **Head**       | with the Head only               | The two head's joint are                       |
+|                | (this is the default mode)       | controlled to track the target.                |
++----------------+----------------------------------+------------------------------------------------+
+| **WholeBody**  | with whole body and fixed legs   | The robot keeps balance autonomously and       |
+|                |                                  | adapts his posture to track the target.        |
++----------------+----------------------------------+------------------------------------------------+
+| **Move**       | with move                        | The robot moves in order to keep a             |
+|                |                                  | defined distance to the target.                |
++----------------+----------------------------------+------------------------------------------------+
+
+|juju| |roboJ| *only*
+^^^^^^^^^^^^^^^^^^^^^^
+
++----------------+----------------------------------+------------------------------------------------+
+| Mode           | The robot will track ...         | Comment                                        |
++================+==================================+================================================+
+| **Navigate**   | with move and obstacle avoidance | The robot moves in order to keep a             |
+|                |                                  | defined distance to the target.                |
+|                |                                  |                                                |
+|                |                                  | This mode uses                                 |
+|                |                                  | :cpp:func:`ALNavigationProxy::navigateTo`      |
+|                |                                  | function.                                      |
++----------------+----------------------------------+------------------------------------------------+
+
+.. _tracking_targets:
+
+Target names
+++++++++++++
+
+**ALTracker** can follow these targets:
+
++---------------+-----------------------------------+------------------------------------------------+
+|  Target       | Parameters                        | Comment                                        |
++===============+===================================+================================================+
+| **RedBall**   | diameter of ball (meter)          | Used to compute the distance between           |
+|               |                                   | robot and ball.                                |
++---------------+-----------------------------------+------------------------------------------------+
+| **Face**      | width of face (meter)             | Used to compute the distance between           |
+|               |                                   | robot and face.                                |
++---------------+-----------------------------------+------------------------------------------------+
+| **LandMark**  | [size, [LandMarkId, ...]]         | size is used to compute the distance           |
+|               |                                   | between robot and LandMark. LandMarkId to      |
+|               |                                   | specify the LandMark to track.                 |
++---------------+-----------------------------------+------------------------------------------------+
+| **LandMarks** | [[size, [LandMarkId, ...]],       | Same parameters as **LandMark**.               |
+|               | [size, [LandMarkId, ...]]]        | One array by LandMark.                         |
++---------------+-----------------------------------+------------------------------------------------+
+| **People**    | [peopleId, ...]                   | Used to track a specific people.               |
++---------------+-----------------------------------+------------------------------------------------+
+| **Sound**     | [distance, confidence]            | distance is used to estimate sound position    |
+|               |                                   | and confidence to filter sound location.       |
++---------------+-----------------------------------+------------------------------------------------+
+
+
+Position identification
++++++++++++++++++++++++
+
+.. image:: /medias/nao/tracker_red_ball.png
+
+- The Tracker module identifies the position of the target seen by the robot.
+
+- It can give the position of the target in desired frame
+  (see :ref:`motion-effectors-space`).
+
+- Function :cpp:func:`ALTrackerProxy::getTargetPosition` returns the [x, y, z]
+  position of active target.
+
+Performance and Limitations
+----------------------------
+
+**Limitations**
+
+This is done assuming an average target size, so it might not be very accurate.
+
+
+Prerequisites
+--------------
+
+.. _ready_to_move_robot:
+
+A robot ready to move
++++++++++++++++++++++
+
+According to the chosen **Mode**, the **Stiffness** of the used body
+parts must be set to 1.0, or they couldn't move.
+
+Moreover, for **Move** and **WholeBody** modes, the robot must
+be in a standing :term:`posture`, ready to move.
+
++-------------------+------------------------------------+
+| Mode              | Prerequisite                       |
++===================+====================================+
+| **Head**          | * Head Stiffness                   |
++-------------------+------------------------------------+
+| **WholeBody**     | * Whole body Stiffness             |
++-------------------+                                    |
+| **Move**          | * The robot must be in a standing  |
+|                   |   :term:`posture`.                 |
++-------------------+------------------------------------+
+
+To set the Stiffness, use motion api
+:cpp:func:`ALMotionProxy::stiffnessInterpolation`.
+
+To easily go to a :term:`predefined postures`, see:
+:cpp:func:`ALRobotPostureProxy::goToPosture`.
+
+
+.. _targets_extractors:
+
+Modules to launch
++++++++++++++++++
+
+According to the chosen **Target**, **ALTracker** needs a specific module to run.
+
+So be sure it is loaded on your robot:
+
++------------------------------+----------------------------------+
+| To follow the Target ...     |  Launch the module ...           |
++==============================+==================================+
+| RedBall                      | :ref:`alredballdetection`        |
++------------------------------+----------------------------------+
+| Face                         | :ref:`alfacedetection`           |
++------------------------------+----------------------------------+
+| LandMark                     | :ref:`allandmarkdetection`       |
++------------------------------+----------------------------------+
+| LandMarks                    | :ref:`allandmarkdetection`       |
++------------------------------+----------------------------------+
+| People                       | :ref:`alpeopleperception`        |
++------------------------------+----------------------------------+
+| Sound                        | :ref:`alsoundlocalization`       |
++------------------------------+----------------------------------+
+
+
+Getting started
+---------------
+
+Choregraphe
+++++++++++++
+
+1. Choose one of the boxes available in **Trackers** folder of the standard
+   box Library.
+
+2. Set the parameters.
+
+3. Make sure your robot is ready to move.
+   For further details, see: :ref:`ready_to_move_robot`.
+
+4. Run the behavior.
+
+
+Use Cases
+---------
+
+Here are some possible applications (from the simplest to the more ambitious ones)
+that can be built from Robot's ability to track a target.
+
+**Case 1: Move toward a red ball:** :ref:`trackers-sample-redball`
+
+**Case 2: Tracking a person with head:** :ref:`trackers-sample-face`
+
+**Case 3: Tracking the red ball with head and LArm:** :ref:`trackers-sample-larm`
+
+**Case 4: Tracking a Blob with generic event:** :ref:`trackers-sample-blob`

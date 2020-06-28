@@ -1,0 +1,34 @@
+.. _vision-release-notes:
+
+ALVision Changes
+=================
+
+New methods
+-----------
+
+These methods correspond to newly developped features.
+
++----------------------------------------------------------+-------------------------------------------------+
+| Method                                                   | Aim                                             |
++==========================================================+=================================================+
+| :cpp:func:`ALVideoDeviceProxy::unsubscribe`              | Up to 8 instances of a module can be subscribed |
+|                                                          | to ALVideoDevice => unsubscribe all of them     |
++----------------------------------------------------------+-------------------------------------------------+
+| :cpp:func:`ALFaceDetectionProxy::forgetPerson`           | Delete a person from the database               |
++----------------------------------------------------------+-------------------------------------------------+
+| :cpp:func:`ALVisionRecognitionProxy::changeDatabase`     | Allows to swtich between different databases    |
++----------------------------------------------------------+-------------------------------------------------+
+
+
+Deprecated methods
+------------------
+
+These methods are deprecated.
+
++---------------------------------------------+-------------------------------------------------+
+| Method                                      | Replacement                                     |
++=============================================+=================================================+
+| ``ALVisionRecognitionProxy::load``          | None                                            |
++---------------------------------------------+-------------------------------------------------+
+
+

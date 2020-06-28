@@ -1,0 +1,42 @@
+.. include:: ../../bulk/common.rst
+
+.. _alwavingdetection:
+
+ALWavingDetection
+=================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alwavingdetection-api
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <alwavingdetection-api>`
+
+------------
+
+|3d| This module requires a robot with a 3D sensor.
+
+
+What it does
+------------
+
+**ALWavingDetection** allows you to detect if a person is moving his/her arms
+in order to catch the robot's attention (for example waving at the robot).
+
+
+How it works
+------------
+
+After detecting the people around the robot with the module **ALPeoplePerception**, it is possible to
+detect the movement of each of the people. Then by comparing the positions of these movements with respect
+to the body of the person, we can find which parts of the body are moving. Using some filtering algorithms,
+only meaningful movements are kept. For example, a person is considered as waving to the robot only if
+he/she is looking at the robot and if his whole body is not moving.
+
+It is possible to filter the detected wavings depending on
+the size and the distance of the movement, using the parameters MinSize and MaxDistance. If a waving
+has a size smaller than MinSize or at a distance bigger than MaxDistance, it will not be detected.
+The theshold values for these two parameters can be changed with the functions
+:cpp:func:`ALWavingDetectionProxy::setMinSize` and
+:cpp:func:`ALWavingDetectionProxy::setMaxDistance`.

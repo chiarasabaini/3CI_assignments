@@ -1,0 +1,116 @@
+.. include:: ../bulk/common.rst
+
+.. _contacting_support_nao:
+
+Contacting customer support for |roboN|
+========================================
+
+To contact |support|:
+
+=====  ============================================================================================================
+Step       Action
+=====  ============================================================================================================
+1.      Submit your request using this on-line form:
+
+        |support_link|
+
+2.      Be as specific as you can, and at least, provide the **Serial number** of your robot.
+
+        See below some tips in order to collect all required information.
+=====  ============================================================================================================
+
+How to find the Serial number of your robot
+--------------------------------------------
+
+It should begin with "ALDR" followed by numbers.
+
+Here are four ways to find it:
+
+=====  =================================================================  ========================================================
+Ways    Description                                                        Comment
+=====  =================================================================  ========================================================
+**A**   It is written on the invoice of your robot.                        If you have several robots, you may not use this way
+                                                                           as you may have put all the invoices together.
+
+**B**   It is written on the box containing your robot.                    If you have several robots, you may not use
+                                                                           this way as you may have mixed the boxes.
+
+**C**   You can find it on a silver sticker on the robot,                  Choose this method if your robot is turned off
+        behind the battery.                                                and unplugged.
+
+        To see it, remove the four screws holding the
+        battery cover with a Phillips PH0 screwdriver,
+        and remove the battery.
+
+**D**   It is also stored in the robot's **BodyId** key of                 Choose this method if your robot is still turned on
+        **ALMemory**.                                                      and connected to the network.
+
+        For further details, see: :ref:`retrieve_almemory`.
+=====  =================================================================  ========================================================
+
+.. _retrieve_almemory:
+
+How to search for an ALMemory key value
+--------------------------------------------
+
+=====  ============================================================================================================
+Step       Action
+=====  ============================================================================================================
+1.      Access to the :ref:`opennao-web-page`.
+
+2.      Choose **Advanced** > **Memory** menu.
+
+3.      In the search box, type the name of the key you look for.
+
+        For example, "BodyId" or “HeadId”.
+
+4.      Click the **Search** button.
+
+        The requested key and its value are displayed.
+
+        .. image:: /medias/nao/webpage_memorykey.png
+            :width: 415 px
+            :height: 145 px
+=====  ============================================================================================================
+
+.. _send_crash_report:
+
+How to retrieve an issue report
+----------------------------------
+
+Sending the issue report could be useful when **NAOqi** has an issue.
+
+It can be done:
+
+* automatically, by enabling the **Issue reporting** option in **NAO Web page**
+  :ref:`opennao-web-page-settings`, or
+* manually, if required by Technical support.
+
+To manually retrieve a issue report:
+
+=====  ============================================================================================================
+Step       Action
+=====  ============================================================================================================
+1.      Start a **SFTP** client on the PC side.
+
+        We recommend `Filezilla <http://filezilla-project.org/download.php>`_.
+
+2.      Fill in the different fields:
+
+        * Host: your "BonjourName.local" or your IP address
+        * Username: "nao" by default.
+        * Password: with your nao password, ("nao" by default).
+        * Port: **22**.
+
+        .. image:: /medias/getting_started/sftp_access.png
+           :width: 636 px
+           :height: 451 px
+
+3.      Search the last .dmp file in the directory:
+
+        `/var/lib/minidump/`
+
+4.      Download it in a temporary folder of your computer.
+
+5.      You can then send it to our support team.
+=====  ============================================================================================================

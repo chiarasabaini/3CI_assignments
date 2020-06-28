@@ -1,0 +1,63 @@
+.. _alsonar-api:
+
+ALSonar API
+===========
+
+:ref:`naoqi-sensors` - :ref:`Overview <alsonar>` | API
+
+------------
+
+.. seealso::
+
+   - :ref:`Sonars Hardware <robot-sonar>`
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alsonarproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+
+It also inherits methods from :ref:`alextractor-api`.
+
+Note that only the :cpp:func:`ALExtractor::subscribe` and :cpp:func:`ALExtractor::unsubscribe` methods are useful for **ALSonar**.
+
+Event list
+----------
+
+* :naoqi:event:`SonarLeftDetected`
+* :naoqi:event:`SonarRightDetected`
+* :naoqi:event:`SonarLeftNothingDetected`
+* :naoqi:event:`SonarRightNothingDetected`
+
+Events
+------
+
+.. naoqi:event:: SonarLeftDetected(float distance)
+
+  Raised when there is something in front of the robot (left side) at less the detection threshold.
+
+  :param dist: the obstacle distance in meters
+
+
+.. naoqi:event:: SonarRightDetected(float distance)
+
+  Raised when there is something in front of  the robot (right side) at less the detection threshold.
+
+  :param dist: the obstacle distance in meters
+
+
+.. naoqi:event:: SonarLeftNothingDetected(float distance)
+
+  :param distance: the distance in meter, of the first obstacle out of the detection threshold.
+
+
+.. naoqi:event:: SonarRightNothingDetected(float distance)
+
+  Raised when there is nothing, within the detection threshold, in front nor on the right side of the robot.
+
+  :param distance: the distance in meter, of the first obstacle out of the detection threshold.

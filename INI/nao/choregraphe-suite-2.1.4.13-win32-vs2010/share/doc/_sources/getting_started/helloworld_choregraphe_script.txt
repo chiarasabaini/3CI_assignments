@@ -1,0 +1,185 @@
+.. _helloworld_choregraphe_script:
+
+Hello World 2 - using Python in Choregraphe
+============================================
+
+Audience
+----------
+
++-------+-------------------------------------+----------------+-------------------+
+| Level |**All beginners**                    | Time           | **5 min**         |
++-------+-------------------------------------+----------------+-------------------+
+| OS    |**Linux** - **Windows** - **Mac**    | Preparation    | **15 min**        |
++-------+-------------------------------------+----------------+-------------------+
+
+*Preparation time is given for the case you have to install tools prior the tutorial.*
+
+Before starting
+----------------
+
+* Make sure you have a robot ready to use.
+  Otherwise, read :ref:`out_of_the_box_nao`.
+
+.. or :ref:`out_of_the_box_juliette`.
+
+* | Make sure **Choregraphe** is installed on your computer.
+  | If it is not the case, see :ref:`desktop-installation-cho-installing`.
+
+Let's do it
+------------
+
+=====  ===============================================================================================
+Step       Action
+=====  ===============================================================================================
+1.      Start **Choregraphe**.
+
+2.      Click the **Connect to** button and connect **Choregraphe** to your robot.
+
+        .. image:: /medias/getting_started/helloworld_cho_00.png
+           :width: 533 px
+           :height: 390 px
+
+        For further details, see :ref:`choregraphe-howto-connect`.
+
+        Your robot appears in the **Robot view**.
+
+3.      Right click the grey area and choose **Create a new Box** > **Python...** in the contextual
+        menu.
+
+        .. image:: /medias/getting_started/helloworld_cho_py_00.png
+           :width: 596 px
+           :height: 428 px
+
+4.      Type a name, for example: *My hello world*, and click the **OK** button.
+
+        .. image:: /medias/getting_started/helloworld_cho_py_01.png
+           :width: 238 px
+           :height: 407 px
+
+5.      Double click the box.
+
+        The **Script editor** appears.
+
+        .. image:: /medias/getting_started/helloworld_cho_py_02.png
+           :width: 339 px
+           :height: 292 px
+
+6.      Add the 2 following lines:
+
+        After:
+
+        .. code-block:: python
+
+            def __init__(self):
+               GeneratedClass.__init__(self)
+
+        Add:
+
+        .. code-block:: python
+
+               self.tts = ALProxy('ALTextToSpeech')
+
+        After:
+
+        .. code-block:: python
+
+           def onInput_onStart(self):
+               #~ self.onStopped() #~ activate output of the box
+
+        Add:
+
+        .. code-block:: python
+
+               self.tts.say("Hello young Padawan")
+
+
+        The **Script** should look like this.
+
+        .. image:: /medias/getting_started/helloworld_cho_py_03.png
+           :width: 345 px
+           :height: 306 px
+
+7.      Click the **Play** button.
+
+        .. image:: /medias/getting_started/helloworld_cho_py_04.png
+           :width: 594 px
+           :height: 434 px
+
+8.      Double click the **onStart** input of your box.
+
+        .. image:: /medias/getting_started/helloworld_cho_py_05.png
+           :width: 595 px
+           :height: 427 px
+
+=====  ===============================================================================================
+
+Result
+---------
+
+Your robot says "Hello, young Padawan". In the meantime, the **Robot view** displays the message.
+
+How it works
+------------------
+
+| This script uses the **say** method of the **ALTextToSpeech** module.
+  **ALTextToSpeech** is the module of **NAoqi** dedicated to speech.
+  The **say** method makes the robot pronounce the string given in parameter.
+| For further details about this module, see :ref:`altexttospeech`.
+
+Let's explain the 2 lines you wrote:
+
+.. code-block:: python
+
+       self.tts = ALProxy('ALTextToSpeech')
+
+This line creates an object, called **tts**.
+
+* **self** is there to make sure **tts** will be available not only locally, but in all the code blocks of the script.
+
+* **tts** is the name we gave to the object instance (could have been *myspeechmodule* or *speakingmodule*).
+
+* **ALProxy()** is a class of objects, allowing you to have acces to all the methods of a module.
+
+* **ALTextToSpeech** is the name of the module of **NAOqi** we want to use.
+
+
+.. code-block:: python
+
+       self.tts.say("Hello young Padawan")
+
+This line uses the object **tts** to send an instruction to the **NAOqi** module.
+
+* **self.tts** is the object we use.
+
+* **say()** is the method.
+
+* **"Hello young Padawan"** is the parameter.
+
+
+
+What you have learned
+----------------------
+
+To make the robot do something, you have to:
+
+1. Create an object giving access to one of the **NAOqi** modules, then
+2. call one of its available methods.
+
+You can manually start the execution of a box by double-clicking on its **on Start** input.
+
+To go further
+-------------
+
+* If you are not familiar with **Python** language, you should go through the tutorial: http://www.python.org.
+
+* To learn how to create scripts in **Choregraphe**, see: :ref:`python_script`.
+
+* To discover all the available modules and methods, see: :ref:`naoqi-api`.
+
+
+Next step
+------------
+
+| What about creating your first dialog topic?
+| Try to create **Dialog** using **Choregraphe** editor: :ref:`helloworld_choregraphe_dialog`.
+

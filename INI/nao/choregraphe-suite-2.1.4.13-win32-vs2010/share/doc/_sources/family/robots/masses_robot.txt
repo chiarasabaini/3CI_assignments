@@ -1,0 +1,38 @@
+.. _robot_masses:
+
+Masses
+=======
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  masses_robot_v4
+  masses_robot_v33
+  masses_robot_v32
+
+
+.. seealso::
+
+   :ref:`all_robots`
+
+   **V5** | :ref:`V4 <robot_masses_v4>`  | :ref:`V3.3 <robot_masses_v33>`
+   | :ref:`V3.2 <robot_masses_v32>`
+
+--------------------
+
+.. include:: ../bulk/masses_whole.rst
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 5.305350006
+
+.. include:: ../bulk/masses_head_torso.rst
+
+.. include:: ../bulk/masses_arms.rst
+
+.. include:: ../bulk/masses_hands_motorized.rst
+
+.. include:: ../bulk/masses_legs.rst

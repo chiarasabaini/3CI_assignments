@@ -1,0 +1,97 @@
+.. _alvideorecorder:
+
+ALVideoRecorder
+===============
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alvideorecorder-api
+    alvideorecorder-tuto
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alvideorecorder-api>` | :ref:`Tutorial <alvideorecorder-tuto>`
+
+------------
+
+What it does
+------------
+
+The **ALVideoRecorder** module allows you to record video sequences using the
+robot cameras and save them on disk.
+
+StartRecording and StopRecording
+++++++++++++++++++++++++++++++++++++
+
+These two functions are used to record videos on the robot.
+
+They are quite straightforward to use. Just call :cpp:func:`ALVideoRecorderProxy::startRecording`
+passing the video name as argument. The robot will then start to record what it
+can see with its active camera. The record is done using the module's parameters
+(color space, frame rate, resolution, video format). All these parameters can
+be set using the appropriate methods (see the :ref:`API <alvideorecorder-api>`
+section).
+Please note that the frame rate may go down below the specified value depending
+on what is running on the robot.
+
+.. note::
+
+  startRecording is not a blocking function, it launches a separate thread that
+  performs the video recording.
+
+When you want to stop the record, call :cpp:func:`ALVideoRecorderProxy::stopRecording`.
+The record is then saved on the robot in using the file path and name you
+specified.
+
+.. warning::
+
+  Please note that you can only have one active record at a time. If you want to
+  know if there is an active record, you can call
+  :cpp:func:`ALVideoRecorderProxy::isRecording`.
+
+.. note::
+
+   If you don't manually set the parameters, the following ones will be used by
+   default:
+
+   * Color space: BGR
+   * Frame rate: 15 frames per second (FPS)
+   * Resolution: QVGA (320 x 240)
+   * Video format: MJPG
+
+Performances and limitations
+----------------------------
+
+Depending on the video format used for encoding, the video stream can either be
+compressed or uncompressed. Uncompressed video has a limited impact on the CPU
+but produces quite large video files (500MB for a 5-minute video at 10 FPS and
+VGA resolution).
+
+On the contrary, compressed video takes much smaller disk space but requires more
+processing power. Depending on the CPU load at the moment of recording, the required
+frame rate may not be reached. On the current hardware, it is not possible to
+record a VGA compressed video (MJPG for example) at 30 FPS. As a result,
+**ALVideoRecorder** will automatically limit the recording frame rate to 15 FPS
+in VGA resolution.
+
+
+.. note::
+
+  A video recorded with MJPG or IYUV format will be stored in an AVI container.
+  As a result, the file name will end with ".avi".
+
+.. warning::
+
+  Recording a gray scale video in IYUV is not possible. Either switch to a color
+  video or to another video format (MJPG).
+
+Getting started
+---------------
+
+The easiest way to get started with most of these features is to use the
+corresponding Choregraphe vision boxes. Recording capabilities can be easily
+used through the camera panel of Monitor. You will also find working examples
+on the :ref:`Tutorial <alvideorecorder-tuto>` page.
+
+Video recording can also be quickly accessed using Monitor, which internally uses
+**ALVideoRecorder**'s functions.

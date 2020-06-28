@@ -1,0 +1,34 @@
+.. _altabletservice:
+
+ALTabletService
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   altabletservice-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <altabletservice-api>`
+
+------------
+
+What it does
+------------
+
+
+**ALTabletService** allows tablet operations. It can be used to:
+
+* load web application,
+* play videos,
+* manage the tablet itself (wifi, brightness).
+
+**ALTabletService** is also a signal bridge between the web application running
+on tablet browser and **NAOqi**.
+
+Getting started
+----------------
+
+In **Choregraphe**, try to use the boxes available in the **tablet** box library.
+
+For further details, see: :ref:`available_libraries`.

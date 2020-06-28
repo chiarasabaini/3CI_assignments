@@ -1,0 +1,17 @@
+
+.. _h25-mre:
+
+H25 - Joint position sensors
+=======================================
+
+.. seealso:: :ref:`nao-h25` | :ref:`robot-mre` 
+
+
+--------------------
+
+36 x MRE (Magnetic Rotary Encoders) using Hall-effect sensor technology.
+
+
+.. include:: ../bulk/mre.rst
+
+

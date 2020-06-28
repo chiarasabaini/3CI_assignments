@@ -1,0 +1,16 @@
+
+.. _robot-motherboard:
+
+Motherboard
+=========================
+
+.. seealso:: 
+    
+    :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21` | :ref:`nao-t14` | :ref:`nao-t2`
+
+--------------------
+
+
+.. include:: ../bulk/motherboard.rst
+
+

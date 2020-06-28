@@ -1,0 +1,39 @@
+
+Main objects
+==============
+
+
+**The Project and its files**
+
+.. toctree::
+   :maxdepth: 1
+
+   objects/choregraphe_project.rst
+   objects/application
+   objects/activity
+   objects/behavior
+   objects/dialog_topic
+   objects/planar_move
+
+
+   
+**The Box and all its parts**
+
+.. toctree::
+   :maxdepth: 1
+
+   objects/box
+   objects/box_input_output
+   objects/box_optional_components
+
+   
+**The 4 types of boxes**
+
+.. toctree::
+   :maxdepth: 1
+
+   objects/flow_diagram_box
+   objects/timeline_box
+   objects/python_box
+   objects/dialog_box
+   

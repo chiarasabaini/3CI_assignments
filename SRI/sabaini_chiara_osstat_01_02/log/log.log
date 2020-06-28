@@ -1,0 +1,449 @@
+Start time: 2020-05-04 18:17:00.295298
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works\osstat_01_01
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01
+Present files: []
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin
+Present files: ['osstat.py', 's.py']
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\osstat.py
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\osstat.py:
+Dimension in byte: 2123 byte
+Last modify: Mon May  4 18:16:59 2020
+Last access: Mon May  4 18:16:59 2020
+Created: Mon May  4 14:57:44 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\s.py
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\bin\s.py:
+Dimension in byte: 2368 byte
+Last modify: Mon May  4 17:12:50 2020
+Last access: Mon May  4 17:12:50 2020
+Created: Mon May  4 17:10:47 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\doc\README.md
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\doc\README.md:
+Dimension in byte: 871 byte
+Last modify: Mon May  4 16:33:41 2020
+Last access: Mon May  4 16:33:41 2020
+Created: Mon May  4 15:37:34 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\log\log.log
+Properties of C:\Users\proprietario\Documents\GitHub\works\osstat_01_01\log\log.log:
+Dimension in byte: 1907 byte
+Last modify: Mon May  4 18:17:00 2020
+Last access: Mon May  4 18:17:00 2020
+Created: Mon May  4 18:15:23 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Done
+End time: 2020-05-04 18:17:00.464202
+Execution time: 0.16990351676940918s
+
+Start time: 2020-05-07 14:52:15.437644
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 0 byte
+Last modify: Thu May  7 14:40:58 2020
+Last access: Thu May  7 14:40:58 2020
+Created: Thu May  7 14:40:58 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2323 byte
+Last modify: Thu May  7 14:50:55 2020
+Last access: Thu May  7 14:50:55 2020
+Created: Thu May  7 14:37:50 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 4311 byte
+Last modify: Thu May  7 14:52:15 2020
+Last access: Thu May  7 14:52:15 2020
+Created: Thu May  7 14:37:50 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Done
+End time: 2020-05-07 14:52:15.746467
+Execution time: 0.3088235855102539s
+
+Start time: 2020-05-07 15:02:04.516259
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 0 byte
+Last modify: Thu May  7 14:40:58 2020
+Last access: Thu May  7 14:40:58 2020
+Created: Thu May  7 14:40:58 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2662 byte
+Last modify: Thu May  7 15:02:00 2020
+Last access: Thu May  7 15:02:00 2020
+Created: Thu May  7 14:37:50 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 6913 byte
+Last modify: Thu May  7 15:02:04 2020
+Last access: Thu May  7 15:02:04 2020
+Created: Thu May  7 14:37:50 2020
+Last read access: True
+Last write access: True
+Last execution acces: True
+Done
+End time: 2020-05-07 15:02:04.629206
+Execution time: 0.11394238471984863s
+
+Start time: 2020-05-07 15:04:35.643592
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 0 byte
+Last modify: Thu May  7 14:40:58 2020
+Last access: Thu May  7 14:40:58 2020
+Created: Thu May  7 14:40:58 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2663 byte
+Last modify: Thu May  7 15:04:23 2020
+Last access: Thu May  7 15:04:23 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 9519 byte
+Last modify: Thu May  7 15:04:35 2020
+Last access: Thu May  7 15:04:35 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Done
+End time: 2020-05-07 15:04:35.826487
+Execution time: 0.18489480018615723s
+
+Start time: 2020-05-07 15:08:37.456662
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 0 byte
+Last modify: Thu May  7 14:40:58 2020
+Last access: Thu May  7 14:40:58 2020
+Created: Thu May  7 14:40:58 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2688 byte
+Last modify: Thu May  7 15:08:33 2020
+Last access: Thu May  7 15:08:33 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 12126 byte
+Last modify: Thu May  7 15:08:37 2020
+Last access: Thu May  7 15:08:37 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Done
+End time: 2020-05-07 15:08:37.629565
+Execution time: 0.17290329933166504s
+
+Start time: 2020-05-07 15:10:08.850070
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Start time: 2020-05-07 15:10:21.194764
+Printing on screen the given directory name: C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Documents\GitHub\works_for_gbellini\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Start time: 2020-05-07 15:13:44.394288
+Printing on screen the given directory name: C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 1042 byte
+Last modify: Thu May  7 15:09:30 2020
+Last access: Thu May  7 15:09:30 2020
+Created: Thu May  7 14:40:58 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2688 byte
+Last modify: Thu May  7 15:10:28 2020
+Last access: Thu May  7 15:10:28 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi
+Present files: ['osstat.csv']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi\osstat.csv
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi\osstat.csv:
+Dimension in byte: 1380 byte
+Last modify: Thu May  7 15:13:44 2020
+Last access: Thu May  7 15:13:44 2020
+Created: Thu May  7 15:08:37 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 15777 byte
+Last modify: Thu May  7 15:13:44 2020
+Last access: Thu May  7 15:13:44 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Done
+End time: 2020-05-07 15:13:44.706106
+Execution time: 0.3148305416107178s
+
+Start time: 2020-05-07 15:21:51.128330
+Printing on screen the given directory name: C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 1042 byte
+Last modify: Thu May  7 15:09:30 2020
+Last access: Thu May  7 15:09:30 2020
+Created: Thu May  7 14:40:58 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2710 byte
+Last modify: Thu May  7 15:21:38 2020
+Last access: Thu May  7 15:21:38 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi
+Present files: ['osstat.csv']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi\osstat.csv
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi\osstat.csv:
+Dimension in byte: 2395 byte
+Last modify: Thu May  7 15:21:51 2020
+Last access: Thu May  7 15:21:51 2020
+Created: Thu May  7 15:08:37 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 18785 byte
+Last modify: Thu May  7 15:21:51 2020
+Last access: Thu May  7 15:21:51 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Done
+End time: 2020-05-07 15:21:51.393180
+Execution time: 0.26584863662719727s
+
+Start time: 2020-05-07 15:24:42.214297
+Printing on screen the given directory name: C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Start time: 2020-05-07 15:24:57.054764
+Printing on screen the given directory name: C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Start time: 2020-05-07 15:25:52.825307
+Printing on screen the given directory name: C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02
+Present files: ['consegna']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\consegna
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\consegna:
+Dimension in byte: 1042 byte
+Last modify: Thu May  7 15:09:30 2020
+Last access: Thu May  7 15:09:30 2020
+Created: Thu May  7 14:40:58 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin
+Present files: ['osstat.py']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin\osstat.py
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\bin\osstat.py:
+Dimension in byte: 2713 byte
+Last modify: Thu May  7 15:25:39 2020
+Last access: Thu May  7 15:25:39 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc
+Present files: ['README.md']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc\README.md
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\doc\README.md:
+Dimension in byte: 876 byte
+Last modify: Thu May  7 14:37:50 2020
+Last access: Thu May  7 14:37:50 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi
+Present files: ['osstat.csv']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi\osstat.csv
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\flussi\osstat.csv:
+Dimension in byte: 3476 byte
+Last modify: Thu May  7 15:25:53 2020
+Last access: Thu May  7 15:25:53 2020
+Created: Thu May  7 15:08:37 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Analizing directory C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log
+Present files: ['log.log']
+Analizing file C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log\log.log
+Properties of C:\Users\proprietario\Desktop\scuola\3CI\SRI\sabaini_chiara_osstat_01_02\log\log.log:
+Dimension in byte: 22358 byte
+Last modify: Thu May  7 15:25:53 2020
+Last access: Thu May  7 15:25:53 2020
+Created: Thu May  7 14:37:50 2020
+Read permissions: True
+Write permissions: True
+Execution permissions: True
+Done
+End time: 2020-05-07 15:25:53.194096
+Execution time: 0.3687894344329834s
+

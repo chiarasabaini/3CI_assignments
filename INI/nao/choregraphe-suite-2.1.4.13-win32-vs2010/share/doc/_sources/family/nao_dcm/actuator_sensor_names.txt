@@ -1,0 +1,2168 @@
+
+.. include:: /bulk/common.rst
+
+.. _actuator_sensor_list_nao:
+
+|roboN| - Actuator & Sensor list
+===================================
+
++-----------------------------------------------------------------------------+
+| :ref:`Battery` -                                                            |
+| :ref:`Cpu` -                                                                |
+| :ref:`FSR`-                                                                 |
+| :ref:`Inertial` -                                                           |
+| :ref:`Joints` -                                                             |
+| :ref:`LEDs` -                                                               |
+| :ref:`Sonars` -                                                             |
+| :ref:`Switches` -                                                           |
+| :ref:`touch_sensor`                                                         |
++-----------------------------------------------------------------------------+
+
+.. note::
+
+    * To send commands to an **Actuator**, use the :ref:`dcm` module.
+    * To read data from **Actuators** and **Sensors**, use the
+      :ref:`almemory` module.
+
+.. _Joints:
+
+Joints and Actuators
+--------------------
++----------------------------------------------------------------------------------+
+| - **Head**: :ref:`HeadPitch` - :ref:`HeadYaw`.                                   |
+| - **RArm**: :ref:`RShoulderRoll` -  :ref:`RShoulderPitch` - :ref:`RElbowYaw` -   |
+|   :ref:`RElbowRoll` -  :ref:`RWristYaw` -  :ref:`RHand`.                         |
+| - **LArm**: :ref:`LShoulderRoll` - :ref:`LShoulderPitch` - :ref:`LElbowYaw` -    |
+|   :ref:`LElbowRoll` - :ref:`LWristYaw` -  :ref:`LHand`.                          |
+| - **RLeg**: :ref:`RHipPitch` -  :ref:`RHipRoll` - :ref:`RKneePitch` -            |
+|   :ref:`RAnklePitch` - :ref:`RAnkleRoll`.                                        |
+| - **LLeg**: :ref:`LHipYawPitch` - :ref:`LHipPitch` - :ref:`LHipRoll` -           |
+|   :ref:`LKneePitch` - :ref:`LAnklePitch` - :ref:`LAnkleRoll`.                    |
++----------------------------------------------------------------------------------+
+
+.. image:: /medias/dev/modules/dcm/hardware_jointname.jpg
+    :width: 600 px
+    :height: 349 px
+
+
+.. _HeadYaw:
+
+HeadYaw
+++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/HeadYaw/Position/Actuator/Value                       | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadYaw/Position/Sensor/Value                         | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadYaw/ElectricCurrent/Sensor/Value                  | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadYaw/Temperature/Sensor/Value                      | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadYaw/Hardness/Actuator/Value                       | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadYaw/Temperature/Sensor/Status                     | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::head-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/HeadYaw/Error                                             | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/HeadYaw/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/HeadYaw/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _HeadPitch:
+
+HeadPitch
+++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/HeadPitch/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadPitch/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadPitch/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadPitch/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadPitch/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/HeadPitch/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::head-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/HeadPitch/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/HeadPitch/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/HeadPitch/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. _LElbowYaw:
+
+LElbowYaw
++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LElbowYaw/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowYaw/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowYaw/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowYaw/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowYaw/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowYaw/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LElbowYaw/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LElbowYaw/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LElbowYaw/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LElbowRoll:
+
+LElbowRoll
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LElbowRoll/Position/Actuator/Value                    | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowRoll/Position/Sensor/Value                      | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowRoll/ElectricCurrent/Sensor/Value               | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowRoll/Temperature/Sensor/Value                   | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowRoll/Hardness/Actuator/Value                    | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LElbowRoll/Temperature/Sensor/Status                  | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LElbowRoll/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LElbowRoll/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LElbowRoll/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RElbowYaw:
+
+RElbowYaw
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RElbowYaw/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowYaw/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowYaw/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowYaw/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowYaw/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowYaw/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RElbowYaw/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RElbowYaw/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RElbowYaw/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RElbowRoll:
+
+RElbowRoll
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RElbowRoll/Position/Actuator/Value                    | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowRoll/Position/Sensor/Value                      | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowRoll/ElectricCurrent/Sensor/Value               | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowRoll/Temperature/Sensor/Value                   | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowRoll/Hardness/Actuator/Value                    | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RElbowRoll/Temperature/Sensor/Status                  | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RElbowRoll/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RElbowRoll/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RElbowRoll/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LHand:
+
+LHand
++++++++++++
+
++-----------------------------------------------------------------------------+--------------------------------+
+| Key                                                                         | See ...                        |
++=============================================================================+================================+
+| Device/SubDeviceList/LHand/Position/Actuator/Value                          | :term:`Position/Actuator (%)`  |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/LHand/Position/Sensor/Value                            | :term:`Position/Sensor (%)`    |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/LHand/ElectricCurrent/Sensor/Value                     | :term:`Current (A)`            |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/LHand/Temperature/Sensor/Value                         | :term:`Temperature (°C)`       |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/LHand/Hardness/Actuator/Value                          | :term:`Stiffness (%)`          |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/LHand/Temperature/Sensor/Status                        | :term:`Temperature status`     |
++-----------------------------------------------------------------------------+--------------------------------+
+
+See also: :ref:`robot_joints_v4::left-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LHand/Error                                               | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LHand/Error                                              | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LHand/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LWristYaw:
+
+LWristYaw
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LWristYaw/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LWristYaw/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LWristYaw/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LWristYaw/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LWristYaw/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LWristYaw/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LWristYaw/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LWristYaw/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LWristYaw/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. _RHand:
+
+RHand
++++++++++++
+
++-----------------------------------------------------------------------------+--------------------------------+
+| Key                                                                         | See ...                        |
++=============================================================================+================================+
+| Device/SubDeviceList/RHand/Position/Actuator/Value                          | :term:`Position/Actuator (%)`  |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/RHand/Position/Sensor/Value                            | :term:`Position/Sensor (%)`    |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/RHand/ElectricCurrent/Sensor/Value                     | :term:`Current (A)`            |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/RHand/Temperature/Sensor/Value                         | :term:`Temperature (°C)`       |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/RHand/Hardness/Actuator/Value                          | :term:`Stiffness (%)`          |
++-----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/RHand/Temperature/Sensor/Status                        | :term:`Temperature status`     |
++-----------------------------------------------------------------------------+--------------------------------+
+
+See also: :ref:`robot_joints_v4::right-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RHand/Error                                               | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RHand/Error                                              | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RHand/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RWristYaw:
+
+RWristYaw
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RWristYaw/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RWristYaw/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RWristYaw/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RWristYaw/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RWristYaw/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RWristYaw/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RWristYaw/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RWristYaw/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RWristYaw/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LShoulderPitch:
+
+LShoulderPitch
+++++++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LShoulderPitch/Position/Actuator/Value                | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderPitch/Position/Sensor/Value                  | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderPitch/ElectricCurrent/Sensor/Value           | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderPitch/Temperature/Sensor/Value               | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderPitch/Hardness/Actuator/Value                | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderPitch/Temperature/Sensor/Status              | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LShoulderPitch/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LShoulderPitch/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LShoulderPitch/Error                                 | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LShoulderRoll:
+
+LShoulderRoll
+++++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LShoulderRoll/Position/Actuator/Value                 | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderRoll/Position/Sensor/Value                   | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderRoll/ElectricCurrent/Sensor/Value            | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderRoll/Temperature/Sensor/Value                | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderRoll/Hardness/Actuator/Value                 | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LShoulderRoll/Temperature/Sensor/Status               | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LShoulderRoll/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LShoulderRoll/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LShoulderRoll/Error                                  | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RShoulderPitch:
+
+RShoulderPitch
+++++++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RShoulderPitch/Position/Actuator/Value                | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderPitch/Position/Sensor/Value                  | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderPitch/ElectricCurrent/Sensor/Value           | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderPitch/Temperature/Sensor/Value               | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderPitch/Hardness/Actuator/Value                | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderPitch/Temperature/Sensor/Status              | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RShoulderPitch/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RShoulderPitch/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RShoulderPitch/Error                                 | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RShoulderRoll:
+
+RShoulderRoll
+++++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RShoulderRoll/Position/Actuator/Value                 | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderRoll/Position/Sensor/Value                   | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderRoll/ElectricCurrent/Sensor/Value            | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderRoll/Temperature/Sensor/Value                | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderRoll/Hardness/Actuator/Value                 | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RShoulderRoll/Temperature/Sensor/Status               | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-Arm-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RShoulderRoll/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RShoulderRoll/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RShoulderRoll/Error                                  | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RHipRoll:
+
+RHipRoll
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RHipRoll/Position/Actuator/Value                      | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipRoll/Position/Sensor/Value                        | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipRoll/ElectricCurrent/Sensor/Value                 | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipRoll/Temperature/Sensor/Value                     | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipRoll/Hardness/Actuator/Value                      | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipRoll/Temperature/Sensor/Status                    | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RHipRoll/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RHipRoll/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RHipRoll/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LHipRoll:
+
+LHipRoll
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LHipRoll/Position/Actuator/Value                      | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipRoll/Position/Sensor/Value                        | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipRoll/ElectricCurrent/Sensor/Value                 | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipRoll/Temperature/Sensor/Value                     | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipRoll/Hardness/Actuator/Value                      | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipRoll/Temperature/Sensor/Status                    | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LHipRoll/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LHipRoll/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LHipRoll/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LHipYawPitch:
+
+LHipYawPitch
++++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LHipYawPitch/Position/Actuator/Value                  | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipYawPitch/Position/Sensor/Value                    | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipYawPitch/ElectricCurrent/Sensor/Value             | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipYawPitch/Temperature/Sensor/Value                 | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipYawPitch/Hardness/Actuator/Value                  | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipYawPitch/Temperature/Sensor/Status                | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::pelvis-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LHipYawPitch/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LHipYawPitch/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LHipYawPitch/Error                                   | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. _RHipPitch:
+
+RHipPitch
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RHipPitch/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipPitch/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipPitch/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipPitch/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipPitch/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHipPitch/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RHipPitch/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RHipPitch/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RHipPitch/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LHipPitch:
+
+LHipPitch
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LHipPitch/Position/Actuator/Value                     | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipPitch/Position/Sensor/Value                       | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipPitch/ElectricCurrent/Sensor/Value                | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipPitch/Temperature/Sensor/Value                    | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipPitch/Hardness/Actuator/Value                     | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHipPitch/Temperature/Sensor/Status                   | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LHipPitch/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LHipPitch/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LHipPitch/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RKneePitch:
+
+RKneePitch
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RKneePitch/Position/Actuator/Value                    | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RKneePitch/Position/Sensor/Value                      | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RKneePitch/ElectricCurrent/Sensor/Value               | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RKneePitch/Temperature/Sensor/Value                   | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RKneePitch/Hardness/Actuator/Value                    | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RKneePitch/Temperature/Sensor/Status                  | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RKneePitch/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RKneePitch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RKneePitch/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. _LKneePitch:
+
+LKneePitch
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LKneePitch/Position/Actuator/Value                    | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LKneePitch/Position/Sensor/Value                      | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LKneePitch/ElectricCurrent/Sensor/Value               | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LKneePitch/Temperature/Sensor/Value                   | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LKneePitch/Hardness/Actuator/Value                    | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LKneePitch/Temperature/Sensor/Status                  | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LKneePitch/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LKneePitch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LKneePitch/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RAnklePitch:
+
+RAnklePitch
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RAnklePitch/Position/Actuator/Value                   | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnklePitch/Position/Sensor/Value                     | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnklePitch/ElectricCurrent/Sensor/Value              | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnklePitch/Temperature/Sensor/Value                  | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnklePitch/Hardness/Actuator/Value                   | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnklePitch/Temperature/Sensor/Status                 | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RAnklePitch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RAnklePitch/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RAnklePitch/Error                                    | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LAnklePitch:
+
+LAnklePitch
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LAnklePitch/Position/Actuator/Value                   | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnklePitch/Position/Sensor/Value                     | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnklePitch/ElectricCurrent/Sensor/Value              | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnklePitch/Temperature/Sensor/Value                  | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnklePitch/Hardness/Actuator/Value                   | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnklePitch/Temperature/Sensor/Status                 | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LAnklePitch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LAnklePitch/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LAnklePitch/Error                                    | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _RAnkleRoll:
+
+RAnkleRoll
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RAnkleRoll/Position/Actuator/Value                    | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnkleRoll/Position/Sensor/Value                      | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnkleRoll/ElectricCurrent/Sensor/Value               | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnkleRoll/Temperature/Sensor/Value                   | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnkleRoll/Hardness/Actuator/Value                    | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RAnkleRoll/Temperature/Sensor/Status                  | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::right-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RAnkleRoll/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RAnkleRoll/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/RAnkleRoll/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _LAnkleRoll:
+
+LAnkleRoll
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LAnkleRoll/Position/Actuator/Value                    | :term:`Position/Actuator (rad)` |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnkleRoll/Position/Sensor/Value                      | :term:`Position/Sensor (rad)`   |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnkleRoll/ElectricCurrent/Sensor/Value               | :term:`Current (A)`             |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnkleRoll/Temperature/Sensor/Value                   | :term:`Temperature (°C)`        |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnkleRoll/Hardness/Actuator/Value                    | :term:`Stiffness (%)`           |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LAnkleRoll/Temperature/Sensor/Status                  | :term:`Temperature status`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_joints_v4::left-leg-joints`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LAnkleRoll/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LAnkleRoll/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/LAnkleRoll/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. glossary::
+
+   Position/Actuator
+
+        Joint angle (in radian) to reach.
+
+        Exception: for hands, aperture (in percentage); 0 means closed, 1 means opened.
+
+        Content update:
+
+        * if :term:`Stiffness<Stiffness (%)>` > 0: the last position requested by a timed command.
+        * if :term:`Stiffness<Stiffness (%)>` <= 0: the same value as the Position/Sensor.
+
+   Position/Actuator (rad)
+
+        Joint angle (in radian) to reach.
+
+        Content update:
+
+        * if :term:`Stiffness<Stiffness (%)>` > 0: the last position requested by a timed command.
+        * if :term:`Stiffness<Stiffness (%)>` <= 0: the same value as the Position/Sensor.
+
+
+   Position/Actuator (%)
+
+        Hand aperture (in percentage) to reach; 0 means closed, 1 means opened.
+
+        Content update:
+
+        * if :term:`Stiffness<Stiffness (%)>` > 0: the last position requested by a timed command.
+        * if :term:`Stiffness<Stiffness (%)>` <= 0: the same value as the Position/Sensor.
+
+   Stiffness (%)
+
+        Stiffness of the joint (in percentage); 0.0 means 0% and 1.0 means 100%
+        (full power).
+
+        In the motorboard, this percentage is directly applied to the max current.
+        Setting the Stiffness to 0.5 means that the electric current limitation
+        is reduced to 50%.
+
+        The Stiffness is sent to the motor board every DCM cycle time, so you can
+        decrease/increase the control loop very fast. However, the current limitation
+        may have some delay.
+
+        If the Stiffness is <0, the motor is free (no electromagnetic break), but due
+        to hardware limitation, it’s only possible when the two motors of the same
+        board are <0 (both are then free). If not, it’s still electromagnetic brake,
+        but with a security that disable it when there is some movement, to protect
+        the mechanics.
+
+        Stiffness may be automatically cut in case of problem (calibration, sensors …)
+        seen at the DCM level or at the µc level, in order to protect the robot.
+
+
+   Position/Sensor (rad)
+
+        Angle of the joint (in radian).
+
+        Content update:
+
+        The sensor used is a Magnetic Rotary Encoder (MRE), used like potentiometer.
+        It’s a 12bits precise value (from 0 to 4095) change in rad.
+
+   Position/Sensor (%)
+
+        Hand aperture (in percentage); 0 means closed, 1 means opened.
+
+        Content update:
+
+        The sensor used is a Magnetic Rotary Encoder (MRE), used like potentiometer.
+        It’s a 12bits precise value (from 0 to 4095) change in percentage (0.0 to 1.0).
+
+   Current (A)
+
+        Every motorboard has a current sensor for each motor that is a shunt resistor.
+        The current is an absolute value in Ampere.
+
+        Every joint has an electric current limitation: if the current reach the “Max”
+        value (“ElectricCurrent/Sensor/Max”) the PWM (return by the control loop) will
+        be decreased a bit until it returns under the maximum value, and it’s
+        increased again after. This is a kind of current control loop around the
+        maximum value.
+        The aim of this limitation is to protect the motor, the electronic board,
+        and the mechanical part of the joint.
+
+   Temperature (°C)
+
+        The motor temperature is a simulated one, using electric current value of the
+        motor.
+        The motor board implements a temperature limitation to protect the motor. The
+        temperature limitation depends on robot version.
+
+   Temperature status
+
+        The status is computed accordingly to the temperature limitation to protecting the motor.
+        A non null value implies an automatic correction of the Stiffness.
+
+        * 0: means regular temperature
+        * 1: means temperature has reach the max limit, start reducing stiffness.
+        * 2: means the joint is very hot, stiffness reduced over 30%.
+        * 3: means the joint is critically hot, stiffness value is set to 0.
+
+   Error
+
+        The results of a diagnosis (see :ref:`aldiagnosis` and
+        :ref:`albodytemperature_diagnosis`).
+        A int with 0 (success) or 1 (error).
+
+   Level of failure severity
+
+        This value defines the consequence of the device failure on the robot behavior.
+        The higher the level is the less the robot will be functional.
+
+        The value could be: *NEGLIGIBLE*, *SERIOUS* or *CRITICAL* (see :ref:`reflexes-diagnosis`
+        for more details about the robot behavior when a failure is detected).
+
+
+
+.. _touch_sensor:
+
+Touch sensors
+-------------
+
+.. _head_touch_sensor:
+
+Head
+++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/Head/Touch/Front/Sensor/Value                         | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/Head/Touch/Rear/Sensor/Value                          | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/Head/Touch/Middle/Sensor/Value                        | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Head/Touch/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Head/Touch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_contact_head`.
+
+.. _lhand_touch_sensor:
+
+LHand
+++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LHand/Touch/Back/Sensor/Value                         | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHand/Touch/Left/Sensor/Value                         | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LHand/Touch/Right/Sensor/Value                        | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LHand/Touch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LHand/Touch/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_contact_hand`.
+
+.. _rhand_touch_sensor:
+
+RHand
+++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RHand/Touch/Back/Sensor/Value                         | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHand/Touch/Left/Sensor/Value                         | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RHand/Touch/Right/Sensor/Value                        | :term:`Touch (ON/OFF)`          |
++----------------------------------------------------------------------------+---------------------------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RHand/Touch/Error                                         | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RHand/Touch/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_contact_hand`.
+
+.. glossary::
+
+   Touch (ON/OFF)
+
+        Touch sensors are capacitive sensors that return a 2 state float value 0.0
+        (unpressed) or 1.0 (pressed).
+
+
+.. _Switches:
+
+Switches
+--------
+
+
+.. _chestboard_button_sensor:
+
+ChestBoard
+++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/ChestBoard/Button/Sensor/Value                        | :term:`Switch (ON/OFF)`         |
++----------------------------------------------------------------------------+---------------------------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Chest/Button/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Chest/Button/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_contact_chest`.
+
+.. _lfoot_touch_sensor:
+
+LFoot
++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LFoot/Bumper/Right/Sensor/Value                       | :term:`Switch (ON/OFF)`         |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/Bumper/Left/Sensor/Value                        | :term:`Switch (ON/OFF)`         |
++----------------------------------------------------------------------------+---------------------------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LFoot/Bumper/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LFoot/Bumper/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_contact_feet`.
+
+.. _rfoot_touch_sensor:
+
+RFoot
++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/RFoot/Bumper/Right/Sensor/Value                       | :term:`Switch (ON/OFF)`         |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/Bumper/Left/Sensor/Value                        | :term:`Switch (ON/OFF)`         |
++----------------------------------------------------------------------------+---------------------------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RFoot/Bumper/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RFoot/Bumper/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`robot_contact_feet`.
+
+.. glossary::
+
+   Switch (ON/OFF)
+
+        Switches are simple sensors that return a 2-state float value 0.0 (unpressed) or 1.0 (pressed).
+        Beware that the value is read only every 10ms, and very fast change may be unseen.
+
+        .. Warning:: It’s better to use a logical “or” between the two switches of the same foot, and use it as one bumper only.
+
+.. _Cpu:
+
+CPU
+----
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        |  Comment                        |
++============================================================================+=================================+
+| Device/SubDeviceList/Head/Temperature/Sensor/Value                         | Head cpu temperature (°C)       |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. _Inertial:
+
+Inertial
+---------
+
+.. _dcm_gyrometer:
+
+Gyroscope
++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/InertialSensor/GyroscopeX/Sensor/Value                | :term:`Gyroscope (rad/s)`       |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/InertialSensor/GyroscopeY/Sensor/Value                | :term:`Gyroscope (rad/s)`       |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/InertialSensor/GyroscopeZ/Sensor/Value                | :term:`Gyroscope (rad/s)`       |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`Inertial unit specifications<robot-inertial>`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Gyrometer/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Gyrometer/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _dcm_angles:
+
+Angle
++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value                    | :term:`Angles (rad)`            |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/InertialSensor/AngleY/Sensor/Value                    | :term:`Angles (rad)`            |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/InertialSensor/AngleZ/Sensor/Value                    | :term:`Angles (rad)`            |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`Inertial unit specifications<robot-inertial>`.
+
+.. _dcm_accelerometer:
+
+Accelerometer
++++++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/InertialSensor/AccelerometerX/Sensor/Value            | :term:`Accelerometer (m/s²)`    |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/InertialSensor/AccelerometerY/Sensor/Value            | :term:`Accelerometer (m/s²)`    |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/InertialSensor/AccelerometerZ/Sensor/Value            | :term:`Accelerometer (m/s²)`    |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`Inertial unit specifications<robot-inertial>`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Accelerometer/Error                                       | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Accelerometer/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. glossary::
+
+   Gyroscope (rad/s)
+
+        Theses are direct rotation speed values in rad.s-1 from the inertial sensor in the center of the body.
+        The Z gyroscope is not available yet.
+
+   Accelerometer (m/s²)
+
+        Theses are 3-axis acceleration in m.s-2 from the inertial sensor in the center of the body (one g is approximately 9.81 m.s-2)
+        Depending the robot version, the precision is 8 or 12 bits.
+
+   Angles (rad)
+
+        The inertial board computes 3 inclination angles of the robot body with the gyro and accelero data.
+        All angles are in radians.
+        The Z angle is not available yet.
+
+
+There are other deprecated values still returned.
+
+
+
+.. _LEDs:
+
+LEDs
+---------
+
++-------------------------------+
+| :ref:`eyes_actuators` -       |
+| :ref:`ear_actuators`-         |
+| :ref:`chestboard_actuators` - |
+| :ref:`led_head` -             |
+| :ref:`Lfoot_actuators` -      |
+| :ref:`Rfoot_actuators`        |
++-------------------------------+
+
+.. _eyes_actuators:
+
+Eyes
++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Face/Led/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Face/Led/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+Face/Led/Red/Left
+^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Face/Led/Red/Left/0Deg/Actuator/Value                                 | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/45Deg/Actuator/Value                                | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/90Deg/Actuator/Value                                | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/135Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/180Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/225Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/270Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Left/315Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_eyes`.
+
+Face/Led/Green/Left
+^^^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Face/Led/Green/Left/0Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/45Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/90Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/135Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/180Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/225Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/270Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Left/315Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_eyes`.
+
+Face/Led/Blue/Left
+^^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Face/Led/Blue/Left/0Deg/Actuator/Value                                | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/45Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/90Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/135Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/180Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/225Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/270Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Left/315Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_eyes`.
+
+Face/Led/Red/Right
+^^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Face/Led/Red/Right/0Deg/Actuator/Value                                | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/45Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/90Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/135Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/180Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/225Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/270Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Red/Right/315Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_eyes`.
+
+
+Face/Led/Green/Right
+^^^^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Face/Led/Green/Right/0Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/45Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/90Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/135Deg/Actuator/Value                            | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/180Deg/Actuator/Value                            | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/225Deg/Actuator/Value                            | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/270Deg/Actuator/Value                            | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Green/Right/315Deg/Actuator/Value                            | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_eyes`.
+
+Face/Led/Blue/Right
+^^^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Face/Led/Blue/Right/0Deg/Actuator/Value                               | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/45Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/90Deg/Actuator/Value                              | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/135Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/180Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/225Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/270Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Face/Led/Blue/Right/315Deg/Actuator/Value                             | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_eyes`.
+
+.. _ear_actuators:
+
+Ears
++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Ears/Led/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Ears/Led/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+Ears/Led/Right
+^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Ears/Led/Right/0Deg/Actuator/Value                                    | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/36Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/72Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/108Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/144Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/180Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/216Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/252Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/288Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Right/324Deg/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_ears`.
+
+Ears/Led/Left
+^^^^^^^^^^^^^^
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Ears/Led/Left/0Deg/Actuator/Value                                     | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/36Deg/Actuator/Value                                    | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/72Deg/Actuator/Value                                    | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/108Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/144Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/180Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/216Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/252Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/288Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Ears/Led/Left/324Deg/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_ears`.
+
+.. _chestboard_actuators:
+
+ChestBoard
++++++++++++
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/ChestBoard/Led/Red/Actuator/Value                                     | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/ChestBoard/Led/Green/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/ChestBoard/Led/Blue/Actuator/Value                                    | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/ChestBoard/Led/Error                                      | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/ChestBoard/Led/Error                                     | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _led_head:
+
+Head
++++++++
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/Head/Led/Rear/Left/0/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Rear/Left/1/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Rear/Left/2/Actuator/Value                                   | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Rear/Right/0/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Rear/Right/1/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Rear/Right/2/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Middle/Right/0/Actuator/Value                                | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Front/Right/0/Actuator/Value                                 | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Front/Right/1/Actuator/Value                                 | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Front/Left/0/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Front/Left/1/Actuator/Value                                  | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/Head/Led/Middle/Left/0/Actuator/Value                                 | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_head`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Head/Led/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Head/Led/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _Lfoot_actuators:
+
+LFoot
++++++++
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/LFoot/Led/Red/Actuator/Value                                          | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/LFoot/Led/Green/Actuator/Value                                        | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/LFoot/Led/Blue/Actuator/Value                                         | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_feet`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LFoot/Led/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LFoot/Led/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. _Rfoot_actuators:
+
+RFoot
++++++++
+
++--------------------------------------------------------------------------------------------+-----------------+
+| Key                                                                                        | See ...         |
++============================================================================================+=================+
+| Device/SubDeviceList/RFoot/Led/Red/Actuator/Value                                          | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/RFoot/Led/Green/Actuator/Value                                        | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+| Device/SubDeviceList/RFoot/Led/Blue/Actuator/Value                                         | :term:`LED (%)` |
++--------------------------------------------------------------------------------------------+-----------------+
+
+See also: :ref:`robot_led_feet`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/RFoot/Led/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RFoot/Led/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+Led state
++++++++++++
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/ChestBoard/Led/State/Actuator/Value                   | :term:`LED state (number)`      |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. glossary::
+
+   LED (%)
+
+        Every LED is a simple actuator that has a float value from 0.0 (no light)
+        to 1.0 (full light). Each LED has only one color, but there could be 3
+        LEDs (RGB) at the same place to have a full color RGB LED. But for the
+        DCM point of view it’s always 3 LEDs.
+        The number of real differents values of leds depends on the leds
+        (64 for the eyes, 256 for chest & foot)
+
+        .. Warning:: Unfortunately, having 3 RGB LEDs set to “1.0” does not mean that you’ll see a perfect white: one or two LEDs will be brighter than others.
+
+
+   LED state (number)
+
+        Internal. **Do not use**.
+
+
+
+.. _Sonars:
+
+Sonars
+-------
+
++----------------------------------------------------------------------------+--------------------------------+
+| Key                                                                        | See ...                        |
++============================================================================+================================+
+| Device/SubDeviceList/US/Actuator/Value                                     |:term:`US/Actuator (number)`    |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Sensor/Value                                       |:term:`US/Sensor (m)`           |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value                                  |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value1                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value2                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value3                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value4                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value5                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value6                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value7                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value8                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Left/Sensor/Value9                                 |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value1                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value2                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value3                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value4                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value5                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value6                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value7                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value8                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+| Device/SubDeviceList/US/Right/Sensor/Value9                                |:term:`US/Sensors (m)`          |
++----------------------------------------------------------------------------+--------------------------------+
+
+See also: :ref:`Sonar specifications<robot-sonar>`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/USSensor/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/USSensor/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. glossary::
+
+   US/Actuator (number)
+
+        Send a value to this **Actuator** to set and send a sonar wave.
+
+        The value you send defines what is the transmitter (left or right)
+        and what is the receiver (left or right).
+        Choosing the side of the receiver/transmitter has an influence on detection cone,
+        and gives you information about the obstacle presence.
+
+        **Wave settings**
+
+        *Mono side wave*
+
+        * The first bit of this value lets you choose which receiver you want to use.
+          0 for left and 1 for right.
+        * The second bit lets you choose the transmitter.
+          Again, 0 meaning left and 1 meaning right.
+
+          +---------+--------------+----------+
+          | Value   | Transmitter  | Receiver |
+          +=========+==============+==========+
+          | 0.0     | Left         | Left     |
+          +---------+--------------+----------+
+          | 1.0     | Left         | Right    |
+          +---------+--------------+----------+
+          | 2.0     | Right        | Left     |
+          +---------+--------------+----------+
+          | 3.0     | Right        | Right    |
+          +---------+--------------+----------+
+
+        *Multi side wave*
+
+        * The third bit (value 4) means that two captures will be made with only
+          one command, left and right. The results will be available in two
+          subDevices: **US/Left/Sensor** and **US/Right/Sensor**. 10 values are
+          available for each sensor, corresponding to the distance of the first
+          10 echoes detected.
+        * The fourth bit (value 8) orders the use of two transmitters at the
+          same time.
+
+        *Periodic capture*
+
+        * The seventh bit (value 64) is used to register for a periodic capture.
+          It means that you need to send the read request to the DCM just once,
+          then you simply read the values every 100 ms in ALMemory. To stop the
+          periodic mode, you can send a new reading command without that bit.
+
+        *Examples*
+
+        All the bits combinations are not useful, even possible.
+        Here are examples:
+
+        +-------------------+--------------------+------------------+
+        | Value             | Transmitter        | Receiver         |
+        +===================+====================+==================+
+        | 4.0               | Right and Left     | Right and Left   |
+        +-------------------+--------------------+------------------+
+        | 12.0 (8.0 + 4.0)  | Right and Left     | Right and Left   |
+        +-------------------+--------------------+------------------+
+        | 68.0 (64.0 + 4.0) | Right and Left     | Right and Left   |
+        +-------------------+--------------------+------------------+
+
+        *Results*
+
+        | The result is written approximately 10ms after in **US/Sensor/Value** or **US/Left/Sensor** and **US/Right/Sensor**.
+        | For further details, see: :term:`US/Sensor (m)` or :term:`US/Sensors (m)`.
+
+   US/Sensor (m)
+
+        Value returned by the Sonar sensor (one of the two sensors in the chest).
+        The value is changed about 10ms after sending the wave using **US/Actuator/Value**.
+        For further details, see: :term:`US/Actuator (number)`.
+
+        | It is in meters.
+        | Result <=0 or >= 5 *Max Detection range* means error from the sensor or echo not detected.
+        | For further details about range detection, see: :ref:`Sonar specification <robot-sonar>`.
+
+        **Tips**:
+
+        * You’ll likely detect the ground before the maximum distance for detection.
+        * Be careful you can detect the robot arms!
+        * The emission cone depends on the size of the object in front of the robot.
+        * The quality of the detection will depends on the object (or obstacle): size, surface, orientation.
+
+   US/Sensors (m)
+   US/Right/Sensor/Value and US/Left/Sensor/Value
+
+        Sensors respectively dedicated to the left or right receivers.
+
+        They are used if the third bit is set in the value sent to the actuator
+        (only available for V2 cards).
+
+        The results of the first echo detected on each receiver are in Value,
+        the 9 following echoes are from Value1 to Value9.
+
+        Value of 0 means an error.
+        A value of *Max Detection range* means no echo.
+
+        For example, if Value contains 0,40, Value1 1,2 and Value2 *Max Detection range*, the
+        following values (3 to 9) will contain *Max Detection range* too. It probably means you
+        have the echo of the ground at 0,40m and another object at 1,2m. Left
+        and Right sensors work the same way and allow you to locate objects.
+
+.. _Battery:
+
+Battery
+---------
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/Battery/Current/Sensor/Value                          | current Sensor (A)              |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/Battery/Charge/Sensor/Value                           | Charge Sensor (%)               |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/Battery/Temperature/Sensor/Value                      | Temperature Sensor (%)          |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`Battery specifications<robot-battery>`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/Battery/Error                                             | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/Battery/Error                                            | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Temperature/Battery/Error                                        | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+
+.. _FSR:
+
+FSR
+-----
+
++----------------------------------------------------------------------------+---------------------------------+
+| Key                                                                        | See ...                         |
++============================================================================+=================================+
+| Device/SubDeviceList/LFoot/FSR/FrontLeft/Sensor/Value                      | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/FSR/FrontRight/Sensor/Value                     | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/FSR/RearLeft/Sensor/Value                       | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/FSR/RearRight/Sensor/Value                      | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/FrontLeft/Sensor/Value                      | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/FrontRight/Sensor/Value                     | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/RearLeft/Sensor/Value                       | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/RearRight/Sensor/Value                      | :term:`FSR (kg)`                |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/FSR/TotalWeight/Sensor/Value                    | :term:`FSR total (kg)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/TotalWeight/Sensor/Value                    | :term:`FSR total (kg)`          |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/FSR/CenterOfPressure/X/Sensor/Value             | :term:`center of pressure (m)`  |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/LFoot/FSR/CenterOfPressure/Y/Sensor/Value             | :term:`center of pressure (m)`  |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/CenterOfPressure/X/Sensor/Value             | :term:`center of pressure (m)`  |
++----------------------------------------------------------------------------+---------------------------------+
+| Device/SubDeviceList/RFoot/FSR/CenterOfPressure/Y/Sensor/Value             | :term:`center of pressure (m)`  |
++----------------------------------------------------------------------------+---------------------------------+
+
+See also: :ref:`FSRs specifications<robot-fsr>`.
+
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis Keys                                                             | See ...                         |
++============================================================================+=================================+
+| Diagnosis/Active/LFoot/FSR/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Active/RFoot/FSR/Error                                           | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/LFoot/FSR/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+| Diagnosis/Passive/RFoot/FSR/Error                                          | :term:`Error`                   |
+|                                                                            |                                 |
+| [:term:`Level of failure severity`: *NEGLIGIBLE*]                          |                                 |
++----------------------------------------------------------------------------+---------------------------------+
+
+.. glossary::
+
+   FSR (kg)
+
+        The returned value is approximate.
+
+        **Good practice**: instead of the value itself, take in account the variation of the value,
+        in order to detect any change at foot contact level.
+
+   FSR total (kg)
+
+        The total weight value is the sum of all 4 FSR of the foot.
+
+   center of pressure (m)
+
+        CenterOfPressure values are computed barycenter of FSR (using individual weight
+        and position) for each foot. The value returned is in m for X and Y, from the
+        foot reference.
+        Using centerOfPressure and weight from both foot, you can compute a barycenter
+        for all weight on the robot.
+
+.. Warning::
+
+    When the weight on the foot is very low, the center of pressure will likely be bad.
+
+.. Warning::
+
+    If the real center of pressure go outside the 4 FSR parallelogram, the value
+    of weight and centre of pressure could become bad, due to internal mechanical constraint.
+

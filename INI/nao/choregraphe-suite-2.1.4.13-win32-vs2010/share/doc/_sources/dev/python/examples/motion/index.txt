@@ -1,0 +1,15 @@
+Motion
+======
+
+This section contains a series of Motion examples written in Python.
+
+.. toctree::
+   :maxdepth: 2
+
+   poses
+   stiffness
+   walk
+   footsteps
+   cartesian
+   whole_body
+   collision_detection

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Enable or disable the Fall Manager.&#x0A;&#x0A;It is automatically set to its previous state when the behavior is stopped." x="245" y="580">
+        <bitmap>media/images/box/sensors/fall_manager.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.motion = ALProxy("ALMotion")
+        self.bFallManagerEnabled = True
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        self.motion.setFallManagerEnabled(self.bFallManagerEnabled)
+
+    def onInput_onSet(self):
+        self.bFallManagerEnabled = self.motion.getFallManagerEnabled()
+        enable = (self.getParameter("Action") == "Enable")
+        self.motion.setFallManagerEnabled(enable)
+        self.onDone()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onDone" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+        <Parameter name="Action" inherits_from_parent="0" content_type="3" value="Enable" default_value="Enable" custom_choice="0" tooltip="Choose if you want to enable or disable the fall manager executing this box." id="4">
+            <Choice value="Disable" />
+            <Choice value="Enable" />
+        </Parameter>
+    </Box>
+</ChoregrapheBox>

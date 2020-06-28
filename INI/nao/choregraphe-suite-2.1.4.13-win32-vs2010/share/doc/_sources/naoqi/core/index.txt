@@ -1,0 +1,89 @@
+.. include:: ../../bulk/common.rst
+
+.. _naoqi-core:
+
+NAOqi Core
+==========
+
+.. toctree::
+   :hidden:
+
+   autonomouslife
+   albehaviormanager
+   ../connectionmanager/index
+   extractors
+   almemory
+   almodule
+   ../notificationmanager/index
+   alpreferencemanager
+   alresourcemanager
+   alstore
+   alsystem
+   alusersession
+   altabletservice
+   worldrepresentation
+   packagemanager
+   albonjour
+   allauncher
+   allogger
+   alpreferences
+
+
+Core modules
+------------
+
+**NAOqi** comes with a list of core modules that are always available.
+
+Every module comes with a list of default methods.
+
+You can read the API that is shared by every module in the :ref:`almodule-api`
+section.
+
+Vision and perception modules also inherit methods from :ref:`extractors`.
+
+A few general purpose modules are also available by default.
+
++--------------------------------+------------------------------------------------------------------------------------+
+| Use ...                        | To ...                                                                             |
++================================+====================================================================================+
+| :ref:`autonomouslife`          | Maintain the robot life cycle and manage the launching of activities               |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`albehaviormanager`       | Start and stop behaviors                                                           |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alconnectionmanager`     | Manage connection to a network and its configuration                               |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`almemory`                | Get and insert data for every other module to use                                  |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`almodule`                | Create your own modules                                                            |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alnotificationmanager`   | Manage notifications                                                               |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alpreferencemanager`     | Read and save robot settings                                                       |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alresourcemanager`       | Handle resources                                                                   |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alstore`                 | Retrieve applications from the |store|                                             |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alsystem`                | Manage the robot system                                                            |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alusersession`           | Manages the state of active users, and the bindings to their data                  |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`altabletservice`         | Load web application, play videos, and manage the tablet itself                    |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alworldrepresentation`   | Store long term data about detected objects in a spatially structured database     |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`packagemanager`          | Manage packages: installation, uninstallation                                      |
++--------------------------------+------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+| Deprecated modules                                                                                                  |
++================================+====================================================================================+
+| :ref:`albonjour`               | Advertises NAOqi on Bonjour                                                        |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`ALLauncher <allauncher>` | Loads dynamic libraries inside NAOqi process and runs executables                  |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`ALLogger <allogger>`     | Logs information on the robot from a remote machine                                |
++--------------------------------+------------------------------------------------------------------------------------+
+| :ref:`alpreferences`           | Read and save settings from configuration files                                    |
++--------------------------------+------------------------------------------------------------------------------------+

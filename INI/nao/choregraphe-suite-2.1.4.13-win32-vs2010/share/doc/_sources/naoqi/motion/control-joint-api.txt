@@ -1,0 +1,197 @@
+.. _control-joint-api:
+
+Joint control API
++++++++++++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <control-joint>` | API | :ref:`Tutorial <control-joint-tuto>`
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/control-joint_toc.rst
+
+
+
+
+Methods
+--------
+
+
+.. cpp:function:: void ALMotionProxy::angleInterpolation( const AL::ALValue& names, const AL::ALValue& angleLists, const AL::ALValue& timeLists, const bool& isAbsolute )
+
+  Interpolates one or multiple joints to a target angle or along timed trajectories. This is a blocking call.
+
+  :param names: Name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param angleLists: An angle, list of angles or list of list of angles in radians
+
+  :param timeLists: A time, list of times or list of list of times in seconds
+
+  :param isAbsolute: If true, the movement is described in absolute angles, else the angles are relative to the current angle.
+
+  :download:`almotion_angleinterpolation.cpp </samples/cpp/almotion/almotion_angleinterpolation.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_angleinterpolation.cpp
+     :language: cpp
+
+
+  :download:`almotion_angleInterpolation.py </samples/python/almotion/almotion_angleInterpolation.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_angleInterpolation.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::angleInterpolationWithSpeed( const AL::ALValue& names, const AL::ALValue& targetAngles, const float& maxSpeedFraction )
+
+  Interpolates one or multiple joints to a target angle, using a fraction of max speed. Only one target angle is allowed for each joint. This is a blocking call.
+
+  :param names: Name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param targetAngles: An angle, or list of angles in radians
+
+  :param maxSpeedFraction: A fraction.
+
+  :download:`almotion_angleinterpolationwithspeed.cpp </samples/cpp/almotion/almotion_angleinterpolationwithspeed.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_angleinterpolationwithspeed.cpp
+     :language: cpp
+
+
+  :download:`almotion_angleInterpolationWithSpeed.py </samples/python/almotion/almotion_angleInterpolationWithSpeed.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_angleInterpolationWithSpeed.py
+     :language: py
+
+
+
+.. cpp:function:: void ALMotionProxy::angleInterpolationBezier( const std::vector<std::string>& jointNames, const AL::ALValue& times, const AL::ALValue& controlPoints )
+
+  Interpolates a sequence of timed angles for several motors using Bezier control points. This is a blocking call.
+
+  :param jointNames: A vector of joint names, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param times: A ragged ALValue matrix of floats. Each line corresponding to a motor, and column element to a control point.
+
+  :param controlPoints: A list of angles in radians or an ALValue array of arrays
+      each containing [float angle, Handle1, Handle2],
+      where Handle is [int InterpolationType, float dTime, float dAngle]
+      describing the handle offsets relative to the angle and time of the point.
+      The first Bezier param describes the handle that controls the curve preceding the point,
+      the second describes the curve following the point.
+
+  :download:`almotion_angleinterpolationbezier.cpp </samples/cpp/almotion/almotion_angleinterpolationbezier.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_angleinterpolationbezier.cpp
+     :language: cpp
+
+  :download:`almotion_angleInterpolationBezier.py </samples/python/almotion/almotion_angleInterpolationBezier.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_angleInterpolationBezier.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::setAngles( const AL::ALValue& names, const AL::ALValue& angles, const float& fractionMaxSpeed )
+
+  Sets angles. This is a non-blocking call.
+
+  :param names: The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param angles: One or more angles in radians
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :download:`almotion_setangles.cpp </samples/cpp/almotion/almotion_setangles.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_setangles.cpp
+     :language: cpp
+
+
+  :download:`almotion_setAngles.py </samples/python/almotion/almotion_setAngles.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setAngles.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::changeAngles( const AL::ALValue& names, const AL::ALValue& changes, const float& fractionMaxSpeed )
+
+  Changes Angles. This is a non-blocking call.
+
+  :param names: The name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param changes: One or more changes in radians
+
+  :param fractionMaxSpeed: The fraction of maximum speed to use
+
+  :download:`almotion_changeangles.cpp </samples/cpp/almotion/almotion_changeangles.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_changeangles.cpp
+     :language: cpp
+
+
+  :download:`almotion_changeAngles.py </samples/python/almotion/almotion_changeAngles.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_changeAngles.py
+     :language: py
+
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getAngles( const AL::ALValue& names, const bool& useSensors )
+
+  Gets the angles of the joints
+
+  :param names: Names the joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param useSensors: If true, sensor angles will be returned
+
+  :return: Joint angles in radians.
+
+  :download:`almotion_getangles.cpp </samples/cpp/almotion/almotion_getangles.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getangles.cpp
+     :language: cpp
+
+
+  :download:`almotion_getAngles.py </samples/python/almotion/almotion_getAngles.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getAngles.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::closeHand(const std::string& handName)
+
+  Closes the hand, then cuts motor current to conserve energy. This is a blocking call.
+
+  :param handName: The name of the hand. Could be: "RHand" or "LHand"
+
+  :download:`almotion_closehand.cpp </samples/cpp/almotion/almotion_closehand.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_closehand.cpp
+     :language: cpp
+
+
+  :download:`almotion_closeHand.py </samples/python/almotion/almotion_closeHand.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_closeHand.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::openHand(const std::string& handName)
+
+  Opens the hand, then cuts motor current to conserve energy. This is a blocking call.
+
+  :param handName: The name of the hand. Could be: "RHand or "LHand"
+
+  :download:`almotion_openhand.cpp </samples/cpp/almotion/almotion_openhand.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_openhand.cpp
+     :language: cpp
+
+
+  :download:`almotion_openHand.py </samples/python/almotion/almotion_openHand.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_openHand.py
+     :language: py

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="1" localization="0" tooltip="Starts the behavior of the name given as input." x="184" y="168">
+        <bitmap>media/images/box/box-diagram.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_startBehavior(self, p):
+        bm = ALProxy("ALBehaviorManager")
+        bm.startBehavior(p)
+        self.onBehaviorStarted(p) #~ activate output of the box]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="startBehavior" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onBehaviorStarted" type="3" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished. Recalls the behavior name." id="3" />
+        <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="Triggered if an error occurs at behavior start." id="4" />
+    </Box>
+</ChoregrapheBox>

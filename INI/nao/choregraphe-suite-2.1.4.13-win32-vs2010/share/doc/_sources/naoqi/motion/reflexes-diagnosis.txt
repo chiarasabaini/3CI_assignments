@@ -1,0 +1,193 @@
+.. include:: ../../bulk/common.rst
+
+.. _reflexes-diagnosis:
+.. _diagnosis_effect:
+
+Diagnosis effect
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   reflexes-diagnosis-api
+
+:ref:`naoqi-motion` - Overview | :ref:`API <reflexes-diagnosis-api>`
+
+------------
+
+What it does
+------------
+
+**Diagnosis effect** is a reflex designed to protect the robot and the user in
+case of a malfunctioning **Joint**, **Actuator** or **Sensor**.
+
+It allows the robot to react appropriately according to the
+issues and errors raised by :ref:`aldiagnosis` and :ref:`albodytemperature` modules.
+
+How it works
+------------
+
+Depending on the :term:`Level of failure severity`, the **Diagnosis effect** reflex may:
+
+- Disable some reflexes,
+
+- Block some joint controls, and/or
+
+- Trigger an appropriate :ref:`rest_reflexes`.
+
+
+For example:
+
+- if one of the Head joints has a diagnosis error, the :ref:`control-stiffness`
+  on the joints of the head :ref:`chain<nao_chains>` is disabled and it will not
+  be possible to reactivate it.
+
+- if the inertial sensor does not answer, the :ref:`reflexes-fall-manager` reflex
+  is disabled.
+
+The diagnosis effect on the robot, depends on the device
+:term:`Level of failure severity`, if an actuator or a sensor is detected as unusable.
+
+Joints and Actuators
+++++++++++++++++++++
+
++----------------+----------------------------------------------------------------------+
+| Severity       | Diagnosis effect on the robot                                        |
++================+======================================================================+
+| *NEGLIGIBLE*   | No effect on the robot.                                              |
++----------------+----------------------------------------------------------------------+
+| *SERIOUS*      | The :ref:`control-stiffness` on the :ref:`nao_chains` that includes  |
+|                | the joint or actuator in failure is disabled and it will not         |
+|                | be possible to reactivate it.                                        |
++----------------+----------------------------------------------------------------------+
+| *CRITICAL*     | The robot goes to rest and refuses to wake up.                       |
+|                | So, the robot will not be usable.                                    |
++----------------+----------------------------------------------------------------------+
+
+Sensors
++++++++
+
++----------------+----------------------------------------------------------------------+
+| Severity       | Diagnosis effect on the robot                                        |
++================+======================================================================+
+| *NEGLIGIBLE*   | No effect on the robot                                               |
++----------------+----------------------------------------------------------------------+
+| *SERIOUS*      | The reflex based on this sensor is not possible anymore so           |
+|                | the :ref:`reflexes-fall-manager` and the                             |
+|                | :ref:`reflexes-smart-stiffness` will be disabled.                    |
++----------------+----------------------------------------------------------------------+
+| *CRITICAL*     | The robot goes to rest and refuses to wake up.                       |
+|                | So, the robot will not be usable.                                    |
++----------------+----------------------------------------------------------------------+
+
+
+.. _rest_reflexes:
+
+|juju| |roboJ| only - Rest reflexes
++++++++++++++++++++++++++++++++++++++
+
+The following table lists the hardware problems detected by :ref:`aldiagnosis`,
+the corresponding Rest reflex and the permanent effect of the problem on
+**ALMotion**. The permanent effect stays until the error disappears.
+
++------------------+-----------------+--------------+---------------------------------------+------------------------------+
+| Diagnosis type   | Device          | Error type   | Rest reflex                           | Permanent effect             |
++==================+=================+==============+=======================================+==============================+
+|Motor Temperature |  Wheels         | Status 2     | Wheel - safe resting                  | Moves are forbidden.         |
+|                  |                 +--------------+---------------------------------------+------------------------------+
+|                  |                 | Status 3     | Wheel - immediate resting             | Moves are forbidden.         |
+|                  +-----------------+--------------+---------------------------------------+------------------------------+
+|                  |  Leg            | Status 2     | Body - safe resting                   | Wake up is forbidden.        |
+|                  |                 +--------------+---------------------------------------+------------------------------+
+|                  |                 | Status 3     | Body - safe resting, immediate on Leg | Wake up is forbidden.        |
+|                  +-----------------+--------------+---------------------------------------+------------------------------+
+|                  |  Arms or Head   | Status 2     | Chain - safe resting                  | Chain stiffness is kept at 0.|
+|                  |                 +--------------+---------------------------------------+------------------------------+
+|                  |                 | Status 3     | Chain - immediate resting             | Chain stiffness is kept at 0.|
++------------------+-----------------+--------------+---------------------------------------+------------------------------+
+|Motor board       | Wheels          | NACKs or     | Wheel - immediate resting             | Moves are forbidden.         |
+|passive diagnosis +-----------------+ error code   +---------------------------------------+------------------------------+
+|                  | Leg             |              | Body - immediate resting              | Wake up is forbidden.        |
+|                  +-----------------+              +---------------------------------------+------------------------------+
+|                  | Arms or Head    |              | Chain - immediate resting             | Chain stiffness is kept at 0.|
++------------------+-----------------+--------------+---------------------------------------+------------------------------+
+|Motor board       | Wheel           | Joint        | Wheel - immediate resting             | Moves are forbidden.         |
+|active diagnosis  +-----------------+ position     +---------------------------------------+------------------------------+
+|                  | Leg             | error        | Body - safe resting                   | Wake up is forbidden.        |
+|                  +-----------------+              +---------------------------------------+------------------------------+
+|                  | Arms or Head    |              | Chain - safe resting                  | Chain stiffness is kept at 0.|
++------------------+-----------------+--------------+---------------------------------------+------------------------------+
+| Sensor           | Fuse            | Status 2     | Body - safe resting, immediate on arms| Wake up is forbidden.        |
+| Temperature      |                 +--------------+---------------------------------------+------------------------------+
+|                  |                 | Status 3     | Body - immediate resting              | Wake up is forbidden.        |
+|                  +-----------------+--------------+---------------------------------------+------------------------------+
+|                  | Battery         | Status 2     | Body - safe resting                   | Wake up is forbidden.        |
+|                  |                 +--------------+---------------------------------------+------------------------------+
+|                  |                 | Status 3     | Body - immediate resting              | Wake up is forbidden.        |
++------------------+-----------------+--------------+---------------------------------------+------------------------------+
+| Sensor passive   | HAL             | Crashed      | Body - immediate resting              | Wake up is forbidden.        |
+| diagnosis        +-----------------+--------------+---------------------------------------+------------------------------+
+|                  | ChestBoard      | USB          | Body - immediate resting              | Wake up is forbidden.        |
+|                  |                 | disconnection|                                       |                              |
+|                  +-----------------+--------------+---------------------------------------+------------------------------+
+|                  | Brake           | Stays close  | Body - immediate resting              | Wake up is forbidden.        |
+|                  |                 +--------------+---------------------------------------+------------------------------+
+|                  |                 | Stays open   | Body - safe resting                   | Wake up is forbidden.        |
++------------------+-----------------+--------------+---------------------------------------+------------------------------+
+| Sensor active    | Brake           | Not          |                                       |                              |
+| diagnosis        |                 | functioning  |                                       |                              |
+|                  +-----------------+--------------+                                       |                              |
+|                  | Elastomere      | Not          |                                       |                              |
+|                  |                 | functioning  |                                       |                              |
+|                  +-----------------+--------------+                                       |                              |
+|                  | Laser           | Freeze       |                                       |                              |
+|                  +-----------------+--------------+                                       |                              |
+|                  | 2D Camera       | Not          |                                       |                              |
+|                  |                 | responding   |                                       |                              |
+|                  +-----------------+--------------+   Body - safe resting                 |   Wake up is forbidden.      |
+|                  | 3D Camera       | Not          |                                       |                              |
+|                  |                 | responding   |                                       |                              |
+|                  +-----------------+--------------+                                       |                              |
+|                  | Audio           | Not          |                                       |                              |
+|                  |                 | functioning  |                                       |                              |
+|                  +-----------------+--------------+                                       |                              |
+|                  | Inertial        | Not          |                                       |                              |
+|                  |                 | responding   |                                       |                              |
+|                  +-----------------+--------------+---------------------------------------+------------------------------+
+|                  | Sonar           | Freeze       |                                                                      |
+|                  +-----------------+--------------+                         No effect                                    |
+|                  | Bumper          | Blocked      |                                                                      |
++------------------+-----------------+--------------+----------------------------------------------------------------------+
+
+
+Rest reflexes - Detailed description
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+======================================= ==============================================================================================================================================
+Name                                    Description
+======================================= ==============================================================================================================================================
+Wheels - Safe resting                   The wheels are stopped gently.
+Wheels - Immediate resting              The wheels are stopped immediately.
+Chain  - Safe resting                   The chain goes to a safe posture, then chain stiffness is set to 0. Chain can be "RArm", "LArm", "Head".
+Chain  - Immediate resting              The chain stiffness is set to 0 immediately. Chain can be "RArm", "LArm", "Head".
+Body   - Safe resting                   The wheels are stopped gently. The robot goes to a safe posture, then stiffness is set to 0.
+Body   - Immediate resting              The wheels are stopped immediately. The robot stiffness is set to 0 immediately.
+Body   - Slumping and resting           The wheels are stopped gently. The robot goes to a safe **Crouch** posture, then stiffness is set to 0.
+Body - Safe resting, Immediate on Arms  The wheels are stopped gently. Arm stiffness is set to 0 immediately. The leg and head go to a safe posture then stiffness is set to 0.
+Body - Safe resting, Immediate on Leg   The wheels are stopped immediately. Leg stiffness is set to 0 immediately. The arms and head go to a safe posture then stiffness is set to 0.
+======================================= ==============================================================================================================================================
+
+
+Getting started
+---------------
+
+By default, the motion reflex based on the diagnosis is active on the robot.
+
+
+How to disable this reflex
+++++++++++++++++++++++++++
+
+You can simply disable the Diagnosis effect in motion by calling the **ALMotion** API.
+
+- Function :cpp:func:`ALMotionProxy::setDiagnosisEffectEnabled`

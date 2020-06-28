@@ -1,0 +1,193 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qiBuild and qmake &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="qiBuild: the build framework" href="../../overview.html" />
+    <link rel="next" title="qiBuild and autotools" href="autotools.html" />
+    <link rel="prev" title="qiBuild and ROS build system" href="ros.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="ros.html" title="qiBuild and ROS build system">previous</a>
+     |
+    <a href="../../overview.html" title="qiBuild: the build framework" accesskey="U">up</a>
+   |
+    <a href="autotools.html" title="qiBuild and autotools">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="beginner-qibuild-other-qmake">
+            
+  <div class="section" id="qibuild-and-qmake">
+<span id="id1"></span><h1>qiBuild and qmake<a class="headerlink" href="#qibuild-and-qmake" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This section is targeted towards qmake users wanting to know more about
+qiBuild</p>
+</div>
+<div class="section" id="general-comparison">
+<h2>General comparison<a class="headerlink" href="#general-comparison" title="Permalink to this headline">¶</a></h2>
+<p>Both frameworks try to be usable on as much as platforms as possible</p>
+</div>
+<div class="section" id="what-is-in-qmake-and-not-in-qibuild">
+<h2>What is in qmake and not in qiBuild<a class="headerlink" href="#what-is-in-qmake-and-not-in-qibuild" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Nice integration is some IDEs (QtCreator mostly)</li>
+</ul>
+</div>
+<div class="section" id="what-is-in-qibuild-and-not-in-qmake">
+<h2>What is in qiBuild and not in qmake<a class="headerlink" href="#what-is-in-qibuild-and-not-in-qmake" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Nice Visual Studio support. You can use qmake with Visual Studio
+but it is a bit clumsy.</li>
+</ul>
+</div>
+<div class="section" id="using-qibuild-with-qmake-projects">
+<h2>Using qiBuild with qmake projects<a class="headerlink" href="#using-qibuild-with-qmake-projects" title="Permalink to this headline">¶</a></h2>
+<p>Right now there are no plans to make the two work together.</p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="ros.html" title="qiBuild and ROS build system">qiBuild and ROS build system</a>
+     |
+    <a href="../../overview.html" title="qiBuild: the build framework" accesskey="U">qiBuild: the build framework</a>
+   |
+    <a href="autotools.html" title="qiBuild and autotools">qiBuild and autotools</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Welcome to qiBuild documentation !</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../overview.html">qiBuild: the build framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cmake.html">qiBuild and CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ros.html">qiBuild and ROS build system</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">qiBuild and qmake</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autotools.html">qiBuild and autotools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html">qiBuild tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qiBuild and qmake</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#general-comparison">General comparison</a></li>
+<li><a class="reference internal" href="#what-is-in-qmake-and-not-in-qibuild">What is in qmake and not in qiBuild</a></li>
+<li><a class="reference internal" href="#what-is-in-qibuild-and-not-in-qmake">What is in qiBuild and not in qmake</a></li>
+<li><a class="reference internal" href="#using-qibuild-with-qmake-projects">Using qiBuild with qmake projects</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="ros.html" title="qiBuild and ROS build system">previous</a>
+     |
+    <a href="../../overview.html" title="qiBuild: the build framework" accesskey="U">up</a>
+   |
+    <a href="autotools.html" title="qiBuild and autotools">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

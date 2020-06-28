@@ -1,0 +1,110 @@
+.. _naoqi-audio:
+
+NAOqi Audio
+=============
+
+.. toctree::
+   :hidden:
+
+   alanimatedspeech
+   alaudiodevice
+   alaudioplayer
+   alaudiorecorder
+   alsoundlocalization
+   dialog/aldialog
+   alsounddetection
+   alspeechrecognition
+   altexttospeech
+   alvoiceemotionanalysis
+   alaudiosourcelocalization
+
+----------
+
+.. seealso::
+
+   :ref:`Loudspeakers Hardware <robot-loudspeaker>`, :ref:`Microphones Hardware <robot-microphone>`
+
+This section describes the audio software components of your robot.
+
+Sound management
+-----------------
+
++----------------------------------+----------------------------------------------------------------+
+| Use ...                          | To ...                                                         |
++==================================+================================================================+
+| :ref:`alaudiodevice`             | Manage audio inputs and outputs.                               |
+|                                  |                                                                |
+|                                  | This module is used by all other audio modules except          |
+|                                  | **ALAudioPlayer**.                                             |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`alaudioplayer`             | Play audio files on the robot.                                 |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`alaudiorecorder`           | Record audio files on the robot.                               |
++----------------------------------+----------------------------------------------------------------+
+
+Sound detection and localization
+---------------------------------
+
++----------------------------------+----------------------------------------------------------------+
+| Use ...                          | To ...                                                         |
++==================================+================================================================+
+| :ref:`alsounddetection`          | Detect sound events.                                           |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`alsoundlocalization`       | Localize sounds detected by the **ALSoundDetection** module.   |
++----------------------------------+----------------------------------------------------------------+
+
+.. _language_management:
+
+Language management
+--------------------
+
++----------------------------------+----------------------------------------------------------------+
+| Use ...                          | To ...                                                         |
++==================================+================================================================+
+| :ref:`alspeechrecognition`       | Make the robot understand what a human says.                   |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`altexttospeech`            | Make the robot speak.                                          |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`alanimatedspeech`          | Combine speech and gestures.                                   |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`aldialog`                  | Create a basic knowledge database for conversational skills.   |
++----------------------------------+----------------------------------------------------------------+
+| :ref:`alvoiceemotionanalysis`    | Identifies the emotion expressed by the speaker's voice.       |
++----------------------------------+----------------------------------------------------------------+
+
+
+Languages installed on your robot
+++++++++++++++++++++++++++++++++++
+
+By default, two languages are installed on the robot:
+
+* **English** and
+* your local language (or the second language you have asked for).
+
+To know which languages are installed on your robot, use:
+
+* :cpp:func:`ALSpeechRecognitionProxy::getAvailableLanguages` or
+* :cpp:func:`ALTextToSpeechProxy::getAvailableLanguages`
+
+Ordering additional Languages
++++++++++++++++++++++++++++++
+
+It is possible to order two additional languages, among the
+:ref:`language_codes`.
+
+To do so:
+
+| Contact your local Sales Representative or the Customer support.
+| For further details, see: :ref:`contacting_support_nao`.
+
+.. or :ref:`contacting_support_juliette`.
+
+
+Deprecated modules
+-------------------
+
++---------------------------------------------------------------------------------------------------------------------------+
+| Deprecated modules                                                                                                        |
++======================================+====================================================================================+
+| :ref:`alaudiosourcelocalization`     | Use :ref:`alsounddetection` instead.                                               |
++--------------------------------------+------------------------------------------------------------------------------------+

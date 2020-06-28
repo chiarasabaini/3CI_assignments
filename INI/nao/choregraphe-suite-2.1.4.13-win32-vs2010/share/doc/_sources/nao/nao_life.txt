@@ -1,0 +1,121 @@
+.. include:: ../bulk/common.rst
+
+.. _nao_life:
+
+Understanding Autonomous Life settings
+=======================================
+
+.. _alife:
+
+Autonomous Life
+-----------------
+
+**Autonomous Life** is the key element making |roboN| alive and responsive.
+To be fully effective, it requires to be combined with :ref:`basic_channel` and
+:ref:`installed_apps`.
+
+To activate or deactivate **Autonomous Life**, see: :ref:`nao_freeze`.
+
+Default settings
+++++++++++++++++
+
+By default, when you receive your |roboN|, only the **Autonomous Life** is
+installed and turned on:
+
++------------------------------------------------------------------------------+
+| **Alive, but deaf and dumb**:                                                |
+| :ref:`alife`: **ON** - :ref:`basic_channel`: **OFF**                         |
++------------------------------------------------------------------------------+
+| On startup:                                                                  |
+|                                                                              |
+| * If he is on his feet, |roboN| gets up,                                     |
+| * If he is sitting, |roboN| remains seated.                                  |
+|                                                                              |
+| In all cases, |roboN| wags slightly, and seems to be waiting for something   |
+| to happen.                                                                   |
+|                                                                              |
+| But he cannot understand your questions and has no conversation skills.      |
++------------------------------------------------------------------------------+
+
+Recommended settings
+++++++++++++++++++++
+
+We recommend to subscribe to the :ref:`basic_channel`.
+
++------------------------------------------------------------------------------+
+| **Alive and responsive**:                                                    |
+| :ref:`alife`: **ON** - :ref:`basic_channel`: **ON**                          |
++------------------------------------------------------------------------------+
+| On startup:                                                                  |
+|                                                                              |
+| * If he is on his feet, |roboN| gets up,                                     |
+| * If he is sitting, |roboN| remains seated.                                  |
+|                                                                              |
+| Then, |roboN|                                                                |
+| orientates its head towards human, and                                       |
+| is able to react to basic stimuli, such as sounds, movements, or tactile     |
+| contacts.                                                                    |
+|                                                                              |
+| * If you stay away, |roboN| does not talk, but looks for people willing to   |
+|   talk and interact.                                                         |
+|                                                                              |
+| * If you come closer, |roboN| listens and tries to make a relevant answer.   |
+|                                                                              |
+| For further details, see: :ref:`nao_interacting`.                            |
++------------------------------------------------------------------------------+
+
+.. _basic_channel:
+
+Basic Channel
++++++++++++++++
+
+Subscribing to the **Basic Channel** will install several items on |roboN|,
+providing mainly dialog abilities, but also push and fall recovery abilities, and
+useful sounds gathered in the **Aldebaran soundSet**.
+
+Subscribing to the **Basic Channel** is mandatory to fully use
+**Autonomous life**, and more specifically, to run **Applications** using
+**Trigger sentences**, or **Aldebaran soundSet**.
+
+For further details, see:
+
+* :ref:`nao_store_channel`.
+* For developers: :ref:`beha_properties`, :ref:`soundset`.
+
+.. _installed_apps:
+
+Installed Activities
++++++++++++++++++++++
+
+Additionally, **Applications** can be installed, from the **Store** and/or from
+**Choregraphe**.
+
+For further details, see: :ref:`nao_store`.
+
+**Applications** may content **Solitary** and/or **Interactive Activities**.
+
+Depending on the launch conditions of these **Activities**,
+you see them either autonomously launched at some point,
+or explicitly launched by voice when you talk to him.
+
+For further details, see: :ref:`life_activity_man`.
+
+The more applications you installed on |roboN|, the richer his living behavior
+will be.
+
+
+What if I do not want autonomous life
+--------------------------------------
+
+You may disable **Autonomous Life**:
+
++------------------------------------------------------------------------------+
+| **Still and motionless**:                                                    |
+| :ref:`alife`: **OFF** - :ref:`basic_channel`: **OFF**                        |
++------------------------------------------------------------------------------+
+| In this state, you can use |roboN| as an experimental tool, to test a        |
+| new program or to study a very specific skill of your robot.                 |
+|                                                                              |
+| But if you want to use or to create interactive **Applications**,            |
+| you should create and test them with the recommended settings.               |
++------------------------------------------------------------------------------+

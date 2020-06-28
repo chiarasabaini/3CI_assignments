@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="This box is dedicated to make the robot track a predefined target using Whole Body&#x0A;(WB) constraints.&#x0A;In this mode, the robot tries to keep an initial position and his feet stuck on the&#x0A;ground.&#x0A;&#x0A;!!Warning!! the robot needs to be standing when launching this box.&#x0A;&#x0A;Note: The target can be set in the parameters and could be either a red&#x0A;ball with a radius of 6cm or a human face." x="216" y="437">
+        <bitmap>media/images/box/tracker/whole_body_tracker.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[import time
+import math
+import motion
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.trackerProxy = None
+        self.motionProxy =  ALProxy("ALMotion")
+        self.postureProxy =  ALProxy("ALRobotPosture")
+        self.lost = True
+        self.track = False
+        self.threadTime = 0.2
+        self.countLost = 0
+        self.TargetName = None
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bMustStop = True
+        if (self.bIsRunning):
+            time.sleep(self.threadTime)
+            if(self.trackerProxy != None):
+                if(self.trackerProxy.isActive()):
+                    self.trackerProxy.stopTracker()
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+
+    def onInput_onStart(self):
+        if(not self.bIsRunning):
+            self.bIsRunning = True
+            self.bMustStop = False
+            try:
+                TargetName = self.getParameter("Target choice")
+                if(self.TargetName != TargetName):
+                    self.TargetName = TargetName
+                if (self.TargetName == "Red Ball"):
+                    self.trackerProxy = ALProxy("ALRedBallTracker")
+                else:
+                    self.trackerProxy = ALProxy("ALFaceTracker")
+                if(self.trackerProxy != None and not self.bMustStop):
+                    if(not self.trackerProxy.isActive()):
+                        self.postureProxy.goToPosture("StandInit", 0.8)
+                        self.trackerProxy.setWholeBodyOn(True)
+                        self.trackerProxy.startTracker()
+                        while( not self.bMustStop ):
+                            self.getTargetInformation()
+                            if( not self.bMustStop ):
+                                time.sleep(self.threadTime)
+            finally:
+                self.onStopped()
+                self.bIsRunning = False
+
+    def onInput_onStop(self):
+        self.onUnload()
+
+    def getTargetInformation(self):
+        TargetName = self.getParameter("Target choice")
+        if(self.TargetName != TargetName):
+            self.bMustStop = True
+            self.bIsRunning = False
+            time.sleep(self.threadTime)
+            if(self.trackerProxy != None):
+                if(self.trackerProxy.isActive()):
+                    self.trackerProxy.stopTracker()
+
+            self.onInput_onStart()
+            return
+
+        if(self.trackerProxy != None):
+            if (self.trackerProxy.isNewData()):
+                self.countLost = 0
+                if(not self.track):
+                    self.track = True
+                    self.lost = False
+                    self.foundTarget()
+                self.trackerProxy.getPosition()
+            else:
+                self.countLost = self.countLost + 1
+                if(self.countLost*self.threadTime > self.getParameter("Time before lost (s)")):
+                    if (not self.lost):
+                        self.lost = True
+                        self.track = False
+                        self.isLost()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="4" />
+        <Output name="foundTarget" type="1" type_size="1" nature="2" inner="0" tooltip="A signal is sent when the robot starts to track the target. The signal is stimulated every&#x0A;time it starts the tracking of the target." id="5" />
+        <Output name="isLost" type="1" type_size="1" nature="2" inner="0" tooltip='A signal is sent every time the robot looses the target. &#x0A;Note: the wait time before this signal is sent is defined in the &quot;Time before lost&quot; parameter.' id="6" />
+        <Parameter name="Target choice" inherits_from_parent="0" content_type="3" value="Red Ball" default_value="Red Ball" custom_choice="0" tooltip="This parameter is used to define which target to track." id="7">
+            <Choice value="Red Ball" />
+            <Choice value="Face" />
+        </Parameter>
+        <Parameter name="Time before lost (s)" inherits_from_parent="0" content_type="2" value="1" default_value="1" min="0" max="5" tooltip="If there is no detection of the target after this period of time, then the target is&#x0A;considered as lost and the isLost output is activated." id="8" />
+        <Resource name="All motors" type="Lock" timeout="0" />
+    </Box>
+</ChoregrapheBox>

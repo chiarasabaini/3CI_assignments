@@ -1,0 +1,71 @@
+.. include:: ../../bulk/common.rst
+
+.. _alcloseobjectdetection-api:
+
+ALCloseObjectDetection API
+==========================
+
+:ref:`naoqi-vision` - :ref:`Overview <alcloseobjectdetection>` | API
+
+---------
+
+|3d| This module requires a robot with a 3D sensor.
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alcloseobjectdetectionproxy.h>
+
+
+
+Method list
+-----------
+
+.. cpp:class:: ALCloseObjectDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+
+Events lists
+------------
+
+* :naoqi:event:`CloseObjectDetection/ObjectDetected`
+* :naoqi:event:`CloseObjectDetection/ObjectNotDetected`
+* :naoqi:event:`ALTracker/CloseObjectDetected`
+
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`CloseObjectDetection/ObjectInfo`
+
+
+Events
+------
+
+.. naoqi:event:: CloseObjectDetection/ObjectDetected()
+
+  Raised each time an object is detected in the "close range" of the depth camera.
+
+.. naoqi:event:: CloseObjectDetection/ObjectNotDetected()
+
+  Raised, only once, when no object is detected anymore in the "close range" of the
+  depth camera.
+
+.. naoqi:event:: ALTracker/CloseObjectDetected()
+
+  Raised each time an object is detected in the "close range" of the depth camera,
+  with a structure that can be used with function :cpp:func:`ALTrackerProxy::trackEvent`
+  of the module **ALTracker**.
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: AL::ALValue CloseObjectDetection/ObjectInfo
+
+  Contains the information about the latest detected close object. Please refer to
+  :ref:`alcloseobjectdetection` for details.

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-21 06:19:52 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjEyOjU4ICI7MzI5MA=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjE5OjUyICI7NTszNDAz"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci un numero positivo:&quot;" newline="True"/>
+            <input variable="n"/>
+            <if expression="n&gt;=4 &amp;&amp; n&lt;=10">
+                <then>
+                    <output expression="n&amp;&quot; appariene all'intervallo [4;10]&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="n&gt;=15 &amp;&amp; n&lt;=20">
+                        <then>
+                            <output expression="n&amp;&quot; appariene all'intervallo [15;20]&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="n&amp;&quot; non appartiene a nessuno degli intervalli presi in considerazione {[4;10][15;20]}&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

@@ -1,0 +1,149 @@
+.. include:: ../../bulk/common.rst
+
+.. _alwavingdetection-api:
+
+ALWavingDetection API
+=====================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <alwavingdetection>` | API
+
+--------
+
+|3d| This module requires a robot with a 3D sensor.
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alwavingdetectionproxy.h>
+
+
+
+
+Method list
+-----------
+
+.. cpp:class:: ALWavingDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* And has the following specific methods:
+
+  * :cpp:func:`ALWavingDetectionProxy::getMaxDistance`
+  * :cpp:func:`ALWavingDetectionProxy::getMinSize`
+  * :cpp:func:`ALWavingDetectionProxy::setMaxDistance`
+  * :cpp:func:`ALWavingDetectionProxy::setMinSize`
+
+
+
+Event list
+----------
+
+* :naoqi:event:`WavingDetection/PersonWaving`
+* :naoqi:event:`WavingDetection/PersonWavingCenter`
+* :naoqi:event:`WavingDetection/PersonWavingLeft`
+* :naoqi:event:`WavingDetection/PersonWavingRight`
+
+
+ALMemory Key list
+-----------------
+
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsWaving`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsWavingCenter`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsWavingLeft`
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/IsWavingRight`
+
+
+
+Methods
+-------
+
+.. cpp:function:: float ALWavingDetectionProxy::getMaxDistance()
+
+   :return: The current value of MaxDistance (in meters). The default value is 2.5m. Please refer to :ref:`alwavingdetection` for details.
+
+.. cpp:function:: float ALWavingDetectionProxy::getMinSize()
+
+   :return: The current value of MinSize (in meters). The default value is 0.1m. Please refer to :ref:`alwavingdetection` for details.
+
+
+.. cpp:function:: bool ALWavingDetectionProxy::setMaxDistance(const float& distance)
+
+   Sets the value of MaxDistance. Please refer to :ref:`alwavingdetection` for details.
+
+   :param distance: Value of the new MaxDistance (in meters). It must be between 0.5 and 3 meters.
+
+   :return: true if the update succeeded.
+
+.. cpp:function:: bool ALWavingDetectionProxy::setMinSize(const float& size)
+
+   Sets the value of MinSize. Please refer to :ref:`alwavingdetection` for details.
+
+   :param size: Value of the new MinSize (in meters). It must be between 0.05 and 0.3 meter.
+
+   :return: true if the update succeeded.
+
+
+Events
+------
+
+.. naoqi:event:: WavingDetection/PersonWaving(int id)
+
+  Raised when someone just waved at the robot.
+
+  :param id: ID of the person.
+
+.. naoqi:event:: WavingDetection/PersonWavingCenter(int id)
+
+  Raised when someone just waved at the robot and the waving was detected ahead of the person.
+  The most usual case is when the person waved with one of his/hers arm, but it has not
+  been possible to detect which arm he/she was using.
+
+  :param id: ID of the person.
+
+.. naoqi:event:: WavingDetection/PersonWavingLeft(int id)
+
+  Raised when someone just waved at the robot and the waving was detected on the left size of the person.
+  The most usual case is when the person waved with his/her left arm.
+
+  :param id: ID of the person.
+
+.. naoqi:event:: WavingDetection/PersonWavingRight(int id)
+
+  Raised when someone just waved at the robot and the waving was detected on the right size of the person.
+  The most usual case is when the person waved with his/her right arm.
+
+  :param id: ID of the person.
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsWaving
+
+  Says whether or not the person is waving at the robot. To have more information about
+  the waving and its position with respect to the body of the person, it is possible
+  to use the 3 next keys: IsWavingLeft, IsWavingRight and IsWavingCenter.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsWavingCenter
+
+  Is set to true when some movements have been detected ahead of the body of the person.
+  The most usual case is when the person is waving with one of his/her arms, but it has not
+  been possible to detect which arm he/she was using.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsWavingLeft
+
+  Is set to true when some movements have been detected on the left size of the person.
+  The most usual case is when the person is waving with his/her left arm.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: bool PeoplePerception/Person/<ID>/IsWavingRight
+
+  Is set to true when some movements have been detected on the right size of the person.
+  The most usual case is when the person is waving with his/her right arm.
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).

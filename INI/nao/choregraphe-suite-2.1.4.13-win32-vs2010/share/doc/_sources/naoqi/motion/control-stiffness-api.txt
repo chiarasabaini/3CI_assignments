@@ -1,0 +1,164 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-stiffness-api:
+
+Stiffness control API
++++++++++++++++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <control-stiffness>` | API
+
+------------
+
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+
+.. include:: bulk/control-stiffness_toc.rst
+
+Event list
+-----------
+
+* :naoqi:event:`robotIsWakeUp`
+* :naoqi:event:`ALMotion/Stiffness/wakeUpStarted`
+* :naoqi:event:`ALMotion/Stiffness/wakeUpFinished`
+* :naoqi:event:`ALMotion/Stiffness/restStarted`
+* :naoqi:event:`ALMotion/Stiffness/restFinished`
+* :naoqi:event:`ALMotion/Protection/DisabledDevicesChanged`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALMotionProxy::wakeUp()
+
+  The robot wakes up: sets Motor on and, if needed, goes to initial position.
+  For example, H25 or H21 sets the Stiffness on and keeps is current position.
+
+  :download:`almotion_wakeUp.py </samples/python/almotion/almotion_wakeUp.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_wakeUp.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::rest()
+
+  The robot rests: goes to a relaxed and safe position and sets Motor off.
+  For example, H25 or H21 goes to the **Crouch** posture and sets the Stiffness off.
+
+  :download:`almotion_rest.py </samples/python/almotion/almotion_rest.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_rest.py
+     :language: py
+
+
+.. cpp:function:: bool ALMotionProxy::robotIsWakeUp()
+
+  :return: True if the robot is awake.
+
+
+.. cpp:function:: void ALMotionProxy::stiffnessInterpolation( const AL::ALValue& names, const AL::ALValue& stiffnessLists, const AL::ALValue& timeLists )
+
+  Interpolates one or multiple joints to a targeted stiffness or along timed trajectories of stiffness. This is a blocking call.
+
+  :param names: Name or names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param stiffnessLists: An stiffness, list of stiffnesses or list of list of stiffnesses
+
+  :param timeLists: A time, list of times or list of list of times.
+
+  :download:`almotion_stiffnessInterpolation.py </samples/python/almotion/almotion_stiffnessInterpolation.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_stiffnessInterpolation.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::setStiffnesses( const AL::ALValue& names, const AL::ALValue& stiffnesses )
+
+  Sets the stiffness of one or more joints. This is a non-blocking call.
+
+  :param names: Names of joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :param stiffnesses: One or more stiffnesses between zero and one.
+
+  :download:`almotion_setstiffnesses.cpp </samples/cpp/almotion/almotion_setstiffnesses.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_setstiffnesses.cpp
+     :language: cpp
+
+
+  :download:`almotion_setStiffnesses.py </samples/python/almotion/almotion_setStiffnesses.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setStiffnesses.py
+     :language: py
+
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getStiffnesses(const AL::ALValue& jointName)
+
+  Gets stiffness of a joint or group of joints
+
+  :param jointName: Name of the joints, chains, "Body", "JointActuators", "Joints" or "Actuators".
+
+  :return: One or more stiffnesses. 1.0 indicates maximum stiffness. 0.0 indicated minimum stiffness
+
+  :download:`almotion_getstiffnesses.cpp </samples/cpp/almotion/almotion_getstiffnesses.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getstiffnesses.cpp
+     :language: cpp
+
+
+  :download:`almotion_getStiffnesses.py </samples/python/almotion/almotion_getStiffnesses.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getStiffnesses.py
+     :language: py
+
+
+Events
+------
+
+.. naoqi:event:: robotIsWakeUp(bool val)
+
+  Raised when the awake status of the robot changes.
+
+  :param val: True if the robot is awake.
+              False if the robot is not awake.
+
+.. naoqi:event:: ALMotion/Stiffness/wakeUpStarted(bool val)
+
+  Raised at :cpp:func:`ALMotionProxy::wakeUp` start.
+
+  :param val: always True.
+
+.. naoqi:event:: ALMotion/Stiffness/wakeUpFinished(bool val)
+
+  Raised at :cpp:func:`ALMotionProxy::wakeUp` finish.
+
+  :param val: always True.
+
+.. naoqi:event:: ALMotion/Stiffness/restStarted(bool val)
+
+  Raised at :cpp:func:`ALMotionProxy::rest` start.
+
+  :param val: always True.
+
+.. naoqi:event:: ALMotion/Stiffness/restFinished(bool val)
+
+  Raised at :cpp:func:`ALMotionProxy::rest` finish.
+
+  :param val: always True.
+
+.. naoqi:event:: ALMotion/Protection/DisabledDevicesChanged(AL::ALValue val)
+
+  Raised when devices availability changed.
+  When a device is not available the stiffness and
+  movement on this device are prohibited.
+
+  The ALValue format is: [[std::string deviceName, bool disabled],...]
+  *deviceName* could be a chainName or "Body".
+  In "Body" case ( [["Body", true]] ) :cpp:func:`ALMotionProxy::wakeUp` are prohibited.
+
+  :param val: An ALValue with the actual disabled devices status.
+              * Example: [["LArm", true]], ["Head", false]]

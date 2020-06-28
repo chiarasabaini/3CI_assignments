@@ -1,0 +1,87 @@
+.. _stdtypes:
+
+Types
+=====
+
+Standard
+--------
+
+.. cpp:type:: void
+
+  An empty type.
+
+  - Python: ``sys.None``
+  - Java: ``void``
+  - .Net: ``void``
+
+.. cpp:type:: bool
+
+  A boolean true or false value
+
+  - Python: ``sys.bool``
+  - Java: ``boolean``
+  - .Net: ``System.Boolean``
+
+.. cpp:type:: int
+
+  A 32bit integer value
+
+  - Python: ``sys.int``
+  - Java: ``int``
+  - .Net: ``System.Int``
+
+.. cpp:type:: float
+
+  A 32bit floating point value
+
+  - Python: ``sys.float``
+  - Java: ``float``
+  - .Net: ``System.Float``
+
+.. cpp:type:: std::string
+
+  A standard template library string
+
+  - Python: ``sys.str``
+  - Java: ``java.lang.String``
+  - .Net: ``System.String``
+
+.. cpp:type:: std::vector<std::string>
+
+  A standard template library vector of strings
+
+  - Python: ``sys.List`` of ``sys.str``
+  - Java:
+  - .Net: ``System.Generics.List<System.String>``
+
+.. cpp:type:: std::vector<float>
+
+  A standard template library vector of floats
+
+  - Python: ``sys.List`` of ``sys.float``
+  - Java:
+  - .Net: ``System.Generics.List<System.Float>``
+
+NAOqi specific
+--------------
+
+.. cpp:type:: AL::ALValue
+
+  A generic container, that can contain any of the basic types, or recursive lists of thereof
+
+  - Python: ``sys.tupple``
+  - Java:
+  - .Net: ``System.Collections.ArrayList``
+
+
+.. cpp:type:: boost::shared_ptr<AL::ALOwner>
+
+  shared AL::ALOwner
+
+.. cpp:type:: boost::shared_ptr<AL::ALHierarchyOwner>
+
+  shared AL::ALHierarchyOwner
+
+.. cpp:type:: AL::ALImage
+
+  A generic image container used in the Vision API and documented `here. <./../ref/libalvision/index.html>`_

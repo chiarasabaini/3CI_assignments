@@ -1,0 +1,22 @@
+.. _t2_joints:
+
+T2 - Joints
+============
+
+.. seealso::  :ref:`nao-t2` | :ref:`robot_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v4.rst
+
+.. include:: ../bulk/joints_head_v33.rst
+
+.. include:: ../bulk/joints_head_v32.rst

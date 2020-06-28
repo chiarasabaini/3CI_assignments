@@ -1,0 +1,203 @@
+
+.. _alresourcemanager-api:
+
+ALResourceManager API
+=====================
+
+
+:ref:`naoqi-core` - :ref:`Overview <alresourcemanager>` | API | :ref:`Tutorial <alresourcemanager-tuto>`
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/alresourcemanagerproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALResourceManagerProxy
+
+* :cpp:func:`ALResourceManagerProxy::areResourcesFree`
+* :cpp:func:`ALResourceManagerProxy::areResourcesOwnedBy`
+* :cpp:func:`ALResourceManagerProxy::createResource`
+* :cpp:func:`ALResourceManagerProxy::deleteResource`
+* :cpp:func:`ALResourceManagerProxy::enableStateResource`
+* :cpp:func:`ALResourceManagerProxy::isInGroup`
+* :cpp:func:`ALResourceManagerProxy::releaseResources`
+* :cpp:func:`ALResourceManagerProxy::acquireResource`
+* :cpp:func:`ALResourceManagerProxy::acquireResourcesTree`
+* :cpp:func:`ALResourceManagerProxy::releaseResource`
+* :cpp:func:`ALResourceManagerProxy::createResourcesList`
+* :cpp:func:`ALResourceManagerProxy::getResources`
+* :cpp:func:`ALResourceManagerProxy::isResourceFree`
+* :cpp:func:`ALResourceManagerProxy::ownersGet`
+
+
+**Deprecated Methods**
+
+* :cpp:func:`ALResourceManagerProxy::waitForOptionalResourcesTree` (deprecated)
+* :cpp:func:`ALResourceManagerProxy::waitForResourcesTree` (deprecated)
+* :cpp:func:`ALResourceManagerProxy::waitForResource` (deprecated)
+
+
+Methods
+-------
+
+
+.. cpp:function:: bool ALResourceManagerProxy::areResourcesFree(const std::vector<std::string>& resourceNames)
+
+  True if resources free
+
+  :param resourceNames: List of resource names
+  :return: True if all the specified resources are free
+
+
+.. cpp:function:: bool ALResourceManagerProxy::areResourcesOwnedBy( const std::vector<std::string>& resourceNameList, const std::string& ownerName )
+
+  True if all the specified resources are owned by the owner
+
+  :param resourceNameList: List of resource names
+  :param ownerName: Owner pointer with hierarchy
+  :return: True if all the specify resources are owned by the owner
+
+
+.. cpp:function:: void ALResourceManagerProxy::createResource( const std::string& resourceName, const std::string& parentResourceName )
+
+  Create a resource
+
+  :param resourceName: Resource name to create
+  :param parentResourceName: Parent resource name or empty string for root resource
+
+
+.. cpp:function:: void ALResourceManagerProxy::createResourcesList( const std::vector<std::string>& resourceNameList, const std::string& strModule)
+
+  Create the resources listed in pResourceNameList
+
+  :param resourceNameList: List of resource names to create
+  :param strModule: Parent resource name or empty string for root resource
+
+
+.. _ALResourceManagerProxy::deleteResource1:
+
+.. cpp:function:: void ALResourceManagerProxy::deleteResource( const std::string& resourceName)
+
+  Delete a resource
+
+  :param resourceName: Resource name to delete
+
+
+.. _ALResourceManagerProxy::deleteResource2:
+
+.. cpp:function:: void ALResourceManagerProxy::deleteResource( const std::string& resourceName, const bool& deleteChildResources )
+
+  .. deprecated:: 1.22
+    use :ref:`ALResourceManagerProxy::deleteResource <ALResourceManagerProxy::deleteResource1>` with a single parameter instead.
+
+  Delete a root resource.
+
+  :param resourceName: Resource name to delete
+  :param deleteChildResources: Delete child resources if true. **Warning**: resource management has been simplified, do not use this parameter anymore.
+
+
+.. cpp:function:: void ALResourceManagerProxy::enableStateResource( const std::string& resourceName, const bool& enabled )
+
+  Enable or disable a state resource
+
+  :param resourceName: The name of the resource that you wish enable of disable. e.g. Standing
+  :param enabled: True to enable, false to disable
+
+
+.. cpp:function:: bool ALResourceManagerProxy::isInGroup( const std::string& resourceGroupName, const std::string& resourceName )
+
+  True if a resource is in another parent resource
+
+  :param resourceGroupName: Group name. Ex: Arm
+  :param resourceName: Resource name
+  :return:
+
+
+.. cpp:function:: void ALResourceManagerProxy::releaseResources( const std::vector<std::string>& resourceNames, const std::string& ownerName )
+
+  Release the resources listed
+
+  :param resourceNames: List of resource names
+  :param ownerName: Owner name
+
+
+
+.. cpp:function:: void ALResourceManagerProxy::acquireResource( const std::string& resourceName, const std::string& moduleName, const std::string& callbackName, const int& timeoutSeconds )
+
+  Wait and acquire the specified resource. Once acquired the callback is called if someone else want to take the resource. The callback takes only two parameters which are the resourcename and the current owner name. In the callback you can decide to release the resource by calling :cpp:func:`ALResourceManagerProxy::releaseResource`
+  If timeoutSeconds is less than 0, an infinite wait is performed, if timeoutSeconds is zero the function is non-bloquing, else the function waits at most timeoutSeconds to acquire the resource, or throws if the resource is still not available.
+  The function throws in case of error.
+
+  :param resourceName: Resource name
+  :param moduleName: Module name where the callback will be called. It's mandatory to specify a moduleName.
+  :param callbackName: Callback name of the function that will be called on moduleName when a conflict is detected
+  :param timeoutSeconds: Timeout in seconds
+
+
+.. cpp:function:: void ALResourceManagerProxy::acquireResourcesTree( const std::vector<std::string>& resourceNameList, const std::string & moduleName, const std::string& callbackName, const int& pnTimeOutMillisec)
+
+  Wait and acquire the specified resource. Once acquired the callback is called if someone else want to take the resource. The callback takes only two parameters which are the resourcename and the current owner name. In the callback you can decide to release the resource by calling :cpp:func:`ALResourceManagerProxy::releaseResource`
+  If timeoutSeconds is less than 0, an infinite wait is performed, if timeoutSeconds is zero the function is non-bloquing, else the function waits at most timeoutSeconds to acquire the resource, or throws if the resource is still not available.
+  The function throws in case of error.
+
+  :param resourceNameList: List of resource names
+  :param moduleName: Module name where the callback will be called. It's mandatory to specify a moduleName.
+  :param callbackName: Callback name of the function that will be called on moduleName when a conflict is detected
+  :param timeoutSeconds: Timeout in seconds
+
+
+.. cpp:function:: void ALResourceManagerProxy::releaseResource( const std::string& resourceName, const std::string& ownerName )
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALResourceManagerProxy::releaseResources` instead.
+
+  Release resource
+
+  :param resourceName: Resource name
+  :param ownerName: Existing owner name
+
+
+
+.. cpp:function:: AL::ALValue ALResourceManagerProxy::getResources()
+
+  :return: the full list of resources
+
+
+.. cpp:function:: bool ALResourceManagerProxy::isResourceFree(const std::string &ResourceName)
+
+  :return: a bool indicating if the resource is free or not
+
+
+.. cpp:function:: AL::ALValue ALResourceManagerProxy::ownersGet()
+
+  :return: the list of owners for each resources
+
+
+
+.. cpp:function:: std::vector<std::string> ALResourceManagerProxy::waitForOptionalResourcesTree( const std::vector<std::string>& pResourceNameList, const std::string & pOwner, const std::string& pLooseCallbackName, const int& pnTimeOutMillisec,const std::vector<std::string>& pOptionalResourceNameList)
+
+  .. deprecated:: 1.22
+    due to technical improvements, this method is not useful anymore. Do not use.
+
+
+.. cpp:function:: void ALResourceManagerProxy::waitForResourcesTree( const std::vector<std::string>& pResourceNameList, const std::string & pOwner, const std::string& pLooseCallbackName, const int& pnTimeOutMillisec)
+
+  .. deprecated:: 1.22
+    due to technical improvements, this method is not useful anymore. Do not use.
+
+
+.. cpp:function:: void ALResourceManagerProxy::waitForResource( const std::string& resourceName, const std::string& ownerName, const std::string& callbackName, const int& timeoutSeconds )
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALResourceManagerProxy::acquireResource` instead

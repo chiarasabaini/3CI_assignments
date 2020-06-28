@@ -1,0 +1,23 @@
+.. include:: ../../bulk/common.rst
+
+.. _alstore:
+
+ALStore
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alstore-api
+   partitioninfo
+
+:ref:`naoqi-core` - Overview | :ref:`API <alstore-api>`
+
+------------
+
+
+What it does
+------------
+
+**ALStore** is the module in charge of retrieving applications from the |store|.

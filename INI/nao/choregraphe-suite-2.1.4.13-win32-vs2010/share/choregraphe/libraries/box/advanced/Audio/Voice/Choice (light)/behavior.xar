@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" tooltip="Launch speech recognition, and wait for one of a defined number of expected answers (written in the table of the box). the robot will prompt the speaker if he cannot understand and give suggestions as to available answers and other ways of selecting your choice. e.g. The tactile sensor on his head.&#x0A;&#x0A;Note that you must open this box to enter the question text and the available answers.&#x0A;&#x0A;This is a lighter version of Choice box from standard library which has no animation embedded.&#x0A;&#x0A;V1.1.0&#x0A;" x="131" y="174">
+        <bitmap>media/images/box/interaction/choice.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload()
+            self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished or stopped." id="4" />
+        <Output name="answer" type="3" type_size="1" nature="1" inner="0" tooltip="Answer recognized." id="5" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Choice" id="1" tooltip="Launch the speech recognition waiting for a defined number of predicted answers (written in the table on the box). Available help&#x0A;from the robot which gives some possible answers and attracts attention on the other modalities to answer (head tactile sensor).&#x0A;&#x0A;You can edit a choice by left double-clicking on the line. You can add a choice by right clicking on a line and selecting &apos;Insert a&#x0A;row&apos;. You can delete a choice by right clicking on a line and selecting &apos;Remove a row&apos;. You can also write several alternative&#x0A;answers for the same choice by writing them on the line separated by the character &apos;/&apos;.&#x0A;Ex: apple pie / pie / apple&#x0A;Then if any of these answers (&apos;apple pie&apos;, &apos;pie&apos; or &apos;apple&apos;) are said, the corresponding output will be activated. Indeed, each output&#x0A;which name begins with &apos;output_&apos; correspond to the choice in the list placed just in front of the output.&#x0A;&#x0A;Moreover, you have advanced options appearing when you click on the blue cross. Then you can make the robot calculate the threshold&#x0A;average of choices with the 1/2/3 button. Actually, it will calculate recognition threshold of each alternative answer and put them from&#x0A;highest to smallest threshold. The threshold displayed in front of each choice then is the highest&apos;s." plugin="ui_choice_plugin" x="312" y="51">
+                            <bitmap>media/images/box/interaction/choice.png</bitmap>
+                            <script language="4">
+                                <content> <!-- This is generated at runtime, plugin magic --> </content>
+                            </script>
+                            <pluginContent>
+                                <arabic>
+                                    <keyword>نعم</keyword>
+                                    <keyword>لا</keyword>
+                                    <keyword></keyword>
+                                </arabic>
+                                <brazilian>
+                                    <keyword>sim</keyword>
+                                    <keyword>não</keyword>
+                                    <keyword></keyword>
+                                </brazilian>
+                                <chinese>
+                                    <keyword>是</keyword>
+                                    <keyword>不是</keyword>
+                                    <keyword></keyword>
+                                </chinese>
+                                <czech>
+                                    <keyword>ano</keyword>
+                                    <keyword>ne</keyword>
+                                    <keyword></keyword>
+                                </czech>
+                                <danish>
+                                    <keyword>ja</keyword>
+                                    <keyword>nej</keyword>
+                                    <keyword></keyword>
+                                </danish>
+                                <dutch>
+                                    <keyword>ja</keyword>
+                                    <keyword>nee</keyword>
+                                    <keyword></keyword>
+                                </dutch>
+                                <english>
+                                    <keyword>yes</keyword>
+                                    <keyword>no</keyword>
+                                    <keyword></keyword>
+                                </english>
+                                <finnish>
+                                    <keyword>kyllä</keyword>
+                                    <keyword>ei</keyword>
+                                    <keyword></keyword>
+                                </finnish>
+                                <french>
+                                    <keyword>oui</keyword>
+                                    <keyword>non</keyword>
+                                    <keyword></keyword>
+                                </french>
+                                <german>
+                                    <keyword>ja</keyword>
+                                    <keyword>nein</keyword>
+                                    <keyword></keyword>
+                                </german>
+                                <italian>
+                                    <keyword>sì</keyword>
+                                    <keyword>no</keyword>
+                                    <keyword></keyword>
+                                </italian>
+                                <japanese>
+                                    <keyword>はい</keyword>
+                                    <keyword>いいえ</keyword>
+                                    <keyword></keyword>
+                                </japanese>
+                                <korean>
+                                    <keyword>예</keyword>
+                                    <keyword>아니</keyword>
+                                    <keyword></keyword>
+                                </korean>
+                                <polish>
+                                    <keyword>tak</keyword>
+                                    <keyword>nie</keyword>
+                                    <keyword></keyword>
+                                </polish>
+                                <portuguese>
+                                    <keyword>sim</keyword>
+                                    <keyword>não</keyword>
+                                    <keyword></keyword>
+                                </portuguese>
+                                <russian>
+                                    <keyword>да</keyword>
+                                    <keyword>нет</keyword>
+                                    <keyword></keyword>
+                                </russian>
+                                <spanish>
+                                    <keyword>si</keyword>
+                                    <keyword>no</keyword>
+                                    <keyword></keyword>
+                                </spanish>
+                                <swedish>
+                                    <keyword>ja</keyword>
+                                    <keyword>ingen</keyword>
+                                    <keyword></keyword>
+                                </swedish>
+                                <turkish>
+                                    <keyword>evet</keyword>
+                                    <keyword>hayır</keyword>
+                                    <keyword></keyword>
+                                </turkish>
+                                <greek>
+                                    <keyword>ναί</keyword>
+                                    <keyword>κανένα</keyword>
+                                    <keyword></keyword>
+                                </greek>
+                                <norwegian>
+                                    <keyword>ja</keyword>
+                                    <keyword>Nei</keyword>
+                                    <keyword></keyword>
+                                </norwegian>
+                                <language>english</language>
+                            </pluginContent>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is&#x0A;received on this input. The signal can be&#x0A;either a string so that the robot asks a&#x0A;question before the recognition of a&#x0A;choice, or a bang so that the speech&#x0A;recognition starts immediately without any&#x0A;question." id="2" />
+                            <Input name="choicesList" type="0" type_size="1" nature="1" inner="0" tooltip="To have extern choices list (for example,&#x0A;depending on extern variables).&#x0A;!! Warning !! : Must be set before each&#x0A;time the box is started (with onStart&#x0A;input). Otherwise, the choices displayed&#x0A;on the box will be selected." id="3" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip='Box behavior stops when a signal is&#x0A;received on this input, the &apos;other&apos; output is&#x0A;stimulated by &quot;onStop&quot;.' id="4" />
+                            <Output name="other" type="0" type_size="1" nature="1" inner="0" tooltip='When the user skipped the question, this output gives how it has been&#x0A;skipped. Gives also the number of the choice chosen in case of external&#x0A;choices.&#x0A;This output can be:&#x0A;- &quot;timeout&quot; if the user has not replied.&#x0A;- &quot;notUnderstood&quot; if the interaction with the speech recognition failed.&#x0A;- &quot;onStop&quot; if the onStop input has been activated.&#x0A;- &quot;wordRecognised&quot; if the exit command has been understood.&#x0A;- &quot;onTactileSensor&quot; if the user has tapped the tactile sensor of the robot.&#x0A;- an integer being the number of the external choice in the input list.' id="5" />
+                            <Output name="output_1" type="0" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="6" />
+                            <Output name="output_2" type="0" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="7" />
+                            <Parameter name="Minimum threshold to understand" inherits_from_parent="0" content_type="2" value="0.2" default_value="0.2" min="0" max="1" tooltip="Minimum threshold to get in order to be understood by the robot." id="8" />
+                            <Parameter name="Minimum threshold to be sure" inherits_from_parent="0" content_type="2" value="0.3" default_value="0.3" min="0" max="1" tooltip="Minimum threshold to get so that the robot would be sure about the user&apos;s&#x0A;answer. Below this threshold, the robot asks a confirmation about what has been&#x0A;understood." id="9" />
+                            <Parameter name="Speech recognition timeout when confirmation" inherits_from_parent="0" content_type="1" value="6" default_value="6" min="1" max="20" tooltip="When the robot asks if what he understood is correct, after this time, if there has been&#x0A;nothing heard, the speech recognition is stopped and the answer understood is&#x0A;considered as correct." id="10" />
+                            <Parameter name="Speech recognition timeout" inherits_from_parent="0" content_type="1" value="6" default_value="6" min="1" max="20" tooltip="After this time, if there has been nothing heard, the speech recognition is stopped&#x0A;and the question is repeated or is skipped." id="11" />
+                            <Parameter name="Maximum number of repetition when no reply" inherits_from_parent="0" content_type="1" value="3" default_value="3" min="1" max="20" tooltip='After this number of times when the user did not reply, the question is skipped, and&#x0A;the output other is stimulated with &quot;timeout&quot;.' id="12" />
+                            <Parameter name="Repeat validated choice" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="If this option is activated, the robot repeats the validated choice when it exits the box." id="13" />
+                            <Parameter name="Activate ears light" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="Activate ears light animation (turn, flash, etc...)." id="14" />
+                            <Parameter name="Activate eyes light" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="Activate eyes light animation (turn, flash, etc...)." id="15" />
+                            <Parameter name="Activate brain light" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="Activate brain light animation (turn, flash, etc...)." id="16" />
+                            <Parameter name="Tactile sensor menu timeout" inherits_from_parent="0" content_type="1" value="10" default_value="10" min="1" max="20" tooltip="After this time, if there has been no action made on the tactile sensor or the torso&#x0A;button, the choice currently selected is repeated or the question is skipped." id="17" />
+                            <Parameter name="Maximum number of repetition when failure" inherits_from_parent="0" content_type="1" value="5" default_value="5" min="1" max="20" tooltip='After this number of times when the robot did not understand the user, the question&#x0A;is skipped, and the output other is stimulated with &quot;notUnderstood&quot;.' id="18" />
+                            <Parameter name="Activate help when failure" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="When this parameter is activated, when the robot did not understand the user, he&#x0A;says some help enumerating available choices and attracting attention on the&#x0A;other available modalities (head tactile sensor)." id="19" />
+                            <Parameter name="Activate help command" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip='Enable the help command. So you can say &quot;help&quot; during the speech recognition&#x0A;and the robot will tell you more information.&#x0A;You will still be able to ask help by clicking the torso button.' id="20" />
+                            <Parameter name="Activate repeat command" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip='Activate the repeat command. So you can say &quot;repeat&quot; during the speech&#x0A;recognition and the robot will repeat the question.' id="21" />
+                            <Parameter name="Activate exit command" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip='Enable the exit command. So you can say &quot;exit&quot; during the speech recognition&#x0A;and the box will be stopped and the &apos;other&apos; output will be stimulated with&#x0A;&quot;wordRecognised&quot;.&#x0A;You will still be able to exit the box with&#x0A;the tactile sensor.' id="22" />
+                            <Parameter name="Sentences file" inherits_from_parent="0" content_type="4" value="/Aldebaran/choice_sentences_light.xml" default_value="/Aldebaran/choice_sentences_light.xml" tooltip="File containing all necessary sentences in each supported language." id="23" />
+                        </Box>
+                        <Box name="Localized Text" id="5" tooltip="Send on the output the text associated with the robot&apos;s current voice language.&#x0A;You can display and edit the text associated with any language by&#x0A;selecting the language in the combobox.&#x0A;&#x0A;!!Warning!! The text sent on the output is NOT the displayed one but the one&#x0A;associated with the robot&apos;s current voice language." plugin="localizationbox_plugin" x="59" y="54">
+                            <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self, False)
+
+		self.tts = ALProxy("ALTextToSpeech")
+		self.sentences = {
+			"Chinese" : " 你喜欢吃巧克力吗？ ",
+			"English" : " Do you like chocolate? ",
+			"French" : " Aimes-tu le chocolat ? ",
+			"German" : " Mögen Sie Schokolade? ",
+			"Italian" : " Ti piace il cioccolato? ",
+			"Japanese" : " チョコレートが好きですか ",
+			"Korean" : " 당신은 초콜렛을 좋아합니까? ",
+			"Portuguese" : " Gostas de chocolate? ",
+			"Brazilian" : " Você gosta de chocolate? ",
+			"Spanish" : " ¿Te gusta el chocolate? ",
+			"Arabic" : " هل تحب الشوكولاته؟ ",
+			"Polish" : " Lubisz czekoladę? ",
+			"Czech" : " Máš rád čokoládu? ",
+			"Dutch" : " Hou je van chocolade? ",
+			"Danish" : " Kan du lide chokolade? ",
+			"Finnish" : " Pidätkö suklaasta? ",
+			"Swedish" : " Tycker du om choklad? ",
+			"Russian" : " Вы любите шоколад? ",
+			"Turkish" : " Çikolata sever misin? ",
+			"Greek" : " Σας αρέσει η σοκολάτα ; ",
+			"Norwegian" : " Har yo liker sjokolade ? "
+
+		}
+
+	def onInput_onStart(self):
+		sDefaultLang = self.tts.getLanguage()
+		self.onStopped(self.sentences[sDefaultLang])]]>
+</content>
+                            </script>
+                            <pluginContent>
+                                <chinese>你喜欢吃巧克力吗？</chinese>
+                                <english>Do you like chocolate?</english>
+                                <french>Aimes-tu le chocolat ?</french>
+                                <german>Mögen Sie Schokolade?</german>
+                                <italian>Ti piace il cioccolato?</italian>
+                                <japanese>チョコレートが好きですか</japanese>
+                                <korean>당신은 초콜렛을 좋아합니까?</korean>
+                                <portuguese>Gostas de chocolate?</portuguese>
+                                <brazilian>Você gosta de chocolate?</brazilian>
+                                <spanish>¿Te gusta el chocolate?</spanish>
+                                <arabic>هل تحب الشوكولاته؟</arabic>
+                                <polish>Lubisz czekoladę?</polish>
+                                <czech>Máš rád čokoládu?</czech>
+                                <dutch>Hou je van chocolade?</dutch>
+                                <danish>Kan du lide chokolade?</danish>
+                                <finnish>Pidätkö suklaasta?</finnish>
+                                <swedish>Gillar du choklad?</swedish>
+                                <russian>Вы любите шоколад?</russian>
+                                <turkish>Çikolata sever misin?</turkish>
+                                <language>1</language>
+                            </pluginContent>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
+                            <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip="Data sent when asked." id="3" />
+                        </Box>
+                        <Link inputowner="1" indexofinput="2" outputowner="5" indexofoutput="3" />
+                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="0" indexofinput="4" outputowner="1" indexofoutput="5" />
+                        <Link inputowner="0" indexofinput="5" outputowner="1" indexofoutput="6" />
+                        <Link inputowner="0" indexofinput="5" outputowner="1" indexofoutput="7" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+        <Resource name="Speech" type="Lock" timeout="0" />
+        <Resource name="Speech recognition" type="Lock" timeout="0" />
+    </Box>
+</ChoregrapheProject>

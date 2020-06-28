@@ -1,0 +1,54 @@
+.. _almodule:
+
+ALModule 
+=========
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   almodule-api
+
+
+:ref:`naoqi-core` - Overview | :ref:`API <almodule-api>`
+
+------------
+
+
+What it does
+------------
+
+ALModule can be used as a base class for user modules to
+help serve and advertise their methods.
+
+How it works
+------------
+
+Each module advertises the methods that it wishes to make available
+to clients participating in the network to a broker within the
+same process.
+
+The broker then transparently handles directory services so that clients
+need not know if the module that provides a service is in the
+same process, on the same machine, or on the same tcp network.
+
+Within the same process, direct method calls are used to
+provide optimal speed without having to change your method
+signatures.
+
+
+Performances and Limitations
+----------------------------
+
+Clients exist in a growing number of languages including c++,
+Python, .Net, Java and Matlab.
+
+Getting started
+---------------
+
+To create a new module, see in the programming guide :ref:`cpp-introduction` or :ref:`python-introduction` 
+introductions, and more specifically:
+
+* for C++: :ref:`cpp-create-module`.
+* for Python: :ref:`python-reacting-to-events`.

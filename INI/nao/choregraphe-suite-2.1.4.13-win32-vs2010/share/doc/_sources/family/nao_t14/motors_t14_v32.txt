@@ -1,0 +1,26 @@
+.. _t14_motors_v32:
+
+T14 - Motors - V3.2
+======================
+
+.. seealso::
+    :ref:`V4<t14_motors>` | :ref:`V3.3 <t14_motors_v33>` | **V3.2**
+
+    :ref:`nao-t14` | :ref:`robot_motors`
+
+--------------------
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_t14.png
+   :width: 330 px
+   :height: 266 px
+
+.. include:: ../bulk/motors_v32.rst
+
+.. include:: ../bulk/motors_v32_head.rst
+
+.. include:: ../bulk/motors_v32_arms.rst
+
+.. include:: ../bulk/motors_v32_hands.rst

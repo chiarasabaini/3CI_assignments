@@ -1,0 +1,161 @@
+.. include:: ../bulk/common.rst
+
+.. |default-flag| image:: /medias/desktop/choregraphe/application_manager_default_flag.png
+   :class: img-inline
+
+.. _chore_robot_applications_panel:
+
+Robot applications panel
+=========================
+
+What is the Robot applications panel
+-------------------------------------
+
+The **Robot applications** panel displays the
+:ref:`Applications<choregraphe-reference-application>` available on the
+connected robot.
+
+It allows you to:
+
+* Start, stop or remove  **Behaviors** and :ref:`application` installed
+  on the connected robot,
+* Package and install the current **Behavior** as an **Application**
+  on the connected Robot,
+* Set a **default** **Behaviors**.
+
+
+.. image:: /medias/desktop/choregraphe/application_manager.png
+     :width: 449 px
+     :height: 211 px
+
+
+The table below describes the main parts of the **Robot applications** panel:
+
+=====  =================================   ==============================================================================
+Part    Name                                Allows you to ...
+=====  =================================   ==============================================================================
+**A**   :ref:`app_man_toolbar`              Manage **Applications** and **Behaviors** currently on the connected robot.
+
+**B**   :ref:`app_man_list`                 Know which **Applications** are currently installed on the robot.
+
+**C**   **Default** flag                    Know which **Behaviors** are set as :ref:`default_behaviors`.
+
+**D**   :ref:`exec_status`                  Play/Stop installed **Behavior** or **Application**.
+=====  =================================   ==============================================================================
+
+
+.. _app_man_list:
+
+Application list
+-----------------
+
+Appearing by default, the ``.lastUploadedChoregrapheBehavior`` is an application,
+containing the **Behavior** temporarily installed on the robot last time you
+have clicked the |play-button| **Play** button.
+
+
+
+.. image:: /medias/desktop/choregraphe/application_manager_expand.png
+    :width: 472 px
+    :height: 339 px
+
+=====  ===================   ==============================================================================
+Part    Name                  Description
+=====  ===================   ==============================================================================
+**A**   **Icon**              Icon of the Application.
+
+**B**   **Application**       When several languages are available, the name is displayed using:
+        name
+                              * the system's language or
+                              * English if the name is not available in the system's language.
+
+                              When the application has more than one behavior,
+                              the number of behaviors is written next to the
+                              application name.
+
+**C**  **ID**                 ID (Identifier) of the Application.
+
+**D**  **Expand/collapse**    Allows expanding the list of **Behaviors**.
+       button
+                              Only visible when an **Application** contains several **Behaviors**.
+
+**E**   **Behavior**          For one **Application**, one line for each **Behavior** embedded in this
+        name                  **Application** shows the **Application**'s ID concatenated with the
+                              **Behavior**'s path. This is the behavior's identifier, allowing you to
+                              start and stop it from other **Behaviors** in the same application.
+=====  ===================   ==============================================================================
+
+.. _app_man_toolbar:
+
+Toolbar
+--------
+
+.. list-table::
+   :widths: 10 100
+   :header-rows: 1
+
+   * - Button
+     - Click on this button to ...
+   * - .. image:: /medias/desktop/choregraphe/application_manager_add_current.png
+     - **Install** the current opened project as an **Application** on your robot.
+   * - .. image:: /medias/desktop/choregraphe/application_manager_delete.png
+     - **Remove** the Applications selected in the list below.
+
+       If a Behavior is selected, this will remove the Application which contains
+       this Behavior.
+   * - .. image:: /medias/desktop/choregraphe/application_manager_default_button.png
+     - Set as **default** the selected Behaviors.
+
+       .. note::
+         A **default** Behavior is a Behavior automatically executed at robot startup.
+   * - .. image:: /medias/desktop/choregraphe/application_manager_stop_all.png
+     - **Stop all Behaviors** that are currently running on the robot.
+
+       It is useful if you have executed a Behavior at startup for example and
+       you do not have control over it.
+
+
+.. _default_behaviors:
+
+Default Behaviors
+-----------------
+
+The **Default Behaviors** are played automatically at NAO startup.
+
+The flag |default-flag| near an **Application** or a **Behavior** means the
+associated **Behavior** is set as **Default** Behavior.
+
+
+.. warning::
+  You can play and set as default several Behaviors simultaneously.
+  But the Behaviors need to be compatible.
+  For example a Behavior making NAO sit down and another making him walk are not compatible.
+  Please set the :ref:`resources <choregraphe-reference-box-resource>` of your boxes
+  to avoid conflicts between simultaneous Behaviors (see :ref:`How to set resources of a box <choregraphe-howto-set-resources-for-box>`).
+
+
+.. _exec_status:
+
+Execution status
+------------------
+
+.. list-table::
+   :widths: 20 50 50
+   :header-rows: 1
+
+   * - Button
+     - Means that the behavior is ...
+     - Click on this button to ...
+   * - .. image:: /medias/desktop/choregraphe/application_manager_play_one.png
+     - not running
+     - **Play** the Behavior
+   * - .. image:: /medias/desktop/choregraphe/application_manager_loading.png
+     - loading
+     -
+   * - .. image:: /medias/desktop/choregraphe/application_manager_stop_one.png
+     - running
+     - **Stop** the Behavior
+   * - .. image:: /medias/desktop/choregraphe/application_manager_unloading.png
+     - unloading
+     -
+

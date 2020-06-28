@@ -1,0 +1,68 @@
+.. include:: ../../bulk/common.rst
+
+.. _robot_video:
+
+|roboN| - Video camera
+=========================
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+.. seealso::
+    :ref:`naoqi-vision`
+
+    :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21` | :ref:`nao-t14` | :ref:`nao-t2`
+
+--------------------
+
+Two identical video cameras are located in the forehead.
+
+They provide a up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the
+visual field such as goals and balls, and bottom camera can ease NAO's dribbles.
+
+2D Camera
+*********
+
+.. _cameraindex_nao:
+
+Camera indexes
+--------------
+
+The camera indexes are:
+
++-------------------+----------+-----------------------+
+| Parameter ID Name | ID Value | Description           |
++===================+==========+=======================+
+| AL::kTopCamera    | 0        | camera on the top.    |
++-------------------+----------+-----------------------+
+| AL::kBottomCamera | 1        | camera on the bottom. |
++-------------------+----------+-----------------------+
+
+Location
+--------
+
++-----------------------------------------------------------------+
+| .. image:: /medias/nao/hardware/hardware_camera_lateral_4.0.png |
+|    :height: 372 px                                              |
+|    :width: 546 px                                               |
++-----------------------------------------------------------------+
+| .. image:: /medias/nao/hardware/hardware_camera_top_4.0.png     |
+|    :height: 375 px                                              |
+|    :width: 463 px                                               |
++-----------------------------------------------------------------+
+
++--------------+---------+------+----------+--------------+----------------+--------------+
+| Camera name  | X(m)    | Y(m) | Z(m)     | WX(rd)[deg]* | WY(rd)[deg]*   | WZ(rd)[deg]* |
++==============+=========+======+==========+==============+================+==============+
+| CameraTop    | 0.05871 | 0.0  | 0.06364  | 0.0          | 0.0209 \[1.2]  | 0.0          |
++--------------+---------+------+----------+--------------+----------------+--------------+
+| CameraBottom | 0.05071 | 0.0  | 0.01774  | 0.0          | 0.6929 \[39.7] | 0.0          |
++--------------+---------+------+----------+--------------+----------------+--------------+
+
+.. note::
+
+   We adopt the roll, pitch and yaw notation for angle representation. So, to
+   construct an homogeneous transform with rotation (Wx,Wy,Wz) use T=rotZ(Wz)*rotY(Wy)*rotX(Wx).
+
+.. include:: ../bulk/camera_mt9m114.rst

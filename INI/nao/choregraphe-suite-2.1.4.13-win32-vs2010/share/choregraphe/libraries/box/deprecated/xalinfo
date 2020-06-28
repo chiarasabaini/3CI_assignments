@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="Motions" />
+    <Node name="Sensing" />
+    <Node name="Vision" />
+    <Node name="Trackers" />
+</Folder>

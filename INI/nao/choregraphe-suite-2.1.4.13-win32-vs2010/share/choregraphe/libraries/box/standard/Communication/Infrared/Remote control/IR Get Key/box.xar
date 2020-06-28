@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="This box makes the robot work like a remote control receiver.&#x0A;&#x0A;You need to set the Remote parameter with the remote control name you want to receive. When the&#x0A;robot receives a key from that remote control, the key name is sent on the output. Go to Nao web page to&#x0A;see available remote controls and keys.&#x0A;&#x0A;V1.1.0" x="139" y="129">
+        <bitmap>media/images/box/interaction/IR_receive.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        try:
+            self.hw = ALProxy("ALInfrared")
+        except Exception as e:
+            self.hw = None
+            self.logger.error(e)
+
+    def onLoad(self):
+        self.repeatThreshold = self.getParameter("Repeat threshold")
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+        if self.hw:
+            self.hw.initReception(self.repeatThreshold)
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload() #~ it is recommanded to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+            self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="InfraRedRemoteKeyReceived_2" type="0" type_size="1" nature="4" stm_value_name="InfraRedRemoteKeyReceived" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="4" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="5" />
+        <Output name="keyPressed" type="3" type_size="1" nature="2" inner="0" tooltip="Key received." id="6" />
+        <Parameter name="Remote" inherits_from_parent="1" content_type="3" value="ALL" default_value="ALL" custom_choice="0" tooltip='Remote name (more info on the robot web page in &quot;Advanced&quot;, &quot;Remote Controls&quot;).&#x0A;&#x0A;You can fill in the Remote parameter with &quot;ALL&quot;. In that case, the keys from any&#x0A;remote control (set in the robot web page) will activate the output.' id="7" />
+        <Parameter name="Repeat threshold" inherits_from_parent="0" content_type="1" value="10" default_value="10" min="1" max="100" tooltip="Above this number of key repetitions, it will consider that the command is repeated." id="8" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="ProcessIRKey" id="1" tooltip="Process Infra-red key extractor data (InfraRedRemoteKeyReceived_2) to&#x0A;translate it into more readable data." x="147" y="57">
+                            <bitmap>media/images/box/interaction/IR_receive.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, info):
+        #~ self.onStopped() #~ activate output of the box
+        self.lircHexaCode(info[0])
+        self.repeat(info[1])
+        self.key(info[2])
+        self.remote(info[3])
+
+        if info[4] == 0: #More more sensitivity but less reliability you can write <=1
+            self.side("Left")
+        elif info[4] == 7: #More more sensitivity but less reliability you can write >=6
+            self.side("Right")
+        else: # Every values between 1 and 6 are considered as matching with the center
+            self.side("Center")]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="side" type="3" type_size="1" nature="1" inner="0" tooltip='This output can be:&#x0A;- &quot;Right&quot; if the robot received the InfraRed signal mostly on the right eye.&#x0A;- &quot;Left&quot; if it is mostly on the left eye.&#x0A;- &quot;Center&quot; otherwise.' id="3" />
+                            <Output name="lircHexaCode" type="3" type_size="1" nature="2" inner="0" tooltip='The LIRC hexadecimal code which is the &quot;identity card&quot; of the association&#x0A;remote/button.' id="4" />
+                            <Output name="repeat" type="2" type_size="1" nature="2" inner="0" tooltip="Number of key repetitions in one tap." id="5" />
+                            <Output name="key" type="3" type_size="1" nature="2" inner="0" tooltip="Key received." id="6" />
+                            <Output name="remote" type="3" type_size="1" nature="2" inner="0" tooltip="Remote control name." id="7" />
+                        </Box>
+                        <Box name="Filter Key" id="2" tooltip="Send key name if remote name is the right one." x="359" y="72">
+                            <bitmap>media/images/box/interaction/IR_receive.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.remote_ok = 0
+        self.key_ok = 0
+        self.remote_value = ""
+        self.key_value = ""
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        self.pRemote = self.getParameter("Remote")
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_remoteName(self, p):
+        self.remote_ok = 1
+        self.remote_value = p
+        if  self.key_ok == 1:
+             self.reinitAndSend()
+
+    def onInput_keyName(self, p):
+        self.key_ok = 1
+        self.key_value = p
+        if  self.remote_ok == 1:
+             self.reinitAndSend()
+
+    def reinitAndSend(self):
+        self.key_ok = 0
+        self.remote_ok = 0
+        if (self.pRemote == self.remote_value) or (self.pRemote == "ALL"):
+            self.key(self.key_value)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="keyName" type="3" type_size="1" nature="2" inner="0" tooltip="Key received." id="2" />
+                            <Input name="remoteName" type="3" type_size="1" nature="2" inner="0" tooltip="Remote control name." id="3" />
+                            <Output name="key" type="3" type_size="1" nature="1" inner="0" tooltip="Key received if it is the right remote." id="4" />
+                            <Parameter name="Remote" inherits_from_parent="1" content_type="3" value="ALL" default_value="ALL" custom_choice="0" tooltip='Remote name (more info on the robot web page in &quot;Advanced&quot;, &quot;Remote Controls&quot;).&#x0A;&#x0A;You can fill in the Remote parameter with &quot;ALL&quot;. In that case, the keys from any&#x0A;remote control (set in the robot web page) will activate the output.' id="5" />
+                        </Box>
+                        <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="4" />
+                        <Link inputowner="2" indexofinput="3" outputowner="1" indexofoutput="7" />
+                        <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="6" />
+                        <Link inputowner="0" indexofinput="6" outputowner="2" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheBox>

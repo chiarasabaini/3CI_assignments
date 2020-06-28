@@ -1,0 +1,673 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-walk-api:
+
+Locomotion control API
+++++++++++++++++++++++
+
+:ref:`naoqi-motion` - :ref:`Overview <control-walk>` | API |
+:ref:`robot position Tutorial <control-walk-tuto2>`
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/control-move_toc.rst
+
+
+Methods
+--------
+
+.. _ALMotionProxy::move1:
+
+.. cpp:function:: void ALMotionProxy::move( const float& x, const float& y, const float& theta )
+
+  There are two overloads of this function:
+
+  - :ref:`ALMotionProxy::move <ALMotionProxy::move1>`
+  - :ref:`ALMotionProxy::move <ALMotionProxy::move2>` with move configuration
+
+  Makes the robot move at the given velocity, expressed in FRAME_ROBOT. This
+  is a non-blocking call.
+
+  :param x: velocity along X-axis, in meters per second. Use negative values for
+            backward motion
+  :param y: velocity along Y-axis, in meters per second. Use positive values to
+            go to the left
+  :param theta: velocity around Z-axis, in radians per second. Use negative
+                values to turn clockwise.
+
+.. _ALMotionProxy::move2:
+
+.. cpp:function:: void ALMotionProxy::move( const float& x, const float& y, const float& theta, const AL::ALValue moveConfig)
+
+  Makes the robot move at the given velocity, expressed in FRAME_ROBOT, with a
+  move configuration. This is a non-blocking call.
+
+  :param x: velocity along X-axis, in meters per second. Use negative values for
+            backward motion
+  :param y: velocity along Y-axis, in meters per second. Use positive values to
+            go to the left
+  :param theta: velocity around Z-axis, in radians per second. Use negative
+                values to turn clockwise.
+  :param moveConfig: An ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+.. _ALMotionProxy::moveToward1:
+
+.. cpp:function:: void ALMotionProxy::moveToward( const float& x, const float& y, const float& theta )
+
+  There are two overloads of this function:
+
+  - :ref:`ALMotionProxy::moveToward <ALMotionProxy::moveToward1>`
+  - :ref:`ALMotionProxy::moveToward <ALMotionProxy::moveToward2>` with move configuration
+
+  Makes the robot move at the given normalized velocity, expressed in
+  FRAME_ROBOT. This is a non-blocking call.
+
+  :param x: normalized, unitless, velocity along X-axis. +1 and -1 correspond to
+            the maximum velocity in the forward and backward directions,
+            respectively.
+  :param y: normalized, unitless, velocity along Y-axis. +1 and -1 correspond to
+            the maximum velocity in the left and right directions,
+            respectively.
+  :param theta: normalized, unitless, velocity around Z-axis. +1 and -1
+            correspond to the maximum velocity in the counterclockwise and
+            clockwise directions, respectively.
+
+.. _ALMotionProxy::moveToward2:
+
+.. cpp:function:: void ALMotionProxy::moveToward( const float& x, const float& y, const float& theta, const AL::ALValue moveConfig)
+
+  Makes the robot move at the given normalized velocity, expressed in
+  FRAME_ROBOT, with a move configuration. This is a non-blocking call.
+
+  :param x: normalized, unitless, velocity along X-axis. +1 and -1 correspond to
+            the maximum velocity in the forward and backward directions,
+            respectively.
+  :param y: normalized, unitless, velocity along Y-axis. +1 and -1 correspond to
+            the maximum velocity in the left and right directions,
+            respectively.
+  :param theta: normalized, unitless, velocity around Z-axis. +1 and -1
+            correspond to the maximum velocity in the counterclockwise and
+            clockwise directions, respectively.
+  :param moveConfig: An ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+  :download:`almotion_moveToward.py </samples/python/almotion/almotion_moveToward.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_moveToward.py
+     :language: py
+
+.. _ALMotionProxy::setWalkTargetVelocity1:
+
+.. cpp:function:: void ALMotionProxy::setWalkTargetVelocity( const float& x, const float& y, const float& theta, const float& frequency )
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALMotionProxy::moveToward` instead.
+    Note that 'frequency' parameter is now set using 'MaxStepFrequency' inside :ref:`move_config` parameter.
+
+  |nao| |roboN| only
+
+  There are three overloads of this function:
+
+  - :ref:`ALMotionProxy::setWalkTargetVelocity <ALMotionProxy::setWalkTargetVelocity1>`
+  - :ref:`ALMotionProxy::setWalkTargetVelocity <ALMotionProxy::setWalkTargetVelocity2>` with feetGaitConfiguration
+  - :ref:`ALMotionProxy::setWalkTargetVelocity <ALMotionProxy::setWalkTargetVelocity3>` with leftFootGaitConfig and rightFootGaitConfig
+
+  Makes the robot walk at the given velocity. This is a non-blocking call.
+
+  :param x: Fraction of MaxStepX. Use negative for backwards. [-1.0 to 1.0]
+  :param y: Fraction of MaxStepY. Use negative for right. [-1.0 to 1.0]
+  :param theta: Fraction of MaxStepTheta. Use negative for clockwise [-1.0 to 1.0]
+  :param frequency: Fraction of MaxStepFrequency [0.0 to 1.0]
+
+.. _ALMotionProxy::setWalkTargetVelocity2:
+
+.. cpp:function:: void ALMotionProxy::setWalkTargetVelocity( const float& x, const float& y, const float& theta, const float& frequency, const AL::ALValue& feetGaitConfig )
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALMotionProxy::moveToward` instead.
+    Note that 'frequency' parameter is now set using 'MaxStepFrequency' inside :ref:`move_config` parameter.
+
+  |nao| |roboN| only
+
+  Makes the robot walk at the given velocity. This is a non-blocking call.
+
+  :param x: Fraction of MaxStepX. Use negative for backwards. [-1.0 to 1.0]
+
+  :param y: Fraction of MaxStepY. Use negative for right. [-1.0 to 1.0]
+
+  :param theta: Fraction of MaxStepTheta. Use negative for clockwise [-1.0 to 1.0]
+
+  :param frequency: Fraction of MaxStepFrequency [0.0 to 1.0]
+
+  :param feetGaitConfig: An ALValue with the custom gait configuration for both feet
+
+.. _ALMotionProxy::setWalkTargetVelocity3:
+
+.. cpp:function:: void ALMotionProxy::setWalkTargetVelocity( const float& x, const float& y, const float& theta, const float& frequency, const AL::ALValue& leftFootGaitConfig, const AL::ALValue& rightFootGaitConfig )
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALMotionProxy::moveToward` instead.
+    Note that 'frequency' parameter is now set using 'MaxStepFrequency' inside :ref:`move_config` parameter.
+
+  |nao| |roboN| only
+
+  Makes the robot walk at the given velocity. This is a non-blocking call.
+
+  :param x: Fraction of MaxStepX. Use negative for backwards. [-1.0 to 1.0]
+  :param y: Fraction of MaxStepY. Use negative for right. [-1.0 to 1.0]
+  :param theta: Fraction of MaxStepTheta. Use negative for clockwise [-1.0 to 1.0]
+  :param frequency: Fraction of MaxStepFrequency [0.0 to 1.0]
+  :param leftFootGaitConfig: An ALValue with custom gait configuration for the left foot
+  :param rightFootGaitConfig: An ALValue with custom gait configuration for the right foot
+
+.. _ALMotionProxy::moveTo1:
+
+.. cpp:function:: void ALMotionProxy::moveTo( const float& x, const float& y, const float& theta )
+
+  There are four overloads of this function:
+
+  - :ref:`ALMotionProxy::moveTo <ALMotionProxy::moveTo1>`
+  - :ref:`ALMotionProxy::moveTo <ALMotionProxy::moveTo2>` with move configuration
+  - :ref:`ALMotionProxy::moveTo <ALMotionProxy::moveTo3>` with controlPoints
+  - :ref:`ALMotionProxy::moveTo <ALMotionProxy::moveTo4>` with controlPoints and move configuration
+  - :ref:`ALMotionProxy::moveTo <ALMotionProxy::moveTo5>` time constrained version, |juju| |roboJ| only
+
+  Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT.
+  This is a blocking call.
+
+  :param x: Distance along the X axis in meters.
+  :param y: Distance along the Y axis in meters.
+  :param theta: Rotation around the Z axis in radians [-3.1415 to 3.1415].
+
+  :download:`almotion_moveto.cpp </samples/cpp/almotion/almotion_moveto.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_moveto.cpp
+     :language: cpp
+
+  :download:`almotion_moveTo.py </samples/python/almotion/almotion_moveTo.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_moveTo.py
+     :language: py
+
+.. _ALMotionProxy::moveTo2:
+
+.. cpp:function:: void ALMotionProxy::moveTo( const float& x, const float& y, const float& theta, const AL::ALValue& moveConfig )
+
+  Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT,
+  with custom move configuration. This is a blocking call.
+
+  :param x: Distance along the X axis in meters.
+  :param y: Distance along the Y axis in meters.
+  :param theta: Rotation around the Z axis in radians [-3.1415 to 3.1415].
+  :param moveConfig: An ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+.. _ALMotionProxy::moveTo3:
+
+.. cpp:function:: void ALMotionProxy::moveTo(const AL::ALValue& controlPoints)
+
+  Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT,
+  while passing through check points. This is a blocking call.
+
+  :param controlPoint: An ALValue with all the control points [[x1,y1,theta1], ..., [xN,yN,thetaN]
+
+
+.. _ALMotionProxy::moveTo4:
+
+.. cpp:function:: void ALMotionProxy::moveTo( const AL::ALValue& controlPoints, const AL::ALValue& moveConfig )
+
+  Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT,
+  while passing through check points with custom move configuration.
+  This is a blocking call.
+
+  :param controlPoints: An ALValue with all the control points [[x1,y1,theta1], ..., [xN,yN,thetaN]
+  :param moveConfig: An ALValue with the custom move configuration. For further details, see: :ref:`move_config`.
+
+.. _ALMotionProxy::moveTo5:
+
+.. cpp:function:: ALMotionProxy::moveTo( const float& x, const float& y, const float& theta, const float& pTime)
+
+    |juju| |roboJ| only
+
+    Makes the robot move to the relative position (*x*, *y*, *theta*) in *pTime*.
+
+    If *pTime* is too short, the robot will move to (*x*, *y*, *theta*)
+    in optimal time (> *pTime*), and NAOqi will warn the user that
+    input time is not achievable.
+
+.. _ALMotionProxy::walkTo1:
+
+.. cpp:function:: void ALMotionProxy::walkTo( const float& x, const float& y, const float& theta )
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::moveTo` instead.
+
+  - :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo1>`
+  - :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo2>` with feetGaitConfig
+  - :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo3>` with controlPoints
+  - :ref:`ALMotionProxy::walkTo <ALMotionProxy::walkTo4>` with controlPoints and feetGaitConfig
+
+  Makes the robot walk to the given pose in the ground plane, relative to FRAME_ROBOT.
+  This is a blocking call.
+
+  :param x: Distance along the X axis in meters.
+  :param y: Distance along the Y axis in meters.
+  :param theta: Rotation around the Z axis in radians [-3.1415 to 3.1415].
+
+
+.. _ALMotionProxy::walkTo2:
+
+.. cpp:function:: void ALMotionProxy::walkTo( const float& x, const float& y, const float& theta, const AL::ALValue& feetGaitConfig )
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::moveTo` instead.
+
+  Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT,
+  with custom gait parameters. This is a blocking call.
+
+  :param x: Distance along the X axis in meters.
+  :param y: Distance along the Y axis in meters.
+  :param theta: Rotation around the Z axis in radians [-3.1415 to 3.1415].
+  :param feetGaitConfig: An ALValue with the custom gait configuration for both feet.
+
+
+.. _ALMotionProxy::walkTo3:
+
+.. cpp:function:: void ALMotionProxy::walkTo(const AL::ALValue& controlPoints)
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::moveTo` instead.
+
+  Makes the robot move to the given pose in the ground plane, relative to FRAME_ROBOT,
+  while passing through check points. This is a blocking call.
+
+  :param controlPoints: An ALValue with all the control points [[x1,y1,theta1], ..., [xN,yN,thetaN]
+
+
+.. _ALMotionProxy::walkTo4:
+
+.. cpp:function:: void ALMotionProxy::walkTo( const AL::ALValue& controlPoints, const AL::ALValue& feetGaitConfig )
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::moveTo` instead.
+
+  Makes the robot walk to the given pose in the ground plane, relative to FRAME_ROBOT,
+  while passing through check points with custom move configuration.
+  This is a blocking call.
+
+  :param controlPoints: An ALValue with all the control points [[x1,y1,theta1], ..., [xN,yN,thetaN]
+  :param feetGaitConfig: An ALValue with the custom gait configuration for both feet
+
+
+.. cpp:function:: void ALMotionProxy::setFootSteps( const std::vector<std::string>& legName, const AL::ALValue& footSteps, const std::vector<float>& timeList, const bool& clearExisting )
+
+  |nao| |roboN| only
+
+  Makes the robot do foot step planner. This is a non-blocking call.
+
+  :param legName: name of the leg to move('LLeg'or 'RLeg')
+
+  :param footSteps: [x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]
+
+  :param timeList: time list of each foot step
+
+  :param clearExisting: Clear existing foot steps.
+
+  :download:`almotion_setFootSteps.py </samples/python/almotion/almotion_setFootSteps.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setFootSteps.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::setFootStepsWithSpeed( const std::vector<std::string>& legName, const AL::ALValue& footSteps, const std::vector<float>& fractionMaxSpeed, const bool& clearExisting )
+
+  |nao| |roboN| only
+
+  Makes the robot do foot step planner with speed. This is a blocking call.
+
+  :param legName: name of the leg to move('LLeg'or 'RLeg')
+
+  :param footSteps: [x, y, theta], [Position along X/Y, Orientation round Z axis] of the leg relative to the other Leg in [meters, meters, radians]. Must be less than [MaxStepX, MaxStepY, MaxStepTheta]
+
+  :param fractionMaxSpeed: speed of each foot step. Must be between 0 and 1.
+
+  :param clearExisting: Clear existing foot steps.
+
+  :download:`almotion_setFootStepsWithSpeed.py </samples/python/almotion/almotion_setFootStepsWithSpeed.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setFootStepsWithSpeed.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getFootSteps()
+
+  Get the actual foot steps vector. This is a non-blocking call.
+
+  :return:
+    An ALValue containing three vector with: ::
+
+        [
+          [The actual position of the left and right foot steps in world frame]
+          [The unChangeable foot steps]
+          [The changeable foot steps]
+        ]
+
+    In more details: ::
+
+        [
+          [
+            [(float) LFootWorld_X, (float) LFootWorld_Y, (float) LFootWorld_Theta],
+            [(float) RFootWorld_X, (float) RFootWorld_Y, (float) RFootWorld_Theta]
+          ]
+          [
+            [(std::string) LegName, (float) Time, [(float) Move_X, (float) Move_Y, (float) Move_Y],
+            [...],
+            [(std::string) LegName, (float) Time, [(float) Move_X, (float) Move_Y, (float) Move_Y]
+          ]
+          [
+            [(std::string) LegName, (float) Time, [(float) Move_X, (float) Move_Y, (float) Move_Y],
+            [...],
+            [(std::string) LegName, (float) Time, [(float) Move_X, (float) Move_Y, (float) Move_Y]
+          ]
+        ]
+
+  Each move of foot step is relative to the previous location of the opposite foot step.
+  For example, a foot step move of LFoot will be relative to the last position of the RFoot.
+
+  If you use setFootSteps or setFootStepsWithSpeed with clearExisting parameter equal true,
+  walk engine execute unchangeable foot step and remove the other.
+
+
+
+  :download:`almotion_getFootSteps.py </samples/python/almotion/almotion_getFootSteps.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getFootSteps.py
+     :language: py
+
+
+
+
+.. cpp:function:: void ALMotionProxy::walkInit()
+
+  .. deprecated:: 1.14
+     use :cpp:func:`ALMotionProxy::moveInit` instead.
+
+
+.. cpp:function:: void ALMotionProxy::moveInit()
+
+  Initializes the move process. Checks the robot pose and takes a right posture. This is blocking called.
+
+  :download:`almotion_moveinit.cpp </samples/cpp/almotion/almotion_moveinit.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_moveinit.cpp
+     :language: cpp
+
+
+  :download:`almotion_moveInit.py </samples/python/almotion/almotion_moveInit.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_moveInit.py
+     :language: py
+
+
+
+
+.. cpp:function:: void ALMotionProxy::waitUntilWalkIsFinished()
+
+  Waits until the WalkTask is finished: this method can be used to block your script/code execution
+  until the walk task is totally finished.
+
+
+  .. deprecated:: 1.14
+     use :cpp:func:`ALMotionProxy::waitUntilMoveIsFinished` instead.
+
+
+
+
+.. cpp:function:: void ALMotionProxy::waitUntilMoveIsFinished()
+
+  Waits until the MoveTask is finished: this method can be used to block your script/code execution
+  until the move task is totally finished.
+
+  :download:`almotion_waituntilmoveisfinished.cpp </samples/cpp/almotion/almotion_waituntilmoveisfinished.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_waituntilmoveisfinished.cpp
+     :language: cpp
+
+
+  :download:`almotion_waitUntilMoveIsFinished.py </samples/python/almotion/almotion_waitUntilMoveIsFinished.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_waitUntilMoveIsFinished.py
+     :language: py
+
+
+
+.. cpp:function:: bool ALMotionProxy::walkIsActive()
+
+  :return: True if Walk is Active.
+
+  .. deprecated:: 1.14
+     use :cpp:func:`ALMotionProxy::moveIsActive` instead.
+
+
+
+.. cpp:function:: bool ALMotionProxy::moveIsActive()
+
+  :return: True if move is Active.
+
+  :download:`almotion_moveisactive.cpp </samples/cpp/almotion/almotion_moveisactive.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_moveisactive.cpp
+     :language: cpp
+
+
+  :download:`almotion_moveIsActive.py </samples/python/almotion/almotion_moveIsActive.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_moveIsActive.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: void ALMotionProxy::stopWalk()
+
+  Stops Walk task at next double support: this method will end the walk task less
+  brutally than killWalk but more quickly than move(0.0, 0.0, 0.0).
+
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::stopMove` instead.
+
+
+
+.. cpp:function:: void ALMotionProxy::stopMove()
+
+  Stops Move task at next double support: this method will end the move task less
+  brutally than killMove but more quickly than move(0.0, 0.0, 0.0).
+
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getFootGaitConfig(const std::string& config)
+
+  Gets the foot Gait config ("MaxStepX", "MaxStepY", "MaxStepTheta",
+  "MaxStepFrequency", "StepHeight", "TorsoWx", "TorsoWy").
+
+  .. deprecated:: 1.14
+    use :cpp:func:`ALMotionProxy::getMoveConfig` instead.
+
+  :param config: a string should be "Max", "Min", "Default"
+
+  :return:
+    An ALValue with the following form ::
+
+                 [ ["MaxStepX", value],
+                   ["MaxStepY", value],
+                   ["MaxStepTheta", value],
+                   ["MaxStepFrequency", value],
+                   ["StepHeight", value],
+                   ["TorsoWx", value],
+                   ["TorsoWy", value]
+                 ]
+
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getMoveConfig(const std::string& config)
+
+  Gets the move config ("MaxStepX", "MaxStepY", "MaxStepTheta",
+  "MaxStepFrequency", "StepHeight", "TorsoWx", "TorsoWy").
+
+  :param config: a string should be "Max", "Min", "Default"
+
+  :return:
+    An ALvalue with the move config. with the following form ::
+
+                 [ ["MaxStepX", value],
+                   ["MaxStepY", value],
+                   ["MaxStepTheta", value],
+                   ["MaxStepFrequency", value],
+                   ["StepHeight", value],
+                   ["TorsoWx", value],
+                   ["TorsoWy", value]
+                 ]
+
+  Example in python: ::
+
+     # Example showing how to get and play with foot gait config
+     # a getFootConfig could be directly use in a walk method
+     # WARNING: be aware that Max and Min are extreme values and could create
+     #           some strange walk behavior
+
+     import time
+
+     proxy.moveInit()
+     proxy.moveToward(1.0, 0.0, 0.0, proxy.getMoveConfig("Min"))
+     time.sleep(3.0)
+     proxy.stopMove()
+
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getRobotPosition(const bool& useSensors)
+
+  Gets the World Absolute Robot Position.
+
+  :param useSensors: If true, use the MRE sensor values
+
+  :return: A vector containing the World Absolute Robot Position. (Absolute Position X in meter, Absolute Position Y in meter, Absolute Angle Theta (Wz) in radian). Wz is an angle between ]-pi, pi].
+
+  :download:`almotion_getrobotposition.cpp </samples/cpp/almotion/almotion_getrobotposition.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getrobotposition.cpp
+     :language: cpp
+
+
+  :download:`almotion_getRobotPosition.py </samples/python/almotion/almotion_getRobotPosition.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getRobotPosition.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getNextRobotPosition()
+
+  Gets the World Absolute next Robot Position.
+
+  When no walk process active, getNextRobotPosition() =   getRobotPosition().
+
+  Else getNextRobotPosition return the position of the robot after the unchangeable foot steps.
+
+  :return: A vector containing the World Absolute next Robot position.(Absolute Position X in meter, Absolute Position Y in meter, Absolute Angle Theta (Wz) in radian). Wz is an angle between ]-pi, pi].
+
+  :download:`almotion_getnextrobotposition.cpp </samples/cpp/almotion/almotion_getnextrobotposition.cpp>`
+
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getnextrobotposition.cpp
+     :language: cpp
+
+
+  :download:`almotion_getNextRobotPosition.py </samples/python/almotion/almotion_getNextRobotPosition.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getNextRobotPosition.py
+     :language: py
+
+
+
+
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getRobotVelocity()
+
+  Gets the Absolute Robot Velocity, expressed in FRAME_ROBOT.
+
+  :return: A vector containing the Absolute Robot Velocity. (Absolute Velocity Translation X [m.s-1], Absolute Velocity Translation Y[m.s-1], Absolute Velocity Rotation WZ [rd.s-1])
+
+  :download:`almotion_getrobotvelocity.cpp </samples/cpp/almotion/almotion_getrobotvelocity.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getrobotvelocity.cpp
+     :language: cpp
+
+
+  :download:`almotion_getRobotVelocity.py </samples/python/almotion/almotion_getRobotVelocity.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getRobotVelocity.py
+     :language: py
+
+.. cpp:function:: AL::ALValue ALMotionProxy::getWalkArmsEnabled()
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALMotionProxy::getMoveArmsEnabled` instead.
+
+  Gets if Arms Motions are enabled during the Walk Process.
+
+  :return: True Arm Motions are controlled by the Walk Task.
+
+.. cpp:function:: void ALMotionProxy::setWalkArmsEnabled( const bool& leftArmEnable, const bool& rightArmEnable )
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALMotionProxy::setMoveArmsEnabled` instead.
+
+  Sets if Arms Motions are enabled during the Walk Process.
+
+  :param leftArmEnable: if true Left Arm motions are controlled by the Walk Task
+
+  :param rightArmEnable: if true Right Arm motions are controlled by the Walk Task
+
+
+.. cpp:function:: bool ALMotionProxy::getMoveArmsEnabled(const std::string & chainName)
+
+  Gets if Arms Motions are enabled during the Move Process.
+
+  :param chainName: arm chain, it should be "LArm", "RArm" or "Arms".
+
+  :return: For "LArm" and "RArm", returns true if the corresponding arm is enabled.
+           For "Arms", returns true if both arms are enabled. Returns false otherwise.
+
+  :download:`almotion_getMoveArmsEnabled.cpp </samples/cpp/almotion/almotion_getmovearmsenabled.cpp>`
+
+  .. literalinclude:: /samples/cpp/almotion/almotion_getmovearmsenabled.cpp
+     :language: cpp
+
+  :download:`almotion_getMoveArmsEnable.py </samples/python/almotion/almotion_getMoveArmsEnabled.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_getMoveArmsEnabled.py
+     :language: py
+
+
+.. cpp:function:: void ALMotionProxy::setMoveArmsEnabled( const bool& leftArmEnable, const bool& rightArmEnable )
+
+  Sets if Arms Motions are enabled during the Move Process.
+
+  :param leftArmEnable: if true Left Arm motions are controlled by the Move Task
+
+  :param rightArmEnable: if true Right Arm motions are controlled by the Move Task
+
+  :download:`almotion_setMoveArmsEnabled.py </samples/python/almotion/almotion_setMoveArmsEnabled.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setMoveArmsEnabled.py
+     :language: py
+

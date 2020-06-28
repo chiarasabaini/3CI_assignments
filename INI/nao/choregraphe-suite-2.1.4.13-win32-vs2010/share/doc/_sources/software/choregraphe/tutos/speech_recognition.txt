@@ -1,0 +1,92 @@
+
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+.. |play-button| image:: /medias/desktop/beginning_play_button.png
+   :class: img-inline
+
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. _speech_recognition_tuto:
+
+Testing the speech recognition
+===============================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Connect **Choregraphe** to a real robot.
+
+2.      Drag and drop the **Audio** > **Voice** > **Set Speech Lang.** box onto
+        **Flow Diagram** panel.
+
+3.      Connect its input to the main input of the Behavior.
+
+4.      Click the |parameter-button| **Parameter** button of the
+        **Set Speech Lang.** box and select **English**.
+
+5.      Drag and drop the **Audio** > **Voice** > **Speech Reco.** box onto the
+        **Flow Diagram** panel.
+
+6.      Connect its input to the output of the **Set Speech Lang.** box.
+
+
+7.      Click the |play-button| **Play** button.
+
+        If **Visual expression** option is enabled, Eye LEDs should become:
+
+        * Blue and turn, while waiting for your speaking.
+
+8.      Say "yes" or "no" - these are the words recognized by default.
+
+        If **Visual expression** option is enabled, Eye LEDs should become:
+
+        * Yellow, while hearing and analyzing what you said.
+        * Green, when a word is recognized.
+=====  ==========================================================================
+
+Customizing the list of recognized words
+-----------------------------------------
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Click the |parameter-button| **Parameter** button of the
+        **Speech Reco.** box and enter your own list of words.
+
+        .. warning::
+           Make sure you use the same separator as provided in the example:
+           according to your local settings, your keyboard may produce another
+           character looking exactly the same way but with another internal
+           code! To avoid this, simply copy/paste the character provided
+           in the sample.
+
+2.      Click the |play-button| **Play** button to test the result.
+=====  ==========================================================================
+
+Improving your Behavior
+-----------------------
+
+* Add a **Say** Box and connect it before the **Speech Reco.** box, in order to
+  make the robot ask a question.
+
+* Add a **Say** Box and connect it after the **onNothing** output of the box
+  in order to make the robot say he hasn't hear anything.
+
+* Add the box of your choice and connect it after the **wordRecognized** output
+  of the box in order to make the robot react to the detected words.
+
+* Try to modify the **word spotting** and  the **Threshold** options in order
+  to obtain a good reactivity.
+
+
+
+
+To go further
+--------------
+
+* Try the **Choice** box in order to make the robot react differently
+  according to the recognized words.

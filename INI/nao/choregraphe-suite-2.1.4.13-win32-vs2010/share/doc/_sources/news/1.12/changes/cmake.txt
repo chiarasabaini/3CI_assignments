@@ -1,0 +1,269 @@
+.. _news-cmake:
+
+CMake Changes
+=============
+
+.. highlight:: cmake
+
+
+We tried hard keep CMake backward compatibility,
+but despite all our efforts, there may be some little glitches.
+Anyway it's a good idea to upgrade from the old t001chain/cmake code to the brand new and documented qibuild CMake framework.
+
+You can find a full tutorial to do that in the :ref:`cpp-tutos-porting-1.12` tutorial
+
+
+Below is a list of all the modifications you should do to use the new qiBuild CMake
+framework.
+
+
+creating NAOqi modules
+++++++++++++++++++++++
+
+
+This concerns the `create_module` and `configure_src_module` functions.
+
+The code looked like::
+
+  include(${CMAKE_CURRENT_SOURCE_DIR}/bootstrap.cmake)
+  use(NAOQI-PLUGINS-TOOLS)
+
+  create_module(foo)
+
+  configure_src_module(foo foomain.cpp foo.cpp foo.h)
+
+
+This code still works, but there are a few subtle changes:
+
+* create_module(foo) used to call `project(foo)`. This is not done
+  anymore because it confuses calling `cmake --build`. You must now explicitely
+  call `project(foo)`
+
+* configure_src_module(foo) creates a library if FOO_IS_REMOTE was ON, else
+  an executable. This has not changed, but `configure_src_module` used
+  to create a dynamic library by default, and now we create an executable by default
+  (which is nicer, because your code is ready to run!)
+
+You can go back to the old behavior by using::
+
+  create_module(foo DEFAULT_REMOTE_OFF)
+
+
+
+Note: most of the time you won't need to have your code being able to be both a
+remote process and a local module on the robot depending on a CMake variable.
+
+In this case, simply use::
+
+  project(foo)
+  qi_create_bin(foo main.cpp foo.cpp foo.h)
+
+If you want a remote process, or::
+
+  project(foo)
+  qi_create_lib(foo main.cpp foo.cpp foo.h)
+
+
+.. warning:: if you choose to do this, you will have to clean the main.cpp file
+   of your module to get rid of the FOO_IS_REMOTE_ON or FOO_IS_REMOTE_OFF defines.
+
+.. note:: Since those functions were very confusing, we no longer use them in our
+   examples.
+
+
+
+
+CMake Functions
+---------------
+
+
+The names of the functions have changed too.
+
+All of them are now prefixed with ``qi``, thus preventing conflicts
+with other functions.
+
+We also implemented new functions, causing API changes.
+
+See qibuild documentation for all the details.
+
+You can set ``QI_WARN_DEPRECATED`` to 'ON' to see the deprecated warning
+messages and fix your code. (it's OFF by default)
+
+
+install\_ functions
++++++++++++++++++++
+
+*old*::
+
+  install_header(FOO SUBFOLDER foo foo.h)
+
+*new*::
+
+  qi_install_header(foo/foo.h SUBFOLDER foo)
+
+  # or
+
+  qi_install_header(foo/foo.h KEEP_RELATIVE_PATHS)
+
+Previously, you had to pass a 'prefix' parameter has first argument,
+matching the name of a staged target. This is no longer necessary.
+
+
+Same thing for:
+
+* install_data
+* install_conf
+* install_cmake
+
+
+
+staging and using libraries
++++++++++++++++++++++++++++
+
+Assumming you have a ``bar`` executable depeding on the ``foo``
+library:
+
+*old*::
+
+  create_lib(foo foo/foo.cpp foo/foo.h)
+  stage_lib(foo FOO)
+
+  create_bin(bar bar/main.cpp)
+  use_lib(bar FOO)
+
+*new*::
+
+  qi_create_lib(foo foo/foo.cpp foo/foo.h)
+  qi_stage_lib(foo)
+
+  qi_create_bin(bar bar/main.cpp)
+  qi_use_lib(bar foo)
+
+Previously, you could had to specify a 'staged name' as a second argument
+in `stage_lib`, and make sure to use **the same** name in the calls of
+`use_lib`
+
+In qibuild, you can just use the name of the target, which is much simpler :)
+
+
+
+Renamed libraries
+-----------------
+
+
++----------------------------+----------------------------------------+
+| Old name                   |    New name                            |
++============================+========================================+
+| ALMEMORYFASTACCESS         |       ALMEMORY_FAST_ACCESS             |
++----------------------------+----------------------------------------+
+| LIBSHM                     |       ALSHM                            |
++----------------------------+----------------------------------------+
+| LIBLAUNCHER                |       ALLAUNCHER                       |
++----------------------------+----------------------------------------+
+| LIBCORE                    |       ALCORE                           |
++----------------------------+----------------------------------------+
+| TOOLS                      |       ALTOOLS                          |
++----------------------------+----------------------------------------+
+| LIBVISION                  |       ALVISION                         |
++----------------------------+----------------------------------------+
+| SHMPOOL                    |       ALSHMPOOL                        |
++----------------------------+----------------------------------------+
+| LIBFILE                    |       ALFILE                           |
++----------------------------+----------------------------------------+
+| LIBAUDIO                   |       ALAUDIO                          |
++----------------------------+----------------------------------------+
+| LIBBEHAVIORINFO            |       ALBEHAVIORINFO                   |
++----------------------------+----------------------------------------+
+| LIBRESOURCE                |       ALRESOURCE                       |
++----------------------------+----------------------------------------+
+| LIBTHREAD                  |       ALTHREAD                         |
++----------------------------+----------------------------------------+
+
+
+This is just for consistency. We made sure names where not too generic,
+and that any Aldebaran library should start with 'AL'
+
+old::
+
+  use_lib(foo LIBAUDIO)
+
+new::
+
+  use_lib(foo ALAUDIO)
+
+
+Private libraries
+-----------------
+We made a clear distinction between private and public libraries. Lots of libraries that where available in previous release wont in new release, they are still available for backward compatibility, but you should update your code to not rely on them. Most of the time you have nothing to do as you should not have been using those libraries.
+
++---------------------------+------------------------------------------------------------+
+|   Library                 |                     Reason                                 |
++===========================+============================================================+
+| RTTOOLS                   |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALLOGREMOTE               |      private, no need when using altoolsmain               |
++---------------------------+------------------------------------------------------------+
+| ALFILE, LIBFILE           |      private, use qi::path and boost::filesystem instead   |
++---------------------------+------------------------------------------------------------+
+| ALLAUNCHER, LIBLAUNCHER   |      private, use qi::os::spawn instead                    |
++---------------------------+------------------------------------------------------------+
+| ALSOAP                    |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALAUTOMATICTEST           |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALBONJOURDISCOVERY        |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALMOTION                  |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALMODELUTILS              |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALTTS                     |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALAUDIODEVICES            |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALASR                     |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALAUDIOTOOLBOX            |      private                                               |
++---------------------------+------------------------------------------------------------+
+| SCRIPTWRAPPER             |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALPYTHONTOOLS             |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALBEHAVIOR                |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALBEHAVIORINFO            |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALBOXLIBRARY              |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALPROJECT                 |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALSERIAL                  |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALRESOURCE                |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALSHM, LIBSHM             |      private                                               |
++---------------------------+------------------------------------------------------------+
+| ALSHMPOOL, SHMPOOL        |      private                                               |
++---------------------------+------------------------------------------------------------+
+| LIBFACTORY                |      private                                               |
++---------------------------+------------------------------------------------------------+
+
+
+Most of the time you only need to use ALCOMMON or ALEXTRACTOR.
+
+This is an example:
+
+
+old::
+
+  create_bin(foo)
+  use_lib(foo ALTOOLS ALCOMMON)
+
+new::
+
+  qi_create_bin(foo)
+  qi_use_lib(foo ALCOMMON)
+
+
+
+

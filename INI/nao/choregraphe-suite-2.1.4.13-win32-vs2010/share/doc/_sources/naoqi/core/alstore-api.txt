@@ -1,0 +1,93 @@
+.. _alstore-api:
+
+ALStore API
+=====================
+
+:ref:`naoqi-core` - :ref:`Overview <alstore>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/alstoreproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALStoreProxy
+
+* :cpp:func:`ALStoreProxy::update`
+* :cpp:func:`ALStoreProxy::stopUpdate`
+* :cpp:func:`ALStoreProxy::status`
+
+Event list
+-----------
+
+* :naoqi:event:`ALStore/SystemImageDownloaded`
+* :naoqi:event:`ALStore/Updated`
+
+Methods
+-------
+
+.. cpp:function:: void ALStoreProxy::update()
+
+  Update applications from the Store. This call will return immediately, but
+  :naoqi:event:`ALStore/Updated` will be raised once update completes.
+
+.. cpp:function:: void ALStoreProxy::stopUpdate()
+
+  Stop current update. Current download is not immediately aborted.
+
+.. cpp:function:: std::vector<AL::ALValue> status()
+
+  Get a vector of all applications status.
+
+Events
+------
+
+.. naoqi:event:: ALStore/Updated()
+
+  Raised when current update completes, even though errors occurred.
+
+.. naoqi:event:: ALStore/SystemImageDownloaded()
+
+  Raised when a new system image was downloaded and can be flashed upon
+  next reboot.
+
+ALValue PackageInfoStatus
+-------------------------
+
+The ALValue PackageInfoStatus is an array of n-pair (key, value).
+
+In order to exchange this object with other modules,
+the PackageInfoStatus object can be represented as an ALValue with the following structure:
+
++------------------------+---------------+-----------------------------------+
+|    key                 |   value type  |    default value                  |
++========================+===============+===================================+
+|    "uuid"              |     string    |       ""                          |
++------------------------+---------------+-----------------------------------+
+|    "version"           |     string    |       ""                          |
++------------------------+---------------+-----------------------------------+
+|    "onlineVersion"     |     string    |       ""                          |
++------------------------+---------------+-----------------------------------+
+|    "status"            |     int       |       0                           |
++------------------------+---------------+-----------------------------------+
+|    "percent"           |     int       |       -1 (not implemented)        |
++------------------------+---------------+-----------------------------------+
+|    "size"              |     int       |       0 (in ko)                   |
++------------------------+---------------+-----------------------------------+
+
+"status" can take 4 values:
+  * 0: PackageStatus_None
+  * 1: PackageStatus_Updated
+  * 2: PackageStatus_Downloading
+  * 3: PackageStatus_ToBeUpdate
+
+Empty values will take default value.

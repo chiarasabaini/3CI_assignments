@@ -1,0 +1,161 @@
+.. include:: bulk/common.rst
+
+.. _animation_mode:
+
+Animation Mode
+===============
+
+.. seealso::
+
+   - :ref:`choregraphe-tuto-animation-mode`
+
+What is the Animation Mode
+--------------------------
+
+The **Animation Mode** allows you to create movements easily, in conjunction
+with the **Timeline Editor**. In this mode, the robot behaves like a puppet
+that you can manipulate, letting you record its posture in a **Timeline**.
+
+| In this mode, tactile commands help you manipulate the robot.
+| For further details, see: :ref:`anim_mode_stiffness`.
+
+.. _choregraphe-howto-use-animation-mode:
+
+Getting started with the Animation Mode
+---------------------------------------
+
+|no-virtual| *Cannot be used on a virtual robot*.
+
+-------------------------------------------------
+
+Starting an animation
++++++++++++++++++++++
+
+To start an animation using **Animation Mode**:
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Make sure **Choregraphe** is connected to a real robot.
+
+2.         Make sure **Life** is off.
+
+           For further details, see: :ref:`nao_freeze`.
+
+3.         Create a **Timeline box**.
+
+           For further details, see: :ref:`choregraphe-howto-create-timeline-box`.
+
+4.         Double-click the box in order to display the **Timeline**.
+
+5.         Click the |stiffen-button| **Wake up** button in the toolbar.
+
+6.         Click the |animation-mode-green| **Animation Mode** button.
+
+           The button turns red: |animation-mode-red|, meaning the
+           **Animation Mode** is on.
+
+7.         Hold your robot by the waist or the torso to prevent it from falling
+           down.
+========  =========================================================================
+
+Defining and storing postures
++++++++++++++++++++++++++++++++
+
+To define and store postures, repeat the following steps for each posture:
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Use :ref:`anim_mode_stiffness` to manipulate its limbs one by one
+           in order to make the robot take the posture you want to store.
+
+2.         Tap the head tactile sensors with your hand:
+
+           The current posture is stored at the **Insertion point** of the **Timeline**
+           which then moves automatically forward.
+========  =========================================================================
+
+Exiting Animation Mode
++++++++++++++++++++++++
+
+To exit the **Animation Mode**:
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         * Click the |animation-mode-red| **Animation Mode** button, or
+
+           * Lay you hand on the 3 **Head tactile sensors** for 3 seconds.
+
+           The button turns green: |animation-mode-green|, meaning the
+           **Animation Mode** is off.
+========  =========================================================================
+
+**Note**: if **Choregraphe** is disconnected from your robot, the
+**Animation Mode** is automatically stopped .
+
+.. _anim_mode_stiffness:
+
+Stiffness-control tactile commands
+------------------------------------
+
+You can use tactile commands to manage the **stiffness**:
+
+===========    ================================================================
+ Limb            Stiffness control
+===========    ================================================================
+ **Head**        Touch the **middle** head tactile sensor to toggle the
+                 stiffness.
+
+ **Arms**        Keep touching **hand tactile sensors** to maintain stiffness
+                 off.
+
+                 **Note**: if your robot does not have such sensors, touch
+                 the **back** and **front** head tactile sensors to toggle
+                 the stiffness of each arm.
+
+ **Legs**        Press the **foot bumpers** to toggle the stiffness.
+===========    ================================================================
+
+.. _visual-commands-animation-mode:
+
+Visual feedback
++++++++++++++++
+
+A visual feedback let you know which limb is currently stiffened or not:
+
+* Yellow means that the **Stiffness** is **On**,
+* Green means that the **Stiffness** is **Off**.
+
+===========    ================================================================
+ Limb           Visual Feed-back location
+===========    ================================================================
+**Head**        Upper Eye LEDs.
+
+**Arms**        All Eye LEDs (except upper).
+
+**Legs**        Foot LEDs.
+===========    ================================================================
+
+.. list-table:: Example of visual information for head and arms
+   :widths: 10 10 10 10
+   :header-rows: 1
+
+   * - Visual information
+     - Stiffened parts
+     - Visual information
+     - Stiffened parts
+   * - .. image:: /medias/desktop/choregraphe/head_both_arms.png
+     - Head and both arms
+     - .. image:: /medias/desktop/choregraphe/nothing.png
+     - Nothing
+   * - .. image:: /medias/desktop/choregraphe/head.png
+     - Head
+     - .. image:: /medias/desktop/choregraphe/head_right_arm.png
+     - Head and right arm
+   * - .. image:: /medias/desktop/choregraphe/left_arm.png
+     - Left arm
+     - .. image:: /medias/desktop/choregraphe/right_arm.png
+     - Right arm
+

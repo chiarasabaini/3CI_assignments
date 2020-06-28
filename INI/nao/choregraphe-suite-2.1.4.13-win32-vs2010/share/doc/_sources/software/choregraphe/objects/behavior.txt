@@ -1,0 +1,39 @@
+
+.. _behavior:
+
+Behavior
+========
+
+.. _choregraphe-reference-behavior:
+
+What is a Behavior
+-------------------
+
+Creating a **Behavior** is an easy way to make the robot talk, walk,
+dance, play a sound, etc.
+
+A **Behavior** contains :ref:`Boxes <choregraphe-reference-box>` which
+are sequentially or simultaneously executed.
+
+Inside the **Project** folder, the **Behavior** is stored in a .XAR file
+located in a sub-folder.
+
+How to manage Behaviors
+-----------------------
+
++-----------------------------------------+-------------------------------------------------------------+
+|  To ...                                 | See ...                                                     |
++=========================================+=============================================================+
+| Create a **Behavior**                   | :ref:`choregraphe-howto-create-a-behavior`,                 |
+|                                         | for a quick start and                                       |
+|                                         |                                                             |
+|                                         | the :ref:`chore_flow_diagram_panel`                         |
+|                                         | for further details.                                        |
++-----------------------------------------+-------------------------------------------------------------+
+| Play or stop the current **Behavior**   | :ref:`choregraphe-howto-play-a-behavior`.                   |
++-----------------------------------------+-------------------------------------------------------------+
+| Save a **Behavior** on your computer    | the :ref:`choregraphe-reference-project` available formats. |
++-----------------------------------------+-------------------------------------------------------------+
+| Play, stop, install or desinstall       | :ref:`chore_robot_applications_panel`.                      |
+| **Behaviors** on your robot.            |                                                             |
++-----------------------------------------+-------------------------------------------------------------+

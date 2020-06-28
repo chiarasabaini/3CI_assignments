@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-11-09 08:41:38 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMDk7IjA4OjIyOjEzICI7MzI5MQ=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTEtMDk7IjA4OjQxOjM4ICI7MTszNDA3"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci numero decimale da convertire:&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="base" type="Integer" array="False" size=""/>
+            <output expression="&quot;in che base vuoi convertirlo? [2;9]&quot;" newline="True"/>
+            <input variable="base"/>
+            <declare name="r" type="Integer" array="False" size=""/>
+            <assign variable="r" expression="10"/>
+            <declare name="converted" type="String" array="False" size=""/>
+            <assign variable="converted" expression="&quot;&quot;"/>
+            <if expression="base&lt;2 || base&gt;9">
+                <then>
+                    <output expression="&quot;Errore: base non valida. Inserire un'altra base [2;9].&quot;" newline="True"/>
+                    <call expression="main"/>
+                </then>
+                <else>
+                    <while expression="r&gt;1">
+                        <assign variable="r" expression="n%base"/>
+                        <assign variable="n" expression="n/base"/>
+                        <assign variable="converted" expression="r &amp; converted"/>
+                    </while>
+                    <output expression="converted" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

@@ -1,0 +1,32 @@
+.. _alrobotpose:
+
+ALRobotPose
+===========
+
+.. toctree::
+  :hidden:
+  :maxdepth: 1
+
+  alrobotpose-api
+
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <alrobotpose-api>`
+
+------------
+
+
+What it does
+------------
+
+The `ALRobotPose` module watches several sensors and tries to recognize the
+current :term:`posture` of the robot.
+
+.. warning::
+
+   This module is deprecated.
+
+   This module is deprecated and most of its functionalities were moved to
+   new module: :ref:`ALRobotPosture <alrobotposture>`.
+
+   Use these new module since ALRobotPose will not be maintained in the future.
+

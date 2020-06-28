@@ -1,0 +1,57 @@
+.. _investigating:
+
+Debugging and investigating on the robot
+==========================================
+
+This section gives you some tips about debug and investigation methods on the robot.
+
+Note that all the following is done logged over ssh on the robot.
+
+For further details, see: :ref:`opennao-ssh`.
+
+Debugging NAOqi development
+---------------------------
+
+Refer to :ref:`gdb`.
+
+
+NAOqi issue report
+------------------
+
+Since the 1.14 release, a *issue report generator* is embedded in **NAOqi**.
+
+When **NAOqi** ends prematurely in an unexpected way, an issue report is
+generated in: ``/var/lib/minidump``.
+
+To help us improving the software quality, feel free to send those reports to
+**Aldebaran Robotics**.
+
+
+Investigating system issues
+---------------------------
+
+In :term:`NAOqi OS`, several program generate logs that are stored in the ``/var/log``
+directory or any of its sub-directories.
+
+Because the ``/var/log`` directory is volatile, it is reset on each power-down.
+
+
+Diagnosis and reports
+---------------------
+
+.. do we really need to talk about this?
+
+   AFAIK, nao-diagnostic exists for a long (long) time but has never been
+   documented because:
+   - it is not really maintained
+   - currently, we cannot ensure that there is no personal data among all the
+     gathered stuff
+   - it generates ~700KB tarball of compressed data, logs, etc... for which,
+     there is currently no script processing those data.
+
+In case of weird behavior of the robot, the ``nao-diagnostic`` program can gather
+many data about the robot state into a tarball located by default in:
+``/home/nao/diagnosis``.
+
+To help us improving the software quality, feel free to send those diagnosis to
+**Aldebaran Robotics**.

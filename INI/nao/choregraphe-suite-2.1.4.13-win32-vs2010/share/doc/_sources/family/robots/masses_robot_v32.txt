@@ -1,0 +1,35 @@
+.. _robot_masses_v32:
+
+Masses - V3.2
+=======================
+
+.. seealso::
+
+   :ref:`all_robots`
+
+   :ref:`V5 <robot_masses>`  | :ref:`V4 <robot_masses_v4>`
+   | :ref:`V3.3 <robot_masses_v33>` | **V3.2**
+
+   :ref:`H25<h25_masses_v32>` | :ref:`H21<h21_masses_v32>` | :ref:`T14<t14_masses_v32>` | :ref:`T2<t2_masses_v32>`
+
+--------------------
+
+.. include:: ../bulk/masses_whole.rst
+
+
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 	4.83592
+
+
+.. include:: ../bulk/masses_head_torso_v32.rst
+
+.. include:: ../bulk/masses_arms_v32.rst
+
+.. include:: ../bulk/masses_hands_motorized_v32.rst
+
+.. include:: ../bulk/masses_legs_v32.rst
+

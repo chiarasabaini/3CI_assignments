@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="This box makes the robot blink once." x="253" y="142">
+        <bitmap>media/images/box/interaction/LED.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.leds = ALProxy("ALLeds")
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self):
+        rDuration = 0.05
+        self.leds.post.fadeRGB( "FaceLed0", 0x000000, rDuration )
+        self.leds.post.fadeRGB( "FaceLed1", 0x000000, rDuration )
+        self.leds.post.fadeRGB( "FaceLed2", 0xffffff, rDuration )
+        self.leds.post.fadeRGB( "FaceLed3", 0x000000, rDuration )
+        self.leds.post.fadeRGB( "FaceLed4", 0x000000, rDuration )
+        self.leds.post.fadeRGB( "FaceLed5", 0x000000, rDuration )
+        self.leds.post.fadeRGB( "FaceLed6", 0xffffff, rDuration )
+        self.leds.fadeRGB( "FaceLed7", 0x000000, rDuration )
+        time.sleep( 0.1 )
+        self.leds.fadeRGB( "FaceLeds", 0xffffff, rDuration )
+        self.onDone()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onDone" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+    </Box>
+</ChoregrapheBox>

@@ -1,0 +1,26 @@
+
+Hello World(s)
+====================
+
+**... Your robot is ready to use?**
+
+"Ready to use" means:
+
+* unpacked and turned ON,
+* with its battery charged and its network settings configured.
+
+If it is not the case, read first :ref:`out_of_the_box_nao`.
+
+.. or :ref:`out_of_the_box_juliette`.
+
+**My robot is ready ...**
+
+Start your discovery with these simple tutorials:
+
+.. toctree::
+   :maxdepth: 1
+
+   1 - Choregraphe <helloworld_choregraphe>
+   2 - Python in Choregraphe <helloworld_choregraphe_script>
+   3 - Dialog in Choregraphe <helloworld_choregraphe_dialog>
+   4 - Python <helloworld_python>

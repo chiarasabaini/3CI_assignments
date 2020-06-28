@@ -1,0 +1,37 @@
+.. _dialog_panel:
+
+Dialog panel
+=============
+
+The **Dialog** panel allows you to visualize and test verbal interaction with the robot.
+
+Can be used with a simulated robot.
+
+.. image:: /medias/desktop/choregraphe/dialog_panel.png
+   :width: 371 px
+   :height: 285 px
+
+=====  ================================================================================
+Part    Allows you to ...
+=====  ================================================================================
+**A**   Enter a Human input instead of speaking to a real robot.
+
+**B**   Visualize the human input as it has been understood by the robot.
+
+        The percentage in gray is the **Confidence** level of the speech recognition.
+
+**C**   Visualize the Robot answer.
+=====  ================================================================================
+
+Useful functions
+-----------------
+
+Use the contextual menu to **Copy**, **Select**, **Clear** the content or to
+show/hide the **Confidence** level of the speech recognition.
+
+.. image:: /medias/desktop/choregraphe/dialog_panel_ctlmenu.png
+   :width: 168 px
+   :height: 107 px
+
+
+

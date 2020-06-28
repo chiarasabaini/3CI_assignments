@@ -1,0 +1,50 @@
+.. _choregraphe-reference-simulated-robot:
+
+Simulated robots
+================
+
+| A simulated robot is a virtual robot running on your computer.
+| It allows you to test your code before running it on a real robot.
+|
+
+There are several ways to get to a simulated robot:
+
+====================================  ======================================================================================================
+ Using ...                             Comment
+====================================  ======================================================================================================
+**Choregraphe** **virtual robot**      This robot is launched at **Choregraphe** startup and stopped at **Choregraphe** closure.
+
+                                       It has the same abilities of a real one but:
+
+                                       * It is not subjected to the gravity and its torso is always considered as in a straight position
+                                         (exactly as it is displayed in the :ref:`3d-nao-panel`).
+                                         So it cannot fall and cannot be lied down.
+
+                                       * Its joints are always considered as stiffened and the stiffness can never be set off.
+
+                                       * It has no audition functions (speech recognition, recording, etc).
+
+                                       * It has no audio player functions.
+
+                                       * It has no LED.
+
+                                       * You cannot directly interact with it (tactile touch, bumper, etc), yet moving
+                                         a joint in :ref:`3d-nao-panel` is possible.
+
+                                       This simulated robot is dependent of **Choregraphe** and is not accessible from other applications
+                                       such as **Monitor**.
+
+**NAOqi binary**                       This robot has the same abilities as the previous one but is totally independent of
+                                       **Choregraphe**.
+
+                                       So it can be connected from any other application (**Monitor** for example)
+                                       and can be launched and exited as you wish independently from **Choregraphe**.
+
+**Virtual world**                      **Webots** offers a robot simulation in a customizable virtual world.
+
+                                       For further details about the abilities of this simulated robot see :ref:`webots`.
+====================================  ======================================================================================================
+
+.. seealso::
+
+  * :ref:`choregraphe-howto-connect-to-simulated-nao`

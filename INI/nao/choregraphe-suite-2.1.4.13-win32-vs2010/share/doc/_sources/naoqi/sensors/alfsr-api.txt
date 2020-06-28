@@ -1,0 +1,69 @@
+.. _alfsr-api:
+
+ALFsr API
+=========
+
+:ref:`naoqi-sensors` - :ref:`Overview <alfsr>` | API | :ref:`Tutorial <alfsr-tuto>`
+
+------------
+
+.. seealso::
+
+   - :ref:`Hardware Force Sensitive Resistors (FSRs) <robot-fsr>`
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alfsrproxy.h>
+
+
+Event list
+----------
+
+* :naoqi:event:`footContactChanged`
+
+ALMemory Keys list
+------------------
+
+* :naoqi:memkey:`footContact`
+* :naoqi:memkey:`leftFootContact`
+* :naoqi:memkey:`rightFootContact`
+* :naoqi:memkey:`leftFootTotalWeight`
+* :naoqi:memkey:`rightFootTotalWeight`
+
+
+Events
+------
+
+.. naoqi:event:: footContactChanged(bool val)
+
+  Raised when the foot contact changes (if the robot lifts his foot from the ground or
+  puts it on the ground). The corresponding key is footContactChanged: it is set to
+  True if at least one of the feet touched the ground.
+
+  :param val: True if at least one of the feet touched the ground.
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: float footContact
+
+  1.0f if one foot touched the ground
+
+.. naoqi:memkey:: float leftFootContact
+
+  1.0f if the left foot touched the ground
+
+.. naoqi:memkey:: float rightFootContact
+
+  1.0f if the right foot touched the ground
+
+.. naoqi:memkey:: float leftFootTotalWeight
+
+  the total weight on the left foot in kilograms
+
+.. naoqi:memkey:: float rightFootTotalWeight
+
+  the total weight on the right foot in kilograms

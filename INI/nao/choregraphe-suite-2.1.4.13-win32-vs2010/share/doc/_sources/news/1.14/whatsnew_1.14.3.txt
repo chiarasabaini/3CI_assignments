@@ -1,0 +1,29 @@
+.. _whats-new_10.14.3:
+
+What's new - 1.14.3
+====================
+
+Supported Operating Systems
+----------------------------
+
+Mac OS: **Snow Leopard** out, **Mountain Lion** in
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Mac OS X 10.6.4 Snow Leopard, is not anymore supported.
+
+Mac OS X version **10.8.3 Mountain Lion** is supported.
+
+For further details, see: :ref:`desktop-index` and :ref:`compatible-platforms`.
+
+
+Choregraphe
+-----------
+
+* Licensing system has been improved to allow multi-machine licenses (one license key
+  for several machines). It also provides a way to authorize Choregraphe installations
+  through license key files.
+
+* Choregraphe support of languages can be extended, using translation files distributed
+  separately.
+
+

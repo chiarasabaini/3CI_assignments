@@ -1,0 +1,115 @@
+.. _albasicawareness:
+
+ALBasicAwareness
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   albasicawareness-api
+   albasicawareness-gettingstarted
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <albasicawareness-api>` | :ref:`Getting started <albasicawareness-gettingstarted>`
+
+------------
+
+
+What it does
+------------
+
+**ALBasicAwareness** is a simple way to make the robot establish and keep eye contact with people.
+
+
+How it works
+------------
+
+The **ALBasicAwareness** module enables the robot to be aware of the stimuli
+coming from its surrounding environment.
+For further details, see: :ref:`ALBasicAwareness::stimuli_types`.
+
+
+The robot doesn't look for stimuli, but if it gets one stimulus (with its associated position),
+it looks at the origin of the stimulus and checks if there is a human there.
+
+* If yes, it tracks it: the robot is now **engaged** with the user (engaged person)
+
+* Else, it goes back to its previous occupation:
+
+  * if the robot was already tracking somebody before the stimulus was detected, it resumes tracking
+
+  * else, its head goes back to the standard position.
+
+
+.. _ALBasicAwareness::stimuli_types:
+
+Types of stimulus
++++++++++++++++++
+
+It is possible to enable or disable the following types of stimulus:
+
+* **"Sound"**: sound detection done using :ref:`alsoundlocalization`,
+
+* **"Movement"**: movement detection done using :ref:`almovementdetection`,
+
+* **"People"** people detection done using :ref:`alpeopleperception`,
+
+* **"Touch"**: touch detection done using :ref:`altouch`.
+
+
+
+.. _ALBasicAwareness::engagement_modes:
+
+Engagement Modes
++++++++++++++++++
+
+To allow a wider range of behaviors, **ALBasicAwareness** provides 3 engagement
+modes that specify how "focused" the robot is on the engaged person.
+
+* **"Unengaged"**: (Default mode) when the robot is engaged with a user, it can be
+  distracted by any stimulus, and engage with another person.
+
+* **"FullyEngaged"**: as soon as the robot is engaged with a person, it stops
+  listening to stimuli and stays engaged with the same person. If it loses the
+  engaged person, it will listen to stimuli again and may engage with a different person.
+
+* **"SemiEngaged"**: when the robot is engaged with a person, it keeps listening
+  to the stimuli, and if it gets a stimulus, it will look in its direction,
+  but it will always go back to the person it is engaged with. If it loses the person,
+  it will listen to stimuli again and may engage with a different person.
+
+
+.. _ALBasicAwareness::tracking_modes:
+
+Tracking Modes
+++++++++++++++++
+
+* **"Head"**: the tracking only uses the head
+
+* **"BodyRotation"**: the tracking uses the head and the rotation of the body
+
+* **"WholeBody"**: the tracking uses the whole body, but doesn't make it rotate
+
+* **"MoveContextually"**: the tracking uses the head and autonomously performs small moves such as approaching the tracked person, stepping backward, rotating...
+
+Performances and Limitations
+----------------------------
+
+**ALBasicAwareness** module is a "meta-module", i.e. it uses other modules to add
+its extra features. The list of modules is the following:
+
+* checking that the stimulus actually comes from a human is done with :ref:`alpeopleperception`,
+
+* sound detection is done with :ref:`alsoundlocalization`,
+
+* movement detection is done with :ref:`almovementdetection`,
+
+* people detection is done with :ref:`alpeopleperception`,
+
+* touch detection is done with :ref:`altouch`,
+
+* servoing uses :ref:`altracker`.
+
+Thus, parallel calls to these modules from another program or **Choregraphe** box
+when **ALBasicAwareness** is running should be done carefully.
+

@@ -1,0 +1,73 @@
+.. _aldialog:
+
+ALDialog
+==================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   aldialog-api
+   aldialog_syntax_toc
+   aldialog_tuto
+
+:ref:`naoqi-audio` - Overview | :ref:`API <aldialog-api>` |
+:ref:`QiChat<dialog_toc>` | :ref:`Tutorials <aldialog_tuto>`
+
+------------
+
+What it does
+------------
+
+The **ALDialog** module allows you to endow your robot with conversational skills
+by using a list of "rules" written and categorized in an appropriate way.
+
+How it works
+------------
+
+**Rules**
+++++++++++
+
+**ALDialog** uses a list of written **rules** in order to manage
+the flow of the conversation between the human and the robot.
+
+These rules are of two types: **User rules** and **Proposal rules**
+
+* A **User rule** links a specific **user input** to possible **robot output**.
+
+  .. code-block:: ini
+
+     u: (Hello Nao how are you today) Hello human, I am fine thank you and you?
+
+* A **Proposal rule** triggers a specific **robot output** without any
+  **user output** beforehand.
+
+  .. code-block:: ini
+
+     proposal: Have you seen that guy on the TV yesterday?
+        u1: (yes) He was crazy, no?
+        u1: (no) Really, I need to tell you.
+
+
+Grouped by **Topics**
+++++++++++++++++++++++
+
+In order to properly manage the conversation between the human and the robot,
+the rules are grouped by **Topics**.
+
+.. code-block:: ini
+
+   topic: ~greetings
+   language: enu
+
+   u: (Hello Nao how are you today) Hello human, I am fine thank you and you?
+   u: ({"Good morning"} {Nao} did you sleep * well) No damn! You forgot to switch me off!
+   proposal: human, are you going well ?
+      u1: (yes) I'm so happy!
+      u1: (no) I'm so sad
+
+A **Topic** can either be created and edited directly in any text editor or
+through a **qiChat** Choregraphe box.
+
+
+

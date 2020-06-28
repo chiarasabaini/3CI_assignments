@@ -1,0 +1,770 @@
+.. include:: ../../bulk/common.rst
+
+.. _control-walk:
+
+Locomotion control
+==================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+
+   control-walk-api
+   control-walk-tuto2
+
+:ref:`naoqi-motion` - Overview | :ref:`API <control-walk-api>` |
+:ref:`robot position Tutorial <control-walk-tuto2>`
+
+
+------------
+
+
+What it does
+------------
+
+This API is dedicated to make robot move to places.
+
+There are 3 high-level ways to control the locomotion.
+
++--------------------------------------------------+--------------------------------------------------------------------+
+| Use ...                                          | To set ...                                                         |
++==================================================+====================================================================+
+| :cpp:func:`ALMotionProxy::moveTo`                | a target :term:`pose` on the                                       |
+|                                                  | ground plane, that the robot will walk to.                         |
++--------------------------------------------------+--------------------------------------------------------------------+
+| :cpp:func:`ALMotionProxy::move`                  | the robot's instantaneous velocity (direction and                  |
+|                                                  | intensity) in SI units (typically used to control the              |
+|                                                  | walk from a loop, with external input such as                      |
+|                                                  | a visual tracker).                                                 |
++--------------------------------------------------+--------------------------------------------------------------------+
+| :cpp:func:`ALMotionProxy::moveToward`            | the robot's instantaneous normalized velocity (direction           |
+|                                                  | and intensity) interactively (typically used to control            |
+|                                                  | the robot from a joystick, when the input gets                     |
+|                                                  | normalized anyway).                                                |
++--------------------------------------------------+--------------------------------------------------------------------+
+
+
+In addition, :ref:`move_config` parameters allows altering the default walk settings.
+
+For even more control over the walk, one may also use
+:cpp:func:`ALMotionProxy::setFootSteps` or
+:cpp:func:`ALMotionProxy::setFootStepsWithSpeed`, to provide the exact
+footsteps NAO will follow.
+
+For a more specialized version of locomotion methods, see also:
+:ref:`alnavigation` and :ref:`alvisualcompass`.
+
+Performance and Limitations
+---------------------------
+
+|nao| |roboN|
+++++++++++++++
+
+|roboN|'s walk is stabilized using feedback from his joint sensors. This
+makes the walk robust against small disturbances and absorbs torso
+oscillations in the frontal and lateral planes.
+
+|roboN| is able to walk on multiple floor surfaces such as carpet, tiles
+and wooden floors.
+
+He can transition between these surfaces while walking. However, large
+obstacles can still make him fall, as he assumes that the ground is more
+or less flat.
+
+.. image:: /medias/dev/modules/motion/motion_omniwalk.png
+   :height: 313 px
+   :width: 226 px
+
+
+|juju| |roboJ|
+++++++++++++++
+
+Specific security requirement
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On |roboJ|, **ALMotion** API are prohibited if power hatch is open.
+
+To use this API make sure the :term:`power hatch` is closed.
+
+
+Animation
+^^^^^^^^^^^
+
+During a Move Command, it's of course possible to generate animation on the head and arms joints.
+
+It's also possible to generate animation on the leg joints but under some condition:
+
+* **HipPitch** and **KneePitch** together with the relation:
+
+  **KneePitch** value = - **HipPitchValue** / 2.0
+
+* **HipRoll** animation is not possible directly. But due to the stability process,
+  if you create dissymmetry on arms, the **HipRoll** will move to compensate.
+
+These constraints on the leg are due to stability process which is a priority.
+
+
+How it works
+------------
+
+|nao| |roboN|
+++++++++++++++
+
+|roboN|'s walk uses a simple dynamic model (Linear Inverse Pendulum), inspired
+by work of Kajita et al. [1]_, and is solved using quadratic programming [2]_.
+
+| Each step is composed of a double leg and a single leg support phase.
+| The double support time uses one third of the step time.
+| The foot swing trajectory uses :ref:`motion-se3-interpolation`.
+| The preview controller length is 0.8s.
+| The walk is initialized and ended with a 0.6s phase of double support.
+
+**References**
+
+.. [1] S. Kajita and K. Tani.
+       Experimental study of biped dynamic walking in the linear inverted
+       pendulum mode.
+       IEEE Int. Conf. on Robotics and Automation, 1995.
+
+.. [2] P-B. Wieber.
+       Trajectory-free linear model predictive control for stable walking in
+       the presence of strong perturbation.
+       IEEE Int. Conf. on Humanoids, 2006.
+
+
+Footstep planner
+^^^^^^^^^^^^^^^^^^^
+
+A foot position is defined by an ALMath::Pose2D (`libalmath API
+reference <../../ref/libalmath/index.html>`_) relative to the last position of
+the other foot.
+
+.. figure:: /medias/dev/modules/motion/motion_footplanner.png
+   :width: 340 px
+   :height: 215 px
+
+   Position of one foot relative to the other as given by a translation
+   (pX, pY) followed by a rotation of pTheta around the vertical axis.
+   These three parameters are bundled in an ALMath::Pose2D.
+
+The foot planner is used by the walk process, irrespective of the walk control
+used. When using :cpp:func:`ALMotionProxy::moveTo`, `ALMotionProxy::move` or
+`ALMotionProxy::moveToward`, the planner chooses the best foot placement.
+If you plan the robot footsteps on your own and feed them to ALMotion using
+:cpp:func:`ALMotionProxy::setFootSteps` or
+:cpp:func:`ALMotionProxy::setFootStepsWithSpeed`, the builtin planner clips
+the given footsteps to ensure the resulting motions are both collision
+and :term:`singularity` free.
+
+The planner work is governed by several parameters which are described in
+:ref:`control-walk-gait-parameters` section.
+The clipping algorithms are described in :ref:`footsteps-clipping` section.
+
+.. _control-walk-gait-parameters:
+
+Gait parameters
+^^^^^^^^^^^^^^^^^^^
+
+These parameters are used by the planner when planning the footsteps and/or
+clipping them. The parameters which are marked as user-settable are part
+of the :ref:`move_config` which can be passed on by the user.
+
+.. _control-walk-gait-parameters-table:
+
+.. table:: Gait parameters
+
+    =================  ========================================================  ===========  ===========  ============  ===========
+      Name                                                                         Default      Minimum      Maximum       Settable
+    =================  ========================================================  ===========  ===========  ============  ===========
+    MaxStepX           maximum forward translation along X (meters)               0.040        0.001        0.080 [3]_    yes
+    MinStepX           maximum backward translation along X (meters)             -0.040                                   no
+    MaxStepY           absolute maximum lateral translation along Y (meters)      0.140        0.101        0.160         yes
+    MaxStepTheta       absolute maximum rotation around Z (radians)               0.349        0.001        0.524         yes
+    MaxStepFrequency   maximum step frequency (normalized, unit-less)             1.           0.           1.            yes
+    MinStepPeriod      minimum step duration (seconds)                            0.42                                    no
+    MaxStepPeriod      maximum step duration (seconds)                            0.6                                     no
+    StepHeight         peak foot elevation along Z (meters)                       0.020        0.005        0.040         yes
+    TorsoWx            peak torso rotation around X (radians)                     0.000       -0.122        0.122         yes
+    TorsoWy            peak torso rotation around Y (radians)                     0.000       -0.122        0.122         yes
+    FootSeparation     alter distance between both feet along Y (meters)          0.1                                     no
+    MinFootSeparation  minimum distance between both feet along Y (meters)        0.088                                   no
+    =================  ========================================================  ===========  ===========  ============  ===========
+
+.. [3] we recommend 0.060 meters for StepX for more stability. Better
+       use 0.080 meters only when walking on flat hard floors.
+
+
+
+Programmatically, you can access some of the gait parameters (Default, Max,
+Min), using the :cpp:func:`ALMotionProxy::getMoveConfig` method.
+
+
+.. _footsteps-clipping:
+
+Footsteps clipping
+^^^^^^^^^^^^^^^^^^^
+
+The clipping is done in three successive steps, which are explained here with
+python functions implementing the same algorithms as ALMotion's planner.
+You can download them here:
+:download:`almath_foot_clip.py </examples/python/almath/almath_foot_clip.py>`
+
+For python-related troubleshooting, see the :ref:`python-install-guide`
+section.
+
+The clipping algorithms uses the extremal values from the :ref:`gait
+parameters table <control-walk-gait-parameters-table>`, and *not* the default
+or user-provided ones.
+
+.. _control-walk-clipping-outreach:
+
+**Clip with maximum outreach**
+*******************************
+
+.. image:: /medias/dev/modules/motion/motion_foot_max_gait.png
+   :width: 440 px
+   :height: 355 px
+
+Here, the python clipping algorithm is presented:
+
+.. literalinclude:: /examples/python/almath/almath_foot_clip.py
+  :language: python
+  :pyobject: clipFootStepOnGaitConfig
+
+**Clip with ellipse**
+***********************
+
+To avoid :term:`singularities <singularity>` in the inverse kinematics, we clip
+the foot step data with an ellipsoid.
+
+We use the AL::Math:clipFootWithEllipse function
+(`libalmath API reference <../../ref/libalmath/index.html>`_).
+
+The figure below gives an illustration of the allowed zone (blue in the
+picture).
+
+.. image:: /medias/dev/modules/motion/motion_foot_ellipse.png
+   :width: 263 px
+   :height: 350 px
+
+Here, the python clipping algorithm with ellipse is presented:
+
+.. literalinclude:: /examples/python/almath/almath_foot_clip.py
+  :language: python
+  :pyobject: clipFootStepWithEllipse
+
+**Clip to avoid collision**
+***************************
+
+The last clipping adjust pTheta to avoid collision between the feet using
+the AL::Math:avoidFootCollision function
+(`libalmath API reference <../../ref/libalmath/index.html>`_).
+
+The picture below illustrates this clipping. (The grey left foot print was the
+one given by the user and the black left foot print is the result of the
+clipping).
+
+.. image:: /medias/dev/modules/motion/motion_foot_no_collision.png
+   :width: 160 px
+   :height: 191 px
+
+Here, the python clipping algorithm with ellipse is presented:
+
+.. literalinclude:: /examples/python/almath/almath_foot_clip.py
+  :language: python
+  :pyobject: clipFootStepToAvoidCollision
+
+.. _control-walk-gait-config:
+
+Velocity control
+^^^^^^^^^^^^^^^^^^^
+
+Use :cpp:func:`ALMotionProxy::move`, to set NAO's instantaneous velocity
+directly in SI units, or :cpp:func:`ALMotionProxy::moveToward` when normalized
+units are better suited.
+
+The python program above illustrates the relationship between normalized step
+length and frequency and absolute velocity in SI units.
+The gait parameters used in the program are either the default values (see
+:ref:`gait parameters <control-walk-gait-parameters-table>`), or the one
+provided in a :ref:`move_config`, as explained in the next section.
+
+.. code-block:: python
+
+    def normalized_length_to_si_length(x_n, y_n, theta_n, f_n, mc,
+            is_left_support):
+        """
+        Convert the normalized step length and frequency into SI units.
+
+        mc is the move config
+        """
+        max_abs_step_x = mc.MaxStepX if (x_n >= 0) else (-mc.MinStepX)
+        x_si = x * max_abs_step_x
+        if is_left_support:
+            y_si = min(y * (mc.MaxStepY - mc.FootSeparation)-mc.FootSeparation,
+                       -MinFootSeparation)
+        else:
+            y_si = max(y * (mc.MaxStepY - mc.FootSeparation)+mc.FootSeparation,
+                       MinFootSeparation)
+        theta_si = x * mc.MaxStepTheta
+        f_si = 1/(mc.MaxStepPeriod + f_n * mc.MaxStepFrequency * \
+                (mc.MinStepPeriod - mc.MaxStepPeriod))
+        return (x_si, y_si, theta_si, f_si)
+
+    def normalized_length_to_si_velocity(x_n, y_n, theta_n, f_n, mc_l, mc_r):
+        """
+        Convert the normalized step length and frequency into velocity
+        in SI units. We consider a full walk cycle: double support, left
+        support, double support, right support.
+
+        mc is the move config
+        """
+        (x_l, y_l, theta_l, f_l) = normalized_length_to_si_length(
+                x_n, y_n, theta_n, f_n, gc_l, False)
+        (x_r, y_r, theta_r, f_r) = normalized_length_to_si_length(
+                x_n, y_n, theta_n, f_n, gc_r, True)
+        period = 1/f_l + 1/f_r
+        return ((x_l + x_r)/period,
+                (y_l + y_r)/period,
+                (theta_l + theta_r)/period)
+
+
+.. _move_config:
+
+Move config
+^^^^^^^^^^^^^^^^^^^
+
+It is possible to define custom gait parameters for the walk, by giving a
+custom **Move config**.
+
+This allows you to modify the robot gait while still using the usual motion
+API. This custom configuration can be used for all
+:cpp:func:`ALMotionProxy::moveTo`, :cpp:func:`ALMotionProxy::move` and
+:cpp:func:`ALMotionProxy::moveToward`
+
+
+For example, you can make NAO lift his feet higher to go over some small
+cables, etc.
+
+A move configuration is defined by the subset of user-settable
+:ref:`gait parameters <control-walk-gait-parameters>` defined in the
+:ref:`table above <control-walk-gait-parameters-table>`. On can
+provide a move config per foot or a single common one.
+
+For compatibility reasons, the way to pass per-foot config depends on the
+method called:
+
+- :cpp:func:`ALMotionProxy::moveTo` accepts a single key-value list parameter,
+  which is applied to both feet.
+
+- :cpp:func:`ALMotionProxy::move` and :cpp:func:`ALMotionProxy::moveToward`
+  accept a single key-value list parameter, whose keys may be prefixed with
+  either "Left" or "Right" to target a single foot. For instance, one would do:
+
+  .. code-block:: python
+
+      motionProxy.move(X, Y, Theta,
+          [
+          ["LeftStepHeight", 0.02],
+          ["RightStepHeight", 0.005],
+          ["RightTorsoWx", -7.0*almath.TO_RAD],
+          ["TorsoWy", 5.0*almath.TO_RAD] ] )
+
+  in order to set ``TorsoWy`` to 5 degrees for both feet, and to set
+  ``TorsoWx`` and ``StepHeight`` on a per-foot basis. Note that, for the left
+  foot, the default value (0.) will be used for ``TorsoWx``. Note also that,
+  in addition to the gait parameters, these two methods accept a ``Frequency``
+  parameter, which indicates a preferred normalized step frequency.
+
+The following examples give some custom gait for |roboN|:
+
+- :download:`almotion_moveCustomization.py
+  </examples/python/motion/almotion_moveCustomization.py>`
+
+- :download:`almotion_moveToCustomization.py
+  </examples/python/motion/almotion_moveToCustomization.py>`
+
+Torso height trajectory
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Since NAOqi version 1.12, the torso height is automatically adjusted to avoid
+:term:`singularities <singularity>` and to enable longer steps.
+
+Beware that using the same gait parameters than in NAOqi version 1.10 together
+with this new feature will create torso oscillations
+and could increase the torque needed in the legs joints. This will in turn
+reduce the battery life and make the joint temperature increase faster.
+
+Arm motions
+^^^^^^^^^^^
+
+During walk, the arm are used to improve the walk stability and look.
+The arms motion amplitude during walk is dependent on the step frequency and
+length.
+
+The arms motion can be activated or deactivated at any moment during a move.
+Moreover, any user commands for the arms will have priority over the default
+arm motions during a walk. This enables you to control the arms as you wish.
+If the default arm movements are enabled, they resume automatically once you
+have finished controlling arm movements.
+
+.. code-block:: python
+
+  # Example showing how to disable left arm motions during a move
+  leftArmEnable  = False
+  rightArmEnable  = True
+  proxy.setMoveArmsEnabled(leftArmEnable, rightArmEnable)
+  # disable right arm motion after 10 seconds
+  time.sleep(10)
+  rightArmEnable  = False
+  proxy.setMoveArmsEnabled(leftArmEnable, rightArmEnable)
+
+.. code-block:: python
+
+  # Example showing how to get the enabled flags for the arms
+  print 'LeftArmEnabled: ',  proxy.getMoveArmsEnabled("LArm")
+  print 'RightArmEnabled: ', proxy.getMoveArmsEnabled("RArm")
+  print 'ArmsEnabled: ', proxy.getMoveArmsEnabled("Arms")
+
+|juju| |roboJ|
++++++++++++++++
+
+Drive Parameters
+^^^^^^^^^^^^^^^^^^
+
+In addition, passing an optional **Move config** key-value list, allows you
+to alter the default drive parameters for the wheeled base. These parameters
+are listed in the following table.
+
+
+.. table:: drive parameters
+
+    =================  ===========================================================  ===========  ===========  ============  ===========
+      Name                                                                            Default      Minimum      Maximum       Settable
+    =================  ===========================================================  ===========  ===========  ============  ===========
+    MaxVelXY           maximum planar velocity (meters/second)                          0.35         0.1          0.55          yes
+    MaxVelTheta        maximum angular velocity (radians/second)                        1.0          0.2          2.00          yes
+    MaxAccXY           maximum planar acceleration (meters/second²)                     0.3          0.1          0.55          yes
+    MaxAccTheta        maximum angular acceleration (radians/second²)                   0.75         0.1          3.00          yes
+    MaxJerkXY          maximum planar jerk (meters/second³)                             1.0          0.2          5.00          yes
+    MaxJerkTheta       maximum angular jerk (radians/second³)                           2.0          0.2          50.00         yes
+    TorsoWx            peak torso rotation around Y (radians)                           0.0         -0.1745       0.1745        yes
+    MaxVelX            **Deprecated** maximum planar velocity (meters/second)           0.7          0.1          0.55          yes
+    MaxVelY            **Deprecated** maximum planar velocity (meters/second)           0.7          0.1          0.55          yes
+    MaxAccX            **Deprecated** maximum planar acceleration (meters/second²)      0.3          0.1          0.55          yes
+    MaxAccY            **Deprecated** maximum planar acceleration (meters/second²)      0.3          0.1          0.55          yes
+    MaxJerkX           **Deprecated** maximum planar jerk (meters/second³)              0.3          0.2          5.00          yes
+    MaxJerkY           **Deprecated** maximum planar jerk (meters/second³)              0.3          0.2          5.00          yes
+    =================  ===========================================================  ===========  ===========  ============  ===========
+
+Getting started
+---------------
+
+This section describes some key points to deal with move control.
+
+Walk Initialization
++++++++++++++++++++
+
+Before launching the walk process, the robot checks if:
+
+* he is not in a :term:`singular configuration <singularity>`
+
+* both its feet are flat on the ground.
+
+If it is not the case, the robot first performs an initialization movement.
+This movement duration is dependant on the robot actual configuration and
+is inderterminate.
+
+One can call :cpp:func:`ALMotionProxy::moveInit` to trigger the initialization
+movement manually.
+And by calling this function before the move process, you make sure that the
+move process will not take an indeterminate time before actually moving.
+
+Robot Position
+++++++++++++++
+
+The :cpp:func:`ALMotionProxy::getRobotPosition` method gives you the current
+position of NAO in the :ref:`FRAME_WORLD<motion-effectors-space>`.
+
+Due to the very nature of preview control, the footsteps are stored in a
+queue, where the few first ones cannot be changed.
+
+So, if the move process runs and you send a new target, your change is applied
+after the unchangeable footSteps.
+
+The :cpp:func:`ALMotionProxy::getNextRobotPosition` method let you know
+the future position of the robot after the last unchangeable foot step.
+
+The figure below illustrates this phenomenon. You can also look at the
+:ref:`robot position Tutorial <control-walk-tuto2>`.
+
+.. code-block:: python
+
+    # created a walk task
+    motionProxy.moveInit()
+    motionProxy.post.moveTo(0.2, 0.0, 0.1)
+
+    # wait that the move process start running
+    time.sleep(0.1)
+
+    # get robotPosition and nextRobotPosition
+    robotPosition     = motionProxy.getRobotPosition(False)
+    nextRobotPosition = motionProxy.getNextRobotPosition(False)
+
+.. image:: /medias/dev/modules/motion/motion_robotPosition.png
+   :width: 480 px
+   :height: 452 px
+
+Synchronization
++++++++++++++++
+
+waitUntilMoveIsFinished
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The :cpp:func:`ALMotionProxy::waitUntilMoveIsFinished` method can be used to
+block your script/code execution until the move task is finished.
+
+.. code-block:: python
+
+  # Start a move
+  proxy.post.moveTo(1.0, 0.0, 0.0, 1.0)
+  # Wait for it to finish
+  proxy.waitUntilMoveIsFinished()
+  # Then do something else
+
+moveIsActive
+^^^^^^^^^^^^
+
+The :cpp:func:`ALMotionProxy::moveIsActive` method returns True while the move
+task is active.
+
+.. code-block:: python
+
+  # start a 1 meter move
+  proxy.post.moveTo(1.0, 0.0, 0.0, 1.0)
+  while proxy.moveIsActive():
+  # do something
+  # sleep a little
+  time.sleep(1)
+  # when finished do something else
+
+Stopping the walk
+^^^^^^^^^^^^^^^^^
+
+The :cpp:func:`ALMotionProxy::stopMove` method ends the walk task as soon as
+the robot is in a relatively safe position, meaning that the two feet are on
+the ground. This method is slower but safer than killing the walk, and is
+faster than setting target velocity to 0.
+
+The :cpp:func:`ALMotionProxy::killMove` method ends the walk task brutally,
+without attempting to return to a balanced state. If the robot has one foot in
+the air, he could easily fall.
+
+.. code-block:: python
+
+  # End the walk suddenly (~20ms)
+  proxy.killMove()
+
+To end the walk more gracefully, set the target velocity to zero.
+
+.. code-block:: python
+
+  # End the walk cleanly (~0.8s)
+  proxy.moveToward(0.0, 0.0, 0.0)
+
+Walk protection
++++++++++++++++
+
+.. _motion-kill-walk-when-lifted:
+
+Kill the walk task when the robot is lifted
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To stop the robot walking in the air, the FSRs are read to see if
+there is ground contact. When there is no ground contact, the
+walk task is killed if it is running, and not allowed to start if absent.
+This feature relies on the FSR extractor of the Sensors module, which
+is responsible for updating the following memory key:
+
+- extractors/alfsr/footContact
+
+By default, this feature is active. To remove this feature, follow
+this procedure:
+
+.. code-block:: python
+
+  # Deactivate the foot contact protection
+  proxy.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", False]])
+  # Or for change the default value,
+  # define the new value of the key ENABLE_FOOT_CONTACT_PROTECTION
+  # in ALMotion.xml preference file
+
+Kill the walk task when the stiffness is low on at least one leg joint
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the move process is launched and the robot has stiffness off, our
+algorithm to solve the dynamics of the move fails. This is due to
+the closed loop, where we inject sensor information into the algorithm.
+When there is no stiffness, the command and sensor values diverge.
+To prevent this, the move process will be killed or prevented from launching,
+if one joint of the legs has a stiffness equal or less than 0,6.
+
+By default, this feature is active. To remove this feature, follow
+this procedure:
+
+.. code-block:: python
+
+  # Deactivate the foot contact protection
+  proxy.setMotionConfig([["ENABLE_STIFFNESS_PROTECTION", False]])
+  # Or for change the default value,
+  # define the new value of the key ENABLE_STIFFNESS_PROTECTION
+  # in ALMotion.xml preference file
+
+
+
+Use Cases
+---------
+
+Case 1: Velocity Control
+++++++++++++++++++++++++
+
+Velocity control enables the move to be controlled reactively, allowing
+behaviors such as target tracking. It can be called as often as you
+like, as the most recent command overrides all previous commands.
+
+The walk uses a preview controller to guarantee stability. This uses
+a preview of time of 0.8s, so the walk will take this time to react
+to new commands. At maximum frequency this equates to about two steps.
+
+Parameters
+^^^^^^^^^^
+
+- x [-1.0 to 1.0]: specifies the length of a step along the x axis
+  (forwards and backwards) as a fraction of maxStepX.
+
+- y [-1.0 to 1.0]: specifies the length of a step along the y axis (lateral)
+  as a fraction of maxStepY.
+
+- theta [-1.0 to 1.0]: specifies the angle between the feet as a fraction of
+  maxStepTheta. A positive value result in a left turn(anti-clockwise) and a
+  negative value results in a right turn (clockwise).
+
+The frequency parameter [0.0 to 1.0] of the move config specifies the step
+frequency as a fraction of linear interpolation between minimumStepFrequency
+and maximumStepFrequency. One cycle is considered to be a phase of double leg
+support followed by a phase of single leg support.
+
+Example
+^^^^^^^
+
+.. code-block:: python
+
+  # Example showing the use of moveToward
+  # The parameters are fractions of the maximum Step parameters
+  # Here we are asking for full speed forwards
+  # with maximum step frequency
+  x  = 1.0
+  y  = 0.0
+  theta  = 0.0
+  moveConfig = [["Frequency", 1.0]]
+  proxy.moveToward(x, y, theta, moveConfig)
+  # If we don't send another command, he will walk forever
+  # Lets make him slow down (step length) and turn after 10 seconds
+  time.sleep(10)
+  x = 0.5
+  theta = 0.6
+  proxy.moveToward(x, y, theta, moveConfig)
+  # Lets make him slow down(frequency) after 5 seconds
+  time.sleep(5)
+  moveConfig = [["Frequency", 0.5]]
+  proxy.moveToward(x, y, theta, moveConfig)
+  # After another 10 seconds, we'll make him stop
+  time.sleep(10)
+  proxy.moveToward(0.0, 0.0, 0.0)
+  # Note that at any time, you can use a moveTo command
+  # to move a precise distance. The last command received,
+  # of velocity or position always wins
+
+
+
+Case 2: Destination Control
++++++++++++++++++++++++++++
+
+The :cpp:func:`ALMotionProxy::moveTo` method is a generalized implementation of
+walk patterns. An :ref:`motion-se3-interpolation` is used to compute the path.
+It is a blocking function until walk process is finished. If you pCalled this
+function, the last command received overrides all previous commands.
+
+Parameters
+^^^^^^^^^^
+
+- x: the distance in meters along the X axis (forwards and backwards).
+
+- y: the distance in meters along the Y axis (lateral motion).
+
+- theta: the final robot orientation in radians relative to the current
+  orientation.
+
+Example
+^^^^^^^
+
+.. code-block:: python
+
+  # Example showing the moveTo command.
+  # As length of path is less than 0.4m
+  # the path will use an SE3 interpolation
+  # The units for this command are meters and radians
+  x  = 0.2
+  y  = 0.2
+  # pi/2 anti-clockwise (90 degrees)
+  theta  = 1.5709
+  proxy.moveTo(x, y, theta)
+
+.. image:: /medias/dev/modules/motion/motion_walktose3.png
+   :height: 299 px
+   :width: 400 px
+
+.. note::
+
+   In previous releases, there used to be a
+   `Dubins curve <http://planning.cs.uiuc.edu/node821.html>`_ interpolation when
+   the distance to walk was greater than 0.4m. This has now been removed, but
+   it can still be reconstituted manually
+   (:download:`almotion_moveToDubinsCurve.py
+   </examples/python/motion/almotion_moveToDubinsCurve.py>`)
+
+Case 3: Step Control
+++++++++++++++++++++
+
+It is possible to control NAO's steps individually, through a footstep planner.
+This allows to implement for example dance-like movements, where the footsteps
+need to be placed precisely:
+
+* each leg can be controlled independently, giving the possibility of non
+  symmetric behavior (for example, making the robot "limp")
+
+* each footstep has its own position (X, Y, Theta)
+
+The footsteps planner either associates footsteps with the time they occur
+in :cpp:func:`ALMotionProxy::setFootSteps` (in that case, this is a
+non-blocking call) or with a normalized footstep speed in
+:cpp:func:`ALMotionProxy::setFootStepsWithSpeed` (this is a blocking call).
+
+If you want to modify the footsteps planner, you may want to clear the footstep
+planner and add your new steps or to add the new footsteps at the end of the
+planner. To do so, you can use the *clearExistingFootsteps* parameter. If it
+is set to **true**, all footsteps that can be cleared are removed and the new
+footsteps are added, else the new footsteps are simply added at the end.
+
+:download:`almotion_setFootStepDance.py </examples/python/motion/almotion_setFootStepDance.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_setFootStepDance.py
+   :language: py
+
+At any moment, you can retrieve the planned footsteps using
+:cpp:func:`ALMotionProxy::getFootSteps`. This method gives:
+
+* the footsteps that cannot be cleared (current steps and immediate followers),
+  and
+* the ones that can be safely removed (See :ref:`robot position Tutorial
+  <control-walk-tuto2>`).

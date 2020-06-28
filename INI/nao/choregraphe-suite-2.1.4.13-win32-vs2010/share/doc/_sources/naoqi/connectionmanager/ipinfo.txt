@@ -1,0 +1,95 @@
+.. _networkinfo-ipinfo:
+
+NetworkInfo-IPInfo
+==================
+
+:ref:`naoqi-core` - :ref:`Overview <alconnectionmanager>` |
+:ref:`API <alconnectionmanager-api>`  | :ref:`networkinfo` | NetworkInfo-IPInfo
+
+--------------------
+
+.. code-block:: cpp
+
+  #include <alproxies/networkinfo.h>
+
+A simple object for retrieving the IP addressing information.
+
+
+* :ref:`networkinfo-ipinfo`
+
+  * :cpp:func:`NetworkInfo::IPInfo::method`
+  * :cpp:func:`NetworkInfo::IPInfo::ipAddress`
+  * :cpp:func:`NetworkInfo::IPInfo::netmask`
+  * :cpp:func:`NetworkInfo::IPInfo::prefix`
+  * :cpp:func:`NetworkInfo::IPInfo::gateway`
+  * :cpp:func:`NetworkInfo::IPInfo::toALValue`
+
+.. cpp:function:: std::string NetworkInfo::IPInfo::method()
+
+  Describes how the robot will get his addressing information, possible values are:
+
+  - "dhcp": the service will request is addressing information from a DHCP server, if no server is available the Local-link method is used.
+
+  - "manual": the service use the static parameter provided by the user.
+
+  :return: the addressing method
+
+.. cpp:function:: std::string NetworkInfo::IPInfo::ipAddress()
+
+  If this service is connected this method returns the current address else it returns the manually configured address.
+
+  :return: the network IP address
+
+.. cpp:function:: std::string NetworkInfo::IPInfo::netmask()
+
+  **IPv4 only**: for IPv6 use the prefix() method.
+
+  If this service is connected this method returns the current netmask else it returns the manually configured netmask.
+
+  :return: the network netmask
+
+.. cpp:function:: int NetworkInfo::IPInfo::prefix()
+
+  **Experimental IPv6 only**: this values is only used for IPv6 for IPv4 use the netmask() method.
+
+  If this service is connected this method returns the current prefix else it returns the manually configured prefix.
+
+.. cpp:function:: std::string NetworkInfo::IPInfo::gateway()
+
+  If this service is connected this method returns the current gateway else it returns the manually configured gateway.
+
+  :return: the network gateway
+
+.. cpp:function:: AL::ALValue NetworkInfo::IPInfo::toALValue()
+
+  Returns an ALValue containing the IPInfo structure :ref:`networkinfo-ipinfo-alvalue`.
+
+  :return: the NetworkInfo::IPInfo as ALValue
+
+.. _networkinfo-ipinfo-alvalue:
+
+ALValue IPInfo
+---------------
+
+The ALValue IPInfo is an array of n-pair (key, value).
+
+To exchange this object with other module the IPInfo is contained in an ALValue
+with the following structure.
+
++-----------------+-------------+
+|       key       | value type  |
++=================+=============+
+|    "Method"     |    string   |
++-----------------+-------------+
+|    "Address"    |    string   |
++-----------------+-------------+
+|    "Netmask"    |    string   |
++-----------------+-------------+
+|    "Prefix"     |    int      |
++-----------------+-------------+
+|    "Gateway"    |    string   |
++-----------------+-------------+
+
+The empties values will not be present.
+
+

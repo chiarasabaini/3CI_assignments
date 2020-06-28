@@ -1,0 +1,64 @@
+﻿.. _connecting_asknao:
+
+Connecting a NAO to ASK NAO for the first time
+===============================================
+
+**Administrators** and **Teachers** are able to configure a new **NAO**.
+
+To unpack and configure a new **NAO** for **ASK NAO** usage:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Log into **ASK NAO Interface**, using the password you received
+        by email.
+
+        For further details, see: :ref:`access_ask_nao`.
+
+2.      Unpack and configure the new robot, following the standard
+        guidelines.
+
+        For further details, see: :ref:`out_of_the_box_nao`.
+
+3.      Keep your **NAO** on and connected for at least 30 minutes.
+
+        At some point, the robot should receive an update order from the
+        **Aldebaran Store**, you will here the robot say:
+
+        "I have updated abc-song application", "I have updated ..."
+
+        It will take NAO about 15-30 minutes (depending on your WiFi speed)
+        to download all the **ASK NAO** specific applications.
+
+        **Caution**: make sure **NAO** remains turned on (plug in the battery
+        charger if needed) until all the applications are fully downloaded.
+=====  =========================================================================
+
+Test the connection
+--------------------
+
+Once downloaded, you can start interacting with **NAO** through the
+Interface.
+
+To make sure your **NAO** is connected:
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      On the **Ask NAO Interface**, click the green **Play** tab.
+
+        .. image:: /medias/asknao/play_tab.png
+            :width: 485 px
+            :height: 381 px
+
+2.      Enter a short text in the text box near the picture of NAO and click
+        the **SPEAK** button.
+
+        If there is more than one robot turned on at a time you will be able to
+        choose which robot you want to work with by selecting the name through
+        the **Choose a Robot** button.
+
+        If **NAO** has been connected to the wireless internet and your
+        interface account and does not connect through the Interface
+        try refreshing the page.
+=====  =========================================================================

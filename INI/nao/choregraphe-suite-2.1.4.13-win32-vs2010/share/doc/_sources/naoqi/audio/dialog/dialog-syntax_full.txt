@@ -1,0 +1,2381 @@
+.. _dialog_rules:
+
+QiChat - Syntax
+=========================
+
+:ref:`naoqi-audio` - :ref:`Overview <aldialog>` | :ref:`API <aldialog-api>` | QiChat
+| :ref:`Tutorials <aldialog_tuto>`
+
+:ref:`Table of Content<dialog_toc>` | :ref:`Introduction<dialog_concepts>` |
+Syntax | :ref:`Overview<dialog_overview>` |
+:ref:`Cheat Sheet<dialog_cheat_sheet>`
+
+------------
+
+.. _basic_rule:
+
+Header keywords
+---------------
+
+.. _dialog_concept_def:
+
+concept
++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   concept:(name) [word1 word2 "word3 word4"]
+
+Where:
+
+* *word1* and *word2* are isolated words,
+* *"word3 word4"* is a phrase, i.e. a group of several words,
+* *name* is the name of the static concept gathering all the items in an ordered list.
+
+**Note**: a static concept can contain :ref:`choices<or_rule>`,
+:ref:`optional words and phrases<optional_delimiter>`, concepts
+(static and :ref:`dialog_dynamic_def`), functions
+(:ref:`rand_function`, :ref:`first_function`), :ref:`variables<dialog_variable>`
+and :ref:`conditions<condition_rule>`.
+
+**Usage**
+
+Defines a static list of items (words and/or phrases).
+
+.. warning::
+  Phrase means a group of word, not a sentence, be aware that any
+  punctuation character will be automatically removed.
+
+Static concepts are global, in other words, they are usable in different **Topics**.
+
+To use a concept in a rule, see: :ref:`dialog_concept`.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   concept:(greetings) ^rand[hi hello "hey there"]
+
+   concept:(wine) [red white] wine
+   concept:(alcohol) [beer ~wine]
+
+   u:(~greetings) ~greetings
+   u:(do you have _~drink) yes, I have $1
+   u:(I want to drink something) do you want ~alcohol?
+
+**Execution**
+
+.. code-block:: ini
+
+   > hey there
+   hello
+   > do you have white wine?
+   yes, I have white wine
+   > I want to drink something
+   do you want beer?
+   > I want to drink something
+   do you want red wine?
+
+
+
+.. _dialog_dynamic_def:
+
+dynamic
+++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   dynamic:name
+
+**Note**: a dynamic concept can only contain a list of words or phrases between
+a single :ref:`choice [ ]<or_rule>`.
+
+
+**Usage**
+
+Declares a dynamic list of items (words and/or phrases).
+This list is local to a **Topic**.
+
+**Conditions**
+
+Dynamic concepts must be modified at runtime, using:
+
+* :cpp:func:`ALDialogProxy::setConcept`
+
+To use a concept in a rule, see: :ref:`dialog_concept`.
+
+**Example**
+
+
+.. code-block:: ini
+
+   topic: ~dynamic()
+   language: enu
+
+   dynamic:mp3
+   u:({please} ["i want" play] _~mp3) let's play $1
+
+.. code-block:: python
+
+   # call it when speech recognition is running
+   proxy = ALProxy("ALDialog")
+   proxy.setConcept("mp3","enu", ["mika", "queen", "village people", "boy george"])
+
+
+**Troubleshooting**
+
+If there are several topics in the behavior, :cpp:func:`ALDialogProxy::setConcept`
+may actually not modify the concept in the right topic.
+
+
+.. _topic_include:
+
+include
++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   include: file.top
+
+Includes must be specified just after the :ref:`name<topic_name>` and the :ref:`topic_language` of a topic,
+and before the first :ref:`dialog_concept_def` or :ref:`rule<dialog_rule>`.
+
+**Usage**
+
+Includes a file in the topic.
+
+The included file must be in the same folder than the topic that calls the include.
+An included topic has the same behavior than topic:
+
+* The included file is loaded as soon as the calling topic is loaded.
+* the included file is activated as soon as the calling topic is activated
+
+.. code-block:: ini
+
+   topic: ~ok()
+   language: enu
+   # suppose lexicon_enu contains concept ~confirmation and ~negation
+   include:lexicon_enu.top
+   u:(hello) are you ok ?
+      u1:(~confirmation) yupi
+      u1:(~negation) Doh !
+
+
+.. _topic_language:
+
+language
+++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   language: enu
+
+**Usage**
+
+Defines the language of the topic.
+
+A topic can have the same name in different languages. For example in English
+"cars" topic and cars topic in French.
+In a language, a topic mush have a unique name.
+
+For further details see: :ref:`dialog_supported_languages`.
+
+.. _topic_name:
+
+topic
++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~name ()
+
+**Usage**
+
+Defines the name to the topic.
+A topic must have one name and can have only one.
+
+The name of a topic must be unique in a given language.
+
+**Related functions**
+
+* :ref:`topic_functions`.
+
+
+.. _dialog_rule:
+
+Rules
+-----
+
+.. _simple_rule:
+
+User rule
+++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(Input) Answer
+   u:(Input)
+     Answer
+
+Where:
+
+* *Input* is the :ref:`human_input`,
+* *Answer* is the :ref:`robot_output`.
+
+Indentation and blank lines are ignored.
+
+**Usage**
+
+Makes the robot say or do the *Answer* when he hears the *Input*.
+
+**Effect**
+
+If the :ref:`human_input` matches, then the topic that contains the rule takes the focus.
+
+For further details, see: :ref:`dialog_doc_focus`.
+
+**Conditions**
+
+The topic containing the user rules must be activated to answer.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(hello) hello human
+   u:(how are you) I feel tired, my batteries are low
+
+**Execution**
+
+.. code-block:: ini
+
+   > hello
+   hello human
+   > how are you
+   I feel tired, my batteries are low
+
+
+**Related functions**
+
+* :ref:`rule_functions`.
+
+
+.. _subrules:
+
+User subrule
++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input1) answer
+      u1:(input2) answer
+      u1:(input3) answer
+        u2:(input4) answer
+           u3:(input5) answer
+        u2:(input6) answer
+
+   proposal: sentence
+      u1:(input7) answer
+      u1:(input8) answer
+
+Where **u1:**, **u2:** and **u3:** are user subrules.
+
+The indentation underlines the relationship between a rule and its subrules.
+
+
+**Usage**
+
+Allows creating several conversational contexts, making some rules activated if
+and only if a main :ref:`simple_rule` or :ref:`proposal` has previously matched.
+
+**Activation / deactivation**
+
+At first, the :ref:`User rules<simple_rule>` and :ref:`proposal` are activated
+while **subrules** are deactivated.
+
+* If a :ref:`simple_rule` matches and if it has a :term:`scope`, its **subrules**
+  (**u1:**) are activated; the other :ref:`simple_rule` remain activated.
+
+* If one of the **u1:** subrule matches, then its own subrules (**u2:**) are
+  activated, and the first-level rules (**u1:**) are deactivated.
+
+* At anytime, if another :ref:`simple_rule` matches, then the previous subrules
+  are deactivated.
+
+.. glossary::
+
+   Scope
+
+       The subrules of a rule are called the **scope** of the rule.
+
+       .. image:: /medias/naoqi/dialog_scope.png
+          :width: 403 px
+          :height: 192 px
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(talk about animals) do you have a cat or a dog?
+      u1:(dog) is it a big dog?
+        u2:(yes) make sure he has enough space to run
+        u2:(no) it is so cute
+      u1:(cat) do you live in the countryside?
+        u2:(yes) does your cat goes outside?
+           u3:(yes) does he hunt mouses?
+        u2:(no) i hope your flat is big enough
+      u1:(none) neither do I
+
+   u:(talk about sport) what a good idea
+
+   proposal: Do you want to talk about sport?
+      u1:(yes) Cool
+      u1:(no) OK
+
+**Execution**
+
+.. code-block:: ini
+
+   > talk about animals
+   do you have a cat or a dog?
+   > I have a cat
+   do you live in the countryside?
+   > no
+   I hope your flat is big enough
+   > Now I want to talk about sport
+   what a good idea
+
+
+**Related functions**
+
+* :ref:`stayInScope_function`.
+
+
+.. _proposal:
+
+Proposal
+++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   proposal: sentence
+
+
+Where:
+
+* *sentence* is a :ref:`robot_output`.
+
+**Usage**
+
+While rules are triggered by a :ref:`human_input`, to be said, a **Proposal**
+needs to be triggered with one of the **topic progression** functions:
+
+* :ref:`nextProposal_function`,
+* :ref:`previousProposal_function`,
+* :ref:`sameProposal_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`, or
+* :ref:`topicTag_function`.
+
+**Activation/deactivation**
+
+When a proposal is said, then it cannot be said again except if the proposal is
+re-activated by :ref:`gotoreactivate_function`.
+
+**Conditions**
+
+The :ref:`dialog_doc_topic` containing the user rules must be active.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language: enu
+
+   proposal: take a cup and fill it with milk
+   proposal: add 3 strawberries
+   proposal: add some vanilla ice cream
+   proposal: close the cup with the lid and shake it
+   proposal: you did it! you can enjoy your milkshake
+
+   u:(I want a milkshake)
+       ok, let's do it.
+       follow my instruction and say next when you are ready for the next step.
+
+   u:(next) ^nextProposal
+
+**Execution**
+
+.. code-block:: ini
+
+   > I want a milkshake
+   ok, let's do it.
+   follow my instruction and say next when you are ready for the next step.
+   >next
+   take a cup and fill it with milk
+   >next
+   add 3 strawberries
+   >next
+   add some vanilla ice cream
+   >next
+   close the cup with the lid and shake it
+   >next
+   you did it! you can enjoy your milkshake
+   >next
+   (no answer)
+
+**Related functions**
+
+* :ref:`nextProposal_function`,
+* :ref:`sameProposal_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`topicTag_function`.
+
+
+.. _delimiter_rule:
+
+Delimiters
+----------
+
+.. _or_rule:
+
+Choice: [ ]
++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:([word1 word2 wordn]) answer
+   u:(input) [word1 word2 wordn]
+   u:([word1 word2 wordn]) [word1 word2 wordn] human
+
+Where:
+
+* *word1* to *wordn* are words that could substitute with each other.
+
+
+**Usage**
+
+* In a :ref:`human_input`: creates one rule accepting variations.
+* In a :ref:`robot_output`: if the rule is triggered several times, the words
+  will be used sequentially in order to create varying responses.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:([hi hello]) [hello hi] human
+
+The :ref:`human_input` can be 'hello' or 'hi'.
+The :ref:`robot_output` can be 'hello human' or 'hi human'.
+By default answers are in a sequential order.
+
+**Execution**
+
+.. code-block:: ini
+
+   > hello
+   hello human
+   > hello
+   hi human
+   > hi
+   hello human
+
+**Related functions**
+
+* :ref:`first_function`.
+* :ref:`rand_function`.
+* :ref:`repeat_function`.
+
+
+.. _phrase_delimiter:
+
+Phrase delimiter: " "
++++++++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:([word1 "phrase 1"]) ["phrase 2" "phrase 3"]
+
+Where:
+
+* *word1* is a word that could substitute with *phrase 1*.
+* *phrase 2* and *phrase 3* are phrases used sequentially in order to create
+  varying responses.
+
+**Usage**
+
+Allows you to place a phrase instead of a single word in a :ref:`choice [] <or_rule>`
+or an :ref:`optional part {} <optional_delimiter>`.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(["hello how are you" "hello are you OK"]) ["I am fine" "I am OK"]
+
+**Execution**
+
+.. code-block:: ini
+
+   > hello are you OK
+   I am fine
+   > hello how are you
+   I am OK
+
+
+.. _optional_delimiter:
+
+Optional part: { }
+++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(beginning of the sentence {optionalWord} end of the sentence) answer
+   u:(beginning of the sentence {"optional phrase"} end of the sentence) answer
+
+Where:
+
+* *optionalWord* is a word that could appear or not in the :ref:`human_input`.
+* *optional phrase* is a phrase that could appear or not in the :ref:`human_input`.
+
+**Usage**
+
+Optional word or phrase, at the beginning, the middle or the end of a sentence.
+
+**Conditions**
+
+Inside a :ref:`or_rule`, optional word can only be used inside a phrase:
+
+* **Not correct**: [chocolate milk {bread}]
+
+* **Correct**: [chocolate milk "{white} bread"]
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(hello {buddy} how are you) hello I am fine
+
+**Execution**
+
+.. code-block:: ini
+
+   >hello how are you
+   hello I am fine
+   >hello buddy how are you
+   hello I am fine
+
+
+.. _special_characters:
+
+Special characters
+------------------
+
+.. _comment-in_rule:
+
+Comments: #
++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   # comment
+
+Comment is defined by character *#*. All the characters following *#* in the
+same line will be ignored.
+
+.. _wildcard:
+
+Wildcard: *
++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(sentence * sentence) answer
+
+**Usage**
+
+Matches any word or phrase.
+
+**Use wildcards sparingly**
+
+Too many wildcards can degrade performance of the automatic speech recognition.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(my name is *) nice to meet you
+   u:(I like to * a lot) it sounds cool
+
+**Execution**
+
+.. code-block:: ini
+
+   > my name is David
+   nice to meet you
+   > I like to dance a lot
+   it sounds cool
+   > I like to play tennis a lot
+   it sounds cool
+
+**Related functions**
+
+* :ref:`input_storing`.
+
+
+.. _forbidden_word:
+
+Forbidden word: !
++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(sentence !forbiddenWord) answer
+
+**Usage**
+
+Allows you to define a forbidden word in a :ref:`human_input`.
+
+**Example**
+
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(tell me a story) OK, a new one?
+   u:(!don't tell me a new one) great, I'll tell you a new story!
+   u:(don't tell me a new one) Ok, so I'll tell you the story of Peter Pan.
+
+Execution
+
+
+.. code-block:: ini
+
+   > tell me a story
+   OK, a new one?
+   > tell me a new one
+   great, I'll tell you a new story!
+
+
+.. _tag:
+
+Tag: %
+++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   proposal: %tag sentence
+   u:(input) %tag answer
+
+
+**Usage**
+
+Allows you to identify one or several proposal(s) or rule(s) by a tag.
+Tags can be activated or deactivated. If a tag is deactivated, then the sentence
+is false and won't be said.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   proposal: %weather what is the weather like today?
+   u:(tell me a story) %story ok, I'll tell you the story of the three bears
+
+**Related functions**
+
+* :ref:`activate_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`topicTag_function`.
+
+.. _input_storing:
+
+Input storing: _
+++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(sentence _[word1 word2]) answer $1
+
+   u:(sentence _~concept) answer $1
+
+   u:(sentence _*) answer $1
+
+
+Where:
+
+* *_[word1 word2]* is the choice of words the robot will be able to catch and reuse.
+
+* *$1* is the first caught word.
+
+  If there are several *_*, *$2* is the second caught word, *$3* is the third, etc.
+  There is no limitation in variable number.
+
+* *_~conceptName* allows catching any word included in a concept.
+  For further details, see: :ref:`dialog_concept`.
+
+* *_** allows catching any word said using the speech recognition.
+
+  .. Warning:: _* is not available for all robot yet, it requires a specific speech recognition license.
+
+  **Note**: giving a choice of words to recognize eases the speech recognition.
+
+**Usage**
+
+Allows catching one or several words in the :ref:`human_input`
+and reuse it within the :ref:`robot_output` directly following.
+
+**Tips**: if you need to reuse the value elsewhere in the dialog, store it in
+a :ref:`variable<dialog_variable>`.
+
+.. code-block:: ini
+
+   u:(my name is _*) nice to meet you $1 $name=$1
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(my name is _*) nice to meet you $1
+   u:(I like _[chocolate cheese]) do you want to eat $1 now?
+
+**Execution**
+
+.. code-block:: ini
+
+   > my name is David
+   nice to meet you David
+   > I like cheese
+   do you want to eat cheese now?
+   > I like chocolate
+   do you want to eat chocolate now?
+
+**Related functions**
+
+* :ref:`wildcard`.
+* :ref:`dialog_concept`.
+* :ref:`dialog_variable`.
+
+
+.. _dialog_variable:
+
+Variable: $
++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   # Affect a variable
+   u:(input) answer $variableName=value
+
+   # Use a variable in a robot answer
+   u:(input) answer $variableName
+
+Where:
+
+*variableName* is the name of the variable.
+
+**Note**: For each :ref:`variable<dialog_variable>` ``$variableName``,
+an :ref:`event<event_rule>` ``e:variableName`` is also available. Variable are
+stored in ALMemory.
+
+**Usage**
+
+Variable can be used the same way in :ref:`human_input` or :ref:`robot_output`.
+
+Variables are global, i.e. they can be used in several behaviors.
+
+They don't have a type and don't need to be declared, they can be directly affected and used in rules.
+
+They can be:
+
+* set
+* used in a :ref:`robot_output`
+* used in conditions (see: :ref:`condition_rule`).
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+      u:(I want some _[chocolate cheese]) OK $askedFood=$1
+      u:(what did I ask) ^first["you asked $askedFood" "I don't know"]
+
+
+**Execution**
+
+.. code-block:: ini
+
+   > what did I ask
+   I don't know
+   > I want some chocolate
+   OK
+   > what did I ask
+   you asked chocolate
+
+**Related functions**
+
+* :ref:`first_function`,
+* :ref:`delete_function`.
+
+
+.. _condition_rule:
+
+Conditions: == > <> <
++++++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   # condition on variable
+   u:($variableName==value) answer
+
+   # answer if variable>value
+   u:(input) answer $variableName>value
+
+   # answer if variable<value
+   u:(input) answer $variableName<value
+
+   # answer if variable different from value
+   u:(input) answer $variableName<>value
+
+   # condition on variable in human input
+   u:("input $variableName==value") answer
+
+   # condition on variable in answer
+   u:(input) ["answer $variableName==value" "another answer"]
+
+**Usage**
+
+Placed in a :ref:`human_input` or in a :ref:`robot_output`, a condition:
+
+* triggers the rule if true,
+* blocks the rule if false.
+
+A condition based on an empty variable will be ignored.
+
+The condition ordering does not matter.
+
+If condition is false anywhere in quote, then the sentence in quote will not be said.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+      u:(I want some _[chocolate cheese]) OK, you want some $1 $askedFood=$1
+      u:(what did I ask) ^first ["you asked $askedFood" "I don't know"]
+      u:(can I have more)
+      ^first["$askedFood==chocolate sorry, too much chocolate could hurt you"
+      "yes, please take more $askedFood"]
+
+
+See also: :ref:`first_function`.
+
+
+**Execution**
+
+.. code-block:: ini
+
+   > I want some chocolate
+   OK, you want some chocolate
+   > can I have more
+   sorry, too much chocolate could hurt you
+   > I want some cheese
+   OK, you want some cheese
+   > can I have more
+   yes, please take more cheese
+
+
+.. _event_rule:
+
+Robot events: e:eventName
++++++++++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(e:event) answer
+   # will answer whenever the event "event" is raised
+
+   u:([e:event sentence]) answer
+   # will answer whenever the event "event" is raised or the sentence is said.
+
+   u:("e:event sentence") answer
+   # will answer whenever the event "event" is raised and then the sentence is said
+   # (the event must be raised before saying the sentence)
+
+**Note**: For each :ref:`event<event_rule>`, ``e:eventName`` a
+:ref:`variable<dialog_variable>` ``$eventName`` is also available.
+
+**Note**: in Choregraphe qiChat events and input/output can have the same name.
+If an event have the same name than box input/output, the variable is only linked
+to the box and is not anymore usable with **ALMemory**.
+
+**Usage**
+
+Catches an event.
+
+Allows to catch:
+
+* any :doc:`NAOqi Events</naoqi-eventindex>` providing information related to
+  the robot: movement, battery information, face information,
+* more specifically any :ref:`ALDialog event list<dialog_event_list>` providing
+  information about the Dialog engine,
+* but also the events raised each time a value is assigned to a
+  :ref:`variable<dialog_doc_variables>`.
+
+**Note**
+
+:ref:`robot_output` cannot occur at high frequency, both data and event are merged.
+
+**Conditions**
+
+The subscribe will only occur when the topic is activated.
+The unsubscribe will occur when the topic is deactivated.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(be my puppet) ok, touch my leg or ask me
+   u:(e:LeftBumperPressed "move this leg") ok I move the left leg
+   u:(e:LeftBumperPressed "light this leg") ok I turn leds on left leg
+
+
+**Execution**
+
+.. code-block:: ini
+
+   >be my puppet
+   ok, touch my leg or ask me
+   >(user touch the left bumper)
+   ok I move the left leg
+   >(user touch the left bumper) light this leg
+   ok I turn leds on left leg
+
+
+.. _dialog_concept:
+
+Concept call: ~
++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(~conceptName) answer
+   u:(input) answer ~conceptName
+
+**Usage**
+
+A **Concept** can be used both in :ref:`human_input` or :ref:`robot_output` to
+replace a list of item previously declared.
+
+* In :ref:`human_input`, the rule will match if anyone of the items of the list
+  is recognized.
+
+* In :ref:`robot_output`, one item of the list will be said.
+  Each call of the rule will call sequentially another item of the list.
+
+**Conditions**
+
+the **Concept** must be previously defined.
+
+To define a concept, see: :ref:`dialog_concept_def` and
+:ref:`dialog_dynamic_def`.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+      concept:(want) [want need desire like]
+      concept:(alcohol) [beer vodka "red wine"]
+      concept:(child-drink) ["orange juice" milk]
+      concept:(drink) [~alcohol ~child-drink]
+
+      u: (what do you do) I can help people with drinks
+
+      u:(I ~want to drink) what you ~want to drink?
+           u1:(* _~drink) do you want me to search $1 for you?
+
+
+**Execution**
+
+.. code-block:: ini
+
+   > what do you do
+   I can help people with drinks
+   > I need to drink
+   what do you want to drink?
+   > I want red wine
+   do you want me to search red wine for you?
+
+
+Forbidden characters
+--------------------
+
+Forbidden characters in Human input
+++++++++++++++++++++++++++++++++++++
+
+* Do not use any punctuation mark.
+
+* Type only the words to be recognized.
+
+* like all :ref:`special_characters`, $ is a reserved word, type dollar instead.
+
+* Apostrophe ( ' ) is allowed but not the typographic apostrophe ( ’ ).
+
+* **Japanese only**:
+  speech recognition does not support Fullwidth numbers
+  [０ １ ２ ３ ４ ５ ６ ７ ８ ９].
+  Use Halfwidth numbers [0 1 2 3 4 5 6 7 8 9] instead.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(have you a dollar for me) No, sorry, I have no pocket!
+   u:(I'm rich) good for you. Are you happy?
+
+Forbidden characters in Robot output
+++++++++++++++++++++++++++++++++++++
+
+* like all :ref:`special_characters`, $ is a reserved word, type dollar instead.
+
+* Apostrophe ( ' ) is allowed but not the typographic apostrophe ( ’ ).
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(have you a dollar for me) No, sorry, I have no pocket!
+   u:(I'm rich) good for you. Are you happy?
+
+
+.. _rule_functions:
+
+Rule functions and properties
+------------------------------
+
+.. _activate_function:
+
+^activate ^deactivate
+++++++++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer ^deactivate(tag)
+   u:(input) answer ^activate(tag)
+
+**Usage**
+
+**^deactivate** function deactivates a tag, **^activate** function reactivates a tag.
+
+If a :ref:`robot_output` contains a deactivated tag, this :ref:`robot_output`
+cannot be triggered.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction()
+   language: enu
+
+   proposal: %greeting1 hello
+   proposal: nice to meet you
+   u:(hello) hello ^deactivate(greeting1)
+   u:(say something) ^nextProposal
+
+**Execution**
+
+.. code-block:: ini
+
+   > Hello
+   Hello
+   > say something
+   nice to meet you
+
+
+
+.. _delete_function:
+
+^clear
++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) ^clear(variableName)
+
+**Usage**
+
+Clears a variable. A cleared variables cannot be said. A sentence with cleared
+variable cannot be said. A condition with cleared variable is always false.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(my name is _*) nice to meet you $name=$1
+   u:(what is my name) ^first["your name is $name" "I don't know"]
+      u1:(no) OK ^clear(name)
+
+**Execution**
+
+.. code-block:: ini
+
+   > my name is David
+   nice to meet you
+   > what is my name
+   your name is David
+   > no
+   OK
+   > what is my name
+   I don't know
+
+**Related functions**
+
+* :ref:`first_function`.
+
+
+.. _exist_function:
+
+^exist ^notExist
+++++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~exist()
+   language: enu
+   u:(hello) ["^exist(42) the variable exist" "^notExist(42) the variable doesn't exist $42=1"]
+
+**Usage**
+
+A sentence that contains ^exist won't be said if the variable parameter doesn't exist or is an empty string.
+
+
+.. _first_function:
+
+^first
+++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) ^first [answer1 answer2]
+
+   # Inside a choice, requires quotes
+   u:(input)  [answer1 "^first [answer2 answer3]"]
+
+**Usage**
+
+When added before a :ref:`or_rule` in the :ref:`robot_output` part,
+instead of using each answer in turn, the interpreter always use the first
+valid :ref:`robot_output`.
+
+A valid :ref:`robot_output` is an answer:
+
+* without any condition nor non-affected variable,
+* including affected variable(s),
+* including a condition tested as true.
+
+Using a non-affected variable in a robot output will make the rule invalid, i.e.
+the rule will not be said at all.
+
+To avoid this situation, use the function ^first before a choice [ ].
+
+This function tries to say the first valid output. If the first element of the
+choice is invalid because it contains a non-affected variable, it will try the
+second element, and so on.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(my name is David) nice to meet you David $name=David
+   u:(my name is Paul) nice to meet you Paul $name=Paul
+   u:(what is my name) ^first["your name is $name" "I don't know"]
+
+**Execution**
+
+.. code-block:: ini
+
+   > what is my name
+   I don't know
+   > my name is David
+   nice to meet you David
+   > what is my name
+   your name is David
+
+For further details, see : :ref:`condition_rule`.
+
+
+
+.. _goto_function:
+
+^goto
++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input1) %tag Answer
+   u:(input2) ^goto(tag)
+
+**Usage**
+
+The **^goto** function allows you to:
+
+* jump to a :ref:`robot_output` (in a user rule or an activated proposal)
+  containing a specific :ref:`tag <tag>`.
+
+* It can also be used to declare two :ref:`Human inputs<human_input>` as equivalent.
+
+* To jump to a deactivated :ref:`proposal`, use :ref:`gotoreactivate_function`.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(hello how are you) hello ^goto(how)
+   u:(how you are) %how I'm fine
+
+**Execution**
+
+.. code-block:: ini
+
+  > how are you
+  I'm fine
+  > hello how are you
+  hello I'm fine
+
+**Related functions**
+
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`nextProposal_function`,
+* :ref:`previousProposal_function`,
+* :ref:`sameProposal_function`,
+* :ref:`topicTag_function`.
+
+.. _gotorandom_function:
+
+^gotoRandom
++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) ^gotoRandom(tag)
+   proposal: %tag answer1
+   proposal: %tag answer2
+
+
+**Usage**
+
+The **^gotoRandom** function is identical to :ref:`goto_function` except if the
+tag is used in several rules, it will chose one randomly.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(hello) ^goto(hi)
+   proposal %hi hello
+   proposal: %hi welcome
+   proposal: %hi hey
+
+
+**Execution**
+
+.. code-block:: ini
+
+  > hello
+  hey
+  > hello
+  hello
+  > hello
+  welcome
+
+**Related functions**
+
+* :ref:`goto_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`nextProposal_function`,
+* :ref:`previousProposal_function`,
+* :ref:`sameProposal_function`,
+* :ref:`topicTag_function`.
+
+
+.. _gotoreactivate_function:
+
+^gotoReactivate
+++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   proposal: %tag Answer
+   u:(input) ^gotoReactivate(tag)
+
+**Usage**
+
+The **^gotoReactivate** function allows you to jump to a deactivated
+:ref:`proposal` and reactivate it.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   proposal: %love I love you
+   u:(do you love me) yes, ^gotoReactivate(love)
+   u:(are you sure) sure, ^gotoReactivate(love)
+
+**Execution**
+
+.. code-block:: ini
+
+  I love you
+  > do you love me
+  yes, I love you
+  > are you sure
+  sure, I love you
+
+**Related functions**
+
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`nextProposal_function`,
+* :ref:`previousProposal_function`,
+* :ref:`sameProposal_function`,
+* :ref:`topicTag_function`.
+
+
+.. _nextProposal_function:
+
+^nextProposal
++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer ^nextProposal
+
+**Usage**
+
+The function **^nextProposal** says the first activated proposal in the
+:ref:`dialog_doc_topic` which has the :ref:`dialog_doc_focus`.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language: enu
+
+   u:(hi) hello ^nextProposal
+
+   proposal: how are you?
+     u1:(I'm fine) cool!
+     u1:(I'm tired) oh, you should take a nap
+
+   proposal: again!
+
+
+**Execution**
+
+.. code-block:: ini
+
+   > hi
+   hello how are you?
+   > I'm tired
+   oh, you should take a nap
+   > hi
+   hello again!
+
+**Related functions**
+
+* :ref:`sameProposal_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`topicTag_function`.
+
+
+.. _play_function:
+
+^play
+++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language: enu
+   u:(play * sound) ^play(sound)
+
+**Usage**
+
+^play is a beta function that can be removed at any version. ^play allows playing
+a sound with audio device soundSet instead of animated speech.
+See :ref:`alaudiodevice`.
+
+
+.. _previousProposal_function:
+
+^previousProposal
+++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer ^previousProposal
+
+**Usage**
+
+The function **^previousProposal** repeats the :ref:`proposal` said previously
+to the last in the same :ref:`dialog_doc_topic`.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language: enu
+
+   u:(hi) hello ^nextProposal
+
+   proposal: how are you?
+     u1:(I'm fine) cool!
+     u1:(I'm tired) oh ^nextProposal
+
+   proposal: do you want some tea?
+      u1:(yes) I'm bringing you a cup of tea.
+      u1:(no) okay, ^nextProposal
+
+   proposal: what about some coffee?
+      u1:(yes) I'm bringing you a cup of coffee.
+      u1:(no) okay, maybe you should just take a nap.
+      u1:(can you repeat please) ^sameProposal ^stayInScope
+      u1:(what did you say before) ^previousProposal ^stayInScope
+
+**Execution**
+
+.. code-block:: ini
+
+   > hi
+   hello how are you?
+   > I'm tired
+   do you want some tea?
+   > no
+   OK, what about coffee?
+   > can you repeat please
+   OK, what about coffee?
+   > what did you say before
+   do you want some tea?
+
+
+**Related functions**
+
+* :ref:`nextProposal_function`,
+* :ref:`sameProposal_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`topicTag_function`.
+
+.. _private_userrules:
+
+^private
+++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:^private(Input) Answer
+
+**Effect**
+
+Apply a private status to a rule.
+A private **user rule** is only active when
+its corresponding topic has the :ref:`dialog_doc_focus`.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~music ()
+   language:enu
+
+   u:(I want to talk about music) OK!
+   u:^private(what are we talking about) we are talking about music
+
+**Execution**
+
+.. code-block:: ini
+
+   > I want to talk about music
+   OK!
+   > what are we talking about
+   we are talking about music
+
+
+
+.. _rand_function:
+
+^rand
++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) ^rand[answer1 answer2]
+
+**Usage**
+
+Can be added before a :ref:`choice [] <or_rule>` in the :ref:`robot_output`.
+
+Instead of using each answer sequentially, the interpreter will choose randomly
+a valid :ref:`robot_output`.
+
+A valid :ref:`robot_output` is:
+
+* an answer including a condition tested as true or
+* an answer including no condition at all.
+
+Rand function in a choice needs to be inside quote.
+
+For further details, see: :ref:`condition_rule`.
+
+**Example**
+
+.. code-block:: ini
+
+   u:(hello) ^rand[hello hi "what's up" "hey there"]
+
+
+
+.. _repeat_function:
+
+^repeat
++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(^repeat[word1 word2 word3]) answer
+
+**Usage**
+
+Allow a free combination of listed words.
+
+The :ref:`human_input` is recognized if one or several word(s) among the list
+are said, regardless of the order.
+
+
+.. _sameProposal_function:
+
+^sameProposal
++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+  u:(input) answer ^sameProposal
+
+**Usage**
+
+The function **^sameProposal** repeats the last :ref:`proposal <proposal>`
+said in the same topic.
+
+**Best practices**
+
+When using **^sameProposal**, always make the robot say something like
+'Ok I'll repeat', 'No problem,' so that the user knows what to expect.
+It also makes the repetition clearer.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language: enu
+
+   u:(hi) hello ^nextProposal
+
+   proposal: how are you?
+     u1:(I'm fine) cool!
+     u1:(I'm tired) oh ^nextProposal
+
+   proposal: do you want some coffee?
+      u1:(yes) I'm bringing you a cup of coffee.
+      u1:(no) okay, maybe you should just take a nap.
+      u1:(can you repeat please) Ok I'll repeat. ^sameProposal
+
+**Execution**
+
+.. code-block:: ini
+
+   > hi
+   hello how are you?
+   > I'm tired
+   do you want some coffee?
+   > can you repeat please
+   Ok I'll repeat. Do you want some coffee?
+   > yes
+   I'm bringing you a cup of coffee.
+
+**Related functions**
+
+* :ref:`nextProposal_function`,
+* :ref:`previousProposal_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`topicTag_function`.
+
+
+.. _stayInScope_function:
+
+^stayInScope
+++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer
+      u1:(input1) answer ^stayInScope
+      u1:(input2) answer
+
+**Usage**
+
+Used in a rule or subrule to stay in the current scope when the corresponding
+rule has matched.
+
+
+**Example**
+
+.. code-block:: ini
+
+   u:(let's talk about animals) do you have a cat or a dog?
+      u1:(I {also} have a dog) dogs are funny ^stayInScope
+      u1:(I {also} have a cat) I once met a cat  ^stayInScope
+
+**Execution**
+
+.. code-block:: ini
+
+   > let's talk about animals
+   do you have a cat or a dog?
+   > I have a dog
+   I love dogs
+   > I also have a cat
+   I once met a cat
+
+
+
+Animated speech functions
+-------------------------
+
+.. _switchfocus_function:
+
+^switchFocus
+++++++++++++
+
+Stops dialog engine and runs a **Behavior** identified by application **uuid** and **Behavior** name.
+
+.. warning::
+  If behavior is at the root of the application, then switch focus parameter is ^switchFocus(uuid/.)
+
+.. warning::
+  Life needs to be started.
+
+**Syntax**
+
+.. code-block:: QiChat
+
+   topic: ~addition()
+   language: enu
+
+   # we suppose an application weather is installed on robot.
+   u:(start weather) ^switchFocus(weatherApplication/weatherBehavior)
+
+.. _mode_function:
+
+^mode
+++++++
+
+Changes the body language mode for the current text.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 "^mode(body_language_mode) word1 word2..." answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+.. _run_function:
+
+^run
+++++++
+
+Suspends the speech, runs an animation and resumes the speech.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^run(animation_full_name) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`start_function`,
+* :ref:`stop_function`,
+* :ref:`wait_function`.
+
+.. _runTag_function:
+
+^runTag
++++++++
+
+Suspends the speech, runs an animation which has the mentioned tag and resumes the speech.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^runTag(tag_name) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`startTag_function`,
+* :ref:`stopTag_function`,
+* :ref:`waitTag_function`.
+
+
+.. _runSound_function:
+
+^runSound
+++++++++++
+
+Suspends the speech, plays a sound and resumes the speech.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^runSound(soundSet/soundFile) answer2
+   u:(input) answer1 ^runSound(soundSet/soundFile, soundVolume) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`startSound_function`,
+* :ref:`stopSound_function`,
+* :ref:`waitSound_function`.
+
+
+.. _start_function:
+
+^start
+++++++
+
+Starts behaviors or animations.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^start(behavior) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`run_function`,
+* :ref:`stop_function`,
+* :ref:`wait_function`.
+
+.. _startTag_function:
+
+^startTag
++++++++++++
+
+Starts an animation which has the mentioned tag.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^startTag(tag_name) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`runTag_function`,
+* :ref:`stopTag_function`,
+* :ref:`waitTag_function`.
+
+.. _startSound_function:
+
+^startSound
++++++++++++
+
+Plays a sound in background.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^startSound(soundSet/soundFile) answer2
+   u:(input) answer1 ^startSound(^startSound(soundSet/soundFile, soundVolume)) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`runSound_function`,
+* :ref:`stopSound_function`,
+* :ref:`waitSound_function`.
+
+.. _stop_function:
+
+^stop
++++++
+
+Stops a running behavior or an animation.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^stop(behavior) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`run_function`,
+* :ref:`start_function`,
+* :ref:`wait_function`.
+
+.. _stopTag_function:
+
+^stopTag
++++++++++
+
+Stops a running animation which has the mentioned tag.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^stopTag(tag_name) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`runTag_function`,
+* :ref:`startTag_function`,
+* :ref:`waitTag_function`.
+
+
+.. _stopSound_function:
+
+^stopSound
+++++++++++
+
+Stops a sound.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^stopSound(soundSet/soundFile) answer2
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+**Related functions**
+
+* :ref:`runSound_function`,
+* :ref:`startSound_function`,
+* :ref:`waitSound_function`.
+
+.. _wait_function:
+
+^wait
++++++
+
+Waits until a running behavior or an animation has finished.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^wait(animation) answer2
+
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+* :ref:`run_function`,
+* :ref:`start_function`,
+* :ref:`stop_function`.
+
+.. _waitTag_function:
+
+^waitTag
++++++++++
+
+Suspends the speech, waits for the end of the animation which has the mentioned
+tag and resumes the speech.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^waitTag(tag_name) answer2
+
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+* :ref:`runTag_function`,
+* :ref:`startTag_function`,
+* :ref:`stopTag_function`.
+
+.. _waitSound_function:
+
+^waitSound
+++++++++++
+
+Suspends the speech, waits for the end of the sound and resumes the speech.
+
+**Syntax**
+
+.. code-block:: ini
+
+   u:(input) answer1 ^waitSound(soundSet/soundFile) answer2
+
+
+For further details, see :ref:`ALAnimatedSpeech: Annotated Text <annotated_text>`.
+
+* :ref:`runSound_function`,
+* :ref:`startSound_function`,
+* :ref:`stopSound_function`.
+
+
+.. _topic_functions:
+
+Topic properties
+----------------
+
+.. _notInEmbeddedASR_function:
+
+^notInEmbeddedASR
++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~introduction ^notInEmbeddedASR ()
+
+**Usage**
+
+Prevents the automatic loading of the rules in the speech recognition engine.
+
+By default, the **user rules** contained in a topic are loaded into the embedded
+speech recognition engine.
+If **^notInEmbeddedASR** property is used, none of the **user rules** are
+loaded into the embedded ASR engine. Very short words or rules with many * can
+trigger whatever we say.
+
+
+.. _noPick_function:
+
+^noPick
++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~introduction ^noPick ()
+
+**Usage**
+
+Prevents the topic from getting randomly the :ref:`dialog_doc_focus`.
+
+The **Topic** can still get the focus when a rule matches, but the
+**Dialog engine** cannot decide by itself to give the focus.
+
+
+.. _noStay_function:
+
+^noStay
++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~introduction ^noStay ()plus
+
+**Usage**
+
+Prevents the topic from keeping the :ref:`dialog_doc_focus`.
+
+If a rule matches in the topic, the :ref:`robot_output` is executed,
+but the :ref:`dialog_doc_focus` stays on the previous topic.
+
+
+.. _resetOnFocus_function:
+
+^resetOnFocus
++++++++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   topic: ~introduction ^resetOnFocus ()
+
+**Usage**
+
+By default a proposal can be said only once.
+
+**^resetOnFocus** reactivates all proposals of a **Topic** when:
+
+* the topic gets the :ref:`dialog_doc_focus` and
+* all his proposals has been previously deactivated.
+
+
+
+.. _fallback_property:
+
+^fallback
+++++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+  topic: ~introduction ^fallback ()
+
+**Usage**
+
+Give the lowest priority to the rules contained in this topic.
+
+Its rules will be taken in consideration after the rules of:
+
+1. the main section of the Topic having the focus,
+2. the main section of all Topics - ^fallback excepted,
+3. the recover sections of all topics.
+
+
+.. _topicTag_function:
+
+^topicTag
+++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   ^topicTag(topic,tag)
+
+**Usage**
+
+Allows to go in a specific location in a topic, defined by a :ref:`tag<tag>`.
+
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~topic1()
+   language: enu
+
+   proposal: %test test
+
+.. code-block:: ini
+
+   topic: ~topic2()
+   language: enu
+
+   u:(test) ^topicTag(topic1,test)
+
+**Related functions**
+
+* :ref:`activate_function`,
+* :ref:`goto_function`,
+* :ref:`gotorandom_function`,
+* :ref:`gotoreactivate_function`,
+* :ref:`tag`.
+
+
+.. _transformation_rule:
+
+Transformation rules
+---------------------
+
+.. _skin_rule:
+
+Skin: s:
++++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   s:(Answer) Modifications
+   s:(Answer)
+   Modifications
+
+Where:
+
+* *Answer* is the :ref:`robot_output` we want to match to apply this skin
+* *Modifications* the modifications :ref:`skin_addword` or/and :ref:`skin_replace` we want to apply to the answer
+
+**Usage**
+
+When a :ref:`robot_output` matches a skin the robot says the *Answer* after *Modifications* are applied.
+
+.. _skin_addword:
+
+^addword
+++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   s:(Answer) ^addword(Expression, Position, Frequency)
+
+Where:
+
+* *Answer* is the :ref:`robot_output` to be matched
+* *Expression* can be any string (word(s), concept...)
+* *Position* is the position where you want to add the expression in the sentence. This parameter can be:
+
+  * an integer: for instance "2" if you want to put the *Expression* in the second position
+  * "end" if you want the *Expression* to be added at the end of the sentence
+  * "start" if you want the *Expression* to be added at the beginning of the sentence
+* *Frequency* represents the probability of the skin to be applied (1:always apply, 0:never apply)
+
+**Usage**
+
+Add an *Expression* in each :ref:`robot_output` matching the skin.
+
+**Conditions**
+
+The rule must be active.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(hello) hello human
+   u:(how are you) I am fine
+
+   s:(hello human) ^addword(I am your father, end, 1)
+   s:(*) ^addword(hey, start, 1)
+
+**Execution**
+
+.. code-block:: ini
+
+   > hello
+   hey hello human I am your father
+   > how are you
+   hey I am fine and you
+
+
+.. _skin_replace:
+
+^replace
+++++++++
+
+**Syntax**
+
+.. code-block:: ini
+
+   s:(Answer) ^replace(Expression1, Expression2, Frequency)
+
+Where:
+
+* *Answer* is the :ref:`robot_output` to be matched
+* *Expression1* can be any string (word(s), concept...) you want to replace
+* *Expression2* can be any string (word(s), concept...) you want to put instead of *Expression1*
+* *Frequency* is the probability of the skin to be applied (1:always, 0:never)
+
+**Usage**
+
+Replaces *Expression1* with *Expression2* in each :ref:`robot_output` matching the skin.
+
+**Conditions**
+
+The rule must be active.
+
+**Example**
+
+.. code-block:: ini
+
+   topic: ~introduction ()
+   language:enu
+
+   u:(hello) hello human
+   u:(what do you like to do) I like to speak with you human
+   u:(do you want to play) yes human we can play together
+
+   s:({*} human {*}) ^replace(human, Michael, 1)
+   s:({*} speak {*}) ^replace(speak, play, 1)
+
+If you are not familiar with {*} check: :ref:`wildcard` to under :ref:`optional_delimiter`.
+
+**Execution**
+
+.. code-block:: ini
+
+   > hello human
+   hello Michael
+   > what do you like to do
+   I like to play with you Michael
+   > do you want to play
+   yes Michael we can play together
+

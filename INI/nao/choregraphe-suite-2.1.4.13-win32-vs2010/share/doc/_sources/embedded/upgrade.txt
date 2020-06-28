@@ -1,0 +1,211 @@
+.. include:: ../bulk/common.rst
+
+.. _software-update:
+
+Upgrading my |roboN|
+====================
+
+Setting an automatic update
+---------------------------
+
+Once your |roboN| has been updated with a **2.x** release,
+you can use the new |cloud| to set an automatic system update.
+
+For further details, see: :ref:`nao_store_sysupdate`.
+
+.. _upgrade_from_1_to_2:
+
+Upgrading my robot - from 1.x to 2.x
+--------------------------------------
+
+To upgrade your |roboN| from version 1.x to 2.x, follow these steps:
+
+.. _prepare_upgrade:
+
+1/4 - Making the robot ready for upgrade
++++++++++++++++++++++++++++++++++++++++++
+
+=====  =========================================================================
+Step     Action
+=====  =========================================================================
+ 1.     |roboN| *only*: make sure your |roboN| is a **V4** or a **V5**.
+
+        For further details, see: :ref:`nao-family::nao-version`.
+
+ 2.     Check the battery level.
+
+        **Important**: make sure the robot battery is fully charged: a power
+        shortage during upgrading could leave the robot in a fatal state.
+
+        **Tips**: if your battery has a limited autonomy, you should leave
+        the charger plugged during the upgrade. However it could be wise
+        to order a new battery.
+
+ 3.     Make sure the sound level is high.
+
+        A very sensitive step will be prompted by a sound, you need to hear it.
+=====  =========================================================================
+
+.. _choose_upgrade_mode_bis:
+
+2/4 - Uploading the release
+++++++++++++++++++++++++++++
+
+====  ==========================================================================
+Step  Action
+====  ==========================================================================
+1.    Retrieve the |roboN| system image:
+
+      ``opennao-atom-system-image-x.x.opn``
+
+      You can download the latest release from |community|.
+      For further details, see: :ref:`retrieving_software`.
+
+2.    In **Choregraphe**, choose **Connection** > **Advanced** >
+      **Update NAO system**.
+
+3.    Select the system image to upload.
+
+4.    Click the **Open** button.
+
+      The **Authentication required** window appears.
+
+      .. image:: /medias/desktop/choregraphe/authent_required.png
+          :width: 221 px
+          :height: 141 px
+
+5.    Type the Login and password of your robot.
+
+      * **Login** is always 'nao'.
+
+      * **Password** is the password you have set on :ref:`webpage_nao`.
+
+6.    Click the **OK** button.
+
+      A progression bar is displayed.
+
+      .. warning::
+
+         Do not switch the robot off while the flashing process is running.
+
+      Then a message let you know you can shut down and restart your robot.
+====  ==========================================================================
+
+*Troubleshooting*
+
+* If something goes wrong during the system update process, and
+  **Choregraphe** ends it prematurely, an **error code** is given in the
+  pop-up.
+
+  For further details, see:
+  :ref:`choregraphe-troubleshooting-errorcode`.
+
+* For specific cases, if you cannot use **Choregraphe** to upload the system,
+  see: :ref:`advanced_upgrade`.
+
+.. _launching_upgrade:
+
+3/4 - Restarting |roboN| to launch the upgrade
++++++++++++++++++++++++++++++++++++++++++++++++
+
+To restart |roboN| after a system update:
+
+=====  ====================================================================================
+Step     Action
+=====  ====================================================================================
+ 1.     Press and hold the robot **Chest** button for about 5 seconds until
+        it gets blue.
+
+        Ear LEDs shows the progression.
+
+        For further details, see: :ref:`upgrading_process_nao`.
+
+        ..  For further details, see: |nao| :ref:`upgrading_process_nao` or |juju|
+        ..  :ref:`upgrading_process_juju`.
+
+ 2.     **Remain alert**: a strong beep sound (echoing), indicates that one of
+        the cards has its firmware updated.
+        This could occur once or several times according to the
+        release content (i.e. the number of firmwares to update).
+
+        **Warning**: it may occur, on some robots, that the upgrade of the card
+        controlling the **Inertial sensor** gets disturbed when the charger is plugged.
+        In that case, the upgrade will be retried, up to 6 times, so you should hear
+        the sound many times.
+
+        **Tips**: in order to avoid this problem, simply unplug the charger once you
+        have heard the first sound.
+
+ 3.     Optionally, in case of persistent disturbances |robot| may say:
+        "To complete my upgrade, please make sure that I am well charged,
+        unplug my charger and re-boot me".
+
+ 4.     When the upgrade process is completed, |robot| may ask you to perform an
+        auto-diagnostic by saying: "put me in an open space on the floor
+        and touch my head or my bumper ...".
+
+        .. Warning::
+            During this auto-diagnostic, all safety reflexes are intentionally
+            removed: do not shake nor push your |robot| and make sure it is
+            in a safe place.
+
+        If you don't feel confident about the upgrade, for example if a repeated sound
+        makes you think that the inertial sensor card may not be properly updated,
+        do not proceed as asked and shutdown the robot:
+        It gives you another chance to perform the upgrade properly.
+
+5.      **NAOFlasher option**: do not forget to remove the USB stick from
+        |roboN|'s head and to close the :term:`Hatch behind the head of the robot`.
+
+        **Factory reset option**: if you have requested a :term:`Factory reset`,
+        then all settings have been reset, therefore you need to restore the WiFi
+        connection settings.
+
+        For further details, see: :ref:`nao-connecting`.
+=====  ====================================================================================
+
+.. _check_upgrade:
+
+4/4 - Last checking
++++++++++++++++++++
+
+* The tricky upgrade of the **Inertial sensor** card could put your robot in danger,
+  so better double-check that everything went well before performing acrobatics!
+
+  So make sure the **Fall Manager reflex** is activated or at least available on the
+  :ref:`opennao-web-page-settings`.
+
+.. _advanced_upgrade:
+
+Advanced uploading methods
+--------------------------
+
+To upload |roboN| system, you may also use **NAOFlasher**.
+
+Note that this method, is more complex and requires a USB key and sometimes an
+Ethernet cable.
+
+Choosing the relevant method
++++++++++++++++++++++++++++++
+
++-------------------------------------+----------------------------------------+
+| If ...                              |  Choose ...                            |
++=====================================+========================================+
+|... your robot is booting normally,  | * :ref:`simple-update`, or             |
+|and you want to:                     |                                        |
+|                                     |                                        |
+|* restore the current release or     | * :ref:`naoflasher_upgrade`,           |
+|* upgrade it                         |   **without** Factory reset.           |
++-------------------------------------+----------------------------------------+
+|... your robot is **not** booting    | * :ref:`naoflasher_upgrade`,           |
+|normally,                            |                                        |
+|                                     |   **with** Factory reset.              |
+|... you have lost the password of    |                                        |
+|your robot and cannot connect to the |                                        |
+|:ref:`webpage_nao`,                  |                                        |
+|                                     |                                        |
+|or                                   |                                        |
+|                                     |                                        |
+|... you wish to **downgrade**        |                                        |
+|the current release.                 |                                        |
++-------------------------------------+----------------------------------------+

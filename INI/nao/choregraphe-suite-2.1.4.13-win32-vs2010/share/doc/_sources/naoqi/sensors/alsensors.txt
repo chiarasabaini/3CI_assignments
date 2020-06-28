@@ -1,0 +1,29 @@
+.. _alsensors:
+
+ALSensors
+=========
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
+    alsensors-api
+
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <alsensors-api>`
+
+------------
+
+What it does
+------------
+
+The **ALSensor** module is responsible for raising events corresponding to the robot's sensors.
+
+For further details, see section: :ref:`ALSensors - List of events <alsensors-events>`.
+
+How it works
+------------
+
+ALSensor module retrieves sensors data in ALMemory, processes it and raises
+events according to the situation.
+

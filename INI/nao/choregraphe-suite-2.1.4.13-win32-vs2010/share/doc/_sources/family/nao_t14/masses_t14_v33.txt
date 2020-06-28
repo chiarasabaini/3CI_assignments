@@ -1,0 +1,26 @@
+.. _t14_masses_v33:
+
+T14 - Masses - V3.3
+=======================
+
+.. seealso::
+    :ref:`all_robots` | :ref:`robot_masses`
+
+    :ref:`nao-t14` | :ref:`V4 <t14_masses>` | **V3.3** | :ref:`V3.2 <t14_masses_v32>`
+
+--------------------
+
+.. include:: ../bulk/masses_whole_t.rst
+
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 2.6
+
+.. include:: ../bulk/masses_head_torso_v33_t14.rst
+
+.. include:: ../bulk/masses_arms_v33.rst
+
+.. include:: ../bulk/masses_hands_motorized_v33.rst

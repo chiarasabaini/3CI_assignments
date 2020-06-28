@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-21 08:10:18 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjI5OjI1ICI7MzI5Mg=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA4OjEwOjE4ICI7NzszNDAw"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci un numero:&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="0"/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <declare name="saveN" type="Integer" array="False" size=""/>
+            <assign variable="saveN" expression="n"/>
+            <do expression="n&gt;0">
+                <if expression="i%2=1">
+                    <then>
+                        <assign variable="sum" expression="sum+i"/>
+                        <output expression="i" newline="True"/>
+                        <assign variable="i" expression="i+1"/>
+                        <assign variable="n" expression="n-1"/>
+                    </then>
+                    <else>
+                        <assign variable="i" expression="i+1"/>
+                    </else>
+                </if>
+            </do>
+            <output expression="&quot;la somma dei primi &quot;&amp;saveN&amp;&quot; numeri dispari &#232; &quot;&amp;sum" newline="True"/>
+        </body>
+    </function>
+    <function name="ask" type="None" variable="">
+        <parameters/>
+        <body/>
+    </function>
+    <function name="printodd" type="None" variable="">
+        <parameters/>
+        <body/>
+    </function>
+</flowgorithm>

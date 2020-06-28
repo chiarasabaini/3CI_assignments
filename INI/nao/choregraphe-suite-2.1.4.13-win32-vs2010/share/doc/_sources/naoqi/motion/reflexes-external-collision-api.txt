@@ -1,0 +1,141 @@
+.. include:: ../../bulk/common.rst
+
+.. _reflexes-external-collision-api:
+
+External-collision avoidance API
+++++++++++++++++++++++++++++++++
+
+
+:ref:`naoqi-motion` - :ref:`Overview <reflexes-external-collision>` | API
+
+------------
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/reflexes-external-collision_toc.rst
+
+
+.. _externalcollision-event-list:
+
+Event list
+----------
+
+* :naoqi:event:`ALMotion/Safety/ChainVelocityClipped`
+* :naoqi:event:`ALMotion/MoveFailed`
+* :naoqi:event:`ALMotion/Safety/MoveFailed` (deprecated, use ALMotion/MoveFailed instead)
+
+
+Methods
+-------
+
+.. cpp:function:: std::vector<float> ALMotionProxy::getChainClosestObstaclePosition(const std::string& chainName, const int &frame)
+
+  Gets, for a specified chain, the position, relative to the specified frame, of the closest obstacle.
+
+  :param chainName: The chain name {"LArm" or "RArm"}.
+  :param frame: Task :ref:`frame <motion-effectors-space>` {:term:`FRAME_TORSO` = 0, :term:`FRAME_WORLD` = 1, :term:`FRAME_ROBOT` = 2}.
+
+  :return: Vector containing the AL::Math::Position3D of obstacle in meters (x, y, z).
+
+
+.. cpp:function:: bool ALMotionProxy::getExternalCollisionProtectionEnabled(const std::string& name)
+
+  Checks if the external collision protection is activated on the given name.
+
+  :param name: The name {"All", "Move", "Arms", "LArm" or "RArm"}.
+
+  :return: Return true if the external collision protection of the given name is activated.
+
+
+.. cpp:function:: float ALMotionProxy::getOrthogonalSecurityDistance ( )
+
+  Gets the current orthogonal security distance used to check dangerous obstacles.
+
+  :return: distance in meters between any part of the robot and any obstacle in the direction of the motion.
+
+        It defines the security area in which any obstacle detection stops the robot.
+
+        Default value: 0.4m.
+
+
+.. cpp:function:: float ALMotionProxy::getTangentialSecurityDistance ( )
+
+  Gets the current tangential security distance used to check dangerous obstacles.
+
+  :return: distance in meters between any part of the robot and any obstacle.
+
+        It defines the security area in which any obstacle detection stops the robot.
+
+        Default value: 0.1m.
+
+
+.. cpp:function:: void ALMotionProxy::setExternalCollisionProtectionEnabled(const std::string& name, const bool& enable)
+
+  +---------------+------------------------------------------------------------------------------+
+  ||nao| |roboN|  | Enable/disable external collision protection of the robot.                   |
+  +---------------+------------------------------------------------------------------------------+
+  ||juju| |roboJ| | Enable/disable external collision protection of the robot, but               |
+  |               | only if allowed by the owner.                                                |
+  |               |                                                                              |
+  |               | If not allowed, an exception is thrown.                                      |
+  |               |                                                                              |
+  |               | * "All" and "Move" deactivation require the owner consent on |roboJ|,        |
+  |               | * "Arms", "LArm" and "RArm" deactivation does not require the owner consent. |
+  +---------------+------------------------------------------------------------------------------+
+
+  For further details, see: :ref:`reflex-deactivation`.
+
+  :param name: The name {"All", "Move", "Arms", "LArm" or "RArm"}.
+
+  :param enable: Activate or deactivate the external collision of the desired name.
+
+  :download:`almotion_setExternalCollisionProtectionEnabled.py </samples/python/almotion/almotion_setExternalCollisionProtectionEnabled.py>`
+
+  .. literalinclude:: /samples/python/almotion/almotion_setExternalCollisionProtectionEnabled.py
+     :language: py
+
+.. cpp:function:: void ALMotionProxy::setOrthogonalSecurityDistance (const float& distance)
+
+  Defines the orthogonal security distance.
+
+  :param distance: distance in meters. See :cpp:func:`ALMotionProxy::getOrthogonalSecurityDistance`.
+
+
+.. cpp:function:: void ALMotionProxy::setTangentialSecurityDistance (const float& distance)
+
+  Defines the tangential security distance.
+
+  :param distance: distance in meters. See :cpp:func:`ALMotionProxy::getTangentialSecurityDistance`.
+
+
+Events
+------
+
+.. naoqi:event:: ALMotion/Safety/ChainVelocityClipped(AL::ALValue val)
+
+  Raised when a chain velocity is clipped because an obstacle is too close.
+
+  :param val: [["ChainName", obstaclePosition], ...]
+              obstaclePosition: [x, y, z] Position3D in :term:`FRAME_WORLD`.
+
+.. naoqi:event:: ALMotion/MoveFailed(AL::ALValue val)
+
+  Raised when a move command fails.
+
+  :param val: [Cause, Status, Obstacle position]
+              Cause: Reason of move failed std::string ("Safety", "Internal stop", ...).
+              Status: 0 move not started, 1 move started but stopped.
+              Obstacle position: Position3D of obstacle in :term:`FRAME_WORLD`.
+
+.. naoqi:event:: ALMotion/Safety/MoveFailed(AL::ALValue val)
+
+  .. deprecated:: 2.0.2
+    use :naoqi:event:`ALMotion/MoveFailed` instead.
+
+  Raised when a move command fails because there is an obstacle in the direction of the move.
+
+  :param val: [x, y, z] Position3D of obstacle in :term:`FRAME_WORLD`.

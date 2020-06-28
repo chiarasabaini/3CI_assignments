@@ -1,0 +1,575 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALAnimatedSpeech &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="NAOqi Audio" href="index.html" />
+    <link rel="next" title="ALAnimatedSpeech API" href="alanimatedspeech-api.html" />
+    <link rel="prev" title="NAOqi Audio" href="index.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="index.html" title="NAOqi Audio">previous</a>
+     |
+    <a href="index.html" title="NAOqi Audio" accesskey="U">up</a>
+   |
+    <a href="alanimatedspeech-api.html" title="ALAnimatedSpeech API">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-audio-alanimatedspeech">
+            
+  <div class="section" id="alanimatedspeech">
+<span id="id1"></span><h1>ALAnimatedSpeech<a class="headerlink" href="#alanimatedspeech" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="index.html#naoqi-audio"><em>NAOqi Audio</em></a> - Overview | <a class="reference internal" href="alanimatedspeech-api.html#alanimatedspeech-api"><em>API</em></a> |
+<a class="reference internal" href="alanimatedspeech_advanced.html#alanimatedspeech-advanced"><em>Advanced</em></a></p>
+<hr class="docutils" />
+<div class="section" id="what-it-does">
+<h2>What it does<a class="headerlink" href="#what-it-does" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>ALAnimatedSpeech</strong> module allows you to make the robot talk in an expressive way.</p>
+<p>By default, when you make the robot say something through this module,
+he livens the speech up with body language.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li>You can complete this body language or create more complex speech by annotating
+the text yourself with some instructions.</li>
+<li>You can also disable the body language so that the robot only executes your
+instructions and does not move outside of them.</li>
+</ul>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p><strong>A</strong> - The <strong>ALAnimatedSpeech</strong> module receives a text that can be
+<a class="reference internal" href="#annotated-text"><em>annotated</em></a> with instructions.</p>
+<p><strong>B</strong> - It splits the text into little chunks.</p>
+<p><strong>C</strong> - It analyzes the text and annotates the things he
+recognizes to choose contextual moves.</p>
+<p><strong>D</strong> - Any part of the text which is not annotated with animations
+are filled with <a class="reference internal" href="#body-language"><em>Body language modes</em></a>.</p>
+<p><strong>E</strong> - The module prepares the robot to execute each instruction so that it can be
+executed as soon as it is needed. This enables speech and instructions to be
+well synchronized.</p>
+<p><strong>F</strong> - The <strong>ALAnimatedSpeech</strong> module makes the robot say the text and keeps
+an eye on the speech to launch instructions at the right time.</p>
+<div class="section" id="annotated-text">
+<span id="id2"></span><h3>Annotated text<a class="headerlink" href="#annotated-text" title="Permalink to this headline">¶</a></h3>
+<p>The annotated text is a string combining text to be said and
+<a class="reference internal" href="#animated-speech-instruction"><em>Instructions</em></a> managing behaviors.</p>
+<p>For example, you could send:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;Hello! ^start(animations/Stand/Gestures/Hey_1) Nice to meet you!&quot;</span>
+</pre></div>
+</div>
+<p>In this case:</p>
+<ul class="simple">
+<li>The robot says &#8220;Hello!&#8221;.</li>
+<li>Then, simultaneously, the robot:<ul>
+<li>starts the execution of the <tt class="docutils literal"><span class="pre">animations/Stand/Gestures/Hey_1</span></tt> animation and,</li>
+<li>says &#8220;Nice to meet you!&#8221;.</li>
+</ul>
+</li>
+<li>Once the text is said, the robot stops abruptly the execution of the
+<tt class="docutils literal"><span class="pre">animations/Stand/Gestures/Hey_1</span></tt> animation.</li>
+</ul>
+<p>If you want it to keep running, you can add a <strong>^wait</strong> instruction at the end:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;Hello! ^start(animations/Stand/Gestures/Hey_1) Nice to meet you ^wait(animations/Stand/Gestures/Hey_1)&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instructions">
+<span id="animated-speech-instruction"></span><h3>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h3>
+<p>The following instructions allow you to do some actions during the course of a speech.</p>
+<div class="section" id="body-language-mode">
+<h4>Body language mode<a class="headerlink" href="#body-language-mode" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Use ...</th>
+<th class="head">To ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>^mode(</strong> <em>body_language_mode</em> <strong>)</strong></td>
+<td><p class="first">Change the body language mode for the current text.</p>
+<p class="last"><em>body_language_mode</em> can be &#8220;disabled&#8221;, &#8220;random&#8221; or &#8220;contextual&#8221;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;Hello. Look I can stop moving ^mode(disabled) and after I can resume moving ^mode(contextual), you see ?&quot;</span>
+</pre></div>
+</div>
+<p>For further details, see: <a class="reference internal" href="#body-language"><em>Body language modes</em></a>.</p>
+</div>
+<div class="section" id="animations">
+<h4>Animations<a class="headerlink" href="#animations" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Use ...</th>
+<th class="head">To ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>^run(</strong> <em>animation_full_name</em> <strong>)</strong></td>
+<td>Suspend the speech, run an animation and resume the speech.</td>
+</tr>
+<tr class="row-odd"><td><strong>^start(</strong> <em>animation_full_name</em> <strong>)</strong></td>
+<td>Start an animation.</td>
+</tr>
+<tr class="row-even"><td><strong>^stop(</strong> <em>animation_full_name</em> <strong>)</strong></td>
+<td>Stop an animation.</td>
+</tr>
+<tr class="row-odd"><td><strong>^wait(</strong> <em>animation_full_name</em> <strong>)</strong></td>
+<td>Suspend the speech, wait for the end of the animation and resume the
+speech.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;^start(animations/Stand/Gestures/Enthusiastic_4) Look what I can do while speaking!&quot;</span>
+
+<span class="s">&quot;^start(animations/Stand/Gestures/Enthusiastic_4) Look what I can do while speaking! ^stop(animations/Stand/Gestures/Enthusiastic_4) Now I use my body language&quot;</span>
+
+<span class="s">&quot;^start(animations/Stand/Gestures/Hey_1)Hi, guys! ^wait(animations/Stand/Gestures/Hey_1)&quot;</span>
+</pre></div>
+</div>
+<p>For further details, see: <a class="reference internal" href="#behavior-prerequisites"><em>Animations</em></a>.</p>
+</div>
+<div class="section" id="tagged-animations">
+<h4>Tagged animations<a class="headerlink" href="#tagged-animations" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Use ...</th>
+<th class="head">To ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>^runTag(</strong> <em>tag_name</em> <strong>)</strong></td>
+<td><p class="first">Suspend the speech, run an animation which has the mentioned tag and
+resume the speech.</p>
+<p class="last">Chooses randomly the animation which will be started among all
+the animations which have the mentioned tag.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>^startTag(</strong> <em>tag_name</em> <strong>)</strong></td>
+<td><p class="first">Start an animation which has the mentioned tag.</p>
+<p class="last">Chooses randomly the animation which will be started among all
+the animations which have the mentioned tag.</p>
+</td>
+</tr>
+<tr class="row-even"><td><strong>^stopTag(</strong> <em>tag_name</em> <strong>)</strong></td>
+<td>Stop an animation which has the mentioned tag.</td>
+</tr>
+<tr class="row-odd"><td><strong>^waitTag(</strong> <em>tag_name</em> <strong>)</strong></td>
+<td>Suspend the speech, wait for the end of the animation which has the
+mentioned tag and resume the speech.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;^startTag(me) My name is Nao.&quot;</span>
+
+<span class="s">&quot;^startTag(hello) Hello. ^waitTag(hello)&quot;</span>
+
+<span class="s">&quot;^startTag(hello) Hello Paul, nice to meet you. ^stopTag(hello) My name is Nao.&quot;</span>
+</pre></div>
+</div>
+<p>For further details, see : <a class="reference internal" href="#tags"><em>Tags</em></a>.</p>
+</div>
+<div class="section" id="sounds">
+<h4>Sounds<a class="headerlink" href="#sounds" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Use ...</th>
+<th class="head">To ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first"><strong>^runSound(</strong> <em>soundSet/soundFile</em> <strong>)</strong></p>
+<p class="last"><strong>^runSound(</strong> <em>soundSet/soundFile</em>,
+<em>soundVolume</em> <strong>)</strong></p>
+</td>
+<td><p class="first">Suspend the speech, play a sound and resume the speech.</p>
+<p class="last"><em>soundVolume</em> is an integer between 0 and 100. (by default it&#8217;s 100)</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p class="first"><strong>^startSound(</strong> <em>soundSet/soundFile</em> <strong>)</strong></p>
+<p class="last"><strong>^startSound(</strong> <em>soundSet/soundFile</em>,
+<em>soundVolume</em> <strong>)</strong></p>
+</td>
+<td><p class="first">Play a sound in background.</p>
+<p class="last">The volume is an integer between 0 and 100. (by default it&#8217;s 100)</p>
+</td>
+</tr>
+<tr class="row-even"><td><strong>^stopSound(</strong> <em>soundSet/soundFile</em> <strong>)</strong></td>
+<td>Stop a sound.</td>
+</tr>
+<tr class="row-odd"><td><strong>^waitSound(</strong> <em>soundSet/soundFile</em> <strong>)</strong></td>
+<td>Suspend the speech, wait for the end of the sound and resume the speech.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;^startSound(my_sound_set/my_sound) That&#39;s cool.&quot;</span>
+
+<span class="s">&quot;^startSound(my_sound_set/my_sound, 50) That&#39;s cool. ^waitSound(my_sound_set/my_sound)&quot;</span>
+
+<span class="s">&quot;That&#39;s cool. ^runSound(my_sound_set/my_sound) &quot;</span>
+</pre></div>
+</div>
+<p>For further details, see: <a class="reference internal" href="#sound-set"><em>Sounds</em></a>.</p>
+</div>
+<div class="section" id="naoqi-api">
+<h4>NAOqi API<a class="headerlink" href="#naoqi-api" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Use ...</th>
+<th class="head">To ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>^pCall(</strong> <em>ALModule.method(args)</em> <strong>)</strong></td>
+<td>Call asynchronously any NAOqi method.</td>
+</tr>
+<tr class="row-odd"><td><strong>$</strong> <em>my_event</em> <strong>=</strong> <em>my_value</em></td>
+<td>Raise an <strong>ALMemory</strong> event.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;^pCall(ALMotion.wakeUp()) Ok, I wake up.&quot;</span>
+
+<span class="s">&quot;While, I am speaking, $my_event=my_value I can raise an event.&quot;</span>
+</pre></div>
+</div>
+<p>For further details, see: <a class="reference internal" href="#id6"><em>NAOqi API</em></a>.</p>
+</div>
+</div>
+<div class="section" id="body-language-modes">
+<span id="body-language"></span><h3>Body language modes<a class="headerlink" href="#body-language-modes" title="Permalink to this headline">¶</a></h3>
+<p>There is 3 modes available for the body language:</p>
+<p><strong>disabled</strong> - The body language never launches any animation.</p>
+<p><strong>random</strong> - The body language launches randomly some short animations which are executed
+one after another.</p>
+<div class="line-block">
+<div class="line"><strong>contextual</strong> - The body language launches some specific animations each time
+a keyword like &#8216;I&#8217;, &#8216;you&#8217; or &#8216;all&#8217; is detected in an appropriate grammatical context
+(for example, he will point at him if he talks about himself).</div>
+<div class="line">Each time no contextual animations has been found, it launches randomly a new animation.</div>
+</div>
+<p>You can add new associations between words and tagged animations using:
+<a class="reference internal" href="alanimatedspeech-api.html#ALAnimatedSpeechProxy::addTagsToWords__AL::ALValueCR" title="ALAnimatedSpeechProxy::addTagsToWords"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAnimatedSpeechProxy::addTagsToWords()</span></tt></a></p>
+<p>The body language takes all motor resources if they are available.
+And it stops as soon as they are asked by another animation.</p>
+</div>
+<div class="section" id="behavior-prerequisites">
+<span id="id3"></span><h3>Animations<a class="headerlink" href="#behavior-prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>In an annotated text, you can use any supplied animation.</p>
+<p>For further details, see:</p>
+<ul class="simple">
+<li><a class="reference internal" href="alanimatedspeech_advanced.html#animated-speech-list-behaviors-nao"><em> NAO - List of animations available by default</em></a>,</li>
+<li><a class="reference internal" href="alanimatedspeech_advanced.html#animated-speech-list-behaviors-juliette"><em> Pepper - List of animations available by default</em></a>.</li>
+</ul>
+<p>You can also use your own behaviors provided that you follow these requirements:</p>
+<ul class="simple">
+<li>Limit the content of the behavior to an animation (no speech, no complex behaviors),
+in order to guaranty a good compatibility with the Text-to-Speech.</li>
+<li>Lock the resources as follow: Wait 1 second at box startup, and lock resources during box execution
+- in order to secure a full compatibility with the automatic body language process.</li>
+</ul>
+<p>For further details, see : <a class="reference internal" href="../../software/choregraphe/tutos/animated_speech.html#alanimatedspeech-createyourownbehavior"><em>Creating a Behavior for annotated text</em></a>.</p>
+</div>
+<div class="section" id="tags">
+<span id="id4"></span><h3>Tags<a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h3>
+<p>In an annotated text, you can use any tag supplied by default.</p>
+<p>For further details, see:</p>
+<ul class="simple">
+<li><a class="reference internal" href="alanimatedspeech_advanced.html#animated-speech-tags-nao"><em> NAO - List of tags available by default</em></a>,</li>
+<li><a class="reference internal" href="alanimatedspeech_advanced.html#animated-speech-tags-juliette"><em> Pepper - List of tags available by default</em></a>.</li>
+</ul>
+<p>Additionally, you can declare new tagged animations using:
+<a class="reference internal" href="alanimatedspeech-api.html#ALAnimatedSpeechProxy::declareAnimationsPackage__ssCR" title="ALAnimatedSpeechProxy::declareAnimationsPackage"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAnimatedSpeechProxy::declareAnimationsPackage()</span></tt></a></p>
+<p>You can also declare new tags for some specific animations (without modifying the animations) using:
+<a class="reference internal" href="alanimatedspeech-api.html#ALAnimatedSpeechProxy::declareTagForAnimations__AL::ALValueCR" title="ALAnimatedSpeechProxy::declareTagForAnimations"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALAnimatedSpeechProxy::declareTagForAnimations()</span></tt></a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The tags used by Animated Speech are nothing more than the generic tags you can associate to any behavior.
+But for Animated Speech, we trust the developers to use only tags that cover animations.</p>
+</div>
+</div>
+<div class="section" id="sound-set">
+<span id="id5"></span><h3>Sounds<a class="headerlink" href="#sound-set" title="Permalink to this headline">¶</a></h3>
+<p>In an annotated text, you can use any sound file contained in a sound set,
+using the following syntax:</p>
+<p><tt class="docutils literal"><span class="pre">soundSet/soundFile</span></tt></p>
+<p>For further details, see: <a class="reference internal" href="alaudioplayer.html#soundset"><em>Soundset</em></a>.</p>
+</div>
+<div class="section" id="id6">
+<span id="id7"></span><h3>NAOqi API<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>You can call any <strong>NAOqi</strong> method or set any event value, at any time of your speech.</p>
+<p>Here is the syntax:</p>
+<p><tt class="docutils literal"><span class="pre">ALModule.method(args)</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">$event=value</span></tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">$my_event=my_value</span></tt> is equivalent to
+<tt class="docutils literal"><span class="pre">^pCall(ALMemory.raiseEvent(&quot;my_event&quot;,</span> <span class="pre">&quot;my_value&quot;))</span></tt>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="features-inherited-from-other-modules">
+<h2>Features inherited from other modules<a class="headerlink" href="#features-inherited-from-other-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="add-your-own-behaviors">
+<h3>Add your own behaviors<a class="headerlink" href="#add-your-own-behaviors" title="Permalink to this headline">¶</a></h3>
+<p>You can install your own behaviors through the
+<a class="reference internal" href="../../software/choregraphe/panels/robot_applications.html#chore-robot-applications-panel"><em>Application Manager panel</em></a>
+and uses them in your text.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>As you can call your own behaviors in an annotated text, you could call
+a behavior which is not an animation.
+But we advise you to only annotate text with animations.
+Also we strongly recommend you to set the resources of your behaviors before
+you start using them in an annotated text.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../../software/choregraphe/tutos/animated_speech.html#alanimatedspeech-createyourownbehavior"><em>Creating a Behavior for annotated text</em></a>.</p>
+</div>
+</div>
+<div class="section" id="voice-customization">
+<h3>Voice customization<a class="headerlink" href="#voice-customization" title="Permalink to this headline">¶</a></h3>
+<p>As <strong>ALAnimatedSpeech</strong> uses <strong>ALTextToSpeech</strong> module to say the text, you
+can customize the voice of the robot.</p>
+<p>For further details, see: <a class="reference internal" href="altexttospeech.html#altexttospeech"><em>ALTextToSpeech</em></a>.</p>
+</div>
+<div class="section" id="sound-managing">
+<h3>Sound managing<a class="headerlink" href="#sound-managing" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALAnimatedSpeech</strong> uses <strong>ALAudioPlayer</strong> module to play the sounds.</p>
+<p>For further details, see: <a class="reference internal" href="alaudioplayer.html#alaudioplayer"><em>ALAudioPlayer</em></a>.</p>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>To discover the basic functions of the animated speech using <strong>Choregraphe</strong>,
+see the tutorial: <a class="reference internal" href="../../software/choregraphe/tutos/animated_speech.html#animated-speech-tuto"><em>Testing the Body language</em></a>.</p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="index.html" title="NAOqi Audio">NAOqi Audio</a>
+     |
+    <a href="index.html" title="NAOqi Audio" accesskey="U">NAOqi Audio</a>
+   |
+    <a href="alanimatedspeech-api.html" title="ALAnimatedSpeech API">ALAnimatedSpeech API</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Audio</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALAnimatedSpeech</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="alanimatedspeech-api.html">ALAnimatedSpeech API</a></li>
+<li class="toctree-l6"><a class="reference internal" href="alanimatedspeech_advanced.html">ALAnimatedSpeech - Advanced</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="alaudiodevice.html">ALAudioDevice</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alaudioplayer.html">ALAudioPlayer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alaudiorecorder.html">ALAudioRecorder</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alsoundlocalization.html">ALSoundLocalization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog/aldialog.html">ALDialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alsounddetection.html">ALSoundDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alspeechrecognition.html">ALSpeechRecognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="altexttospeech.html">ALTextToSpeech</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alvoiceemotionanalysis.html">ALVoiceEmotionAnalysis</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alaudiosourcelocalization.html">ALAudioSourceLocalization</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALAnimatedSpeech</a><ul>
+<li><a class="reference internal" href="#what-it-does">What it does</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a><ul>
+<li><a class="reference internal" href="#annotated-text">Annotated text</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#body-language-mode">Body language mode</a></li>
+<li><a class="reference internal" href="#animations">Animations</a></li>
+<li><a class="reference internal" href="#tagged-animations">Tagged animations</a></li>
+<li><a class="reference internal" href="#sounds">Sounds</a></li>
+<li><a class="reference internal" href="#naoqi-api">NAOqi API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#body-language-modes">Body language modes</a></li>
+<li><a class="reference internal" href="#behavior-prerequisites">Animations</a></li>
+<li><a class="reference internal" href="#tags">Tags</a></li>
+<li><a class="reference internal" href="#sound-set">Sounds</a></li>
+<li><a class="reference internal" href="#id6">NAOqi API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#features-inherited-from-other-modules">Features inherited from other modules</a><ul>
+<li><a class="reference internal" href="#add-your-own-behaviors">Add your own behaviors</a></li>
+<li><a class="reference internal" href="#voice-customization">Voice customization</a></li>
+<li><a class="reference internal" href="#sound-managing">Sound managing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="index.html" title="NAOqi Audio">previous</a>
+     |
+    <a href="index.html" title="NAOqi Audio" accesskey="U">up</a>
+   |
+    <a href="alanimatedspeech-api.html" title="ALAnimatedSpeech API">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

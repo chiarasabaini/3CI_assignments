@@ -1,0 +1,35 @@
+.. _reflexes-smart-stiffness-api:
+
+Smart Stiffness API
++++++++++++++++++++
+
+
+:ref:`naoqi-motion` - :ref:`Overview <reflexes-smart-stiffness>` | API
+
+------------
+
+
+
+Method list
+-----------
+
+.. cpp:class:: ALMotionProxy
+
+.. include:: bulk/reflexes-smart-stiffness_toc.rst
+
+
+Methods
+--------
+
+.. cpp:function:: bool ALMotionProxy::setSmartStiffnessEnabled(const bool &enable)
+
+  | Enable or Disable the smart stiffness reflex for all the joints (True by default).
+  | The update takes one motion cycle.
+
+  :param enable: Enable or disable the smart stiffness reflex.
+
+.. cpp:function:: ALMotionProxy::getSmartStiffnessEnabled()
+
+  Allow to know if the smart stiffness reflex is activated.
+
+  :return: Return true is the smart stiffness reflex is activated.

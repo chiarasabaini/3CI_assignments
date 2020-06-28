@@ -1,0 +1,14 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo-fsr:
+
+|roboR| -  FSRs
+=================
+
+.. seealso::
+
+   :ref:`romeo`
+
+----------------
+
+**TBD**

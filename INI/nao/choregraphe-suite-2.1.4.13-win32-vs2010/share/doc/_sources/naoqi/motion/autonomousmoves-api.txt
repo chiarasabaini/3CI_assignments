@@ -1,0 +1,60 @@
+.. _autonomousmoves-api:
+
+ALAutonomousMoves API
+=====================
+
+:ref:`naoqi-core` - :ref:`Overview <autonomousmoves>` | API
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alautonomousmovesproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: AutonomousMovesProxy
+
+* :cpp:func:`ALAutonomousMovesProxy::setExpressiveListeningEnabled`
+* :cpp:func:`ALAutonomousMovesProxy::getExpressiveListeningEnabled`
+* :cpp:func:`ALAutonomousMovesProxy::setBackgroundStrategy`
+* :cpp:func:`ALAutonomousMovesProxy::getBackgroundStrategy`
+
+
+Methods
+-------
+
+.. cpp:function:: void ALAutonomousMovesProxy::setExpressiveListeningEnabled(const bool& enabled)
+
+   Enables or disables the expressive listening.
+
+   :param enabled: Whether or not to enable or disable the expressive listening.
+
+
+.. cpp:function:: void ALAutonomousMovesProxy::getExpressiveListeningEnabled()
+
+   Gets if the expressive listening is enabled.
+
+   :return: True if the expressive listening is enabled, False otherwise.
+
+
+
+.. cpp:function:: void ALAutonomousMovesProxy::setBackgroundStrategy(const std::string& stategy)
+
+   Sets the backround posture strategy.
+
+   :param strategy: The backround posture strategy ("none" or "backToNeutral").
+
+
+.. cpp:function:: void ALAutonomousMovesProxy::getBackgroundStrategy()
+
+   Gets the backround posture strategy.
+
+   :return: The backround posture strategy ("none" or "backToNeutral").

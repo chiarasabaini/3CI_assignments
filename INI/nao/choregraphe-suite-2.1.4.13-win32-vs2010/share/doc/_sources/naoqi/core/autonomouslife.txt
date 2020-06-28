@@ -1,0 +1,51 @@
+.. include:: ../../bulk/common.rst
+
+.. _autonomouslife:
+
+ALAutonomousLife
+================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   autonomouslife-api
+   triggerconditions
+   autonomouslife_advanced
+
+:ref:`naoqi-core` - Overview | :ref:`API <autonomouslife-api>` |
+:ref:`launchtriggerconditions` | :ref:`Advanced <autonomouslife_advanced>`
+
+------------
+
+What it does
+------------
+
+**ALAutonomousLife** is the module that makes the robot be alive at all time.
+
+For further details, see: |nao| :ref:`nao_life`.
+
+How it works
+-------------
+
+* The robot is kept visually alive by using the :ref:`albasicawareness` and
+  :ref:`almotion` :ref:`idle` services.
+
+* :ref:`Activities <activity>` are autonomously started when their specific 
+  :ref:`launchtriggerconditions` are validated.
+
+* Only one Activity can be running, or **focused** at a time.
+
+* ALAutonomousLife cycle is based on a state machine paradigm with 4 possible states:
+  **Interactive**, **Solitary**, **Safeguard** and **Disabled**.
+  For further details, see: :ref:`autonomouslife_states`.
+
+Getting started
+----------------
+
+To discover how to use and improved the **Life** of your |robot|, follow these
+tutorials:
+
+* :ref:`life_tuto`.
+
+* :ref:`create_solitary_activity_tuto`.

@@ -1,0 +1,84 @@
+.. _altexttospeech:
+
+ALTextToSpeech
+===============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   altexttospeech-api
+   altexttospeech-tuto
+
+:ref:`naoqi-audio` - Overview | :ref:`API <altexttospeech-api>` | :ref:`Tutorial <altexttospeech-tuto>`
+
+------------
+
+What it does
+------------
+
+The **ALTextToSpeech** module allows the robot to speak. It sends commands to a
+text-to-speech engine, and authorizes also voice customization.
+The result of the synthesis is sent to the robot's loudspeakers.
+
+
+How it works
+------------
+
+Speech engines
++++++++++++++++
+
+**ALTextToSpeech** is based on speech synthesizers - or speech engines.
+
+According to the selected language, a specific engine is used:
+
++---------------------+---------------------------------------------------------------+
+|                     | Uses ...                                                      |
++=====================+===============================================================+
+| **Japanese**        | **microAITalk** engine,                                       |
+|                     | provided by **AI, Inc**.                                      |
++---------------------+---------------------------------------------------------------+
+| **Other languages** | According to the language package the engine is provided      |
+|                     | by **ACAPELA** or **Nuance**.                                 |
+|                     | The engine used is indicated in the description               |
+|                     | of the package.                                               |
++---------------------+---------------------------------------------------------------+
+
+Customization
+--------------
+
+Using parameters
++++++++++++++++++
+
+The output audio stream can be modified.
+
+For example, these effects are available:
+
+- **pitch shifting** effect modifies the initial pitch of the voice,
+- **double voice** effect produces a "delay/echo" effect on the main voice.
+
+Additional parameters  are available for **microAITalk** engine.
+
+Further information can be found here : :cpp:func:`ALTextToSpeechProxy::setParameter`
+
+Using tags
+++++++++++
+
+To add some expressiveness when the robot speaks, it is highly recommended to use "tags" in your text.
+Tags, allows you to change, in the middle of a sentence, the pitch, the speed, the volume of a word, or add pauses between words,
+change the emphase of word.
+
+For further details, see: :ref:`tag-tutorial`.
+
+Getting Started
+---------------
+
+The easiest way to get started with **ALTextToSpeech** is to use the **Say** Choregraphe box.
+
+Testing on a real or a virtual robot
+++++++++++++++++++++++++++++++++++++++
+
+**ACAPELA**, **microAITalk** and **Nuance** engines are only available on the real robot.
+
+When using a virtual robot, said text can be visualized in **Choregraphe**
+:ref:`3d-nao-panel` and :ref:`dialog_panel`.

@@ -1,0 +1,40 @@
+.. _robot_motors:
+
+Motors
+========
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  motors_robot_v4
+  motors_robot_v33
+  motors_robot_v32
+
+
+.. seealso::
+
+    :ref:`all_robots`
+
+    **V5** | :ref:`V4 <robot_motors_v4>` | :ref:`V3.3 <robot_motors_v33>` | :ref:`V3.2 <robot_motors_v32>`
+
+    :ref:`h25_motors` | :ref:`h21_motors` | :ref:`t14_motors` | :ref:`t2_motors`
+
+--------------------
+
+Location
+----------
+
+.. figure:: /medias/robots/hardware_motortype_h25V5.png
+   :width: 313 px
+   :height: 416 px
+
+.. include:: ../bulk/motors_v5.rst
+
+.. include:: ../bulk/motors_v5_head.rst
+
+.. include:: ../bulk/motors_v5_arms.rst
+
+.. include:: ../bulk/motors_v5_hands.rst
+
+.. include:: ../bulk/motors_v5_legs.rst

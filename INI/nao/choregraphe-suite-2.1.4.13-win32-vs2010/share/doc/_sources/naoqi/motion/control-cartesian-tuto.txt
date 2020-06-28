@@ -1,0 +1,110 @@
+.. _control-cartesian-tuto:
+
+Cartesian control Tutorial: The Hula-Hoop motion
+================================================
+
+:ref:`naoqi-motion` - :ref:`Overview<control-cartesian>` | :ref:`API <control-cartesian-api>` |
+Tutorial
+
+-----------------
+
+
+Introduction
+------------
+
+This tutorial explains how to use Cartesian control API to make
+the robot perform a Hula-Hoop motion (Torso control in position and in rotation).
+
+
+.. note::
+
+   The tutorial is written in Python.
+
+.. _control-cartesian-tuto-download:
+
+Download
+--------
+
+You can download the Hula Hoop example here:
+:download:`almotion_hulaHoop.py </examples/python/motion/almotion_hulaHoop.py>`
+
+
+Please refer to the section: :ref:`python-install-guide` for any troubleshooting linked to python.
+
+
+Code review
+-----------
+
+In this section we describe each important piece of code of the example.
+
+NAOqi tools
++++++++++++
+
+First, we import some external libraries:
+ - argparse: toolbox useful to define parameter
+ - motion: some useful definitions such as FRAME.
+ - almath: an optimized mathematic toolbox for robotics.
+   For further details, see: `libalmath API reference <../../ref/libalmath/index.html>`_.
+ - ALProxy: create proxy to motion and robotposture modules
+
+Then, the proxy to **ALMotion** module is created. This proxy is useful to call **ALMotion** API.
+
+.. literalinclude:: /examples/python/motion/almotion_hulaHoop.py
+  :language: python
+  :start-after: # -*- encoding: UTF-8 -*-
+  :end-before: # end initialize proxy, begin go to Stand Init
+
+Initialization of the robot
+++++++++++++++++++++++++++++
+
+| When doing Cartesian control, it is important to be sure that the robot is in a good configuration. To
+  have the maximum range of control, the maximum stability and far away of :term:`singularity`.
+| A :ref:`PoseInit <control-joint-tuto>` is a good posture before a Cartesian control
+  of the robot Torso.
+
+.. literalinclude:: /examples/python/motion/almotion_hulaHoop.py
+  :language: python
+  :start-after: # end initialize proxy, begin go to Stand Init
+  :end-before: # end go to Stand Init, begin define control point
+
+Control point
++++++++++++++
+
+| Here, we specify that we want to control the *Torso* (see :ref:`motion-cartesian-effectors`)
+  in the FRAME_ROBOT (see :ref:`motion-effectors-space`) and that we want to control all the motion
+  with a AXIS_MASK_ALL (see :ref:`motion-axis-masks`).
+| We also specify that the torso path is defined in absolute.
+
+.. literalinclude:: /examples/python/motion/almotion_hulaHoop.py
+  :language: python
+  :start-after: # end go to Stand Init, begin define control point
+  :end-before: # end define control point, begin define target
+
+
+Hula hoop motion
+++++++++++++++++
+
+We define the hula hoop motion with four checkPoints:
+ - forward  / bend backward
+ - right    / bend left
+ - backward / bend forward
+ - left     / bend right
+
+.. image:: /medias/dev/modules/motion/motion_hulaHoop.png
+   :scale: 50%
+
+We define two loops of hula hoop. You can accelerate the motion by playing with the timeOneMove
+variable.
+
+.. literalinclude:: /examples/python/motion/almotion_hulaHoop.py
+  :language: python
+  :start-after: # end define control point, begin define target
+  :end-before: # end define target, begin call motion api
+
+Call the Cartesian control API
+++++++++++++++++++++++++++++++
+
+.. literalinclude:: /examples/python/motion/almotion_hulaHoop.py
+  :language: python
+  :start-after: # end define target, begin call motion api
+  :end-before: # end script

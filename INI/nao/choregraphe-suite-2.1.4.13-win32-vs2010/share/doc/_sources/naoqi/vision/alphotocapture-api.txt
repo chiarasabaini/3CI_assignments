@@ -1,0 +1,234 @@
+.. _alphotocapture-api:
+
+ALPhotoCapture API
+==================
+
+:ref:`naoqi-vision` - :ref:`Overview <alphotocapture>` | API | :ref:`Tutorial <alphotocapture-tuto>`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alphotocaptureproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALPhotoCaptureProxy
+
+* :cpp:func:`ALPhotoCaptureProxy::getCameraID`
+* :cpp:func:`ALPhotoCaptureProxy::getCaptureInterval`
+* :cpp:func:`ALPhotoCaptureProxy::getColorSpace`
+* :cpp:func:`ALPhotoCaptureProxy::getPictureFormat`
+* :cpp:func:`ALPhotoCaptureProxy::getResolution`
+* :cpp:func:`ALPhotoCaptureProxy::halfPress` (deprecated)
+* :cpp:func:`ALPhotoCaptureProxy::isHalfPressed` (deprecated)
+* :cpp:func:`ALPhotoCaptureProxy::isHalfPressEnabled`
+* :cpp:func:`ALPhotoCaptureProxy::setCameraID`
+* :cpp:func:`ALPhotoCaptureProxy::setCaptureInterval`
+* :cpp:func:`ALPhotoCaptureProxy::setColorSpace`
+* :cpp:func:`ALPhotoCaptureProxy::setHalfPressEnabled`
+* :cpp:func:`ALPhotoCaptureProxy::setPictureFormat`
+* :cpp:func:`ALPhotoCaptureProxy::setResolution`
+* :cpp:func:`ALPhotoCaptureProxy::takePicture`
+* :cpp:func:`ALPhotoCaptureProxy::takePictures`
+
+
+Methods
+-------
+
+
+.. cpp:function:: int ALPhotoCaptureProxy::getCameraID()
+
+  Returns the ID of the camera used to take pictures.
+
+  :return: camera ID.
+
+.. cpp:function:: int ALPhotoCaptureProxy::getCaptureInterval()
+
+  Returns the current delay in millisecond between two pictures.
+
+
+.. cpp:function:: int ALPhotoCaptureProxy::getColorSpace()
+
+  Returns the current color space (either *kBGRColorSpace* or *kYuvColorSpace*).
+
+
+.. cpp:function:: std::string ALPhotoCaptureProxy::getPictureFormat()
+
+  Returns the current picture extension. See :cpp:func:`ALPhotoCaptureProxy::setPictureFormat`
+  for the list of possible return values.
+
+
+.. cpp:function:: int ALPhotoCaptureProxy::getResolution()
+
+  Returns the current frame resolution.
+
+
+.. cpp:function:: bool ALPhotoCaptureProxy::halfPress()
+
+  .. deprecated:: 1.18
+                  use :cpp:func:`ALPhotoCaptureProxy::setHalfPressEnabled` instead.
+
+  Toggles the *halfPress* mode between on and off depending on the current state.
+
+  :return: true in case of success, false otherwise.
+
+
+.. cpp:function:: bool ALPhotoCaptureProxy::isHalfPressed()
+
+  .. deprecated:: 1.18
+                  use :cpp:func:`ALPhotoCaptureProxy::isHalfPressEnabled` instead.
+
+  Returns the current status of *halfPress* mode (true if it is on, false otherwise).
+
+.. cpp:function:: bool ALPhotoCaptureProxy::isHalfPressEnabled()
+
+  Returns the current status of *halfPress* mode.
+
+  :return: true if the *halfPress* mode is on, false otherwise.
+
+
+.. cpp:function:: void ALPhotoCaptureProxy::setCameraID(const int& cameraID)
+
+  Sets the camera used to take pictures.
+
+  :param cameraID: ID of the camera (see :ref:`cameraindex`).
+
+.. cpp:function:: void ALPhotoCaptureProxy::setCaptureInterval(const int& captureInterval)
+
+  Sets the time period between which two successive shots.
+
+  :param captureInterval: New time period between pictures in millisecond.
+                              The default value, 200, corresponds to 5 images
+                              taken per second.
+
+
+.. cpp:function:: void ALPhotoCaptureProxy::setColorSpace(const int& colorSpace)
+
+  Sets the color space used. It must be either *kBGRColorSpace* (for color images)
+  or *kYuvColorSpace* (for gray-scale images).
+
+  :param colorSpace: New color space { 0 = kYuvColorSpace, 13 = kBGRColorSpace }.
+
+
+.. cpp:function:: bool ALPhotoCaptureProxy::setHalfPressEnabled(const bool& enable)
+
+  Enable or disables the *halfPress* mode.
+
+  :param enable: true to turn the *halfPress* mode on, off to turn it off.
+
+  :return: true in case of success, false otherwise.
+
+
+.. cpp:function:: void ALPhotoCaptureProxy::setPictureFormat(const std::string& pictureFormat)
+
+  Sets the image format used to save the pictures. This also corresponds
+  to the file extension added to the filename.
+
+  :param pictureFormat: File format. Possible values are "bmp", "dib", "jpeg", "jpg", "jpe", "png", "pbm", "pgm", "ppm", "sr", "ras", "tiff", "tif".
+
+
+.. cpp:function:: void ALPhotoCaptureProxy::setResolution(const int& resolution)
+
+  Sets the frame resolution. It can be either VGA, QVGA or QQVGA.
+
+  :param resolution: New resolution { 0 = kQQVGA, 1 = kQVGA, 2 = kVGA }.
+
+
+.. _ALPhotoCaptureProxy::takePicture1:
+
+.. cpp:function:: AL::ALValue ALPhotoCaptureProxy::takePicture(const std::string& folderPath, const std::string& fileName)
+
+  There are two overloads of this function:
+
+  - :ref:`ALPhotoCaptureProxy::takePicture <ALPhotoCaptureProxy::takePicture1>`
+  - :ref:`ALPhotoCaptureProxy::takePicture <ALPhotoCaptureProxy::takePicture2>` with extra *overwrite* argument.
+
+  Takes one picture at the given resolution and stores it on the disk. The file
+  format is determined by the extension (see :cpp:func:`ALPhotoCaptureProxy::setPictureFormat`
+  for the list of supported extensions). If the destination file already exists,
+  it will be overwritten.
+
+  :param folderPath: Path were the file will be save.
+
+  :param fileName: Name used to save the picture.
+
+  :return: Array of one element [fileName].
+
+
+.. _ALPhotoCaptureProxy::takePicture2:
+
+.. cpp:function:: AL::ALValue ALPhotoCaptureProxy::takePicture(const std::string& folderPath, const std::string& fileName, const bool& overwrite)
+
+  Takes one picture at the given resolution and stores it on the disk. The file
+  format is determined by the extension (see :cpp:func:`ALPhotoCaptureProxy::setPictureFormat`
+  for the list of supported extensions).
+
+  :param folderPath: Path were the file will be save.
+
+  :param fileName: Name used to save the picture.
+
+  :param overwrite: If you set this value to false and the destination file
+                    already exists, the method will return and throw an
+                    exception. No data will be saved on disk and the existing
+                    file will be preserved.
+
+  :return: Array of one element [fileName].
+
+
+.. _ALPhotoCaptureProxy::takePictures1:
+
+.. cpp:function:: AL::ALValue ALPhotoCaptureProxy::takePictures(const int& numberOfPictures, const std::string& folderPath, const std::string& fileName)
+
+  There are two overloads of this function:
+
+  - :ref:`ALPhotoCaptureProxy::takePictures <ALPhotoCaptureProxy::takePictures1>`
+  - :ref:`ALPhotoCaptureProxy::takePictures <ALPhotoCaptureProxy::takePictures2>` with extra *overwrite* argument.
+
+  Takes several pictures in a row and stores them on disk. If the destination file
+  already exists, it will be overwritten.
+
+  :param numberOfPictures: Number of pictures to be taken.
+
+  :param folderPath: Path were the files will be save.
+
+  :param fileName: Name used to save the pictures. The actual names construction
+                   is detailed below.
+
+  :return: Array containing the list of the recorded file names [listOfNames]
+           where listOfNames is an array of strings [name1, name2...].
+
+
+.. _ALPhotoCaptureProxy::takePictures2:
+
+.. cpp:function:: AL::ALValue ALPhotoCaptureProxy::takePictures(const int& numberOfPictures, const std::string& folderPath, const std::string& fileName, const bool& overwrite)
+
+  Takes several pictures in a row and stores them on disk.
+
+  :param numberOfPictures: Number of pictures to be taken.
+
+  :param folderPath: Path were the files will be save.
+
+  :param fileName: Name used to save the pictures. The actual names construction
+                   is detailed below.
+
+  :param overwrite: If you set this value to false, then takePicture will stop
+                    saving pictures if one of them has the same file name as an
+                    existing file. An exception will be thrown if such a case
+                    happens.
+
+  :return: Array containing the list of the recorded file names [listOfNames]
+           where listOfNames is an array of strings [name1, name2...].
+
+.. note::
+
+  Since this function saves several pictures to disk, we have to create
+  different file names. This is done by appending an underscore ("_") and the
+  picture number to the end of the file name and before the extension.
+  You will find an example on the :ref:`Tutorial <alphotocapture-tuto>` page.

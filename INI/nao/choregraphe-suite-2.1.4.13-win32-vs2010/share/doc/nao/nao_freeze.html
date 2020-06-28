@@ -1,0 +1,314 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Switching Autonomous life on and off &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../index.html" />
+    <link rel="up" title="Daily use" href="interacting.html" />
+    <link rel="next" title="Turning NAO off" href="nao-turn-off.html" />
+    <link rel="prev" title="Interacting with NAO" href="nao_interacting.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../search.html">Search</a>
+         |
+        <a title="Index" href="../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="nao_interacting.html" title="Interacting with &lt;em&gt;NAO&lt;/em&gt;">previous</a>
+     |
+    <a href="interacting.html" title="Daily use" accesskey="U">up</a>
+   |
+    <a href="nao-turn-off.html" title="Turning &lt;em&gt;NAO&lt;/em&gt; off">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="nao-nao_freeze">
+            
+  <div class="section" id="switching-autonomous-life-on-and-off">
+<span id="nao-freeze"></span><h1>Switching Autonomous life on and off<a class="headerlink" href="#switching-autonomous-life-on-and-off" title="Permalink to this headline">¶</a></h1>
+<p>To enable or disable  <a class="reference internal" href="nao_life.html#alife"><em>Autonomous Life</em></a>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Press the <a class="reference internal" href="#chest-btn-nao1"><em>Chest Button</em></a> twice.</td>
+</tr>
+</tbody>
+</table>
+<p id="chest-btn-nao1"><strong>Chest Button</strong> - <em>NAO</em></p>
+<img alt="../_images/chest_button.png" src="../_images/chest_button.png" style="width: 109px; height: 176px;" />
+<p><strong>Result</strong></p>
+<p><em>NAO</em> switches its <strong>Life</strong> status.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>From <strong>off</strong> to <strong>on</strong>, <em>NAO</em>:</td>
+<td>From <strong>on</strong> to <strong>off</strong>, <em>NAO</em>:</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li>Pushes a happy grunt, and</li>
+<li>Performs a <a class="reference internal" href="#wake-nao"><em>Waking up</em></a>.</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li>Sights,</li>
+<li>Stops its <strong>Activities</strong> and</li>
+<li>Performs a <a class="reference internal" href="#rest-nao"><em>Resting</em></a> action.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="waking-up">
+<span id="wake-nao"></span><h2>Waking up<a class="headerlink" href="#waking-up" title="Permalink to this headline">¶</a></h2>
+<p>When requested to wake up, <em>NAO</em>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><ul class="first last">
+<li><p class="first">Turns the <strong>Stiffness</strong> of its motors on,</p>
+</li>
+<li><p class="first">Goes to a standing posture,</p>
+<p><strong>Note</strong>: this step is skipped when <em>NAO</em>
+is sitting, is lying, or has no feet.</p>
+</li>
+<li><p class="first">Resumes its <strong>life</strong>.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="resting">
+<span id="rest-nao"></span><h2>Resting<a class="headerlink" href="#resting" title="Permalink to this headline">¶</a></h2>
+<p>When requested to rest, <em>NAO</em>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><ul class="first last">
+<li><p class="first">Goes to its resting posture.</p>
+<p><strong>Note</strong>: this step is skipped when <em>NAO</em>
+is sitting, is lying, or has no feet.</p>
+</li>
+<li><p class="first">Turns the <strong>Stiffness</strong> of its motors off.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="advanced-settings-and-tools-for-developers">
+<h2>Advanced settings and tools for developers<a class="headerlink" href="#advanced-settings-and-tools-for-developers" title="Permalink to this headline">¶</a></h2>
+<p>You may also enable or disable <a class="reference internal" href="nao_life.html#alife"><em>Autonomous Life</em></a>, from <strong>Choregraphe</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>Click the <img alt="life_btn" class="img-inline" src="../_images/chore_life_button_on.png" /> <strong>Life</strong> button.</td>
+</tr>
+</tbody>
+</table>
+<p>To disable <a class="reference internal" href="nao_life.html#alife"><em>Autonomous Life</em></a> by default at startup:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>On the <a class="reference internal" href="webpage.html#webpage-nao"><em>NAO Web page</em></a>, click the <strong>Alive by default</strong> button.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="nao_interacting.html" title="Interacting with &lt;em&gt;NAO&lt;/em&gt;">Interacting with <em>NAO</em></a>
+     |
+    <a href="interacting.html" title="Daily use" accesskey="U">Daily use</a>
+   |
+    <a href="nao-turn-off.html" title="Turning &lt;em&gt;NAO&lt;/em&gt; off">Turning <em>NAO</em> off</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../news/index.html">What’s new</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../home_nao.html"><em>NAO</em> Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html"><em>NAO</em> - User Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="introduction_nao.html">First steps with <em>NAO</em></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="interacting.html">Daily use</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nao-turn-on.html">Turning <em>NAO</em> on</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nao_interacting.html">Interacting with <em>NAO</em></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">Switching Autonomous life on and off</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="nao-turn-off.html">Turning <em>NAO</em> off</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nao_request.html">Requesting technical information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="battery-charging.html">Charging the battery</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring and settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="understanding.html">More details about <em>NAO</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="store_home.html"><em>Apps 2.0 Store</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="taking-care.html">Taking care of NAO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../family/index.html"><em>NAO</em> - Technical Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_dev_guide.html">NAOqi Developer guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Switching Autonomous life on and off</a><ul>
+<li><a class="reference internal" href="#waking-up">Waking up</a></li>
+<li><a class="reference internal" href="#resting">Resting</a></li>
+<li><a class="reference internal" href="#advanced-settings-and-tools-for-developers">Advanced settings and tools for developers</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="nao_interacting.html" title="Interacting with &lt;em&gt;NAO&lt;/em&gt;">previous</a>
+     |
+    <a href="interacting.html" title="Daily use" accesskey="U">up</a>
+   |
+    <a href="nao-turn-off.html" title="Turning &lt;em&gt;NAO&lt;/em&gt; off">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+﻿.. include:: /bulk/common.rst
+
+.. _romeo_languages:
+
+|roboR| - Available languages
+===============================
+
+.. seealso::
+    :ref:`romeo`
+
+-----------
+
+**TBD**

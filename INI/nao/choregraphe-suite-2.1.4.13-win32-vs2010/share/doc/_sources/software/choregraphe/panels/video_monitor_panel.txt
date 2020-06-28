@@ -1,0 +1,79 @@
+
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+
+
+.. _video-monitor-panel:
+
+Video monitor panel
+====================
+
+|no-virtual| *Cannot be tested on a simulated robot, unless in a virtual world*.
+
+----------------------
+
+What is the Video monitor panel
++++++++++++++++++++++++++++++++++
+
+
+The **Video monitor** panel:
+
+* displays what is seen by the active camera of NAO's head. It shows you in
+  real-time what NAO is seeing.
+
+* It also allows you to teach NAO to recognize objects.
+
+.. image:: /medias/desktop/choregraphe/video-monitor.png
+
+
+.. _choregraphe-detailed-interface-video-monitor:
+
+Video monitor panel functionalities
+++++++++++++++++++++++++++++++++++++
+
+Here are the actions you can make in the Video monitor panel:
+
+.. list-table::
+   :widths: 10 100
+   :header-rows: 1
+
+   * - Button
+     - Function
+   * - .. image:: /medias/desktop/choregraphe/video_monitor_play.png
+
+       .. image:: /medias/desktop/choregraphe/video_monitor_pause.png
+     - **Play** or **pause** the retrieval of the video from NAO's active camera.
+
+       For switching NAO's active camera, please refer to :ref:`How to change NAO's active camera <choregraphe-howto-change-active-camera>`.
+   * - .. image:: /medias/desktop/choregraphe/video_monitor_learn.png
+     - Switch simple video retrieving mode to **learning mode**.
+
+       For more information, see section: :ref:`Teaching NAO to recognize objects <choregraphe-tuto-learn-object>`.
+   * - .. image:: /medias/desktop/choregraphe/video_monitor_import.png
+     - **Import** a vision recognition database from your computer to Choregraphe.
+   * - .. image:: /medias/desktop/choregraphe/video_monitor_export.png
+     - **Export** Choregraphe's current vision recognition database to save it on your computer.
+
+       .. note::
+          A vision recognition database is saved as a **.vrd** file.
+   * - .. image:: /medias/desktop/choregraphe/video_monitor_new.png
+     - **Clear** Choregraphe's current vision recognition database.
+
+       This action removes any object you already taught from Choregraphe's current vision recognition database.
+       Choregraphe suggest you back up its current database before clearing it.
+   * - .. image:: /medias/desktop/choregraphe/video_monitor_send.png
+     - **Send** the current Choregraphe's vision recognition database to the connected NAO.
+
+       .. warning::
+          The vision recognition database currently on NAO will be replaced by Choregraphe's current one.
+
+.. warning::
+   The vision recognition database is **not saved in the project file**.
+   So if your behavior needs your vision recognition database to work
+   and you want to execute your behavior on another robot,
+   you will then have to send your vision recognition database to that other robot first.
+
+.. note::
+   The vision recognition database is **not reinitialized** at Choregraphe closure or startup.
+

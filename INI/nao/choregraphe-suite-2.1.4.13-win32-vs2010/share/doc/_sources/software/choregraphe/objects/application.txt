@@ -1,0 +1,215 @@
+.. include:: ../../../bulk/common.rst
+
+.. _application:
+
+Application
+===========
+
+.. _choregraphe-reference-application:
+
+What is an Application
+----------------------
+
+An **Application** is a set of content that can be installed on a robot
+from the |store|.
+
+It contains all kind of useful resources such as
+:ref:`Behaviors<choregraphe-reference-behavior>` and :ref:`Dialog topics <dialog_topic>`.
+
+Installing and managing Applications
+------------------------------------
+
+|store| is the main way to install and manage applications.
+
+From **Choregraphe**, the :ref:`chore_robot_applications_panel` offers short-cuts
+letting you install and test on your robot the application designed in the
+current **Project**.
+
+Creating an Application
+------------------------
+
+To create an **Application**:
+
+=====  ==========================================================
+Step       Action
+=====  ==========================================================
+1.      Create a new :ref:`choregraphe-reference-project`.
+
+2.      Create at least one :ref:`activity`.
+
+3.      Optionally, add one or several
+        :ref:`Dialog topic(s) <dialog_topic>`.
+
+4.      Complete the :ref:`choregraphe-reference-project-properties`.
+
+5.      Save your :ref:`choregraphe-reference-project`.
+
+        **Result**:
+
+        Your **Application** is ready to be tested and packaged.
+=====  ==========================================================
+
+Running an Application
+-----------------------
+
+.. |install-app| image:: /medias/desktop/choregraphe/application_manager_add_current.png
+   :class: img-inline
+
+
+To run the application designed in the current **Project**:
+
+=====  ==========================================================
+Step       Action
+=====  ==========================================================
+1.      Make sure you are connected to a robot.
+
+2.      In the :ref:`chore_robot_applications_panel`, click the
+        |install-app| **Install Application** button.
+
+        **Result**:
+
+        The application is now installed on the connected robot.
+
+        You can now run it using
+        :ref:`chore_robot_applications_panel`.
+=====  ==========================================================
+
+.. _choregraphe-howto-build-application-package:
+
+Building an Application Package
+-------------------------------
+
+To build an **Application Package**:
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Choose **File** > **Build Application Package...**
+
+2.         Choose the **Application Package** destination path.
+
+           .. image:: /medias/desktop/choregraphe/package_destination.png
+                :width: 527 px
+                :height: 379 px
+
+           * The default proposal for the Package file name follows the form:
+             ``<Application ID>-<Application Version>.pkg``.
+
+             e.g. ``my_uid-1.0.1.pkg``
+
+           * During the build process, the Minor number of the Application
+             version is automatically incremented.
+
+3.         Click the **Save** button.
+
+           Once the build is done, a popup informs you and provides a shortcut to
+           upload your Application Package on the |store|.
+
+           .. image:: /medias/desktop/choregraphe/package_end.png
+                :width: 315 px
+                :height: 126 px
+========  =========================================================================
+
+Publishing an Application
+-------------------------
+
+To publish an **Application Package**:
+
+========  =========================================================================
+Step       Action
+========  =========================================================================
+1.         Click the link to the store and, follow contextual on line help
+           provided by the |store|.
+
+2.         Before asking validation, check the :ref:`app_best_practice`.
+========  =========================================================================
+
+.. _app_best_practice:
+
+Application - Best practices
+------------------------------
+
+Behavior design
++++++++++++++++
+
+* **Check that your Application finishes**: in all cases, there should be a path
+  to the output of your Behavior.
+
+
+Animation design: How to mix Timelines and Planar Moves
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* An animation should consist of **one** timeline :ref:`choregraphe-reference-box-motion-layer`
+  together with **one** :ref:`choregraphe-planar-move`. **Good method:**
+
+  .. image:: /medias/desktop/choregraphe/correct_timeline.png
+      :width: 447 px
+      :height: 200 px
+
+* It is **NOT** recommended to use several timelines and planar moves for
+  a single animation. The following behavior uses several timeline and planar move
+  boxes, synchronized with timer boxes. It is a wrong design. **Bad method:**
+
+  .. image:: /medias/desktop/choregraphe/multiple_timelines.png
+      :width: 390 px
+      :height: 500 px
+
+* The rationale behind this practice is that precise synchronization of timelines
+  and planar moves is not guaranteed over multiple calls. The precise duration of
+  each planar move depends on the robot environment, and is not perfectly predictable.
+  The duration variations of several planar moves played in a row will add up,
+  potentially resulting in a de-synchronization with the articular timeline.
+
+
+Project Properties
+++++++++++++++++++
+
+Supported Languages
+^^^^^^^^^^^^^^^^^^^
+
+* Select the languages that are actually supported by the application
+  and make sure that all the names and descriptions are translated in all the
+  supported languages.
+
+* For Dances and applications that do not use TTS: select **Language
+  Independent**.
+
+Application Description
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* You will be able to modify and improve the **Application Description** on the |store|:
+  there you can use formatted text, hyperlinks etc.
+
+NAOqi requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+* Specify the software versions for which you developed.
+
+  For example, to support all minor versions of 2.0 after the 2.0.1, specify:
+
+  "From 2.0.1 To 2.0".
+
+Robot requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+* Make sure you specify all the robots for which you developed your application.
+
+Behavior properties
+++++++++++++++++++++
+
+Nature
+^^^^^^^
+
+* Check the Nature: usually this should be Interactive.
+
+Trigger Sentences
+^^^^^^^^^^^^^^^^^^
+
+* Check that the Trigger Sentences are relevant and not too general if you want
+  to use this features
+
+Release Note
+++++++++++++
+
+* Completing the release note on the |store|, specify on which robot version and
+  on which software version you tested the application.

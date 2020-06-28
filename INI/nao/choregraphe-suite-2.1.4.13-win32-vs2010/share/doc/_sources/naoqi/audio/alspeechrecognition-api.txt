@@ -1,0 +1,426 @@
+.. _alspeechrecognition-api:
+
+ALSpeechRecognition API
+=======================
+
+:ref:`naoqi-audio` - :ref:`Overview <alspeechrecognition>` | API | :ref:`Tutorial <alspeechrecognition-tuto>`
+
+-----------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alspeechrecognitionproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALSpeechRecognitionProxy
+
+* :cpp:func:`ALSpeechRecognitionProxy::getAvailableLanguages`
+* :cpp:func:`ALSpeechRecognitionProxy::getLanguage`
+* :cpp:func:`ALSpeechRecognitionProxy::setLanguage`
+* :cpp:func:`ALSpeechRecognitionProxy::getParameter`
+* :cpp:func:`ALSpeechRecognitionProxy::setParameter`
+* :cpp:func:`ALSpeechRecognitionProxy::loadVocabulary` (deprecated)
+* :cpp:func:`ALSpeechRecognitionProxy::getAudioExpression`
+* :cpp:func:`ALSpeechRecognitionProxy::setAudioExpression`
+* :cpp:func:`ALSpeechRecognitionProxy::setVisualExpression`
+* :cpp:func:`ALSpeechRecognitionProxy::setVocabulary`
+* :cpp:func:`ALSpeechRecognitionProxy::setWordListAsVocabulary` (deprecated)
+* :cpp:func:`ALSpeechRecognitionProxy::compile`
+* :cpp:func:`ALSpeechRecognitionProxy::addContext`
+* :cpp:func:`ALSpeechRecognitionProxy::removeContext`
+* :cpp:func:`ALSpeechRecognitionProxy::removeAllContext`
+* :cpp:func:`ALSpeechRecognitionProxy::saveContextSet`
+* :cpp:func:`ALSpeechRecognitionProxy::loadContextSet`
+* :cpp:func:`ALSpeechRecognitionProxy::eraseContextSet`
+* :cpp:func:`ALSpeechRecognitionProxy::activateRule`
+* :cpp:func:`ALSpeechRecognitionProxy::deactivateRule`
+* :cpp:func:`ALSpeechRecognitionProxy::activateAllRules`
+* :cpp:func:`ALSpeechRecognitionProxy::deactivateAllRules`
+* :cpp:func:`ALSpeechRecognitionProxy::addWordListToSlot`
+* :cpp:func:`ALSpeechRecognitionProxy::removeWordListFromSlot`
+* :cpp:func:`ALSpeechRecognitionProxy::getRules`
+* :cpp:func:`ALSpeechRecognitionProxy::pause`
+* :cpp:func:`ALSpeechRecognitionProxy::subscribe`
+* :cpp:func:`ALSpeechRecognitionProxy::unsubscribe`
+
+
+Event list
+----------
+
+* :naoqi:event:`WordRecognized`
+* :naoqi:event:`WordRecognizedAndGrammar`
+* :naoqi:event:`LastWordRecognized` (deprecated)
+* :naoqi:event:`SpeechDetected`
+* :naoqi:event:`ALSpeechRecognition/ActiveListening`
+* :naoqi:event:`ALSpeechRecognition/IsRunning`
+* :naoqi:event:`ALSpeechRecognition/Status`
+
+
+
+Methods
+-------
+
+
+.. cpp:function:: std::vector<std::string> ALSpeechRecognitionProxy::getAvailableLanguages()
+
+  Returns the list of the languages currently installed on the system.
+
+  Example: ['French', 'Chinese', 'English', 'German', 'Italian', 'Japanese', 'Korean', 'Portuguese', 'Spanish']
+
+  :return: List of installed languages (language names are given in English)
+
+
+
+
+.. cpp:function:: std::string ALSpeechRecognitionProxy::getLanguage()
+
+  Returns the language currently used by the speech recognition system.
+
+  Example: 'French'
+
+  Could be one of the available languages.
+
+  For further details, see: :cpp:func:`ALSpeechRecognitionProxy::getAvailableLanguages`.
+
+  :return: Current language used by the speech recognition engine
+
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::setLanguage(const std::string& language)
+
+  Sets the language currently used by the speech recognition system.
+  Each NAOqi restart will however reset that setting to the default language that
+  can be set on NAO's web page.
+
+  :param language: English name of one of the available languages. See: :cpp:func:`ALSpeechRecognitionProxy::getAvailableLanguages`.
+
+                   Example: 'French'
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::getParameter(const std::string& parameter)
+
+  Gets a parameter of the speech recognition engine.
+
+  :param parameter: Name of the parameter
+  :return: Value of the parameter
+
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::setParameter(const std::string& parameter, const float& value)
+
+  Sets parameters of the speech recognition engine.
+
+  :param parameter: Name of the parameter.
+  :param value: Value of the parameter.
+
+  Supported parameters:
+  - Sensitivity: Value between 0 and 1 setting the sensitivity of the voice activity detector used by the engine.
+  - NbHypotheses: Number of hypotheses returned by the engine. Default: 1
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::loadVocabulary(const std::string& pathToGrammarfile)
+
+  .. deprecated:: 1.20 use :cpp:func:`ALSpeechRecognitionProxy::setVocabulary` instead.
+
+  Loads the vocabulary to recognize contained in a .lcf or .fcf file (NUANCE grammar file format).
+
+  :param pathToGrammarfile: Path to the .lcf or .fcf file containing the vocabulary
+
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::getAudioExpression()
+
+  Gets value of the parameter AudioExpression. This parameter indicates if the recognition process will play "bip" or not.
+
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::setAudioExpression(const bool& setOrNot)
+
+  When set to True, a "bip" is played at the beginning of the recognition process,
+  and another "bip" is played at the end of the process. This is a useful
+  indication to let the user know when it is appropriate to speak.
+
+  :param setOrNot: Enable (true) or disable it (false)
+
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::setVisualExpression(const bool& setOrNot)
+
+  Enables or disables the leds animations showing the state of the recognition engine during the recognition process.
+
+  :param setOrNot: Enable (true) or disable it (false).
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::setVocabulary(const std::vector<std::string>& vocabulary, const bool& enableWordSpotting)
+
+  Sets the list of words/phrases (vocabulary) that should be recognized by the speech recognition engine. If word spotting is disabled (default),
+  the engine expects to hear one of the specified words, nothing more, nothing less. If enabled, the specified words can be pronounced in the middle of a whole speech stream,
+  the engine will try to spot them. The parameter enableWordSpotting changes the results given by the speech recognition. Please refer to :ref:`alspeechrecognition` for details.
+
+  :param vocabulary: List of words that should be recognized
+  :param enableWordSpotting: Enable (true) or disable it (false)
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::setWordListAsVocabulary(const std::vector<std::string>& vocabulary)
+
+  .. deprecated:: 1.20 use :cpp:func:`ALSpeechRecognitionProxy::setVocabulary` instead.
+
+  Sets the list of words/phrases (vocabulary) that should be recognized by the speech recognition engine.
+  To enable "word spotting", please use :cpp:func:`ALSpeechRecognitionProxy::setVocabulary` instead.
+
+  :param vocabulary: List of words that should be recognized
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::compile(const std::string & pathToInputBNFFile, const std::string & pathToOutputLCFFile, const std::string & language)
+
+  Converts a BNF file to a LCF file. The LCF file is a  binary file which contains the same content as the BNF file. Use this file for the method addContext.
+
+  :param pathToInputBNFFile: Path to a BNF input file. This BNF file is a set of rules that should be recognized by the speech recognition engine.
+  :param pathToOutputLCFFile: Define the path were the LCF file will be generateds.
+  :param language: Name of the language of the BNF file.
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::addContext(const std::string & pathToLCFFile, const std::string & contextName)
+
+  Adds the context contained in the LCF file. This LCF file contains the set of rules that should be recognized by the speech recognition engine.
+
+  :param pathToLCFFile: Path to LCF file to use.
+  :param contextName: Name of the context.
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::removeContext(const std::string & contextName)
+
+  Removes one context from the speech recognition engine.
+
+  :param contextName: Name of the context to remove.
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::removeAllContext()
+
+  Removes all contexts from the speech recognition engine.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::saveContextSet(const std::string & saveName)
+
+  Saves the current context set under the name saveName.
+
+  Saved context sets are lost when restarting NaoQi.
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::loadContextSet(const std::string & saveName)
+
+  Replaces the currently loaded context set by the one previously saved under the name saveName.
+
+  Note: reloading a saved context do not reset its state; i.e. changes made since the save,
+  to its activated rules or slots, are not erased.
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::eraseContextSet(const std::string & saveName)
+
+  Erases the save named saveName. This will not remove any currently loaded contexts.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::activateRule(const std::string & contextName, const std::string & ruleName)
+
+  Activates a rule contained in the specified context.
+
+  :param contextName: Name of the context to modify.
+  :param ruleName: Name of the rule to activate.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::deactivateRule(const std::string & contextName, const std::string & ruleName)
+
+  Deactivates a rule contained in the specified context.
+
+  :param contextName: Name of the context to modify.
+  :param ruleName: Name of the rule to deactivate.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::activateAllRules(const std::string & contextName)
+
+  Activates all rules contained in the specified context.
+
+  :param contextName: Name of the context to modify.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::deactivateAllRules(const std::string & contextName)
+
+  Deactivates all rules contained in the specified context.
+
+  :param contextName: Name of the context to modify.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::addWordListToSlot(const std::string & contextName, const std::string & slotName, const std::vector<std::string> & wordList)
+
+  Adds a list of words in a slot. A slot is a part of a context which can be modified. You can add a list of words that should be recognized by the speech recognition engine.
+
+  :param contextName: Name of the context to modify.
+  :param slotName: Name of the slot to modify.
+  :param wordList: List of words to insert in the slot.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::removeWordListFromSlot(const std::string & contextName, const std::string & slotName)
+
+  Removes all words from a slot.
+
+  :param contextName: Name of the context to modify.
+  :param slotName: Name of the slot to modify.
+
+
+
+
+
+.. cpp:function:: std::vector<std::string> ALSpeechRecognitionProxy::getRules(const std::string & contextName, const std::string & typeName)
+
+  Gets rules corresponding to the specified type. Type can be:
+
+  * "start": provides entry points into a context
+  * "active": state of a rule, indicates wether the rule is activated or not
+  * "activatable": specifies a rule which can be activated or deactivated
+  * "slot": those rules can be changed during the runtime
+
+  :param contextName: Name of the context.
+  :param typeName: Type of the rules ordered.
+
+
+
+
+.. cpp:function:: float ALSpeechRecognitionProxy::pause(const bool & isPaused)
+
+  Stops and restarts the speech recognition engine according to the input parameter. This can be used to add contexts, activate or deactivate rules of a contex, add a words to a slot.
+
+  :param isPaused: True (stops ASR) or False (restarts ASR).
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::subscribe(const std::string& name)
+
+  Subscribes to *ALSpeechRecognition*.
+  This causes the module to start writing information to *ALMemory* in *"WordRecognized"*.
+  This can be accessed in *ALMemory* using :cpp:func:`ALMemoryProxy::getData`.
+
+  :param name: Name to identify the subscriber
+
+
+
+
+.. cpp:function:: void ALSpeechRecognitionProxy::unsubscribe(const std::string& name)
+
+  Unsubscribes to *ALSpeechRecognition*.
+  This causes the module to stop writing information to *ALMemory* in *"WordRecognized"*.
+
+  :param name: Name to identify the subscriber (as used in :cpp:func:`ALSpeechRecognitionProxy::subscribe`).
+
+
+
+
+Events
+------
+
+.. naoqi:event:: WordRecognized(AL::ALValue value)
+
+  Raised when one of the specified words with :cpp:func:`ALSpeechRecognitionProxy::setVocabulary` has been recognized.
+  When no word is currently recognized, this value is reinitialized.
+
+  :param value: Recognized words infos. Please refer to :ref:`alspeechrecognition` for details.
+
+
+.. naoqi:event:: WordRecognizedAndGrammar(AL::ALValue value)
+
+  Raised when the engine produces a result. Same as WordRecognized with an additional information, the name of the grammar used for the recognition.
+
+  :param value: Recognized words infos. Please refer to :ref:`alspeechrecognition` for details.
+
+
+.. naoqi:event:: LastWordRecognized(AL::ALValue value)
+
+  .. deprecated:: 1.20
+
+  Raised when one of the specified words with :cpp:func:`ALSpeechRecognitionProxy::setWordListAsVocabulary` has been recognized.
+  This value is kept unchanged until a new word has been recognized.
+
+  :param value: Last recognized words infos. Please refer to :ref:`alspeechrecognition` for details.
+
+
+.. naoqi:event:: SpeechDetected(bool value)
+
+  Raised when the automatic speech recognition engine has detected a voice activity.
+
+  :param value: True if voice activity detected.
+
+
+.. naoqi:event:: ALSpeechRecognition/IsRunning(bool value)
+
+  Raised when the speech recognition engine is started.
+
+  :param value: True if speech recognition engine is started.
+
+
+.. naoqi:event:: ALSpeechRecognition/Status(AL::ALValue status)
+
+  Raised when the status of the speech recognition engine changes.
+
+  :param status: can be "Idle", "ListenOn", "SpeechDetected", "EndOfProcess", "ListenOff", "Stop".
+
+    Note: "ListenOn" status does not necessarily mean ready to process.
+    For further details, see: :naoqi:event:`ALSpeechRecognition/ActiveListening`.
+
+.. naoqi:event:: ALSpeechRecognition/ActiveListening(bool value)
+
+  **Experimental**
+
+  Raised with true value when the engine is not only listening but also ready to process
+  data (i.e. not raised when the ASR engine is only recording sound to be processed).
+
+  :param value: True if the engine is listening and processing data, False otherwise.

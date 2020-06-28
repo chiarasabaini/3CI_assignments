@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qiBuild: the build framework &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../index.html" />
+    <link rel="up" title="Welcome to qiBuild documentation !" href="index.html" />
+    <link rel="next" title="qiBuild and CMake" href="qibuild/other/cmake.html" />
+    <link rel="prev" title="Welcome to qiBuild documentation !" href="index.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../search.html">Search</a>
+         |
+        <a title="Index" href="../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="index.html" title="Welcome to qiBuild documentation !">previous</a>
+     |
+    <a href="index.html" title="Welcome to qiBuild documentation !" accesskey="U">up</a>
+   |
+    <a href="qibuild/other/cmake.html" title="qiBuild and CMake">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="beginner-overview">
+            
+  <div class="section" id="qibuild-the-build-framework">
+<h1>qiBuild: the build framework<a class="headerlink" href="#qibuild-the-build-framework" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-concepts">
+<h2>Basic concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<p>qiBuild is a generic framework that helps for managing several projects
+and their dependencies.</p>
+<p>It comes with a set of tools, which are listed below.</p>
+<p>Every tool comes with a matching script (<tt class="docutils literal"><span class="pre">qibuild</span></tt>, <tt class="docutils literal"><span class="pre">qisrc</span></tt>, etc.),
+and must be used from a <a class="reference internal" href="../hacking/design/python/index.html#term-worktree"><em class="xref std std-term">worktree</em></a>.</p>
+<p>Every project must be inside the worktree, and should have a <tt class="docutils literal"><span class="pre">qiproject.xml</span></tt> at
+its root. This is how the scripts can find the projects paths when they look
+for dependencies, for instance.</p>
+<p>Read more about this in this section: <a class="reference internal" href="../hacking/design/python/overviews/worktree_and_projects.html#worktree-and-projects"><em>Worktree and projects</em></a>.</p>
+<p>So, in order to be able to use qiBuild scripts, you should first create
+a worktree with <tt class="docutils literal"><span class="pre">qibuild</span> <span class="pre">init</span></tt>, and then register projects paths with
+<tt class="docutils literal"><span class="pre">qisrc</span> <span class="pre">add</span></tt>.</p>
+<p>For instance:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">cd ~/work</span>
+<span class="go">qibuild init</span>
+<span class="go">mkdir my_first_proj</span>
+<span class="gp">#</span> edit my_first_proj/qiproject.xml
+<span class="go">qisrc add my_first_proj</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="qibuild-c-compilation-made-easy">
+<h2>qibuild: C++ compilation made easy<a class="headerlink" href="#qibuild-c-compilation-made-easy" title="Permalink to this headline">¶</a></h2>
+<p>qibuild aims to make compilation of your sources easy. It manages dependencies
+between projects and supports cross-compilation.</p>
+<p>By default qibuild uses libraries provided by your system, but you can also use
+qitoolchain to manage sets of pre-compiled packages (called toolchains) if you
+want. Cross-compilation is then just a matter of using a specific toolchain.</p>
+<p>qibuild is truly cross-platform: it is tested on Linux, Mac and Windows. Being
+based on the well-known CMake build system, it allows you to use your existing
+tools such as gcc, Make, or Visual Studio.</p>
+<p>The qibuild framework tries hard to stand out of your way: it remains close to
+standards, and will play nice with other build systems.</p>
+<p>qibuild is composed of two parts:</p>
+<ul class="simple">
+<li>the qibuild CMake framework, that simplifies authoring CMakeLists.txt.</li>
+<li>the qibuild/qitoolchain command line tools, that helps build projects while
+taking dependencies into account and generate re-distributable binary
+packages.</li>
+</ul>
+<div class="section" id="is-qibuild-the-only-one-build-framework">
+<h3>Is qibuild the only one build framework?<a class="headerlink" href="#is-qibuild-the-only-one-build-framework" title="Permalink to this headline">¶</a></h3>
+<p>Of course not!</p>
+<p>You can have a loot at</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qibuild/other/cmake.html">qiBuild and CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qibuild/other/ros.html">qiBuild and ROS build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qibuild/other/qmake.html">qiBuild and qmake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qibuild/other/autotools.html">qiBuild and autotools</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="going-further-with-qibuild">
+<h3>Going further with qibuild<a class="headerlink" href="#going-further-with-qibuild" title="Permalink to this headline">¶</a></h3>
+<p>Read more about qibuild in the <a class="reference internal" href="qibuild/tutorial.html#qibuild-tutorial"><em>Building C++ projects with qibuild</em></a>, or
+follow the <a class="reference internal" href="../advanced/guide/index.html#qibuild-guide"><em>qibuild Programming guide</em></a>.</p>
+</div>
+</div>
+<div class="section" id="qisrc-managing-git-projects">
+<h2>qisrc: Managing git projects<a class="headerlink" href="#qisrc-managing-git-projects" title="Permalink to this headline">¶</a></h2>
+<p>The motivation for <tt class="docutils literal"><span class="pre">qisrc</span></tt> is to make it possible to work
+with several git repositories at the same time.</p>
+<dl class="docutils">
+<dt>Notes:</dt>
+<dd><ul class="first last simple">
+<li>Yes, we are aware that git submodules exists, but we wanted
+something more flexible and easier to use.</li>
+<li><tt class="docutils literal"><span class="pre">qisrc</span></tt> has more or less the same features than <tt class="docutils literal"><span class="pre">repo</span></tt>,
+(including <tt class="docutils literal"><span class="pre">gerrit</span></tt> support for code review), but, contrary
+to <tt class="docutils literal"><span class="pre">repo</span></tt>, it preserves a clean branch for you to work in
+and you can still use <tt class="docutils literal"><span class="pre">git</span></tt> normally.</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="tutorial">
+<h3>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="qisrc/git_projects.html#qisrc-tutorial"><em>Managing git projects with qisrc</em></a>.</p>
+</div>
+</div>
+<div class="section" id="qidoc-building-documentation">
+<h2>qidoc: Building documentation<a class="headerlink" href="#qidoc-building-documentation" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">qidoc</span></tt> is a small tool that helps you write documentation in
+<tt class="docutils literal"><span class="pre">sphinx</span></tt> or in <tt class="docutils literal"><span class="pre">doxygen</span></tt>, spread across several projects,
+while making sure you can generate re-locatable HTML documentation.</p>
+<div class="section" id="id1">
+<h3>Tutorial<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="qidoc/tutorial.html#qidoc-tutorial"><em>Building documentation with qidoc</em></a>.</p>
+</div>
+</div>
+<div class="section" id="qilinguist-translating-projects">
+<h2>qilinguist: Translating projects<a class="headerlink" href="#qilinguist-translating-projects" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">qilinguist</span></tt> provides tools to help internationalization
+of any kind of project, using <tt class="docutils literal"><span class="pre">gettext</span></tt> or <tt class="docutils literal"><span class="pre">Qt</span> <span class="pre">Linguist</span></tt>
+as backend.</p>
+<div class="section" id="id2">
+<h3>Tutorial<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="qilinguist/tutorial.html#qilinguist-tutorial"><em>Translating projects with qilinguist</em></a>.</p>
+</div>
+</div>
+<div class="section" id="qipy-qibuild-and-python">
+<h2>qipy: qibuild and Python<a class="headerlink" href="#qipy-qibuild-and-python" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">qipy</span></tt> makes it possible to use Python extensions
+written in C/C++ with <tt class="docutils literal"><span class="pre">qibuild</span></tt> with pure Python libraries.</p>
+<div class="section" id="id3">
+<h3>Tutorial<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="qipy/tutorial.html#qipy-tutorial"><em>Using Python with qibuild projects</em></a>.</p>
+</div>
+</div>
+<div class="section" id="qipkg-generate-binary-packages">
+<h2>qipkg: Generate binary packages<a class="headerlink" href="#qipkg-generate-binary-packages" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">qipkg</span></tt> lets you make packages the same way Choregraphe does,
+but from the command line, and also lets you embed code written in
+C++ or Python inside the package.</p>
+<div class="section" id="id4">
+<h3>Tutorial<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="qipkg/tutorial.html#qipkg-tutorial"><em>qipkg tutorial</em></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="index.html" title="Welcome to qiBuild documentation !">Welcome to qiBuild documentation !</a>
+     |
+    <a href="index.html" title="Welcome to qiBuild documentation !" accesskey="U">Welcome to qiBuild documentation !</a>
+   |
+    <a href="qibuild/other/cmake.html" title="qiBuild and CMake">qiBuild and CMake</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Welcome to qiBuild documentation !</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">qiBuild: the build framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qibuild/other/cmake.html">qiBuild and CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qibuild/other/ros.html">qiBuild and ROS build system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qibuild/other/qmake.html">qiBuild and qmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qibuild/other/autotools.html">qiBuild and autotools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">qiBuild tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hacking/index.html">Hacking qiBuild</a></li>
+</ul>
+
+    <h3><a href="../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qiBuild: the build framework</a><ul>
+<li><a class="reference internal" href="#basic-concepts">Basic concepts</a></li>
+<li><a class="reference internal" href="#qibuild-c-compilation-made-easy">qibuild: C++ compilation made easy</a><ul>
+<li><a class="reference internal" href="#is-qibuild-the-only-one-build-framework">Is qibuild the only one build framework?</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#going-further-with-qibuild">Going further with qibuild</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qisrc-managing-git-projects">qisrc: Managing git projects</a><ul>
+<li><a class="reference internal" href="#tutorial">Tutorial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qidoc-building-documentation">qidoc: Building documentation</a><ul>
+<li><a class="reference internal" href="#id1">Tutorial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qilinguist-translating-projects">qilinguist: Translating projects</a><ul>
+<li><a class="reference internal" href="#id2">Tutorial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qipy-qibuild-and-python">qipy: qibuild and Python</a><ul>
+<li><a class="reference internal" href="#id3">Tutorial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#qipkg-generate-binary-packages">qipkg: Generate binary packages</a><ul>
+<li><a class="reference internal" href="#id4">Tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="index.html" title="Welcome to qiBuild documentation !">previous</a>
+     |
+    <a href="index.html" title="Welcome to qiBuild documentation !" accesskey="U">up</a>
+   |
+    <a href="qibuild/other/cmake.html" title="qiBuild and CMake">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

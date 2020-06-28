@@ -1,0 +1,58 @@
+.. _h25_joints:
+
+H25 - Joints
+======================
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  joints_h25_v33
+  joints_h25_v32
+
+
+.. seealso::
+    **V5 & V4** | :ref:`V3.3 <h25_joints_v33>` | :ref:`V3.2 <h25_joints_v32>`
+
+    :ref:`nao-h25` | :ref:`robot_joints`
+
+--------------------
+
+Sign convention
+---------------
+
+.. include:: ../bulk/joints_sign_convention.rst
+
+Head joints
+-------------
+
+.. include:: ../bulk/joints_head_v4.rst
+
+
+Left Arm joints
+-----------------
+
+.. include:: ../bulk/joints_arms_left_v4.rst
+
+Right Arm joints
+------------------
+
+.. include:: ../bulk/joints_arms_right_v4.rst
+
+
+Pelvis joints
+--------------
+
+.. include:: ../bulk/joints_pelvis_v4.rst
+
+
+Left Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_left_v4.rst
+
+
+Right Leg joints
+-----------------
+
+.. include:: ../bulk/joints_legs_right_v4.rst

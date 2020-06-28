@@ -1,0 +1,277 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Script editor panel &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="Advanced panels" href="../advanced_panels.html" />
+    <link rel="next" title="Robot applications panel" href="robot_applications.html" />
+    <link rel="prev" title="Dialog panel" href="dialog_panel.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="dialog_panel.html" title="Dialog panel">previous</a>
+     |
+    <a href="../advanced_panels.html" title="Advanced panels" accesskey="U">up</a>
+   |
+    <a href="robot_applications.html" title="Robot applications panel">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-panels-scritp_editor_panel">
+            
+  <div class="section" id="script-editor-panel">
+<span id="chore-script-editor-panel"></span><h1>Script editor panel<a class="headerlink" href="#script-editor-panel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-script-editor-panel">
+<h2>What is the Script editor panel<a class="headerlink" href="#what-is-the-script-editor-panel" title="Permalink to this headline">¶</a></h2>
+<p>The Script editor panel enables to edit box <strong>scripts</strong>.</p>
+<img alt="../../../_images/create_script_box.png" src="../../../_images/create_script_box.png" style="width: 335px; height: 384px;" />
+<p>This editor integrates <strong>syntax highlighting</strong> to ease the edition.</p>
+<p>At the bottom of the panel you can see the <strong>number of the selected line</strong> on the left and a field to <strong>search</strong> a specific keyword in the script.</p>
+</div>
+<div class="section" id="how-to-open-the-script-of-a-specific-box">
+<h2>How to open the script of a specific box<a class="headerlink" href="#how-to-open-the-script-of-a-specific-box" title="Permalink to this headline">¶</a></h2>
+<p>In the flow diagram, to open the script of any <a class="reference internal" href="../objects/box.html#choregraphe-reference-box"><em>box</em></a>,
+right-click on it and select <strong>Edit box script</strong>.</p>
+<p>The script is displayed in the <strong>Script editor</strong> panel.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a <a class="reference internal" href="../objects/python_box.html#choregraphe-reference-box-type-python"><em>Python box</em></a> you can also double-click on it.</p>
+</div>
+</div>
+<div class="section" id="script-editor-panel-functionalities">
+<span id="choregraphe-detailed-interface-script-editor-panel"></span><h2>Script editor panel functionalities<a class="headerlink" href="#script-editor-panel-functionalities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="script-editor-functions">
+<h3>Script editor functions<a class="headerlink" href="#script-editor-functions" title="Permalink to this headline">¶</a></h3>
+<p>If you <strong>right-click</strong> in the panel, the following menu is displayed:</p>
+<img alt="../../../_images/script-editor-context-menu.png" src="../../../_images/script-editor-context-menu.png" style="width: 221px; height: 194px;" />
+<p>This <strong>contextual menu</strong> provides fast access to some classic functions for a script editor:</p>
+<ul class="simple">
+<li><strong>Undo</strong>: to revert last script modification.</li>
+<li><strong>Redo</strong>: to apply previously reverted modification.</li>
+<li><strong>Cut</strong>, <strong>Copy</strong>, <strong>Paste</strong> or <strong>Delete</strong>: to cut, copy, delete selected text block or paste text at the current location of editing cursor.</li>
+<li><strong>Select All</strong>: to select the complete script.</li>
+<li><strong>Insert Function</strong>: to insert a <a class="reference internal" href="../objects/python_script.html#choregraphe-reference-box-script-built-in-functions"><em>built-in function</em></a> only available from a box script.</li>
+<li><strong>Block comment or uncomment</strong>: to toggle the current line or the selected text block commented or uncommented.</li>
+</ul>
+</div>
+<div class="section" id="search-functions">
+<h3>Search functions<a class="headerlink" href="#search-functions" title="Permalink to this headline">¶</a></h3>
+<p>You have useful functions at the bottom of the panel:</p>
+<ul>
+<li><p class="first"><strong>Search text field</strong> to find a specific keyword in the current script:</p>
+<img alt="../../../_images/chore_script_editor_find.png" src="../../../_images/chore_script_editor_find.png" style="width: 163px; height: 30px;" />
+<p>It is highlighted in red if the keyword is not found in the script:</p>
+<img alt="../../../_images/chore_script_editor_find_red.png" src="../../../_images/chore_script_editor_find_red.png" style="width: 164px; height: 26px;" />
+</li>
+<li><p class="first"><strong>Navigation buttons</strong> to move to the previous or the next matching string:</p>
+<img alt="../../../_images/chore_script_editor_find_prevnext.png" src="../../../_images/chore_script_editor_find_prevnext.png" style="width: 76px; height: 30px;" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the search wraps around the document: if you reach the bottom
+of the the script, it will start again from the top. This option can be
+disabled from the <strong>Setting button</strong>.</p>
+</div>
+</li>
+<li><p class="first"><strong>Setting button</strong> to specify search options:</p>
+<ul class="simple">
+<li>Match case</li>
+<li>Match whole word</li>
+<li>Wrap around</li>
+</ul>
+<img alt="../../../_images/chore_script_editor_find_settings.png" src="../../../_images/chore_script_editor_find_settings.png" style="width: 46px; height: 27px;" />
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="customizing-script-editor-panel">
+<h2>Customizing Script editor panel<a class="headerlink" href="#customizing-script-editor-panel" title="Permalink to this headline">¶</a></h2>
+<p>Several options are available in order to customize the <strong>Script editor panel</strong>:</p>
+<ul class="simple">
+<li>Display mono-spaced font,</li>
+<li>Display code folding buttons,</li>
+<li>Display line numbers,</li>
+<li>Wrap text.</li>
+</ul>
+<p>For further details, see: <a class="reference internal" href="../choregraphe_preference.html#choregraphe-detailed-interface-preferences"><em>Choregraphe Preferences</em></a>.</p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="dialog_panel.html" title="Dialog panel">Dialog panel</a>
+     |
+    <a href="../advanced_panels.html" title="Advanced panels" accesskey="U">Advanced panels</a>
+   |
+    <a href="robot_applications.html" title="Robot applications panel">Robot applications panel</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutos/index.html">Choregraphe Tutorials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="video_monitor_panel.html">Video monitor panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dialog_panel.html">Dialog panel</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Script editor panel</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="robot_applications.html">Robot applications panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="resource_viewer_panel.html">Resource viewer panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="memory_watcher_panel.html">Memory watcher panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="debug_window.html">Log viewer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="undo_stack_panel.html">Undo stack panel</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Script editor panel</a><ul>
+<li><a class="reference internal" href="#what-is-the-script-editor-panel">What is the Script editor panel</a></li>
+<li><a class="reference internal" href="#how-to-open-the-script-of-a-specific-box">How to open the script of a specific box</a></li>
+<li><a class="reference internal" href="#script-editor-panel-functionalities">Script editor panel functionalities</a><ul>
+<li><a class="reference internal" href="#script-editor-functions">Script editor functions</a></li>
+<li><a class="reference internal" href="#search-functions">Search functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#customizing-script-editor-panel">Customizing Script editor panel</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="dialog_panel.html" title="Dialog panel">previous</a>
+     |
+    <a href="../advanced_panels.html" title="Advanced panels" accesskey="U">up</a>
+   |
+    <a href="robot_applications.html" title="Robot applications panel">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

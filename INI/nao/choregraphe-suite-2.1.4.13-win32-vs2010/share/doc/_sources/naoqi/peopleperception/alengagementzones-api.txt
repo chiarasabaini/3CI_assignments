@@ -1,0 +1,250 @@
+.. _alengagementzones-api:
+
+ALEngagementZones API
+=====================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <alengagementzones>` | API
+
+-------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alengagementzonesproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALEngagementZonesProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+* It also has the following specific methods:
+
+  * :cpp:func:`ALEngagementZonesProxy::computeEngagementZone`
+  * :cpp:func:`ALEngagementZonesProxy::getFirstLimitDistance`
+  * :cpp:func:`ALEngagementZonesProxy::getLimitAngle`
+  * :cpp:func:`ALEngagementZonesProxy::getSecondLimitDistance`
+  * :cpp:func:`ALEngagementZonesProxy::setFirstLimitDistance`
+  * :cpp:func:`ALEngagementZonesProxy::setLimitAngle`
+  * :cpp:func:`ALEngagementZonesProxy::setSecondLimitDistance`
+
+
+Event list
+----------
+
+* :naoqi:event:`EngagementZones/LimitAngleUpdated`
+* :naoqi:event:`EngagementZones/FirstLimitDistanceUpdated`
+* :naoqi:event:`EngagementZones/SecondLimitDistanceUpdated`
+
+EngagementZones and PeoplePerception:
+
+* :naoqi:event:`EngagementZones/PeopleInZonesUpdated`
+* :naoqi:event:`EngagementZones/PersonApproached`
+* :naoqi:event:`EngagementZones/PersonMovedAway`
+* :naoqi:event:`EngagementZones/PersonEnteredZone1`
+* :naoqi:event:`EngagementZones/PersonEnteredZone2`
+* :naoqi:event:`EngagementZones/PersonEnteredZone3`
+
+
+EngagementZones and MovementDetection:
+
+* :naoqi:event:`EngagementZones/MovementsInZonesUpdated`
+
+
+ALMemory Key list
+-----------------
+
+EngagementZones and PeoplePerception:
+
+* :naoqi:memkey:`PeoplePerception/Person/<ID>/EngagementZone`
+* :naoqi:memkey:`EngagementZones/PeopleInZone1`
+* :naoqi:memkey:`EngagementZones/PeopleInZone2`
+* :naoqi:memkey:`EngagementZones/PeopleInZone3`
+
+EngagementZones and MovementDetection:
+
+* :naoqi:memkey:`EngagementZones/LastMovementsInZone1`
+* :naoqi:memkey:`EngagementZones/LastMovementsInZone2`
+* :naoqi:memkey:`EngagementZones/LastMovementsInZone3`
+
+
+
+
+Methods
+-------
+
+.. cpp:function:: int ALEngagementZonesProxy::computeEngagementZone()
+
+   There are two overloads of this function:
+
+   - :ref:`ALEngagementZonesProxy::computeEngagementZone(x,y,z)
+     <ALEngagementZonesProxy::computeEngagementZone1>`,
+     using the 3D coordinates of the object in :term:`FRAME_ROBOT`.
+   - :ref:`ALEngagementZonesProxy::computeEngagementZone(xAngle,yAngle,distance,cameraPositionRobot)
+     <ALEngagementZonesProxy::computeEngagementZone2>`,
+     using the angular coordinates of the object in the image, its distance from the camera, and the camera position
+     in :term:`FRAME_ROBOT`.
+
+.. _ALEngagementZonesProxy::computeEngagementZone1:
+
+.. cpp:function:: int ALEngagementZonesProxy::computeEngagementZone(const float& x, const float& y, const float& z)
+
+   :param x: X coordinate of the object in :term:`FRAME_ROBOT`.
+   :param y: Y coordinate of the object in :term:`FRAME_ROBOT`.
+   :param z: Z coordinate of the object in :term:`FRAME_ROBOT`.
+   :return: The corresponding Engagement Zone.
+
+.. _ALEngagementZonesProxy::computeEngagementZone2:
+
+.. cpp:function:: int ALEngagementZonesProxy::computeEngagementZone(const float& xAngle, const float& yAngle, const float& distance, const AL::ALValue& cameraPositionRobot)
+
+   :param xAngle: horizontal angular coordinate of the object in the image (in radians).
+   :param yAngle: vertical angular coordinate of the object in the image (in radians).
+   :param distance: distance of the object from the camera.
+   :param cameraPositionRobot: position of the camera in :term:`FRAME_ROBOT` as a :term:`Position6D`.
+   :return: The corresponding Engagement Zone.
+
+
+.. cpp:function:: float ALEngagementZonesProxy::getFirstLimitDistance()
+
+   :return: The current value of FirstDistance (in meters). The default value is 1.5m. Please refer to the diagram in :ref:`alengagementzones` for details.
+
+.. cpp:function:: float ALEngagementZonesProxy::getLimitAngle()
+
+   :return: The current value of LimitAngle (in degrees). The default value is 90 degrees. Please refer to the diagram in :ref:`alengagementzones` for details.
+
+.. cpp:function:: float ALEngagementZonesProxy::getSecondLimitDistance()
+
+   :return: The current value of SecondDistance (in meters). The default value is 2.5m. Please refer to the diagram in :ref:`alengagementzones` for details.
+
+
+.. cpp:function:: bool ALEngagementZonesProxy::setFirstLimitDistance(const float& distance)
+
+   Sets the value of FirstDistance. Please refer to the diagram in :ref:`alengagementzones` for details.
+   Calling this method will trigger the event :naoqi:event:`EngagementZones/FirstLimitDistanceUpdated`.
+
+   :param distance: Value of the new FirstDistance (in meters). It must be positive and smaller than the current value of SecondDistance.
+
+   :return: true if the update succeeded.
+
+.. cpp:function:: bool ALEngagementZonesProxy::setLimitAngle(const float& angle)
+
+   Sets the value of LimitAngle. Please refer to the diagram in :ref:`alengagementzones` for details.
+   Calling this method will trigger the event :naoqi:event:`EngagementZones/LimitAngleUpdated`.
+
+   :param distance: Value of the new LimitAngle (in degrees). It must be between 0 and 180 degrees.
+
+   :return: true if the update succeeded.
+
+.. cpp:function:: bool ALEngagementZonesProxy::setSecondLimitDistance(const float& distance)
+
+   Sets the value of SecondDistance. Please refer to the diagram in :ref:`alengagementzones` for details.
+   Calling this method will trigger the event :naoqi:event:`EngagementZones/SecondLimitDistanceUpdated`.
+
+   :param distance: Value of the new FirstDistance (in meters). It must be positive and bigger than the current value of FirstDistance.
+
+   :return: true if the update succeeded.
+
+
+
+Events
+------
+
+.. naoqi:event:: EngagementZones/LimitAngleUpdated(float angle)
+
+  Raised when the limit angle value has changed.
+
+  :param angle: New value in radians.
+
+.. naoqi:event:: EngagementZones/FirstLimitDistanceUpdated(float distance)
+
+  Raised when the first limit distance value has changed.
+
+  :param distance: New value in meters.
+
+.. naoqi:event:: EngagementZones/SecondLimitDistanceUpdated(float distance)
+
+  Raised when the second limit distance value has changed.
+
+  :param distance: New value in meters.
+
+
+.. naoqi:event:: EngagementZones/PeopleInZonesUpdated()
+
+  Raised when the memory keys containing the list of people IDs in each zone have been updated.
+
+.. naoqi:event:: EngagementZones/PersonApproached(int id)
+
+  Raised when a person just approached the robot (i.e. moved to a closer engagement zone).
+
+  :param id: ID of the person
+
+.. naoqi:event:: EngagementZones/PersonMovedAway(int id)
+
+  Raised when a person just moved away from the robot (i.e. moved to a further engagement zone).
+
+  :param id: ID of the person
+
+.. naoqi:event:: EngagementZones/PersonEnteredZone1(int id)
+
+  Raised when a person changed of engagement zone and entered Zone 1.
+
+  :param id: ID of the person
+
+.. naoqi:event:: EngagementZones/PersonEnteredZone2(int id)
+
+  :param id: ID of the person
+
+.. naoqi:event:: EngagementZones/PersonEnteredZone3(int id)
+
+  Raised when a person changed of engagement zone and entered Zone 3.
+
+  :param id: ID of the person
+
+
+.. naoqi:event:: EngagementZones/MovementsInZonesUpdated()
+
+  Raised when the memory keys containing the list of movements in each zone have been updated.
+
+
+
+ALMemory Keys
+-------------
+
+.. naoqi:memkey:: int PeoplePerception/Person/<ID>/EngagementZone
+
+  Id of the engagement zone of the person (0 if unknown).
+  <ID> is the ID of the person (see :ref:`ALPeoplePerception API <alpeopleperception-api>`).
+
+.. naoqi:memkey:: AL::ALValue EngagementZones/PeopleInZone1
+
+  List of the IDs of the people detected in Zone 1.
+
+.. naoqi:memkey:: AL::ALValue EngagementZones/PeopleInZone2
+
+  List of the IDs of the people detected in Zone 2.
+
+.. naoqi:memkey:: AL::ALValue EngagementZones/PeopleInZone3
+
+  List of the IDs of the people detected in Zone 3.
+
+
+.. naoqi:memkey:: AL::ALValue EngagementZones/LastMovementsInZone1
+
+  List of the movements detected in Zone 1. The memory key has the same structure
+  as the key **MovementDetection/MovementInfo**, described in :ref:`almovementdetection`
+
+.. naoqi:memkey:: AL::ALValue EngagementZones/LastMovementsInZone2
+
+  List of the movements detected in Zone 2. The memory key has the same structure
+  as the key **MovementDetection/MovementInfo**, described in :ref:`almovementdetection`
+
+.. naoqi:memkey:: AL::ALValue EngagementZones/LastMovementsInZone3
+
+  List of the movements detected in Zone 3. The memory key has the same structure
+  as the key **MovementDetection/MovementInfo**, described in :ref:`almovementdetection`

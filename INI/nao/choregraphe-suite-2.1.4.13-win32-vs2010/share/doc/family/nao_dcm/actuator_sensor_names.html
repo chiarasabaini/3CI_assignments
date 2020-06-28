@@ -1,0 +1,3494 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NAO - Actuator &amp; Sensor list &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="NAO - Technical Guide" href="../index.html" />
+    <link rel="next" title="NAO - Versions and Body Type" href="../body_type.html" />
+    <link rel="prev" title="Predefined postures" href="../robots/postures_robot.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="../robots/postures_robot.html" title="Predefined postures">previous</a>
+     |
+    <a href="../index.html" title="&lt;em&gt;NAO&lt;/em&gt; - Technical Guide" accesskey="U">up</a>
+   |
+    <a href="../body_type.html" title="&lt;em&gt;NAO&lt;/em&gt; - Versions and Body Type">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="family-nao_dcm-actuator_sensor_names">
+            
+  <div class="section" id="robon-actuator-sensor-list">
+<span id="actuator-sensor-list-nao"></span><h1><em>NAO</em> - Actuator &amp; Sensor list<a class="headerlink" href="#robon-actuator-sensor-list" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#battery"><em>Battery</em></a> -
+<a class="reference internal" href="#cpu"><em>CPU</em></a> -
+<a class="reference internal" href="#fsr"><em>FSR</em></a>-
+<a class="reference internal" href="#inertial"><em>Inertial</em></a> -
+<a class="reference internal" href="#joints"><em>Joints and Actuators</em></a> -
+<a class="reference internal" href="#leds"><em>LEDs</em></a> -
+<a class="reference internal" href="#sonars"><em>Sonars</em></a> -
+<a class="reference internal" href="#switches"><em>Switches</em></a> -
+<a class="reference internal" href="#touch-sensor"><em>Touch sensors</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>To send commands to an <strong>Actuator</strong>, use the <a class="reference internal" href="../../naoqi/sensors/dcm.html#dcm"><em>DCM</em></a> module.</li>
+<li>To read data from <strong>Actuators</strong> and <strong>Sensors</strong>, use the
+<a class="reference internal" href="../../naoqi/core/almemory.html#almemory"><em>ALMemory</em></a> module.</li>
+</ul>
+</div>
+<div class="section" id="joints-and-actuators">
+<span id="joints"></span><h2>Joints and Actuators<a class="headerlink" href="#joints-and-actuators" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><ul class="first last simple">
+<li><strong>Head</strong>: <a class="reference internal" href="#headpitch"><em>HeadPitch</em></a> - <a class="reference internal" href="#headyaw"><em>HeadYaw</em></a>.</li>
+<li><strong>RArm</strong>: <a class="reference internal" href="#rshoulderroll"><em>RShoulderRoll</em></a> -  <a class="reference internal" href="#rshoulderpitch"><em>RShoulderPitch</em></a> - <a class="reference internal" href="#relbowyaw"><em>RElbowYaw</em></a> -
+<a class="reference internal" href="#relbowroll"><em>RElbowRoll</em></a> -  <a class="reference internal" href="#rwristyaw"><em>RWristYaw</em></a> -  <a class="reference internal" href="#rhand"><em>RHand</em></a>.</li>
+<li><strong>LArm</strong>: <a class="reference internal" href="#lshoulderroll"><em>LShoulderRoll</em></a> - <a class="reference internal" href="#lshoulderpitch"><em>LShoulderPitch</em></a> - <a class="reference internal" href="#lelbowyaw"><em>LElbowYaw</em></a> -
+<a class="reference internal" href="#lelbowroll"><em>LElbowRoll</em></a> - <a class="reference internal" href="#lwristyaw"><em>LWristYaw</em></a> -  <a class="reference internal" href="#lhand"><em>LHand</em></a>.</li>
+<li><strong>RLeg</strong>: <a class="reference internal" href="#rhippitch"><em>RHipPitch</em></a> -  <a class="reference internal" href="#rhiproll"><em>RHipRoll</em></a> - <a class="reference internal" href="#rkneepitch"><em>RKneePitch</em></a> -
+<a class="reference internal" href="#ranklepitch"><em>RAnklePitch</em></a> - <a class="reference internal" href="#rankleroll"><em>RAnkleRoll</em></a>.</li>
+<li><strong>LLeg</strong>: <a class="reference internal" href="#lhipyawpitch"><em>LHipYawPitch</em></a> - <a class="reference internal" href="#lhippitch"><em>LHipPitch</em></a> - <a class="reference internal" href="#lhiproll"><em>LHipRoll</em></a> -
+<a class="reference internal" href="#lkneepitch"><em>LKneePitch</em></a> - <a class="reference internal" href="#lanklepitch"><em>LAnklePitch</em></a> - <a class="reference internal" href="#lankleroll"><em>LAnkleRoll</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<img alt="../../_images/hardware_jointname.jpg" src="../../_images/hardware_jointname.jpg" style="width: 600px; height: 349px;" />
+<div class="section" id="headyaw">
+<span id="id1"></span><h3>HeadYaw<a class="headerlink" href="#headyaw" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/HeadYaw/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/HeadYaw/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/HeadYaw/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/HeadYaw/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/HeadYaw/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/HeadYaw/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-head-joints"><em>Head joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/HeadYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/HeadYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/HeadYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="headpitch">
+<span id="id2"></span><h3>HeadPitch<a class="headerlink" href="#headpitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/HeadPitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/HeadPitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/HeadPitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/HeadPitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/HeadPitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/HeadPitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-head-joints"><em>Head joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/HeadPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/HeadPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/HeadPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lelbowyaw">
+<span id="id3"></span><h3>LElbowYaw<a class="headerlink" href="#lelbowyaw" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LElbowYaw/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LElbowYaw/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LElbowYaw/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LElbowYaw/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LElbowYaw/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LElbowYaw/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-arm-joints"><em>Left Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LElbowYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LElbowYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LElbowYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lelbowroll">
+<span id="id4"></span><h3>LElbowRoll<a class="headerlink" href="#lelbowroll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LElbowRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LElbowRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LElbowRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LElbowRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LElbowRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LElbowRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-arm-joints"><em>Left Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LElbowRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LElbowRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LElbowRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="relbowyaw">
+<span id="id5"></span><h3>RElbowYaw<a class="headerlink" href="#relbowyaw" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RElbowYaw/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RElbowYaw/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RElbowYaw/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RElbowYaw/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RElbowYaw/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RElbowYaw/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-arm-joints"><em>Right Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RElbowYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RElbowYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RElbowYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="relbowroll">
+<span id="id6"></span><h3>RElbowRoll<a class="headerlink" href="#relbowroll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RElbowRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RElbowRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RElbowRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RElbowRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RElbowRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RElbowRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-arm-joints"><em>Right Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RElbowRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RElbowRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RElbowRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lhand">
+<span id="id7"></span><h3>LHand<a class="headerlink" href="#lhand" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="71%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LHand/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-2"><em class="xref std std-term">Position/Actuator (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHand/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor"><em class="xref std std-term">Position/Sensor (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHand/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHand/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHand/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHand/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-arm-joints"><em>Left Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LHand/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LHand/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LHand/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lwristyaw">
+<span id="id8"></span><h3>LWristYaw<a class="headerlink" href="#lwristyaw" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LWristYaw/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LWristYaw/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LWristYaw/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LWristYaw/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LWristYaw/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LWristYaw/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-arm-joints"><em>Left Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LWristYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LWristYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LWristYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rhand">
+<span id="id9"></span><h3>RHand<a class="headerlink" href="#rhand" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="71%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RHand/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-2"><em class="xref std std-term">Position/Actuator (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHand/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor"><em class="xref std std-term">Position/Sensor (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHand/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHand/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHand/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHand/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-arm-joints"><em>Right Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RHand/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RHand/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RHand/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rwristyaw">
+<span id="id10"></span><h3>RWristYaw<a class="headerlink" href="#rwristyaw" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RWristYaw/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RWristYaw/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RWristYaw/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RWristYaw/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RWristYaw/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RWristYaw/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-arm-joints"><em>Right Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RWristYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RWristYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RWristYaw/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lshoulderpitch">
+<span id="id11"></span><h3>LShoulderPitch<a class="headerlink" href="#lshoulderpitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LShoulderPitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LShoulderPitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LShoulderPitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LShoulderPitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LShoulderPitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LShoulderPitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-arm-joints"><em>Left Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LShoulderPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LShoulderPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LShoulderPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lshoulderroll">
+<span id="id12"></span><h3>LShoulderRoll<a class="headerlink" href="#lshoulderroll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LShoulderRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LShoulderRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LShoulderRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LShoulderRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LShoulderRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LShoulderRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-arm-joints"><em>Left Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LShoulderRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LShoulderRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LShoulderRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rshoulderpitch">
+<span id="id13"></span><h3>RShoulderPitch<a class="headerlink" href="#rshoulderpitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RShoulderPitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RShoulderPitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RShoulderPitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RShoulderPitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RShoulderPitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RShoulderPitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-arm-joints"><em>Right Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RShoulderPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RShoulderPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RShoulderPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rshoulderroll">
+<span id="id14"></span><h3>RShoulderRoll<a class="headerlink" href="#rshoulderroll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RShoulderRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RShoulderRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RShoulderRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RShoulderRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RShoulderRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RShoulderRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-arm-joints"><em>Right Arm joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RShoulderRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RShoulderRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RShoulderRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rhiproll">
+<span id="id15"></span><h3>RHipRoll<a class="headerlink" href="#rhiproll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RHipRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHipRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHipRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHipRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHipRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHipRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-leg-joints"><em>Right Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RHipRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RHipRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RHipRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lhiproll">
+<span id="id16"></span><h3>LHipRoll<a class="headerlink" href="#lhiproll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LHipRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHipRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHipRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-leg-joints"><em>Left Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LHipRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LHipRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LHipRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lhipyawpitch">
+<span id="id17"></span><h3>LHipYawPitch<a class="headerlink" href="#lhipyawpitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LHipYawPitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipYawPitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHipYawPitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipYawPitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHipYawPitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipYawPitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-pelvis-joints"><em>Pelvis joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LHipYawPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LHipYawPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LHipYawPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rhippitch">
+<span id="id18"></span><h3>RHipPitch<a class="headerlink" href="#rhippitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RHipPitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHipPitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHipPitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHipPitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHipPitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHipPitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-leg-joints"><em>Right Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RHipPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RHipPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RHipPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lhippitch">
+<span id="id19"></span><h3>LHipPitch<a class="headerlink" href="#lhippitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LHipPitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipPitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHipPitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipPitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHipPitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHipPitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-leg-joints"><em>Left Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LHipPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LHipPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LHipPitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rkneepitch">
+<span id="id20"></span><h3>RKneePitch<a class="headerlink" href="#rkneepitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RKneePitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RKneePitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RKneePitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RKneePitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RKneePitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RKneePitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-leg-joints"><em>Right Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RKneePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RKneePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RKneePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lkneepitch">
+<span id="id21"></span><h3>LKneePitch<a class="headerlink" href="#lkneepitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LKneePitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LKneePitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LKneePitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LKneePitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LKneePitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LKneePitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-leg-joints"><em>Left Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LKneePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LKneePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LKneePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ranklepitch">
+<span id="id22"></span><h3>RAnklePitch<a class="headerlink" href="#ranklepitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RAnklePitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RAnklePitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RAnklePitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RAnklePitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RAnklePitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RAnklePitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-leg-joints"><em>Right Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RAnklePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RAnklePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RAnklePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lanklepitch">
+<span id="id23"></span><h3>LAnklePitch<a class="headerlink" href="#lanklepitch" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LAnklePitch/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LAnklePitch/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LAnklePitch/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LAnklePitch/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LAnklePitch/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LAnklePitch/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-leg-joints"><em>Left Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LAnklePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LAnklePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LAnklePitch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rankleroll">
+<span id="id24"></span><h3>RAnkleRoll<a class="headerlink" href="#rankleroll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RAnkleRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RAnkleRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RAnkleRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RAnkleRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RAnkleRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RAnkleRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-right-leg-joints"><em>Right Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RAnkleRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RAnkleRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/RAnkleRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lankleroll">
+<span id="id25"></span><h3>LAnkleRoll<a class="headerlink" href="#lankleroll" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LAnkleRoll/Position/Actuator/Value</td>
+<td><a class="reference internal" href="#term-position-actuator-rad"><em class="xref std std-term">Position/Actuator (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LAnkleRoll/Position/Sensor/Value</td>
+<td><a class="reference internal" href="#term-position-sensor-rad"><em class="xref std std-term">Position/Sensor (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LAnkleRoll/ElectricCurrent/Sensor/Value</td>
+<td><a class="reference internal" href="#term-current-a"><em class="xref std std-term">Current (A)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LAnkleRoll/Temperature/Sensor/Value</td>
+<td><a class="reference internal" href="#term-temperature-c"><em class="xref std std-term">Temperature (°C)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LAnkleRoll/Hardness/Actuator/Value</td>
+<td><a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LAnkleRoll/Temperature/Sensor/Status</td>
+<td><a class="reference internal" href="#term-temperature-status"><em class="xref std std-term">Temperature status</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/joints_robot.html#robot-joints-v4-left-leg-joints"><em>Left Leg joints</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LAnkleRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LAnkleRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/LAnkleRoll/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="glossary docutils">
+<dt id="term-position-actuator">Position/Actuator</dt>
+<dd><p class="first">Joint angle (in radian) to reach.</p>
+<p>Exception: for hands, aperture (in percentage); 0 means closed, 1 means opened.</p>
+<p>Content update:</p>
+<ul class="last simple">
+<li>if <a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness</em></a> &gt; 0: the last position requested by a timed command.</li>
+<li>if <a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness</em></a> &lt;= 0: the same value as the Position/Sensor.</li>
+</ul>
+</dd>
+<dt id="term-position-actuator-rad">Position/Actuator (rad)</dt>
+<dd><p class="first">Joint angle (in radian) to reach.</p>
+<p>Content update:</p>
+<ul class="last simple">
+<li>if <a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness</em></a> &gt; 0: the last position requested by a timed command.</li>
+<li>if <a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness</em></a> &lt;= 0: the same value as the Position/Sensor.</li>
+</ul>
+</dd>
+<dt id="term-2">Position/Actuator (%)</dt>
+<dd><p class="first">Hand aperture (in percentage) to reach; 0 means closed, 1 means opened.</p>
+<p>Content update:</p>
+<ul class="last simple">
+<li>if <a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness</em></a> &gt; 0: the last position requested by a timed command.</li>
+<li>if <a class="reference internal" href="#term-stiffness"><em class="xref std std-term">Stiffness</em></a> &lt;= 0: the same value as the Position/Sensor.</li>
+</ul>
+</dd>
+<dt id="term-stiffness">Stiffness (%)</dt>
+<dd><p class="first">Stiffness of the joint (in percentage); 0.0 means 0% and 1.0 means 100%
+(full power).</p>
+<p>In the motorboard, this percentage is directly applied to the max current.
+Setting the Stiffness to 0.5 means that the electric current limitation
+is reduced to 50%.</p>
+<p>The Stiffness is sent to the motor board every DCM cycle time, so you can
+decrease/increase the control loop very fast. However, the current limitation
+may have some delay.</p>
+<p>If the Stiffness is &lt;0, the motor is free (no electromagnetic break), but due
+to hardware limitation, it’s only possible when the two motors of the same
+board are &lt;0 (both are then free). If not, it’s still electromagnetic brake,
+but with a security that disable it when there is some movement, to protect
+the mechanics.</p>
+<p class="last">Stiffness may be automatically cut in case of problem (calibration, sensors …)
+seen at the DCM level or at the µc level, in order to protect the robot.</p>
+</dd>
+<dt id="term-position-sensor-rad">Position/Sensor (rad)</dt>
+<dd><p class="first">Angle of the joint (in radian).</p>
+<p>Content update:</p>
+<p class="last">The sensor used is a Magnetic Rotary Encoder (MRE), used like potentiometer.
+It’s a 12bits precise value (from 0 to 4095) change in rad.</p>
+</dd>
+<dt id="term-position-sensor">Position/Sensor (%)</dt>
+<dd><p class="first">Hand aperture (in percentage); 0 means closed, 1 means opened.</p>
+<p>Content update:</p>
+<p class="last">The sensor used is a Magnetic Rotary Encoder (MRE), used like potentiometer.
+It’s a 12bits precise value (from 0 to 4095) change in percentage (0.0 to 1.0).</p>
+</dd>
+<dt id="term-current-a">Current (A)</dt>
+<dd><p class="first">Every motorboard has a current sensor for each motor that is a shunt resistor.
+The current is an absolute value in Ampere.</p>
+<p class="last">Every joint has an electric current limitation: if the current reach the “Max”
+value (“ElectricCurrent/Sensor/Max”) the PWM (return by the control loop) will
+be decreased a bit until it returns under the maximum value, and it’s
+increased again after. This is a kind of current control loop around the
+maximum value.
+The aim of this limitation is to protect the motor, the electronic board,
+and the mechanical part of the joint.</p>
+</dd>
+<dt id="term-temperature-c">Temperature (°C)</dt>
+<dd>The motor temperature is a simulated one, using electric current value of the
+motor.
+The motor board implements a temperature limitation to protect the motor. The
+temperature limitation depends on robot version.</dd>
+<dt id="term-temperature-status">Temperature status</dt>
+<dd><p class="first">The status is computed accordingly to the temperature limitation to protecting the motor.
+A non null value implies an automatic correction of the Stiffness.</p>
+<ul class="last simple">
+<li>0: means regular temperature</li>
+<li>1: means temperature has reach the max limit, start reducing stiffness.</li>
+<li>2: means the joint is very hot, stiffness reduced over 30%.</li>
+<li>3: means the joint is critically hot, stiffness value is set to 0.</li>
+</ul>
+</dd>
+<dt id="term-error">Error</dt>
+<dd>The results of a diagnosis (see <a class="reference internal" href="../../naoqi/diagnosis/aldiagnosis.html#aldiagnosis"><em>ALDiagnosis</em></a> and
+<a class="reference internal" href="../../naoqi/sensors/albodytemperature.html#albodytemperature-diagnosis"><em>Temperature Diagnosis</em></a>).
+A int with 0 (success) or 1 (error).</dd>
+<dt id="term-level-of-failure-severity">Level of failure severity</dt>
+<dd><p class="first">This value defines the consequence of the device failure on the robot behavior.
+The higher the level is the less the robot will be functional.</p>
+<p class="last">The value could be: <em>NEGLIGIBLE</em>, <em>SERIOUS</em> or <em>CRITICAL</em> (see <a class="reference internal" href="../../naoqi/motion/reflexes-diagnosis.html#reflexes-diagnosis"><em>Diagnosis effect</em></a>
+for more details about the robot behavior when a failure is detected).</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="touch-sensors">
+<span id="touch-sensor"></span><h2>Touch sensors<a class="headerlink" href="#touch-sensors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="head">
+<span id="head-touch-sensor"></span><h3>Head<a class="headerlink" href="#head" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Head/Touch/Front/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Touch/Rear/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Head/Touch/Middle/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Head/Touch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Head/Touch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/contact-sensors_robot.html#robot-contact-head"><em>Tactile Head</em></a>.</p>
+</div>
+<div class="section" id="lhand-touch-sensor">
+<span id="id26"></span><h3>LHand<a class="headerlink" href="#lhand-touch-sensor" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LHand/Touch/Back/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LHand/Touch/Left/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LHand/Touch/Right/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LHand/Touch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LHand/Touch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/contact-sensors_robot.html#robot-contact-hand"><em>Tactile Hands</em></a>.</p>
+</div>
+<div class="section" id="rhand-touch-sensor">
+<span id="id27"></span><h3>RHand<a class="headerlink" href="#rhand-touch-sensor" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RHand/Touch/Back/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RHand/Touch/Left/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RHand/Touch/Right/Sensor/Value</td>
+<td><a class="reference internal" href="#term-touch-on-off"><em class="xref std std-term">Touch (ON/OFF)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RHand/Touch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RHand/Touch/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/contact-sensors_robot.html#robot-contact-hand"><em>Tactile Hands</em></a>.</p>
+<dl class="glossary docutils">
+<dt id="term-touch-on-off">Touch (ON/OFF)</dt>
+<dd>Touch sensors are capacitive sensors that return a 2 state float value 0.0
+(unpressed) or 1.0 (pressed).</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="switches">
+<span id="id28"></span><h2>Switches<a class="headerlink" href="#switches" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chestboard">
+<span id="chestboard-button-sensor"></span><h3>ChestBoard<a class="headerlink" href="#chestboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/ChestBoard/Button/Sensor/Value</td>
+<td><a class="reference internal" href="#term-switch-on-off"><em class="xref std std-term">Switch (ON/OFF)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Chest/Button/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Chest/Button/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/contact-sensors_robot.html#robot-contact-chest"><em>Chest Button</em></a>.</p>
+</div>
+<div class="section" id="lfoot">
+<span id="lfoot-touch-sensor"></span><h3>LFoot<a class="headerlink" href="#lfoot" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/Bumper/Right/Sensor/Value</td>
+<td><a class="reference internal" href="#term-switch-on-off"><em class="xref std std-term">Switch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LFoot/Bumper/Left/Sensor/Value</td>
+<td><a class="reference internal" href="#term-switch-on-off"><em class="xref std std-term">Switch (ON/OFF)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LFoot/Bumper/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LFoot/Bumper/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/contact-sensors_robot.html#robot-contact-feet"><em>Feet Bumpers</em></a>.</p>
+</div>
+<div class="section" id="rfoot">
+<span id="rfoot-touch-sensor"></span><h3>RFoot<a class="headerlink" href="#rfoot" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RFoot/Bumper/Right/Sensor/Value</td>
+<td><a class="reference internal" href="#term-switch-on-off"><em class="xref std std-term">Switch (ON/OFF)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RFoot/Bumper/Left/Sensor/Value</td>
+<td><a class="reference internal" href="#term-switch-on-off"><em class="xref std std-term">Switch (ON/OFF)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RFoot/Bumper/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RFoot/Bumper/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/contact-sensors_robot.html#robot-contact-feet"><em>Feet Bumpers</em></a>.</p>
+<dl class="glossary docutils">
+<dt id="term-switch-on-off">Switch (ON/OFF)</dt>
+<dd><p class="first">Switches are simple sensors that return a 2-state float value 0.0 (unpressed) or 1.0 (pressed).
+Beware that the value is read only every 10ms, and very fast change may be unseen.</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It’s better to use a logical “or” between the two switches of the same foot, and use it as one bumper only.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="cpu">
+<span id="id29"></span><h2>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Comment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Head/Temperature/Sensor/Value</td>
+<td>Head cpu temperature (°C)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inertial">
+<span id="id30"></span><h2>Inertial<a class="headerlink" href="#inertial" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gyroscope">
+<span id="dcm-gyrometer"></span><h3>Gyroscope<a class="headerlink" href="#gyroscope" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/InertialSensor/GyroscopeX/Sensor/Value</td>
+<td><a class="reference internal" href="#term-gyroscope-rad-s"><em class="xref std std-term">Gyroscope (rad/s)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/InertialSensor/GyroscopeY/Sensor/Value</td>
+<td><a class="reference internal" href="#term-gyroscope-rad-s"><em class="xref std std-term">Gyroscope (rad/s)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/InertialSensor/GyroscopeZ/Sensor/Value</td>
+<td><a class="reference internal" href="#term-gyroscope-rad-s"><em class="xref std std-term">Gyroscope (rad/s)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/inertial_robot.html#robot-inertial"><em>Inertial unit specifications</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Gyrometer/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Gyrometer/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="angle">
+<span id="dcm-angles"></span><h3>Angle<a class="headerlink" href="#angle" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value</td>
+<td><a class="reference internal" href="#term-angles-rad"><em class="xref std std-term">Angles (rad)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/InertialSensor/AngleY/Sensor/Value</td>
+<td><a class="reference internal" href="#term-angles-rad"><em class="xref std std-term">Angles (rad)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/InertialSensor/AngleZ/Sensor/Value</td>
+<td><a class="reference internal" href="#term-angles-rad"><em class="xref std std-term">Angles (rad)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/inertial_robot.html#robot-inertial"><em>Inertial unit specifications</em></a>.</p>
+</div>
+<div class="section" id="accelerometer">
+<span id="dcm-accelerometer"></span><h3>Accelerometer<a class="headerlink" href="#accelerometer" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/InertialSensor/AccelerometerX/Sensor/Value</td>
+<td><a class="reference internal" href="#term-accelerometer-m-s2"><em class="xref std std-term">Accelerometer (m/s²)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/InertialSensor/AccelerometerY/Sensor/Value</td>
+<td><a class="reference internal" href="#term-accelerometer-m-s2"><em class="xref std std-term">Accelerometer (m/s²)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/InertialSensor/AccelerometerZ/Sensor/Value</td>
+<td><a class="reference internal" href="#term-accelerometer-m-s2"><em class="xref std std-term">Accelerometer (m/s²)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/inertial_robot.html#robot-inertial"><em>Inertial unit specifications</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Accelerometer/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Accelerometer/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="glossary docutils">
+<dt id="term-gyroscope-rad-s">Gyroscope (rad/s)</dt>
+<dd>Theses are direct rotation speed values in rad.s-1 from the inertial sensor in the center of the body.
+The Z gyroscope is not available yet.</dd>
+<dt id="term-accelerometer-m-s2">Accelerometer (m/s²)</dt>
+<dd>Theses are 3-axis acceleration in m.s-2 from the inertial sensor in the center of the body (one g is approximately 9.81 m.s-2)
+Depending the robot version, the precision is 8 or 12 bits.</dd>
+<dt id="term-angles-rad">Angles (rad)</dt>
+<dd>The inertial board computes 3 inclination angles of the robot body with the gyro and accelero data.
+All angles are in radians.
+The Z angle is not available yet.</dd>
+</dl>
+<p>There are other deprecated values still returned.</p>
+</div>
+</div>
+<div class="section" id="leds">
+<span id="id31"></span><h2>LEDs<a class="headerlink" href="#leds" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#eyes-actuators"><em>Eyes</em></a> -
+<a class="reference internal" href="#ear-actuators"><em>Ears</em></a>-
+<a class="reference internal" href="#chestboard-actuators"><em>ChestBoard</em></a> -
+<a class="reference internal" href="#led-head"><em>Head</em></a> -
+<a class="reference internal" href="#lfoot-actuators"><em>LFoot</em></a> -
+<a class="reference internal" href="#rfoot-actuators"><em>RFoot</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="eyes">
+<span id="eyes-actuators"></span><h3>Eyes<a class="headerlink" href="#eyes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Face/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Face/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="face-led-red-left">
+<h4>Face/Led/Red/Left<a class="headerlink" href="#face-led-red-left" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Left/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Left/45Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Left/90Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Left/135Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Left/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Left/225Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Left/270Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Left/315Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-eyes"><em>Eye LED locations</em></a>.</p>
+</div>
+<div class="section" id="face-led-green-left">
+<h4>Face/Led/Green/Left<a class="headerlink" href="#face-led-green-left" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Left/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Left/45Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Left/90Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Left/135Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Left/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Left/225Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Left/270Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Left/315Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-eyes"><em>Eye LED locations</em></a>.</p>
+</div>
+<div class="section" id="face-led-blue-left">
+<h4>Face/Led/Blue/Left<a class="headerlink" href="#face-led-blue-left" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Left/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Left/45Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Left/90Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Left/135Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Left/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Left/225Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Left/270Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Left/315Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-eyes"><em>Eye LED locations</em></a>.</p>
+</div>
+<div class="section" id="face-led-red-right">
+<h4>Face/Led/Red/Right<a class="headerlink" href="#face-led-red-right" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Right/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Right/45Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Right/90Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Right/135Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Right/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Right/225Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Red/Right/270Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Red/Right/315Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-eyes"><em>Eye LED locations</em></a>.</p>
+</div>
+<div class="section" id="face-led-green-right">
+<h4>Face/Led/Green/Right<a class="headerlink" href="#face-led-green-right" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Right/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Right/45Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Right/90Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Right/135Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Right/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Right/225Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Green/Right/270Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Green/Right/315Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-eyes"><em>Eye LED locations</em></a>.</p>
+</div>
+<div class="section" id="face-led-blue-right">
+<h4>Face/Led/Blue/Right<a class="headerlink" href="#face-led-blue-right" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Right/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Right/45Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Right/90Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Right/135Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Right/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Right/225Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Face/Led/Blue/Right/270Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Face/Led/Blue/Right/315Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-eyes"><em>Eye LED locations</em></a>.</p>
+</div>
+</div>
+<div class="section" id="ears">
+<span id="ear-actuators"></span><h3>Ears<a class="headerlink" href="#ears" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Ears/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Ears/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="ears-led-right">
+<h4>Ears/Led/Right<a class="headerlink" href="#ears-led-right" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Right/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Right/36Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Right/72Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Right/108Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Right/144Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Right/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Right/216Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Right/252Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Right/288Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Right/324Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-ears"><em>Ear LED locations</em></a>.</p>
+</div>
+<div class="section" id="ears-led-left">
+<h4>Ears/Led/Left<a class="headerlink" href="#ears-led-left" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Left/0Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Left/36Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Left/72Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Left/108Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Left/144Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Left/180Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Left/216Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Left/252Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Ears/Led/Left/288Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Ears/Led/Left/324Deg/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-ears"><em>Ear LED locations</em></a>.</p>
+</div>
+</div>
+<div class="section" id="chestboard-actuators">
+<span id="id32"></span><h3>ChestBoard<a class="headerlink" href="#chestboard-actuators" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/ChestBoard/Led/Red/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/ChestBoard/Led/Green/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/ChestBoard/Led/Blue/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/ChestBoard/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/ChestBoard/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="led-head">
+<span id="id33"></span><h3>Head<a class="headerlink" href="#led-head" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Head/Led/Rear/Left/0/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Led/Rear/Left/1/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Head/Led/Rear/Left/2/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Led/Rear/Right/0/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Head/Led/Rear/Right/1/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Led/Rear/Right/2/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Head/Led/Middle/Right/0/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Led/Front/Right/0/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Head/Led/Front/Right/1/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Led/Front/Left/0/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Head/Led/Front/Left/1/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Head/Led/Middle/Left/0/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-head"><em>Head tactile sensor LED locations</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Head/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Head/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lfoot-actuators">
+<span id="id34"></span><h3>LFoot<a class="headerlink" href="#lfoot-actuators" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/Led/Red/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LFoot/Led/Green/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/Led/Blue/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-feet"><em>Foot LED locations</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LFoot/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/LFoot/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rfoot-actuators">
+<span id="id35"></span><h3>RFoot<a class="headerlink" href="#rfoot-actuators" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="84%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/RFoot/Led/Red/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RFoot/Led/Green/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RFoot/Led/Blue/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led"><em class="xref std std-term">LED (%)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/leds_robot.html#robot-led-feet"><em>Foot LED locations</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/RFoot/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RFoot/Led/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="led-state">
+<h3>Led state<a class="headerlink" href="#led-state" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/ChestBoard/Led/State/Actuator/Value</td>
+<td><a class="reference internal" href="#term-led-state-number"><em class="xref std std-term">LED state (number)</em></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="glossary docutils">
+<dt id="term-led">LED (%)</dt>
+<dd><p class="first">Every LED is a simple actuator that has a float value from 0.0 (no light)
+to 1.0 (full light). Each LED has only one color, but there could be 3
+LEDs (RGB) at the same place to have a full color RGB LED. But for the
+DCM point of view it’s always 3 LEDs.
+The number of real differents values of leds depends on the leds
+(64 for the eyes, 256 for chest &amp; foot)</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Unfortunately, having 3 RGB LEDs set to “1.0” does not mean that you’ll see a perfect white: one or two LEDs will be brighter than others.</p>
+</div>
+</dd>
+<dt id="term-led-state-number">LED state (number)</dt>
+<dd>Internal. <strong>Do not use</strong>.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="sonars">
+<span id="id36"></span><h2>Sonars<a class="headerlink" href="#sonars" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/US/Actuator/Value</td>
+<td><a class="reference internal" href="#term-us-actuator-number"><em class="xref std std-term">US/Actuator (number)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Sensor/Value</td>
+<td><a class="reference internal" href="#term-us-sensor-m"><em class="xref std std-term">US/Sensor (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Left/Sensor/Value</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Right/Sensor/Value</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Left/Sensor/Value1</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Left/Sensor/Value2</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Left/Sensor/Value3</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Left/Sensor/Value4</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Left/Sensor/Value5</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Left/Sensor/Value6</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Left/Sensor/Value7</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Left/Sensor/Value8</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Left/Sensor/Value9</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Right/Sensor/Value1</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Right/Sensor/Value2</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Right/Sensor/Value3</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Right/Sensor/Value4</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Right/Sensor/Value5</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Right/Sensor/Value6</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Right/Sensor/Value7</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/US/Right/Sensor/Value8</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/US/Right/Sensor/Value9</td>
+<td><a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/sonar_robot.html#robot-sonar"><em>Sonar specifications</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/USSensor/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/USSensor/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="glossary docutils">
+<dt id="term-us-actuator-number">US/Actuator (number)</dt>
+<dd><p class="first">Send a value to this <strong>Actuator</strong> to set and send a sonar wave.</p>
+<p>The value you send defines what is the transmitter (left or right)
+and what is the receiver (left or right).
+Choosing the side of the receiver/transmitter has an influence on detection cone,
+and gives you information about the obstacle presence.</p>
+<p><strong>Wave settings</strong></p>
+<p><em>Mono side wave</em></p>
+<ul>
+<li><p class="first">The first bit of this value lets you choose which receiver you want to use.
+0 for left and 1 for right.</p>
+</li>
+<li><p class="first">The second bit lets you choose the transmitter.
+Again, 0 meaning left and 1 meaning right.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="42%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Transmitter</th>
+<th class="head">Receiver</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0.0</td>
+<td>Left</td>
+<td>Left</td>
+</tr>
+<tr class="row-odd"><td>1.0</td>
+<td>Left</td>
+<td>Right</td>
+</tr>
+<tr class="row-even"><td>2.0</td>
+<td>Right</td>
+<td>Left</td>
+</tr>
+<tr class="row-odd"><td>3.0</td>
+<td>Right</td>
+<td>Right</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p><em>Multi side wave</em></p>
+<ul class="simple">
+<li>The third bit (value 4) means that two captures will be made with only
+one command, left and right. The results will be available in two
+subDevices: <strong>US/Left/Sensor</strong> and <strong>US/Right/Sensor</strong>. 10 values are
+available for each sensor, corresponding to the distance of the first
+10 echoes detected.</li>
+<li>The fourth bit (value 8) orders the use of two transmitters at the
+same time.</li>
+</ul>
+<p><em>Periodic capture</em></p>
+<ul class="simple">
+<li>The seventh bit (value 64) is used to register for a periodic capture.
+It means that you need to send the read request to the DCM just once,
+then you simply read the values every 100 ms in ALMemory. To stop the
+periodic mode, you can send a new reading command without that bit.</li>
+</ul>
+<p><em>Examples</em></p>
+<p>All the bits combinations are not useful, even possible.
+Here are examples:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="35%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Transmitter</th>
+<th class="head">Receiver</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>4.0</td>
+<td>Right and Left</td>
+<td>Right and Left</td>
+</tr>
+<tr class="row-odd"><td>12.0 (8.0 + 4.0)</td>
+<td>Right and Left</td>
+<td>Right and Left</td>
+</tr>
+<tr class="row-even"><td>68.0 (64.0 + 4.0)</td>
+<td>Right and Left</td>
+<td>Right and Left</td>
+</tr>
+</tbody>
+</table>
+<p><em>Results</em></p>
+<div class="last line-block">
+<div class="line">The result is written approximately 10ms after in <strong>US/Sensor/Value</strong> or <strong>US/Left/Sensor</strong> and <strong>US/Right/Sensor</strong>.</div>
+<div class="line">For further details, see: <a class="reference internal" href="#term-us-sensor-m"><em class="xref std std-term">US/Sensor (m)</em></a> or <a class="reference internal" href="#term-us-sensors-m"><em class="xref std std-term">US/Sensors (m)</em></a>.</div>
+</div>
+</dd>
+<dt id="term-us-sensor-m">US/Sensor (m)</dt>
+<dd><p class="first">Value returned by the Sonar sensor (one of the two sensors in the chest).
+The value is changed about 10ms after sending the wave using <strong>US/Actuator/Value</strong>.
+For further details, see: <a class="reference internal" href="#term-us-actuator-number"><em class="xref std std-term">US/Actuator (number)</em></a>.</p>
+<div class="line-block">
+<div class="line">It is in meters.</div>
+<div class="line">Result &lt;=0 or &gt;= 5 <em>Max Detection range</em> means error from the sensor or echo not detected.</div>
+<div class="line">For further details about range detection, see: <a class="reference internal" href="../robots/sonar_robot.html#robot-sonar"><em>Sonar specification</em></a>.</div>
+</div>
+<p><strong>Tips</strong>:</p>
+<ul class="last simple">
+<li>You’ll likely detect the ground before the maximum distance for detection.</li>
+<li>Be careful you can detect the robot arms!</li>
+<li>The emission cone depends on the size of the object in front of the robot.</li>
+<li>The quality of the detection will depends on the object (or obstacle): size, surface, orientation.</li>
+</ul>
+</dd>
+<dt id="term-us-sensors-m"><span id="term-us-right-sensor-value-and-us-left-sensor-value"></span>US/Sensors (m)<br />US/Right/Sensor/Value and US/Left/Sensor/Value</dt>
+<dd><p class="first">Sensors respectively dedicated to the left or right receivers.</p>
+<p>They are used if the third bit is set in the value sent to the actuator
+(only available for V2 cards).</p>
+<p>The results of the first echo detected on each receiver are in Value,
+the 9 following echoes are from Value1 to Value9.</p>
+<p>Value of 0 means an error.
+A value of <em>Max Detection range</em> means no echo.</p>
+<p class="last">For example, if Value contains 0,40, Value1 1,2 and Value2 <em>Max Detection range</em>, the
+following values (3 to 9) will contain <em>Max Detection range</em> too. It probably means you
+have the echo of the ground at 0,40m and another object at 1,2m. Left
+and Right sensors work the same way and allow you to locate objects.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="battery">
+<span id="id37"></span><h2>Battery<a class="headerlink" href="#battery" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/Battery/Current/Sensor/Value</td>
+<td>current Sensor (A)</td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/Battery/Charge/Sensor/Value</td>
+<td>Charge Sensor (%)</td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/Battery/Temperature/Sensor/Value</td>
+<td>Temperature Sensor (%)</td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/battery_robot.html#robot-battery"><em>Battery specifications</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/Battery/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/Battery/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Temperature/Battery/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fsr">
+<span id="id38"></span><h2>FSR<a class="headerlink" href="#fsr" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/FSR/FrontLeft/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LFoot/FSR/FrontRight/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/FSR/RearLeft/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LFoot/FSR/RearRight/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RFoot/FSR/FrontLeft/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RFoot/FSR/FrontRight/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RFoot/FSR/RearLeft/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RFoot/FSR/RearRight/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-kg"><em class="xref std std-term">FSR (kg)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/FSR/TotalWeight/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-total-kg"><em class="xref std std-term">FSR total (kg)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RFoot/FSR/TotalWeight/Sensor/Value</td>
+<td><a class="reference internal" href="#term-fsr-total-kg"><em class="xref std std-term">FSR total (kg)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/LFoot/FSR/CenterOfPressure/X/Sensor/Value</td>
+<td><a class="reference internal" href="#term-center-of-pressure-m"><em class="xref std std-term">center of pressure (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/LFoot/FSR/CenterOfPressure/Y/Sensor/Value</td>
+<td><a class="reference internal" href="#term-center-of-pressure-m"><em class="xref std std-term">center of pressure (m)</em></a></td>
+</tr>
+<tr class="row-even"><td>Device/SubDeviceList/RFoot/FSR/CenterOfPressure/X/Sensor/Value</td>
+<td><a class="reference internal" href="#term-center-of-pressure-m"><em class="xref std std-term">center of pressure (m)</em></a></td>
+</tr>
+<tr class="row-odd"><td>Device/SubDeviceList/RFoot/FSR/CenterOfPressure/Y/Sensor/Value</td>
+<td><a class="reference internal" href="#term-center-of-pressure-m"><em class="xref std std-term">center of pressure (m)</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a class="reference internal" href="../robots/fsr_robot.html#robot-fsr"><em>FSRs specifications</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Diagnosis Keys</th>
+<th class="head">See ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><p class="first">Diagnosis/Active/LFoot/FSR/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Active/RFoot/FSR/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-even"><td><p class="first">Diagnosis/Passive/LFoot/FSR/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+<tr class="row-odd"><td><p class="first">Diagnosis/Passive/RFoot/FSR/Error</p>
+<p class="last">[<a class="reference internal" href="#term-level-of-failure-severity"><em class="xref std std-term">Level of failure severity</em></a>: <em>NEGLIGIBLE</em>]</p>
+</td>
+<td><a class="reference internal" href="#term-error"><em class="xref std std-term">Error</em></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="glossary docutils">
+<dt id="term-fsr-kg">FSR (kg)</dt>
+<dd><p class="first">The returned value is approximate.</p>
+<p class="last"><strong>Good practice</strong>: instead of the value itself, take in account the variation of the value,
+in order to detect any change at foot contact level.</p>
+</dd>
+<dt id="term-fsr-total-kg">FSR total (kg)</dt>
+<dd>The total weight value is the sum of all 4 FSR of the foot.</dd>
+<dt id="term-center-of-pressure-m">center of pressure (m)</dt>
+<dd>CenterOfPressure values are computed barycenter of FSR (using individual weight
+and position) for each foot. The value returned is in m for X and Y, from the
+foot reference.
+Using centerOfPressure and weight from both foot, you can compute a barycenter
+for all weight on the robot.</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When the weight on the foot is very low, the center of pressure will likely be bad.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the real center of pressure go outside the 4 FSR parallelogram, the value
+of weight and centre of pressure could become bad, due to internal mechanical constraint.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="../robots/postures_robot.html" title="Predefined postures">Predefined postures</a>
+     |
+    <a href="../index.html" title="&lt;em&gt;NAO&lt;/em&gt; - Technical Guide" accesskey="U">&lt;em&gt;NAO&lt;/em&gt; - Technical Guide</a>
+   |
+    <a href="../body_type.html" title="&lt;em&gt;NAO&lt;/em&gt; - Versions and Body Type"><em>NAO</em> - Versions and Body Type</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../nao/index.html"><em>NAO</em> - User Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><em>NAO</em> - Technical Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../robots/index_robots.html"><em>NAO</em> - Technical overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href=""><em>NAO</em> - Actuator &amp; Sensor list</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../body_type.html"><em>NAO</em> - Versions and Body Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_h25/index_h25.html">NAO H25</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_h21/index_h21.html">NAO H21</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_t14/index_t14.html">NAO T14</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nao_t2/index_t2.html">NAO T2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../asknao/index_asknao.html">ASK NAO Interface - V2 - User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><em>NAO</em> - Actuator &amp; Sensor list</a><ul>
+<li><a class="reference internal" href="#joints-and-actuators">Joints and Actuators</a><ul>
+<li><a class="reference internal" href="#headyaw">HeadYaw</a></li>
+<li><a class="reference internal" href="#headpitch">HeadPitch</a></li>
+<li><a class="reference internal" href="#lelbowyaw">LElbowYaw</a></li>
+<li><a class="reference internal" href="#lelbowroll">LElbowRoll</a></li>
+<li><a class="reference internal" href="#relbowyaw">RElbowYaw</a></li>
+<li><a class="reference internal" href="#relbowroll">RElbowRoll</a></li>
+<li><a class="reference internal" href="#lhand">LHand</a></li>
+<li><a class="reference internal" href="#lwristyaw">LWristYaw</a></li>
+<li><a class="reference internal" href="#rhand">RHand</a></li>
+<li><a class="reference internal" href="#rwristyaw">RWristYaw</a></li>
+<li><a class="reference internal" href="#lshoulderpitch">LShoulderPitch</a></li>
+<li><a class="reference internal" href="#lshoulderroll">LShoulderRoll</a></li>
+<li><a class="reference internal" href="#rshoulderpitch">RShoulderPitch</a></li>
+<li><a class="reference internal" href="#rshoulderroll">RShoulderRoll</a></li>
+<li><a class="reference internal" href="#rhiproll">RHipRoll</a></li>
+<li><a class="reference internal" href="#lhiproll">LHipRoll</a></li>
+<li><a class="reference internal" href="#lhipyawpitch">LHipYawPitch</a></li>
+<li><a class="reference internal" href="#rhippitch">RHipPitch</a></li>
+<li><a class="reference internal" href="#lhippitch">LHipPitch</a></li>
+<li><a class="reference internal" href="#rkneepitch">RKneePitch</a></li>
+<li><a class="reference internal" href="#lkneepitch">LKneePitch</a></li>
+<li><a class="reference internal" href="#ranklepitch">RAnklePitch</a></li>
+<li><a class="reference internal" href="#lanklepitch">LAnklePitch</a></li>
+<li><a class="reference internal" href="#rankleroll">RAnkleRoll</a></li>
+<li><a class="reference internal" href="#lankleroll">LAnkleRoll</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#touch-sensors">Touch sensors</a><ul>
+<li><a class="reference internal" href="#head">Head</a></li>
+<li><a class="reference internal" href="#lhand-touch-sensor">LHand</a></li>
+<li><a class="reference internal" href="#rhand-touch-sensor">RHand</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#switches">Switches</a><ul>
+<li><a class="reference internal" href="#chestboard">ChestBoard</a></li>
+<li><a class="reference internal" href="#lfoot">LFoot</a></li>
+<li><a class="reference internal" href="#rfoot">RFoot</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cpu">CPU</a></li>
+<li><a class="reference internal" href="#inertial">Inertial</a><ul>
+<li><a class="reference internal" href="#gyroscope">Gyroscope</a></li>
+<li><a class="reference internal" href="#angle">Angle</a></li>
+<li><a class="reference internal" href="#accelerometer">Accelerometer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#leds">LEDs</a><ul>
+<li><a class="reference internal" href="#eyes">Eyes</a><ul>
+<li><a class="reference internal" href="#face-led-red-left">Face/Led/Red/Left</a></li>
+<li><a class="reference internal" href="#face-led-green-left">Face/Led/Green/Left</a></li>
+<li><a class="reference internal" href="#face-led-blue-left">Face/Led/Blue/Left</a></li>
+<li><a class="reference internal" href="#face-led-red-right">Face/Led/Red/Right</a></li>
+<li><a class="reference internal" href="#face-led-green-right">Face/Led/Green/Right</a></li>
+<li><a class="reference internal" href="#face-led-blue-right">Face/Led/Blue/Right</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ears">Ears</a><ul>
+<li><a class="reference internal" href="#ears-led-right">Ears/Led/Right</a></li>
+<li><a class="reference internal" href="#ears-led-left">Ears/Led/Left</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#chestboard-actuators">ChestBoard</a></li>
+<li><a class="reference internal" href="#led-head">Head</a></li>
+<li><a class="reference internal" href="#lfoot-actuators">LFoot</a></li>
+<li><a class="reference internal" href="#rfoot-actuators">RFoot</a></li>
+<li><a class="reference internal" href="#led-state">Led state</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sonars">Sonars</a></li>
+<li><a class="reference internal" href="#battery">Battery</a></li>
+<li><a class="reference internal" href="#fsr">FSR</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="../robots/postures_robot.html" title="Predefined postures">previous</a>
+     |
+    <a href="../index.html" title="&lt;em&gt;NAO&lt;/em&gt; - Technical Guide" accesskey="U">up</a>
+   |
+    <a href="../body_type.html" title="&lt;em&gt;NAO&lt;/em&gt; - Versions and Body Type">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

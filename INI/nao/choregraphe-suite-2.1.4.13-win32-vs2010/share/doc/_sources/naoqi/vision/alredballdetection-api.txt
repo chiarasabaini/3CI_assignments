@@ -1,0 +1,41 @@
+.. _alredballdetection-api:
+
+ALRedBallDetection API
+======================
+
+:ref:`naoqi-vision` - :ref:`Overview <alredballdetection>` | API
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alredballdetectionproxy.h>
+
+
+Method list
+-----------
+
+.. cpp:class:: ALRedBallDetectionProxy
+
+* As any module, this module inherits methods from :ref:`almodule-api`.
+
+* It also inherits methods from :ref:`alextractor-api`.
+
+
+Event list
+----------
+
+* :naoqi:event:`redBallDetected`
+
+
+
+Events
+------
+
+.. naoqi:event:: redBallDetected(AL::ALValue value)
+
+  Raised when a red ball is detected.
+
+  :param value: Informations related to the detected red ball. Please refer to :ref:`alredballdetection` for details.

@@ -1,0 +1,162 @@
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+.. |parameter-button| image:: /medias/desktop/choregraphe/parameter_button.png
+   :class: img-inline
+
+.. |play-button| image:: /medias/desktop/beginning_play_button.png
+   :class: img-inline
+
+.. |import-file-button| image:: /medias/desktop/choregraphe/chore_project_content_import.png
+   :class: img-inline
+
+.. |browse-button| image:: /medias/desktop/choregraphe/chore_browse_button.png
+   :class: img-inline
+
+
+
+.. _choregraphe-tuto-attach-file-to-box:
+
+Using attached files
+=====================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+------------------------
+
+In this tutorial you will see, over an example, how to:
+
+#. Attach a file, for example, a sound, to the current Project.
+#. Declare it as a parameter of a box.
+#. Use it in the box script.
+
+*Create the following box*: a **Script** box playing a music from a MP3 file.
+
+
+1 - Attaching a file to the current Project
+-------------------------------------------
+
+=====  =================================================================================
+Step       Action
+=====  =================================================================================
+1.      In the :ref:`chore_project_content`, click **Plus** |import-file-button| button
+        then choose **Import files**.
+
+2.      Select the file to attach.
+
+        The file is displayed in the project content, and will be sent on the robot
+        with the behavior.
+
+        .. image:: /medias/desktop/choregraphe/content_panel_attached_file.png
+            :width: 219 px
+            :height: 290 px
+=====  =================================================================================
+
+2 - Declaring the attached file as parameter of a box
+------------------------------------------------------
+
+Now we are going to create a simple box that will play a music in order to use an attached file as parameter.
+
+=====  =================================================================================
+Step       Action
+=====  =================================================================================
+1.      Create a new **Python** box.
+
+        For further details, see: :ref:`choregraphe-howto-create-script-box`.
+
+2.      Add a parameter to the box, and specify "File name" as **Name**, and
+        "Attached file" as **Type**.
+
+        For further details, see: :ref:`choregraphe-howto-add-remove-box-in-out-param`.
+
+3.      Click the |parameter-button| **Parameter** button, to set the value of
+        the parameter.
+
+        .. image:: /medias/desktop/choregraphe/set_parameter_attached_file.png
+            :width: 294 px
+            :height: 251 px
+
+4.      Click the |browse-button| browse button and select one of the files available
+        in the **Project content**.
+
+        Note that if you had not yet imported the file in the **Project content**,
+        you can do it prior to select the file.
+=====  =================================================================================
+
+
+Using a file in the box script
+--------------------------------
+
+Now we will edit the script of the box in order to read the music.
+
+=====  ====================================================================================================================
+Step    Action
+=====  ====================================================================================================================
+1.      Double click the box to display the **Script editor** panel.
+
+        For further details, see: :ref:`chore_script_editor_panel`.
+
+        As you can see, the structure of the code were automatically generated.
+
+2.      In the **onLoad** method, create a proxy to AlAudioPlayer module.
+
+        For further deails, see: :ref:`alaudioplayer`.
+
+        .. code-block:: python
+
+                def onLoad(self):
+                    self.player = ALProxy('ALAudioPlayer')
+
+3.      In the **onStart** method, call the method playFile() with the path to
+        the attached file as parameter.
+
+        The attached file will be send to the robot when you will start the behavior,
+        so the path has to lead to the attached file on the robot.
+
+        .. code-block:: python
+
+            os.path.join(self.behaviorAbsolutePath(), self.getParameter("File name"))
+
+        It is a concatenation of the behavior path on the robot and the file name.
+
+4.      In the **onUnload** method, call the method **stopAll()**.
+
+        The code of the box should look like that:
+
+        .. code-block:: python
+
+            class MyClass(GeneratedClass):
+                def __init__(self):
+                GeneratedClass.__init__(self)
+
+                def onLoad(self):
+                    self.player = ALProxy('ALAudioPlayer')
+
+                def onUnload(self):
+                    self.player.stopAll()
+
+                def onInput_onStart(self):
+                    self.player.playFile(os.path.join(self.behaviorAbsolutePath(), self.getParameter("File name")))
+
+                def onInput_onStop(self):
+                    self.onUnload()
+=====  ====================================================================================================================
+
+**Testing**
+
+Now, let's test it:
+
+=====  =================================================================================
+Step       Action
+=====  =================================================================================
+1.      In your root diagram, link the **onStart** input of the box to the beginning
+        of the behavior.
+
+2.      Click the |play-button| **Play** button to start the behavior.
+
+        Your robot is playing the music given as an attached file.
+=====  =================================================================================
+
+:download:`tutorial_attached_file.crg </examples/choregraphe/tutorial_attached_file.crg>`
+
+

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="proprietario"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-10-21 08:14:41 "/>
+        <attribute name="created" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA2OjI5OjI1ICI7MzI5Mg=="/>
+        <attribute name="edited" value="cHJvcHJpZXRhcmlvO0FTVVMtQ0hJQVJBOzIwMTktMTAtMjE7IjA4OjE0OjQxICI7MTI7MzQ0NA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;inserisci un numero:&quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="i" expression="1"/>
+            <declare name="prod" type="Integer" array="False" size=""/>
+            <assign variable="prod" expression="1"/>
+            <declare name="saveN" type="Integer" array="False" size=""/>
+            <assign variable="saveN" expression="n"/>
+            <do expression="n&gt;0">
+                <assign variable="prod" expression="prod*i"/>
+                <assign variable="i" expression="i+1"/>
+                <assign variable="n" expression="n-1"/>
+            </do>
+            <output expression="&quot;il prodotto dei primi &quot;&amp;saveN&amp;&quot; numeri &#232; &quot;&amp;prod" newline="True"/>
+        </body>
+    </function>
+    <function name="ask" type="None" variable="">
+        <parameters/>
+        <body/>
+    </function>
+    <function name="printodd" type="None" variable="">
+        <parameters/>
+        <body/>
+    </function>
+</flowgorithm>

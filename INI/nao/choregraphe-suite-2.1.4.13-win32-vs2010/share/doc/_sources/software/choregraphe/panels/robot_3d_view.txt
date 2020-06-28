@@ -1,0 +1,432 @@
+
+.. _3d-nao-panel:
+
+Robot View
+==========
+
+What is the Robot View
+-----------------------
+
+The **Robot View** displays in a 3D view the robot **Choregraphe** is connected to.
+
+It allows you to check and modify the joint values (and then move the limbs) using
+the :ref:`choregraphe-detailed-interface-motion-widget`.
+
+.. image:: /medias/desktop/choregraphe/chore_3d_view.png
+   :width: 250 px
+   :height: 291 px
+
+The **Robot View** also displays:
+
+* sentences said or heard by the robot,
+* objects, people or zones involved in the world perception.
+
+
+.. _robot-3d-view-preferences:
+
+Toolbar
++++++++
+
+.. |info_btn| image:: /medias/desktop/choregraphe/information-48.png
+   :class: img-inline
+
+.. |hide_world_rep_btn| image:: /medias/desktop/choregraphe/hide-world-rep-48.png
+   :class: img-inline
+
+.. |update_position_btn| image:: /medias/desktop/choregraphe/dont-update-robot-position-48.png
+   :class: img-inline
+
+.. |update_motor_btn| image:: /medias/desktop/choregraphe/dont-update-motors-48.png
+   :class: img-inline
+
+.. |hide_engzone_btn| image:: /medias/desktop/choregraphe/hide_engzone.png
+   :class: img-inline
+
+.. |hide_people_btn| image:: /medias/desktop/choregraphe/hide_people.png
+   :class: img-inline
+
+====================== ===============================================================================
+Button                  Click on this button to ...
+====================== ===============================================================================
+|info_btn|              Hide or show information data such as FPS and triangles displayed.
+
+                        .. image:: /medias/desktop/choregraphe/info_display.png
+                            :width: 186 px
+                            :height: 162 px
+
+|hide_world_rep_btn|    Hide or show objects stored in memory by the
+                        **ALWorldRepresentation** module.
+
+                        For further details, see: :ref:`alworldrepresentation`.
+
+|update_position_btn|   Disable tracking of the robot position in the world.
+
+                        If checked, the robot torso will not move on the grid nor rotate.
+
+|update_motor_btn|      Disable tracking of actuator values.
+
+                        If checked, the robot will be frozen on the display, in order to save
+                        CPU on the robot.
+
+|hide_engzone_btn|      Hide or show the areas defined by **ALEngagementZones** module.
+
+                        For further details, see: :ref:`alengagementzones`.
+
+|hide_people_btn|       Hide or show people detected by
+                        **ALPeoplePerception** module.
+
+                        **Caution**: if show is selected, the **ALEngagementZones** module
+                        is launched automatically each time you connect **Choregraphe** to a robot.
+
+                        For further details, see: :ref:`alpeopleperception`.
+====================== ===============================================================================
+
+.. _navigate:
+
+Navigating the 3D world
+++++++++++++++++++++++++
+
+By default, the point of view is on the **front** of the robot.
+
+To **navigate** in the 3D world:
+
+===================================    =======================================================
+ To ...                                 Do ...
+===================================    =======================================================
+ Move up, down, right or left           Drag using the left button of the mouse.
+
+ Zoom in and out                        Use the scroll wheel of the mouse.
+
+ Turn around a point                    Drag using the right button of the mouse.
+
+===================================    =======================================================
+
+.. This has disappeared (for this version only)
+
+..  Change the point of view              Right-click to select a predefined point of view in
+..                                        the contextual menu.
+
+.. _selecting_objects:
+
+Displaying object or limb properties
++++++++++++++++++++++++++++++++++++++
+
+| Click any robot limb or objects in order to display their properties.
+| For further details, see:
+
+* :ref:`choregraphe-detailed-interface-motion-widget` and :ref:`rotation_handles`.
+* :ref:`robot-3d-view-world-rep-widget`.
+
+
+.. |green-arrow| image:: /medias/desktop/choregraphe/chore_3d_motion_arrow_green.png
+   :class: img-inline
+
+.. |blue-arrow| image:: /medias/desktop/choregraphe/chore_3d_motion_arrow_blue.png
+   :class: img-inline
+
+.. |motion-record-enabled| image:: /medias/desktop/choregraphe/chore_3d_motion_record_enable.png
+   :class: img-inline
+
+.. |motion-record-red| image:: /medias/desktop/choregraphe/chore_3d_motion_record_enable_red.png
+   :class: img-inline
+
+.. |motion-record-disabled| image:: /medias/desktop/choregraphe/chore_3d_motion_record_disable.png
+   :class: img-inline
+
+.. |stiffen-green| image:: /medias/desktop/choregraphe/chore_asserv_button.png
+   :class: img-inline
+
+.. |stiffen-orange| image:: /medias/desktop/choregraphe/stiffness_button_orange.png
+   :class: img-inline
+
+.. |stiffen-red| image:: /medias/desktop/choregraphe/stiffness_button_red.png
+   :class: img-inline
+
+.. |show-motion| image:: /medias/desktop/choregraphe/show_motion.png
+   :class: img-inline
+
+
+.. _choregraphe-detailed-interface-motion-widget:
+
+Limb properties
+-----------------
+
+This panel enables you to modify the joint values of each limb.
+
+.. image:: /medias/desktop/choregraphe/chore_tuto_motion.png
+    :width: 412 px
+    :height: 385 px
+
+The table below describes in details the control buttons and indicators of
+the :ref:`choregraphe-detailed-interface-motion-widget`:
+
+=====  =========================== ====================================================================================================================================
+Part    Name                        Description
+=====  =========================== ====================================================================================================================================
+**A**   **Slider**                  Allows you to adjust the **joint value**.
+
+                                    You can move it, as well as enter a value in the associated text box.
+
+                                    The robot tries to reach the command value with its joint as soon as possible.
+
+                                    For further details, see:
+
+                                    * :ref:`moving-joints`,
+                                    * :ref:`store-joints`.
+
+**B**   **Current joint value**     The color indicates if the requested value has been reached.
+
+                                    |green-arrow| (green) means the current joint value = the last requested value.
+
+                                    |blue-arrow| (blue) means that the joint value is not (or not yet) the requested value.
+
+                                    It could be because:
+
+                                    * the command execution is still ongoing, or
+                                    * the joint cannot reach the requested value.
+
+                                      It is the case when there is an obstacle as an other body part or a wall for instance.
+
+**C**  **Record** button            Saves the defined value, when a :ref:`choregraphe-reference-box-type-timeline` is currently opened.
+
+                                    This button can be:
+
+                                    |motion-record-disabled| (grey): you cannot store joint values because you are not currently editing a
+                                    :ref:`choregraphe-reference-box-type-timeline`.
+
+                                    |motion-record-enabled| (black): the current joint value is not stored at the current selected frame.
+
+                                    |motion-record-red| (black and red): the current joint value is being stored at the current selected frame.
+
+                                    For further details, see: :ref:`store-joints`.
+
+**D**   **Stiffen chain on/off**    Sets on/off the **Stiffness** of the whole selected chain of joints (Head, Arm or Leg).
+        button
+                                    This button can be:
+
+                                    | |stiffen-green| (green): **Stiffness off**, you can move this part manually on the real robot, but commands have no effect.
+                                    | |stiffen-orange| (orange): intermediate state depending on the **Stiffness** value.
+                                    | |stiffen-red| (red): **Stiffness on**, the robot is able to move this part when requested, but you cannot move it manually.
+
+**E**   **Mirroring** option        If selected, actions (send a command value, register a joint value, etc) are also executed
+                                    on the symmetric limb.
+
+                                    For example left and right arms will move the same way.
+=====  =========================== ====================================================================================================================================
+
+.. _moving-joints:
+
+Moving joints from the Robot view
+++++++++++++++++++++++++++++++++++
+
+Simulated robot
+^^^^^^^^^^^^^^^^
+
+To move joints of a simulated robot, using the :ref:`choregraphe-detailed-interface-motion-widget`:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      In the :ref:`3d-nao-panel`, click any moving part of the robot (head or limbs).
+
+        The :ref:`choregraphe-detailed-interface-motion-widget` appears.
+
+2.      Use one of the **Sliders** to adjust the joint value.
+
+        The simulated robot moves.
+=====  ======================================================================================
+
+Real robot
+^^^^^^^^^^
+
+To use the :ref:`choregraphe-detailed-interface-motion-widget` to make a real robot move:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Make sure **Choregraphe** is connected to a real robot.
+
+2.      In the :ref:`3d-nao-panel`, click any moving part of the robot (head or limbs).
+
+        The :ref:`choregraphe-detailed-interface-motion-widget` appears.
+
+3.      Make sure the **Stiffness** is on.
+
+        If not, click the **Stiffen chain on/of** button.
+
+4.      Use one of the **Sliders** to adjust the joint value.
+
+        Simulated and real robots move together.
+=====  ======================================================================================
+
+
+.. _moving-joints-bis:
+
+Moving the real robot to update the Robot view
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+To edit the :ref:`choregraphe-detailed-interface-motion-widget` using the real robot:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Make sure **Choregraphe** is connected to a real robot.
+
+2.      In the :ref:`3d-nao-panel`, click any moving part of the robot (head or limbs).
+
+        The :ref:`choregraphe-detailed-interface-motion-widget` appears.
+
+3.      If you chose a leg, hold your robot by the waist/torso to prevent it to fall down.
+
+4.      Make sure the **Stiffness** is off.
+
+        If not, click the **Stiffen chain on/of** button.
+
+5.      Move the real robot manually.
+
+        Simulated and real robots move together.
+=====  ======================================================================================
+
+
+.. _store-joints:
+
+Storing joint value from the Robot view
++++++++++++++++++++++++++++++++++++++++++++
+
+To store a joint value using the **Robot view**:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Make sure a :ref:`choregraphe-reference-box-type-timeline` is opened.
+
+2.      Click on the **Timeline** in order to select the **Motion keyframe** you want to
+        modify.
+
+3.      In the :ref:`3d-nao-panel`, click any moving part of the robot (head or limbs).
+
+        The :ref:`choregraphe-detailed-interface-motion-widget` appears.
+
+4.      Use one of the **Sliders** to adjust the joint value, or
+        click the |motion-record-enabled| **Record** button.
+
+        The **Record** button becomes red |motion-record-red| and the joint value is stored
+        in the current :ref:`choregraphe-reference-box-motion-keyframe`.
+=====  ======================================================================================
+
+.. _delete-joints-values:
+
+Deleting joint value from the Robot view
+++++++++++++++++++++++++++++++++++++++++++++
+
+To delete a joint value in a **Motion keyframe**:
+
+=====  ======================================================================================
+Step       Action
+=====  ======================================================================================
+1.      Click on the **Motion keyframe** you want to modify.
+
+2.      In the :ref:`3d-nao-panel`, click any moving part of the robot (head or limbs).
+
+        The :ref:`choregraphe-detailed-interface-motion-widget` appears.
+
+3.      Click the |motion-record-red| red **Record** button.
+
+        the **Record** button becomes black and white |motion-record-enabled|
+        and the joint value is removed from the current
+        :ref:`choregraphe-reference-box-motion-keyframe`.
+=====  ======================================================================================
+
+For further details, see:
+
+* :ref:`Create a movement from scratch <choregraphe-tuto-movement-from-scratch>`,
+* :ref:`Create a movement on a real NAO <choregraphe-tuto-movement-real-nao>`.
+
+.. _rotation_handles:
+
+Rotation handles
++++++++++++++++++
+
+Rotation handles allow manipulating directly the joints of the selected limb.
+
+.. image:: /medias/desktop/choregraphe/rotation_handle.png
+   :width: 361 px
+   :height: 333 px
+
+.. _robot-3d-view-world-rep-widget:
+
+ALWorldRepresentation object properties
+---------------------------------------
+
+.. image:: /medias/desktop/choregraphe/robot_view_capture_world_rep.png
+   :width: 360 px
+   :height: 427 px
+
+This panel shows data about the object currently selected.
+The data displayed depends on the Category of the objects selected.
+Some data items are always shown:
+
+* Category
+* Parent
+* Position
+* Rotation
+
+The position is given relatively to the Parent object.
+
+Additionally, you can give a specific shape, color and scale to the object.
+
+To customize the aspect of your object, you have to set the ``Display``
+attribute with the following fields:
+
+* ``colorR`` (float) -- red component of the color (between 0 and 1)
+* ``colorG`` (float) -- green component of the color (between 0 and 1)
+* ``colorB`` (float) -- blue component of the color (between 0 and 1)
+* ``scaleX`` (float) -- scale along x of the object
+* ``scaleY`` (float) -- scale along y of the object
+* ``scaleZ`` (float) -- scale along z of the object
+* ``model`` (text) -- name of the model of the object (without the .mesh extension)
+
+.. warning::
+
+  Colors are defined as float between 0 and 1.
+
+This has to be done in NAOqi. For instance, in Python:
+
+.. code-block:: python
+
+  wr = ALProxy("ALWorldRepresentation", "127.0.0.1", 9559)
+  attribute = "Display"
+  fields = [["colorR", "float"],
+            ["colorG", "float"],
+            ["colorB", "float"],
+            ["scaleX", "float"],
+            ["scaleY", "float"],
+            ["scaleZ", "float"],
+            ["model", "text"]]
+  # assuming the category "mycategory" exists
+  success = wr.addAttributeToCategory("mycategory", attribute, fields)
+  # assuming the object "myobject" exists in category "mycategory"
+  values = [["colorR", 1.0],
+            ["colorG", 1.0],
+            ["colorB", 0.0],
+            ["scaleX", 0.1],
+            ["scaleY", 0.2],
+            ["scaleZ", 0.3],
+            ["model", "cylinder"]]
+  success = wr.updateAttribute("myobject", attribute, 1, values)
+
+For more details, refer to :ref:`alworldrepresentation`.
+
+.. note::
+
+  Several models are already provided:
+
+  * "arrow"
+  * "cylinder"
+  * "sphere"
+
+  If you want to set a custom model for your object, just provide an Ogre mesh
+  model (\*.mesh file) and put it in the share/choregraphe/media/visual folder
+  of Choregraphe installation directory. The name of the model to provide to
+  ALWorldRepresentation is without the .mesh extension.
+

@@ -1,0 +1,62 @@
+﻿.. include:: ../../../bulk/common.rst
+
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+.. |life| image:: /medias/desktop/choregraphe/chore_life_button.png
+   :class: img-inline
+
+.. _life_tuto:
+
+Testing Autonomous Life
+========================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+-----------------
+
+1. Get |robot| alive
+----------------------
+
+To activate **ALAutonomousLife**:
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Make sure your |robot| is on the floor.
+
+        More specifically, do not leave |roboN| unattended on a table.
+
+2.      Make sure he has subscribed to the **Basic Channel**.
+
+        For further details, see: :ref:`basic_channel`.
+
+3.      Click the |life| **Turn autonomous life on** button.
+
+4.      Your |robot| becomes alive, breathing, slightly moving and trying to
+        keep eye contact with any human entering its field of vision.
+=====  ==========================================================================
+
+
+2. Upload additional activities
+-------------------------------
+
+To see activities launched:
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Make sure your |robot| is associated with the |store|.
+
+2.      From the |store|: |store_link|, choose something to install.
+
+3.      In **Choregraphe**,
+        click the |life| **Turn autonomous life on** button.
+=====  ==========================================================================
+
+To go further
+-------------
+
+To discover how to create an **Activity**, follow the tutorial:
+
+* :ref:`create_solitary_activity_tuto`.

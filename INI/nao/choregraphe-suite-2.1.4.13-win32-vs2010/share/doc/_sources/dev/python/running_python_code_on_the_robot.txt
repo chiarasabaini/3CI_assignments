@@ -1,0 +1,24 @@
+Running Python code on the robot
+================================
+
+
+Here we will try to have the script found in the :ref:`python-reacting-to-events`
+tutorial running automatically at naoqi startup.
+
+Upload the script on the robot, for instance to ``/home/nao/reacting_to_events.py``,
+then edit the ``/home/nao/naoqi/preferences/autoload.ini`` file to have:
+
+.. code-block:: ini
+
+   [python]
+   /home/nao/reacting_to_events.py
+
+
+
+Note that the `--pip` and `--pport` option are automatically set by
+NAOqi while it runs the script.
+
+
+
+
+

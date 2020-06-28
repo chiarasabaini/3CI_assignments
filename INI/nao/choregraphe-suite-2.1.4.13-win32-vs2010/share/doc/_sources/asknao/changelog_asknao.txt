@@ -1,0 +1,96 @@
+﻿ASK NAO Interface - V2 - Changelog
+==================================
+
+This is the new **ASK NAO Interface - V2** - https://interface2.asknao.com
+
+It has been designed to support robots running on **NAOqi** version **2.1**.
+
+If your robot is still running on version **1.14**, you can:
+
+* Still access the former site https://interface.asknao.com/
+
+Or better:
+
+* upgrade your robot with version **2.1**, and then use the **ASK NAO Interface - V2**.
+
+Global changes
+--------------
+
+* Uses the new **Aldebaran Store**:
+  https://cloud.aldebaran-robotics.com
+
+* No need to enter community login and password anymore, the system now uses **OAuth**
+  authentication system.
+
+  You are redirected to an authorization page the first time you log in, and you
+  need to 'allow' **ASK NAO** to access your store account.
+
+* In the **Aldebaran**  menu bar, a new page: **My Robots** lists
+  the robots associated to your account, as well as robots shared by other
+  users in your institution.
+
+* Now robots can be associated to any **Teacher** or **Admin** account: they are
+  automatically shared between institution members, so that every teacher can use them.
+
+* Confirmation messages has been added everywhere (when a **Playlist** is saved,
+  when a user profile is added/updated, etc.)
+
+* Website loading time optimized.
+
+* A link to **Ask NAO documentation** has been added in the **Aldebaran** menu bar.
+
+* A notification system with a notification menu has been added on the main page.
+
+  This menu displays notifications.
+  
+  Currently you will get notified everytime one of your robot updates or
+  installs an application.
+  You'll also get notified when the **ASK NAO interface** is updated.
+
+* Website translated in Spanish and German.
+
+Playlist tab changes
+--------------------
+
+* **Activity** information displays additional items about the application:
+  version and tags.
+
+* A Search box has been added to search for **Playlist** on the **Playlist** page.
+
+* A search box has been added to search for **Activities** on the **Playlist** edition page.
+
+* **Playlist** icon becomes dynamic, and displays the icons of the **Activity**
+  included in the **Playlist**.
+
+Create tab changes
+------------------
+
+* A new **CREATE** tab has been added, containing the **Quiz me** content
+  creator.
+
+  With this new page, the **Teacher** can create its own quizzes,
+  and later play them with the **Quiz me!** **Activity** on **NAO**.
+
+
+Administration panel changes
+----------------------------
+
+* New function: import CSV files for child account creation.
+
+Quiz me! content creator
+------------------------
+
+First version of the **Quiz me!** content creator.
+
+Features:
+
+* List your quizzes.
+
+* Create quizzes.
+
+  Quiz has a title, a topic, a description, a language grade and a difficulty.
+  Add as many questions as you want to your quiz.
+  Each quiz question has one right answer, and a variable number of wrong answers
+  possible.
+
+* Update/delete existing quizzes.

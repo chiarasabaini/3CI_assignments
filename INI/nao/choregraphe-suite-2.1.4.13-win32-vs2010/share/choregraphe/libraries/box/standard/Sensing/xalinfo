@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="no">
+    <Node name="Battery" />
+    <Node name="Bumpers" />
+    <Node name="Fall Detector" />
+    <Node name="Foot Contact" />
+    <Node name="Get Temperature" />
+    <Node name="Has Hardware" />
+    <Node name="Is In Collision" />
+    <Node name="Motor Heat" />
+    <Node name="Robot Posture" />
+    <Node name="Sonar" />
+    <Node name="Tactile Head" />
+    <Node name="Tactile L.Hand" />
+    <Node name="Tactile R.Hand" />
+</Folder>

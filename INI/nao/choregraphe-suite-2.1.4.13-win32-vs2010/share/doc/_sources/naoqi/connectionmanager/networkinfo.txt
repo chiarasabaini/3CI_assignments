@@ -1,0 +1,206 @@
+.. _networkinfo:
+
+NetworkInfo
+===========
+
+:ref:`naoqi-core` - :ref:`Overview <alconnectionmanager>` |
+:ref:`API <alconnectionmanager-api>`  | NetworkInfo | :ref:`networkinfo-ipinfo`
+
+--------------------
+
+.. code-block:: cpp
+
+  #include <alproxies/networkinfo.h>
+
+Describes the status of a network service. Many information are available for the service like the state of a service or its signal strength.
+
+
+* :ref:`networkinfo`
+
+  * :cpp:func:`NetworkInfo::serviceId`
+  * :cpp:func:`NetworkInfo::name`
+  * :cpp:func:`NetworkInfo::type`
+  * :cpp:func:`NetworkInfo::state`
+  * :cpp:func:`NetworkInfo::favorite`
+  * :cpp:func:`NetworkInfo::autoconnect`
+  * :cpp:func:`NetworkInfo::security`
+  * :cpp:func:`NetworkInfo::domains`
+  * :cpp:func:`NetworkInfo::nameserver`
+  * :cpp:func:`NetworkInfo::ipv4`
+  * :cpp:func:`NetworkInfo::ipv6`
+  * :cpp:func:`NetworkInfo::strength`
+  * :cpp:func:`NetworkInfo::error`
+  * :cpp:func:`NetworkInfo::toALValue`
+
+.. cpp:function:: std::string NetworkInfo::serviceId()
+
+  :return: the identifier for the network service.
+
+.. cpp:function:: std::string NetworkInfo::name()
+
+  Returns the name for the network service, for Ethernet service the name is "Wired",
+  for WiFi services the name is the SSID name of the network, if the network service is hidden the name is not set.,
+
+  :return: the network name
+
+.. cpp:function:: std::string NetworkInfo::type()
+
+  Returns the type of the network this can be:
+
+  - "ethernet" for Ethernet service or Usb networking
+
+  - "wifi" for WiFi service
+
+  - "bluetooth" for Bluetooth service
+
+  :return: the type of the service
+
+.. cpp:function:: std::string NetworkInfo::state()
+
+  Returns the state of the service possible values are:
+
+  - "online": signals that an Internet connection is available and verified
+
+  (Only one service can be online at the same time)
+
+  - "ready": means that the service is successfully connected
+
+  - "configuration": means that the services is getting is configuration like the IP address
+
+  - "association": for a WiFi service, represents the association to the services using the security parameter.
+
+  - "idle": means that no action have been made for this services.
+
+  - "failure": means that a connection tentative has failed. Use error() method to get the reason.
+
+  - "disconnect": means that the service is going to terminate the current connection and will return to the "idle" state.
+
+  :return: the state of the service
+
+.. cpp:function:: bool NetworkInfo::favorite()
+
+  Will be true if a cable is plugged in or the user selected and successfully connected to this service.
+
+  This value is automatically changed and to revert it back to false, the method :cpp:func:`ALConnectionManagerProxy::forget` needs to be used.
+
+  :return: true if the service is marked as favorite false instead
+
+.. cpp:function:: bool NetworkInfo::autoconnect()
+
+  If set to true, this service will auto-connect when no other connection is available.
+  This can be be set to false to prevent automatic connection without calling forget() method of ALConnectionManager.
+
+  :return: true if the service is marked as autoconnect false instead
+
+.. cpp:function:: std::vector<std::string> NetworkInfo::security()
+
+  For WiFi service type, this method will return a list of security methods
+  or key management settings. For other network type this method
+  will return an empty list.
+
+  Possible values are:
+
+  - "none": the WiFi service has no security
+
+  - "wep": the WiFi service uses WEP security.
+
+  - "psk": the WiFi uses WPA or WPA2 personal security.
+
+  - "wps": the WiFi uses the Wireless Protected Setup, this security is often an alternative for psk.
+    WPS allows connecting to a WPA2 secure Network by pressing an association button or by giving a PIN code.
+
+  - "ieee8021x": the WiFi service uses a WPA/WPA2 entreprise protection, this security is not supported in the current version of NAOqi.
+
+  :return: the available securities for the network.
+
+.. cpp:function:: std::vector<std::string> NetworkInfo::domains()
+
+  Returns the list of currently used search domains.
+  Can also be manual configured domains using :cpp:func:`ALConnectionManagerProxy::setServiceConfiguration`.
+
+  :return: the list of domains for this service
+
+.. cpp:function:: std::vector<std::string> NetworkInfo::nameserver()
+
+  Returns the list of currently activated or manually configured domain name servers.
+  The first one have a higher priority.
+
+  :return: the activated or configured name servers
+
+.. cpp:function:: NetworkInfo::IPInfo NetworkInfo::ipv4()
+
+  Returns a IPInfo which represents the actual system configuration or the manually
+  configured IP address using :cpp:func:`ALConnectionManagerProxy::setServiceConfiguration`.
+
+  :return: the IPv4 configuration for this service.
+
+.. cpp:function:: NetworkInfo::IPInfo NetworkInfo::ipv6()
+
+  **Experimental**: the IPv6 is not supported in the current version.
+
+  Returns a IPInfo for the actual system configuration or the manually
+  configured IP address using :cpp:func:`ALConnectionManagerProxy::setServiceConfiguration`.
+
+  :return: the IPv6 configuration for this service.
+
+.. cpp:function:: int NetworkInfo::strength()
+
+  :return: the signal strength of the services (only available for WiFi).
+
+.. cpp:function:: int NetworkInfo::error()
+
+  When an error occurs during connection or disconnection
+  the detailed information is represented in this
+  property.
+
+  This property is only valid when the service is in
+  the "failure" state. Otherwise it might be empty.
+
+  :return: the connection error
+
+.. cpp:function:: AL::ALValue NetworkInfo::toALValue()
+
+  Converts the NetworkInfo object as an ALValue. :ref:`networkinfo-alvalue`
+
+  :return: the ALValue representation of the NetworkInfo object.
+
+.. _networkinfo-alvalue:
+
+ALValue NetworkInfo
+--------------------
+
+The ALValue NetworkInfo is an array of n-pair (key, value).
+
+To exchange this object with other modules the NetworkInfo object can be represented as ALValue with the following structure.
+
++----------------+------------------------------------------------------+
+| key            | value type                                           |
++================+======================================================+
+| "ServiceId"    | string                                               |
++----------------+------------------------------------------------------+
+| "Name"         | string                                               |
++----------------+------------------------------------------------------+
+| "Type"         | string                                               |
++----------------+------------------------------------------------------+
+| "State"        | string                                               |
++----------------+------------------------------------------------------+
+| "Favorite"     | bool                                                 |
++----------------+------------------------------------------------------+
+| "Autoconnect"  | bool                                                 |
++----------------+------------------------------------------------------+
+| "Security"     | array of string                                      |
++----------------+------------------------------------------------------+
+| "Domains"      | array of string                                      |
++----------------+------------------------------------------------------+
+| "Nameserver"   | array of string                                      |
++----------------+------------------------------------------------------+
+| "IPv4"         | ALValue :ref:`networkinfo-ipinfo-alvalue`            |
++----------------+------------------------------------------------------+
+| "IPv6"         | ALValue :ref:`networkinfo-ipinfo-alvalue`            |
++----------------+------------------------------------------------------+
+| "Strength"     | int                                                  |
++----------------+------------------------------------------------------+
+| "Error"        | string                                               |
++----------------+------------------------------------------------------+
+
+The empty values will not be present.

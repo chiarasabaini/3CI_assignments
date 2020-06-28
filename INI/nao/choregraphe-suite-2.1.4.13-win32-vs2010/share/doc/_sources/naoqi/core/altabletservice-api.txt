@@ -1,0 +1,436 @@
+.. _altabletservice-api:
+
+ALTabletService API
+=====================
+
+:ref:`naoqi-core` - :ref:`Overview <altabletservice>` | API
+
+-----------------
+
+Namespace : **AL**
+
+Method list
+-----------
+
+Has the following methods:
+
+.. cpp:class:: ALTabletService
+
+**Web view**
+
+* :cpp:func:`ALTabletService::cleanWebview`
+* :cpp:func:`ALTabletService::hideWebview`
+* :cpp:func:`ALTabletService::loadApplication`
+* :cpp:func:`ALTabletService::loadUrl`
+* :cpp:func:`ALTabletService::showWebview`
+
+**Video Player**
+
+* :cpp:func:`ALTabletService::getVideoLength`
+* :cpp:func:`ALTabletService::getVideoPosition`
+* :cpp:func:`ALTabletService::pauseVideo`
+* :cpp:func:`ALTabletService::playVideo`
+* :cpp:func:`ALTabletService::resumeVideo`
+* :cpp:func:`ALTabletService::stopVideo`
+
+**Image**
+
+* :cpp:func:`ALTabletService::hideImage`
+* :cpp:func:`ALTabletService::pauseGif`
+* :cpp:func:`ALTabletService::preLoadImage`
+* :cpp:func:`ALTabletService::resumeGif`
+* :cpp:func:`ALTabletService::setBackgroundColor`
+* :cpp:func:`ALTabletService::showImage`
+
+**Dialog**
+
+* :cpp:func:`ALTabletService::showAlertView`
+* :cpp:func:`ALTabletService::showInputDialog`
+* :cpp:func:`ALTabletService::showInputTextDialog`
+
+**Wifi**
+
+* :cpp:func:`ALTabletService::configureWifi`
+* :cpp:func:`ALTabletService::disableWifi`
+* :cpp:func:`ALTabletService::enableWifi`
+* :cpp:func:`ALTabletService::forgetWifi`
+* :cpp:func:`ALTabletService::getWifiStatus`
+
+**System**
+
+* :cpp:func:`ALTabletService::getBrightness`
+* :cpp:func:`ALTabletService::getCurrentLifeActivity`
+* :cpp:func:`ALTabletService::hide`
+* :cpp:func:`ALTabletService::resetToDefaultValue`
+* :cpp:func:`ALTabletService::robotIp`
+* :cpp:func:`ALTabletService::setBrightness`
+* :cpp:func:`ALTabletService::setTabletLanguage`
+* :cpp:func:`ALTabletService::setVolume`
+* :cpp:func:`ALTabletService::version`
+
+**Deprecated**
+
+* :cpp:func:`ALTabletService::getLastVideoErrorLog`
+* :cpp:func:`ALTabletService::postEventToApplication`
+
+
+Signal list
+-----------
+
+**Tactile screen**
+
+* :cpp:func:`ALTabletService::onTouchDown`
+* :cpp:func:`ALTabletService::onTouchMove`
+* :cpp:func:`ALTabletService::onTouchUp`
+* :cpp:func:`ALTabletService::onTouch` *(deprecated)*
+
+**Other**
+
+* :cpp:func:`ALTabletService::onConsoleMessage`
+* :cpp:func:`ALTabletService::onImageLoaded`
+* :cpp:func:`ALTabletService::onInputText`
+* :cpp:func:`ALTabletService::onPageFinished`
+* :cpp:func:`ALTabletService::onPageStarted`
+* :cpp:func:`ALTabletService::videoFinished`
+* :cpp:func:`ALTabletService::videoStarted`
+
+Event list
+----------
+
+* :naoqi:event:`ALTabletService/error`
+* :naoqi:event:`ALTabletService/message`
+* :naoqi:event:`ALTabletService/onInputText`
+
+Methods
+-------
+
+**Web view**
+
+.. cpp:function:: void ALTabletService::cleanWebview()
+
+  Clean the web browser.
+
+.. cpp:function:: bool ALTabletService::hideWebview()
+
+  Hide the :term:`webview` on the tablet, the :term:`idle screen` appears instead.
+
+  :return: True if successful, false otherwise.
+
+.. cpp:function:: bool ALTabletService::loadApplication(const std::string &name)
+
+  Start new application on tablet.
+
+  :param name: Name of application. It must have a index.html to load.
+  :return: True if successful, false if the application is not found or unreachable.
+
+.. cpp:function:: bool ALTabletService::loadUrl(const std::string &url)
+
+  Load an URL in the browser of the tablet.
+  Warning: you need to call :cpp:func:`ALTabletService::showWebview` to display the browser.
+
+  :param url: Url of the page to display.
+  :return: True if successful, false if the URL is not found or unreachable.
+
+.. cpp:function:: bool ALTabletService::showWebview()
+
+  Display the :term:`webview` on the tablet.
+
+  :return: True if successful, false otherwise.
+
+**Video Player**
+
+.. cpp:function:: int ALTabletService::getVideoLength()
+
+  Get video length in milliseconds.
+
+  :return: -1 on error.
+
+.. cpp:function:: int ALTabletService::getVideoPosition()
+
+  Get the time elapsed since the beginning of the video in milliseconds.
+
+  :return: -1 if no video is played, a positive number otherwise.
+
+.. cpp:function:: bool ALTabletService::pauseVideo()
+
+  Pause the video playing but do not close the video player.
+  Can be resumed by :cpp:func:`ALTabletService::resumeVideo`.
+
+  :return: True if video is playing, false otherwise.
+
+.. cpp:function:: bool ALTabletService::playVideo(const std::string &url)
+
+  Open a video player on tablet and play video from given url.
+  Supported formats is: mp4 or mov.
+  Can be stopped by :cpp:func:`ALTabletService::stopVideo`.
+
+  :param url: URL of the video to play.
+
+  :return: True if video is playing, false otherwise.
+
+.. cpp:function:: void ALTabletService::resumeVideo()
+
+  Resume the video paused by :cpp:func:`ALTabletService::pauseVideo`.
+
+  :return: True if video is playing, false otherwise.
+
+.. cpp:function:: bool ALTabletService::stopVideo()
+
+  Close the video player.
+
+  :return: True if video player is open, false otherwise.
+
+
+**Image**
+
+.. cpp:function:: void ALTabletService::hideImage()
+
+  Hide image currently displayed.
+
+.. cpp:function:: void ALTabletService::pauseGif()
+
+  Pause current gif displayed.
+
+.. cpp:function:: bool ALTabletService::preLoadImage(const std::string &url)
+
+  Pre-load an image. Use the same URL for showImage.
+
+  :param url: URL of the image to pre-load.
+
+  :return: True if pre-load succeed, false if it cannot ping the URL or if it is not a image.
+
+.. cpp:function:: void ALTabletService::resumeGif()
+
+  Resume current gif displayed.
+
+  :return: True if gif is playing, false otherwise.
+
+.. cpp:function:: void ALTabletService::setBackgroundColor(const std::string &color)
+
+  Set image background color.
+
+  :param color:  hexadecimal color code, from "#000000" to "#FFFFFF".
+
+.. cpp:function:: bool ALTabletService::showImage(const std::string &url)
+
+  Show an image, using the cache.
+  Download the image before displaying it, unless the picture is already in the cache,
+  because it has been preloaded or already displayed.
+
+  :param url: url of the image to display.
+  :return: true if show succeed, false if it can't ping the URL or if it's not a image.
+
+**Dialog**
+
+.. cpp:function:: void ALTabletService::showAlertView(const float &radius, const std::string &color, const int &delay)
+
+  Show an alert view.
+
+  :param radius: radius of the 3 displayed points
+  :param color: hexadecimal color code, from "#000000" to "#FFFFFF".
+  :param delay: refresh time.
+
+.. cpp:function:: void ALTabletService::showInputDialog(const std::string &type, const std::string &title, const std::string &ok, const std::string &cancel)
+
+  Show a native input text dialog.
+
+  :param type: Type among: "text", "password", "email", "url", "number".
+  :param title: Title of the box (could be just a title or a question).
+  :param ok: text of the OK button.
+  :param cancel: text of the Cancel button.
+
+.. cpp:function:: void ALTabletService::showInputTextDialog(const std::string &title, const std::string &ok, const std::string &cancel)
+
+  Show a native input text dialog.
+
+  :param title: Title of the box (could be just a title or a question).
+  :param ok: text of the OK button.
+  :param cancel: text of the Cancel button.
+
+**Wifi**
+
+.. cpp:function:: bool ALTabletService::configureWifi(const std::string &security, const std::string &ssid, const std::string &key)
+
+   Configure the WiFi.
+
+   :param security: among (wep, wpa, open)
+   :param ssid: network name
+   :param key: encryption key (for wep or wpa only).
+
+.. cpp:function:: void ALTabletService::disableWifi()
+
+  Disable the wifi.
+
+.. cpp:function:: void ALTabletService::enableWifi()
+
+  Enable the wifi.
+
+.. cpp:function:: bool ALTabletService::forgetWifi(const std::string &ssid)
+
+  Forget a wifi network.
+
+  :param ssid: ssid of the network to forget.
+
+  :return: true if it find the network and succeed to forget it.
+
+.. cpp:function:: std::string ALTabletService::getWifiStatus()
+
+  Check WiFi status on the tablet.
+
+  :return: IDLE, SCANNING, DISCONNECTED, or CONNECTED.
+
+**System**
+
+.. cpp:function:: float ALTabletService::getBrightness()
+
+  Get the tablet brightness.
+
+  :return:  a float between 0 and 1.
+
+.. cpp:function:: std::string ALTabletService::getCurrentLifeActivity()
+
+  Get the name of the current life activity running.
+
+  :return: the name of the current life activity running or "" if there isn't.
+
+.. cpp:function:: void ALTabletService::hide()
+
+  Hide view currently displayed (video, image, web, alert ...).
+
+.. cpp:function:: void ALTabletService::resetToDefaultValue()
+
+  reset view to default values.
+
+.. cpp:function:: std::string ALTabletService::robotIp()
+
+  :return: Current robot IP.
+
+.. cpp:function:: bool ALTabletService::setBrightness(float newBrightness)
+
+  Set tablet brightness.
+
+  :param newBrightness: New brightness value. Must be between 0 (exclusive) and 1.
+  :return: True if successful, false otherwise.
+
+.. cpp:function:: bool ALTabletService::setTabletLanguage(const std::string &language)
+
+  Set the tablet language.
+
+  :param language: language - like fr, en, ja.
+
+.. cpp:function:: bool ALTabletService::setVolume(const int &volume)
+
+  Configure the media volume of the tablet.
+
+  :param volume: a positive integer between 0 and 15.
+
+  :return: true if it's work false otherwise, if the volume isn't in the proper range.
+
+.. cpp:function:: std::string ALTabletService::version()
+
+  Return the tablet browser version.
+
+**Deprecated**
+
+.. cpp:function:: void ALTabletService::postEventToApplication()
+
+  .. deprecated:: 2.0.2
+    Deprecated and removed. Do not use anymore.
+
+  Forward given signal to current web application.
+
+.. cpp:function:: std::string ALTabletService::getLastVideoErrorLog()
+
+  .. deprecated:: 2.0.1
+    use :naoqi:event:`ALTabletService/error` instead.
+
+
+Signals
+-------
+
+**Tactile screen**
+
+.. cpp:function:: ALTabletService::onTouchDown(const float& x, const float& y)
+
+  :triggered: When someone When someone touches the tablet screen.
+
+  :param x: Abscissa of touched point.
+  :param y: Ordinate of touched point.
+
+.. cpp:function:: ALTabletService::onTouchMove(const float& x, const float& y)
+
+  :triggered: When someone moves its finger on the tablet screen.
+
+  :param x: Abscissa of touched point.
+  :param y: Ordinate of touched point.
+
+.. cpp:function:: ALTabletService::onTouchUp(const float& x, const float& y)
+
+  :triggered: When someone removes its finger from the tablet screen.
+
+  :param x: Abscissa of touched point.
+  :param y: Ordinate of touched point.
+
+.. cpp:function:: ALTabletService::onTouch(const float& x, const float& y)
+
+  .. deprecated:: 2.0.2 use more specific events instead.
+
+  :param x: Abscissa of touched point.
+  :param y: Ordinate of touched point.
+
+**Other**
+
+.. cpp:function:: ALTabletService::onConsoleMessage(const std::string& message)
+
+  :purpose: View JavaScript console message written by web applications loaded on tablet.
+
+            Tip: in command line, use: `qicli watch ALTabletService.onConsoleMessage`.
+
+  :param message: Content of message.
+  :triggered: By web applications.
+
+.. cpp:function:: ALTabletService::onImageLoaded()
+
+  :triggered: When an image is pre-loaded.
+
+.. cpp:function:: ALTabletService::onInputText(const int &validation, const std::string& input)
+
+  :triggered: When :cpp:func:`ALTabletService::showInputDialog`
+              or :cpp:func:`ALTabletService::showInputTextDialog` returns a text.
+
+  :param validation: Button clicked by the user: 1 means 'OK', 0 means 'Cancel'.
+  :param input: input entered by user.
+
+.. cpp:function:: ALTabletService::onPageFinished()
+
+  :triggered: When page upload is finished.
+
+.. cpp:function:: ALTabletService::onPageStarted()
+
+  :triggered: When page upload is started.
+
+
+.. cpp:function:: ALTabletService::videoFinished()
+
+  :purpose: Warn NAOqi modules that displayed video is finished.
+  :triggered: When video started by :cpp:func:`ALTabletService::playVideo` is finished.
+
+.. cpp:function:: ALTabletService::videoStarted()
+
+  :purpose: Warn NAOqi modules that displayed video is started.
+  :triggered: When video started by :cpp:func:`ALTabletService::playVideo` is started.
+
+Events
+------
+
+.. naoqi:event:: ALTabletService/error()
+
+  Raised when an error occurs.
+
+.. naoqi:event:: ALTabletService/message()
+
+  Raised when message occurs.
+
+.. naoqi:event:: ALTabletService/onInputText()
+
+  Raised when text input occurs.

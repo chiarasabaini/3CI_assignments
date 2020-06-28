@@ -1,0 +1,24 @@
+
+.. _h21_dimensions:
+
+H21 - Dimensions
+=============================
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  dimensions_h21_v33
+  dimensions_h21_v32
+
+.. seealso::
+        
+    **V4** | :ref:`V3.3 <h21_dimensions_v33>` | :ref:`V3.2 <h21_dimensions_v32>`
+
+    :ref:`nao-h21` | :ref:`robot_dimensions` 
+
+--------------------
+
+.. include:: ../bulk/dimensions_h_v4_v33.rst
+
+

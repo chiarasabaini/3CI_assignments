@@ -1,0 +1,39 @@
+
+.. include:: /bulk/common.rst
+
+.. |nao_tech| image:: /_static/index_nao_tech.png
+   :class: img-inline
+
+.. _nao-family:
+
+|roboN| - Technical Guide
+===========================
+
++------------------------------------------------------------------+---------------+
+|  *Global overview of the latest Version*                         |               |
++------------------------------------------------------------------+               |
+|                                                                  |               |
+| .. toctree::                                                     |  |nao_tech|   |
+|    :maxdepth: 1                                                  |               |
+|                                                                  |               |
+|    robots/index_robots                                           |               |
+|    nao_dcm/actuator_sensor_names                                 |               |
+|    body_type                                                     |               |
+|                                                                  |               |
++------------------------------------------------------------------+               +
+| *Technical overview for each body types*                         |               |
++------------------------------------------------------------------+               |
+|                                                                  |               |
+| .. toctree::                                                     |               |
+|    :maxdepth: 1                                                  |               |
+|                                                                  |               |
+|    nao_h25/index_h25                                             |               |
+|    nao_h21/index_h21                                             |               |
+|    nao_t14/index_t14                                             |               |
+|    nao_t2/index_t2                                               |               |
++------------------------------------------------------------------+               |
+| **See Also**                                                     |               |
++------------------------------------+-----------------------------+               |
+| * :ref:`nao`                       | * :ref:`dev-index`          |               |
+| * :ref:`software-update`           | * :ref:`references`         |               |
++------------------------------------+-----------------------------+---------------+

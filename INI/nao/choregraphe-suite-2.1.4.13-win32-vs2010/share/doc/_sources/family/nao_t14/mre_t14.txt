@@ -1,0 +1,19 @@
+
+.. _t14-mre:
+
+T14 - Joint position sensors
+========================================
+
+.. seealso::
+      
+   :ref:`robot-mre` 
+
+
+--------------------
+
+14 x MRE (Magnetic Rotary Encoders) using Hall-effect sensor technology.
+
+
+.. include:: ../bulk/mre.rst
+
+

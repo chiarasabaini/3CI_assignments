@@ -1,0 +1,89 @@
+.. _alredballtracker-api:
+
+ALRedBallTracker API
+====================
+
+:ref:`Overview <naoqi-trackers>` | ALRedBallTracker API | :ref:`alfacetracker-api`
+
+------------
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alredballtrackerproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALRedBallProxy
+
+* :cpp:func:`ALRedBallTrackerProxy::getPosition`
+* :cpp:func:`ALRedBallTrackerProxy::isActive`
+* :cpp:func:`ALRedBallTrackerProxy::isNewData`
+* :cpp:func:`ALRedBallTrackerProxy::setWholeBodyOn`
+* :cpp:func:`ALRedBallTrackerProxy::startTracker`
+* :cpp:func:`ALRedBallTrackerProxy::stopTracker`
+
+
+Methods
+-------
+
+.. cpp:function:: std::vector<float> ALRedBallTrackerProxy::getPosition()
+
+  .. deprecated:: 1.16
+      use :ref:`altracker` module instead.
+
+  Returns the [x, y, z] position of the red ball in FRAME_TORSO. This is done
+  assuming an average red ball size (diameter: 0.06 m), so it might not be very accurate.
+
+  :return: An Array of float containing the red ball position [x, y, z].
+
+.. cpp:function:: bool ALRedBallTrackerProxy::isActive()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Return true if the red Ball Tracker is running.
+
+  :return: true if the red Ball Tracker is running.
+
+.. cpp:function:: bool ALRedBallTrackerProxy::isNewData()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Return true if a new Red Ball was detected since the last getPosition().
+
+  :return: true if a new Red Ball was detected since the last getPosition().
+
+.. cpp:function:: void ALRedBallTrackerProxy::setWholeBodyOn(const bool& wholeBodyOn)
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  If true, the tracking will be through a Whole Body Process.
+
+  :param wholeBodyOn: The whole Body state
+
+.. cpp:function:: void ALRedBallTrackerProxy::startTracker()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Start the tracker by Subscribing to Event redBallDetected from ALRedBallDetection module.
+  Then Wait Event redBallDetected from ALRedBallDetection module.
+  And finally send information to motion for head tracking.
+  Note: Stiffness of Head must be set to 1.0 to move!
+
+.. cpp:function:: void ALRedBallTrackerProxy::stopTracker()
+
+  .. deprecated:: 1.16
+    use :ref:`altracker` module instead.
+
+  Stop the tracker by Unsubscribing to Event redBallDetected from ALRedBallDetection module.
+

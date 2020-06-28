@@ -1,0 +1,30 @@
+.. include:: ../bulk/common.rst
+
+.. _shut_down_process_nao:
+
+Understanding the shut down process
+------------------------------------
+
+**Step 1**: |roboN| goes to a relax and safe position and sets its motors off.
+
+**Step 2**
+
+The shut-down process takes approximately 18 seconds:
+
+* The **Status** :ref:`LEDs <leds_nao>` are fading out, smoothly and repeatedly,
+  from **White**  to **Black**.
+
+* A progress bar is displayed on the **Ear** :ref:`LEDs <leds_nao>`.
+
+The shutdown process is completed when all the :ref:`LEDs <leds_nao>` are off.
+
+.. _leds_nao:
+
+**LEDs** - |roboN|
+
+.. image:: /medias/nao/boot_leds.png
+    :width: 265 px
+    :height: 334 px
+
+**A** - **Eye** LEDs,  **B** - **Ear** LEDs,  **C** - **Status** LEDs
+

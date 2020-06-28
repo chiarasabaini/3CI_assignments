@@ -1,0 +1,274 @@
+.. _alleds:
+
+ALLeds
+========
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alleds-api
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <alleds-api>`
+
+------------
+
+.. seealso::
+
+   - :ref:`LEDs Hardware <robot-led>`
+
+
+What it does
+------------
+
+This module allows you to control the LEDs of the robot.
+
+* It provides simple ways of setting or fading the intensity of a LED or a group
+  of LEDs:
+
+  :cpp:func:`ALLedsProxy::fade`, :cpp:func:`ALLedsProxy::fadeListRGB`, :cpp:func:`ALLedsProxy::fadeRGB`,
+  :cpp:func:`ALLedsProxy::getIntensity`, :cpp:func:`ALLedsProxy::off`, :cpp:func:`ALLedsProxy::on`,
+  :cpp:func:`ALLedsProxy::setIntensity`
+
+* It also provides animations:
+
+  :cpp:func:`ALLedsProxy::earLedsSetAngle`, :cpp:func:`ALLedsProxy::randomEyes`, :cpp:func:`ALLedsProxy::rasta`,
+  :cpp:func:`ALLedsProxy::rotateEyes`
+
+* And useful methods to manage groups and lists:
+
+  :cpp:func:`ALLedsProxy::createGroup`, :cpp:func:`ALLedsProxy::listGroup`, :cpp:func:`ALLedsProxy::listGroups`
+  :cpp:func:`ALLedsProxy::listLED`, :cpp:func:`ALLedsProxy::listLEDs`
+
+How it works
+------------
+
+Colors
+++++++
+
+* Ear LEDs are blue.
+
+* Eye, Chest and Feet LEDs are RGB Fullcolour, so it is possible to combine
+  the three primary colors (red, green and blue) in order to obtain different colors.
+
+Intensity
++++++++++
+
+It is possible to control the LEDs intensity (between 0 and 100%).
+
+
+Getting started
+---------------
+
+To control:
+
+* a single LED, use **Names** or **Short Names**.
+* several LEDs, use existing **Groups** or create your own groups.
+
+.. code-block:: guess
+
+  # Example showing how to list the devices in a group
+  proxy.listGroup("FaceLeds")
+
+For more details, see the list of existing :ref:`list-group-led`.
+
+
+
+.. _list-group-led:
+
+Groups, Short Names and Names
+++++++++++++++++++++++++++++++
+
+All
+^^^
+
++-------------------+
+| Groups            |
++===================+
+|   AllLeds         |
++-------------------+
+| | AllLedsBlue     |
+| | AllLedsGreen    |
+| | AllLedsRed      |
++-------------------+
+
+
+Head tactile sensor
+^^^^^^^^^^^^^^^^^^^^^^
+
++-------------------+
+| Groups            |
++===================+
+|BrainLeds          |
++-------------------+
+| | BrainLedsBack   |
+| | BrainLedsMiddle |
+| | BrainLedsFront  |
++-------------------+
+| | BrainLedsLeft   |
+| | BrainLedsRight  |
++-------------------+
+
+===========  ========================================  ============  =======================================
+Short Name   Name                                      Short Name    Name
+===========  ========================================  ============  =======================================
+Brain0       Head/Led/Front/Right/1/Actuator/Value     Brain6        Head/Led/Rear/Left/2/Actuator/Value
+Brain1       Head/Led/Front/Right/0/Actuator/Value     Brain7        Head/Led/Rear/Left/1/Actuator/Value
+Brain2       Head/Led/Middle/Right/0/Actuator/Value    Brain8        Head/Led/Rear/Left/0/Actuator/Value
+Brain3       Head/Led/Rear/Right/0/Actuator/Value      Brain9        Head/Led/Middle/Left/0/Actuator/Value
+Brain4       Head/Led/Rear/Right/1/Actuator/Value      Brain10       Head/Led/Front/Left/0/Actuator/Value
+Brain5       Head/Led/Rear/Right/2/Actuator/Value      Brain11       Head/Led/Front/Left/1/Actuator/Value
+===========  ========================================  ============  =======================================
+
+
+Ears
+^^^^
+
++-------------------------------------------+
+| Groups                                    |
++===========================================+
+|EarLeds                                    |
++---------------------+---------------------+
+| RightEarLeds        | LeftEarLeds         |
++---------------------+---------------------+
+| | RightEarLedsBack  | | LeftEarLedsBack   |
+| | RightEarLedsFront | | LeftEarLedsFront  |
++---------------------+---------------------+
+| | RightEarLedsEven  | | LeftEarLedsEven   |
+| | RightEarLedsOdd   | | LeftEarLedsOdd    |
++---------------------+---------------------+
+
+==============  =====================================  =============  =====================================
+Short Name      Name                                   Short Name     Name
+==============  =====================================  =============  =====================================
+RightEarLed1    Ears/Led/Right/0Deg/Actuator/Value     LeftEarLed1    Ears/Led/Left/0Deg/Actuator/Value
+RightEarLed2    Ears/Led/Right/36Deg/Actuator/Value    LeftEarLed2    Ears/Led/Left/36Deg/Actuator/Value
+RightEarLed3    Ears/Led/Right/72Deg/Actuator/Value    LeftEarLed3    Ears/Led/Left/72Deg/Actuator/Value
+RightEarLed4    Ears/Led/Right/108Deg/Actuator/Value   LeftEarLed4    Ears/Led/Left/108Deg/Actuator/Value
+RightEarLed5    Ears/Led/Right/144Deg/Actuator/Value   LeftEarLed5    Ears/Led/Left/144Deg/Actuator/Value
+RightEarLed6    Ears/Led/Right/180Deg/Actuator/Value   LeftEarLed6    Ears/Led/Left/180Deg/Actuator/Value
+RightEarLed7    Ears/Led/Right/216Deg/Actuator/Value   LeftEarLed7    Ears/Led/Left/216Deg/Actuator/Value
+RightEarLed8    Ears/Led/Right/252Deg/Actuator/Value   LeftEarLed8    Ears/Led/Left/252Deg/Actuator/Value
+RightEarLed9    Ears/Led/Right/288Deg/Actuator/Value   LeftEarLed9    Ears/Led/Left/288Deg/Actuator/Value
+RightEarLed10   Ears/Led/Right/324Deg/Actuator/Value   LeftEarLed10   Ears/Led/Left/324Deg/Actuator/Value
+==============  =====================================  =============  =====================================
+
+
+Eyes
+^^^^^^
+
++------------------------------------------------------------------------------------------+
+| Groups                                                                                   |
++==========================+==============================+================================+
+|FaceLeds                  | RightFaceLeds                |  LeftFaceLeds                  |
++--------------------------+------------------------------+--------------------------------+
+| | FaceLedsBottom         | | FaceLedsRightBottom        | | FaceLedsLeftBottom           |
+| | FaceLedsExternal       | | FaceLedsRightExternal      | | FaceLedsLeftExternal         |
+| | FaceLedsInternal       | | FaceLedsRightInternal      | | FaceLedsLeftInternal         |
+| | FaceLedsTop            | | FaceLedsRightTop           | | FaceLedsLeftTop              |
++--------------------------+------------------------------+--------------------------------+
+|                          | | RightFaceLedsBlue          | | LeftFaceLedsBlue             |
+|                          | | RightFaceLedsGreen         | | LeftFaceLedsGreen            |
+|                          | | RightFaceLedsRed           | | LeftFaceLedsRed              |
++--------------------------+------------------------------+--------------------------------+
+
+=======================  ============================== =======================  ================================= =======================
+Groups                   Groups                         *Equals to Short Name*    Groups                           *Equals to Short Name*
+=======================  ============================== =======================  ================================= =======================
+FaceLed0                 FaceLedRight0                   RightFaceLed8            FaceLedLeft0                     LeftFaceLed1
+FaceLed1                 FaceLedRight1                   RightFaceLed7            FaceLedLeft1                     LeftFaceLed2
+FaceLed2                 FaceLedRight2                   RightFaceLed6            FaceLedLeft2                     LeftFaceLed3
+FaceLed3                 FaceLedRight3                   RightFaceLed5            FaceLedLeft3                     LeftFaceLed4
+FaceLed4                 FaceLedRight4                   RightFaceLed4            FaceLedLeft4                     LeftFaceLed5
+FaceLed5                 FaceLedRight5                   RightFaceLed3            FaceLedLeft5                     LeftFaceLed6
+FaceLed6                 FaceLedRight6                   RightFaceLed2            FaceLedLeft6                     LeftFaceLed7
+FaceLed7                 FaceLedRight7                   RightFaceLed1            FaceLedLeft7                     LeftFaceLed8
+=======================  ============================== =======================  ================================= =======================
+
+.. note::
+
+    **Group Names** and **Short Names** are not numbered the same way.
+
+    This helps to animate both eyes either:
+
+    * symmetrically (using **Group Names**) or
+    * similarly (using **Short Names**).
+
+==============  ===============================================  =============  ==================================================
+Short Name        Names                                           Short Name      Names
+==============  ===============================================  =============  ==================================================
+RightFaceLed1    | Face/Led/Red/Right/0Deg/Actuator/Value,       LeftFaceLed1    |  Face/Led/Red/Left/0Deg/Actuator/Value,
+                 | Face/Led/Green/Right/0Deg/Actuator/Value,                     |  Face/Led/Green/Left/0Deg/Actuator/Value,
+                 | Face/Led/Blue/Right/0Deg/Actuator/Value                       |  Face/Led/Blue/Left/0Deg/Actuator/Value
+
+RightFaceLed2    | Face/Led/Red/Right/45Deg/Actuator/Value,      LeftFaceLed2    |  Face/Led/Red/Left/45Deg/Actuator/Value,
+                 | Face/Led/Green/Right/45Deg/Actuator/Value,                    |  Face/Led/Green/Left/45Deg/Actuator/Value,
+                 | Face/Led/Blue/Right/45Deg/Actuator/Value                      |  Face/Led/Blue/Left/45Deg/Actuator/Value
+
+RightFaceLed3    |  Face/Led/Red/Right/90Deg/Actuator/Value,     LeftFaceLed3    |  Face/Led/Red/Left/90Deg/Actuator/Value,
+                 |  Face/Led/Green/Right/90Deg/Actuator/Value,                   |  Face/Led/Green/Left/90Deg/Actuator/Value,
+                 |  Face/Led/Blue/Right/90Deg/Actuator/Value                     |  Face/Led/Blue/Left/90Deg/Actuator/Value
+
+RightFaceLed4    |  Face/Led/Red/Right/135Deg/Actuator/Value,    LeftFaceLed4    |  Face/Led/Red/Left/135Deg/Actuator/Value,
+                 |  Face/Led/Green/Right/135Deg/Actuator/Value,                  |  Face/Led/Green/Left/135Deg/Actuator/Value,
+                 |  Face/Led/Blue/Right/135Deg/Actuator/Value                    |  Face/Led/Blue/Left/135Deg/Actuator/Value
+
+RightFaceLed5    |  Face/Led/Red/Right/180Deg/Actuator/Value,    LeftFaceLed5    |  Face/Led/Red/Left/180Deg/Actuator/Value,
+                 |  Face/Led/Green/Right/180Deg/Actuator/Value,                  |  Face/Led/Green/Left/180Deg/Actuator/Value,
+                 |  Face/Led/Blue/Right/180Deg/Actuator/Value                    |  Face/Led/Blue/Left/180Deg/Actuator/Value
+
+RightFaceLed6    |  Face/Led/Red/Right/225Deg/Actuator/Value,    LeftFaceLed6    |  Face/Led/Red/Left/225Deg/Actuator/Value,
+                 |  Face/Led/Green/Right/225Deg/Actuator/Value,                  |  Face/Led/Green/Left/225Deg/Actuator/Value,
+                 |  Face/Led/Blue/Right/225Deg/Actuator/Value                    |  Face/Led/Blue/Left/225Deg/Actuator/Value
+
+RightFaceLed7    |  Face/Led/Red/Right/270Deg/Actuator/Value,    LeftFaceLed7    |  Face/Led/Red/Left/270Deg/Actuator/Value,
+                 |  Face/Led/Green/Right/270Deg/Actuator/Value,                  |  Face/Led/Green/Left/270Deg/Actuator/Value,
+                 |  Face/Led/Blue/Right/270Deg/Actuator/Value                    |  Face/Led/Blue/Left/270Deg/Actuator/Value
+
+RightFaceLed8    |  Face/Led/Red/Right/315Deg/Actuator/Value,    LeftFaceLed8    |  Face/Led/Red/Left/315Deg/Actuator/Value,
+                 |  Face/Led/Green/Right/315Deg/Actuator/Value,                  |  Face/Led/Green/Left/315Deg/Actuator/Value,
+                 |  Face/Led/Blue/Right/315Deg/Actuator/Value                    |  Face/Led/Blue/Left/315Deg/Actuator/Value
+==============  ===============================================  =============  ==================================================
+
+
+
+Chest button
+^^^^^^^^^^^^^^
+
++-------------------+
+| Groups            |
++===================+
+| ChestLeds         |
++-------------------+
+
+==============  =====================================
+Short Name      Name
+==============  =====================================
+ChestLedsBlue   ChestBoard/Led/Blue/Actuator/Value
+ChestLedsGreen  ChestBoard/Led/Green/Actuator/Value
+ChestLedsRed    ChestBoard/Led/Red/Actuator/Value
+==============  =====================================
+
+
+Feet
+^^^^
+
++-------------------+
+| Groups            |
++===================+
+| FeetLeds          |
++-------------------+
+| | LeftFootLeds    |
+| | RightFootLeds   |
++-------------------+
+
+===================  =====================================  ==================  =====================================
+Short Name            Name                                   Short Name          Name
+===================  =====================================  ==================  =====================================
+RightFootLedsBlue     RFoot/Led/Blue/Actuator/Value          LeftFootLedsBlue    LFoot/Led/Blue/Actuator/Value
+RightFootLedsGreen    RFoot/Led/Green/Actuator/Value         LeftFootLedsGreen   LFoot/Led/Green/Actuator/Value
+RightFootLedsRed      RFoot/Led/Red/Actuator/Value           LeftFootLedsRed     LFoot/Led/Red/Actuator/Value
+===================  =====================================  ==================  =====================================
+
+
+

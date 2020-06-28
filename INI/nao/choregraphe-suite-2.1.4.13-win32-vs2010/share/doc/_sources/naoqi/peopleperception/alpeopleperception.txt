@@ -1,0 +1,94 @@
+
+.. _alpeopleperception:
+
+ALPeoplePerception
+==================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alpeopleperception-api
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <alpeopleperception-api>`
+
+------------
+
+What it does
+------------
+
+**ALPeoplePerception** is an extractor which keeps track of the people around
+the robot and provides basic information about them. It gathers visual
+information from RGB cameras and a 3D sensor if available.
+
+Once people have been detected and their attributes are constantly updated by
+**ALPeoplePerception**.
+All the gathered data are made available through **ALMemory** keys and raised events.
+
+**ALMemory** keys examples:
+
+* Position in space relative to the **FRAME_TORSO** :ref:`frame<motion-effectors-space>`,
+* How long they have been detected for.
+
+Raised events examples:
+
+* A new person is detected,
+* A person is considered as gone.
+
+The whole list of memory keys and events is documented in
+:ref:`alpeopleperception-api`.
+
+
+How it works
+------------
+
+**ALPeoplePerception** tries to find potential humans around the robot using
+visual cues.
+
+People list
+++++++++++++
+
+All new people detected in the current video frame are associated (when possible)
+with previously known people. This helps track someone and update his attributes.
+If a new person cannot be associated to a previously known person, it is added
+to the population.
+
+Visible / Non visible people lists
++++++++++++++++++++++++++++++++++++
+
+When somebody gets out of the field of view, he/she is not immediately
+removed form the people list, as this disappearance may be temporary and the
+result of the robot movements.
+
+So, the People list is divided in two sub-lists:
+
+* visible people list and
+* non visible people list.
+
+When someone has not been seen for a while, he or she will be removed
+from the current population.
+
+Two methods allow you to set the amount of time before a person is removed from
+the population:
+
+* :cpp:func:`ALPeoplePerceptionProxy::setTimeBeforePersonDisappears`
+* :cpp:func:`ALPeoplePerceptionProxy::setTimeBeforeVisiblePersonDisappears`
+
+Performances and limitations
+----------------------------
+
+The detection process may benefit from additional techniques to improve the detection
+but they generally require more CPU resources. They can be enabled or disabled by calling
+:cpp:func:`ALPeoplePerceptionProxy::setFastModeEnabled`. Currently only movement
+detection is impacted by the fast mode.
+
+Another way to save processing resources is to limit the detection and tracking
+range. This is especially interesting when the robot is in close-range interaction
+because it does not always need to see many people at the same time and might need
+to save power for text-to-speech or dialog tasks for example.
+See :cpp:func:`ALPeoplePerceptionProxy::setMaximumDetectionRange`.
+
+.. warning::
+
+  Please note that since some memory keys contain positions relative to the
+  robot's head position, their value can become erroneous when the robot moves.

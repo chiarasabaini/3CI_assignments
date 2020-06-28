@@ -1,0 +1,32 @@
+.. _monitor-plugin-laser-monitor:
+
+Laser monitor
+---------------
+
+.. seealso::
+
+   - :ref:`laser-head`
+   - :ref:`allaser`
+
+------------------------------------------------------------
+
+
+This feature is only available for NAO Laser Head owners.
+
+This plugin allows you to display what is seen by the laser telemeter.
+
+To load the **Laser Monitor** plugin into **Monitor**,
+see :ref:`monitor-start`.
+
+Once loaded, the following panel is displayed:
+
+.. image:: /medias/desktop/monitor/allaser_lasermonitor.png
+    :width: 560 px
+    :height: 581 px
+
+Distances measured by the laser sensor, are projected as cross dots on a polar
+graph, with the correct angular ratio and offsets.
+
+The scrollbar at the bottom of the widget filters the points, so you
+can focus on closer obstacles, it has no effect on the laser sensor.
+

@@ -1,0 +1,34 @@
+.. _child_tab:
+
+Child tab
+=========
+
+The **Child** tab displays the profiles of:
+
+* your children (if you are a **Parent**) or
+* the children you are working with (if you are a **Teacher**).
+
+.. image:: /medias/asknao/parent_home.png
+   :width: 521 px
+   :height: 377 px
+
+.. |passport| image:: /medias/asknao/passport.png
+   :class: img-inline
+
+.. |progress| image:: /medias/asknao/progress.png
+   :class: img-inline
+
+.. |history| image:: /medias/asknao/history.png
+   :class: img-inline
+
++------------+---------------------------------------------------+-----------------------+
+| Click ...  | To ...                                            | For further details,  |
+|            |                                                   | see:                  |
++============+===================================================+=======================+
+| |passport| | Display detailed information about a child.       | :ref:`child_passport` |
++------------+---------------------------------------------------+-----------------------+
+| |progress| | Track progress made by a child on specific        | :ref:`child_progress` |
+|            | **Activity**.                                     |                       |
++------------+---------------------------------------------------+-----------------------+
+| |history|  | Take a look at the past sessions.                 | :ref:`child_history`  |
++------------+---------------------------------------------------+-----------------------+

@@ -1,0 +1,12 @@
+
+Main panels
+============
+
+.. toctree::
+   :maxdepth: 1
+
+   panels/project_content_panel
+   panels/box_libraries_panel
+   panels/flow_diagram_panel
+   panels/pose_library_panel
+   panels/robot_3d_view

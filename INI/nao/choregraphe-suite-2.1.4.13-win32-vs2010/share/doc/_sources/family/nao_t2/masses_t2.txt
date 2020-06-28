@@ -1,0 +1,30 @@
+.. _t2_masses:
+
+T2 - Masses
+============
+
+.. toctree::
+  :maxdepth: 1
+  :hidden:
+
+  masses_t2_v33
+  masses_t2_v32
+
+
+.. seealso::
+    :ref:`all_robots` | :ref:`robot_masses`
+
+    :ref:`nao-t2` | **V4** | :ref:`V3.3 <t2_masses_v33>` | :ref:`V3.2 <t2_masses_v32>`
+
+--------------------
+
+.. include:: ../bulk/masses_whole_t.rst
+
+Whole robot
+-----------
+
+.. math::
+    \text{Mass} = 1.7
+
+.. include:: ../bulk/masses_head_torso_t2.rst
+

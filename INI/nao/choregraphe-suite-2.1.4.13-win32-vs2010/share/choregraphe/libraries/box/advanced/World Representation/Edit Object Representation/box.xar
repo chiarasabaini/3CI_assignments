@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="6" localization="8" tooltip="This box allows to simply edit display properties of objects from the world representation.&#x0A;&#x0A;Objects stored in the WorldRepresentation with this box can be visualized in the 3D robot view. See parameters for more details." x="505" y="267">
+        <bitmap>media/images/box/world_representation/world_rep.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    DISPLAY_STR = "Display"
+    MODEL_STR = "model"
+    RED_STR = "colorR"
+    GREEN_STR = "colorG"
+    BLUE_STR = "colorB"
+    SCALE_X_STR = "scaleX"
+    SCALE_Y_STR = "scaleY"
+    SCALE_Z_STR = "scaleZ"
+
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        try:
+            self.wr = ALProxy("ALWorldRepresentation")
+        except Exception as e:
+            self.onError(e)
+        import threading
+        self.lock = threading.Lock()
+        self.displayFields = {self.MODEL_STR: "text",
+            self.RED_STR: "float", self.GREEN_STR: "float",
+            self.BLUE_STR: "float", self.SCALE_X_STR: "float",
+            self.SCALE_Y_STR: "float", self.SCALE_Z_STR: "float"}
+
+    def onLoad(self):
+        pass
+
+    def onUnload(self):
+        pass
+
+    def onInput_updateDisplay(self, p):
+        objectName = str()
+        displayAttribute = str()
+        displayAttributeValue = str()
+        try:
+            if isinstance(p, basestring):
+                raise Exception("onInput_updateDisplay(%s): expected a list "\
+                    "(see tooltip for details)" % (p))
+            objectName = p[0]
+            displayAttribute = p[1]
+            displayAttributeValue = p[2]
+        except Exception as e:
+            self.logger.error("onInput_updateDisplay(%s): error in parameters "\
+                "(see tooltip for details on expected parameter format): %s" % (p, e))
+            return
+        self.lock.acquire()
+        categoryName = self.objectCategory(objectName)
+        self.setupDisplayAttribute(categoryName)
+        self.updateDisplayAttribute(objectName, displayAttribute, displayAttributeValue)
+        self.lock.release()
+
+    def objectCategory(self, objectName):
+        try:
+            categoryName = self.wr.getObjectCategory(objectName)
+            return categoryName
+        except Exception as e:
+            self.logger.warning("wr.getObjectCategory(%s) error: %s" % (objectName, e))
+            raise
+
+    def setupDisplayAttribute(self, categoryName):
+        attributesList = []
+        try:
+            attributesList = self.wr.getAttributesFromCategory(categoryName)
+        except Exception as e:
+            self.logger.error("wr.getAttributesFromCategory(%s) error: %s"
+                % (categoryName, e))
+            raise
+        attributesMap = self.fieldsToMap(attributesList)
+        if self.DISPLAY_STR not in attributesMap.keys():
+            try:
+                self.wr.addAttributeToCategory(
+                    categoryName,
+                    self.DISPLAY_STR,
+                    self.fieldsFromMap(self.displayFields))
+            except Exception as e:
+                self.logger.warning("wr.addAttributeToCategory(%s, %s, [%s]) error: %s"
+                    % (categoryName, self.DISPLAY_STR, self.displayFields, e))
+                raise
+        else:
+            displayList = attributesMap[self.DISPLAY_STR]
+            displayMap = self.fieldsToMap(displayList)
+            fieldsMatch = True
+            for key, value in self.displayFields.iteritems():
+                if key not in displayMap.keys():
+                    fieldsMatch = False
+                    break
+                if displayMap[key] != value:
+                    fieldsMatch = False
+                    break
+            if not fieldsMatch:
+                raise Exception("The category %s already exists and its %s(%s) attribute does not match the "\
+                    "standard. Objects will not be displayed." % (categoryName, self.DISPLAY_STR, displayMap))
+        pass
+
+    def updateDisplayAttribute(self, objectName, parameterName, parameterValue):
+        try:
+            ret = self.wr.updateAttribute(
+                objectName,
+                self.DISPLAY_STR,
+                "1",
+                [[parameterName, parameterValue]])
+            if ret is not 0:
+                self.logger.warning("wr.updateAttribute(%s, %s, %s, %s) error code: %d"
+                    %(objectName, self.DISPLAY_STR, "1", [[parameterName, parameterValue]], ret))
+        except Exception as e:
+            self.logger.warning("wr.updateAttribute(%s, %s, %s, %s) error: %s"
+                %(objectName, self.DISPLAY_STR, "1", str([[parameterName, parameterValue]]), e))
+
+
+    @staticmethod
+    def fieldsToMap(attributes):
+        map = dict()
+        for pair in attributes:
+            try:
+                map[pair[0]] = pair[1]
+            except:
+                pass
+        return map
+
+    @staticmethod
+    def fieldsFromMap(map):
+        attributes = list()
+        for key, value in map.iteritems():
+            attributes.append([key, value])
+        return attributes]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="updateDisplay" type="0" type_size="1" nature="1" inner="0" tooltip="updates the given display attribute of the object given as argument.&#x0A;&#x0A;The value expected is a list organized as follows [objectName, displayAttribute, displayValue]&#x0A;&#x0A;The displayAttribute argument is a string.&#x0A;&#x0A;The displayAttributeValue is the corresponding value.&#x0A;&#x0A;A single stimulation of this box sets all the other display parameters to their default values and adds the Display attribute to the object category." id="2" />
+        <Output name="done" type="3" type_size="1" nature="2" inner="0" tooltip="Signal sent when a processing for the given object is finished." id="3" />
+        <Output name="onError" type="3" type_size="1" nature="2" inner="0" tooltip="Standard onError output." id="4" />
+    </Box>
+</ChoregrapheBox>

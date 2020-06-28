@@ -1,0 +1,162 @@
+.. _qimessaging_javascript:
+
+QiMessaging JavaScript
+======================
+
+Introduction
+------------
+
+QiMessaging provides JavaScript bindings to use QiMessaging services (modules)
+in a web browser. It allows you to build HTML5 applications for your robot.
+
+The library was designed to be asynchronous. Most function calls return a
+Deferred object, as specified by
+`jQuery <http://api.jquery.com/deferred.promise/>`_, but `reimplemented
+<https://github.com/warpdesign/deferred-js/>`_ to avoid shipping the whole
+library.
+`Socket.IO <http://socket.io/>`_ is used to provide bidirectional communication
+between the robot and the browser. You may want to get more familiar with these
+libraries before going further.
+
+Getting started
+----------------
+
+The client page requires the inclusion of QiMessaging which is hosted on
+the robot.
+
+.. code-block:: html
+
+   <script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+
+
+QiSession
+---------
+
+The bindings provide only one class: ``QiSession``. This object connects to the
+robot and gets proxies to services.
+
+If the page is hosted on the robot, the constructor does not need any argument.
+If the page is *not* served by the robot, you may pass the hostname or IP of
+the robot you want to connect to (e.g. ``"192.168.0.5"``, ``"nao.local"``,
+etc.).
+
+.. code-block:: javascript
+
+   var session = new QiSession();
+
+Once the connection is established, two methods are available: ``socket()`` and
+``service()``.
+
+
+.. _socket:
+
+socket()
++++++++++
+
+This function will return the underlying `Socket.Io` object. It is used to deal
+with low-level `socket events
+<https://github.com/LearnBoost/socket.io/wiki/Exposed-events#client>`_.
+
+.. code-block:: javascript
+
+   session.socket().on('connect', function () {
+     console.log('QiSession connected!');
+     // now you can start using your QiSession
+   }).on('disconnect', function () {
+     console.log('QiSession disconnected!');
+   });
+
+
+.. _service:
+
+service()
+++++++++++
+
+You can call this function to get a JavaScript proxy to any service, also known
+as modules. Services are JavaScript bound objects providing corresponding
+:ref:`naoqi-api` through :ref:`calls` and :ref:`signals`.
+
+In case of success, this method calls the ``done()`` callback with an
+object corresponding to the requested service. Otherwise, the ``fail()``
+callback is triggered.
+
+.. code-block:: javascript
+
+   session.service("ALTextToSpeech").done(function (tts) {
+     // tts is a proxy to the ALTextToSpeech service
+   }).fail(function (error) {
+     console.log("An error occurred:", error);
+   });
+
+Using services
+---------------
+
+Services are JavaScript object exposing methods and signals.
+
+.. _calls:
+
+Calls
+++++++
+
+Service calls are only JavaScript function calls returning `Deferred
+promises <http://api.jquery.com/deferred.promise/>`_. They are entirely
+asynchronous. As previously explained, ``done()`` and ``fail()`` callbacks
+will be triggered upon successful completion or not.
+
+.. code-block:: javascript
+
+   tts.getLanguage().done(function (lang) {
+     console.log("I speak " + lang);
+   }).fail(function (error) {
+     console.log("An error occurred: " + error);
+   });
+
+.. _signals:
+
+Signals
++++++++
+
+Signals are JavaScript objects inside a service, that provide two methods,
+``connect()`` and ``disconnect()``, respectively to subscribe and unsubscribe.
+The first one will return an id that must be used by the second one for
+unregistration.
+
+The example below connects to a signal, and once fired, disconnects.
+
+.. code-block:: javascript
+
+   var signalLink;
+   var serviceDirectory;
+
+   function onServiceAdded(serviceId, serviceName)
+   {
+     console.log("New service", serviceId, serviceName);
+     serviceDirectory.serviceAdded.disconnect(signalLink);
+   }
+
+   session.service("ServiceDirectory").done(function (sd) {
+     serviceDirectory = sd;
+     serviceDirectory.serviceAdded.connect(onServiceAdded).done(function (link) {
+       signalLink = link;
+     }).fail(function (error) {
+       console.log("An error occurred: " + error);
+     });
+   });
+
+Compatibility between Signals and ALMemory
++++++++++++++++++++++++++++++++++++++++++++
+
+:ref:`almemory` events cannot be directly used as QiMessaging signals. An extra step
+is needed, where ALMemory events are converted to signals using
+``ALMemory::subscriber``.
+
+.. code-block:: javascript
+
+   session.service("ALMemory").done(function (ALMemory) {
+     ALMemory.subscriber("FrontTactilTouched").done(function (subscriber) {
+       // subscriber.signal is a signal associated to "FrontTactilTouched"
+       subscriber.signal.connect(function (state) {
+         console.log(state == 1 ? "You just touched my head!" : "Bye bye!");
+       });
+     });
+   });

@@ -1,0 +1,88 @@
+.. _alpreferences-api:
+
+ALPreferences API
+=================
+
+:ref:`naoqi-core` - :ref:`Overview <alpreferences>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alpreferencesproxy.h>
+
+ALPreferences allows access to xml preference files.
+A preference is defined as follows :
+
+- **pParams[0]**: Name of the preference
+- **pParams[1]**: Description of the preference
+- **pParams[2]**: The value of the preference (can contain other preferences)
+- **pParams[3]**: (optional) The name of the data when inserted into memory
+
+.. code-block:: cpp
+
+  #include <alproxies/alpreferencesproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALPreferencesProxy
+
+* :cpp:func:`ALPreferencesProxy::readPrefFile` (deprecated)
+* :cpp:func:`ALPreferencesProxy::saveToMemory` (deprecated)
+* :cpp:func:`ALPreferencesProxy::writePrefFile` (deprecated)
+* :cpp:func:`ALPreferencesProxy::removePrefFile` (deprecated)
+
+
+
+Methods
+-------
+
+.. cpp:function:: AL::ALValue ALPreferencesProxy::readPrefFile(const std::string& fileName,const bool& autoGenerateMemoryNames)
+
+  .. deprecated:: 1.20
+    use :cpp:func:`ALPreferenceManagerProxy::importPrefFile` and :cpp:func:`ALPreferenceManagerProxy::getValueList` instead.
+
+  Reads all preferences from an xml files and stores them in an ALValue.
+
+  :param fileName: Name of the module associated to the preference.
+  :param autoGenerateMemoryNames: If true a memory name will be generated for each non-array preference.
+  :return: array representing the whole file.
+
+
+.. cpp:function:: bool ALPreferencesProxy::saveToMemory(const AL::ALValue& prefs)
+
+  .. deprecated:: 1.20
+    use :cpp:func:`ALPreferenceManagerProxy::setValue` instead
+
+  Writes all preferences from ALValue to individual memory keys.
+
+  :param prefs: array representing the whole file.
+  :return: True upon success.
+
+
+.. cpp:function:: void ALPreferencesProxy::writePrefFile(const std::string& fileName,const AL::ALValue& prefs,const bool& ignoreMemoryNames)
+
+  .. deprecated:: 1.20
+    use :cpp:func:`ALPreferenceManagerProxy::setValue` instead
+
+  Writes all preferences from ALValue to an xml file.
+
+  :param fileName: Name of the module associated to the preference.
+  :param prefs: array representing the whole file.
+  :param ignoreMemoryNames: If true all memory names will be removed before saving.
+
+.. cpp:function:: void ALPreferencesProxy::removePrefFile(const std::string& fileName)
+
+  .. deprecated:: 1.20
+    use :cpp:func:`ALPreferenceManagerProxy::removeValue` instead
+
+  Removes the xml file.
+
+  :param fileName: Name of the module associated to the preference.

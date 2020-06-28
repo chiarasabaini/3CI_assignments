@@ -1,0 +1,39 @@
+.. _whats-new-1.12.5:
+
+What's new - 1.12.5
+=====================
+
+.. warning::
+    **Always choose the latest release**
+
+    Do not forget to update both **Choregraphe** and your robot with the latest release.
+    It is not advised to downgrade to an earlier minor release.
+
+    For further details see: :ref:`choregraphe-howto-update-nao-system` and
+    :ref:`desktop-installation-cho-installing`.
+
+RoboCup only
+--------------
+
+* Specific issue with **ALAudioPlayer** on RoboCup config has been solved.
+
+Choregraphe
+------------
+
+* As some robots had experienced stability problems during Tai Chi Chuan danse,
+  a new version of the **Tai Chi Chuan** box has been released.
+
+* Read the troubleshooting section about :ref:`choregraphe-troubleshooting-connection`.
+  This should solve the Bug #6467 Choregraphe / NAO connection troubles.
+
+* **Record Sound** box. The default value of the **Microphone used** parameter has changed.
+
+  In order to handle the main usages of this box, default value is now *Front head microphone only(.ogg)*
+  instead of *Front, sides and rear head microphones (.wav)*.
+
+
+Infrared / NAO web page
+-------------------------
+
+* ALInfrared can be used exclusively with devices supported by http://www.lirc.org.
+  Requiring a complete overhaul, **Record a new remote** function is no longer available.

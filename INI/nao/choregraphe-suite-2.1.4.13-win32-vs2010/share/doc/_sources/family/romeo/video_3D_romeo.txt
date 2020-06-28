@@ -1,0 +1,52 @@
+.. include:: /bulk/common.rst
+
+.. _romeo_video_3D:
+
+|roboR| - 3D Sensor
+======================
+
+.. seealso::
+    :ref:`romeo`
+
+--------------------
+
+The robot head is composed of three cameras:
+
+* four :ref:`2D_camera_romeo`, and optionally
+* one :ref:`3D_camera_romeo`.
+
+The camera indexes are:
+
++-------------------+----------+-----------------------+
+| Parameter ID Name | ID Value | Description           |
++===================+==========+=======================+
+| AL::kTopCamera    | 0        | camera on the top.    |
++-------------------+----------+-----------------------+
+| AL::kBottomCamera | 1        | camera on the bottom. |
++-------------------+----------+-----------------------+
+| AL::kDepthCamera  | 2        | 3D camera in the eyes.|
++-------------------+----------+-----------------------+
+
+
+..  _3D_camera_romeo:
+
+3D Sensor
+*********
+
+One 3D camera is located in the forehead.
+It provides image resolution up to 320x240 at 20 frames per second.
+
+Location
+--------
+
+One ASUS Xtion 3D sensor is located behind the eyes.
+
+
++----------------+---------+---------+--------+------------+------------+
+| Sensor         | X (m)   | Y (m)   | Z (m)  | VFOV       | HFOV       |
++================+=========+=========+========+============+============+
+| DepthCamera    | 0.05138 | 0.0390  | 0.1194 | 45.00°     | 58.00°     |
++----------------+---------+---------+--------+------------+------------+
+
+.. include:: ../bulk/camera_xtion.rst
+

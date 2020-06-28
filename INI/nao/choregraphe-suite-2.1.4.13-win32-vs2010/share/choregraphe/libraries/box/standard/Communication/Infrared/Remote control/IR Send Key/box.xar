@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="This box makes the robot work like a remote control.&#x0A;&#x0A;You need to set the Remote parameter with the remote control name and the key&#x0A;name you want to send. Go to Nao web page to see available remote controls and&#x0A;keys.&#x0A;&#x0A;V1.1.0&#x0A;" x="219" y="137">
+        <bitmap>media/images/box/interaction/IR_send.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        try:
+            self.hw = ALProxy("ALInfrared")
+        except Exception as e:
+            self.hw = None
+            self.logger.error(e)
+
+    def onLoad(self):
+        self.remote = self.getParameter("Remote")
+        self.key = self.getParameter("Key")
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onSend(self):
+        if self.hw:
+            try:
+              self.hw.sendRemoteKeyWithTime(self.remote, self.key, 500)
+            except: # for NAOqi 1.12 compatibility
+              self.hw.sendRemoteKey(self.remote, self.key)
+        self.onSent()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onSend" type="1" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onSent" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+        <Parameter name="Remote" inherits_from_parent="0" content_type="3" value="TV" default_value="TV" custom_choice="1" tooltip='Remote name (more info on the robot web page in &quot;Advanced&quot;, &quot;Remote Controls&quot;).' id="4">
+            <Choice value="TV" />
+            <Choice value="DVD" />
+            <Choice value="VCR" />
+        </Parameter>
+        <Parameter name="Key" inherits_from_parent="0" content_type="3" value="KEY_0" default_value="KEY_0" custom_choice="0" tooltip='Key name (more info on the robot web page in &quot;Advanced&quot;, &quot;Remote Controls&quot;).' id="5">
+            <Choice value="KEY_0" />
+            <Choice value="KEY_1" />
+            <Choice value="KEY_2" />
+            <Choice value="KEY_3" />
+            <Choice value="KEY_4" />
+            <Choice value="KEY_5" />
+            <Choice value="KEY_6" />
+            <Choice value="KEY_7" />
+            <Choice value="KEY_8" />
+            <Choice value="KEY_9" />
+            <Choice value="KEY_BACK" />
+            <Choice value="KEY_CHANNELDOWN" />
+            <Choice value="KEY_CHANNELUP" />
+            <Choice value="KEY_CLOSE" />
+            <Choice value="KEY_DOWN" />
+            <Choice value="KEY_EJECTCLOSECD" />
+            <Choice value="KEY_FORWARD" />
+            <Choice value="KEY_LANGUAGE" />
+            <Choice value="KEY_LEFT" />
+            <Choice value="KEY_MENU" />
+            <Choice value="KEY_MUTE" />
+            <Choice value="KEY_OK" />
+            <Choice value="KEY_OPEN" />
+            <Choice value="KEY_PAUSE" />
+            <Choice value="KEY_PLAY" />
+            <Choice value="KEY_RECORD" />
+            <Choice value="KEY_REWIND" />
+            <Choice value="KEY_RIGHT" />
+            <Choice value="KEY_STOP" />
+            <Choice value="KEY_TEXT" />
+            <Choice value="KEY_UP" />
+            <Choice value="KEY_VOLUMEDOWN" />
+            <Choice value="KEY_VOLUMEUP" />
+        </Parameter>
+    </Box>
+</ChoregrapheBox>

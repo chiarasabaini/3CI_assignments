@@ -1,0 +1,30 @@
+.. _partitionInfo:
+
+PartitionInfo
+=============
+
+:ref:`naoqi-core` - :ref:`Overview <alsystem>` | :ref:`API <alsystem-api>` | PartitionInfo
+
+--------------------
+
+.. code-block:: cpp
+
+   #include <alproxies/alsystemproxy.h>
+
+Expose all information required for a partition.
+
+* :ref:`partitionInfo`
+
+  * :cpp:func:`PartitionInfo::PartitionInfo`
+
+.. cpp:function:: PartitionInfo::PartitionInfo(const std::string& filesystem, const std::string& path, qi::uint64_t size, qi::uint64_t free)
+
+  Constructor using a set of values to create a PartitionInfo.
+
+PartitionInfo structure
+-----------------------
+
+* **filesystem**: This is the filesystem name (example: 'rootfs')
+* **path**: This is the path to the mount point (example: '\\')
+* **size**: Total size (octet) of the partition
+* **free**: Free space (octet) of the partition

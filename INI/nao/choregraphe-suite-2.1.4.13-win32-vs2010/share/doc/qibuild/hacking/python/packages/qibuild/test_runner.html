@@ -1,0 +1,271 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qibuild.test_runner – Running tests from a C++ project &mdash; qiBuild 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="qiBuild 2.1.4.12 documentation" href="../../../../index.html" />
+    <link rel="up" title="qibuild modules" href="index.html" />
+    <link rel="next" title="qibuild.wizard – Configuration wizards" href="wizard.html" />
+    <link rel="prev" title="qibuild.project – Managing projects" href="project.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../../index.html">qiBuild documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../../index.html">Home</a>
+        
+         |
+        <a title="Search" href="../../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../../genindex.html">Index</a>
+        
+         |
+        <a title="CMake index" href="../../../../cmake-functions-index.html">CMake index</a>
+         |
+        <a title="Python index" href="../../../../py-modindex.html">Python index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="project.html" title="qibuild.project &amp;#8211; Managing &lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;projects&lt;/span&gt;&lt;/tt&gt;">previous</a>
+     |
+    <a href="index.html" title="qibuild modules" accesskey="U">up</a>
+   |
+    <a href="wizard.html" title="qibuild.wizard &amp;#8211; Configuration wizards">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="hacking-python-packages-qibuild-test_runner">
+            
+  <div class="section" id="module-qibuild.test_runner">
+<span id="qibuild-test-runner-running-tests-from-a-c-project"></span><h1>qibuild.test_runner &#8211; Running tests from a C++ project<a class="headerlink" href="#module-qibuild.test_runner" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="projecttestrunner">
+<h2>ProjectTestRunner<a class="headerlink" href="#projecttestrunner" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qibuild.test_runner.ProjectTestRunner">
+<em class="property">class </em><tt class="descclassname">qibuild.test_runner.</tt><tt class="descname">ProjectTestRunner</tt><big>(</big><em>project</em><big>)</big><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements <a class="reference internal" href="../qitest/runner.html#qitest.runner.TestSuiteRunner" title="qitest.runner.TestSuiteRunner"><tt class="xref py py-class docutils literal"><span class="pre">TestSuiteRunner</span></tt></a> for a qibuild/cmake project</p>
+<dl class="attribute">
+<dt id="qibuild.test_runner.ProjectTestRunner.perf">
+<tt class="descname">perf</tt><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner.perf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether we should run performance tests</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.test_runner.ProjectTestRunner.nightly">
+<tt class="descname">nightly</tt><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner.nightly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether we should run nightly tests</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.test_runner.ProjectTestRunner.nightmare">
+<tt class="descname">nightmare</tt><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner.nightmare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets <tt class="docutils literal"><span class="pre">GTEST_REPEAT=20</span></tt> and <tt class="docutils literal"><span class="pre">GTEST_SHUFFLE=1</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.test_runner.ProjectTestRunner.valgrind">
+<tt class="descname">valgrind</tt><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner.valgrind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run with valgrind and make the tests fail if there are
+memory leaks or file descriptor leaks</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.test_runner.ProjectTestRunner.num_cpus">
+<tt class="descname">num_cpus</tt><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner.num_cpus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the given number of CPUS for each test. Useful
+to trigger race conditions.
+For instance, with a machine with 8 CPUs you could run</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">qitest run --ncpu=2 -j4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qibuild.test_runner.ProjectTestRunner.launcher">
+<tt class="descname">launcher</tt><a class="headerlink" href="#qibuild.test_runner.ProjectTestRunner.launcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements TestSuiteRunner.launcher</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="processtestlauncher">
+<h2>ProcessTestLauncher<a class="headerlink" href="#processtestlauncher" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="qibuild.test_runner.ProcessTestLauncher">
+<em class="property">class </em><tt class="descclassname">qibuild.test_runner.</tt><tt class="descname">ProcessTestLauncher</tt><big>(</big><em>project_runner</em><big>)</big><a class="headerlink" href="#qibuild.test_runner.ProcessTestLauncher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements <a class="reference internal" href="../qitest/runner.html#qitest.runner.TestLauncher" title="qitest.runner.TestLauncher"><tt class="xref py py-class docutils literal"><span class="pre">TestLauncher</span></tt></a> using
+<a class="reference internal" href="../qisys/command.html#qisys.command.Process" title="qisys.command.Process"><tt class="xref py py-class docutils literal"><span class="pre">qisys.command.Process</span></tt></a></p>
+<dl class="method">
+<dt id="qibuild.test_runner.ProcessTestLauncher.launch">
+<tt class="descname">launch</tt><big>(</big><em>test</em><big>)</big><a class="headerlink" href="#qibuild.test_runner.ProcessTestLauncher.launch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements <a class="reference internal" href="../qitest/runner.html#qitest.runner.TestLauncher.launch" title="qitest.runner.TestLauncher.launch"><tt class="xref py py-func docutils literal"><span class="pre">qitest.runner.TestLauncher.launch()</span></tt></a></p>
+<p>Also make sure a Junit-like XML file is always written, even
+if the test did not produce any XML file on its own or crashed
+before being able to write one.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="qibuild.test_runner.ProcessTestLauncher.get_message">
+<tt class="descname">get_message</tt><big>(</big><em>process</em>, <em>timeout=None</em><big>)</big><a class="headerlink" href="#qibuild.test_runner.ProcessTestLauncher.get_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human readable string describing the state of the process</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="project.html" title="qibuild.project &amp;#8211; Managing &lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;projects&lt;/span&gt;&lt;/tt&gt;">qibuild.project &#8211; Managing <tt class="docutils literal"><span class="pre">projects</span></tt></a>
+     |
+    <a href="index.html" title="qibuild modules" accesskey="U">qibuild modules</a>
+   |
+    <a href="wizard.html" title="qibuild.wizard &amp;#8211; Configuration wizards">qibuild.wizard &#8211; Configuration wizards</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../beginner/index.html">Welcome to qiBuild documentation !</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../advanced/index.html">Advanced qibuild usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Hacking qiBuild</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../contrib/index.html">Contributing to qiBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/managing_deps.html">Managing dependencies with qiBuild: an overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/searching.html">Search order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/shared_libs.html">Managing shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/cmake/index.html">qiBuild CMake framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/python/index.html">qiBuild Python framework design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../design/index.html">qiBuild design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">qiBuild Python documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">qiBuild Python packages documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../qisys/index.html">qisys modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qisrc/index.html">qisrc modules</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">qibuild modules</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="build.html">qibuild.build - Build tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="build_config.html">qibuild.build_config</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cmake.html">qibuild.cmake - CMake tools</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cmake_builder.html">qibuild.cmake_builder - Building CMake projects</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cmake_modules.html">qibuild.cmake.modules - CMake module generation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="config.html">qibuild.config &#8211; Managing qiBuild config files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="deps.html">qibuild.deps &#8211; Resolving dependencies</a></li>
+<li class="toctree-l5"><a class="reference internal" href="deploy.html">qibuild.deploy - Deploying code to remote targets</a></li>
+<li class="toctree-l5"><a class="reference internal" href="find.html">qibuild.find - Finding build products</a></li>
+<li class="toctree-l5"><a class="reference internal" href="gdb.html">qibuild.gdb - Tools for gdb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="parsers.html">qibuild.parsers &#8211; Parsers for qibuild actions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="profile.html">qibuild.profile &#8211; Managing build profiles</a></li>
+<li class="toctree-l5"><a class="reference internal" href="project.html">qibuild.project &#8211; Managing <tt class="docutils literal"><span class="pre">projects</span></tt></a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">qibuild.test_runner &#8211; Running tests from a C++ project</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="wizard.html">qibuild.wizard &#8211; Configuration wizards</a></li>
+<li class="toctree-l5"><a class="reference internal" href="worktree.html">qibuild.worktree- The BuildWorkTree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../qitest/index.html">qitest modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qitoolchain/index.html">qitoolchain modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qidoc/index.html">qidoc modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qilinguist/index.html">qilinguist modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipy/index.html">qipy modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../qipkg/index.html">qipkg modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h3><a href="../../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">qibuild.test_runner &#8211; Running tests from a C++ project</a><ul>
+<li><a class="reference internal" href="#projecttestrunner">ProjectTestRunner</a></li>
+<li><a class="reference internal" href="#processtestlauncher">ProcessTestLauncher</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="project.html" title="qibuild.project &amp;#8211; Managing &lt;tt class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;projects&lt;/span&gt;&lt;/tt&gt;">previous</a>
+     |
+    <a href="index.html" title="qibuild modules" accesskey="U">up</a>
+   |
+    <a href="wizard.html" title="qibuild.wizard &amp;#8211; Configuration wizards">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

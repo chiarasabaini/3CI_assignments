@@ -1,0 +1,110 @@
+.. include:: ../../bulk/common.rst
+
+.. _alcloseobjectdetection:
+
+ALCloseObjectDetection
+======================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alcloseobjectdetection-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <alcloseobjectdetection-api>`
+
+
+---------
+
+|3d| This module requires a robot with a 3D sensor.
+
+
+What it does
+------------
+
+**ALCloseObjectDetection** allows you to detect objects that are too close to the robot
+to be directly detected by the 3D sensor.
+
+
+How it works
+------------
+
+In order to be detected and appear in the depth image returned by the 3D sensor, objects must be
+at a minimum distance to the sensor. However, using the Infrared image (also returned by the
+3D sensor) it is possible to detect when objects are too close and compute their positions, as these
+objects will correspond to saturated pixels in the Infrared image.
+
+
+ALMemory key
+++++++++++++
+
+Each time an object is detected in the "close range" of the 3D sensor by the module **ALCloseObjectDetection**,
+the ALMemory key :naoqi:memkey:`CloseObjectDetection/ObjectInfo` is updated and the ALMemory event
+:naoqi:event:`CloseObjectDetection/ObjectDetected` is raised.
+
+The memory key contains the information about the detection of biggest close object.
+It is organized as follows:
+
+.. code-block:: guess
+
+  ObjectInfo =
+  [
+    TimeStamp,
+    CloseObjectInfo,
+    CameraPose_InTorsoFrame,
+    CameraPose_InRobotFrame,
+    Camera_Id
+  ]
+
+
+**TimeStamp**: this field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+  TimeStamp [
+    TimeStamp_Seconds,
+    Timestamp_Microseconds
+  ]
+
+
+**CloseObjectInfo**: each of these fields contains the description of the detected close object.
+It has the following structure:
+
+.. code-block:: guess
+
+  CloseObjectInfo =
+  [
+    PositionOfCog,
+    AngularRoi,
+    PixelsProportion,
+  ]
+
+- **PositionOfCog** = [x,y] contains the angular coordinates (in radians) of the center of gravity
+  of the object.
+
+- **AngularRoi** = [x,y,width, height] contains information about the smallest rectangle (ROI) in which
+  the object is included. [x,y] corresponds to the angular coordinates (in radians) of the top left corner
+  of the ROI in the current depth image. [width, height] corresponds to the angular size (in radians)
+  of the ROI.
+
+- **PixelsProportion** = [In_Frame, In_Roi]  corresponds to the proportion of pixels that belong to the
+  close object. In_Frame is the proportion relative to the total number of pixels in the frame and In_Roi is
+  the proportion relative to the number of pixels in the ROI of the object.
+
+
+**CameraPose_InTorsoFrame**: describes the :term:`Position6D` of the depth camera at the time the image was
+taken, in :term:`FRAME_TORSO`.
+
+**CameraPose_InRobotFrame**: describes the :term:`Position6D` of the depth camera at the time the image was
+taken, in :term:`FRAME_ROBOT`.
+
+**Camera_Id**: gives the Id of the camera used for the detection, i.e the depth camera.
+
+
+Tracking a close object
++++++++++++++++++++++++
+
+When a close object is detected, the event :naoqi:event:`ALTracker/CloseObjectDetected`
+is also raised. It contains information similar to :naoqi:memkey:`CloseObjectDetection/ObjectInfo`,
+but with a structure that can be used with function :cpp:func:`ALTrackerProxy::trackEvent` of
+the module **ALTracker**.

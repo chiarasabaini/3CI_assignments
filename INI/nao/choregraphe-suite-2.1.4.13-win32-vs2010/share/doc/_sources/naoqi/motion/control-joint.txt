@@ -1,0 +1,165 @@
+.. _control-joint:
+
+Joint control
+=============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   control-joint-api
+   control-joint-tuto
+
+
+:ref:`naoqi-motion` - Overview | :ref:`API <control-joint-api>` | :ref:`Tutorial <control-joint-tuto>`
+
+------------
+
+
+What it does
+------------
+
+| These API are dedicated to control directly the position of the robot joints.
+| Each joint can be controlled individually, or in parallel with other joints.
+
+There are two ways of controlling a joint or a group of joints:
+  * animation methods (time fixed, blocking function)
+      * :cpp:func:`ALMotionProxy::angleInterpolation`
+      * :cpp:func:`ALMotionProxy::angleInterpolationWithSpeed`
+  * reactive methods (could be changed every **ALMotion** cycle, non blocking function)
+      * :cpp:func:`ALMotionProxy::setAngles`
+      * :cpp:func:`ALMotionProxy::changeAngles`
+
+How it works
+------------
+
+These API just create a higher level of the :term:`DCM` actuator control and provide
+interpolation to have more smooth behavior.
+
+Getting started
+---------------
+
+.. _body-chain-def:
+
+"Body", chains and joint names
+++++++++++++++++++++++++++++++
+
+Joints can be controlled:
+
+* individually, using a joint name, or
+* in parallel, using a chain of joints or a group of joints like "Body".
+
+For further details, see: :ref:`NAO's Chains<nao_chains>`.
+
+It is possible to get the list of joints available on your robot using the
+:cpp:func:`ALMotionProxy::getBodyNames` method, described in the section:
+:ref:`general-tools::jointNames`.
+
+Use Cases
+---------
+
+Case 1: Controlling Joints
+++++++++++++++++++++++++++
+
+To control a joint, you need to specify the name of the joint, the
+target angle in radians, and how fast you want to go to the target angle.
+
+:download:`almotion_controllingJoints.py </samples/python/almotion/almotion_controllingJoints.py>`
+
+.. literalinclude:: /samples/python/almotion/almotion_controllingJoints.py
+   :language: py
+
+.. list-table::
+   :class: borderless
+
+   * - .. image:: /medias/dev/modules/motion/motion_headyaw_position.png
+          :width: 300 px
+          :height: 225 px
+
+     - .. image:: /medias/dev/modules/motion/motion_headyaw_speed.png
+          :width: 300 px
+          :height: 225 px
+
+Case 2: Timed Interpolations
+++++++++++++++++++++++++++++
+
+When you know in advance the trajectory that you want to follow,
+the :cpp:func:`ALMotionProxy::angleInterpolation` and :cpp:func:`ALMotionProxy::angleInterpolationWithSpeed` methods can be
+used to set up an interpolation.
+
+.. code-block:: python
+
+  # Example showing a joint trajectory with a single destination
+  names = "HeadYaw"
+  angleLists = 1.0
+  times = 1.0
+  isAbsolute = True
+  proxy.angleInterpolation(names, angleLists, times, isAbsolute)
+
+You can command multiple joints in one command, by using a single
+time, and a number of target angles equal to the number of joints.
+
+.. code-block:: python
+
+  # Example showing a command for the two joints in the 'Head' alias
+  # 'Head' is expanded to ['HeadYaw','HeadPitch']
+  names = "Head"
+  angleLists = [-1.0,-1.0]
+  times = 1.0
+  isAbsolute = True
+  proxy.angleInterpolation(names, angleLists, times, isAbsolute)
+
+The same command can take a list of angles with corresponding times.
+
+.. code-block:: python
+
+  # Shake the head from side to side
+  names = "HeadYaw"
+  angleLists = [1.0, -1.0, 1.0, -1.0, 0.0]
+  times      = [1.0,  2.0, 3.0,  4.0, 5.0]
+  isAbsolute = True
+  proxy.angleInterpolation(names, angleLists, times, isAbsolute)
+
+Similarly, trajectories can be specified for multiple joints.
+
+.. code-block:: python
+
+  # Two trajectories in one command. Each trajectory must have a
+  # corresponding number of times
+  names      = ["HeadYaw", "HeadPitch"]
+  angleLists = [[1.0, -1.0, 1.0, -1.0], [-1.0]]
+  times      = [[1.0,  2.0, 3.0,  4.0], [ 5.0]]
+  isAbsolute = True
+  proxy.angleInterpolation(names, angleLists, times, isAbsolute)
+
+Case 3: Reactive Control
+++++++++++++++++++++++++
+
+The commands :cpp:func:`ALMotionProxy::setAngles` and :cpp:func:`ALMotionProxy::changeAngles`, do not block the calling thread.
+This makes them ideal for being called often in reactive control loops, such as
+head tracking. You can call them often, with contradictory commands, and motion will
+ensure that the trajectory is smooth in position and continuous in velocity.
+
+
+:download:`almotion_reactiveControl.py </samples/python/almotion/almotion_reactiveControl.py>`
+
+.. literalinclude:: /samples/python/almotion/almotion_reactiveControl.py
+   :language: py
+
+
+.. list-table::
+   :class: borderless
+
+   * - .. image:: /medias/dev/modules/motion/motion_headyaw_reactive_position.png
+          :width: 100%
+
+     - .. image:: /medias/dev/modules/motion/motion_headyaw_reactive_speed.png
+          :width: 100%
+
+
+It is also possible to use time with angleInterpolation to do reactive control.
+
+:download:`almotion_angleInterpolationReactif.py </samples/python/almotion/almotion_angleInterpolationReactif.py>`
+
+.. literalinclude:: /samples/python/almotion/almotion_angleInterpolationReactif.py
+   :language: py

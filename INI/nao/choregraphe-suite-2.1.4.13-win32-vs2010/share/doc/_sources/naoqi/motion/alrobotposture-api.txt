@@ -1,0 +1,140 @@
+.. _alrobotposture-api:
+
+ALRobotPosture API
+====================
+
+:ref:`Overview <alrobotposture>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+   #include <alproxies/alrobotpostureproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALRobotPostureProxy
+
+* :cpp:func:`ALRobotPostureProxy::getPostureList`
+* :cpp:func:`ALRobotPostureProxy::getPosture`
+* :cpp:func:`ALRobotPostureProxy::goToPosture`
+* :cpp:func:`ALRobotPostureProxy::applyPosture`
+* :cpp:func:`ALRobotPostureProxy::stopMove`
+
+* :cpp:func:`ALRobotPostureProxy::getPostureFamily`
+* :cpp:func:`ALRobotPostureProxy::getPostureFamilyList`
+* :cpp:func:`ALRobotPostureProxy::setMaxTryNumber`
+
+Event list
+----------
+
+* :naoqi:event:`PostureFamilyChanged`
+* :naoqi:event:`PostureChanged`
+
+
+Methods
+-------
+
+.. cpp:function:: std::vector<std::string> ALRobotPostureProxy::getPostureList()
+
+  Returns a vector with all predefined postures.
+
+  :return: A vector with all predefined postures.
+
+.. cpp:function:: std::string ALRobotPostureProxy::getPosture()
+
+  Returns the name of the current :term:`predefined postures`. If the current posture is not in the predefined postures, it returns "Unknown".
+
+  :return: A string with the name of the current posture.
+
+
+.. cpp:function:: bool ALRobotPostureProxy::goToPosture(const std::string postureName, const float speed)
+
+  Makes the robot go to the predefined posture asked in parameter. It is possible to modify
+  the speed of the move. The move is "intelligent": it will start from beginning posture of the robot, and choose
+  all the steps to reach the asked posture.
+
+  This is a blocking call. Use a post if you want to make it non-blocking.
+
+  :param postureName: Name of the predefined posture to be reached. See: :term:`Predefined postures`.
+
+  :param speed: Relative speed between 0.0 and 1.0.
+
+  :return: Returns if the predefined posture was reached.
+
+
+.. cpp:function:: bool ALRobotPostureProxy::applyPosture(const std::string &postureName, const float& speed)
+
+  Set all the joints of the robot in the configuration of the asked predefined posture.
+
+  Use applyPosture for animation purposes when manipulating the robot. Consider it has a shortcut, in case you
+  want to reach quickly a posture. The robot will need user's help to reach the posture.
+
+  The effect is immediate and there is no intelligence in it so be careful
+  when using set posture. For example if the robot is sitting and you ask for
+  setPosture("StandInit", 1.0) it can be dangerous for the robot, it will fall
+  if you do not help it to stand up.
+
+  If you want the robot to stand up alone, use :cpp:func:`ALRobotPostureProxy::goToPosture`.
+
+  This is a blocking call. Please use a post if you want to make it non-blocking.
+
+  :param postureName: Name of the predefined posture to be reached. See: :term:`Predefined postures`.
+
+  :param speed: Relative speed between 0.0 and 1.0.
+
+  :return: Returns if the predefined posture was reached.
+
+
+.. cpp:function:: void ALRobotPostureProxy::stopMove()
+
+  Stop the current posture interpolation.
+
+
+
+.. cpp:function:: std::string ALRobotPostureProxy::getPostureFamily()
+
+  Returns the Posture family. For further details, see: :term:`Posture family`.
+
+  :return: Returns the name of the current posture family.
+
+
+
+.. cpp:function:: std::vector<std::string> ALRobotPostureProxy::getPostureFamilyList()
+
+  Returns a vector with all predefined postures families.
+
+  :return: A vector with all predefined postures families.
+
+
+
+.. cpp:function:: void ALRobotPostureProxy::setMaxTryNumber( const int& maxTryNumber)
+
+  Sets the maximum number of tries performed by :cpp:func:`ALRobotPostureProxy::goToPosture`
+  before returning a fail.
+
+  :param maxTryNumber: number of tries, default value: 3.
+
+
+
+Events
+------
+
+.. naoqi:event:: PostureFamilyChanged(std::string PostureFamily)
+
+  Raises the name of the :term:`Posture family` when it changes.
+
+  The update frequency of the event is about 1 second.
+
+.. naoqi:event:: PostureChanged(std::string Posture)
+
+  Raises the name of the :term:`Posture` when it changes.
+
+  The update frequency of the event is about 1 second.

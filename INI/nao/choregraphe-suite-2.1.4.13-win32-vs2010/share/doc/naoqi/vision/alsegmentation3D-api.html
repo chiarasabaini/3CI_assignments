@@ -1,0 +1,549 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALSegmentation3D API &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="ALSegmentation3D" href="alsegmentation3D.html" />
+    <link rel="next" title="ALVideoDevice" href="alvideodevice.html" />
+    <link rel="prev" title="ALSegmentation3D" href="alsegmentation3D.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="alsegmentation3D.html" title="ALSegmentation3D">previous</a>
+     |
+    <a href="alsegmentation3D.html" title="ALSegmentation3D" accesskey="U">up</a>
+   |
+    <a href="alvideodevice.html" title="ALVideoDevice">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-vision-alsegmentation3D-api">
+            
+  <div class="section" id="alsegmentation3d-api">
+<span id="id1"></span><h1>ALSegmentation3D API<a class="headerlink" href="#alsegmentation3d-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html#naoqi-vision"><em>NAOqi Vision</em></a> - <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d"><em>Overview</em></a> | API</p>
+<hr class="docutils" />
+<p><img alt="3d" class="img-inline" src="../../_images/3d.png" /> This module requires a robot with a 3D sensor.</p>
+<p>Namespace : <strong>AL</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;alproxies/alsegmentation3Dproxy.h&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="method-list">
+<h2>Method list<a class="headerlink" href="#method-list" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ALSegmentation3DProxy">
+<em class="property">class </em><tt class="descname">ALSegmentation3DProxy</tt><a class="headerlink" href="#ALSegmentation3DProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li>As any module, this module inherits methods from <a class="reference internal" href="../core/almodule-api.html#almodule-api"><em>ALModule API</em></a>.</li>
+<li>It also inherits methods from <a class="reference internal" href="../core/alextractor-api.html#alextractor-api"><em>ALExtractor API</em></a> and <a class="reference internal" href="../core/alvisionextractor-api.html#alvisionextractor-api"><em>ALVisionExtractor API</em></a>.</li>
+<li>It also has the following specific methods:<ul>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::getDeltaDepthThreshold" title="ALSegmentation3DProxy::getDeltaDepthThreshold"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::getDeltaDepthThreshold()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::getBlobTrackingDistance" title="ALSegmentation3DProxy::getBlobTrackingDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::getBlobTrackingDistance()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::getTopOfBlob__floatCR.iCR.bCR" title="ALSegmentation3DProxy::getTopOfBlob"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::getTopOfBlob()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::getVerticalOffset" title="ALSegmentation3DProxy::getVerticalOffset"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::getVerticalOffset()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::isBlobTrackingEnabled" title="ALSegmentation3DProxy::isBlobTrackingEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::isBlobTrackingEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::setBlobTrackingDistance__floatCR" title="ALSegmentation3DProxy::setBlobTrackingDistance"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::setBlobTrackingDistance()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::setBlobTrackingEnabled__bCR" title="ALSegmentation3DProxy::setBlobTrackingEnabled"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::setBlobTrackingEnabled()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::setDeltaDepthThreshold__floatCR" title="ALSegmentation3DProxy::setDeltaDepthThreshold"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::setDeltaDepthThreshold()</span></tt></a></li>
+<li><a class="reference internal" href="#ALSegmentation3DProxy::setVerticalOffset__floatCR" title="ALSegmentation3DProxy::setVerticalOffset"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALSegmentation3DProxy::setVerticalOffset()</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="events-lists">
+<h2>Events lists<a class="headerlink" href="#events-lists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#ALTracker/BlobDetected" title="ALTracker/BlobDetected"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">ALTracker/BlobDetected()</span></tt></a></li>
+<li><a class="reference internal" href="#Segmentation3D/BlobTrackerUpdated" title="Segmentation3D/BlobTrackerUpdated"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Segmentation3D/BlobTrackerUpdated()</span></tt></a></li>
+<li><a class="reference internal" href="#Segmentation3D/SegmentationUpdated" title="Segmentation3D/SegmentationUpdated"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Segmentation3D/SegmentationUpdated()</span></tt></a></li>
+<li><a class="reference internal" href="#Segmentation3D/TrackedBlobNotFound" title="Segmentation3D/TrackedBlobNotFound"><tt class="xref naoqi naoqi-event docutils literal"><span class="pre">Segmentation3D/TrackedBlobNotFound()</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="almemory-keys-list">
+<h2>ALMemory Keys list<a class="headerlink" href="#almemory-keys-list" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#Segmentation3D/BlobsList" title="Segmentation3D/BlobsList"><tt class="xref naoqi naoqi-memkey docutils literal"><span class="pre">Segmentation3D/BlobsList</span></tt></a></li>
+<li><a class="reference internal" href="#Segmentation3D/TopOfTrackedBlob" title="Segmentation3D/TopOfTrackedBlob"><tt class="xref naoqi naoqi-memkey docutils literal"><span class="pre">Segmentation3D/TopOfTrackedBlob</span></tt></a></li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ALSegmentation3DProxy::getDeltaDepthThreshold">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">getDeltaDepthThreshold</tt><big>(</big><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::getDeltaDepthThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The current value of DepthThreshold (in meters) for the segmentation. The default value is 0.05m.
+See definition of DepthThreshold in section
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-segmentationsection"><em>Segmentation</em></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::getBlobTrackingDistance">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">getBlobTrackingDistance</tt><big>(</big><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::getBlobTrackingDistance" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The current value of BlobTrackingDistance (in meters).
+See definition of BlobTrackingDistance in section
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::getTopOfBlob__floatCR.iCR.bCR">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">getTopOfBlob</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>dist</em>, <a class="reference internal" href="../stdtypes.html#i" title="int">const int&amp;</a> <em>frame</em>, <a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>applyVerticalOffset</em><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::getTopOfBlob__floatCR.iCR.bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is like a &#8220;one-shot&#8221; version of the
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a></p>
+<p>Returns the position of the <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-topofblobsection"><em>TopOfBlob</em></a> of the blob
+the most in the center, present at a distance near the given distance <strong>dist</strong>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dist</strong> &#8211; Distance criterion in order to filter the segmentated blobs. By setting dist to -1,
+it it possible to bypass this criterion and just select the nearest blob to the robot.</li>
+<li><strong>frame</strong> &#8211; Used to select the frame in which the position will be returned (-1 for the frame of
+the image, 0 for <a class="reference internal" href="../../glossary.html#term-frame-torso"><em class="xref std std-term">FRAME_TORSO</em></a>, 1 for <a class="reference internal" href="../../glossary.html#term-frame-world"><em class="xref std std-term">FRAME_WORLD</em></a> and 2 for <a class="reference internal" href="../../glossary.html#term-frame-robot"><em class="xref std std-term">FRAME_ROBOT</em></a>).</li>
+<li><strong>applyVerticalOffset</strong> &#8211; Used to choose if the VerticalOffset must be applied. This offset will not be
+applied if the <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-topofblobsection"><em>TopOfBlob</em></a> belongs
+to the top border of the depth image.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">If frame equals -1, result = [xAngle, yAngle, distBlob] where [xAngle,yAngle] are the angular
+coordinates in the image and distBlob is the real distance of the blob with respect ot the camera.
+If frame equals 0,1 or 2, result = [x, y, z] where [x,y,z] are the coordinates in the corresponding frame.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::getVerticalOffset">
+<a class="reference internal" href="../stdtypes.html#float" title="float">float</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">getVerticalOffset</tt><big>(</big><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::getVerticalOffset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The current value of the VerticalOffset (in meters). The default value is -0.2m.
+A negative value means that the offset will be substracted to the position of TopOfBlob.
+See definition of VerticalOffset in section
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::isBlobTrackingEnabled">
+<a class="reference internal" href="../stdtypes.html#b" title="bool">bool</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">isBlobTrackingEnabled</tt><big>(</big><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::isBlobTrackingEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if blob tracking is running, false otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::setBlobTrackingDistance__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">setBlobTrackingDistance</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>distance</em><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::setBlobTrackingDistance__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the value of BlobTrackingDistance.
+See definition of BlobTrackingDistance in section
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>distance</strong> &#8211; New BlobTrackingDistance (in meters), -1 to track the nearest blob.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::setBlobTrackingEnabled__bCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">setBlobTrackingEnabled</tt><big>(</big><a class="reference internal" href="../stdtypes.html#b" title="bool">const bool&amp;</a> <em>status</em><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::setBlobTrackingEnabled__bCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns on or off the blob tracking.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>status</strong> &#8211; true to turn on the blob tracking, false to turn it off.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::setDeltaDepthThreshold__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">setDeltaDepthThreshold</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>threshold</em><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::setDeltaDepthThreshold__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the value of DepthThreshold (in meters) used for the segmentation.
+See definition of DepthThreshold in section
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-segmentationsection"><em>Segmentation</em></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>threshold</strong> &#8211; New DepthThreshold value (must be positive).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ALSegmentation3DProxy::setVerticalOffset__floatCR">
+<a class="reference internal" href="../stdtypes.html#void" title="void">void</a> <tt class="descclassname">ALSegmentation3DProxy::</tt><tt class="descname">setVerticalOffset</tt><big>(</big><a class="reference internal" href="../stdtypes.html#float" title="float">const float&amp;</a> <em>offset</em><big>)</big><a class="headerlink" href="#ALSegmentation3DProxy::setVerticalOffset__floatCR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the value of VerticalOffset. See definition of VerticalOffset in section
+<a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>threshold</strong> &#8211; New VerticalOffset value (in meters). A negative value means that the
+offset will be substracted to the position of TopOfBlob.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<dl class="event">
+<dt id="ALTracker/BlobDetected">
+<div class="line">Event: <tt class="descname">&quot;ALTracker/BlobDetected&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a><em> result</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#ALTracker/BlobDetected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised each time the tracked blob is detected, with a structure that can
+be used with function <a class="reference internal" href="../trackers/altracker-api.html#ALTrackerProxy::trackEvent__ssCR" title="ALTrackerProxy::trackEvent"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALTrackerProxy::trackEvent()</span></tt></a> of the module <strong>ALTracker</strong>.
+For more details, see: <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Segmentation3D/BlobTrackerUpdated">
+<div class="line">Event: <tt class="descname">&quot;Segmentation3D/BlobTrackerUpdated&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Segmentation3D/BlobTrackerUpdated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised each time the tracked blob is detected. The information about the updated position
+of the tracked blob can be accessed using the memory key
+<a class="reference internal" href="#Segmentation3D/TopOfTrackedBlob" title="Segmentation3D/TopOfTrackedBlob"><tt class="xref naoqi naoqi-memkey docutils literal"><span class="pre">Segmentation3D/TopOfTrackedBlob</span></tt></a>.
+For more details, see: <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Segmentation3D/SegmentationUpdated">
+<div class="line">Event: <tt class="descname">&quot;Segmentation3D/SegmentationUpdated&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Segmentation3D/SegmentationUpdated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised each time segmentation is computed. The description of the blobs of the updated
+segmentation can be accessed using the memory key <a class="reference internal" href="#Segmentation3D/BlobsList" title="Segmentation3D/BlobsList"><tt class="xref naoqi naoqi-memkey docutils literal"><span class="pre">Segmentation3D/BlobsList</span></tt></a>.
+For more details, see: <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-segmentationsection"><em>Segmentation</em></a>.</p>
+</dd></dl>
+
+<dl class="event">
+<dt id="Segmentation3D/TrackedBlobNotFound">
+<div class="line">Event: <tt class="descname">&quot;Segmentation3D/TrackedBlobNotFound&quot;</tt></div>
+callback<big>(</big><a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> eventName</em>, <a class="reference internal" href="../stdtypes.html#ss" title="std::string">std::string</a><em> subscriberIdentifier</em><big>)</big><a class="headerlink" href="#Segmentation3D/TrackedBlobNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised each time the tracked blob is not detected.
+For more details, see: <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-blobtrackingsection"><em>Blob tracking</em></a>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="memory-keys">
+<h2>Memory Keys<a class="headerlink" href="#memory-keys" title="Permalink to this headline">¶</a></h2>
+<dl class="memkey">
+<dt id="Segmentation3D/BlobsList">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <tt class="descname">Segmentation3D/BlobsList</tt><a class="headerlink" href="#Segmentation3D/BlobsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the list of blobs after segmentation.</p>
+</dd></dl>
+
+<div class="section" id="key-structure">
+<h3>Key structure<a class="headerlink" href="#key-structure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><pre>BlobsList =
+[
+  TimeStamp,
+  [BlobInfo_1, BlobInfo_2, ... BlobInfo_n],
+  CameraPose_InTorsoFrame,
+  CameraPose_InRobotFrame,
+  Camera_Id
+]</pre>
+</div>
+<p><strong>TimeStamp</strong>: this field is the time stamp of the image that was used to perform the detection.</p>
+<div class="highlight-guess"><pre>TimeStamp [
+  TimeStamp_Seconds,
+  Timestamp_Microseconds
+]</pre>
+</div>
+<p><strong>BlobInfo_i</strong>: each of these fields contains the description of a blob of similar depth:</p>
+<div class="highlight-guess"><pre>BlobInfo_i =
+[
+  PositionOfCog,
+  AngularRoi,
+  MeanDistance,
+  RealSizeRoi,
+  TopOfBlob
+]</pre>
+</div>
+<ul class="simple">
+<li><strong>PositionOfCog</strong> = [xAngle,yAngle] contains the angular coordinates (in radians) of the center of gravity
+of the blob.</li>
+<li><strong>AngularRoi</strong> = [xAngle,yAngle,width, height] contains information about the smallest rectangle (ROI) in which
+the blob is included. [xAngle,yAngle] corresponds to the angular coordinates (in radians) of the top left corner
+of the ROI in the current depth image. [width, height] corresponds to the angular size (in radians)
+of the ROI.</li>
+<li><strong>MeanDistance</strong> is the mean distance of the points of the blob, with respect to the depth camera.</li>
+<li><strong>RealSizeRoi</strong> = [realwidth, realheight] gives the real size (in meters) of the ROI of the cluster.</li>
+<li><strong>TopOfBlob</strong> = [xAngle,yAngle] contains the angular coordinates (in radians) of the <a class="reference internal" href="alsegmentation3D.html#alsegmentation3d-topofblobsection"><em>TopOfBlob</em></a>.</li>
+</ul>
+<p><strong>CameraPose_InTorsoFrame</strong>: describes the <a class="reference internal" href="../../glossary.html#term-position6d"><em class="xref std std-term">Position6D</em></a> of the depth camera at the time the image was taken, in <a class="reference internal" href="../../glossary.html#term-frame-torso"><em class="xref std std-term">FRAME_TORSO</em></a>.</p>
+<p><strong>CameraPose_InRobotFrame</strong>: describes the <a class="reference internal" href="../../glossary.html#term-position6d"><em class="xref std std-term">Position6D</em></a> of the depth camera at the time the image was taken, in <a class="reference internal" href="../../glossary.html#term-frame-robot"><em class="xref std std-term">FRAME_ROBOT</em></a>.</p>
+<p><strong>Camera_Id</strong>: gives the Id of the depth camera used for the detection.</p>
+<dl class="memkey">
+<dt id="Segmentation3D/TopOfTrackedBlob">
+<a class="reference internal" href="../stdtypes.html#AL::ALValue" title="AL::ALValue">AL::ALValue</a> <tt class="descname">Segmentation3D/TopOfTrackedBlob</tt><a class="headerlink" href="#Segmentation3D/TopOfTrackedBlob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the infomation about the tracked blob.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>Key structure<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-guess"><pre>TopOfTrackedBlob =
+[
+  TimeStamp,
+  Position,
+  CameraPose_InTorsoFrame,
+  CameraPose_InRobotFrame,
+  Camera_Id
+]</pre>
+</div>
+<p><strong>TimeStamp</strong>: this field is the time stamp of the image that was used to perform the detection.</p>
+<div class="highlight-guess"><pre>TimeStamp [
+  TimeStamp_Seconds,
+  Timestamp_Microseconds
+]</pre>
+</div>
+<p><strong>Position</strong> = [xAngle,yAngle,distance], where [xAngle,yAngle] are the angular coordinates (in radians) in the image
+of the top of the blob after applying the offset, and distance is the distance between the blob and
+the camera.</p>
+<p><strong>CameraPose_InTorsoFrame</strong>: describes the <a class="reference internal" href="../../glossary.html#term-position6d"><em class="xref std std-term">Position6D</em></a> of the depth camera at the time the image was taken, in <a class="reference internal" href="../../glossary.html#term-frame-torso"><em class="xref std std-term">FRAME_TORSO</em></a>.</p>
+<p><strong>CameraPose_InRobotFrame</strong>: describes the <a class="reference internal" href="../../glossary.html#term-position6d"><em class="xref std std-term">Position6D</em></a> of the depth camera at the time the image was taken, in <a class="reference internal" href="../../glossary.html#term-frame-robot"><em class="xref std std-term">FRAME_ROBOT</em></a>.</p>
+<p><strong>Camera_Id</strong>: gives the Id of the depth camera used for the detection.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="alsegmentation3D.html" title="ALSegmentation3D">ALSegmentation3D</a>
+     |
+    <a href="alsegmentation3D.html" title="ALSegmentation3D" accesskey="U">ALSegmentation3D</a>
+   |
+    <a href="alvideodevice.html" title="ALVideoDevice">ALVideoDevice</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Vision</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="albacklightingdetection.html">ALBacklightingDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="albarcodereader.html">ALBarcodeReader</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alcloseobjectdetection.html">ALCloseObjectDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alcolorblobdetection.html">ALColorBlobDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="aldarknessdetection.html">ALDarknessDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="allandmarkdetection.html">ALLandMarkDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="almovementdetection.html">ALMovementDetection</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alphotocapture.html">ALPhotoCapture</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alredballdetection.html">ALRedBallDetection</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="alsegmentation3D.html">ALSegmentation3D</a><ul class="current">
+<li class="toctree-l6 current"><a class="current reference internal" href="">ALSegmentation3D API</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="alvideodevice.html">ALVideoDevice</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alvideorecorder.html">ALVideoRecorder</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alvisionrecognition.html">ALVisionRecognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="allocalization.html">ALLocalization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alvisualcompass.html">ALVisualCompass</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alvisualspacehistory.html">ALVisualSpaceHistory</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../trackers/index.html">NAOqi Trackers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALSegmentation3D API</a><ul>
+<li><a class="reference internal" href="#method-list">Method list</a></li>
+<li><a class="reference internal" href="#events-lists">Events lists</a></li>
+<li><a class="reference internal" href="#almemory-keys-list">ALMemory Keys list</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#events">Events</a></li>
+<li><a class="reference internal" href="#memory-keys">Memory Keys</a><ul>
+<li><a class="reference internal" href="#key-structure">Key structure</a></li>
+<li><a class="reference internal" href="#id2">Key structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="alsegmentation3D.html" title="ALSegmentation3D">previous</a>
+     |
+    <a href="alsegmentation3D.html" title="ALSegmentation3D" accesskey="U">up</a>
+   |
+    <a href="alvideodevice.html" title="ALVideoDevice">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

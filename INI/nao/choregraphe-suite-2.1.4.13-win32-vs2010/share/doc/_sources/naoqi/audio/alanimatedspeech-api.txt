@@ -1,0 +1,270 @@
+.. _alanimatedspeech-api:
+
+ALAnimatedSpeech API
+=====================
+
+:ref:`naoqi-audio` - :ref:`Overview <alanimatedspeech>` | API |
+:ref:`Advanced <alanimatedspeech-advanced>`
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/alanimatedspeechproxy.h>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALAnimatedSpeechProxy
+
+* :cpp:func:`ALAnimatedSpeechProxy::say`
+* :cpp:func:`ALAnimatedSpeechProxy::setBodyLanguageMode`
+* :cpp:func:`ALAnimatedSpeechProxy::setBodyLanguageModeFromStr`
+* :cpp:func:`ALAnimatedSpeechProxy::getBodyLanguageMode`
+* :cpp:func:`ALAnimatedSpeechProxy::getBodyLanguageModeToStr`
+* :cpp:func:`ALAnimatedSpeechProxy::addTagsToWords`
+* :cpp:func:`ALAnimatedSpeechProxy::declareAnimationsPackage`
+* :cpp:func:`ALAnimatedSpeechProxy::declareTagForAnimations`
+* :cpp:func:`ALAnimatedSpeechProxy::setBodyLanguageEnabled` (deprecated)
+* :cpp:func:`ALAnimatedSpeechProxy::isBodyLanguageEnabled` (deprecated)
+* :cpp:func:`ALAnimatedSpeechProxy::setBodyTalkEnabled` (deprecated)
+* :cpp:func:`ALAnimatedSpeechProxy::isBodyTalkEnabled` (deprecated)
+
+
+Event list
+----------
+
+* :naoqi:event:`ALAnimatedSpeech/EndOfAnimatedSpeech`
+
+
+Methods
+-------
+
+.. _ALAnimatedSpeechProxy::say1:
+
+.. cpp:function:: void ALAnimatedSpeechProxy::say(const std::string& text)
+
+  - :ref:`ALAnimatedSpeechProxy::say <ALAnimatedSpeechProxy::say1>`
+  - :ref:`ALAnimatedSpeechProxy::say <ALAnimatedSpeechProxy::say2>` with local configuration
+
+  Say the annotated text given in parameter
+  and animate it with animations inserted in the text.
+  The current Animated Speech configuration will be used.
+
+  :param text: An annotated text
+               (for example: "Hello. ^start(animations/Stand/Gestures/Hey_1)
+               My name is John Doe. Nice to meet you!").
+
+               For further details, see: :ref:`annotated_text`.
+
+
+.. _ALAnimatedSpeechProxy::say2:
+
+.. cpp:function:: void ALAnimatedSpeechProxy::say(const std::string& text, const AL::ALValue& configuration)
+
+  Say the annotated text given in parameter
+  and animate it with animations inserted in the text.
+  The given configuration will be used. For the unset parameters, their default value will be used.
+
+Here are the configuration parameters:
+
++--------------------+------------+---------------+-----------------+-----------------------+
+| Key                | Value type | Default value | Possible values | For further details,  |
+|                    |            |               |                 | see ...               |
++====================+============+===============+=================+=======================+
+| "bodyLanguageMode" | string     | "contextual"  | "disabled",     | :ref:`body_language`  |
+|                    |            |               | "random",       |                       |
+|                    |            |               | "contextual"    |                       |
++--------------------+------------+---------------+-----------------+-----------------------+
+
+
+:download:`alanimatedspeech_say_with_configuration.py </samples/python/alanimatedspeech/alanimatedspeech_say_with_configuration.py>`
+
+.. literalinclude:: /samples/python/alanimatedspeech/alanimatedspeech_say_with_configuration.py
+  :language: py
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::setBodyLanguageMode(unsigned int bodyLanguageMode)
+
+  Set the current body language mode.
+
+  :param stringBodyLanguageMode: The choosen body language mode.
+
+               3 modes exist:
+
+               0 (BODY_LANGUAGE_MODE_DISABLED)
+
+               1 (BODY_LANGUAGE_MODE_RANDOM)
+
+               2 (BODY_LANGUAGE_MODE_CONTEXTUAL)
+
+               For further details, see: :ref:`body_language`.
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::setBodyLanguageModeFromStr(const std::string& stringBodyLanguageMode)
+
+  Set the current body language mode from a string.
+
+  :param stringBodyLanguageMode: The choosen body language mode.
+
+               3 modes exist:
+
+               "disabled"
+
+               "random"
+
+               "contextual"
+
+               For further details, see: :ref:`body_language`.
+
+
+.. cpp:function:: unsigned int ALAnimatedSpeechProxy::getBodyLanguageMode()
+
+  Get the current body language mode.
+
+  :return: The current body language mode.
+
+           3 modes exist:
+
+           0 (BODY_LANGUAGE_MODE_DISABLED)
+
+           1 (BODY_LANGUAGE_MODE_RANDOM)
+
+           2 (BODY_LANGUAGE_MODE_CONTEXTUAL)
+
+           For further details, see: :ref:`body_language`.
+
+
+.. cpp:function:: unsigned int ALAnimatedSpeechProxy::getBodyLanguageModeToStr()
+
+  Get a string corresponding to the current body language mode.
+
+  :return: The current body language mode.
+
+           3 modes exist:
+
+           "disabled"
+
+           "random"
+
+           "contextual"
+
+           For further details, see: :ref:`body_language`.
+
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::addTagsToWords(const AL::ALValue& tagsToWords)
+
+  Link some words to some specific animation tags.
+
+  :param tagsToWords: Map of tags to words.
+
+
+:download:`alanimatedspeech_add_links_between_tags_and_words.py </samples/python/alanimatedspeech/alanimatedspeech_add_links_between_tags_and_words.py>`
+
+.. literalinclude:: /samples/python/alanimatedspeech/alanimatedspeech_add_links_between_tags_and_words.py
+  :language: py
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::declareAnimationsPackage(const std::string& animationsPackage)
+
+  Allows using animations contained in the specified package as tagged animations.
+
+  :param animationsPackage: The name of the package containing animations (and only animations).
+
+
+  .. note::
+      The animations package has to have the following tree pattern:
+
+      Stand/    => root folder for the standing animations
+
+      Sit/      => root folder for the sitting animations
+
+      SitOnPod/ => root folder for the sitting on pod animations
+
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::declareTagForAnimations(const AL::ALValue& tagsToAnimations)
+
+  Dynamically associate tags and animations.
+
+  :param tagsToAnimations: Map of tag to animations.
+
+  :download:`alanimatedspeech_declare_tags_for_animations.py </samples/python/alanimatedspeech/alanimatedspeech_declare_tags_for_animations.py>`
+
+  .. literalinclude:: /samples/python/alanimatedspeech/alanimatedspeech_declare_tags_for_animations.py
+    :language: py
+
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::setBodyLanguageEnabled(const bool& enable)
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALAnimatedSpeechProxy::setBodyLanguageMode` instead.
+
+  Enable or disable the automatic body Language random mode on the speech.
+  If it is enabled, anywhere you have not annotated your text with animation,
+  the robot will fill the gap with automatically calculated gestures.
+  If it is disabled, the robot will move only where you annotate it with
+  animations.
+
+  :param enable: The boolean value: true to enable, false to disable.
+
+                 For further details, see: :ref:`body_language`.
+
+
+.. cpp:function:: bool ALAnimatedSpeechProxy::isBodyLanguageEnabled()
+
+  .. deprecated:: 1.22
+    use :cpp:func:`ALAnimatedSpeechProxy::getBodyLanguageMode` instead.
+
+  Indicate whether the body Language is enabled or not.
+
+  :return: The boolean value: true means it is enabled,
+           false means it is disabled.
+
+           For further details, see: :ref:`body_language`.
+
+
+.. cpp:function:: void ALAnimatedSpeechProxy::setBodyTalkEnabled(const bool& enable)
+
+  .. deprecated:: 1.18
+    use :cpp:func:`ALAnimatedSpeechProxy::setBodyLanguageMode` instead.
+
+  Enable or disable the automatic body Language random mode on the speech.
+
+  :param enable: The boolean value: true to enable, false to disable.
+
+           For further details, see: :ref:`body_language`.
+
+
+.. cpp:function:: bool ALAnimatedSpeechProxy::isBodyTalkEnabled()
+
+  .. deprecated:: 1.18
+    use :cpp:func:`ALAnimatedSpeechProxy::getBodyLanguageMode` instead.
+
+  Indicate whether the body Language is enabled or not.
+
+
+  :return: The boolean value: true means it is enabled,
+           false means it is disabled.
+
+           For further details, see: :ref:`body_language`.
+
+
+Events
+------
+
+.. naoqi:event:: ALAnimatedSpeech/EndOfAnimatedSpeech(int taskId)
+
+  Raised when an animated speech is done.
+
+  :param taskId: The ID of the animated speech which is done.
+

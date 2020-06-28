@@ -1,0 +1,100 @@
+.. _play_tab:
+
+Play tab
+========
+
+The **Play** tab allows the **Teacher** to start and control a training session,
+associating a **Child**, a **Robot** and a **Playlist** or an **Activity**.
+
+.. image:: /medias/asknao/play_tab.png
+   :width: 485 px
+   :height: 381 px
+
+Playing a Playlist
+------------------
+
+.. |param_play| image:: /medias/asknao/param_play_btn.png
+   :class: img-inline
+
+.. |play| image:: /medias/asknao/play_btn.png
+   :class: img-inline
+
+=====  =========================================================================
+Step       Action
+=====  =========================================================================
+1.      Make sure your **NAO** is turned on and connected.
+
+        **NAO** needs to be turned on and connected to a WiFi network in order
+        to be available through the Interface.
+
+2.      Choose a **Child**.
+
+        * Click the **Choose a Child** button,
+        * Select a **Child** profile,
+        * Click the **Select This Child** button.
+
+3.      Choose a **Robot**.
+
+        * Click the **Choose a robot** button.
+
+          The **NAOs** that are connected to your interface are displayed.
+
+        * Select the robot you want to work with.
+
+        * Click the **Select This Robot** button.
+
+          The name of the selected **NAO** is displayed.
+
+          To test the connection, type a word or phrase into the text box
+          and wait for **NAO** to say it.
+
+4.      Choose a **Playlist** or an **Activity**.
+
+        * Click the **Choose a Playlist/ An App** button
+        * Select the **Playlist** or single **Acivity** you wish to start,
+        * Click the **Select This Playlist** button.
+
+        * If you choose an app, click the |param_play| **parameter** button
+          to select the features which best suit the class or child you are
+          working with.
+
+5.      When you and the child are ready to interact with **NAO**:
+
+        * Click the **Play** |play| button.
+
+          A few seconds after, the **Playlist** starts.
+=====  =========================================================================
+
+Playlist Controls
+------------------
+
+The buttons under the timeline allow you to start, stop, pause, skip ahead
+and skip backward through the **Playlist**.
+
+.. |backward| image:: /medias/asknao/backward_btn.png
+   :class: img-inline
+
+.. |stop| image:: /medias/asknao/stop_btn.png
+   :class: img-inline
+
+.. |pause| image:: /medias/asknao/pause_btn.png
+   :class: img-inline
+
+.. |forward| image:: /medias/asknao/forward_btn.png
+   :class: img-inline
+
+* |backward| **Skip backward** button restarts the currently running **Activity** without
+  saving data,
+
+* |forward| **Skip ahead** button jumps to the next one.
+
+* If you use the |stop| **Stop** or the |pause| **Pause** button,
+  when the **Activity** is resumed, the **Activity** will restart from the beginning.
+
+Troubleshoot: You have two robots on but your Interface is not recognizing one of them.
+------------------------------------------------------------------------------------------
+
+1) Make sure both robots are connected to Wi-Fi (**NAO** will give an IP address when you press his chest button once).
+2) Make sure both **NAOs** are connected to the Community account your Interface has on file.
+   For further details, see: :ref:`connecting_asknao`.
+3) Potential Proxy issue.

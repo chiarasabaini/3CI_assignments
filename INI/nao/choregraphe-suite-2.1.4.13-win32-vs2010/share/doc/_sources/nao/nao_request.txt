@@ -1,0 +1,43 @@
+.. include:: ../bulk/common.rst
+
+.. _nao_request:
+
+Requesting technical information
+==================================
+
+To Get |roboN|'s IP address and read notifications:
+
+=====  =========================================================================
+Step    Action
+=====  =========================================================================
+1.      Press the **Chest Button** once.
+
+        *Result*:
+
+        * |roboN| says its name and IP address.
+
+        * If the status LEDs are blinking, |roboN| also
+          reads the pending :ref:`notifications_nao`.
+
+2.      **Optionally**: Press again the **Chest Button** to Skip a message.
+
+        While the robot is saying its IP address or a notification message,
+        pressing again interrupts the current message and jumps to the next one,
+        if any.
+=====  =========================================================================
+
+.. _chest_btn_nao:
+
+**Chest Button**
+
+.. image:: /medias/wizard/chest_button.png
+    :width: 109 px
+    :height: 176 px
+
+**Tip**:
+
+* **IP address is hard to understand?**
+
+  On the third request, |roboN| will slow down
+  and spell digit by digit the address.
+

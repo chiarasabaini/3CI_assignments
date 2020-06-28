@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Set the color of one eye LED. Note that you must open the box to enter the color." x="87" y="237">
+        <bitmap>media/images/box/interaction/LED.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self):
+        #~ self.onStopped() #~ activate output of the box
+        pass]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onDone" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+        <Parameter name="Side" inherits_from_parent="0" content_type="3" value="Left" default_value="Left" custom_choice="0" tooltip="Choose the eye where the LED light is set." id="4">
+            <Choice value="Left" />
+            <Choice value="Right" />
+        </Parameter>
+        <Parameter name="Angle (degrees)" inherits_from_parent="0" content_type="3" value="0" default_value="0" custom_choice="0" tooltip="Angle (in degrees) where the LED is on the robot&apos;s eye. They are placed as&#x0A;following:&#x0A;&#x0A;         Right Eye   -&gt; (Front) &lt;-    Left Eye&#x0A;                     &#x0A;       90° .   . 45°                     45° .   . 90°&#x0A;  135° .         . 0°                   0° .         . 135°&#x0A;  180° .         . 315°            315° .         . 180°&#x0A;     225° .   . 270°                  270° .   . 225°" id="5">
+            <Choice value="0" />
+            <Choice value="45" />
+            <Choice value="90" />
+            <Choice value="135" />
+            <Choice value="180" />
+            <Choice value="225" />
+            <Choice value="270" />
+            <Choice value="315" />
+        </Parameter>
+        <Parameter name="Duration (s)" inherits_from_parent="0" content_type="2" value="0.1" default_value="0.1" min="0" max="5" tooltip="Transition&apos;s duration in seconds." id="6" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Color Edit" id="16" tooltip="Transmit a table of number [R,G,B] correponsding to the selected color." plugin="coloredit_plugin" x="154" y="48">
+                            <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self, False)
+
+	def onInput_onStart(self):
+		self.onStopped([255, 0, 0])]]>
+</content>
+                            </script>
+                            <pluginContent>
+                                <color>#ff0000</color>
+                            </pluginContent>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="To send the color on the output." id="2" />
+                            <Output name="onStopped" type="2" type_size="3" nature="1" inner="0" tooltip="[R,G,B] with R, G and B between 0 and 255." id="3" />
+                        </Box>
+                        <Box name="Eye LED" id="2" tooltip="Set the intensity of one LED of robot&apos;s eyes." x="329" y="39">
+                            <bitmap>media/images/box/interaction/LED.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+    
+    def onLoad(self):
+        self.ids = []
+        self.leds = ALProxy("ALLeds")
+
+    def onUnload(self):
+        #puts code for box cleanup here
+        #~ for id in self.ids:
+            #~ self.leds.stop(id)
+        pass
+
+    def onInput_color(self, p):
+        """Fade the eye Led you have chosen to the color you have chosen with the duration you have chosen!"""
+        aEyeNums = self.processAngle()
+        if self.getParameter("Side") == "Left":
+            nEyeNum = aEyeNums[0]
+        else:
+            nEyeNum = aEyeNums[1]
+        sName = "FaceLed"+self.getParameter("Side")+str(nEyeNum)
+        id = self.leds.post.fadeRGB(sName, 256*256*p[0] + 256*p[1] + p[2], self.getParameter("Duration (s)"))
+        self.ids.append(id)
+        self.leds.wait(id, 0)
+        self.ids.remove(id)
+        if( self.ids == [] ):
+            self.onDone() # activate output of the box
+
+    def processAngle(self):
+        n = int( self.getParameter("Angle (degrees)") )
+        return [(45 - n) % 360 / 45] * 2]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="color" type="2" type_size="3" nature="2" inner="0" tooltip="LED color." id="2" />
+                            <Output name="onDone" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                            <Parameter name="Side" inherits_from_parent="1" content_type="3" value="Left" default_value="Left" custom_choice="0" tooltip="Choose the eye where the LED light is set." id="4">
+                                <Choice value="Left" />
+                                <Choice value="Right" />
+                            </Parameter>
+                            <Parameter name="Angle (degrees)" inherits_from_parent="1" content_type="3" value="0" default_value="0" custom_choice="0" tooltip="Angle (in degrees) where the LED is on the robot&apos;s eye. They are placed as&#x0A;following:&#x0A;&#x0A;         Right Eye   -&gt; (Front) &lt;-    Left Eye&#x0A;                     &#x0A;       90° .   . 45°                     45° .   . 90°&#x0A;  135° .         . 0°                   0° .         . 135°&#x0A;  180° .         . 315°            315° .         . 180°&#x0A;     225° .   . 270°                  270° .   . 225°" id="5">
+                                <Choice value="0" />
+                                <Choice value="45" />
+                                <Choice value="90" />
+                                <Choice value="135" />
+                                <Choice value="180" />
+                                <Choice value="225" />
+                                <Choice value="270" />
+                                <Choice value="315" />
+                            </Parameter>
+                            <Parameter name="Duration (s)" inherits_from_parent="1" content_type="2" value="0.1" default_value="0.1" min="0" max="5" tooltip="Transition&apos;s duration in seconds." id="6" />
+                        </Box>
+                        <Link inputowner="16" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="2" indexofinput="2" outputowner="16" indexofoutput="3" />
+                        <Link inputowner="0" indexofinput="3" outputowner="2" indexofoutput="3" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheBox>

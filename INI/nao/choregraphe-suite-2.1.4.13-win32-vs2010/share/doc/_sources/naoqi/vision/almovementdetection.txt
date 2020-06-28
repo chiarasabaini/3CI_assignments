@@ -1,0 +1,138 @@
+.. include:: ../../bulk/common.rst
+
+.. _almovementdetection:
+
+ALMovementDetection
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   almovementdetection-api
+
+:ref:`naoqi-vision` - Overview | :ref:`API <almovementdetection-api>`
+
+-------------------
+
+What it does
+------------
+
+**ALMovementDetection** allows you to detect movement in the field of view of the |roboS|.
+
+The |roboS| use the 3d camera if available, otherwise they use the **RGB camera**.
+
+
+How it works
+------------
+
+Frames are collected at a regular interval and each new frame is compared with the previous one.
+The pixels for which the difference is above a threshold are identified as "moving pixels".
+Then all the "moving pixels" are clustered using both their physical proximity and their value difference.
+
+For |roboS| without 3d camera, it is possible to change the threshold using:
+- :cpp:func:`ALMovementDetectionProxy::setColorSensitivity`
+
+For |roboS| with 3d camera, it is possible to change the threshold using:
+- :cpp:func:`ALMovementDetectionProxy::setDepthSensitivity`
+
+
+ALMemory key
+++++++++++++
+
+Each time some movement is detected, the ALMemory key **MovementDetection/MovementInfo** is updated
+and an ALMemory event, **MovementDetection/MovementDetected**, is raised.
+
+The memory key contains the information about the different clusters of "moving" pixels.
+It is organized as follows:
+
+.. code-block:: guess
+
+  MovementInfo =
+  [
+    TimeStamp,
+    [ClusterInfo_1, ClusterInfo_2, ... ClusterInfo_n],
+    CameraPose_InTorsoFrame,
+    CameraPose_InRobotFrame,
+    Camera_Id
+  ]
+
+**TimeStamp**: this field is the time stamp of the image that was used to perform the detection.
+
+.. code-block:: guess
+
+  TimeStamp [
+    TimeStamp_Seconds,
+    Timestamp_Microseconds
+  ]
+
+
+**ClusterInfo_i**: each of these fields contains the description of a "moving" cluster. It has the following structure, depending on the type of camera:
+
+**RGB camera**
+
+.. code-block:: guess
+
+  ClusterInfo_i(RGB) =
+  [
+    PositionOfCog,
+    AngularRoi,
+    ProportionMovingPixels,
+  ]
+
+**Depth camera**
+
+.. code-block:: guess
+
+  ClusterInfo_i(Depth) =
+  [
+    PositionOfCog,
+    AngularRoi,
+    ProportionMovingPixels,
+    MeanDistance,
+    RealSizeRoi,
+    PositionOfAssociatedPoint
+  ]
+
+**All cameras**
+
+- **PositionOfCog** = [x,y] contains the angular coordinates (in radians) of the center of gravity
+  of the cluster with respect to the center of the used camera.
+
+- **AngularRoi** = [x,y,width, height] contains information about the smallest rectangle (ROI) in which
+  the cluster is included. [x,y] corresponds to the angular coordinates (in radians) of the top left corner
+  of the ROI in the current depth image. [width, height] corresponds to the angular size (in radians)
+  of the ROI.
+
+- **ProportionMovingPixels** = [In_Frame, In_Roi]  corresponds to the proportion of "moving" pixels. In_Frame is
+  the proportion relative to the total number of pixels in the frame and In_Roi is the proportion relative to
+  the number of pixels in the ROI of the cluster.
+
+**Depth camera only**
+
+- **MeanDistance** is the mean distance of the points of the cluster, with respect to the depth camera
+  (only for 3D detection).
+
+- **RealSizeRoi** = [realwidth, realheight] gives the real size (in meters) of the ROI of the cluster
+  (only for 3D detection).
+
+- **PositionOfAssociatedPoint** = [x,y]. Using the segmentation of the initial depth image (see description
+  of module ALSegmentation3D), it is possible to extract the blob that moved. It is then possible to find
+  the top pixel of this blob, by going up from its center of gravity.
+  [x,y] are the angular coordinates (in radians) of this pixel. These coordinates can, for example, be
+  very useful to look at the head of a person that just moved, instead of looking at the center of
+  gravity of the movement (only for 3D detection).
+
+**CameraPose_InTorsoFrame**: describes the :term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_TORSO`.
+
+**CameraPose_InRobotFrame**: describes the :term:`Position6D` of the camera at the time the image was taken, in :term:`FRAME_ROBOT`.
+
+**Camera_Id**: gives the Id of the camera used for the detection.
+
+
+Performances and limitations
+----------------------------
+
+The algorithm used for movement detection only works if the camera is not moving.
+Therefore, when the robot is moving, the detection is automatically disabled: the events
+are not raised and the memory keys are not updated.

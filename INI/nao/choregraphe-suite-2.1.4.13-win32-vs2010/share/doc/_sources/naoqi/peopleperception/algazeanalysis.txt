@@ -1,0 +1,50 @@
+
+.. _algazeanalysis:
+
+ALGazeAnalysis
+==============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   algazeanalysis-api
+
+:ref:`naoqi-peopleperception` - Overview | :ref:`API <algazeanalysis-api>`
+
+------------
+
+What it does
+------------
+
+**ALGazeAnalysis** allows you to analyze the direction of the gaze of a detected person,
+in order to know if he/she is looking at the robot. It also detects whether the person's eyes
+are open or close.
+
+
+How it works
+------------
+
+By detecting the face of a person and studying its orientation, it is possible to detect whether
+or not this person is looking at the robot.
+
+First a scoring value, called **LookingAtRobotScore**, is computed for each person in the detected population.
+This score, between 0 and 1, describes the confidence in the fact that the person is looking at the robot. It is
+stored in the memory key :naoqi:memkey:`PeoplePerception/Person/<ID>/LookingAtRobotScore`.
+Then this score is compared to a threshold value:
+
+* if the score is greater than the threshold value, the person is characterized
+  as looking at the robot.
+* if the score is smaller than the threshold value, the person is characterized
+  as not looking at the robot.
+
+It is possible to change the threshold value by changing the Tolerance of the gaze analysis, using
+the function :cpp:func:`ALGazeAnalysisProxy::setTolerance` (Threshold = 1-Tolerance). The current
+value of the Tolerance can be retrieved with function :cpp:func:`ALGazeAnalysisProxy::getTolerance`.
+
+This result is added to the description of the people in the **ALMemory**
+by filling the key :naoqi:memkey:`PeoplePerception/Person/<ID>/IsLookingAtRobot`.
+
+The raw head angles are also available through the key :naoqi:memkey:`PeoplePerception/Person/<ID>/HeadAngles`.
+The gaze direction *relative to the face plane* are available through :naoqi:memkey:`PeoplePerception/Person/<ID>/GazeDirection`.
+The "opening degree" of both eyes is given by :naoqi:memkey:`PeoplePerception/Person/<ID>/EyeOpeningDegree`.

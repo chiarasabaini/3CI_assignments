@@ -1,0 +1,163 @@
+.. _allaser:
+
+ALLaser
+=======
+
+.. toctree::
+  :hidden:
+  :maxdepth: 1
+
+  allaser-api
+  allaser-tuto
+
+:ref:`naoqi-sensors` - Overview | :ref:`API <allaser-api>` | :ref:`Tutorial <allaser-tuto>`
+
+---------------
+
+.. seealso::
+
+  - :ref:`laser-head`
+  - :ref:`monitor-laser`
+
+----------------------
+
+
+What it does
+------------
+
+ALLaser Module retrieves data sent by the Laser head (optional device)
+and stores it in an :ref:`ALMemory <almemory>` key named: ``Device/Laser/Value``.
+
+How it works
+------------
+
+This module is fully autonomous.
+
+Laser resolution is 0.0063 rad (0.36 degree). This means 683 laser points.
+
+Laser data is refreshed every 100ms.
+
+Settings
+---------
+
+* Laser opening angle goes from -2.0923 rad to 2.0923 rad (240 degrees).
+  The default opening angle is set to maximum.
+  You can adjust opening angle with :cpp:func:`ALLaserProxy::setOpeningAngle` method.
+
+* The hokuyo laser detection distance goes from 20 mm to 5600 mm. You can adjust
+  these values with :cpp:func:`ALLaserProxy::setDetectingLength` method.
+
+
+
+Performance and Limitations
+----------------------------
+
+**Limitations**
+
+.. warning::
+
+   The electrical drive of the laser scanning produces a significant level
+   of noise close to the front microphone, which reduces the robot voice
+   recognition performance when the laser is active. We recommend that you
+   switch off the laser if voice recognition is required.
+
+
+Due to mass differences between a standard head and a laser head be careful
+when running:
+
+- the Choregraphe Walk box
+
+- the Choregraphe StandUp box
+
+.. warning::
+
+   The fall hazard for these behaviors is high and could damage the laser head.
+
+
+Getting started
+---------------
+
+**Checking hardware**
+
+If you want to check if the laser module works or if you need to
+know the effective efficiency of the hokuyo product, you can run the :ref:`Laser Viewer<monitor-laser>` for Monitor.
+
+
+**Data acquisition**
+
+To retrieve data, use a proxy to ALMemory and call the getData method with
+``Device/Laser/Value`` as the parameter. If you are not familiar with this please consult
+getData function of :ref:`almemory-api`.
+
+The data stored in ``Device/Laser/Value`` is a 2 dimensional array, *i* by 4,
+where *i* is the index of measurement
+(maximum index i depends on the way we set ALLaser parameters).
+
+For each index *i* :
+
+- urgdata[*i*][0]=> length
+
+- urgdata[*i*][1]=> angle
+
+- urgdata[*i*][2]=> x
+
+- urgdata[*i*][3]=> y
+
++------------+----------------------------------------------------------------+
+| Data       | Meaning                                                        |
++============+================================================================+
+| Length     | Obstacle position in polar coordinates.                        |
+| and Angle  |                                                                |
+|            | **Length**: Distance between laser and obstacles               |
+|            |                                                                |
+|            | **Angle**: Computed value based on the index and urg device    |
+|            | configuration                                                  |
++------------+----------------------------------------------------------------+
+| X and Y    | Obstacle coordinates in Cartesian space.                       |
+|            |                                                                |
+|            | **x**: abscissa                                                |
+|            |                                                                |
+|            | **y**: ordinate                                                |
++------------+----------------------------------------------------------------+
+
+
+Use Cases
+---------
+
+Laser can be used for example to avoid obstacles or for SLAM
+(Simultaneous Localization And Mapping).
+
+
+FAQ
+---
+
+
+**How to turn on/off laser?**
+
+It is possible to turn off the laser in order to free the cpu.
+The laserOff function of ALLaser turns off the laser light only, the motor
+will keep on turning.
+
+**How does the laser connect?**
+
+It connects via an URG-SCIP protocol on the
+USB-native (/dev/ttyACM0), then on the USB-serial (/dev/ttyUSB0).
+At the robot's system start-up the URG device serial port is configured at 19200
+baud or 115200 baud by laser_speed utility software, based on URG
+scip_handler library.
+
+**What version of URG is used in ALLaser?**
+
+URG official library 0.2. Available on the robot's system:
+libc_system.so, libc_urg.so, libc_connection.so.
+
+**Where can I find URG example**
+
+Source code available on the `hokuyo web site <http://www.hokuyo-aut.jp>`_.
+
+**Can I plug the laser directly into my PC?**
+
+Yes, if you want to do some tests with your own computer, you
+have an access to its mini USB connector on the right side of the laser. If you
+do so, you have to write the connection and retrieve data code on your own.
+

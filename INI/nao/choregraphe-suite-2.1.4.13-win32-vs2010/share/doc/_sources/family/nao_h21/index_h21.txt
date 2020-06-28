@@ -1,0 +1,59 @@
+.. _nao-h21:
+
+NAO H21
+============
++-----------------------------------------------------------+
+| Technical specifications                                  |
++============================+==============================+
+| **Construction**           | **CPU**                      |
+|                            |                              |
+| .. toctree::               | * :ref:`robot-motherboard`   |
+|    :maxdepth: 1            |                              |
+|                            |                              |
+|    dimensions_h21          |                              |
++----------------------------+------------------------------+
+| **Energy**                 | **Connectivity**             |
+|                            |                              |
+| * :ref:`robot-battery`     | * :ref:`connectivity-nao`    |
+|                            |                              |
++----------------------------+------------------------------+
+| **Interaction**            | **Sensors**                  |
+|                            |                              |
+| * :ref:`robot-loudspeaker` |                              |
+| * :ref:`robot-microphone`  | * :ref:`robot-fsr`           |
+| * :ref:`robot_video`       | * :ref:`robot-inertial`      |
+| * :ref:`robot-infrared`    | * :ref:`robot-sonar`         |
+|                            |                              |
+| .. toctree::               | .. toctree::                 |
+|    :maxdepth: 1            |    :maxdepth: 1              |
+|                            |                              |
+|                            |    mre_h21                   |
+|    leds_h21                |    contact-sensors_h21       |
+|                            |                              |
++----------------------------+------------------------------+
+
+**Optional devices**
+
+* :ref:`language_codes`
+* :ref:`laser-head`
+
+
++---------------------------------------------------+
+| Kinematics data                                   |
++=======================+===========================+
+| .. toctree::          |                           |
+|    :maxdepth: 1       |                           |
+|                       |                           |
+|                       | * :ref:`effector_chain`   |
+|    links_h21          |                           |
+|    joints_h21         | * :ref:`robot_postures`   |
+|    masses_h21         |                           |
+|    motors_h21         |                           |
+|                       |                           |
++-----------------------+---------------------------+
+
+-----------------------------
+
+.. include:: ../bulk/overview_nao_h21.rst
+
+

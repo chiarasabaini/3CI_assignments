@@ -1,0 +1,36 @@
+.. _choregraphe-tutorials:
+
+Choregraphe Tutorials
+=====================
+
+**Level 1**
+
+.. toctree::
+   :maxdepth: 1
+
+   ../choregraphe_first_steps
+   basic
+   movements
+   animated_speech
+   speech_recognition
+   life
+
+**Level 2**
+
+.. toctree::
+   :maxdepth: 1
+
+   flow_control
+   attached_files
+   dialog_topic
+   boxes
+   create_solitary_activity
+   create_interactive_activity
+
+**Level 3**
+
+.. toctree::
+   :maxdepth: 1
+
+   resource_manager
+   recognize_objects

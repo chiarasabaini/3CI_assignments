@@ -1,0 +1,86 @@
+.. include:: ../../bulk/common.rst
+
+.. _alaudioplayer:
+
+ALAudioPlayer
+==============
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alaudioplayer-api
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alaudioplayer-api>`
+
+------------
+
+What it does
+------------
+
+**ALAudioPlayer** provides playback services for multiple audio file format and
+the associated common functionalities (play, pause, stop, loop, etc...). The resulting
+audio stream is in all cases sent to the robot's loudspeakers.
+
+How it works
+------------
+
+**ALAudioPlayer** relies on several decoding Linux libraries (mainly Gstreamer and SNDFile)
+to efficiently decode and stream to audio outputs a good variety of audio file formats.
+
+Sound file storage
++++++++++++++++++++
+
+The files containing sounds must be uploaded on the robot:
+
+* as a single sound file or
+* inside a :ref:`soundset`.
+
+**Syntax**
+
+* A single sound file is called using its absolute path:
+
+  .. code-block:: python
+
+      fileId = aup.post.playFile("/usr/share/naoqi/wav/filename.wav")
+
+* Once a **soundSet** is loaded, a sound file stored in a **soundSet** is called
+  using its name:
+
+  .. code-block:: python
+
+      ap.loadSoundSet("Aldebaran")
+      fileId = ap.post.playSoundSetFile("filename")
+
+.. _soundset:
+
+Soundset
++++++++++
+
+A **soundSet** contains .ogg or .wav files.
+
+The **Aldebaran soundSet** is available trough the :ref:`basic_channel`.
+
+Performances and Limitations
+----------------------------
+
+Loading/starting time
+++++++++++++++++++++++
+
+Efficiency has been optimized to reach the lowest time of reaction when loading/starting
+a file; but depending on the audio file format, that time can vary.
+
+**Tips**: uncompressed **WAV** files should be preferred to any other compressed file format,
+particularly for applications requiring very low loading/starting times.
+
+Limited functionalities on virtual robot
++++++++++++++++++++++++++++++++++++++++++
+
+On a virtual robot, **AlAudioPlayer** can play **OGG** and **WAV** files but
+not **MP3**.
+
+
+Getting started
+---------------
+
+To start using **ALAudioPlayer**, see the tutorial: :ref:`playing-music-tuto`.

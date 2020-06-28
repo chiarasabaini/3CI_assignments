@@ -1,0 +1,19 @@
+
+Connecting Choregraphe / your robot
+===================================
+
+
+**Connecting Choregraphe to NAO**
+
+.. toctree::
+   :maxdepth: 1
+
+   connection_widget
+
+**File transfer**
+
+.. toctree::
+   :maxdepth: 1
+
+   file_upload_download
+   choregraphe_update_system

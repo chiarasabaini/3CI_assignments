@@ -1,0 +1,1138 @@
+.. include:: ../../bulk/common.rst
+
+.. _alanimatedspeech-advanced:
+
+ALAnimatedSpeech - Advanced
+===========================
+
+:ref:`naoqi-audio` - :ref:`Overview <alanimatedspeech>` | :ref:`API <alanimatedspeech-api>`
+| Advanced
+
+-------------
+
+|roboN|
+--------
+
+.. _animated_speech_tags_nao:
+
+|nao| |roboN| - List of tags available by default
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+   :widths: 1 20
+   :header-rows: 1
+
+   * - Tag
+     - Matching animations
+   * - affirmative
+     - Yes_1; Yes_2; Yes_3
+   * - alright
+     - Yes_1; Yes_2; Yes_3
+   * - beg
+     - Please_1
+   * - beseech
+     - Please_1
+   * - body language
+     - BodyTalk_1; BodyTalk_1; BodyTalk_10; BodyTalk_10; BodyTalk_11; BodyTalk_11; BodyTalk_12; BodyTalk_12; BodyTalk_13; BodyTalk_14; BodyTalk_15; BodyTalk_16; BodyTalk_17; BodyTalk_18; BodyTalk_19; BodyTalk_2; BodyTalk_2; BodyTalk_20; BodyTalk_21; BodyTalk_22; BodyTalk_3; BodyTalk_3; BodyTalk_4; BodyTalk_4; BodyTalk_5; BodyTalk_5; BodyTalk_6; BodyTalk_6; BodyTalk_7; BodyTalk_7; BodyTalk_8; BodyTalk_8; BodyTalk_9; BodyTalk_9; Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8; YouKnowWhat_1; YouKnowWhat_5
+   * - bow
+     - BowShort_1
+   * - call
+     - Hey_1; Hey_6
+   * - clear
+     - Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8
+   * - enthusiastic
+     - Enthusiastic_4; Enthusiastic_5
+   * - entreat
+     - Please_1
+   * - explain
+     - Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8; YouKnowWhat_1; YouKnowWhat_5
+   * - happy
+     - Enthusiastic_4; Enthusiastic_5
+   * - hello
+     - Hey_1; Hey_6
+   * - hey
+     - Hey_1; Hey_6
+   * - hi
+     - Hey_1; Hey_6
+   * - I
+     - Me_1; Me_2
+   * - implore
+     - Please_1
+   * - indicate
+     - You_1; You_4
+   * - me
+     - Me_1; Me_2
+   * - my
+     - Me_1; Me_2
+   * - myself
+     - Me_1; Me_2
+   * - negative
+     - No_3; No_8; No_9
+   * - no
+     - No_3; No_8; No_9
+   * - not know
+     - IDontKnow_1; IDontKnow_2
+   * - ok
+     - Yes_1; Yes_2; Yes_3
+   * - oppose
+     - No_3; No_8; No_9
+   * - please
+     - Please_1
+   * - present
+     - Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8
+   * - rapturous
+     - Enthusiastic_4; Enthusiastic_5
+   * - raring
+     - Enthusiastic_4; Enthusiastic_5
+   * - refute
+     - No_3; No_8; No_9
+   * - reject
+     - No_3; No_8; No_9
+   * - rousing
+     - Enthusiastic_4; Enthusiastic_5
+   * - show
+     - You_1; You_4
+   * - supplicate
+     - Please_1
+   * - unacquainted
+     - IDontKnow_1; IDontKnow_2
+   * - undetermined
+     - IDontKnow_1; IDontKnow_2
+   * - undiscovered
+     - IDontKnow_1; IDontKnow_2
+   * - unfamiliar
+     - IDontKnow_1; IDontKnow_2
+   * - unknown
+     - IDontKnow_1; IDontKnow_2
+   * - warm
+     - Enthusiastic_4; Enthusiastic_5
+   * - yeah
+     - Yes_1; Yes_2; Yes_3
+   * - yes
+     - Yes_1; Yes_2; Yes_3
+   * - yoo-hoo
+     - Hey_1
+   * - you
+     - You_1; You_4
+   * - your
+     - You_1; You_4
+   * - zestful
+     - Enthusiastic_4; Enthusiastic_5
+
+
+.. _animated_speech_list_behaviors_nao:
+
+|nao| |roboN| - List of animations available by default
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+   :widths: 5 20 1 20
+   :header-rows: 1
+
+   * - Animation
+     - Full name
+     - Type
+     - Tags
+   * - BodyTalk_1
+     - animations/Sit/BodyTalk/BodyTalk_1
+     - animation
+     - body language
+   * - BodyTalk_10
+     - animations/Sit/BodyTalk/BodyTalk_10
+     - animation
+     - body language
+   * - BodyTalk_11
+     - animations/Sit/BodyTalk/BodyTalk_11
+     - animation
+     - body language
+   * - BodyTalk_12
+     - animations/Sit/BodyTalk/BodyTalk_12
+     - animation
+     - body language
+   * - BodyTalk_2
+     - animations/Sit/BodyTalk/BodyTalk_2
+     - animation
+     - body language
+   * - BodyTalk_3
+     - animations/Sit/BodyTalk/BodyTalk_3
+     - animation
+     - body language
+   * - BodyTalk_4
+     - animations/Sit/BodyTalk/BodyTalk_4
+     - animation
+     - body language
+   * - BodyTalk_5
+     - animations/Sit/BodyTalk/BodyTalk_5
+     - animation
+     - body language
+   * - BodyTalk_6
+     - animations/Sit/BodyTalk/BodyTalk_6
+     - animation
+     - body language
+   * - BodyTalk_7
+     - animations/Sit/BodyTalk/BodyTalk_7
+     - animation
+     - body language
+   * - BodyTalk_8
+     - animations/Sit/BodyTalk/BodyTalk_8
+     - animation
+     - body language
+   * - BodyTalk_9
+     - animations/Sit/BodyTalk/BodyTalk_9
+     - animation
+     - body language
+   * - BodyTalk_1
+     - animations/Stand/BodyTalk/BodyTalk_1
+     - animation
+     - body language
+   * - BodyTalk_10
+     - animations/Stand/BodyTalk/BodyTalk_10
+     - animation
+     - body language
+   * - BodyTalk_11
+     - animations/Stand/BodyTalk/BodyTalk_11
+     - animation
+     - body language
+   * - BodyTalk_12
+     - animations/Stand/BodyTalk/BodyTalk_12
+     - animation
+     - body language
+   * - BodyTalk_13
+     - animations/Stand/BodyTalk/BodyTalk_13
+     - animation
+     - body language
+   * - BodyTalk_14
+     - animations/Stand/BodyTalk/BodyTalk_14
+     - animation
+     - body language
+   * - BodyTalk_15
+     - animations/Stand/BodyTalk/BodyTalk_15
+     - animation
+     - body language
+   * - BodyTalk_16
+     - animations/Stand/BodyTalk/BodyTalk_16
+     - animation
+     - body language
+   * - BodyTalk_17
+     - animations/Stand/BodyTalk/BodyTalk_17
+     - animation
+     - body language
+   * - BodyTalk_18
+     - animations/Stand/BodyTalk/BodyTalk_18
+     - animation
+     - body language
+   * - BodyTalk_19
+     - animations/Stand/BodyTalk/BodyTalk_19
+     - animation
+     - body language
+   * - BodyTalk_2
+     - animations/Stand/BodyTalk/BodyTalk_2
+     - animation
+     - body language
+   * - BodyTalk_20
+     - animations/Stand/BodyTalk/BodyTalk_20
+     - animation
+     - body language
+   * - BodyTalk_21
+     - animations/Stand/BodyTalk/BodyTalk_21
+     - animation
+     - body language
+   * - BodyTalk_22
+     - animations/Stand/BodyTalk/BodyTalk_22
+     - animation
+     - body language
+   * - BodyTalk_3
+     - animations/Stand/BodyTalk/BodyTalk_3
+     - animation
+     - body language
+   * - BodyTalk_4
+     - animations/Stand/BodyTalk/BodyTalk_4
+     - animation
+     - body language
+   * - BodyTalk_5
+     - animations/Stand/BodyTalk/BodyTalk_5
+     - animation
+     - body language
+   * - BodyTalk_6
+     - animations/Stand/BodyTalk/BodyTalk_6
+     - animation
+     - body language
+   * - BodyTalk_7
+     - animations/Stand/BodyTalk/BodyTalk_7
+     - animation
+     - body language
+   * - BodyTalk_8
+     - animations/Stand/BodyTalk/BodyTalk_8
+     - animation
+     - body language
+   * - BodyTalk_9
+     - animations/Stand/BodyTalk/BodyTalk_9
+     - animation
+     - body language
+   * - BowShort_1
+     - animations/Stand/Gestures/BowShort_1
+     - animation
+     - bow
+   * - Enthusiastic_4
+     - animations/Stand/Gestures/Enthusiastic_4
+     - animation
+     - enthusiastic; happy; rapturous; raring; rousing; warm; zestful
+   * - Enthusiastic_5
+     - animations/Stand/Gestures/Enthusiastic_5
+     - animation
+     - enthusiastic; happy; rapturous; raring; rousing; warm; zestful
+   * - Explain_1
+     - animations/Stand/Gestures/Explain_1
+     - animation
+     - body language; clear; explain; present
+   * - Explain_10
+     - animations/Stand/Gestures/Explain_10
+     - animation
+     - body language; clear; explain; present
+   * - Explain_11
+     - animations/Stand/Gestures/Explain_11
+     - animation
+     - body language; clear; explain; present
+   * - Explain_2
+     - animations/Stand/Gestures/Explain_2
+     - animation
+     - body language; clear; explain; present
+   * - Explain_3
+     - animations/Stand/Gestures/Explain_3
+     - animation
+     - body language; clear; explain; present
+   * - Explain_4
+     - animations/Stand/Gestures/Explain_4
+     - animation
+     - body language; clear; explain; present
+   * - Explain_5
+     - animations/Stand/Gestures/Explain_5
+     - animation
+     - body language; clear; explain; present
+   * - Explain_6
+     - animations/Stand/Gestures/Explain_6
+     - animation
+     - body language; clear; explain; present
+   * - Explain_7
+     - animations/Stand/Gestures/Explain_7
+     - animation
+     - body language; clear; explain; present
+   * - Explain_8
+     - animations/Stand/Gestures/Explain_8
+     - animation
+     - body language; clear; explain; present
+   * - Hey_1
+     - animations/Stand/Gestures/Hey_1
+     - animation
+     - call; hello; hey; hi; yoo-hoo
+   * - Hey_6
+     - animations/Stand/Gestures/Hey_6
+     - animation
+     - call; hello; hey; hi
+   * - IDontKnow_1
+     - animations/Stand/Gestures/IDontKnow_1
+     - animation
+     - not know; unacquainted; undetermined; undiscovered; unfamiliar; unknown
+   * - IDontKnow_2
+     - animations/Stand/Gestures/IDontKnow_2
+     - animation
+     - not know; unacquainted; undetermined; undiscovered; unfamiliar; unknown
+   * - Me_1
+     - animations/Stand/Gestures/Me_1
+     - animation
+     - I; me; my; myself
+   * - Me_2
+     - animations/Stand/Gestures/Me_2
+     - animation
+     - I; me; my; myself
+   * - No_3
+     - animations/Stand/Gestures/No_3
+     - animation
+     - negative; no; oppose; refute; reject
+   * - No_8
+     - animations/Stand/Gestures/No_8
+     - animation
+     - negative; no; oppose; refute; reject
+   * - No_9
+     - animations/Stand/Gestures/No_9
+     - animation
+     - negative; no; oppose; refute; reject
+   * - Please_1
+     - animations/Stand/Gestures/Please_1
+     - animation
+     - beg; beseech; entreat; implore; please; supplicate
+   * - Yes_1
+     - animations/Stand/Gestures/Yes_1
+     - animation
+     - affirmative; alright; ok; yeah; yes
+   * - Yes_2
+     - animations/Stand/Gestures/Yes_2
+     - animation
+     - affirmative; alright; ok; yeah; yes
+   * - Yes_3
+     - animations/Stand/Gestures/Yes_3
+     - animation
+     - affirmative; alright; ok; yeah; yes
+   * - YouKnowWhat_1
+     - animations/Stand/Gestures/YouKnowWhat_1
+     - animation
+     - body language; explain
+   * - YouKnowWhat_5
+     - animations/Stand/Gestures/YouKnowWhat_5
+     - animation
+     - body language; explain
+   * - You_1
+     - animations/Stand/Gestures/You_1
+     - animation
+     - indicate; show; you; your
+   * - You_4
+     - animations/Stand/Gestures/You_4
+     - animation
+     - indicate; show; you; your
+
+All animations which are supplied are either standing or sitting.
+So you should be aware that if your robot is neither standing nor sitting,
+it will not execute these moves.
+
+
+|roboJ|
+--------
+
+There are more animations available by default specifically for |roboJ|.
+Here is the complete list.
+
+
+.. _animated_speech_tags_juliette:
+
+|juju| |roboJ| - List of tags available by default
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+   :widths: 1 20
+   :header-rows: 1
+
+   * - Tag
+     - Matching animations
+   * - above
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - affirmative
+     - Yes_1; Yes_2; Yes_3
+   * - afford
+     - Give_3; Give_4; Give_5; Give_6
+   * - agitated
+     - Excited_1
+   * - all
+     - Everything_1; Everything_2; Everything_3; Everything_4
+   * - allright
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - alright
+     - Yes_1; Yes_2; Yes_3
+   * - any
+     - Everything_1; Everything_2; Everything_3; Everything_4
+   * - appease
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - ashamed
+     - Embarrassed_1
+   * - assuage
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - attemper
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - back
+     - ShowTablet_2
+   * - bashful
+     - Embarrassed_1
+   * - becalm
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - beg
+     - Please_1
+   * - beseech
+     - Please_1
+   * - blank
+     - Nothing_2
+   * - body language
+     - BodyTalk_1; BodyTalk_10; BodyTalk_11; BodyTalk_12; BodyTalk_13; BodyTalk_14; BodyTalk_15; BodyTalk_16; BodyTalk_2; BodyTalk_3; BodyTalk_4; BodyTalk_5; BodyTalk_6; BodyTalk_7; BodyTalk_8; BodyTalk_9; Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8; YouKnowWhat_1; YouKnowWhat_2; YouKnowWhat_3; YouKnowWhat_5; YouKnowWhat_6
+   * - bored
+     - Bored_1
+   * - bow
+     - BowShort_1
+   * - but
+     - But_1
+   * - call
+     - Hey_1; Hey_3; Hey_4; Hey_6
+   * - calm
+     - CalmDown_1; CalmDown_5; CalmDown_6; Peaceful_1
+   * - choice
+     - Choice_1
+   * - choose
+     - Choice_1
+   * - clear
+     - Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8
+   * - cloud
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - cogitate
+     - Think_1; Think_2; Think_3
+   * - cool
+     - CalmDown_1; CalmDown_5; CalmDown_6; Peaceful_1
+   * - crazy
+     - Hysterical_1
+   * - despairing
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - desperate
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - disappointed
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - down
+     - ShowFloor_1; ShowFloor_3; ShowFloor_4
+   * - earth
+     - ShowFloor_1; ShowFloor_3; ShowFloor_4
+   * - embarrassed
+     - Embarrassed_1
+   * - empty
+     - Nothing_2
+   * - enthusiastic
+     - Enthusiastic_4; Enthusiastic_5
+   * - entire
+     - Everything_1; Everything_2; Everything_3; Everything_4
+   * - entreat
+     - Please_1
+   * - estimate
+     - Thinking_1; Thinking_3; Thinking_4; Thinking_6; Thinking_8
+   * - every
+     - Everything_1; Everything_2; Everything_3; Everything_4
+   * - everyone
+     - Everything_1; Everything_2; Everything_3; Everything_4
+   * - everything
+     - Everything_1; Everything_2; Everything_3; Everything_4
+   * - exalted
+     - Excited_1
+   * - except
+     - But_1
+   * - excited
+     - Excited_1; Hysterical_1
+   * - explain
+     - Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8; YouKnowWhat_1; YouKnowWhat_2; YouKnowWhat_3; YouKnowWhat_5; YouKnowWhat_6
+   * - far
+     - Far_1; Far_2; Far_3
+   * - field
+     - ShowFloor_1; ShowFloor_3; ShowFloor_4
+   * - floor
+     - ShowFloor_1; ShowFloor_3; ShowFloor_4
+   * - forlorn
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - friendly
+     - Give_3; Give_4; Give_5; Give_6
+   * - front
+     - ShowTablet_3
+   * - frustrated
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - gentle
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - gift
+     - Give_3; Give_4; Give_5; Give_6
+   * - give
+     - Give_3; Give_4; Give_5; Give_6
+   * - ground
+     - ShowFloor_1; ShowFloor_3; ShowFloor_4
+   * - happy
+     - Enthusiastic_4; Enthusiastic_5; Happy_4; Hysterical_1
+   * - hello
+     - Hey_1; Hey_3; Hey_4; Hey_6
+   * - her
+     - Far_3
+   * - here
+     - Far_1; Far_2; Far_3; ShowFloor_1; ShowFloor_3; ShowFloor_4
+   * - hey
+     - Hey_1; Hey_3; Hey_4; Hey_6
+   * - hi
+     - Hey_1; Hey_3; Hey_4; Hey_6
+   * - high
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - him
+     - Far_3
+   * - hopeless
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - hysterical
+     - Hysterical_1
+   * - I
+     - Me_1; Me_2; Me_4; Me_7
+   * - implore
+     - Please_1
+   * - indicate
+     - You_1; You_4
+   * - joyful
+     - Happy_4
+   * - me
+     - Me_1; Me_2; Me_4; Me_7
+   * - meditate
+     - Think_1; Think_2; Think_3; Thinking_1; Thinking_3; Thinking_4; Thinking_6; Thinking_8
+   * - modest
+     - Embarrassed_1
+   * - mollify
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - my
+     - Me_1; Me_2; Me_4; Me_7
+   * - myself
+     - Me_1; Me_2; Me_4; Me_7
+   * - negative
+     - No_1; No_2; No_3; No_8; No_9
+   * - nervous
+     - Excited_1
+   * - no
+     - No_1; No_2; No_3; No_8; No_9
+   * - not know
+     - IDontKnow_1; IDontKnow_2; IDontKnow_3
+   * - nothing
+     - Nothing_2
+   * - offer
+     - Give_3; Give_4; Give_5; Give_6
+   * - ok
+     - Yes_1; Yes_2; Yes_3
+   * - once upon a time
+     - Everything_1; Everything_3; Everything_4
+   * - oppose
+     - No_1; No_2; No_3; No_8; No_9
+   * - or
+     - Choice_1
+   * - pacify
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - peaceful
+     - Peaceful_1
+   * - pick
+     - Choice_1
+   * - placate
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - please
+     - Please_1
+   * - present
+     - Explain_1; Explain_10; Explain_11; Explain_2; Explain_3; Explain_4; Explain_5; Explain_6; Explain_7; Explain_8; Give_3; Give_4; Give_5; Give_6
+   * - proffer
+     - Give_3; Give_4; Give_5; Give_6
+   * - quiet
+     - CalmDown_1; CalmDown_5; CalmDown_6; Peaceful_1
+   * - rapturous
+     - Enthusiastic_4; Enthusiastic_5
+   * - raring
+     - Enthusiastic_4; Enthusiastic_5
+   * - reason
+     - Thinking_1; Thinking_3; Thinking_4; Thinking_6; Thinking_8
+   * - refute
+     - No_1; No_2; No_3; No_8; No_9
+   * - reject
+     - No_1; No_2; No_3; No_8; No_9
+   * - rousing
+     - Enthusiastic_4; Enthusiastic_5
+   * - sad
+     - Desperate_1; Desperate_2; Desperate_4; Desperate_5
+   * - select
+     - Choice_1
+   * - shamefaced
+     - Embarrassed_1
+   * - show
+     - ShowTablet_2; ShowTablet_3; You_1; You_4
+   * - show sky
+     - ShowSky_1; ShowSky_2
+   * - shy
+     - Embarrassed_1
+   * - sky
+     - ShowSky_1; ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - soothe
+     - CalmDown_1; CalmDown_5; CalmDown_6
+   * - sun
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - supplicate
+     - Please_1
+   * - tablet
+     - ShowTablet_2; ShowTablet_3
+   * - tall
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - them
+     - Far_3
+   * - there
+     - Far_1; Far_2; Far_3
+   * - think
+     - Think_1; Think_2; Think_3; Thinking_1; Thinking_3; Thinking_4; Thinking_6; Thinking_8
+   * - timid
+     - Embarrassed_1
+   * - top
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - unacquainted
+     - IDontKnow_1; IDontKnow_2; IDontKnow_3
+   * - uncomfortable
+     - Embarrassed_1
+   * - undetermined
+     - IDontKnow_1; IDontKnow_2; IDontKnow_3
+   * - undiscovered
+     - IDontKnow_1; IDontKnow_2; IDontKnow_3
+   * - unfamiliar
+     - IDontKnow_1; IDontKnow_2; IDontKnow_3
+   * - unknown
+     - IDontKnow_1; IDontKnow_2; IDontKnow_3
+   * - unless
+     - But_1
+   * - up
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - upstairs
+     - ShowSky_1; ShowSky_11; ShowSky_2; ShowSky_4; ShowSky_5; ShowSky_6; ShowSky_7; ShowSky_8; ShowSky_9
+   * - void
+     - Nothing_2
+   * - warm
+     - Enthusiastic_4; Enthusiastic_5
+   * - winner
+     - Happy_4
+   * - yeah
+     - Yes_1; Yes_2; Yes_3
+   * - yes
+     - Yes_1; Yes_2; Yes_3
+   * - yoo-hoo
+     - Hey_1; Hey_3; Hey_4
+   * - you
+     - You_1; You_4
+   * - your
+     - You_1; You_4
+   * - zero
+     - Nothing_2
+   * - zestful
+     - Enthusiastic_4; Enthusiastic_5
+
+
+.. _animated_speech_list_behaviors_juliette:
+
+|juju| |roboJ| - List of animations available by default
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+   :widths: 5 20 1 20
+   :header-rows: 1
+
+   * - Animation
+     - Full name
+     - Type
+     - Tags
+   * - BodyTalk_1
+     - animations/Stand/BodyTalk/BodyTalk_1
+     - animation
+     - body language
+   * - BodyTalk_10
+     - animations/Stand/BodyTalk/BodyTalk_10
+     - animation
+     - body language
+   * - BodyTalk_11
+     - animations/Stand/BodyTalk/BodyTalk_11
+     - animation
+     - body language
+   * - BodyTalk_12
+     - animations/Stand/BodyTalk/BodyTalk_12
+     - animation
+     - body language
+   * - BodyTalk_13
+     - animations/Stand/BodyTalk/BodyTalk_13
+     - animation
+     - body language
+   * - BodyTalk_14
+     - animations/Stand/BodyTalk/BodyTalk_14
+     - animation
+     - body language
+   * - BodyTalk_15
+     - animations/Stand/BodyTalk/BodyTalk_15
+     - animation
+     - body language
+   * - BodyTalk_16
+     - animations/Stand/BodyTalk/BodyTalk_16
+     - animation
+     - body language
+   * - BodyTalk_2
+     - animations/Stand/BodyTalk/BodyTalk_2
+     - animation
+     - body language
+   * - BodyTalk_3
+     - animations/Stand/BodyTalk/BodyTalk_3
+     - animation
+     - body language
+   * - BodyTalk_4
+     - animations/Stand/BodyTalk/BodyTalk_4
+     - animation
+     - body language
+   * - BodyTalk_5
+     - animations/Stand/BodyTalk/BodyTalk_5
+     - animation
+     - body language
+   * - BodyTalk_6
+     - animations/Stand/BodyTalk/BodyTalk_6
+     - animation
+     - body language
+   * - BodyTalk_7
+     - animations/Stand/BodyTalk/BodyTalk_7
+     - animation
+     - body language
+   * - BodyTalk_8
+     - animations/Stand/BodyTalk/BodyTalk_8
+     - animation
+     - body language
+   * - BodyTalk_9
+     - animations/Stand/BodyTalk/BodyTalk_9
+     - animation
+     - body language
+   * - Bored_1
+     - animations/Stand/Emotions/Negative/Bored_1
+     - animation
+     - bored
+   * - Embarrassed_1
+     - animations/Stand/Emotions/Neutral/Embarrassed_1
+     - animation
+     - ashamed; bashful; embarrassed; modest; shamefaced; shy; timid; uncomfortable
+   * - Happy_4
+     - animations/Stand/Emotions/Positive/Happy_4
+     - animation
+     - happy; joyful; winner
+   * - Hysterical_1
+     - animations/Stand/Emotions/Positive/Hysterical_1
+     - animation
+     - crazy; excited; happy; hysterical
+   * - Peaceful_1
+     - animations/Stand/Emotions/Positive/Peaceful_1
+     - animation
+     - calm; cool; peaceful; quiet
+   * - BowShort_1
+     - animations/Stand/Gestures/BowShort_1
+     - animation
+     - bow
+   * - But_1
+     - animations/Stand/Gestures/But_1
+     - animation
+     - but; except; unless
+   * - CalmDown_1
+     - animations/Stand/Gestures/CalmDown_1
+     - animation
+     - allright; appease; assuage; attemper; becalm; calm; cool; gentle; mollify; pacify; placate; quiet; soothe
+   * - CalmDown_5
+     - animations/Stand/Gestures/CalmDown_5
+     - animation
+     - allright; appease; assuage; attemper; becalm; calm; cool; gentle; mollify; pacify; placate; quiet; soothe
+   * - CalmDown_6
+     - animations/Stand/Gestures/CalmDown_6
+     - animation
+     - allright; appease; assuage; attemper; becalm; calm; cool; gentle; mollify; pacify; placate; quiet; soothe
+   * - Choice_1
+     - animations/Stand/Gestures/Choice_1
+     - animation
+     - choice; choose; or; pick; select
+   * - Desperate_1
+     - animations/Stand/Gestures/Desperate_1
+     - animation
+     - despairing; desperate; disappointed; forlorn; frustrated; hopeless; sad
+   * - Desperate_2
+     - animations/Stand/Gestures/Desperate_2
+     - animation
+     - despairing; desperate; disappointed; forlorn; frustrated; hopeless; sad
+   * - Desperate_4
+     - animations/Stand/Gestures/Desperate_4
+     - animation
+     - despairing; desperate; disappointed; forlorn; frustrated; hopeless; sad
+   * - Desperate_5
+     - animations/Stand/Gestures/Desperate_5
+     - animation
+     - despairing; desperate; disappointed; forlorn; frustrated; hopeless; sad
+   * - Enthusiastic_4
+     - animations/Stand/Gestures/Enthusiastic_4
+     - animation
+     - enthusiastic; happy; rapturous; raring; rousing; warm; zestful
+   * - Enthusiastic_5
+     - animations/Stand/Gestures/Enthusiastic_5
+     - animation
+     - enthusiastic; happy; rapturous; raring; rousing; warm; zestful
+   * - Everything_1
+     - animations/Stand/Gestures/Everything_1
+     - animation
+     - all; any; entire; every; everyone; everything; once upon a time
+   * - Everything_2
+     - animations/Stand/Gestures/Everything_2
+     - animation
+     - all; any; entire; every; everyone; everything
+   * - Everything_3
+     - animations/Stand/Gestures/Everything_3
+     - animation
+     - all; any; entire; every; everyone; everything; once upon a time
+   * - Everything_4
+     - animations/Stand/Gestures/Everything_4
+     - animation
+     - all; any; entire; every; everyone; everything; once upon a time
+   * - Excited_1
+     - animations/Stand/Gestures/Excited_1
+     - animation
+     - agitated; exalted; excited; nervous
+   * - Explain_1
+     - animations/Stand/Gestures/Explain_1
+     - animation
+     - body language; clear; explain; present
+   * - Explain_10
+     - animations/Stand/Gestures/Explain_10
+     - animation
+     - body language; clear; explain; present
+   * - Explain_11
+     - animations/Stand/Gestures/Explain_11
+     - animation
+     - body language; clear; explain; present
+   * - Explain_2
+     - animations/Stand/Gestures/Explain_2
+     - animation
+     - body language; clear; explain; present
+   * - Explain_3
+     - animations/Stand/Gestures/Explain_3
+     - animation
+     - body language; clear; explain; present
+   * - Explain_4
+     - animations/Stand/Gestures/Explain_4
+     - animation
+     - body language; clear; explain; present
+   * - Explain_5
+     - animations/Stand/Gestures/Explain_5
+     - animation
+     - body language; clear; explain; present
+   * - Explain_6
+     - animations/Stand/Gestures/Explain_6
+     - animation
+     - body language; clear; explain; present
+   * - Explain_7
+     - animations/Stand/Gestures/Explain_7
+     - animation
+     - body language; clear; explain; present
+   * - Explain_8
+     - animations/Stand/Gestures/Explain_8
+     - animation
+     - body language; clear; explain; present
+   * - Far_1
+     - animations/Stand/Gestures/Far_1
+     - animation
+     - far; here; there
+   * - Far_2
+     - animations/Stand/Gestures/Far_2
+     - animation
+     - far; here; there
+   * - Far_3
+     - animations/Stand/Gestures/Far_3
+     - animation
+     - far; her; here; him; them; there
+   * - Give_3
+     - animations/Stand/Gestures/Give_3
+     - animation
+     - afford; friendly; gift; give; offer; present; proffer
+   * - Give_4
+     - animations/Stand/Gestures/Give_4
+     - animation
+     - afford; friendly; gift; give; offer; present; proffer
+   * - Give_5
+     - animations/Stand/Gestures/Give_5
+     - animation
+     - afford; friendly; gift; give; offer; present; proffer
+   * - Give_6
+     - animations/Stand/Gestures/Give_6
+     - animation
+     - afford; friendly; gift; give; offer; present; proffer
+   * - Hey_1
+     - animations/Stand/Gestures/Hey_1
+     - animation
+     - call; hello; hey; hi; yoo-hoo
+   * - Hey_3
+     - animations/Stand/Gestures/Hey_3
+     - animation
+     - call; hello; hey; hi; yoo-hoo
+   * - Hey_4
+     - animations/Stand/Gestures/Hey_4
+     - animation
+     - call; hello; hey; hi; yoo-hoo
+   * - Hey_6
+     - animations/Stand/Gestures/Hey_6
+     - animation
+     - call; hello; hey; hi
+   * - IDontKnow_1
+     - animations/Stand/Gestures/IDontKnow_1
+     - animation
+     - not know; unacquainted; undetermined; undiscovered; unfamiliar; unknown
+   * - IDontKnow_2
+     - animations/Stand/Gestures/IDontKnow_2
+     - animation
+     - not know; unacquainted; undetermined; undiscovered; unfamiliar; unknown
+   * - IDontKnow_3
+     - animations/Stand/Gestures/IDontKnow_3
+     - animation
+     - not know; unacquainted; undetermined; undiscovered; unfamiliar; unknown
+   * - Me_1
+     - animations/Stand/Gestures/Me_1
+     - animation
+     - I; me; my; myself
+   * - Me_2
+     - animations/Stand/Gestures/Me_2
+     - animation
+     - I; me; my; myself
+   * - Me_4
+     - animations/Stand/Gestures/Me_4
+     - animation
+     - I; me; my; myself
+   * - Me_7
+     - animations/Stand/Gestures/Me_7
+     - animation
+     - I; me; my; myself
+   * - No_1
+     - animations/Stand/Gestures/No_1
+     - animation
+     - negative; no; oppose; refute; reject
+   * - No_2
+     - animations/Stand/Gestures/No_2
+     - animation
+     - negative; no; oppose; refute; reject
+   * - No_3
+     - animations/Stand/Gestures/No_3
+     - animation
+     - negative; no; oppose; refute; reject
+   * - No_8
+     - animations/Stand/Gestures/No_8
+     - animation
+     - negative; no; oppose; refute; reject
+   * - No_9
+     - animations/Stand/Gestures/No_9
+     - animation
+     - negative; no; oppose; refute; reject
+   * - Nothing_2
+     - animations/Stand/Gestures/Nothing_2
+     - animation
+     - blank; empty; nothing; void; zero
+   * - Please_1
+     - animations/Stand/Gestures/Please_1
+     - animation
+     - beg; beseech; entreat; implore; please; supplicate
+   * - ShowFloor_1
+     - animations/Stand/Gestures/ShowFloor_1
+     - animation
+     - down; earth; field; floor; ground; here
+   * - ShowFloor_3
+     - animations/Stand/Gestures/ShowFloor_3
+     - animation
+     - down; earth; field; floor; ground; here
+   * - ShowFloor_4
+     - animations/Stand/Gestures/ShowFloor_4
+     - animation
+     - down; earth; field; floor; ground; here
+   * - ShowSky_1
+     - animations/Stand/Gestures/ShowSky_1
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_11
+     - animations/Stand/Gestures/ShowSky_11
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_2
+     - animations/Stand/Gestures/ShowSky_2
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_4
+     - animations/Stand/Gestures/ShowSky_4
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_5
+     - animations/Stand/Gestures/ShowSky_5
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_6
+     - animations/Stand/Gestures/ShowSky_6
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_7
+     - animations/Stand/Gestures/ShowSky_7
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_8
+     - animations/Stand/Gestures/ShowSky_8
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowSky_9
+     - animations/Stand/Gestures/ShowSky_9
+     - animation
+     - above; cloud; high; sky; sun; tall; top; up; upstairs
+   * - ShowTablet_2
+     - animations/Stand/Gestures/ShowTablet_2
+     - animation
+     - back; show; tablet
+   * - ShowTablet_3
+     - animations/Stand/Gestures/ShowTablet_3
+     - animation
+     - front; show; tablet
+   * - Thinking_1
+     - animations/Stand/Gestures/Thinking_1
+     - animation
+     - estimate; meditate; reason; think
+   * - Thinking_3
+     - animations/Stand/Gestures/Thinking_3
+     - animation
+     - estimate; meditate; reason; think
+   * - Thinking_4
+     - animations/Stand/Gestures/Thinking_4
+     - animation
+     - estimate; meditate; reason; think
+   * - Thinking_6
+     - animations/Stand/Gestures/Thinking_6
+     - animation
+     - estimate; meditate; reason; think
+   * - Thinking_8
+     - animations/Stand/Gestures/Thinking_8
+     - animation
+     - estimate; meditate; reason; think
+   * - Yes_1
+     - animations/Stand/Gestures/Yes_1
+     - animation
+     - affirmative; alright; ok; yeah; yes
+   * - Yes_2
+     - animations/Stand/Gestures/Yes_2
+     - animation
+     - affirmative; alright; ok; yeah; yes
+   * - Yes_3
+     - animations/Stand/Gestures/Yes_3
+     - animation
+     - affirmative; alright; ok; yeah; yes
+   * - YouKnowWhat_1
+     - animations/Stand/Gestures/YouKnowWhat_1
+     - animation
+     - body language; explain
+   * - YouKnowWhat_2
+     - animations/Stand/Gestures/YouKnowWhat_2
+     - animation
+     - body language; explain
+   * - YouKnowWhat_3
+     - animations/Stand/Gestures/YouKnowWhat_3
+     - animation
+     - body language; explain
+   * - YouKnowWhat_5
+     - animations/Stand/Gestures/YouKnowWhat_5
+     - animation
+     - body language; explain
+   * - YouKnowWhat_6
+     - animations/Stand/Gestures/YouKnowWhat_6
+     - animation
+     - body language; explain
+   * - You_1
+     - animations/Stand/Gestures/You_1
+     - animation
+     - indicate; show; you; your
+   * - You_4
+     - animations/Stand/Gestures/You_4
+     - animation
+     - indicate; show; you; your
+   * - ShowSky_1
+     - animations/Stand/Waiting/ShowSky_1
+     - animation
+     - show sky; sky
+   * - ShowSky_2
+     - animations/Stand/Waiting/ShowSky_2
+     - animation
+     - show sky; sky
+   * - Think_1
+     - animations/Stand/Waiting/Think_1
+     - animation
+     - cogitate; meditate; think
+   * - Think_2
+     - animations/Stand/Waiting/Think_2
+     - animation
+     - cogitate; meditate; think
+   * - Think_3
+     - animations/Stand/Waiting/Think_3
+     - animation
+     - cogitate; meditate; think

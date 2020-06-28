@@ -1,0 +1,20 @@
+.. include:: ../bulk/common.rst
+
+.. _interacting:
+
+Daily use
+===========
+
+Here are gathered key points to interact with |roboN|:
+
++----------------------------------+
+| .. toctree::                     |
+|    :maxdepth: 1                  |
+|                                  |
+|    nao-turn-on                   |
+|    nao_interacting               |
+|    nao_freeze                    |
+|    nao-turn-off                  |
+|    nao_request                   |
+|    battery-charging              |
++----------------------------------+

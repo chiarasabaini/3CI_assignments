@@ -1,0 +1,57 @@
+.. _nao-t2:
+
+NAO T2
+============
+
++-----------------------------------------------------------+
+| Technical specifications                                  |
++============================+==============================+
+| **Construction**           | **CPU**                      |
+|                            |                              |
+| .. toctree::               | * :ref:`robot-motherboard`   |
+|    :maxdepth: 1            |                              |
+|                            |                              |
+|    dimensions_t2           |                              |
++----------------------------+------------------------------+
+| **Energy**                 | **Connectivity**             |
+|                            |                              |
+| * :ref:`robot-battery`     | * :ref:`connectivity-nao`    |
+|                            |                              |
++----------------------------+------------------------------+
+| **Interaction**            | **Sensors**                  |
+|                            |                              |
+| * :ref:`robot-loudspeaker` |                              |
+| * :ref:`robot-microphone`  |                              |
+| * :ref:`robot_video`       | * :ref:`robot-inertial`      |
+| * :ref:`robot-infrared`    | * :ref:`robot-sonar`         |
+|                            |                              |
+| .. toctree::               | .. toctree::                 |
+|    :maxdepth: 1            |    :maxdepth: 1              |
+|                            |                              |
+|                            |    mre_t2                    |
+|    leds_t2                 |    contact-sensors_t2        |
+|                            |                              |
++----------------------------+------------------------------+
+
+**Optional devices**
+
+* :ref:`language_codes`
+
++----------------------------------------------------+
+| Kinematics data                                    |
++========================+===========================+
+| .. toctree::           |                           |
+|    :maxdepth: 1        |                           |
+|                        |                           |
+|                        | * :ref:`effector_chain`   |
+|    links_t2            |                           |
+|    joints_t2           |                           |
+|    masses_t2           |                           |
+|    motors_t2           |                           |
+|                        |                           |
++------------------------+---------------------------+
+
+
+.. include:: ../bulk/overview_nao_t2.rst
+
+

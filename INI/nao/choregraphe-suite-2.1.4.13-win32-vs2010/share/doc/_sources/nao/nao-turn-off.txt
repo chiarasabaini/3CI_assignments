@@ -1,0 +1,59 @@
+.. include:: ../bulk/common.rst
+
+.. _nao-turn-off:
+
+Turning |roboN| off
+=====================
+
+To turn |roboN| off:
+
+=====  ==============================================================
+Step       Action
+=====  ==============================================================
+1.      Make sure |roboN| is in a safe position, or he may fall.
+
+        You could also place a hand on its back to keep it in
+        position.
+
+2.      Press and hold the :ref:`Chest Button <chest_btn_nao>`
+        for 3 seconds, until |roboN| says "**GNUK GNUK**".
+
+        The shutdown process is completed when all the
+        :ref:`LEDs <leds_nao>` are off.
+
+        For further details, see: :ref:`shut_down_process_nao`.
+=====  ==============================================================
+
+.. _chest_btn_nao:
+
+**Chest Button** - |roboN|
+
+.. image:: /medias/wizard/chest_button.png
+    :width: 109 px
+    :height: 176 px
+
+
+.. _emergency_turn_off:
+
+Emergency turn off
+-------------------
+
+.. warning:: Forced switch off is not recommended in normal use.
+
+To turn |roboN| off in an emergency mode:
+
+=====  ==============================================================
+Step       Action
+=====  ==============================================================
+1.      Make sure |roboN| is in a safe position, or he may fall.
+
+2.      Press and hold the **Chest Button** for 8 seconds.
+
+        *Result*
+
+        * the **Chest Button** becomes Green,
+
+        * The robot says "**GNUK GNUK**",
+
+        * The tactile-head and ear LEDs fade quickly.
+=====  ==============================================================

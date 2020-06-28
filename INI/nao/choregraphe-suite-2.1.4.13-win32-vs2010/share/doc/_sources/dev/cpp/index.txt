@@ -1,0 +1,116 @@
+.. include:: ../../bulk/common.rst
+
+.. _cpp-introduction:
+
+C++ SDK
+=======
+
+.. seealso::
+
+   *C++ SDK* | :ref:`cpp-tutos-examples` |
+   :ref:`cpp-examples` | :ref:`tips_and_tricks` | :ref:`gdb`
+
+------------
+
+.. toctree::
+  :hidden:
+
+  tutorials
+  examples
+  tips-and-tricks
+  ../tools/gdb-on-nao
+
+
+What is the C++ SDK for
+------------------------
+
+- Develop with your favorite IDE:  Visual Studio, QtCreator, Eclipse or XCode.
+
+- Use the NAOqi framework on your PC. You can run the NAOqi executable on your platform,
+  and use it with a simulator, or you can use the framewrok to write software which
+  communicates with your robot.
+
+- On **Linux** and **Mac**, you can cross-compile libraries to embed in |roboS|.
+
+
+
+C++ SDK specificities
+----------------------
+
+Please make sure to have read the :ref:`naoqi-overview` section first.
+
+Additionaly, there are a few things that are **C++** specific, one key difference
+is that there are two types of proxies:
+
+* **Specialized proxies**. They correspond to Aldebaran features, such as **ALMotion**,
+  **ALTextToSpeech**, **ALVideoDevice** etc. These proxies are optimized, efficient and
+  easy to  use: once created, they give direct access to already existing
+  methods. Always prefer this kind of proxy to **generic proxies** if it exists
+  for a desired module - in addition to being optimized, they give you compile-time
+  type checking, which helps you see problems earlier.
+
+
+  .. code-block:: cpp
+
+    #include <alproxies/altexttospeechproxy.h>
+
+    const std::string phraseToSay = "Hello world";
+    AL::ALTextToSpeechProxy tts("nao.local" , 9559);
+    tts.say("Hello world");
+
+
+* **Generic proxies**. They give access to any module including
+  the ones which also have specialized proxies. The generic proxy has no
+  information about the methods which are bound to these modules,
+  contrary to **specialized proxies**. This means that the user must specify himself
+  the name and parameters of the methods: if there is a mistake somewhere, it
+  will raise an exception during execution. This kind of proxy is slower and
+  more error-prone, but very flexible since it can adapt to any module. For user-created
+  modules that have no specialized proxy, this is your only choice.
+
+
+  .. code-block:: cpp
+
+    #include <alcommon/alproxy.h>
+    #include <alcommon/albroker.h>
+
+    const std::string phraseToSay = "Hello world";
+    boost::shared_ptr<AL::ALBroker> broker =
+      AL::ALBroker::createBroker("MyBroker", "", 0, "nao.local", 9559);
+    AL::ALProxy proxy(broker, "ALTextToSpeech");
+    proxy.callVoid("say", phraseToSay);
+
+
+    // Or, if the method returns something, you
+    // must use a template parameter
+    bool ping = proxy.call<bool>("ping");
+
+
+* **ALValue**  Most of the methods will return simple POD objects,
+  but some of them may return a variant object of type ALValue.
+
+  Please read the `libalvalue API reference <../../ref/libalvalue/index.html>`_ for more
+  details.
+
+
+Installation
+------------
+
+Please read the :ref:`cpp-install-guide` section.
+
+
+Samples and tutorials
+----------------------
+
+The main tutorial can be found in the :ref:`cpp-create-module` section.
+
+It is recommended that you use
+`qiBuild <http://doc.aldebaran.com/qibuild/>`_ to build your projects.
+
+Please make sure to also read the :ref:`naoqi-local-remote-modules` section.
+
+Reference documentation
+-----------------------
+
+* :ref:`naoqi-cpp-api`
+* :ref:`gdb`

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Returns the ID of the robot&apos;s body.&#x0A;&#x0A;V1.1.0&#x0A;" x="321" y="336">
+        <bitmap>media/images/box/movement/stand.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onGet(self):
+        try:
+            memory = ALProxy("ALMemory")
+            if( self.getParameter("Full ID") ):
+                # for example "00000ALDR1008E002140"
+                bodyId = memory.getData("Device/DeviceList/ChestBoard/BodyId")
+            else:
+                # for example "Nao2140"
+                bodyId = memory.getData("Device/DeviceList/ChestBoard/BodyNickName")
+            self.onData(bodyId)
+        except Exception as e:
+            self.logger.error(e)
+            self.onData("NoBodyID")]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onGet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is sent to the output when a signal is received on this input." id="2" />
+        <Output name="onData" type="3" type_size="1" nature="2" inner="0" tooltip="The data is sent to this output when a signal is received to the intput." id="3" />
+        <Parameter name="Full ID" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip='If this option is enabled, the ID given will be the complete ID&#x0A;(for example &quot;00000ALDR1008E002140&quot;).&#x0A;If it is disabled, the ID given will be a short nickname of the robot body&#x0A;(for example &quot;Nao2140&quot;).' id="4" />
+    </Box>
+</ChoregrapheBox>

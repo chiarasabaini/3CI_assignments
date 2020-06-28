@@ -1,0 +1,120 @@
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+
+.. _alspeechrecognition:
+
+ALSpeechRecognition
+====================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   alspeechrecognition-api
+   alspeechrecognition-tuto
+
+:ref:`naoqi-audio` - Overview | :ref:`API <alspeechrecognition-api>` | :ref:`Tutorial <alspeechrecognition-tuto>`
+
+------------
+
+
+What it does
+------------
+
+The **ALSpeechRecognition** module gives to the robot the ability to recognize
+predefined words or phrases in several languages.
+
+For the complete list of language codes, see: :ref:`language_codes`.
+
+.. note::
+
+   |no-virtual| *Cannot be tested on a simulated robot* -
+   This module is only available on a real robot, you cannot test it on a simulated robot.
+
+How it works
+------------
+
+Technology
+++++++++++
+
+**ALSpeechRecognition** relies on sophisticated speech recognition technologies provided
+by:
+
+* ACAPELA GROUP for NAO Version 3.x and
+
+* NUANCE for NAO Version 4.
+
+Operating principle
++++++++++++++++++++++
+
++------+------------------------------------------------------------------------------+
+| Step | Description                                                                  |
++======+==============================================================================+
+| A    | Before starting, **ALSpeechRecognition** needs to be fed by the              |
+|      | list of phrases that should be recognized.                                   |
++------+------------------------------------------------------------------------------+
+| B    | Once started, **ALSpeechRecognition** places in the key **SpeechDetected**,  |
+|      | a boolean that specifies if a speaker is currently heard or not.             |
++------+------------------------------------------------------------------------------+
+| C    | If a speaker is heard, the element of the list that best matches what        |
+|      | is heard by the robot is placed in the key **WordRecognized**.               |
++------+------------------------------------------------------------------------------+
+| D    | If a speaker is heard, the element of the list that best matches what        |
+|      | is heard by the robot is placed in the key **WordRecognizedAndGrammar**.     |
++------+------------------------------------------------------------------------------+
+
+The **WordRecognized** key is organized as follows:
+
+.. code-block:: guess
+
+     [phrase_1, confidence_1, phrase_2, confidence_2, ..., phrase_n, confidence_n]
+
+where:
+
+*  **phrase_i** is one of the predefined phrases and
+
+* **confidence_i** an estimate of the probability that this phrase is indeed what
+  has been pronounced by the human speaker.
+
+Note that the different hypothesis contained in that key are ordered so that the
+most likely phrases comes first.
+
+The **WordRecognizedAndGrammar** key is organized as follows:
+
+.. code-block:: guess
+
+     [phrase_1, confidence_1, grammar_1, phrase_2, confidence_2, grammar_2, ..., phrase_n, confidence_n, grammar_n]
+
+where:
+
+*  **phrase_i** is one of the predefined phrases and
+
+* **confidence_i** an estimate of the probability that this phrase is indeed what
+  has been pronounced by the human speaker.
+
+* **grammar_i** is the name of the grammar used by the recognition engine.
+
+
+Note that the different hypothesis contained in that key are ordered so that the
+most likely phrases comes first.
+
+.. _word_spotting:
+
+Word Spotting option
+--------------------
+
+The parameter **enableWordSpotting** of :cpp:func:`ALSpeechRecognitionProxy::setVocabulary` modifies the content of the returned result:
+
+* If true: **Phrase_i** contains **<...>phrase<...>**
+  Where the markers **<...>** indicates garbage results of the speech recognition.
+
+* If false:  **Phrase_i** contains the exact searched phrase.
+
+
+
+Getting started
+---------------
+
+To discover the basic functions of the speech recognition using **Choregraphe**,
+see the tutorial: :ref:`speech_recognition_tuto`.

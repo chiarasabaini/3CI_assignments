@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="Detect sound peaks.&#x0A;Each time a sound peak is detected, the onPeak output is stimulated.&#x0A;&#x0A;Note: You can set the sensibility to detect the sound peak in parameters.&#x0A;&#x0A;V1.1.0" x="184" y="125">
+        <bitmap>media/images/box/sensors/STM.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+        try:
+            self.sound = ALProxy("ALSoundDetection")
+        except Exception as e:
+            self.sound = None
+            self.logger.error(e)
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+        if self.sound:
+            self.sound.setParameter("Sensibility", self.getParameter("Sensibility"))
+        else:
+            self.logger.warning("No Sound Peak can be detected")
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload()
+            self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="SoundDetected" type="0" type_size="1" nature="4" stm_value_name="SoundDetected" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="4" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="5" />
+        <Output name="onPeak" type="1" type_size="1" nature="2" inner="0" tooltip="Stimulated when a sound peak is detected." id="6" />
+        <Parameter name="Sensibility" inherits_from_parent="0" content_type="2" value="0.9" default_value="0.9" min="0" max="1" tooltip="Sensibility to detect the sound peak." id="7" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="SelectElement" id="1" localization="8" tooltip="Enter tooltip here" x="220" y="61">
+                            <bitmap>media/images/box/box-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        self.onStopped( p[ self.getParameter( "index" ) ] )
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is recommanded to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Parameter name="index" inherits_from_parent="0" content_type="1" value="1" default_value="0" min="0" max="100" tooltip="" id="5" />
+                        </Box>
+                        <Box name="If" id="2" localization="8" tooltip="Test a condition and stimulate the then or else outputs depending on the boolean&#x0A;value of the condition.&#x0A;The condition can be set in parameters." x="363" y="60">
+                            <bitmap>media/images/box/box-diagram.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onData(self, p):
+        param = self.getParameter("Value to compare")
+        try:
+            p = float(p)
+            param = float(param)
+        except:
+            p = str(p)
+            param = str(param)
+        operator = self.getParameter("Condition operator")
+        if( operator == "<" ):
+            self.outputTrueOrFalse( p < param )
+        elif( operator == "< or =" ):
+            self.outputTrueOrFalse( p <= param )
+        elif( operator == "=" ):
+            self.outputTrueOrFalse( p == param )
+        elif( operator == "> or =" ):
+            self.outputTrueOrFalse( p >= param )
+        elif( operator == ">" ):
+            self.outputTrueOrFalse( p > param )
+        elif( operator == "≠" ):
+            self.outputTrueOrFalse( p != param )
+        else:
+            raise Exception( "Operator not known: " + str(operator) )
+
+    def outputTrueOrFalse(self, condition):
+        if( condition ):
+            self.output_then()
+        else:
+            self.output_else()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onData" type="0" type_size="1" nature="1" inner="0" tooltip="The data to test." id="2" />
+                            <Output name="output_then" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the condition is true." id="3" />
+                            <Output name="output_else" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent if the condition is false." id="4" />
+                            <Parameter name="Condition operator" inherits_from_parent="0" content_type="3" value="=" default_value="=" custom_choice="0" tooltip='Choose the condition operator.&#x0A;&#x0A;For example:&#x0A;If you choose &quot;&gt; or =&quot;, the condition will be: is the input is higher or equal&#x0A;than the parameter?' id="5">
+                                <Choice value="&lt;" />
+                                <Choice value="&lt; or =" />
+                                <Choice value="=" />
+                                <Choice value="&gt; or =" />
+                                <Choice value="&gt;" />
+                                <Choice value="≠" />
+                            </Parameter>
+                            <Parameter name="Value to compare" inherits_from_parent="0" content_type="3" value="1" default_value="0" custom_choice="0" tooltip="This is the value which is compared to the input value." id="6" />
+                        </Box>
+                        <Box name="Array Streaming" id="3" localization="8" tooltip="When an array is received on the input of this box, each element is sent one by one&#x0A;to the output." x="76" y="62">
+                            <bitmap>media/images/box/box-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onArray(self, p):
+        if( type(p) == type([]) ):
+            for elem in p:
+                self.element(elem)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onArray" type="0" type_size="1" nature="1" inner="0" tooltip="The array to stream." id="2" />
+                            <Output name="element" type="0" type_size="1" nature="2" inner="0" tooltip="Each element of the array is sent to this output." id="3" />
+                        </Box>
+                        <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="4" />
+                        <Link inputowner="0" indexofinput="6" outputowner="2" indexofoutput="3" />
+                        <Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="4" />
+                        <Link inputowner="1" indexofinput="2" outputowner="3" indexofoutput="3" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheBox>

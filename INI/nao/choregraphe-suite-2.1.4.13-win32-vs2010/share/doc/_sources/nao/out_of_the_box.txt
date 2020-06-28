@@ -1,0 +1,65 @@
+.. include:: ../bulk/common.rst
+
+.. _out_of_the_box_nao:
+
+|roboN| - Out of the box
+=========================
+
+.. toctree::
+   :hidden:
+
+   getting_out_of_the_box
+   first_conf
+
+.. |nao_box1| image:: /medias/wizard/nao_box1.png
+   :class: img-inline
+
+.. |safety_nao_en_fr| image:: /medias/pdf/nao_safety_small_en_fr.png
+   :class: img-inline
+   :target: _downloads/nao_safetyguide_2014_en_fr_sp_pt_gr_it_nl.pdf
+
+1. |nao_box1| **Open the box!**
+
+   If this is your first time handling |roboN|, read
+   the :download:`Safety Guide </medias/pdf/nao_safetyguide_2014_en_fr_sp_pt_gr_it_nl.pdf>`:
+
+   |safety_nao_en_fr|
+
+   .. |mind_fingers| image:: /medias/wizard/mind_your_fingers.png
+      :class: img-inline
+
+   +----------------------------------------------------------------+----------------+
+   | Make sure you **mind your fingers!**                           | |mind_fingers| |
+   |                                                                |                |
+   | .. warning::                                                   |                |
+   |                                                                |                |
+   |     avoid carrying and touching |roboN| when moving,           |                |
+   |     walking or getting up, you could be severely pinched.      |                |
+   |                                                                |                |
+   | |roboN|'s joints can be extremely strong.                      |                |
+   |                                                                |                |
+   | .. warning::                                                   |                |
+   |                                                                |                |
+   |    More specifically:                                          |                |
+   |                                                                |                |
+   |    do not place your hands in any of its joints,               |                |
+   |    as you could be severely pinched.                           |                |
+   +----------------------------------------------------------------+----------------+
+
+.. |nao_box2| image:: /medias/wizard/nao_box2.png
+   :class: img-inline
+
+2. |nao_box2| **Unpack the robot**...
+
+   Follow the steps of the :ref:`setup_wizard_nao`.
+
+   .. image:: /medias/pdf/nao_hello_guide.png
+       :width: 313 px
+       :height: 249 px
+       :target: getting_out_of_the_box.html
+
+   .. |nao_box3| image:: /medias/wizard/nao_box3.png
+      :class: img-inline
+      :target: first_conf.html
+
+3. **Then** start the configuration trough the |nao_box3| :ref:`getting_started`.

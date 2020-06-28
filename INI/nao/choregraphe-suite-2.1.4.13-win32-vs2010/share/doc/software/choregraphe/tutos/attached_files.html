@@ -1,0 +1,408 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using attached files &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../../index.html" />
+    <link rel="up" title="Choregraphe Tutorials" href="index.html" />
+    <link rel="next" title="Creating Dialog boxes" href="dialog_topic.html" />
+    <link rel="prev" title="Using Flow Control boxes" href="flow_control.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../../search.html">Search</a>
+         |
+        <a title="Index" href="../../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="flow_control.html" title="Using Flow Control boxes">previous</a>
+     |
+    <a href="index.html" title="Choregraphe Tutorials" accesskey="U">up</a>
+   |
+    <a href="dialog_topic.html" title="Creating Dialog boxes">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="software-choregraphe-tutos-attached_files">
+            
+  <div class="section" id="using-attached-files">
+<span id="choregraphe-tuto-attach-file-to-box"></span><h1>Using attached files<a class="headerlink" href="#using-attached-files" title="Permalink to this headline">¶</a></h1>
+<p><img alt="no-virtual" class="img-inline" src="../../../_images/no_virtual.png" /> <em>Cannot be tested on a simulated robot</em>.</p>
+<hr class="docutils" />
+<p>In this tutorial you will see, over an example, how to:</p>
+<ol class="arabic simple">
+<li>Attach a file, for example, a sound, to the current Project.</li>
+<li>Declare it as a parameter of a box.</li>
+<li>Use it in the box script.</li>
+</ol>
+<p><em>Create the following box</em>: a <strong>Script</strong> box playing a music from a MP3 file.</p>
+<div class="section" id="attaching-a-file-to-the-current-project">
+<h2>1 - Attaching a file to the current Project<a class="headerlink" href="#attaching-a-file-to-the-current-project" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>In the <a class="reference internal" href="../panels/project_content_panel.html#chore-project-content"><em>Project content panel</em></a>, click <strong>Plus</strong> <img alt="import-file-button" class="img-inline" src="../../../_images/chore_project_content_import.png" /> button
+then choose <strong>Import files</strong>.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Select the file to attach.</p>
+<p>The file is displayed in the project content, and will be sent on the robot
+with the behavior.</p>
+<img alt="../../../_images/content_panel_attached_file.png" class="last" src="../../../_images/content_panel_attached_file.png" style="width: 219px; height: 290px;" />
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="declaring-the-attached-file-as-parameter-of-a-box">
+<h2>2 - Declaring the attached file as parameter of a box<a class="headerlink" href="#declaring-the-attached-file-as-parameter-of-a-box" title="Permalink to this headline">¶</a></h2>
+<p>Now we are going to create a simple box that will play a music in order to use an attached file as parameter.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Create a new <strong>Python</strong> box.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../objects/python_box.html#choregraphe-howto-create-script-box"><em>How to create a Python box</em></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Add a parameter to the box, and specify &#8220;File name&#8221; as <strong>Name</strong>, and
+&#8220;Attached file&#8221; as <strong>Type</strong>.</p>
+<p class="last">For further details, see: <a class="reference internal" href="../objects/box_optional_components.html#choregraphe-howto-add-remove-box-in-out-param"><em>How to add/remove inputs, outputs, parameters in a box</em></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <img alt="parameter-button" class="img-inline" src="../../../_images/parameter_button.png" /> <strong>Parameter</strong> button, to set the value of
+the parameter.</p>
+<img alt="../../../_images/set_parameter_attached_file.png" class="last" src="../../../_images/set_parameter_attached_file.png" style="width: 294px; height: 251px;" />
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <img alt="browse-button" class="img-inline" src="../../../_images/chore_browse_button.png" /> browse button and select one of the files available
+in the <strong>Project content</strong>.</p>
+<p class="last">Note that if you had not yet imported the file in the <strong>Project content</strong>,
+you can do it prior to select the file.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="using-a-file-in-the-box-script">
+<h2>Using a file in the box script<a class="headerlink" href="#using-a-file-in-the-box-script" title="Permalink to this headline">¶</a></h2>
+<p>Now we will edit the script of the box in order to read the music.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="96%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Double click the box to display the <strong>Script editor</strong> panel.</p>
+<p>For further details, see: <a class="reference internal" href="../panels/scritp_editor_panel.html#chore-script-editor-panel"><em>Script editor panel</em></a>.</p>
+<p class="last">As you can see, the structure of the code were automatically generated.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">In the <strong>onLoad</strong> method, create a proxy to AlAudioPlayer module.</p>
+<p>For further deails, see: <a class="reference internal" href="../../../naoqi/audio/alaudioplayer.html#alaudioplayer"><em>ALAudioPlayer</em></a>.</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">onLoad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">=</span> <span class="n">ALProxy</span><span class="p">(</span><span class="s">&#39;ALAudioPlayer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="first last arabic simple" start="3">
+<li></li>
+</ol>
+</td>
+<td><p class="first">In the <strong>onStart</strong> method, call the method playFile() with the path to
+the attached file as parameter.</p>
+<p>The attached file will be send to the robot when you will start the behavior,
+so the path has to lead to the attached file on the robot.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">behaviorAbsolutePath</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">getParameter</span><span class="p">(</span><span class="s">&quot;File name&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="last">It is a concatenation of the behavior path on the robot and the file name.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="4">
+<li></li>
+</ol>
+</td>
+<td><p class="first">In the <strong>onUnload</strong> method, call the method <strong>stopAll()</strong>.</p>
+<p>The code of the box should look like that:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">GeneratedClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">GeneratedClass</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">onLoad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">=</span> <span class="n">ALProxy</span><span class="p">(</span><span class="s">&#39;ALAudioPlayer&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">onUnload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">stopAll</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">onInput_onStart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">playFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">behaviorAbsolutePath</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">getParameter</span><span class="p">(</span><span class="s">&quot;File name&quot;</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">onInput_onStop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onUnload</span><span class="p">()</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Testing</strong></p>
+<p>Now, let&#8217;s test it:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Step</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><ol class="first last arabic simple">
+<li></li>
+</ol>
+</td>
+<td>In your root diagram, link the <strong>onStart</strong> input of the box to the beginning
+of the behavior.</td>
+</tr>
+<tr class="row-odd"><td><ol class="first last arabic simple" start="2">
+<li></li>
+</ol>
+</td>
+<td><p class="first">Click the <img alt="play-button" class="img-inline" src="../../../_images/beginning_play_button.png" /> <strong>Play</strong> button to start the behavior.</p>
+<p class="last">Your robot is playing the music given as an attached file.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference download internal" href="../../../_downloads/tutorial_attached_file.crg"><tt class="xref download docutils literal"><span class="pre">tutorial_attached_file.crg</span></tt></a></p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="flow_control.html" title="Using Flow Control boxes">Using Flow Control boxes</a>
+     |
+    <a href="index.html" title="Choregraphe Tutorials" accesskey="U">Choregraphe Tutorials</a>
+   |
+    <a href="dialog_topic.html" title="Creating Dialog boxes">Creating Dialog boxes</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../dev/programming_index.html">Programming</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Choregraphe User Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../choregraphe_overview.html">What is <strong>Choregraphe</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../interface.html">Menus, Panels and Toolbar in a glance</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Choregraphe Tutorials</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../choregraphe_first_steps.html">Your first steps in Choregraphe</a></li>
+<li class="toctree-l5"><a class="reference internal" href="basic.html">Playing music</a></li>
+<li class="toctree-l5"><a class="reference internal" href="movements.html">Moving my limbs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="animated_speech.html">Testing the Body language</a></li>
+<li class="toctree-l5"><a class="reference internal" href="speech_recognition.html">Testing the speech recognition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="life.html">Testing Autonomous Life</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flow_control.html">Using Flow Control boxes</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="">Using attached files</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="dialog_topic.html">Creating Dialog boxes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="boxes.html">Creating Python boxes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="create_solitary_activity.html">Creating a Solitary activity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="create_interactive_activity.html">Creating an Interactive activity</a></li>
+<li class="toctree-l5"><a class="reference internal" href="resource_manager.html">Resources manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="recognize_objects.html">Recognizing objects</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../starting_discovery.html">Main panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../advanced_panels.html">Advanced panels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../connecting.html">Connecting Choregraphe / your robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../main_objects.html">Main objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../mouvement.html">Mastering movements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../scripting.html">Mastering script creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../customizing.html">Customizing Choregraphe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../debugging.html">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../monitor/index.html">Monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/python/index.html">Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../embedded/embedded_index.html">Working with NAOqi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/cpp/index.html">C++ SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../simulators/simulator_index.html">Simulators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/js/index.html">QiMessaging JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dev/java/index_java.html">Java SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ref/index.html">NAOqi Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Using attached files</a><ul>
+<li><a class="reference internal" href="#attaching-a-file-to-the-current-project">1 - Attaching a file to the current Project</a></li>
+<li><a class="reference internal" href="#declaring-the-attached-file-as-parameter-of-a-box">2 - Declaring the attached file as parameter of a box</a></li>
+<li><a class="reference internal" href="#using-a-file-in-the-box-script">Using a file in the box script</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="flow_control.html" title="Using Flow Control boxes">previous</a>
+     |
+    <a href="index.html" title="Choregraphe Tutorials" accesskey="U">up</a>
+   |
+    <a href="dialog_topic.html" title="Creating Dialog boxes">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

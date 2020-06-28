@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="-1" tooltip="This box provides the robot&apos;s local time and date." x="213" y="549">
+        <bitmap>media/images/box/internet/date.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[import datetime
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onGet(self):
+        currentTime = datetime.datetime.now()
+        aTime = [currentTime.year, currentTime.month, currentTime.day, currentTime.hour, currentTime.minute, currentTime.second, currentTime.microsecond]
+        self.onTime(aTime)]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onGet" type="1" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onTime" type="2" type_size="7" nature="2" inner="0" tooltip="This output provides current time in table formatted as following :&#x0A;[yyyy, mm, dd, hh, MM, ss, mmmmmm]&#x0A;with&#x0A;yyyy as year&#x0A;mm as month&#x0A;dd as day&#x0A;hh as hours&#x0A;MM as minutes&#x0A;ss as seconds&#x0A;mmmmmm as micro-seconds" id="3" />
+    </Box>
+</ChoregrapheBox>

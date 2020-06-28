@@ -1,0 +1,57 @@
+
+.. _albarcodereader:
+
+ALBarcodeReader
+====================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   albarcodereader-api
+   albarcodereader-tuto
+
+:ref:`naoqi-vision` - Overview | :ref:`API <albarcodereader-api>` | :ref:`Tutorial <albarcodereader-tuto>`
+
+-------------------
+
+What it does
+------------
+
+**ALBarcodeReader** scans an image from the camera and looks for a barcode. If
+a barcode is found in the image, the module tries to decypher it.
+
+
+How it works
+------------
+
+**ALBarcodeReader** is a module that regularly queries an image
+from the camera, converts it to grayscale and processes it in order to
+find and decode barcodes.
+
+.. figure:: /medias/dev/modules/vision/qrcode.jpg
+   :alt: QR Code
+   :width: 320 px
+   :height: 240 px
+
+   Example of QR Code with display of coordinates.
+
+
+An event is raised whenever a code is read. This event also contains the code
+data and corner position as depicted in the above image. Note that the first
+corner (labelled "0") is always opposite to the corner with no black square. The
+remaining corners are labelled counter-clockwise.
+
+See :naoqi:event:`BarcodeReader/BarcodeDetected` for a detailed
+event data description.
+
+
+Performances and limitations
+----------------------------
+
+**ALBarcodeReader** currently only works with QR Codes. Several codes can be
+processed in a single image.
+
+Since a barcode is made of small elements (bars, squares...), the image resolution
+must be set according to the distance between the camera and the code itself.
+The detection rate also depends on the printed code quality and size.

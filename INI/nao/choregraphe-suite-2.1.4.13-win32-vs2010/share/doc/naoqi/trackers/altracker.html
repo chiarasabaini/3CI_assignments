@@ -1,0 +1,460 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ALTracker &mdash; Aldebaran 2.1.4.12 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.4.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Aldebaran 2.1.4.12 documentation" href="../../index.html" />
+    <link rel="up" title="NAOqi Trackers" href="index.html" />
+    <link rel="next" title="ALTracker API" href="altracker-api.html" />
+    <link rel="prev" title="NAOqi Trackers" href="index.html" />
+ 
+<script type="text/javascript" src="https://community.aldebaran-robotics.com/static/js/include_doc.js"></script>
+<script>
+$(window).ready(function () {
+    var width_label = 0;
+    $('dl.function-index dt > span').each(function () {
+        $(this).css('width', 'auto');
+        width_label = Math.max(width_label, $(this).width());
+    }).width(width_label + 30);
+})
+
+</script>
+
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t3">
+    <div id="hd">
+      <h1><a href="../../index.html">Aldebaran documentation</a></h1>
+      <div id="global-nav">
+        <a title="NAOqi Developer guide" href="../../index.html">Home</a>
+        
+         |
+        <a title="NAO documentation" href="../../home_nao.html">NAO</a>
+         |
+        <a title="Romeo Documentation" href="../../home_romeo.html">Romeo</a>
+         |
+       <a title="Site map" href="../../contents.html">Site map</a>
+        
+         |
+        <a title="Search" href="../../search.html">Search</a>
+         |
+        <a title="Index" href="../../genindex.html">Index</a>
+        
+        
+      </div>
+      <div class="nav">
+    &laquo; <a href="index.html" title="NAOqi Trackers">previous</a>
+     |
+    <a href="index.html" title="NAOqi Trackers" accesskey="U">up</a>
+   |
+    <a href="altracker-api.html" title="ALTracker API">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="naoqi-trackers-altracker">
+            
+  <div class="section" id="altracker">
+<span id="id1"></span><h1>ALTracker<a class="headerlink" href="#altracker" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="index.html#naoqi-trackers"><em>NAOqi Trackers</em></a> - Overview | <a class="reference internal" href="altracker-api.html#altracker-api"><em>API</em></a> |  <a class="reference internal" href="trackers-sample.html#trackers-sample"><em>Tutorial or samples</em></a></p>
+<hr class="docutils" />
+<div class="section" id="what-it-does">
+<h2>What it does<a class="headerlink" href="#what-it-does" title="Permalink to this headline">¶</a></h2>
+<p><strong>ALTracker</strong> module allows the robot to track different targets (red ball,
+face, landmark, etc) using different means (head only, whole body, move, etc).</p>
+<p>The main goal of this module is to establish a bridge between target detection
+and motion in order to make the robot keep in view the target in the middle of the camera.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tracking-modes">
+<span id="id2"></span><h3>Tracking modes<a class="headerlink" href="#tracking-modes" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALTracker</strong> can track target with the following modes:</p>
+<div class="section" id="nao-robon-juju-roboj">
+<h4><img alt="nao" class="img-inline" src="../../_images/nao.png" /> <em>NAO</em> &amp; <img alt="juju" class="img-inline" src="../../_images/juju.png" /> <em>Pepper</em><a class="headerlink" href="#nao-robon-juju-roboj" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="35%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Mode</th>
+<th class="head">The robot will track ...</th>
+<th class="head">Comment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Head</strong></td>
+<td>with the Head only
+(this is the default mode)</td>
+<td>The two head&#8217;s joint are
+controlled to track the target.</td>
+</tr>
+<tr class="row-odd"><td><strong>WholeBody</strong></td>
+<td>with whole body and fixed legs</td>
+<td>The robot keeps balance autonomously and
+adapts his posture to track the target.</td>
+</tr>
+<tr class="row-even"><td><strong>Move</strong></td>
+<td>with move</td>
+<td>The robot moves in order to keep a
+defined distance to the target.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="juju-roboj-only">
+<h4><img alt="juju" class="img-inline" src="../../_images/juju.png" /> <em>Pepper</em> <em>only</em><a class="headerlink" href="#juju-roboj-only" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="35%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Mode</th>
+<th class="head">The robot will track ...</th>
+<th class="head">Comment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Navigate</strong></td>
+<td>with move and obstacle avoidance</td>
+<td><p class="first">The robot moves in order to keep a
+defined distance to the target.</p>
+<p class="last">This mode uses
+<a class="reference internal" href="../motion/alnavigation-api.html#ALNavigationProxy::navigateTo__floatCR.floatCR" title="ALNavigationProxy::navigateTo"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALNavigationProxy::navigateTo()</span></tt></a>
+function.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="target-names">
+<span id="tracking-targets"></span><h3>Target names<a class="headerlink" href="#target-names" title="Permalink to this headline">¶</a></h3>
+<p><strong>ALTracker</strong> can follow these targets:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="36%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Parameters</th>
+<th class="head">Comment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>RedBall</strong></td>
+<td>diameter of ball (meter)</td>
+<td>Used to compute the distance between
+robot and ball.</td>
+</tr>
+<tr class="row-odd"><td><strong>Face</strong></td>
+<td>width of face (meter)</td>
+<td>Used to compute the distance between
+robot and face.</td>
+</tr>
+<tr class="row-even"><td><strong>LandMark</strong></td>
+<td>[size, [LandMarkId, ...]]</td>
+<td>size is used to compute the distance
+between robot and LandMark. LandMarkId to
+specify the LandMark to track.</td>
+</tr>
+<tr class="row-odd"><td><strong>LandMarks</strong></td>
+<td>[[size, [LandMarkId, ...]],
+[size, [LandMarkId, ...]]]</td>
+<td>Same parameters as <strong>LandMark</strong>.
+One array by LandMark.</td>
+</tr>
+<tr class="row-even"><td><strong>People</strong></td>
+<td>[peopleId, ...]</td>
+<td>Used to track a specific people.</td>
+</tr>
+<tr class="row-odd"><td><strong>Sound</strong></td>
+<td>[distance, confidence]</td>
+<td>distance is used to estimate sound position
+and confidence to filter sound location.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="position-identification">
+<h3>Position identification<a class="headerlink" href="#position-identification" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/tracker_red_ball.png" src="../../_images/tracker_red_ball.png" />
+<ul class="simple">
+<li>The Tracker module identifies the position of the target seen by the robot.</li>
+<li>It can give the position of the target in desired frame
+(see <a class="reference internal" href="../motion/control-cartesian.html#motion-effectors-space"><em>Frames</em></a>).</li>
+<li>Function <a class="reference internal" href="altracker-api.html#ALTrackerProxy::getTargetPosition__iCR" title="ALTrackerProxy::getTargetPosition"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALTrackerProxy::getTargetPosition()</span></tt></a> returns the [x, y, z]
+position of active target.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="performance-and-limitations">
+<h2>Performance and Limitations<a class="headerlink" href="#performance-and-limitations" title="Permalink to this headline">¶</a></h2>
+<p><strong>Limitations</strong></p>
+<p>This is done assuming an average target size, so it might not be very accurate.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-robot-ready-to-move">
+<span id="ready-to-move-robot"></span><h3>A robot ready to move<a class="headerlink" href="#a-robot-ready-to-move" title="Permalink to this headline">¶</a></h3>
+<p>According to the chosen <strong>Mode</strong>, the <strong>Stiffness</strong> of the used body
+parts must be set to 1.0, or they couldn&#8217;t move.</p>
+<p>Moreover, for <strong>Move</strong> and <strong>WholeBody</strong> modes, the robot must
+be in a standing <a class="reference internal" href="../motion/alrobotposture.html#term-posture"><em class="xref std std-term">posture</em></a>, ready to move.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Mode</th>
+<th class="head">Prerequisite</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Head</strong></td>
+<td><ul class="first last simple">
+<li>Head Stiffness</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>WholeBody</strong></td>
+<td rowspan="2"><ul class="first last simple">
+<li>Whole body Stiffness</li>
+<li>The robot must be in a standing
+<a class="reference internal" href="../motion/alrobotposture.html#term-posture"><em class="xref std std-term">posture</em></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><strong>Move</strong></td>
+</tr>
+</tbody>
+</table>
+<p>To set the Stiffness, use motion api
+<a class="reference internal" href="../motion/control-stiffness-api.html#ALMotionProxy::stiffnessInterpolation__AL::ALValueCR.AL::ALValueCR.AL::ALValueCR" title="ALMotionProxy::stiffnessInterpolation"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALMotionProxy::stiffnessInterpolation()</span></tt></a>.</p>
+<p>To easily go to a <a class="reference internal" href="../motion/alrobotposture.html#term-predefined-postures"><em class="xref std std-term">predefined postures</em></a>, see:
+<a class="reference internal" href="../motion/alrobotposture-api.html#ALRobotPostureProxy::goToPosture__ssC.floatC" title="ALRobotPostureProxy::goToPosture"><tt class="xref cpp cpp-func docutils literal"><span class="pre">ALRobotPostureProxy::goToPosture()</span></tt></a>.</p>
+</div>
+<div class="section" id="modules-to-launch">
+<span id="targets-extractors"></span><h3>Modules to launch<a class="headerlink" href="#modules-to-launch" title="Permalink to this headline">¶</a></h3>
+<p>According to the chosen <strong>Target</strong>, <strong>ALTracker</strong> needs a specific module to run.</p>
+<p>So be sure it is loaded on your robot:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">To follow the Target ...</th>
+<th class="head">Launch the module ...</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>RedBall</td>
+<td><a class="reference internal" href="../vision/alredballdetection.html#alredballdetection"><em>ALRedBallDetection</em></a></td>
+</tr>
+<tr class="row-odd"><td>Face</td>
+<td><a class="reference internal" href="../peopleperception/alfacedetection.html#alfacedetection"><em>ALFaceDetection</em></a></td>
+</tr>
+<tr class="row-even"><td>LandMark</td>
+<td><a class="reference internal" href="../vision/allandmarkdetection.html#allandmarkdetection"><em>ALLandMarkDetection</em></a></td>
+</tr>
+<tr class="row-odd"><td>LandMarks</td>
+<td><a class="reference internal" href="../vision/allandmarkdetection.html#allandmarkdetection"><em>ALLandMarkDetection</em></a></td>
+</tr>
+<tr class="row-even"><td>People</td>
+<td><a class="reference internal" href="../peopleperception/alpeopleperception.html#alpeopleperception"><em>ALPeoplePerception</em></a></td>
+</tr>
+<tr class="row-odd"><td>Sound</td>
+<td><a class="reference internal" href="../audio/alsoundlocalization.html#alsoundlocalization"><em>ALSoundLocalization</em></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="choregraphe">
+<h3>Choregraphe<a class="headerlink" href="#choregraphe" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Choose one of the boxes available in <strong>Trackers</strong> folder of the standard
+box Library.</li>
+<li>Set the parameters.</li>
+<li>Make sure your robot is ready to move.
+For further details, see: <a class="reference internal" href="#ready-to-move-robot"><em>A robot ready to move</em></a>.</li>
+<li>Run the behavior.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<p>Here are some possible applications (from the simplest to the more ambitious ones)
+that can be built from Robot&#8217;s ability to track a target.</p>
+<p><strong>Case 1: Move toward a red ball:</strong> <a class="reference internal" href="trackers-sample.html#trackers-sample-redball"><em>Red Ball Tracker Sample</em></a></p>
+<p><strong>Case 2: Tracking a person with head:</strong> <a class="reference internal" href="trackers-sample.html#trackers-sample-face"><em>Face Tracker Sample</em></a></p>
+<p><strong>Case 3: Tracking the red ball with head and LArm:</strong> <a class="reference internal" href="trackers-sample.html#trackers-sample-larm"><em>LArm Tracker Sample</em></a></p>
+<p><strong>Case 4: Tracking a Blob with generic event:</strong> <a class="reference internal" href="trackers-sample.html#trackers-sample-blob"><em>Generic event Tracker Sample</em></a></p>
+</div>
+</div>
+
+
+          </div>
+          <!-- <div class="footernav">
+    &laquo; <a href="index.html" title="NAOqi Trackers">NAOqi Trackers</a>
+     |
+    <a href="index.html" title="NAOqi Trackers" accesskey="U">NAOqi Trackers</a>
+   |
+    <a href="altracker-api.html" title="ALTracker API">ALTracker API</a> &raquo;</div> -->
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+  <h3>Table Of Contents</h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contents.html">Site map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news/index.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_nao.html"><em>NAO</em> Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../home_romeo.html"><em>Romeo</em> Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_dev_guide.html">NAOqi Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev/programming_index.html">Programming</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref/index.html">NAOqi Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../dev/naoqi/index.html">Key concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">NAOqi API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../core/index.html">NAOqi Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../motion/index.html">NAOqi Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../audio/index.html">NAOqi Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vision/index.html">NAOqi Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../peopleperception/index.html">NAOqi PeoplePerception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/index.html">NAOqi Sensors</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">NAOqi Trackers</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="">ALTracker</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="altracker-api.html">ALTracker API</a></li>
+<li class="toctree-l6"><a class="reference internal" href="trackers-sample.html">Tutorial or samples</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="alredballtracker-api.html">ALRedBallTracker API</a></li>
+<li class="toctree-l5"><a class="reference internal" href="alfacetracker-api.html">ALFaceTracker API</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../diagnosis/aldiagnosis.html">ALDiagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/dcm.html">DCM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../stdtypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-classindex.html">&gt; All C++ Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cpp-funcindex.html">&gt; All C++ Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-eventindex.html">&gt; All NAOqi Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../naoqi-memoryindex.html">&gt; All NAOqi Memory Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/cpp-api.html">C++ API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/python-api.html">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../embedded/upgrade_index.html">Managing my robot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal/notice.html">Legal notices</a></li>
+</ul>
+
+    <h3><a href="../../index.html">On this page</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">ALTracker</a><ul>
+<li><a class="reference internal" href="#what-it-does">What it does</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a><ul>
+<li><a class="reference internal" href="#tracking-modes">Tracking modes</a><ul>
+<li><a class="reference internal" href="#nao-robon-juju-roboj"> <em>NAO</em> &amp;  <em>Pepper</em></a></li>
+<li><a class="reference internal" href="#juju-roboj-only"> <em>Pepper</em> <em>only</em></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#target-names">Target names</a></li>
+<li><a class="reference internal" href="#position-identification">Position identification</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-and-limitations">Performance and Limitations</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference internal" href="#a-robot-ready-to-move">A robot ready to move</a></li>
+<li><a class="reference internal" href="#modules-to-launch">Modules to launch</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-started">Getting started</a><ul>
+<li><a class="reference internal" href="#choregraphe">Choregraphe</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="index.html" title="NAOqi Trackers">previous</a>
+     |
+    <a href="index.html" title="NAOqi Trackers" accesskey="U">up</a>
+   |
+    <a href="altracker-api.html" title="ALTracker API">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

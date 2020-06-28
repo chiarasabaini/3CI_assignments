@@ -1,0 +1,23 @@
+.. |no-virtual| image:: /medias/desktop/no_virtual.png
+   :class: img-inline
+
+
+.. _robot-loudspeaker:
+
+Loudspeakers
+=======================
+
+|no-virtual| *Cannot be tested on a simulated robot*.
+
+
+.. seealso::
+
+    :ref:`naoqi-audio`
+
+    :ref:`all_robots` | :ref:`nao-h25` | :ref:`nao-h21` | :ref:`nao-t14` | :ref:`nao-t2`
+
+--------------------
+
+
+.. include:: ../bulk/loudspeaker.rst
+

@@ -1,0 +1,74 @@
+.. _python-example-motion-wholebody:
+
+Whole body motion
+=================
+
+:ref:`\<\< return to Python examples<python-examples>`
+
+This section contains examples showing various possibilities of Whole Body Motion.
+
+Effector control
+----------------
+
+Control NAO's effectors, separately or simultaneously.
+
+Head
+++++
+
+:download:`almotion_wbEffectorControlHead.py </examples/python/motion/almotion_wbEffectorControlHead.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_wbEffectorControlHead.py
+   :language: py
+
+Arms
+++++
+
+:download:`almotion_wbEffectorControlLArm.py </examples/python/motion/almotion_wbEffectorControlArm.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_wbEffectorControlArm.py
+   :language: py
+
+Multiple Effectors
+++++++++++++++++++
+
+Control arms and torso simultaneously.
+
+:download:`almotion_wbMultipleEffectors.py </examples/python/motion/almotion_wbMultipleEffectors.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_wbMultipleEffectors.py
+   :language: py
+
+Balance
+-------
+
+Balance constraints in whole body motion.
+
+Balance constraint
+++++++++++++++++++
+
+Enable a balance constraint.
+
+:download:`almotion_wbEnableBalanceConstraint.py </examples/python/motion/almotion_wbEnableBalanceConstraint.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_wbEnableBalanceConstraint.py
+   :language: py
+
+Kick
+++++
+
+Make NAO kick the air with its foot.
+
+:download:`almotion_wbKick.py </examples/python/motion/almotion_wbKick.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_wbKick.py
+   :language: py
+
+Foot state
+----------
+
+Constrain whole body balancer with foot state.
+
+:download:`almotion_wbFootState.py </examples/python/motion/almotion_wbFootState.py>`
+
+.. literalinclude:: /examples/python/motion/almotion_wbFootState.py
+   :language: py

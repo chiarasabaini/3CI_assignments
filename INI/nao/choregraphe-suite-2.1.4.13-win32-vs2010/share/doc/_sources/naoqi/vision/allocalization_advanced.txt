@@ -1,0 +1,166 @@
+.. _allocalization_adv:
+
+ALLocalization - advanced
+==========================
+
+:ref:`naoqi-vision` - :ref:`Overview<allocalization>` | :ref:`API <allocalization-api>` |
+:ref:`Tutorial <allocalization-tuto>` | Advanced
+
+
+-------------------
+
+Custom localization algorithms
+---------------------------------
+
+.. warning::
+
+   * Advanced functionalities in **ALLocalization** are made available for those who want
+     to use them in their own localization algorithms. If you are not one of them, please
+     use standard functionalities instead.
+   * Those functionalities are not supported yet.
+
+
+The first step to use the module is to set it up by shooting a reference
+panorama. The robot will perform a 360 degrees shooting by rotating its head and
+base to gather images. The panorama is then saved to the robot hard drive, and
+visual information is extracted. It is also possible to load a panorama from the
+robot hard drive, and use it for localization.
+
+Once the setup phase has been done, **ALLocalization** gives the current robot
+orientation relatively to the setup origin. It also allows making the robot move
+to a given position in the panorama.
+
+If the robot is equipped with a 3D camera, the reference panorama will include
+depth maps in addition to the images. It then becomes possible to use this module
+for localization purposes.
+
+A reference panorama containing depth maps can be used to locate the robot near
+the origin of the panorama (within 2m). Please note that (0,0,0) corresponds to the location of the robot
+**before** the setup and that the robot will return to this location after the acquisition.
+
+In this case, the location (x, y and theta, relatively to the setup origin) can be retrieved in two ways:
+
+* an **estimate location** can be retrieved instantly, using the odometry and the last precise position known.
+* a **precise location** can be retrieved by shooting half a panorama and comparing it
+  to the reference. If the location is not known with enough confidence, the
+  robot will make a half-turn and shoot the other half of the panorama. It will then
+  return the location **after the half turn.**
+
+
+How it works
+------------
+
+General principle
++++++++++++++++++
+
+**ALLocalization** uses information extracted from its camera images. Just like
+:ref:`alvisualcompass`, it extracts keypoints from the panorama images, and builds
+a search index out of them.
+
+When trying to estimate its position, the robot retrieves an image from its
+camera, then compares it to the stored panorama. Using the best match between the
+current image and the panorama, it can compute precisely its orientation relatively
+to the panorama.
+
+The localization functionalities rely on pointcloud alignment to compute the
+position of the current depthmap relatively to the reference (which corresponds
+to the best alignment of the pointclouds).
+
+
+Implementation details
+++++++++++++++++++++++
+
+Setup
+^^^^^
+
+The panorama images must cover 360 degrees. To ensure the panorama robustness, all
+images overlap by half with the previous and the next. Therefore, each image which
+is taken later theoretically half overlaps with one of the panorama image.
+
+In total, the panorama consists in 16 images, taken in two steps. Between the two
+steps, the robot turns around of 180 degrees using :ref:`alvisualcompass` to
+ensure that the stitching is as good as possible.
+
+In addition to those 16 images, 16 depth maps can be acquired from the 3D camera.
+
+Keypoints
+^^^^^^^^^
+
+The visual features used here are multi-scale **FAST** keypoints with **BRIEF**
+descriptors, as in :ref:`alvisualcompass`. They are chosen for their robustness
+and computational efficiency.
+
+Pointcloud alignment
+^^^^^^^^^^^^^^^^^^^^
+
+Pointclouds are aligned using the **Iterative Closest Points (ICP)** algorithm,
+which is a local search. We use the angle computed as explained above and the
+odometry as origin of the search.
+If getting a decent origin for the search proves to be impossible, it is also
+possible to find one automatically, by matching points with the help of the
+**shape context** descriptor.
+
+Performances and limitations
+----------------------------
+
+Setup
++++++
+
+The performances of **ALLocalization** depend mainly on the initial panorama
+setup. Ideally, all images taken during the setup must be well textured and
+easily distinguished. To detect potential problems, the robot performs a
+diagnosis, by comparing all reference images to the others: the problematic
+images are then raised in :naoqi:event:`ALLocalization/Setup/Diagnosis`.
+
+The setup takes about 30 seconds to shoot the images, plus a few seconds to
+perform the diagnosis (which is only run once per panorama).
+
+Regarding the 3D camera, the quantity of information retrieved will depend
+on the geometry of the environment. Concretely, only objects located in a range
+from 40cm to 5m of the robot will be usable as a reference.
+
+Image textures
+++++++++++++++
+
+The quality of the localization depends on the number of detected keypoints in
+the panorama, and thus on the textures. If the images are not sufficient, the
+robot compensates by using its odometry to avoid being lost, so the precision
+is guaranteed to be at least as good as the one from :ref:`ALMotion`.
+
+
+Runtime
++++++++
+
+Position estimation
+^^^^^^^^^^^^^^^^^^^
+
+The underlying algorithms allow the position estimation to be relatively robust
+to changes in the panorama.
+
+The position estimation itself is optimized to be as quick as possible, by
+using hints from the robot odometry to narrow the search in the reference
+panorama. However, it will still work even if the odometry is no longer
+relevant, for example if the robot has been lifted and moved around.
+
+
+Movements
+^^^^^^^^^
+
+The movements are performed using a closed loop based on the panorama images,
+similarly to :ref:`alvisualcompass`. The robot first estimates its current
+position in the panorama, then uses the panorama frame corresponding to its
+target to perform a closed loop.
+
+In practice, the robot first moves its head towards the target frame, then
+aligns its base in that direction, keeping the target frame in sight. If the
+target frame is no longer detected, the robot finishes its move
+using its odometry, thus guaranteeing that the final position will be at
+least close to the target one.
+
+Localization
+^^^^^^^^^^^^
+
+Like in the setup, only objects located in a range from 40cm to 5m will be usable
+for localization purposes. The robot looks up during acquisition, which allow
+it to mainly detect walls. It is therefore quite robust to minor changes in the environment.
+

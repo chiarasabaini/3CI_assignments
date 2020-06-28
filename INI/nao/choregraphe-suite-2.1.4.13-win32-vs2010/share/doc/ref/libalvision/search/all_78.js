@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['x',['x',['../a00003.html#a96586bec98a3fc03b46256e5eba008ee',1,'AL::ALImage::ROI']]],
+  ['xstartdetection',['xStartDetection',['../../libalextractor/a00002.html#ab0c754943cd4dfc79fb4c27e5a745c08',1,'AL::ALExtractor']]],
+  ['xstopdetection',['xStopDetection',['../../libalextractor/a00002.html#a4097139cb805ddbd27bdf1e13b8ffb4c',1,'AL::ALExtractor']]],
+  ['xupdateparameters',['xUpdateParameters',['../../libalextractor/a00002.html#a4299ea7e7b7d2a22caae27c2b0ecc0f0',1,'AL::ALExtractor::xUpdateParameters()'],['../a00005.html#ad92ec535634d2bf26caa6c1444d9472c',1,'AL::ALVisionExtractor::xUpdateParameters()']]]
+];

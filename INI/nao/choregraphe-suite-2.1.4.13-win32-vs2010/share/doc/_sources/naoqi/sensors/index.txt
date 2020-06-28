@@ -1,0 +1,42 @@
+.. _naoqi-sensors:
+
+NAOqi Sensors
+=============
+
+.. toctree::
+   :hidden:
+
+   albattery
+   albodytemperature
+   alchestbutton
+   alfsr
+   altouch
+   alinfrared
+   allaser
+   alleds
+   alsensors
+   alsonar
+   alrobotpose
+
+
+High level
+----------
+
+- :ref:`alsensors`
+- :ref:`albattery`
+- :ref:`albodytemperature`
+- :ref:`alchestbutton`
+- :ref:`alfsr`
+- :ref:`altouch`
+- :ref:`alinfrared`
+- :ref:`allaser`
+- :ref:`alsonar`
+
+
+- :ref:`alrobotpose`: this module is deprecated (use :ref:`alrobotposture` instead)
+
+
+Low level
+---------
+
+* :ref:`alleds`

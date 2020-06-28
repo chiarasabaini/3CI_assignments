@@ -1,0 +1,39 @@
+.. _allauncher-api:
+
+ALLauncher API
+==============
+
+:ref:`naoqi-core` - :ref:`Overview <allauncher>` | API
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/allauncherproxy.h>
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALLauncherProxy
+
+* :cpp:func:`ALLauncherProxy::launchLocal`
+
+
+Methods
+-------
+
+
+.. cpp:function:: std::vector<std::string> ALLauncherProxy::launchLocal(const std::string &moduleName)
+
+  .. deprecated:: 1.12
+
+  Loads dynamically a module.
+
+  :param moduleName: The full path to the module or just the name of the module if it is into the standard sdk path (using qi::path::findLib).
+  :return: List of modules that wasn't already load.

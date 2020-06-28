@@ -1,0 +1,59 @@
+.. _nao-h25:
+
+NAO H25
+============
++-----------------------------------------------------------+
+| Technical specifications                                  |
++============================+==============================+
+| **Construction**           | **CPU**                      |
+|                            |                              |
+| .. toctree::               | * :ref:`robot-motherboard`   |
+|    :maxdepth: 1            |                              |
+|                            |                              |
+|    dimensions_h25          |                              |
++----------------------------+------------------------------+
+| **Energy**                 | **Connectivity**             |
+|                            |                              |
+| * :ref:`robot-battery`     | * :ref:`connectivity-nao`    |
+|                            |                              |
++----------------------------+------------------------------+
+| **Interaction**            | **Sensors**                  |
+|                            |                              |
+| * :ref:`robot-loudspeaker` |                              |
+| * :ref:`robot-microphone`  | * :ref:`robot-fsr`           |
+| * :ref:`robot_video`       | * :ref:`robot-inertial`      |
+| * :ref:`robot-infrared`    | * :ref:`robot-sonar`         |
+|                            |                              |
+| .. toctree::               | .. toctree::                 |
+|    :maxdepth: 1            |    :maxdepth: 1              |
+|                            |                              |
+|                            |    mre_h25                   |
+|    leds_h25                |    contact-sensors_h25       |
+|                            |                              |
++----------------------------+------------------------------+
+
+
+**Optional devices**
+
+* :ref:`language_codes`
+* :ref:`laser-head`
+
++-----------------------------------------------------+
+| Kinematics data                                     |
++=========================+===========================+
+| .. toctree::            |                           |
+|    :maxdepth: 1         |                           |
+|                         |                           |
+|                         | * :ref:`effector_chain`   |
+|    links_h25            |                           |
+|    joints_h25           | * :ref:`robot_postures`   |
+|    masses_h25           |                           |
+|    motors_h25           |                           |
+|                         |                           |
++-------------------------+---------------------------+
+
+-----------------------------
+
+.. include:: ../bulk/overview_nao_h25.rst
+
+

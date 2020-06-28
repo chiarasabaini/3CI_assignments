@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="3" localization="0" tooltip="Manage a behavior.&#x0A;&#x0A;Will start the behavior given as input when onStart is stimulated.&#x0A;&#x0A;Will stop it when onStop is stimulated.&#x0A;&#x0A;Will exit on onStopped when no error happened during behavior startup or stopping.&#x0A;&#x0A;Will exit on onError if an error happened, transmitting a string describing the error.&#x0A;&#x0A;Most notably (but not exclusively), the box will fail if you try to start a behavior not present on the robot, or if you try to start a behavior that&apos;s already started.&#x0A;" x="393" y="317">
+        <bitmap>media/images/box/box-diagram.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.behaviorName = str()
+        self.bm = ALProxy("ALBehaviorManager")
+
+    def onUnload(self):
+        if len(self.behaviorName) > 0:
+            self.bm.stopBehavior(self.behaviorName)
+
+    def onInput_onStart(self, p):
+        if len(self.behaviorName) > 0 and self.behaviorName != p:
+            raise RuntimeError("this box is already running another behavior")
+
+        try:
+            self.behaviorName = p
+            self.bm.runBehavior(self.behaviorName)
+        finally:
+            self.behaviorName = str()
+            self.onStopped()
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+        <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="" id="5" />
+    </Box>
+</ChoregrapheBox>

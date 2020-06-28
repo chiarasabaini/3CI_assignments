@@ -1,0 +1,75 @@
+.. _albehaviormanager:
+
+ALBehaviorManager
+===================
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   albehaviormanager-api
+
+:ref:`naoqi-core` - Overview | :ref:`API <albehaviormanager-api>`
+
+------------
+
+
+What it does
+------------
+
+**ALBehaviorManager** is intended to manage **Behaviors**. With this module, you can:
+
+* Load, start, stop **Behaviors**,
+* Manage default **Behaviors**,
+* get information about **Behaviors**.
+
+How it works
+------------
+
+Default Behaviors
++++++++++++++++++
+
+Some **Behaviors** can be marked as "Default", which means they are automatically
+started when NAOqi launches. **ALBehaviorManager** allows the user to add or remove
+such **Behaviors**, or to launch and stop them.
+
+Behavior name
+++++++++++++++
+
+The name of a **Behavior** is composed of the package id it is from, and
+its local **Behavior** path.
+Starting a **Behavior** usually looks like this:
+
+``myBehaviorManagerProxy.startBehavior("my_application/a_behavior")``
+
+.. note::
+    **Choregraphe 1.14** generated packages with a single **Behavior**
+    at its root.
+    Starting such a **Behavior** looks like this:
+
+    * ``myBehaviorManagerProxy.startBehavior("my_application/.")`` or
+
+    * ``myBehaviorManagerProxy.startBehavior("my_application")``
+
+
+Getting started
+---------------
+
+The following Python script shows how to use **ALBehaviorManager**.
+
+To use it:
+
+=====  ==========================================================================
+Step       Action
+=====  ==========================================================================
+1.      Upload a Behavior from **Choregraphe** on the robot.
+
+2.      Run the python script giving the NAO's IP and the Behavior name as argument: ::
+
+            python albehaviormanager_example.py robotIp behaviorName
+=====  ==========================================================================
+
+:download:`albehaviormanager_example.py </examples/python/albehaviormanager/albehaviormanager_example.py>`
+
+.. literalinclude:: /examples/python/albehaviormanager/albehaviormanager_example.py
+    :language: py

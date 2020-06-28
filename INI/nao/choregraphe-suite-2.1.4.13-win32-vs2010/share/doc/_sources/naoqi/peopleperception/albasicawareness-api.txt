@@ -1,0 +1,188 @@
+.. _albasicawareness-api:
+
+
+ALBasicAwareness API
+====================
+
+:ref:`naoqi-peopleperception` - :ref:`Overview <albasicawareness>` | API | :ref:`Getting started <albasicawareness-gettingstarted>`
+
+-----------------
+
+
+Namespace : **AL**
+
+.. code-block:: cpp
+
+  #include <alproxies/albasicawareness>
+
+
+Method list
+-----------
+
+As any module, this module inherits methods from :ref:`almodule-api`.
+It also has the following specific methods:
+
+.. cpp:class:: ALBasicAwarenessProxy
+
+* :cpp:func:`ALBasicAwarenessProxy::startAwareness`
+* :cpp:func:`ALBasicAwarenessProxy::stopAwareness`
+* :cpp:func:`ALBasicAwarenessProxy::isAwarenessRunning`
+* :cpp:func:`ALBasicAwarenessProxy::setStimulusDetectionEnabled`
+* :cpp:func:`ALBasicAwarenessProxy::isStimulusDetectionEnabled`
+* :cpp:func:`ALBasicAwarenessProxy::setEngagementMode`
+* :cpp:func:`ALBasicAwarenessProxy::getEngagementMode`
+* :cpp:func:`ALBasicAwarenessProxy::engagePerson`
+* :cpp:func:`ALBasicAwarenessProxy::setTrackingMode`
+* :cpp:func:`ALBasicAwarenessProxy::getTrackingMode`
+* :cpp:func:`ALBasicAwarenessProxy::setParameter`
+* :cpp:func:`ALBasicAwarenessProxy::getParameter`
+* :cpp:func:`ALBasicAwarenessProxy::resetAllParameters`
+
+
+Events lists
+------------
+
+* :naoqi:event:`ALBasicAwareness/StimulusDetected`
+* :naoqi:event:`ALBasicAwareness/HumanTracked`
+* :naoqi:event:`ALBasicAwareness/HumanLost`
+
+Methods
+-------
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::startAwareness()
+
+  Starts basic awareness.
+
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::stopAwareness()
+
+  Stops basic awareness.
+
+
+
+.. cpp:function:: bool ALBasicAwarenessProxy::isAwarenessRunning()
+
+  Gets the status (started or not) of the module.
+
+  :return: Boolean value: true if the module is started, false if it's stopped or paused.
+
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::setStimulusDetectionEnabled(const std::string stimType, const bool enable)
+
+  Enables/disables detection of the specified type of stimulus.
+
+  :param stimType: Type of stimulus. For further details, see: :ref:`ALBasicAwareness::stimuli_types`.
+
+  :param enable: true to enable, false to disable.
+
+
+
+.. cpp:function:: bool ALBasicAwarenessProxy::isStimulusDetectionEnabled(const std::string stimType)
+
+  Gets status enabled/disabled for the detection of the specified type of stimulus.
+
+  :param stimType: Type of stimulus. For further details, see: :ref:`ALBasicAwareness::stimuli_types`.
+  :return: true if enabled, false if disabled
+
+.. note::
+ Throws AL::ALError if setting fails.
+
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::setEngagementMode(const std::string &modeName)
+
+  Sets the engagement mode.
+
+  :param modeName: Name of the engagement mode to be set. For further details, see: :ref:`ALBasicAwareness::engagement_modes`.
+
+
+
+.. cpp:function:: std::string ALBasicAwarenessProxy::getEngagementMode()
+
+  Gets the current engagement mode. For further details, see: :ref:`ALBasicAwareness::engagement_modes`.
+
+  :return: The engagement mode name.
+
+
+
+.. cpp:function:: bool ALBasicAwarenessProxy::engagePerson(const int idPersonToEngage)
+
+  Forces the robot to engage a person identified by its PeoplePerception ID.
+
+  :param idPersonToEngage: ID of the person to engage, as it can be found in :naoqi:event:`PeoplePerception/PeopleList`.
+  :return: true if the robot succeeded to engage the person, else false.
+
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::setTrackingMode(const std::string &trackingMode)
+
+  Sets the current tracking Mode.
+
+  :param trackingMode: name of the tracking mode. For further details, see: :ref:`ALBasicAwareness::tracking_modes`.
+
+
+
+.. cpp:function:: std::string ALBasicAwarenessProxy::getTrackingMode()
+
+  Gets the current tracking mode.
+
+  :return: the tracking mode name. For further details, see: :ref:`ALBasicAwareness::tracking_modes`.
+
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::setParameter(const std::string &paramName, const AL::ALValue &paramValue)
+
+  Sets parameters related to basic awareness features.
+
+  :param paramName: name of the parameter, among the following:
+
+  * "LookStimulusSpeed": speed of head moves when looking at a stimulus (float in ]0;1]),
+
+  * "LookBackSpeed": speed of head moves when looking back to previous position after false alarm (float in ]0;1]).
+
+  :param paramValue: value of the parameter to be set (ALValue).
+
+
+
+.. cpp:function:: AL::ALValue ALBasicAwarenessProxy::getParameter(const std::string &paramName)
+
+  Gets parameters related to basic awareness features.
+
+  :param paramName: name of the parameter, among: "LookStimulusSpeed", "LookBackSpeed".
+  :return: value of the parameter (ALValue).
+
+
+
+.. cpp:function:: void ALBasicAwarenessProxy::resetAllParameters()
+
+  Resets all parameters to their default values.
+
+
+
+Events
+------
+
+.. naoqi:event:: ALBasicAwareness/StimulusDetected(std::string stimulusName)
+
+  Raised when a stimulus is detected.
+
+  :param stimulusName: Name of the stimulus detected. See the names of the available stimuli in section :ref:`Stimuli Types<ALBasicAwareness::stimuli_types>`.
+
+.. note::
+ To know if a person is detected in the general case, use the event *HumanTracked* rather than the event *StimulusDetected* with the value *People*.
+ For example, if the robot detects a person thanks to a sound stimulus, the robot will raise the event *StimulusDetected* with the value *Sound*,
+ then recognize the person and raise the event *HumanTracked* with a positive ID, but the event *StimulusDetected* won't be raised with the value *People*.
+
+
+.. naoqi:event:: ALBasicAwareness/HumanTracked(int humanID)
+
+  Raised when the robot begins to track a person, when the tracked person is lost, or when the tracked person's ID is updated.
+
+  :param humanID: The ID of the currently tracked person. If no person is tracked, the value is -1.
+
+.. naoqi:event:: ALBasicAwareness/HumanLost()
+
+  Raised when the person tracked can no longer be found for some time.
