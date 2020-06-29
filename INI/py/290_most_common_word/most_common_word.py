@@ -3,6 +3,7 @@ __version__ = "1.0"
 __date__ = "2020-06-29"
 
 from copy import deepcopy
+import string
 
 def most_common_word(filename):
     file = open(filename, 'r')
@@ -12,6 +13,9 @@ def most_common_word(filename):
     
     # init words list
     for line in file:
+        for sep in string.punctuation + "’" +"”":
+            line = line.replace(sep, " ")
+            
         for word in line.split():
             all_words.append(word)
             if word not in words:
