@@ -1,3 +1,7 @@
+__author__ = "Sabaini Chiara 3CI"
+__version__ = "1.0"
+__date__ = "2020-06-29"
+
 from copy import deepcopy
 
 def most_common_word(filename):
@@ -22,7 +26,7 @@ def most_common_word(filename):
         if tmp_n > n:
             n = deepcopy(tmp_n)
             common = words[i]
-    print(common, n)
+    return common, n
 
 if __name__ == "__main__":
     most_common_word("data/i_promessi_sposi.txt")
