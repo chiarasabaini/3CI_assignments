@@ -1,9 +1,0 @@
-v3.5.3
-======
-
-cmake
------
-
-* ``qt-tools``: add ``qi_generate_qt_conf``
-* ``qt-tools``: prefer ``qt4``
-

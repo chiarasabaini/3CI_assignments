@@ -1,3 +1,0 @@
-<project name="audiovideocapture">
-  <depends buildtime="true" runtime="true" names="libnaoqi" />
-</project>

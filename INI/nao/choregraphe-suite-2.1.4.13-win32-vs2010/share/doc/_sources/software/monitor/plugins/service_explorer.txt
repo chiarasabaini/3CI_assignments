@@ -1,9 +1,0 @@
-.. _monitor-plugin-service-explorer:
-
-Service explorer
-================
-
-The **Service explorer** allows you to introspect NAOqi2 services running on the
-robot the plugin is connected to.
-
-

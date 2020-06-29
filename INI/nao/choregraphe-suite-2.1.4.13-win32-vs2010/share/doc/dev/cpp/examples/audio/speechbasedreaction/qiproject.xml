@@ -1,3 +1,0 @@
-<project name="speechbasedreaction">
-  <depends buildtime="true" runtime="true" names="libnaoqi" />
-</project>

@@ -1,3 +1,0 @@
-<project name="soundplayback">
-  <depends buildtime="true" runtime="true" names="libnaoqi" />
-</project>

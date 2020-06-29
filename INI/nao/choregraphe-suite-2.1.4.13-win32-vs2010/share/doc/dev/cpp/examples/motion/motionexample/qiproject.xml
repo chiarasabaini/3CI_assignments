@@ -1,3 +1,0 @@
-<project name="motionexample">
-  <depends buildtime="true" runtime="true" names="libnaoqi" />
-</project>

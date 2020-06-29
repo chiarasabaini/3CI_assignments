@@ -1,7 +1,0 @@
-v3.8.3
-======
-
-qisys
------
-
-* Support symbolic links in zip archives

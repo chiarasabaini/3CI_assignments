@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Folder expanded="no">
-    <Node name="Ear LEDs" />
-    <Node name="Eye LEDs" />
-    <Node name="Set LEDs" />
-    <Node name="Set Single LED" />
-    <Node name="Single Ear LED" />
-    <Node name="Single Eye LED" />
-</Folder>

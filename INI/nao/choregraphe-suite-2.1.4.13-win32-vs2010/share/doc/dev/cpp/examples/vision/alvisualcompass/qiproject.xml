@@ -1,3 +1,0 @@
-<project name="alvisualcompass">
-  <depends buildtime="true" runtime="true" names="libnaoqi" />
-</project>

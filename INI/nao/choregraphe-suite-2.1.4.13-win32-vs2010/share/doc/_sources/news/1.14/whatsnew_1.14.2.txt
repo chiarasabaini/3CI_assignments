@@ -1,7 +1,0 @@
-.. _whats-new_10.14.2:
-
-What's new - 1.14.2
-====================
-
-Maintenance release, read the :ref:`changelog` to see the main fixes.
-

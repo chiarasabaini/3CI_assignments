@@ -1,3 +1,0 @@
-<project name="fooproject" >
-  <depends buildtime="true" names="gtest" />
-</project>

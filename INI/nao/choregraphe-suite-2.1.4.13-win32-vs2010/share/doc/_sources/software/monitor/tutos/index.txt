@@ -1,9 +1,0 @@
-.. _monitor-tutorials:
-
-Monitor Tutorials
-=================
-
-.. toctree::
-   :maxdepth: 2
-
-   camera_viewer

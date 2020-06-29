@@ -1,7 +1,0 @@
-v3.9.1
-======
-
-qisrc
------
-
-* Fix sending mails to ``gerrit`` groups from ``qisrc push``

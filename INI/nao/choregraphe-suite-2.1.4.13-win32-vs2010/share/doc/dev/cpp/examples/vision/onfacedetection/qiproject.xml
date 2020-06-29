@@ -1,3 +1,0 @@
-<project name="onfacedetection">
-  <depends buildtime="true" runtime="true" names="libnaoqi" />
-</project>

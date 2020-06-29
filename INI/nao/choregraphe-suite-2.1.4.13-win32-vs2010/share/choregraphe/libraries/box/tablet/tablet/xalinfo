@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Folder expanded="yes">
-    <Node name="Show Image" />
-    <Node name="Play Video" />
-    <Node name="Touch Detection" />
-    <Node name="Show App" />
-    <Node name="Show Web View" />
-    <Node name="Hide Web View" />
-</Folder>
